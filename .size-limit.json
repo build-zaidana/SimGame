@@ -1,0 +1,8 @@
+[
+  {
+    "name": "JS awal (gzip)",
+    "path": "dist/assets/index-*.js",
+    "limit": "250 KB",
+    "gzip": true
+  }
+]
