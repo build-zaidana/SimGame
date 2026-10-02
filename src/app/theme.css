@@ -1,0 +1,41 @@
+@import 'tailwindcss';
+
+/* Token tema (ARCHITECTURE §9.3). Palet final menyusul di M4. */
+@theme {
+  --color-bg: #1b1f2b;
+  --color-panel: #262c3d;
+  --color-ink: #f2efe6;
+  --color-ink-muted: #b8b4a8;
+  --color-accent: #f2c14e;
+  --color-danger: #e5604f;
+  --color-safe: #6cc28a;
+  --color-focus: #7fc8f8;
+  --font-display: ui-monospace, 'Courier New', monospace;
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+:root {
+  --text-scale: 1;
+  font-size: calc(100% * var(--text-scale));
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+img.sprite {
+  image-rendering: pixelated;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

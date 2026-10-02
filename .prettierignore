@@ -1,0 +1,8 @@
+dist
+coverage
+pnpm-lock.yaml
+test-results
+playwright-report
+docs/PRD.md
+docs/ARCHITECTURE.md
+CLAUDE.md
