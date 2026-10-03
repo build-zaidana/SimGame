@@ -50,44 +50,107 @@ const defaultPersist = async () => {
   }
 };
 
+/**
+ * Salinan sinkron save terakhir. IndexedDB itu asinkron: jika tab ditutup tepat setelah sebuah aksi,
+ * tulisan bisa terpotong. Jurnal (localStorage) ditulis seketika, dan load() memilih yang lebih baru.
+ */
+export interface SyncJournal {
+  get(): unknown;
+  set(value: unknown): void;
+  del(): void;
+}
+
+export const JOURNAL_KEY = 'shiftit:save:journal';
+
+export const localStorageJournal = (ls: Storage = localStorage): SyncJournal => ({
+  get() {
+    const raw = ls.getItem(JOURNAL_KEY);
+    return raw === null ? undefined : (JSON.parse(raw) as unknown);
+  },
+  set(value) {
+    ls.setItem(JOURNAL_KEY, JSON.stringify(value));
+  },
+  del() {
+    ls.removeItem(JOURNAL_KEY);
+  },
+});
+
+function tryMigrate(raw: unknown): SaveData | null {
+  try {
+    return raw === undefined ? null : migrate(raw);
+  } catch {
+    return null;
+  }
+}
+
 export class LocalSaveRepository implements SaveRepository {
   private readonly store: KeyValueStore;
   private readonly persist: () => Promise<unknown>;
+  private readonly journal: SyncJournal | null;
   private persistRequested = false;
+  /** Tulisan ke store diantrekan di sini supaya selalu mendarat sesuai urutan panggilan. */
+  private queue: Promise<void> = Promise.resolve();
 
-  constructor(store: KeyValueStore, persist: () => Promise<unknown> = defaultPersist) {
+  constructor(
+    store: KeyValueStore,
+    persist: () => Promise<unknown> = defaultPersist,
+    journal: SyncJournal | null = null,
+  ) {
     this.store = store;
     this.persist = persist;
+    this.journal = journal;
   }
 
   async load(): Promise<SaveData | null> {
     const raw = await this.store.get(SAVE_KEY);
-    return raw === undefined ? null : migrate(raw);
+    const fromJournal = this.journal ? tryMigrate(safeGet(this.journal)) : null;
+    if (raw === undefined) return fromJournal;
+    let main: SaveData;
+    try {
+      main = migrate(raw);
+    } catch (e) {
+      if (fromJournal) return fromJournal;
+      throw e;
+    }
+    return fromJournal && fromJournal.updatedAt > main.updatedAt ? fromJournal : main;
   }
 
   async loadBackup(): Promise<SaveData | null> {
-    const raw = await this.store.get(BACKUP_KEY);
-    if (raw === undefined) return null;
-    try {
-      return migrate(raw);
-    } catch {
-      return null;
-    }
+    return tryMigrate(await this.store.get(BACKUP_KEY));
   }
 
-  async save(data: SaveData): Promise<void> {
+  save(data: SaveData): Promise<void> {
     if (!this.persistRequested) {
       this.persistRequested = true;
       void this.persist();
     }
-    const previous = await this.store.get(SAVE_KEY);
-    if (previous !== undefined) await this.store.set(BACKUP_KEY, previous);
-    await this.store.set(SAVE_KEY, data);
+    try {
+      this.journal?.set(data);
+    } catch {
+      // Kuota localStorage penuh / diblokir: tetap simpan ke store utama.
+    }
+    const run = this.queue.then(async () => {
+      const previous = await this.store.get(SAVE_KEY);
+      if (previous !== undefined) await this.store.set(BACKUP_KEY, previous);
+      await this.store.set(SAVE_KEY, data);
+    });
+    this.queue = run.catch(() => undefined);
+    return run;
   }
 
   async clear(): Promise<void> {
+    await this.queue;
+    this.journal?.del();
     await this.store.del(SAVE_KEY);
     await this.store.del(BACKUP_KEY);
+  }
+}
+
+function safeGet(journal: SyncJournal): unknown {
+  try {
+    return journal.get();
+  } catch {
+    return undefined;
   }
 }
 
@@ -121,5 +184,15 @@ export async function createLocalSaveRepository(): Promise<{
   kind: StorageKind;
 }> {
   const { store, kind } = await detectStore();
-  return { repo: new LocalSaveRepository(store), kind };
+  // Jurnal sinkron hanya berguna bila store utamanya asinkron (IndexedDB).
+  let journal: SyncJournal | null = null;
+  if (kind === 'indexeddb') {
+    try {
+      journal = localStorageJournal();
+      journal.get();
+    } catch {
+      journal = null;
+    }
+  }
+  return { repo: new LocalSaveRepository(store, defaultPersist, journal), kind };
 }

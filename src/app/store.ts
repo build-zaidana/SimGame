@@ -90,7 +90,6 @@ let repo: SaveRepository | null = null;
 const contentCache = new Map<string, Promise<ModeContent>>();
 const AUTOSAVE_TICK_MS = 5000;
 let msSinceSave = 0;
-let writeChain: Promise<void> = Promise.resolve();
 
 function loadContent(modeId: string): Promise<ModeContent> {
   const mode = getMode(modeId);
@@ -108,13 +107,9 @@ const nowIso = () => new Date().toISOString();
 const schemasOf = (mode: CareerMode): CaseSchemas =>
   Object.fromEntries(mode.caseTypes.map((t) => [t.type, t.schema]));
 
-/** Tulis berurutan agar save lama tidak menimpa save baru. */
+/** Repository menulis jurnal seketika dan mengantrekan tulisan IndexedDB sesuai urutan. */
 function write(save: SaveData) {
-  const r = repo;
-  if (!r) return;
-  writeChain = writeChain
-    .then(() => r.save(save))
-    .catch((e: unknown) => console.error('save failed', e));
+  repo?.save(save).catch((e: unknown) => console.error('save failed', e));
 }
 
 /** Slot save untuk sesi: jalur utama atau Mode Latihan (PRD S5). */
