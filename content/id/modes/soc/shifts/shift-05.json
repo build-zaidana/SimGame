@@ -70,5 +70,20 @@
   "pay": {
     "base": 50,
     "perCase": 12
+  },
+  "newspaper": {
+    "headline": "Kelompok Kelabu Incar Bagian Keuangan",
+    "lead": "Kelompok peretas yang menamai diri Kelabu dikabarkan menyiapkan serangan berlapis ke perusahaan di kawasan Nusantara. Tim SOC di banyak kantor diminta bersiaga sejak pagi.",
+    "impact": {
+      "good": "Kemarin, file berbahaya berkedok resi berhasil dicegat sebelum dibuka. Tidak ada laptop kantor yang terinfeksi.",
+      "mixed": "Kemarin, sebagian besar file berbahaya dicegat, tetapi beberapa sempat lolos dan sedang diperiksa ulang.",
+      "bad": "Kemarin, beberapa file berbahaya sempat terbuka di laptop kantor. Perangkat yang terdampak sedang dikarantina."
+    },
+    "tip": {
+      "title": "Tips: Batasi Dulu, Baru Bersihkan",
+      "text": "Saat insiden terjadi, hentikan penyebarannya lebih dulu, misalnya mengisolasi perangkat atau mengganti password. Setelah itu bersihkan, pulihkan, dan laporkan."
+    },
+    "classified": "SAMPAI JUMPA NANTI SIANG. — K.",
+    "sources": ["NIST SP 800-61: Computer Security Incident Handling Guide", "BSSN"]
   }
 }

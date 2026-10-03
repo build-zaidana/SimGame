@@ -57,5 +57,20 @@
   "pay": {
     "base": 40,
     "perCase": 12
+  },
+  "newspaper": {
+    "headline": "Musim Promo, Musim Email Palsu",
+    "lead": "Menjelang akhir bulan, kotak masuk kantor dibanjiri promo, tagihan, dan pengumuman. Pakar keamanan mengingatkan: tidak semua email mendesak itu jahat, dan tidak semua email rapi itu aman.",
+    "impact": {
+      "good": "Kemarin, analis baru PT Nusa Digital menahan semua jebakan phishing tanpa mengganggu email kerja. Klien memuji ketelitiannya.",
+      "mixed": "Kemarin, sebagian besar email palsu berhasil ditahan, walau ada yang lolos atau salah diblokir. Analis baru diminta lebih teliti memeriksa pengirim.",
+      "bad": "Kemarin, beberapa email palsu lolos ke karyawan PT Nusa Digital. Tim SOC sedang memeriksa dampaknya dan memperketat pemeriksaan."
+    },
+    "tip": {
+      "title": "Tips: Cek Alamat Pengirim",
+      "text": "Nama yang tampil bisa diisi siapa saja. Lihat alamat setelah tanda @, lalu bandingkan dengan domain resmi pengirimnya."
+    },
+    "classified": "DIJUAL: Domain mirip-mirip, harga miring. Hanya untuk peminat serius. — K.",
+    "sources": ["APWG Phishing Activity Trends Report", "BSSN: panduan mengenali phishing"]
   }
 }

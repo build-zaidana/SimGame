@@ -6,6 +6,7 @@ import type { CaseOutcome } from '../../engine/types.ts';
 import { createNewSave, newModeProgress } from '../../persistence/saveSchema.ts';
 import type { CaseGenerator } from '../../modes/contract.ts';
 import {
+  awardBadges,
   buildShift,
   commitShift,
   nextShift,
@@ -198,6 +199,47 @@ describe('commitShift', () => {
     const p = commitShift(better, played(), content, 'T2').modes['soc'];
     expect(p?.shifts['soc-01']).toEqual({ bestScore: 90, stars: 3, completedAt: 'T2' });
     expect(p?.unlockedShift).toBe(3);
+  });
+});
+
+describe('badges on commit and on purchase', () => {
+  const badgeContent = {
+    ...content,
+    tools: [{ id: 't1' }, { id: 't2' }],
+    badges: [
+      { id: 'first-day', rule: { type: 'shift-complete', shiftId: 'soc-01' } },
+      { id: 'reviewer', rule: { type: 'review-perfect' } },
+      { id: 'collector', rule: { type: 'tools-owned', count: 1 } },
+    ],
+  } as unknown as ModeContent;
+
+  function playedShift() {
+    let s = startShift({
+      plan: planFromShift('soc', shiftDef(1)),
+      seed: 1,
+      playMode: 'relaxed',
+      trust: 75,
+    });
+    s = shiftReducer(s, { type: 'DISMISS_BRIEFING' });
+    return shiftReducer(s, { type: 'END_SHIFT' });
+  }
+  const fresh = () =>
+    createNewSave({ installId: '6f1c2b8e-3a4d-4c5e-8f9a-0b1c2d3e4f5a', now: 'T0' });
+
+  it('awards earned badges with a timestamp and never twice', () => {
+    const once = commitShift(fresh(), playedShift(), badgeContent, 'T1', [
+      { itemId: 'q-1', correct: true },
+    ]);
+    expect(once.modes['soc']?.badges).toEqual({ 'first-day': 'T1', reviewer: 'T1' });
+    const twice = commitShift(once, playedShift(), badgeContent, 'T2', []);
+    expect(twice.modes['soc']?.badges).toEqual({ 'first-day': 'T1', reviewer: 'T1' });
+  });
+
+  it('awards tool badges right after a purchase (no shift rules)', () => {
+    const progress = { ...newModeProgress(), toolsOwned: ['t1'] };
+    const { progress: next, earned } = awardBadges(progress, badgeContent, 'T3');
+    expect(earned).toEqual(['collector']);
+    expect(next.badges).toEqual({ collector: 'T3' });
   });
 });
 

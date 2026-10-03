@@ -24,6 +24,7 @@ const save = (): SaveData => ({
       wallet: 250,
       trust: 81,
       toolsOwned: ['link-checker'],
+      badges: { 'first-day': '2026-10-03T10:00:00.000Z' },
       chaptersUnlocked: ['ch-url', 'ch-phish'],
     },
   },

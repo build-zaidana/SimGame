@@ -21,6 +21,8 @@ export interface CheckPolicy {
   maxDocumentWords: number;
   maxConceptWords: number;
   maxExplanationSentences: number;
+  /** Batas kata tiap tulisan di koran pagi. */
+  maxNewsWords: number;
 }
 
 export const DEFAULT_LIMITS = {
@@ -28,6 +30,7 @@ export const DEFAULT_LIMITS = {
   maxDocumentWords: 120,
   maxConceptWords: 180,
   maxExplanationSentences: 2,
+  maxNewsWords: 60,
 } as const;
 
 /** TLD dunia nyata yang dicek; ekstensi file (.pdf, .apk) tidak dianggap domain. */
@@ -238,6 +241,29 @@ export function checkModeContent(content: ModeContent, policy: CheckPolicy): Con
     for (const id of [s.introDialogue, s.outroDialogue]) {
       if (!content.dialogues[id]) err(file, `dialog tidak ada: ${id}`);
     }
+    if (s.newspaper) {
+      const n = s.newspaper;
+      if (s.order === 1 && n.impact) err(file, 'koran: berita dampak tidak ada di shift pertama');
+      if (s.order > 1 && !n.impact)
+        err(file, 'koran: shift ini butuh berita dampak (good/mixed/bad)');
+      const stories: [string, string][] = [
+        ['lead', n.lead],
+        ['tips', n.tip.text],
+        ...Object.entries(n.impact ?? {}).map(([k, v]): [string, string] => [`dampak ${k}`, v]),
+        ...(n.classified ? [['iklan', n.classified] as [string, string]] : []),
+      ];
+      for (const [name, story] of stories) {
+        const words = countWords(story);
+        if (words > policy.maxNewsWords)
+          err(file, `koran: ${name} ${words} kata (maks ${policy.maxNewsWords})`);
+      }
+      const newsText = allStrings(n).join(' ');
+      const brands = findBrands(newsText, policy.brandDenylist);
+      if (brands.length) err(file, `koran: merek nyata: ${brands.join(', ')}`);
+      const domains = findNonFictionalDomains(newsText, policy.fictionalDomains);
+      if (domains.length)
+        err(file, `koran: domain bukan .test/.example/fiktif terdaftar: ${domains.join(', ')}`);
+    }
     const pool = content.review.filter((r) => s.review.conceptIds.includes(r.conceptId));
     if (pool.length < Math.min(3, s.review.count)) {
       err(file, `soal review untuk konsep shift ini hanya ${pool.length} (min 3)`);
@@ -274,6 +300,21 @@ export function checkModeContent(content: ModeContent, policy: CheckPolicy): Con
     if (policy.knownTools && !policy.knownTools.includes(t.id)) {
       err('tools.json', `${t.id}: alat belum diimplementasikan di kode mode`);
     }
+  }
+
+  const seenBadges = new Set<string>();
+  const shiftIds = new Set(content.shifts.map((s) => s.id));
+  for (const b of content.badges) {
+    if (b.rule.type === 'shift-complete' && b.rule.shiftId && !shiftIds.has(b.rule.shiftId))
+      err('badges.json', `${b.id}: shift tidak ada: ${b.rule.shiftId}`);
+    dupCheck(seenBadges, b.id, 'badges.json', 'lencana');
+    if (b.rule.type === 'tools-owned' && b.rule.count > content.tools.length)
+      err(
+        'badges.json',
+        `${b.id}: butuh ${b.rule.count} alat, toko hanya punya ${content.tools.length}`,
+      );
+    const brands = findBrands(allStrings(b).join(' '), policy.brandDenylist);
+    if (brands.length) err('badges.json', `${b.id}: merek nyata: ${brands.join(', ')}`);
   }
 
   if (content.assessment) {

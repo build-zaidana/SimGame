@@ -297,3 +297,82 @@ describe('concept rendering', () => {
     expect(content.concepts[0]?.html).toBe('<p>Isi materi.</p>\n');
   });
 });
+
+describe('morning newspaper (koran pagi)', () => {
+  const paper = (over: object = {}) => ({
+    headline: 'Judul',
+    lead: 'Isi berita singkat.',
+    tip: { title: 'Tips', text: 'Baca domain dari kanan.' },
+    sources: ['BSSN'],
+    ...over,
+  });
+  const impact = { good: 'Bagus.', mixed: 'Lumayan.', bad: 'Buruk.' };
+  const withPaper = (newspaper: object, order = 1) => {
+    const f = fixture();
+    Object.assign(f['shifts/s-1.json'] as object, { order, newspaper });
+    return errorsFor(f);
+  };
+
+  it('accepts a first-day paper without an impact story', () => {
+    expect(withPaper(paper())).toEqual([]);
+  });
+  it('rejects an impact story on the first shift', () => {
+    expect(withPaper(paper({ impact }))).toEqual([
+      expect.stringMatching(/berita dampak tidak ada di shift pertama/),
+    ]);
+  });
+  it('requires an impact story on later shifts', () => {
+    expect(withPaper(paper(), 2)).toContainEqual(expect.stringMatching(/butuh berita dampak/));
+    expect(withPaper(paper({ impact }), 2).filter((e) => /berita dampak/.test(e))).toEqual([]);
+  });
+  it('limits story length and checks brands and domains', () => {
+    expect(withPaper(paper({ lead: 'kata '.repeat(61) }))).toContainEqual(
+      expect.stringMatching(/koran: lead 61 kata/),
+    );
+    expect(withPaper(paper({ headline: 'Promo Tokopedia' }))).toContainEqual(
+      expect.stringMatching(/merek nyata: Tokopedia/),
+    );
+    expect(withPaper(paper({ lead: 'Buka nusa-promo.com sekarang.' }))).toContainEqual(
+      expect.stringMatching(/domain bukan/),
+    );
+  });
+});
+
+describe('badges (lencana)', () => {
+  const badge = (id: string, rule: object) => ({
+    id,
+    title: 'Lencana',
+    description: 'Deskripsi.',
+    icon: '🏅',
+    tier: 'bronze',
+    rule,
+  });
+  const withBadges = (badges: object[]) => {
+    const f = fixture();
+    f['badges.json'] = { badges };
+    return errorsFor(f);
+  };
+
+  it('loads valid badges', () => {
+    const f = fixture();
+    f['badges.json'] = { badges: [badge('b-1', { type: 'shift-complete', shiftId: 's-1' })] };
+    const { content } = parseModeContent(f, socCaseSchemas);
+    expect(content.badges.map((b) => b.id)).toEqual(['b-1']);
+    expect(errorsFor(f)).toEqual([]);
+  });
+  it('rejects duplicates, unknown shifts and impossible tool counts', () => {
+    expect(
+      withBadges([
+        badge('b-1', { type: 'shift-complete', shiftId: 's-x' }),
+        badge('b-1', { type: 'tools-owned', count: 9 }),
+      ]),
+    ).toEqual([
+      expect.stringMatching(/b-1: shift tidak ada: s-x/),
+      expect.stringMatching(/ID lencana duplikat: b-1/),
+      expect.stringMatching(/b-1: butuh 9 alat, toko hanya punya 0/),
+    ]);
+  });
+  it('rejects unknown rule types', () => {
+    expect(withBadges([badge('b-1', { type: 'hack-the-planet' })]).length).toBeGreaterThan(0);
+  });
+});

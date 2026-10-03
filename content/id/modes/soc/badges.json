@@ -1,0 +1,116 @@
+{
+  "badges": [
+    {
+      "id": "hari-pertama",
+      "title": "Hari Pertama",
+      "description": "Menyelesaikan Shift 1. Selamat datang di meja SOC!",
+      "icon": "🎫",
+      "tier": "bronze",
+      "rule": {
+        "type": "shift-complete",
+        "shiftId": "soc-01"
+      }
+    },
+    {
+      "id": "murid-teladan",
+      "title": "Murid Teladan",
+      "description": "Menjawab semua soal Review Cepat dengan benar dalam satu shift.",
+      "icon": "📚",
+      "tier": "bronze",
+      "rule": {
+        "type": "review-perfect"
+      }
+    },
+    {
+      "id": "tanpa-celah",
+      "title": "Tanpa Celah",
+      "description": "Satu shift penuh tanpa satu pun ancaman yang lolos ke klien, dengan minimal ★★.",
+      "icon": "🧱",
+      "tier": "silver",
+      "rule": {
+        "type": "no-threat-allowed",
+        "minCases": 8,
+        "minStars": 2
+      }
+    },
+    {
+      "id": "sahabat-klien",
+      "title": "Sahabat Klien",
+      "description": "Satu shift penuh tanpa memblokir yang sah dan tanpa eskalasi yang tidak perlu, dengan minimal ★★.",
+      "icon": "🤝",
+      "tier": "silver",
+      "rule": {
+        "type": "no-legit-blocked",
+        "minCases": 8,
+        "minStars": 2
+      }
+    },
+    {
+      "id": "mata-elang",
+      "title": "Mata Elang",
+      "description": "Lima kasus berturut-turut dengan keputusan tepat, bukti lengkap, dan tanpa salah tandai.",
+      "icon": "🦅",
+      "tier": "silver",
+      "rule": {
+        "type": "evidence-streak",
+        "count": 5
+      }
+    },
+    {
+      "id": "analis-mandiri",
+      "title": "Analis Mandiri",
+      "description": "Menyelesaikan satu shift tanpa bertanya ke mentor, dengan minimal ★★.",
+      "icon": "🧠",
+      "tier": "silver",
+      "rule": {
+        "type": "no-hints",
+        "minCases": 8,
+        "minStars": 2
+      }
+    },
+    {
+      "id": "perkakas-lengkap",
+      "title": "Perkakas Lengkap",
+      "description": "Memiliki keempat alat dari Toko Alat.",
+      "icon": "🧰",
+      "tier": "silver",
+      "rule": {
+        "type": "tools-owned",
+        "count": 4
+      }
+    },
+    {
+      "id": "tiga-bintang",
+      "title": "Tiga Bintang",
+      "description": "Meraih ★★★ di sebuah shift.",
+      "icon": "⭐",
+      "tier": "gold",
+      "rule": {
+        "type": "shift-stars",
+        "stars": 3
+      }
+    },
+    {
+      "id": "sangat-dipercaya",
+      "title": "Sangat Dipercaya",
+      "description": "Mengakhiri shift dengan kepercayaan klien 90 atau lebih.",
+      "icon": "💛",
+      "tier": "gold",
+      "rule": {
+        "type": "trust-at-least",
+        "value": 90
+      }
+    },
+    {
+      "id": "penjaga-nusa",
+      "title": "Penjaga Nusa",
+      "description": "Menyelesaikan Shift 5 dan menghadapi serangan berlapis Kelabu.",
+      "icon": "🛡",
+      "tier": "gold",
+      "rule": {
+        "type": "shift-complete",
+        "shiftId": "soc-05"
+      }
+    }
+  ]
+}

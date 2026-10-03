@@ -76,6 +76,19 @@ export const id = {
     wallet: (coins: number) => `Gaji: Rp ${coins}`,
     trust: (trust: number) => `Kepercayaan klien: ${trust}`,
     loadingDesk: 'Menyiapkan meja…',
+    badges: (n: number, total: number) => `Lencana (${n}/${total})`,
+    newBadges: 'Lencana baru!',
+    viewBadges: 'Lihat lencana',
+    dismissBadges: 'Tutup',
+  },
+  badges: {
+    heading: 'Lencana',
+    intro:
+      'Kumpulkan lencana dengan bekerja teliti. Lencana hanya didapat di jalur utama, bukan Mode Latihan.',
+    count: (n: number, total: number) => `${n} dari ${total} lencana`,
+    earned: (date: string) => `Didapat ${date}`,
+    locked: 'Belum didapat',
+    tier: { bronze: 'Perunggu', silver: 'Perak', gold: 'Emas' } as Record<string, string>,
   },
   modes: {
     soc: { title: 'Analis Keamanan (SOC)', deskTitle: 'Meja SOC' },
@@ -204,6 +217,14 @@ export const id = {
     sources: 'Sumber',
     locked: (order: number) => `Terbuka di Shift ${order}`,
   },
+  news: {
+    masthead: 'KABAR NUSA',
+    edition: (n: number) => `Edisi hari ke-${n}`,
+    price: 'Gratis untuk karyawan',
+    impactHeading: 'Dampak kerjamu kemarin',
+    tier: { good: 'kabar baik', mixed: 'kabar campuran', bad: 'kabar buruk' },
+    classified: 'IKLAN BARIS:',
+  },
   briefing: {
     next: 'Lanjut',
     start: 'Mulai shift',
@@ -234,6 +255,8 @@ export const id = {
     playModeNote: 'Mode baru berlaku mulai shift berikutnya.',
     reduceMotion: 'Kurangi animasi',
     sound: 'Efek suara',
+    music: 'Musik latar',
+    audio: 'Suara',
     on: 'Nyala',
     off: 'Mati',
     preview: 'Contoh teks dokumen: Yth. Nasabah, akun Anda akan diblokir dalam 1 jam.',

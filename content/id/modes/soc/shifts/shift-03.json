@@ -57,5 +57,20 @@
   "pay": {
     "base": 40,
     "perCase": 12
+  },
+  "newspaper": {
+    "headline": "Penelepon Mengaku Tim IT, Minta Kode OTP",
+    "lead": "Sejumlah karyawan di kawasan bisnis Nusantara melaporkan telepon dari orang yang mengaku petugas IT dan meminta kode OTP. Petugas IT sungguhan tidak pernah meminta kode itu.",
+    "impact": {
+      "good": "Kemarin, analis SOC PT Nusa Digital membedakan email sah dan palsu dengan cermat. Tidak ada pekerjaan klien yang terganggu.",
+      "mixed": "Kemarin, sebagian jebakan email lolos dan beberapa email sah ikut terblokir. Tim SOC melakukan pemeriksaan ulang.",
+      "bad": "Kemarin, beberapa jebakan email lolos dan email kerja yang sah ikut diblokir. Klien meminta laporan perbaikan."
+    },
+    "tip": {
+      "title": "Tips: OTP Itu Rahasia",
+      "text": "OTP (kode sekali pakai) hanya untuk kamu. Siapa pun yang memintanya, termasuk yang mengaku dari bank atau tim IT, patut dicurigai."
+    },
+    "classified": "TERIMA KASIH kepada siapa pun yang membacakan kodenya lewat telepon. Kalian sangat membantu. — K.",
+    "sources": ["BSSN: imbauan menjaga kerahasiaan OTP", "NIST SP 800-63B"]
   }
 }

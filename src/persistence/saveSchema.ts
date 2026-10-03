@@ -3,7 +3,7 @@ import type { ShiftSession } from '../engine/types.ts';
 import { BASELINE_TRUST } from '../engine/economy.ts';
 
 /** Naikkan + tambah migrasi di migrations.ts + test setiap kali bentuk save berubah. */
-export const SAVE_SCHEMA_VERSION = 3;
+export const SAVE_SCHEMA_VERSION = 5;
 
 const level = z.literal([1, 2, 3]);
 const score01 = z.number().min(0).max(1);
@@ -64,6 +64,8 @@ export const settingsSchema = z.object({
   playMode: z.enum(['relaxed', 'normal']),
   reduceMotion: z.boolean(),
   sound: z.boolean(),
+  /** v5: musik latar (PRD C2), terpisah dari efek suara. */
+  music: z.boolean(),
 });
 
 export const modeProgressSchema = z.object({
@@ -84,6 +86,8 @@ export const modeProgressSchema = z.object({
   activeSession: shiftSessionSchema.optional(),
   /** v3: shift Mode Latihan yang sedang berjalan (PRD S5); tidak memengaruhi progres utama. */
   practiceSession: shiftSessionSchema.optional(),
+  /** v4: lencana yang sudah didapat → waktu didapat (ISO). */
+  badges: z.record(z.string(), z.string()),
 });
 
 const assessmentResultSchema = z.object({
@@ -130,7 +134,13 @@ export function createNewSave({ installId, now }: { installId: string; now: stri
     installId,
     profile: {
       nickname: '',
-      settings: { textScale: 1, playMode: 'relaxed', reduceMotion: false, sound: true },
+      settings: {
+        textScale: 1,
+        playMode: 'relaxed',
+        reduceMotion: false,
+        sound: true,
+        music: true,
+      },
     },
     modes: {},
     mastery: {},
@@ -146,5 +156,6 @@ export function newModeProgress(): ModeProgress {
     trust: INITIAL_TRUST,
     toolsOwned: [],
     chaptersUnlocked: [],
+    badges: {},
   };
 }

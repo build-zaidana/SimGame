@@ -39,7 +39,7 @@ export function FeedbackDialog({
         {id.feedback.slipHeader(caseData.id)}
       </p>
       <p className="float-right ml-2" aria-hidden="true">
-        <span className={`stamp border-4 px-2 py-1 font-display text-lg ${color} border-current`}>
+        <span className={`stamp border-4 px-2 py-1 font-stamp text-lg ${color} border-current`}>
           {id.stamps[o.decision] ?? o.decision.toUpperCase()}
         </span>
       </p>

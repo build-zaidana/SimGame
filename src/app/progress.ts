@@ -1,5 +1,6 @@
 import type { CaseSchemas, ModeContent } from '../content/loader.ts';
 import type { ReviewItem, ShiftDef } from '../content/schemas.ts';
+import { newBadges, type BadgeRule } from '../engine/badges.ts';
 import { carryTrust } from '../engine/economy.ts';
 import { recordResult, recordShiftConcepts, type MasteryMap } from '../engine/mastery.ts';
 import { createRng } from '../engine/rng.ts';
@@ -108,6 +109,35 @@ export function reviewItemsFor(
   return ids.flatMap((rid) => content.review.filter((r) => r.id === rid));
 }
 
+/**
+ * Memberi lencana yang baru terpenuhi (PRD C3). Tanpa `shift`, hanya aturan di luar shift yang
+ * dinilai (mis. jumlah alat setelah membeli). Mengembalikan progres baru + ID lencana baru.
+ */
+export function awardBadges(
+  progress: ModeProgress,
+  content: ModeContent,
+  now: string,
+  shift?: {
+    session: ShiftSession;
+    stars: number;
+    trust: number;
+    reviewResults: readonly ReviewResult[];
+  },
+): { progress: ModeProgress; earned: string[] } {
+  const defs = (content.badges ?? []).map((b) => ({ id: b.id, rule: b.rule as BadgeRule }));
+  const earned = newBadges(defs, progress.badges, {
+    shiftId: shift?.session.shiftId ?? null,
+    cases: shift?.session.cases ?? [],
+    stars: shift?.stars ?? 0,
+    trust: shift?.trust ?? progress.trust,
+    toolsOwned: progress.toolsOwned.length,
+    reviewResults: shift?.reviewResults ?? [],
+  });
+  if (earned.length === 0) return { progress, earned };
+  const badges = { ...progress.badges, ...Object.fromEntries(earned.map((id) => [id, now])) };
+  return { progress: { ...progress, badges }, earned };
+}
+
 /** Menyimpan hasil shift yang selesai ke save (skor terbaik, gaji, kepercayaan, mastery). */
 export function commitShift(
   save: SaveData,
@@ -141,6 +171,13 @@ export function commitShift(
     ],
   };
 
+  const { progress: withBadges } = awardBadges(nextProgress, content, now, {
+    session,
+    stars: summary.stars,
+    trust: summary.trust,
+    reviewResults,
+  });
+
   const results = session.cases.map((c) => ({
     conceptIds: content.cases[c.caseId]?.conceptIds ?? [],
     correct: c.outcome?.correct ?? false,
@@ -149,7 +186,7 @@ export function commitShift(
   return {
     ...save,
     updatedAt: now,
-    modes: { ...save.modes, [session.modeId]: nextProgress },
+    modes: { ...save.modes, [session.modeId]: withBadges },
     mastery: reviewResults.reduce(
       (m, r) => recordResult(m, r.itemId, r.correct, session.shiftOrder),
       recordShiftConcepts(save.mastery, results, session.shiftOrder),
