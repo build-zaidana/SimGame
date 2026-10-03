@@ -1,10 +1,16 @@
 # Deploy ShiftIT
 
-Game ini situs statis (tanpa backend). Hasil `pnpm build` ada di `dist/`. Header keamanan (CSP, dll.)
-dan cache sudah disiapkan untuk dua pilihan hosting di PRD §14: **Cloudflare Pages** (`public/_headers`)
-dan **Vercel** (`vercel.json`). Isi header keduanya sama.
+Game ini situs statis (tanpa backend). Hasil `pnpm build` ada di `dist/`. Hosting yang dipakai:
+**Netlify** (`netlify.toml`). Header keamanan (CSP, dll.) dan cache ada di `public/_headers`, yang dibaca
+Netlify dan Cloudflare Pages dengan format yang sama. Vercel memakai `vercel.json` dengan isi yang sama.
 
-## Cloudflare Pages
+## Netlify (dipakai)
+
+1. Netlify → Add new site → Import from Git → pilih repo ini.
+2. Pengaturan build dibaca dari `netlify.toml` (build `pnpm build`, publish `dist`, Node 22, pnpm 10).
+3. Branch produksi: `main`. Pull request otomatis mendapat _Deploy Preview_.
+
+## Cloudflare Pages (alternatif)
 
 1. Dashboard Cloudflare → Workers & Pages → Create → Pages → hubungkan repo GitHub ini.
 2. Pengaturan build:
@@ -14,7 +20,7 @@ dan **Vercel** (`vercel.json`). Isi header keduanya sama.
    - Environment variable: `NODE_VERSION` = `22`
 3. Branch produksi: `main`. Branch lain otomatis mendapat URL preview.
 
-## Vercel
+## Vercel (alternatif)
 
 1. Dashboard Vercel → Add New → Project → impor repo ini.
 2. Pengaturan dibaca dari `vercel.json` (build `pnpm build`, output `dist`). Tidak perlu diubah.

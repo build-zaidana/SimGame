@@ -1,0 +1,9 @@
+# Netlify (hosting yang dipakai pemilik). Header CSP & cache dibaca dari public/_headers
+# (format yang sama dengan Cloudflare Pages), jadi hanya ada satu sumber header.
+[build]
+  command = "pnpm build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  PNPM_VERSION = "10.28.0"

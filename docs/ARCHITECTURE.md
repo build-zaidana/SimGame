@@ -28,7 +28,7 @@
 │     │                                                                          │
 │     └── hub/phaser/  ← v1.1: scene top-down Phaser 4, di-*lazy load*            │
 └────────────────────────────────────────────────────────────────────────────────┘
-          Tidak ada backend di v1.0. Hosting statis (Cloudflare Pages / Vercel).
+          Tidak ada backend di v1.0. Hosting statis (Netlify; konfigurasi Cloudflare Pages / Vercel tetap tersedia).
 ```
 
 ### Aturan dependensi (wajib)
@@ -61,7 +61,7 @@ Aturan ini ditegakkan dengan ESLint `no-restricted-imports` (lihat §12).
 | Test | **Vitest** (unit), **Playwright** (e2e, viewport HP & desktop) | |
 | Kualitas | ESLint (flat config) + Prettier + `size-limit` | |
 | Package manager | **pnpm** | |
-| Hosting | Cloudflare Pages atau Vercel (statis) | Gratis, CDN dekat Indonesia |
+| Hosting | **Netlify** (statis; dipilih pemilik). Cloudflare Pages / Vercel tetap didukung | Gratis, CDN global, deploy otomatis dari `main` |
 
 > Catatan untuk Claude Code: API Phaser 4 berbeda dari Phaser 3 di beberapa bagian (renderer, beberapa nama API). **Selalu cek dokumentasi & template resmi `phaserjs/template-react-ts` versi terkini** sebelum menulis kode Phaser, jangan mengandalkan ingatan Phaser 3.
 
