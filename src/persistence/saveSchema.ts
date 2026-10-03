@@ -3,7 +3,7 @@ import type { ShiftSession } from '../engine/types.ts';
 import { BASELINE_TRUST } from '../engine/economy.ts';
 
 /** Naikkan + tambah migrasi di migrations.ts + test setiap kali bentuk save berubah. */
-export const SAVE_SCHEMA_VERSION = 6;
+export const SAVE_SCHEMA_VERSION = 7;
 
 const level = z.literal([1, 2, 3]);
 const score01 = z.number().min(0).max(1);
@@ -68,6 +68,8 @@ export const settingsSchema = z.object({
   music: z.boolean(),
   /** v6: bahasa antarmuka & konten (PRD C4). */
   language: z.enum(['id', 'en']),
+  /** v7: kantor top-down yang bisa dijelajahi (PRD C1); mati = ilustrasi statis. */
+  exploreOffice: z.boolean(),
 });
 
 export const modeProgressSchema = z.object({
@@ -143,6 +145,7 @@ export function createNewSave({ installId, now }: { installId: string; now: stri
         sound: true,
         music: true,
         language: 'id',
+        exploreOffice: true,
       },
     },
     modes: {},

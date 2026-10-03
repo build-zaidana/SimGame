@@ -53,6 +53,12 @@ export const MIGRATIONS: Record<number, Migration> = {
     const settings = (profile['settings'] ?? {}) as Record<string, unknown>;
     return { ...d, profile: { ...profile, settings: { language: 'id', ...settings } } };
   },
+  /** v6 → v7: kantor yang bisa dijelajahi menyala untuk semua pemain (bisa dimatikan). */
+  6: (d) => {
+    const profile = (d['profile'] ?? {}) as Record<string, unknown>;
+    const settings = (profile['settings'] ?? {}) as Record<string, unknown>;
+    return { ...d, profile: { ...profile, settings: { exploreOffice: true, ...settings } } };
+  },
 };
 
 export function runMigrations(

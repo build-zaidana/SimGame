@@ -374,12 +374,12 @@ Saat pertama kali menyimpan: panggil `navigator.storage.persist()` (abaikan jika
 ### 7.2 Bentuk save
 ```ts
 // src/persistence/saveSchema.ts
-export const SAVE_SCHEMA_VERSION = 6;
+export const SAVE_SCHEMA_VERSION = 7;
 SaveData = {
-  schemaVersion: 6,
+  schemaVersion: 7,
   createdAt: string, updatedAt: string,
   installId: string,                  // UUID acak; tidak terkait identitas
-  profile: { nickname: string, settings: { textScale: 1|1.15|1.3, playMode: 'relaxed'|'normal', reduceMotion: boolean, sound: boolean, music: boolean /* v5 */, language: 'id'|'en' /* v6, ADR 023 */ } },
+  profile: { nickname: string, settings: { textScale: 1|1.15|1.3, playMode: 'relaxed'|'normal', reduceMotion: boolean, sound: boolean, music: boolean /* v5 */, language: 'id'|'en' /* v6, ADR 023 */, exploreOffice: boolean /* v7, ADR 024 */ } },
   modes: {
     [modeId: string]: {
       unlockedShift: number,
@@ -457,7 +457,7 @@ Desktop ≥ 1024px                         HP < 768px (potret)
 ## 10. HUB
 
 - **v1.0 — `HubMenu`** (React): ilustrasi kantor pixel statis dengan 4 hotspot meja (SOC aktif; Support/Dev/Data bertanda "Segera hadir"), tombol Panduan, Pengaturan, Pindah Save.
-- **v1.1 — `PhaserHub`**: komponen React yang memanggil `import('./phaser/createGame')` secara dinamis, me-*mount* `Phaser.Game` ke `<div>`, dan berkomunikasi lewat `EventBus` (pola dari template resmi Phaser + React). Scene: tilemap kantor, pemain bergerak (keyboard/joystick sentuh), NPC Mbak Rani, zona interaksi meja → emit `desk:enter { modeId }` → React mengganti layar. Saat keluar hub, `game.destroy(true)` untuk membebaskan memori di HP.
+- **v1.1 — `PhaserHub`** (sudah dibangun, ADR 024; logika peta di `src/hub/officeMap.ts`, kontrak di `src/hub/hubTypes.ts`): komponen React yang memanggil `import('./phaser/createGame')` secara dinamis, me-*mount* `Phaser.Game` ke `<div>`, dan berkomunikasi lewat callback `onNear`/`onInteract` (bukan EventBus global). Scene: kantor pixel dari kode, pemain bergerak (keyboard saat kanvas difokus, atau ketuk tujuan), NPC Mbak Rani, zona interaksi meja/toko/rak/papan lencana → React mengganti layar. Saat keluar hub, `game.destroy(true)` untuk membebaskan memori di HP.
 - Kedua versi memakai data yang sama: `modes/registry.ts`.
 
 ## 11. Performa & PWA

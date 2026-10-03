@@ -25,5 +25,11 @@
     ],
     "limit": "150 KB",
     "gzip": true
+  },
+  {
+    "name": "Kantor Phaser (dimuat lazy, hanya bila kantor dijelajahi)",
+    "path": "dist/assets/createGame-*.js",
+    "limit": "380 KB",
+    "gzip": true
   }
 ]

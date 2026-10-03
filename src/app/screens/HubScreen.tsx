@@ -4,6 +4,7 @@ import { modes, upcomingModes } from '../../modes/registry.ts';
 import { newModeProgress } from '../../persistence/saveSchema.ts';
 import { nextShift, practiceShifts } from '../progress.ts';
 import { useAppStore } from '../store.ts';
+import { PhaserHub, type HotspotInfo } from '../../hub/PhaserHub.tsx';
 import { OfficeIllustration } from '../ui/hub/OfficeIllustration.tsx';
 import { Medal } from '../ui/Medal.tsx';
 import { btnPrimary, btnSecondary, panel } from '../ui/styles.ts';
@@ -22,6 +23,59 @@ export function HubScreen() {
   const newBadges = useAppStore((s) => s.newBadges);
   const dismissBadges = useAppStore((s) => s.dismissBadges);
   const [entering, setEntering] = useState(false);
+  const explore = useAppStore((s) => s.save?.profile.settings.exploreOffice ?? false);
+
+  const startDesk = (modeId: string) => {
+    if (entering) return;
+    setEntering(true);
+    void enterMode(modeId).finally(() => setEntering(false));
+  };
+  const illustration = (
+    <OfficeIllustration
+      desks={[
+        ...modes.map((m) => ({
+          label: m.deskTitle,
+          available: m.status === 'available',
+          disabled: entering,
+          onEnter: () => startDesk(m.id),
+        })),
+        ...upcomingModes.map((m) => ({ label: m.deskTitle, available: false })),
+      ]}
+    />
+  );
+
+  // Kantor yang bisa dijelajahi (PRD C1): arti setiap hotspot di peta.
+  const allModes = [...modes, ...upcomingModes];
+  const describeHotspot = (hotspotId: string): HotspotInfo => {
+    const [kind, key] = hotspotId.split(':');
+    if (kind === 'desk') {
+      const m = allModes.find((x) => x.id === key);
+      return m?.status === 'available'
+        ? { label: m.deskTitle, action: id.explore.enter }
+        : { label: m?.deskTitle ?? key ?? '' };
+    }
+    if (hotspotId === 'npc:rani') return { label: id.explore.raniLabel, action: id.explore.talk };
+    if (hotspotId === 'menu:shop') return { label: id.explore.shopLabel, action: id.explore.open };
+    if (hotspotId === 'menu:rulebook')
+      return { label: id.explore.rulebookLabel, action: id.explore.open };
+    return { label: id.explore.badgesLabel, action: id.explore.open };
+  };
+  const interactHotspot = (hotspotId: string): string | void => {
+    const [kind, key] = hotspotId.split(':');
+    if (kind === 'desk') {
+      if (modes.some((m) => m.id === key && m.status === 'available')) startDesk(key ?? '');
+      return;
+    }
+    if (hotspotId === 'menu:shop') return openMenu('shop');
+    if (hotspotId === 'menu:rulebook') return openRulebook(null);
+    if (hotspotId === 'menu:badges') return openMenu('badges');
+    // Mbak Rani: satu aturan acak dari bab yang sudah terbuka.
+    const rules = (content?.rulebook.chapters ?? [])
+      .filter((ch) => ch.unlockAtShift <= Math.max(1, socProgress.unlockedShift))
+      .flatMap((ch) => ch.rules);
+    const rule = rules[Math.floor(Math.random() * rules.length)];
+    return rule ? id.explore.raniTip(rule.text) : undefined;
+  };
 
   useEffect(() => {
     for (const m of modes) void preloadContent(m.id);
@@ -66,20 +120,16 @@ export function HubScreen() {
           </button>
         </section>
       )}
-      <OfficeIllustration
-        desks={[
-          ...modes.map((m) => ({
-            label: m.deskTitle,
-            available: m.status === 'available',
-            disabled: entering,
-            onEnter: () => {
-              setEntering(true);
-              void enterMode(m.id).finally(() => setEntering(false));
-            },
-          })),
-          ...upcomingModes.map((m) => ({ label: m.deskTitle, available: false })),
-        ]}
-      />
+      {explore ? (
+        <PhaserHub
+          activeModes={modes.filter((m) => m.status === 'available').map((m) => m.id)}
+          describe={describeHotspot}
+          onInteract={interactHotspot}
+          fallback={illustration}
+        />
+      ) : (
+        illustration
+      )}
       <nav className="flex flex-wrap gap-2" aria-label={id.hub.heading}>
         <button type="button" className={btnSecondary} onClick={() => openRulebook(null)}>
           <span aria-hidden="true">📖 </span>
