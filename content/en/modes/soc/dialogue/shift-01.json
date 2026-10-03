@@ -1,0 +1,42 @@
+{
+  "dialogues": [
+    {
+      "id": "soc-01-intro",
+      "lines": [
+        {
+          "speaker": "rani",
+          "text": "Hi! I'm Rani, a senior analyst at the Nusa Digital SOC desk. Welcome to your first day!"
+        },
+        {
+          "speaker": "rani",
+          "text": "SOC stands for Security Operations Center: the team that keeps our office and our clients safe every day."
+        },
+        {
+          "speaker": "rani",
+          "text": "Open a case from the Queue, then tap anything suspicious to mark it as evidence."
+        },
+        {
+          "speaker": "rani",
+          "text": "Then decide: ALLOW, BLOCK, or ESCALATE (hand it to a senior analyst) if you're not sure."
+        },
+        {
+          "speaker": "rani",
+          "text": "Confused? Open the Handbook. One more thing: press and hold, or right-click, a link to see its real address."
+        }
+      ]
+    },
+    {
+      "id": "soc-01-outro",
+      "lines": [
+        {
+          "speaker": "rani",
+          "text": "First shift done! Check your report, especially the cases you missed. That's where we learn the most."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "Nusa Digital has a new analyst, huh? Let's see how careful they are."
+        }
+      ]
+    }
+  ]
+}

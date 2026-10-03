@@ -1,0 +1,52 @@
+{
+  "id": "s04-email-002",
+  "type": "email",
+  "conceptIds": ["malware-files", "phishing-signs"],
+  "difficulty": 1,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "from": {
+      "name": "Maya Putri (HR)",
+      "address": "maya.putri@nusadigital.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Maya's wedding invitation 🎉",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "11:30",
+    "body": [
+      {
+        "text": "Hi SOC team,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "I'm getting married next month! I've attached the invitation, I hope you can all come.",
+        "evidenceId": "body-info"
+      },
+      {
+        "text": "Maya",
+        "evidenceId": "signature"
+      }
+    ],
+    "attachments": [
+      {
+        "name": "Undangan_Maya.jpg",
+        "size": "640 KB",
+        "evidenceId": "attachment"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["sender", "attachment"]
+  },
+  "explanation": "The sender is a coworker using the real office domain, and the invitation is a normal .jpg image, not an app. Not every invitation is a trap.",
+  "ruleRefs": ["r-mal-2", "r-phish-5"],
+  "hints": [
+    "Who is the sender, and what type of attachment is it?",
+    "An image invitation from your own coworker. Any red flags?"
+  ]
+}

@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { id } from '../../i18n/id.ts';
+import { t as id } from '../../i18n/index.ts';
 
 interface EvidenceProps {
   evidenceId: string | undefined;

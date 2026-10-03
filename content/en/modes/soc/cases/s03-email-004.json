@@ -1,0 +1,48 @@
+{
+  "id": "s03-email-004",
+  "type": "email",
+  "conceptIds": ["passwords-mfa", "phishing-signs"],
+  "difficulty": 1,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 2,
+  "data": {
+    "from": {
+      "name": "SendFast Courier",
+      "address": "kurir@sendfast-antar.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "The courier is outside your office",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "11:05",
+    "body": [
+      {
+        "text": "Hello,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "Our courier is in the lobby. To confirm delivery, reply with the OTP code that was just sent to your phone.",
+        "evidenceId": "request-otp"
+      },
+      {
+        "text": "The package will be sent back if you do not reply within 10 minutes.",
+        "evidenceId": "urgency"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["request-otp", "sender"],
+    "supporting": ["urgency"]
+  },
+  "explanation": "A real courier does not need an OTP to deliver a package, and SendFast's official domain is sendfast.test. The OTP they want is probably for logging in to one of your accounts.",
+  "ruleRefs": ["r-pass-1", "r-phish-1", "r-phish-3"],
+  "hints": [
+    "Why would a courier need an OTP code?",
+    "Check the sender's domain and the time limit."
+  ]
+}

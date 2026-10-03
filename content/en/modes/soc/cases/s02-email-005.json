@@ -1,0 +1,55 @@
+{
+  "id": "s02-email-005",
+  "type": "email",
+  "conceptIds": ["phishing-signs", "url-anatomy"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "from": {
+      "name": "Nusantara Bank",
+      "address": "notifikasi@nusantarabank.akun-verifikasi.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Transaction of Rp 4.750.000 successful",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "10:47",
+    "body": [
+      {
+        "text": "Dear Customer,",
+        "evidenceId": "generic-greeting"
+      },
+      {
+        "text": "Your account just sent Rp 4.750.000 to another account.",
+        "evidenceId": "body-claim"
+      },
+      {
+        "text": "Wasn't you? Cancel within 15 minutes:",
+        "evidenceId": "urgency"
+      },
+      {
+        "link": {
+          "label": "Cancel transaction",
+          "href": "http://batalkan-transaksi.test/bank"
+        },
+        "evidenceId": "link"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["sender", "link"],
+    "supporting": ["urgency", "generic-greeting"]
+  },
+  "explanation": "Reading from the right, the sender's domain is akun-verifikasi.test, not nusantarabank.test, and the link goes to a different site. Panic about losing money is used to make you click without thinking.",
+  "ruleRefs": ["r-phish-1", "r-url-1", "r-phish-3"],
+  "hints": [
+    "Scammers like to make you panic. Take a breath, then read the sender's domain from the right.",
+    "The owner is akun-verifikasi.test. Now press and hold the link."
+  ]
+}

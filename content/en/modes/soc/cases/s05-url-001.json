@@ -1,0 +1,48 @@
+{
+  "id": "s05-url-001",
+  "type": "url-request",
+  "conceptIds": ["malware-files", "url-anatomy"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "requester": {
+      "name": "Hendra Wijaya",
+      "department": "IT Team"
+    },
+    "url": {
+      "parts": [
+        {
+          "text": "http://",
+          "evidenceId": "url-scheme"
+        },
+        {
+          "text": "update-nusadigital.test",
+          "evidenceId": "url-domain"
+        },
+        {
+          "text": "/patch-darurat.exe",
+          "evidenceId": "url-path"
+        }
+      ]
+    },
+    "reason": {
+      "text": "An email told every laptop to install an emergency patch from this link. Please unblock it.",
+      "evidenceId": "reason"
+    }
+  },
+  "evidence": {
+    "required": ["url-domain", "url-path"],
+    "supporting": ["reason"]
+  },
+  "explanation": "The domain owner is update-nusadigital.test, not the office, and the download is an .exe program. Official patches are never shared through links in emails.",
+  "ruleRefs": ["r-url-1", "r-mal-2"],
+  "hints": [
+    "Read the domain owner from the right.",
+    "Then look at the end of the address: what file will be downloaded?"
+  ]
+}

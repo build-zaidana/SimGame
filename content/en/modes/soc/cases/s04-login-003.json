@@ -1,0 +1,59 @@
+{
+  "id": "s04-login-003",
+  "type": "login-alert",
+  "conceptIds": ["log-reading"],
+  "difficulty": 3,
+  "verdict": "malicious",
+  "correctDecision": "reset-password",
+  "acceptableDecisions": {
+    "block": 0.6,
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "account": {
+      "user": "Andi Saputra",
+      "role": "Marketing"
+    },
+    "headline": {
+      "text": "Two successful logins from places far apart",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "09:00",
+        "location": "Jakarta office",
+        "ip": "10.20.1.22",
+        "device": "Office laptop (registered)",
+        "method": "Password + OTP",
+        "result": "success",
+        "evidenceId": "ev-1"
+      },
+      {
+        "time": "09:12",
+        "location": "Abroad",
+        "ip": "198.51.100.23",
+        "device": "Windows (new device)",
+        "method": "Password",
+        "result": "success",
+        "evidenceId": "ev-2"
+      }
+    ],
+    "context": [
+      {
+        "text": "Andi is in a meeting at the Jakarta office from 09.00 to 10.00.",
+        "evidenceId": "ctx-meeting"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["ev-2"],
+    "supporting": ["ev-1", "ctx-meeting"]
+  },
+  "explanation": "Andi is in Jakarta, but 12 minutes later there is a successful login from abroad on a new device. This is impossible travel: someone else has Andi's password.",
+  "ruleRefs": ["r-log-2", "r-pass-2"],
+  "hints": [
+    "Compare the time and location of both logins.",
+    "Could Andi travel abroad in 12 minutes?"
+  ]
+}

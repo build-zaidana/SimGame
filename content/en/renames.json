@@ -1,0 +1,14 @@
+{
+  "$comment": "Nama fiktif yang dilokalkan untuk bahasa ini (ADR 023). Diterapkan berurutan pada teks bahasa dasar; content:check memakai tabel ini untuk paritas domain/alamat. Tambahkan nama baru di sini, jangan langsung di kasus.",
+  "renames": [
+    ["PT Nusa Digital", "Nusa Digital"],
+    ["PT NUSA DIGITAL", "NUSA DIGITAL"],
+    ["Bank Nusantara", "Nusantara Bank"],
+    ["banknusantara", "nusantarabank"],
+    ["KirimCepat", "SendFast"],
+    ["kirimcepat", "sendfast"],
+    ["PT Sinar Jaya", "Bright Harbor"],
+    ["Sinar Jaya", "Bright Harbor"],
+    ["sinarjaya", "brightharbor"]
+  ]
+}

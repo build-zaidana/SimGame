@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import type { Chapter, Concept } from '../../content/schemas.ts';
 import { masteryOf, type MasteryMap } from '../../engine/mastery.ts';
-import { id } from '../../i18n/id.ts';
+import { t as id } from '../../i18n/index.ts';
 
 interface RulebookProps {
   chapters: Chapter[];

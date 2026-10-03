@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { id } from '../../i18n/id.ts';
+import { intlLocale, t as id } from '../../i18n/index.ts';
 import type { SaveData } from '../../persistence/saveSchema.ts';
 import {
   decodeSave,
@@ -11,7 +11,8 @@ import {
 import { useAppStore } from '../store.ts';
 import { btnPrimary, btnSecondary, panel } from '../ui/styles.ts';
 
-const dateFmt = new Intl.DateTimeFormat('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
+const dateFmt = () =>
+  new Intl.DateTimeFormat(intlLocale(), { dateStyle: 'medium', timeStyle: 'short' });
 
 /** Ekspor (kode teks / file .shiftit) dan impor dengan ringkasan + konfirmasi (ARCHITECTURE §7.3). */
 export function SaveTransferScreen() {
@@ -149,7 +150,7 @@ export function SaveTransferScreen() {
               {id.transfer.summary(
                 summary.shiftsCompleted,
                 summary.stars,
-                dateFmt.format(new Date(summary.updatedAt)),
+                dateFmt().format(new Date(summary.updatedAt)),
               )}
             </p>
             <p id="confirm-h" className="font-display">

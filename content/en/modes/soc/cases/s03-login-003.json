@@ -1,0 +1,68 @@
+{
+  "id": "s03-login-003",
+  "type": "login-alert",
+  "conceptIds": ["passwords-mfa"],
+  "difficulty": 3,
+  "verdict": "malicious",
+  "correctDecision": "reset-password",
+  "acceptableDecisions": {
+    "block": 0.6,
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "account": {
+      "user": "Budi Santoso",
+      "role": "Logistics"
+    },
+    "headline": {
+      "text": "Many MFA approval requests at midnight",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "23:10",
+        "location": "Unknown",
+        "ip": "198.51.100.7",
+        "device": "Linux (new device)",
+        "method": "MFA denied",
+        "result": "failed",
+        "evidenceId": "ev-1"
+      },
+      {
+        "time": "23:12",
+        "location": "Unknown",
+        "ip": "198.51.100.7",
+        "device": "Linux (new device)",
+        "method": "MFA denied",
+        "result": "failed",
+        "evidenceId": "ev-2"
+      },
+      {
+        "time": "23:15",
+        "location": "Unknown",
+        "ip": "198.51.100.7",
+        "device": "Linux (new device)",
+        "method": "MFA approved",
+        "result": "success",
+        "evidenceId": "ev-3"
+      }
+    ],
+    "context": [
+      {
+        "text": "Budi: \"My phone kept buzzing late at night, so in the end I tapped Approve to make it stop.\"",
+        "evidenceId": "ctx-push"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["ev-3", "ctx-push"],
+    "supporting": ["ev-1", "ev-2"]
+  },
+  "explanation": "The attacker already knew Budi's password and kept sending MFA requests until Budi got tired and approved one. The login from the unknown device succeeded, so the password must be reset.",
+  "ruleRefs": ["r-pass-3", "r-pass-2"],
+  "hints": [
+    "Who asked for those MFA approvals, Budi or someone else?",
+    "Look at the last line of the log and at what Budi admitted."
+  ]
+}

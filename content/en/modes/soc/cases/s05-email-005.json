@@ -1,0 +1,48 @@
+{
+  "id": "s05-email-005",
+  "type": "email",
+  "conceptIds": ["incident-response"],
+  "difficulty": 3,
+  "verdict": "malicious",
+  "correctDecision": "escalate",
+  "acceptableDecisions": {
+    "block": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "from": {
+      "name": "Kelabu",
+      "address": "kelabu@tebusan-kelabu.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "We have locked your files",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "12:00",
+    "body": [
+      {
+        "text": "Hello Nusa Digital,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "We have locked some of the files in your shared folder.",
+        "evidenceId": "claim"
+      },
+      {
+        "text": "Send a ransom payment within 24 hours, or we will leak the files.",
+        "evidenceId": "ransom"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["ransom", "claim"],
+    "supporting": ["sender"]
+  },
+  "explanation": "This is a ransomware threat that affects data across the whole office. Don't reply or pay: escalate to the senior analyst and the managers so the incident response can start.",
+  "ruleRefs": ["r-ir-3", "r-ir-1"],
+  "hints": [
+    "This is not about one email anymore. How big is the impact?",
+    "Decisions about a ransom and the whole office's data are not one analyst's call."
+  ]
+}

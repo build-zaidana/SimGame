@@ -1,0 +1,64 @@
+{
+  "id": "s03-login-004",
+  "type": "login-alert",
+  "conceptIds": ["passwords-mfa"],
+  "difficulty": 2,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "account": {
+      "user": "Sari Anggraini",
+      "role": "Finance"
+    },
+    "headline": {
+      "text": "2 failed logins before a successful one",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "08:01",
+        "location": "Jakarta office",
+        "ip": "10.20.1.15",
+        "device": "Office laptop (registered)",
+        "method": "Wrong password",
+        "result": "failed",
+        "evidenceId": "ev-1"
+      },
+      {
+        "time": "08:02",
+        "location": "Jakarta office",
+        "ip": "10.20.1.15",
+        "device": "Office laptop (registered)",
+        "method": "Wrong password",
+        "result": "failed",
+        "evidenceId": "ev-2"
+      },
+      {
+        "time": "08:02",
+        "location": "Jakarta office",
+        "ip": "10.20.1.15",
+        "device": "Office laptop (registered)",
+        "method": "Password + OTP",
+        "result": "success",
+        "evidenceId": "ev-3"
+      }
+    ],
+    "context": [
+      {
+        "text": "Sari to the helpdesk: \"My Caps Lock was on this morning, hehe.\"",
+        "evidenceId": "ctx-capslock"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["ctx-capslock", "ev-3"]
+  },
+  "explanation": "Every attempt came from Sari's registered laptop in the office, only two were wrong, and then she passed MFA. This is a normal typo, not an attack.",
+  "ruleRefs": ["r-pass-4"],
+  "hints": [
+    "Where and from which device did these logins come?",
+    "Two mistakes from her own laptop in the office. That is normal, right?"
+  ]
+}

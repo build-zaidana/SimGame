@@ -1,0 +1,64 @@
+{
+  "id": "s05-email-001",
+  "type": "email",
+  "conceptIds": ["phishing-signs", "url-anatomy"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "from": {
+      "name": "Finance Director",
+      "address": "direktur.keuangan@nusa-digital.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Please review the audit report before the meeting",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "09:05",
+    "body": [
+      {
+        "text": "Yudi,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "You must check the audit report before the 10 o'clock meeting. Log in on this portal first:",
+        "evidenceId": "body-claim"
+      },
+      {
+        "link": {
+          "label": "portal.nusadigital.test/audit",
+          "href": "https://nusa-digital.test/audit/login"
+        },
+        "evidenceId": "link"
+      },
+      {
+        "text": "Don't be late.",
+        "evidenceId": "urgency"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["sender", "link"],
+    "supporting": ["urgency", "whois-age"]
+  },
+  "explanation": "The office domain is nusadigital.test, but this email comes from nusa-digital.test (with a hyphen), and the link goes to that fake domain too. This is the first move in Kelabu's attack on the Finance team.",
+  "ruleRefs": ["r-phish-1", "r-url-1", "r-url-3"],
+  "hints": [
+    "Compare the sender's domain with the office domain, letter by letter.",
+    "Hold the link. Do the text and the real address match?"
+  ],
+  "intel": {
+    "whois": [
+      {
+        "domain": "nusa-digital.test",
+        "registered": "2 days ago",
+        "evidenceId": "whois-age"
+      }
+    ]
+  }
+}

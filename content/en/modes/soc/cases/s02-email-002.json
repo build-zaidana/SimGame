@@ -1,0 +1,55 @@
+{
+  "id": "s02-email-002",
+  "type": "email",
+  "conceptIds": ["phishing-signs", "url-anatomy"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 2,
+  "data": {
+    "from": {
+      "name": "Nusa Digital IT Team",
+      "address": "it@nusadlgital.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Your inbox is 99% full",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "09:11",
+    "body": [
+      {
+        "text": "Dear Employee,",
+        "evidenceId": "generic-greeting"
+      },
+      {
+        "text": "New emails will be rejected starting today. Add free storage before 12.00:",
+        "evidenceId": "urgency"
+      },
+      {
+        "link": {
+          "label": "Add storage",
+          "href": "http://nusadlgital.test/kuota/login"
+        },
+        "evidenceId": "link"
+      },
+      {
+        "text": "IT Team",
+        "evidenceId": "signature"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["sender", "link"],
+    "supporting": ["urgency", "generic-greeting"]
+  },
+  "explanation": "The sender is nusadlgital.test (the letter l, not i), a fake domain that looks like nusadigital.test. The link asks you to log in on the same fake domain.",
+  "ruleRefs": ["r-phish-1", "r-url-1", "r-phish-3"],
+  "hints": [
+    "Read the sender's address letter by letter.",
+    "Compare nusadlgital with nusadigital. Then press and hold the link."
+  ]
+}

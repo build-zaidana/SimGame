@@ -1,0 +1,44 @@
+{
+  "id": "s02-file-002",
+  "type": "file",
+  "conceptIds": ["phishing-signs"],
+  "difficulty": 1,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "fileName": {
+      "text": "Undangan_Pernikahan.apk",
+      "evidenceId": "file-name"
+    },
+    "fileType": {
+      "text": "Android app (APK)",
+      "evidenceId": "file-type"
+    },
+    "size": {
+      "text": "6.2 MB",
+      "evidenceId": "file-size"
+    },
+    "source": {
+      "text": "Chat app, from an unknown number +62 812-0000-1234",
+      "evidenceId": "source"
+    },
+    "message": {
+      "text": "Assalamualaikum, please come to our wedding. Open the invitation here 🙏",
+      "evidenceId": "message"
+    }
+  },
+  "evidence": {
+    "required": ["source", "file-type"],
+    "supporting": ["file-name", "message"]
+  },
+  "explanation": "A wedding invitation from an unknown number that comes as an app (APK), not an image or PDF, is a common scam trick. If installed, an app like this can steal data from your phone.",
+  "ruleRefs": ["r-phish-6"],
+  "hints": [
+    "Do you know the sender?",
+    "Invitations are usually images or PDFs. Look at the file type."
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "id": "soc-02",
+  "order": 2,
+  "title": "Full Inbox",
+  "durationGameMinutes": 120,
+  "realSecondsPerGameMinute": 3,
+  "unlocksChapters": [],
+  "introDialogue": "soc-02-intro",
+  "outroDialogue": "soc-02-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s02-email-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s02-email-002",
+      "arriveAt": 6
+    },
+    {
+      "caseId": "s02-file-001",
+      "arriveAt": 14
+    },
+    {
+      "caseId": "s02-email-003",
+      "arriveAt": 22
+    },
+    {
+      "caseId": "s02-file-002",
+      "arriveAt": 30
+    },
+    {
+      "caseId": "s02-email-004",
+      "arriveAt": 40
+    },
+    {
+      "caseId": "s02-url-001",
+      "arriveAt": 50
+    },
+    {
+      "caseId": "s02-email-005",
+      "arriveAt": 60
+    },
+    {
+      "caseId": "s02-url-002",
+      "arriveAt": 72
+    },
+    {
+      "caseId": "s02-email-006",
+      "arriveAt": 85
+    }
+  ],
+  "review": {
+    "count": 3,
+    "conceptIds": ["phishing-signs", "url-anatomy"]
+  },
+  "pay": {
+    "base": 40,
+    "perCase": 12
+  },
+  "newspaper": {
+    "headline": "Sale Season, Fake Email Season",
+    "lead": "As the month ends, office inboxes fill up with promos, bills, and announcements. Security experts remind everyone: not every urgent email is bad, and not every neat email is safe.",
+    "impact": {
+      "good": "Yesterday, Nusa Digital's new analyst stopped every phishing trap without blocking any work emails. Clients praised the careful work.",
+      "mixed": "Yesterday, most fake emails were stopped, but some got through or were blocked by mistake. The new analyst was asked to check senders more carefully.",
+      "bad": "Yesterday, several fake emails reached Nusa Digital employees. The SOC team is checking the damage and tightening its checks."
+    },
+    "tip": {
+      "title": "Tip: Check the Sender's Address",
+      "text": "Anyone can type any display name. Look at the address after the @ sign, then compare it with the sender's official domain."
+    },
+    "classified": "FOR SALE: Look-alike domains, cheap prices. Serious buyers only. — K.",
+    "sources": ["APWG Phishing Activity Trends Report", "BSSN: guide to spotting phishing"]
+  }
+}

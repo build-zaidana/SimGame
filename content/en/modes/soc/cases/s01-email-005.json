@@ -1,0 +1,49 @@
+{
+  "id": "s01-email-005",
+  "type": "email",
+  "conceptIds": ["phishing-signs"],
+  "difficulty": 2,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "from": {
+      "name": "Nusantara Bank",
+      "address": "info@nusantarabank.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Your September transaction summary",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "11:05",
+    "body": [
+      {
+        "text": "Hello Rina Wulandari,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "This month's transaction summary for your account is now available in the official Nusantara Bank app.",
+        "evidenceId": "body-info"
+      },
+      {
+        "text": "Remember, we never ask for your PIN or password by email.",
+        "evidenceId": "body-warning"
+      },
+      {
+        "text": "Warm regards, Nusantara Bank",
+        "evidenceId": "signature"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["sender", "greeting"]
+  },
+  "explanation": "The sender uses the real domain nusantarabank.test, greets you by name, and there are no links or requests for data. Not every bank email is a scam, so allow it.",
+  "ruleRefs": ["r-phish-1", "r-phish-5"],
+  "hints": [
+    "Check the sender's domain and how this email greets you.",
+    "Are there any links or requests for data? Not every bank email is a trap."
+  ]
+}

@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { id } from '../../i18n/id.ts';
+import { LOCALES, t as id } from '../../i18n/index.ts';
 import { useAppStore } from '../store.ts';
 import { Avatar } from '../ui/Avatar.tsx';
 import { btnPrimary } from '../ui/styles.ts';
@@ -8,6 +8,8 @@ export function TitleScreen() {
   const goTo = useAppStore((s) => s.goTo);
   const ready = useAppStore((s) => s.status === 'ready');
   const openMenu = useAppStore((s) => s.openMenu);
+  const locale = useAppStore((s) => s.locale);
+  const setLanguage = useAppStore((s) => s.setLanguage);
   // Laporan Belajar tersembunyi: ketuk logo 5× dalam 3 detik (untuk penyelenggara uji main).
   const taps = useRef<number[]>([]);
   const onLogoTap = () => {
@@ -26,6 +28,24 @@ export function TitleScreen() {
         </button>
       </h1>
       <p className="max-w-xs text-ink-muted">{id.app.tagline}</p>
+      <div role="group" aria-label={id.language.label} className="flex gap-2">
+        {LOCALES.map((l) => (
+          <button
+            key={l}
+            type="button"
+            lang={l}
+            aria-pressed={locale === l}
+            disabled={!ready}
+            onClick={() => void setLanguage(l)}
+            className={
+              'min-h-11 border-2 px-3 font-display text-sm focus-visible:outline-4 focus-visible:outline-focus ' +
+              (locale === l ? 'border-accent text-accent' : 'border-ink/40 text-ink-muted')
+            }
+          >
+            {id.language.names[l]}
+          </button>
+        ))}
+      </div>
       <div
         className="w-full max-w-sm border-4 border-ink/60 bg-[#0f1a14] p-3 text-left font-mono text-xs leading-relaxed text-[#74cf92] pixel-shadow sm:text-sm"
         aria-hidden="true"

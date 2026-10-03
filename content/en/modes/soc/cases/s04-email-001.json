@@ -1,0 +1,61 @@
+{
+  "id": "s04-email-001",
+  "type": "email",
+  "conceptIds": ["malware-files", "phishing-signs"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6,
+    "quarantine": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "from": {
+      "name": "SendFast",
+      "address": "info@sendfast-lacak.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Delivery failed: install the tracking app",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "09:40",
+    "body": [
+      {
+        "text": "Dear Customer,",
+        "evidenceId": "generic-greeting"
+      },
+      {
+        "text": "Your package is on hold. Download our official tracking app to reschedule the delivery.",
+        "evidenceId": "body-claim"
+      },
+      {
+        "link": {
+          "label": "Download Tracking App",
+          "href": "https://sendfast-lacak.test/pelacak.apk"
+        },
+        "evidenceId": "link"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["sender", "link"],
+    "supporting": ["generic-greeting", "whois-age"]
+  },
+  "explanation": "The domain sendfast-lacak.test does not belong to SendFast, and the link downloads an .apk file. Real couriers do not ask customers to install an app from an email.",
+  "ruleRefs": ["r-phish-1", "r-url-3", "r-mal-2"],
+  "hints": [
+    "Check the sender's domain.",
+    "Hold the link: what is the ending of the file it will download?"
+  ],
+  "intel": {
+    "whois": [
+      {
+        "domain": "sendfast-lacak.test",
+        "registered": "4 days ago",
+        "evidenceId": "whois-age"
+      }
+    ]
+  }
+}

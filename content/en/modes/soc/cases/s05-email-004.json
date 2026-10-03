@@ -1,0 +1,49 @@
+{
+  "id": "s05-email-004",
+  "type": "email",
+  "conceptIds": ["incident-response"],
+  "difficulty": 2,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "from": {
+      "name": "Nusa Digital IT Team",
+      "address": "it@nusadigital.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "WARNING: do not open the Invoice_Okt attachment",
+      "evidenceId": "urgency"
+    },
+    "receivedAt": "11:30",
+    "body": [
+      {
+        "text": "Hi everyone,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "We are handling a security incident. Do not open the Invoice_Okt attachment, no matter who sent it.",
+        "evidenceId": "body-info"
+      },
+      {
+        "text": "If you already opened it, turn off your laptop's Wi-Fi and call the helpdesk at ext. 110.",
+        "evidenceId": "body-action"
+      },
+      {
+        "text": "IT Team",
+        "evidenceId": "signature"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["sender", "body-action"]
+  },
+  "explanation": "This warning comes from the real office domain, has no links, and gives the right steps. Employees need to get this email, so allow it.",
+  "ruleRefs": ["r-phish-5", "r-ir-2"],
+  "hints": [
+    "The subject sounds worrying. But who is the sender?",
+    "Does this email ask for data, money, or a click on a link?"
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "id": "rv-ir-1",
+      "type": "order-steps",
+      "conceptId": "incident-response",
+      "difficulty": 2,
+      "prompt": "Put the incident response steps in order.",
+      "steps": ["Detect", "Contain the spread", "Clean up", "Recover", "Report & learn"],
+      "explanation": "Contain first so the damage stops, then clean up and recover. The report at the end stops the same incident from happening again."
+    },
+    {
+      "id": "rv-ir-2",
+      "type": "mcq",
+      "conceptId": "incident-response",
+      "difficulty": 2,
+      "prompt": "Yudi's account was broken into and used to send malware to every employee. The right containment step is…",
+      "choices": [
+        "Reset Yudi's password and pull back the email with the attachment",
+        "Wait until someone complains",
+        "Delete all work emails"
+      ],
+      "answerIndex": 0,
+      "explanation": "Containing means cutting off the attacker's access and stopping the spread, without breaking anything else."
+    },
+    {
+      "id": "rv-ir-3",
+      "type": "mcq",
+      "conceptId": "incident-response",
+      "difficulty": 1,
+      "prompt": "When should you escalate?",
+      "choices": [
+        "Only when you're 100% sure it's an attack",
+        "When the incident affects many people, or you're unsure",
+        "Never, analysts must solve it on their own"
+      ],
+      "answerIndex": 1,
+      "explanation": "Escalating quickly lets the right team take action. Being unsure is a valid reason to escalate."
+    },
+    {
+      "id": "rv-ir-4",
+      "type": "mcq",
+      "conceptId": "incident-response",
+      "difficulty": 1,
+      "prompt": "Why is the \"report & learn\" step still important after the system has recovered?",
+      "choices": [
+        "So the same incident doesn't happen again",
+        "So there is someone to blame",
+        "It's not important once the system has recovered"
+      ],
+      "answerIndex": 0,
+      "explanation": "Lessons from an incident are used to improve rules and training. The goal is to prevent, not to blame."
+    }
+  ]
+}

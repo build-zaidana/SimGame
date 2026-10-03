@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { id } from '../../i18n/id.ts';
+import { t as id } from '../../i18n/index.ts';
 import { summarizeEvents, type LoggedEvent } from '../../telemetry/SessionReportTelemetry.ts';
 import { useAppStore } from '../store.ts';
 import { sessionReport } from '../telemetry.ts';

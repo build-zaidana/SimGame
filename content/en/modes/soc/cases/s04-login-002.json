@@ -1,0 +1,91 @@
+{
+  "id": "s04-login-002",
+  "type": "login-alert",
+  "conceptIds": ["log-reading"],
+  "difficulty": 2,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "account": {
+      "user": "Lina Marlina",
+      "role": "Administration"
+    },
+    "headline": {
+      "text": "5 failed logins this morning",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "09:00",
+        "location": "Jakarta office",
+        "ip": "10.20.1.40",
+        "device": "Office laptop (registered)",
+        "method": "Wrong password",
+        "result": "failed",
+        "evidenceId": "ev-1"
+      },
+      {
+        "time": "09:01",
+        "location": "Jakarta office",
+        "ip": "10.20.1.40",
+        "device": "Office laptop (registered)",
+        "method": "Wrong password",
+        "result": "failed",
+        "evidenceId": "ev-2"
+      },
+      {
+        "time": "09:02",
+        "location": "Jakarta office",
+        "ip": "10.20.1.40",
+        "device": "Office laptop (registered)",
+        "method": "Wrong password",
+        "result": "failed",
+        "evidenceId": "ev-3"
+      },
+      {
+        "time": "09:03",
+        "location": "Jakarta office",
+        "ip": "10.20.1.40",
+        "device": "Office laptop (registered)",
+        "method": "Wrong password",
+        "result": "failed",
+        "evidenceId": "ev-4"
+      },
+      {
+        "time": "09:04",
+        "location": "Jakarta office",
+        "ip": "10.20.1.40",
+        "device": "Office laptop (registered)",
+        "method": "Wrong password",
+        "result": "failed",
+        "evidenceId": "ev-5"
+      },
+      {
+        "time": "09:14",
+        "location": "Jakarta office",
+        "ip": "10.20.1.40",
+        "device": "Office laptop (registered)",
+        "method": "Password + OTP",
+        "result": "success",
+        "evidenceId": "ev-6"
+      }
+    ],
+    "context": [
+      {
+        "text": "Helpdesk ticket #2291: Lina forgot her password, reset by the helpdesk at 09.12.",
+        "evidenceId": "ctx-ticket"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["ctx-ticket", "ev-6"]
+  },
+  "explanation": "Every attempt came from Lina's registered laptop in the office, and the helpdesk ticket shows she forgot her password and got it reset. The last login also passed MFA, so this is not an attack.",
+  "ruleRefs": ["r-log-4"],
+  "hints": [
+    "Many failures are not always brute force. Where did they come from?",
+    "Match the login times with the helpdesk ticket."
+  ]
+}

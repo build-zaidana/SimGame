@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { collectEvidenceIds, findNonFictionalDomains } from '../../../content/checks.ts';
+import { checkLocaleParity } from '../../../content/parity.ts';
 import { createRng } from '../../../engine/rng.ts';
 import { emailCaseSchema } from '../caseTypes/email/schema.ts';
 import { typosquatDomain } from '../generators/typosquat-domain.ts';
@@ -44,5 +45,27 @@ describe('typosquat-domain generator', () => {
   it('rejects invalid params', () => {
     expect(() => gen(1, { brand: 'X', domain: 'asli.com', verdict: 'malicious' })).toThrow();
     expect(() => gen(1, { brand: 'X' })).toThrow();
+  });
+});
+
+describe('typosquat-domain in English (PRD C4)', () => {
+  const genIn = (seed: number, locale: 'id' | 'en', verdict = 'malicious') =>
+    typosquatDomain({ ...params, verdict }, createRng(seed), { id: 'gen-1', locale })[0];
+
+  it('only changes human text: same domains, evidence and answers as Indonesian', () => {
+    for (const verdict of ['malicious', 'safe'])
+      for (let seed = 0; seed < 20; seed++)
+        expect(checkLocaleParity(genIn(seed, 'id', verdict), genIn(seed, 'en', verdict))).toEqual(
+          [],
+        );
+  });
+
+  it('writes the English text', () => {
+    const c = emailCaseSchema.parse(genIn(1, 'en'));
+    expect(c.data.body[0]).toMatchObject({ text: 'Dear Customer,' });
+    expect(c.explanation).toMatch(/only looks like kirimcepat\.test/);
+    expect(emailCaseSchema.parse(genIn(1, 'en', 'safe')).data.body[0]).toMatchObject({
+      text: expect.stringMatching(/^Hello /),
+    });
   });
 });

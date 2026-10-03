@@ -222,14 +222,25 @@ describe('migration v4 → v5 (music setting)', () => {
   const v4With = (sound: boolean) => {
     const save = JSON.parse(JSON.stringify(createNewSave({ installId: INSTALL_ID, now: NOW })));
     delete save.profile.settings.music;
+    delete save.profile.settings.language;
     save.profile.settings.sound = sound;
     return { ...save, schemaVersion: 4 };
   };
   it('turns music on when sound effects were on, and off when they were off', () => {
-    expect(SAVE_SCHEMA_VERSION).toBe(5);
     expect(migrate(v4With(true)).profile.settings.music).toBe(true);
     expect(migrate(v4With(false)).profile.settings.music).toBe(false);
-    expect(migrate(v4With(true)).schemaVersion).toBe(5);
+    expect(migrate(v4With(true)).schemaVersion).toBe(SAVE_SCHEMA_VERSION);
+  });
+});
+
+describe('migration v5 → v6 (language setting)', () => {
+  it('keeps old saves in Indonesian', () => {
+    const save = JSON.parse(JSON.stringify(createNewSave({ installId: INSTALL_ID, now: NOW })));
+    delete save.profile.settings.language;
+    const migrated = migrate({ ...save, schemaVersion: 5 });
+    expect(SAVE_SCHEMA_VERSION).toBe(6);
+    expect(migrated.schemaVersion).toBe(6);
+    expect(migrated.profile.settings.language).toBe('id');
   });
 });
 

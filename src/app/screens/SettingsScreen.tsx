@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { id } from '../../i18n/id.ts';
+import { LOCALES, t as id } from '../../i18n/index.ts';
 import type { Settings } from '../../persistence/saveSchema.ts';
 import { useAppStore } from '../store.ts';
 import { ANALYTICS_OPT_IN, analyticsAvailable, telemetry } from '../telemetry.ts';
@@ -24,6 +24,7 @@ export function SettingsScreen() {
   const settings = useAppStore((s) => s.save?.profile.settings);
   const update = useAppStore((s) => s.updateSettings);
   const back = useAppStore((s) => s.back);
+  const setLanguage = useAppStore((s) => s.setLanguage);
   const analyticsOn = useAppStore((s) => s.save?.flags[ANALYTICS_OPT_IN] === true);
   const setFlag = useAppStore((s) => s.setFlag);
   if (!settings) return null;
@@ -37,6 +38,22 @@ export function SettingsScreen() {
         </button>
         <h1 className="font-display text-2xl text-accent">{id.settings.heading}</h1>
       </div>
+
+      <Fieldset legend={id.language.label}>
+        {LOCALES.map((l) => (
+          <label key={l} className={optionClass} lang={l}>
+            <input
+              type="radio"
+              name="language"
+              className="size-5 accent-accent"
+              checked={settings.language === l}
+              onChange={() => void setLanguage(l)}
+            />
+            {id.language.names[l]}
+          </label>
+        ))}
+        <p className="text-sm text-ink-muted">{id.language.note}</p>
+      </Fieldset>
 
       <Fieldset legend={id.settings.textScale}>
         {TEXT_SCALES.map((scale) => (

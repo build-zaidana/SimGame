@@ -1,0 +1,52 @@
+{
+  "id": "s03-email-001",
+  "type": "email",
+  "conceptIds": ["passwords-mfa", "phishing-signs"],
+  "difficulty": 1,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "from": {
+      "name": "IT Helpdesk",
+      "address": "helpdesk@nusadigital-it.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Verify your email account",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "09:20",
+    "body": [
+      {
+        "text": "Hello,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "We are moving accounts to a new server. Reply to this email with the OTP code that was just sent to your phone.",
+        "evidenceId": "request-otp"
+      },
+      {
+        "text": "Accounts that are not verified today will be deactivated.",
+        "evidenceId": "urgency"
+      },
+      {
+        "text": "IT Helpdesk",
+        "evidenceId": "signature"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["request-otp", "sender"],
+    "supporting": ["urgency"]
+  },
+  "explanation": "A real IT team never asks for an OTP code, and the sender is nusadigital-it.test, not the office domain. Anyone who has your OTP can log in to your account.",
+  "ruleRefs": ["r-pass-1", "r-phish-1"],
+  "hints": [
+    "What is this email asking for?",
+    "Remember the golden rule about OTPs. Then check the sender's domain."
+  ]
+}

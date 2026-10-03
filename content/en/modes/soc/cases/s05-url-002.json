@@ -1,0 +1,46 @@
+{
+  "id": "s05-url-002",
+  "type": "url-request",
+  "conceptIds": ["incident-response"],
+  "difficulty": 1,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Rina Wulandari",
+      "department": "Finance"
+    },
+    "url": {
+      "parts": [
+        {
+          "text": "https://",
+          "evidenceId": "url-scheme"
+        },
+        {
+          "text": "portal.",
+          "evidenceId": "url-subdomain"
+        },
+        {
+          "text": "nusadigital.test",
+          "evidenceId": "url-domain"
+        },
+        {
+          "text": "/lapor-insiden",
+          "evidenceId": "url-path"
+        }
+      ]
+    },
+    "reason": {
+      "text": "I want to report that I opened a strange invoice file earlier.",
+      "evidenceId": "reason"
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["url-domain", "reason"]
+  },
+  "explanation": "This is the real office portal, and Rina wants to report a problem. Reporting fast actually helps the team handle the incident.",
+  "ruleRefs": ["r-url-1", "r-ir-1"],
+  "hints": ["Who owns the domain?", "Rina wants to report an incident. Should we stop her?"]
+}

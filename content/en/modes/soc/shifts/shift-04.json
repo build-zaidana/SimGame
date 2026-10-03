@@ -1,0 +1,85 @@
+{
+  "id": "soc-04",
+  "order": 4,
+  "title": "Unknown Package",
+  "durationGameMinutes": 120,
+  "realSecondsPerGameMinute": 3,
+  "unlocksChapters": ["ch-malware", "ch-log"],
+  "introDialogue": "soc-04-intro",
+  "outroDialogue": "soc-04-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s04-file-002",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s04-file-001",
+      "arriveAt": 5
+    },
+    {
+      "caseId": "s04-login-001",
+      "arriveAt": 12
+    },
+    {
+      "caseId": "s04-email-002",
+      "arriveAt": 20
+    },
+    {
+      "caseId": "s04-file-003",
+      "arriveAt": 28
+    },
+    {
+      "caseId": "s04-url-001",
+      "arriveAt": 36
+    },
+    {
+      "generator": "typosquat-domain",
+      "params": {
+        "brand": "SendFast",
+        "domain": "sendfast.test",
+        "verdict": "malicious"
+      },
+      "arriveAt": 44
+    },
+    {
+      "caseId": "s04-login-002",
+      "arriveAt": 52
+    },
+    {
+      "caseId": "s04-email-001",
+      "arriveAt": 62
+    },
+    {
+      "caseId": "s04-file-004",
+      "arriveAt": 72
+    },
+    {
+      "caseId": "s04-login-003",
+      "arriveAt": 84
+    }
+  ],
+  "review": {
+    "count": 4,
+    "conceptIds": ["malware-files", "log-reading", "passwords-mfa"]
+  },
+  "pay": {
+    "base": 50,
+    "perCase": 12
+  },
+  "newspaper": {
+    "headline": "Fake Delivery Receipts Spread Through Chat Apps",
+    "lead": "Messages with a \"delivery receipt\" that is really a harmful app are spreading fast. People are advised not to install .apk files from messages, even if the name looks like a PDF.",
+    "impact": {
+      "good": "Yesterday, every attempt to steal accounts with OTP codes failed at Nusa Digital. Suspicious accounts were secured right away.",
+      "mixed": "Yesterday, most accounts were secured, but a few strange logins were missed.",
+      "bad": "Yesterday, some employee accounts were taken over because strange logins were missed. Passwords are being changed."
+    },
+    "tip": {
+      "title": "Tip: Look at the Last Ending",
+      "text": "Resi.pdf.apk is an Android app, not a PDF. The file type is set by the ending furthest to the right in its name."
+    },
+    "classified": "A PACKAGE FOR YOU is on its way. Don't forget to open it. — K.",
+    "sources": ["BSSN: warning about APK files", "OWASP: malware glossary"]
+  }
+}

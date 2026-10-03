@@ -1,4 +1,4 @@
-import { id } from '../../../i18n/id.ts';
+import { t as id } from '../../../i18n/index.ts';
 import type { Dialogue } from '../../../content/schemas.ts';
 import { Avatar } from '../Avatar.tsx';
 

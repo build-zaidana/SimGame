@@ -1,6 +1,6 @@
 import { carryTrust } from '../../engine/economy.ts';
 import { summarizeShift } from '../../engine/shift.ts';
-import { id } from '../../i18n/id.ts';
+import { t as id } from '../../i18n/index.ts';
 import { getMode } from '../../modes/registry.ts';
 import { useAppStore } from '../store.ts';
 import { DialogueLine } from '../ui/desk/DialogueLines.tsx';

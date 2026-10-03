@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { id } from '../../i18n/id.ts';
+import { t as id } from '../../i18n/index.ts';
 import { useAppStore } from '../store.ts';
 import { QuestionRunner } from '../ui/review/QuestionRunner.tsx';
 import { btnPrimary, panel } from '../ui/styles.ts';

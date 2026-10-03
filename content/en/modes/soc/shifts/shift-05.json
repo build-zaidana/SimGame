@@ -1,0 +1,89 @@
+{
+  "id": "soc-05",
+  "order": 5,
+  "title": "Kelabu Arrives",
+  "durationGameMinutes": 120,
+  "realSecondsPerGameMinute": 3,
+  "unlocksChapters": ["ch-ir"],
+  "introDialogue": "soc-05-intro",
+  "outroDialogue": "soc-05-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s05-email-002",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s05-email-001",
+      "arriveAt": 4
+    },
+    {
+      "caseId": "s05-login-001",
+      "arriveAt": 10
+    },
+    {
+      "caseId": "s05-email-003",
+      "arriveAt": 16
+    },
+    {
+      "caseId": "s05-file-001",
+      "arriveAt": 22
+    },
+    {
+      "caseId": "s05-email-004",
+      "arriveAt": 30
+    },
+    {
+      "caseId": "s05-login-002",
+      "arriveAt": 38
+    },
+    {
+      "caseId": "s05-url-002",
+      "arriveAt": 46
+    },
+    {
+      "generator": "typosquat-domain",
+      "params": {
+        "brand": "Nusantara Bank",
+        "domain": "nusantarabank.test",
+        "verdict": "malicious"
+      },
+      "arriveAt": 54
+    },
+    {
+      "caseId": "s05-url-001",
+      "arriveAt": 62
+    },
+    {
+      "caseId": "s05-login-003",
+      "arriveAt": 72
+    },
+    {
+      "caseId": "s05-email-005",
+      "arriveAt": 84
+    }
+  ],
+  "review": {
+    "count": 5,
+    "conceptIds": ["incident-response", "malware-files", "log-reading"]
+  },
+  "pay": {
+    "base": 50,
+    "perCase": 12
+  },
+  "newspaper": {
+    "headline": "Kelabu Group Targets Finance Teams",
+    "lead": "A hacker group calling itself Kelabu is said to be planning a multi-step attack on companies in the Nusantara area. SOC teams at many offices have been asked to stay alert from the morning.",
+    "impact": {
+      "good": "Yesterday, harmful files disguised as delivery receipts were stopped before anyone opened them. No office laptops were infected.",
+      "mixed": "Yesterday, most harmful files were stopped, but a few got through and are being checked again.",
+      "bad": "Yesterday, several harmful files were opened on office laptops. The affected devices are being quarantined."
+    },
+    "tip": {
+      "title": "Tip: Contain First, Then Clean Up",
+      "text": "When an incident happens, stop it from spreading first, for example by isolating a device or changing a password. After that, clean up, recover, and report."
+    },
+    "classified": "SEE YOU AT LUNCHTIME. — K.",
+    "sources": ["NIST SP 800-61: Computer Security Incident Handling Guide", "BSSN"]
+  }
+}

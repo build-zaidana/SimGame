@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { id } from '../i18n/id.ts';
+import { t as id } from '../i18n/index.ts';
 import { BadgesScreen } from './screens/BadgesScreen.tsx';
 import { DeskScreen } from './screens/DeskScreen.tsx';
 import { HubScreen } from './screens/HubScreen.tsx';
@@ -18,11 +18,12 @@ import { telemetry } from './telemetry.ts';
 import { btnSecondary } from './ui/styles.ts';
 import { UpdateToast } from './ui/UpdateToast.tsx';
 
-const NOTICE_TEXT = {
-  'memory-only': id.storage.memoryOnly,
-  'restored-backup': id.storage.restoredBackup,
-  reset: id.storage.reset,
-} as const;
+const noticeText = () =>
+  ({
+    'memory-only': id.storage.memoryOnly,
+    'restored-backup': id.storage.restoredBackup,
+    reset: id.storage.reset,
+  }) as const;
 
 function Screen() {
   const screen = useAppStore((s) => s.screen);
@@ -62,6 +63,10 @@ export function App() {
   const textScale = useAppStore((s) => s.save?.profile.settings.textScale ?? 1);
   const reduceMotion = useAppStore((s) => s.save?.profile.settings.reduceMotion ?? false);
   useMusic();
+  const locale = useAppStore((s) => s.locale);
+  useEffect(() => {
+    document.documentElement.lang = locale;
+  }, [locale]);
 
   useEffect(() => {
     void init();
@@ -97,13 +102,13 @@ export function App() {
     <>
       {notice && (
         <div role="alert" className="flex items-center gap-3 bg-danger p-2 text-sm text-bg">
-          <p className="flex-1">{NOTICE_TEXT[notice]}</p>
+          <p className="flex-1">{noticeText()[notice]}</p>
           <button type="button" className={btnSecondary} onClick={dismissNotice}>
             {id.storage.dismiss}
           </button>
         </div>
       )}
-      <Screen />
+      <Screen key={locale} />
       <UpdateToast />
     </>
   );

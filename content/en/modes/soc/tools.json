@@ -1,0 +1,40 @@
+{
+  "tools": [
+    {
+      "id": "link-checker",
+      "name": "Link Checker",
+      "icon": "🔍",
+      "description": "Automatically shows the real address of every link and its domain owner, no need to hold the link.",
+      "price": 50,
+      "conceptId": "url-anatomy",
+      "unlockAtShift": 1
+    },
+    {
+      "id": "whois",
+      "name": "WHOIS Lookup",
+      "icon": "📅",
+      "description": "Shows when a domain was registered. Scam domains are usually only a few days old.",
+      "price": 80,
+      "conceptId": "phishing-signs",
+      "unlockAtShift": 2
+    },
+    {
+      "id": "sandbox",
+      "name": "Sandbox",
+      "icon": "🧪",
+      "description": "Runs a file in an isolated space and reports what it does, without putting office computers at risk.",
+      "price": 130,
+      "conceptId": "malware-files",
+      "unlockAtShift": 4
+    },
+    {
+      "id": "log-filter",
+      "name": "Log Filter",
+      "icon": "🧮",
+      "description": "Sums up logins by IP address: how many failed, how many succeeded, and from where.",
+      "price": 130,
+      "conceptId": "log-reading",
+      "unlockAtShift": 4
+    }
+  ]
+}

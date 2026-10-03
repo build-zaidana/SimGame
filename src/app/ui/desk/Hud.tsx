@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { id } from '../../../i18n/id.ts';
+import { t as id } from '../../../i18n/index.ts';
 import { btnSecondary } from '../styles.ts';
 import { formatClock } from './format.ts';
 import type { ShiftSession } from '../../../engine/types.ts';

@@ -1,5 +1,5 @@
 import { Evidence } from '../../../../app/ui/Evidence.tsx';
-import { id } from '../../../../i18n/id.ts';
+import { t as id } from '../../../../i18n/index.ts';
 import type { DocumentProps } from '../../../contract.ts';
 import type { FileCase } from './schema.ts';
 

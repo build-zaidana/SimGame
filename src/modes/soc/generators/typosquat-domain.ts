@@ -29,6 +29,86 @@ const roll = (r: Rng) => {
   return f;
 };
 
+/**
+ * Teks per bahasa. Urutan & jumlah skenario harus sama di semua bahasa (RNG memilih indeks),
+ * dan path tautan tidak diterjemahkan, agar kasus identik selain teksnya (paritas, ADR 023).
+ */
+const TEXT = {
+  id: {
+    safeSubject: (code: string) => `Status pesanan ${code}`,
+    hello: (name: string) => `Halo ${name},`,
+    received: (code: string) => `Pesanan ${code} sudah kami terima dan sedang diproses.`,
+    noRequest: 'Tidak ada yang perlu kamu bayar atau isi.',
+    safeExplanation: (domain: string, brand: string) =>
+      `Pengirim dan tautannya memakai domain resmi ${domain}, dan email ini tidak meminta data atau uang. Ini notifikasi biasa dari ${brand}.`,
+    safeHint1: 'Cek domain pengirim dan alamat asli tautannya.',
+    safeHint2: (brand: string, domain: string) => `Domain resmi ${brand} adalah ${domain}. Cocok?`,
+    yearsAgo: (n: number) => `${n} tahun lalu`,
+    daysAgo: (n: number) => `${n} hari lalu`,
+    scenarios: (code: string) => [
+      {
+        subject: `Pesanan ${code} tertahan, konfirmasi dalam 2 jam`,
+        claim: 'Pesanan Anda tertahan karena alamat tidak lengkap.',
+        path: 'konfirmasi',
+      },
+      {
+        subject: 'Akun Anda dinonaktifkan sementara',
+        claim: 'Kami mendeteksi login tidak biasa di akun Anda.',
+        path: 'aktivasi',
+      },
+      {
+        subject: `Voucher Rp 200.000 untuk Anda (${code})`,
+        claim: 'Selamat, Anda terpilih mendapat voucher belanja.',
+        path: 'voucher',
+      },
+    ],
+    genericGreeting: 'Yth. Pelanggan,',
+    signature: (brand: string) => `Salam, Tim ${brand}`,
+    fakeExplanation: (fake: string, domain: string, brand: string) =>
+      `Domain ${fake} hanya mirip ${domain}, bukan milik ${brand}. Tautannya pun diam-diam menuju ${fake}.`,
+    fakeHint1: (brand: string, domain: string) =>
+      `Domain resmi ${brand} adalah ${domain}. Baca alamat pengirim huruf demi huruf.`,
+    fakeHint2: 'Tahan tautannya: ke domain mana sebenarnya?',
+  },
+  en: {
+    safeSubject: (code: string) => `Order status ${code}`,
+    hello: (name: string) => `Hello ${name},`,
+    received: (code: string) => `We have received order ${code} and it is being processed.`,
+    noRequest: 'You do not need to pay or fill in anything.',
+    safeExplanation: (domain: string, brand: string) =>
+      `The sender and the link use the official domain ${domain}, and the email asks for no data or money. It is a normal notice from ${brand}.`,
+    safeHint1: "Check the sender's domain and the link's real address.",
+    safeHint2: (brand: string, domain: string) =>
+      `The official domain of ${brand} is ${domain}. Does it match?`,
+    yearsAgo: (n: number) => `${n} years ago`,
+    daysAgo: (n: number) => `${n} days ago`,
+    scenarios: (code: string) => [
+      {
+        subject: `Order ${code} on hold, confirm within 2 hours`,
+        claim: 'Your order is on hold because the address is incomplete.',
+        path: 'konfirmasi',
+      },
+      {
+        subject: 'Your account has been temporarily disabled',
+        claim: 'We detected an unusual login on your account.',
+        path: 'aktivasi',
+      },
+      {
+        subject: `A Rp 200.000 voucher for you (${code})`,
+        claim: 'Congratulations, you have been chosen for a shopping voucher.',
+        path: 'voucher',
+      },
+    ],
+    genericGreeting: 'Dear Customer,',
+    signature: (brand: string) => `Regards, the ${brand} Team`,
+    fakeExplanation: (fake: string, domain: string, brand: string) =>
+      `The domain ${fake} only looks like ${domain} and does not belong to ${brand}. The link also secretly goes to ${fake}.`,
+    fakeHint1: (brand: string, domain: string) =>
+      `The official domain of ${brand} is ${domain}. Read the sender address letter by letter.`,
+    fakeHint2: 'Press and hold the link: which domain does it really go to?',
+  },
+} as const;
+
 /** Teknik umum typosquatting: huruf mirip, huruf hilang/dobel, tambahan kata. */
 function mutate(label: string, r: Rng): string {
   const techniques: ((l: string) => string | null)[] = [
@@ -57,8 +137,9 @@ function mutate(label: string, r: Rng): string {
 export function typosquatDomain(
   rawParams: Record<string, unknown>,
   rng: RngState,
-  ctx: { id: string },
+  ctx: { id: string; locale?: 'id' | 'en' },
 ): [BaseCase, RngState] {
+  const tx = TEXT[ctx.locale ?? 'id'];
   const { brand, domain, verdict } = paramsSchema.parse(rawParams);
   const r: Rng = { s: rng };
   const label = domain.replace(/\.test$/, '');
@@ -81,54 +162,29 @@ export function typosquatDomain(
       correctDecision: 'allow',
       data: {
         from: { name: brand, address: `info@${domain}`, evidenceId: 'sender' },
-        subject: { text: `Status pesanan ${code}`, evidenceId: 'subject' },
+        subject: { text: tx.safeSubject(code), evidenceId: 'subject' },
         body: [
-          { text: `Halo ${recipient},`, evidenceId: 'greeting' },
-          {
-            text: `Pesanan ${code} sudah kami terima dan sedang diproses.`,
-            evidenceId: 'body-info',
-          },
+          { text: tx.hello(recipient), evidenceId: 'greeting' },
+          { text: tx.received(code), evidenceId: 'body-info' },
           {
             link: { label: `${domain}/pesanan/${code}`, href: `https://${domain}/pesanan/${code}` },
             evidenceId: 'link',
           },
-          { text: 'Tidak ada yang perlu kamu bayar atau isi.', evidenceId: 'no-request' },
+          { text: tx.noRequest, evidenceId: 'no-request' },
         ],
         attachments: [],
       },
       evidence: { required: [], supporting: ['sender', 'link', 'greeting'] },
-      explanation: `Pengirim dan tautannya memakai domain resmi ${domain}, dan email ini tidak meminta data atau uang. Ini notifikasi biasa dari ${brand}.`,
-      hints: [
-        'Cek domain pengirim dan alamat asli tautannya.',
-        `Domain resmi ${brand} adalah ${domain}. Cocok?`,
-      ],
-      intel: { whois: [{ domain, registered: '12 tahun lalu', evidenceId: 'whois-age' }] },
+      explanation: tx.safeExplanation(domain, brand),
+      hints: [tx.safeHint1, tx.safeHint2(brand, domain)],
+      intel: { whois: [{ domain, registered: tx.yearsAgo(12), evidenceId: 'whois-age' }] },
     };
     return [c, r.s];
   }
 
   const fake = `${mutate(label, r)}.test`;
   const ageDays = 1 + Math.floor(roll(r) * 6);
-  const scenario = pick(r, [
-    {
-      subject: `Pesanan ${code} tertahan, konfirmasi dalam 2 jam`,
-      claim: 'Pesanan Anda tertahan karena alamat tidak lengkap.',
-      cta: 'Konfirmasi alamat',
-      path: 'konfirmasi',
-    },
-    {
-      subject: 'Akun Anda dinonaktifkan sementara',
-      claim: 'Kami mendeteksi login tidak biasa di akun Anda.',
-      cta: 'Aktifkan kembali',
-      path: 'aktivasi',
-    },
-    {
-      subject: `Voucher Rp 200.000 untuk Anda (${code})`,
-      claim: 'Selamat, Anda terpilih mendapat voucher belanja.',
-      cta: 'Klaim voucher',
-      path: 'voucher',
-    },
-  ]);
+  const scenario = pick(r, tx.scenarios(code));
   const c: EmailCase = {
     ...base,
     verdict: 'malicious',
@@ -138,13 +194,13 @@ export function typosquatDomain(
       from: { name: brand, address: `info@${fake}`, evidenceId: 'sender' },
       subject: { text: scenario.subject, evidenceId: 'urgency' },
       body: [
-        { text: 'Yth. Pelanggan,', evidenceId: 'generic-greeting' },
+        { text: tx.genericGreeting, evidenceId: 'generic-greeting' },
         { text: scenario.claim, evidenceId: 'body-claim' },
         {
           link: { label: `${domain}/${scenario.path}`, href: `https://${fake}/${scenario.path}` },
           evidenceId: 'link',
         },
-        { text: `Salam, Tim ${brand}`, evidenceId: 'signature' },
+        { text: tx.signature(brand), evidenceId: 'signature' },
       ],
       attachments: [],
     },
@@ -152,13 +208,10 @@ export function typosquatDomain(
       required: ['sender', 'link'],
       supporting: ['urgency', 'generic-greeting', 'whois-age'],
     },
-    explanation: `Domain ${fake} hanya mirip ${domain}, bukan milik ${brand}. Tautannya pun diam-diam menuju ${fake}.`,
-    hints: [
-      `Domain resmi ${brand} adalah ${domain}. Baca alamat pengirim huruf demi huruf.`,
-      'Tahan tautannya: ke domain mana sebenarnya?',
-    ],
+    explanation: tx.fakeExplanation(fake, domain, brand),
+    hints: [tx.fakeHint1(brand, domain), tx.fakeHint2],
     intel: {
-      whois: [{ domain: fake, registered: `${ageDays} hari lalu`, evidenceId: 'whois-age' }],
+      whois: [{ domain: fake, registered: tx.daysAgo(ageDays), evidenceId: 'whois-age' }],
     },
   };
   return [c, r.s];

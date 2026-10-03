@@ -13,6 +13,7 @@ import type {
 import type { RngState } from '../engine/rng.ts';
 import type { MasteryMap } from '../engine/mastery.ts';
 import type { NewsTier } from '../engine/news.ts';
+import type { Locale } from '../i18n/index.ts';
 
 export interface DocumentProps<TCase extends BaseCase = BaseCase> {
   data: TCase;
@@ -57,7 +58,8 @@ export function defineCaseType<TCase extends BaseCase>(def: CaseTypeDef<TCase>):
 export type CaseGenerator = (
   params: Record<string, unknown>,
   rng: RngState,
-  ctx: { id: string },
+  /** `locale`: bahasa teks kasus (bawaan 'id'). Struktur & jawaban tidak boleh bergantung padanya. */
+  ctx: { id: string; locale?: 'id' | 'en' },
 ) => [BaseCase, RngState];
 
 export interface DeskProps {
@@ -89,7 +91,8 @@ export interface CareerMode {
    * Memuat & memvalidasi konten mode (code-split). Tambahan dari sketsa §4: app butuh konten
    * untuk membuat ShiftPlan dan menampilkan Laporan tanpa tahu struktur folder mode.
    */
-  loadContent(): Promise<ModeContent>;
+  /** Konten mode dalam bahasa tertentu (PRD C4); semua bahasa punya struktur identik. */
+  loadContent(locale: Locale): Promise<ModeContent>;
 }
 
 /** Mode yang tampil di HUB tapi belum bisa dimainkan. */

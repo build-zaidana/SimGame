@@ -1,0 +1,77 @@
+{
+  "items": [
+    {
+      "id": "rv-phish-1",
+      "type": "mcq",
+      "conceptId": "phishing-signs",
+      "difficulty": 1,
+      "prompt": "Email from \"Nusantara Bank\": \"Dear Customer, your account will be blocked in 1 hour. Verify at this link.\" Which phishing signs appear?",
+      "choices": [
+        "A generic greeting, time pressure, and a request to verify through a link",
+        "None, banks often send emails like this",
+        "Only the generic greeting"
+      ],
+      "answerIndex": 0,
+      "explanation": "All three signs appear at once. Official banks don't ask you to verify your account through an email link."
+    },
+    {
+      "id": "rv-phish-2",
+      "type": "tap-evidence",
+      "conceptId": "phishing-signs",
+      "difficulty": 2,
+      "prompt": "This email is phishing. Tap all the warning signs.",
+      "parts": [
+        {
+          "text": "From: Security Team <admin@nusadigital-keamanan.test>",
+          "evidenceId": "sender"
+        },
+        {
+          "text": "Hi Team,",
+          "evidenceId": "greeting"
+        },
+        {
+          "text": "Your password expires TODAY.",
+          "evidenceId": "urgency"
+        },
+        {
+          "text": "Enter your old and new password in this form.",
+          "evidenceId": "request"
+        },
+        {
+          "text": "Thank you.",
+          "evidenceId": "closing"
+        }
+      ],
+      "answer": ["sender", "urgency", "request"],
+      "explanation": "The sender's domain isn't nusadigital.test, there's time pressure, and the email asks for a password. The greeting and closing on their own are harmless."
+    },
+    {
+      "id": "rv-phish-3",
+      "type": "mcq",
+      "conceptId": "phishing-signs",
+      "difficulty": 2,
+      "prompt": "An email from your coworker's real address asks you to buy vouchers, saying they're in a meeting and you shouldn't call. What's the best move?",
+      "choices": [
+        "Buy them right away, the address is real",
+        "Escalate, then confirm with your coworker another way",
+        "Just ignore it without telling anyone"
+      ],
+      "answerIndex": 1,
+      "explanation": "Your coworker's account may have been taken over. Escalating lets the security team check the account and protect other people."
+    },
+    {
+      "id": "rv-phish-4",
+      "type": "mcq",
+      "conceptId": "phishing-signs",
+      "difficulty": 1,
+      "prompt": "An unknown number sends you the file Undangan.apk (\"Invitation\") through chat. What do you do?",
+      "choices": [
+        "Just open it, it might be an old friend",
+        "Don't open it, delete it, and report it if it's on a work device",
+        "Forward it to the group so others can check it too"
+      ],
+      "answerIndex": 1,
+      "explanation": "Real invitations are pictures or PDFs, not apps. Forwarding it only spreads the trap to other people."
+    }
+  ]
+}

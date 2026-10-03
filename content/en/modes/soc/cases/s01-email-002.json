@@ -1,0 +1,49 @@
+{
+  "id": "s01-email-002",
+  "type": "email",
+  "conceptIds": ["phishing-signs"],
+  "difficulty": 1,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "from": {
+      "name": "Nusa Digital HR Team",
+      "address": "hr@nusadigital.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "SOC team lunch on Friday",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "09:14",
+    "body": [
+      {
+        "text": "Hi SOC team,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "Our team lunch is on Friday at 12 in the 3rd-floor pantry. The menu is nasi liwet.",
+        "evidenceId": "body-info"
+      },
+      {
+        "text": "If you have any food allergies, please reply to this email before Thursday.",
+        "evidenceId": "body-request"
+      },
+      {
+        "text": "Regards, Dewi (HR)",
+        "evidenceId": "signature"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["sender"]
+  },
+  "explanation": "The sender uses the real office domain, nusadigital.test, and there are no links or requests for data. A legit email like this should be allowed.",
+  "ruleRefs": ["r-phish-1", "r-phish-5"],
+  "hints": [
+    "Check the domain after the @. Who owns it?",
+    "No links, no requests for data. Is there any reason to be suspicious?"
+  ]
+}

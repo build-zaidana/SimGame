@@ -6,8 +6,23 @@
     "gzip": true
   },
   {
-    "name": "Chunk mode SOC: meja + konten (gzip)",
-    "path": ["dist/assets/SocDesk-*.js", "dist/assets/content-*.js"],
+    "name": "Chunk mode SOC, Bahasa Indonesia: meja + konten (gzip)",
+    "path": [
+      "dist/assets/SocDesk-*.js",
+      "dist/assets/soc-content-*.js",
+      "dist/assets/content-id-*.js"
+    ],
+    "limit": "150 KB",
+    "gzip": true
+  },
+  {
+    "name": "Chunk mode SOC, English: meja + konten + kamus UI (gzip)",
+    "path": [
+      "dist/assets/SocDesk-*.js",
+      "dist/assets/soc-content-*.js",
+      "dist/assets/content-en-*.js",
+      "dist/assets/en-*.js"
+    ],
     "limit": "150 KB",
     "gzip": true
   }

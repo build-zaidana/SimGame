@@ -1,0 +1,182 @@
+{
+  "chapters": [
+    {
+      "id": "ch-url",
+      "title": "Chapter 1 · Links",
+      "conceptId": "url-anatomy",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-url-1",
+          "text": "Site owner = the one name right before the ending (.co.id, .com, .test). Read the domain from right to left.",
+          "evidenceTags": ["domain"]
+        },
+        {
+          "id": "r-url-2",
+          "text": "The HTTPS padlock only means the connection is encrypted. It doesn't mean the site is honest.",
+          "evidenceTags": ["https"]
+        },
+        {
+          "id": "r-url-3",
+          "text": "A link's text can be different from its real address. Long-press or right-click the link to see the real address.",
+          "evidenceTags": ["link"]
+        }
+      ]
+    },
+    {
+      "id": "ch-phish",
+      "title": "Chapter 2 · Phishing",
+      "conceptId": "phishing-signs",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-phish-1",
+          "text": "Check the sender's address (the domain after @), not just the display name.",
+          "evidenceTags": ["sender"]
+        },
+        {
+          "id": "r-phish-2",
+          "text": "Official organizations don't ask for account verification, passwords, or personal data through email links.",
+          "evidenceTags": ["link", "request"]
+        },
+        {
+          "id": "r-phish-3",
+          "text": "Time pressure (\"URGENT\", \"1 hour\") and generic greetings (\"Dear Customer\") are warning signs.",
+          "evidenceTags": ["urgency", "greeting"]
+        },
+        {
+          "id": "r-phish-4",
+          "text": "Prizes or lucky draws you never entered are almost always scams.",
+          "evidenceTags": ["prize"]
+        },
+        {
+          "id": "r-phish-5",
+          "text": "Real emails: the real domain, greet you by name, and don't pressure you. Don't block without a reason.",
+          "evidenceTags": []
+        },
+        {
+          "id": "r-phish-6",
+          "text": "Don't open attachments you weren't expecting, especially from unknown senders. Confirm another way first.",
+          "evidenceTags": ["attachment", "sender"]
+        },
+        {
+          "id": "r-phish-7",
+          "text": "A strange request from a coworker's real address can mean their account was taken over. Escalate, then confirm by phone or in person.",
+          "evidenceTags": ["request"]
+        }
+      ]
+    },
+    {
+      "id": "ch-pass",
+      "title": "Chapter 3 · Passwords & MFA",
+      "conceptId": "passwords-mfa",
+      "unlockAtShift": 3,
+      "rules": [
+        {
+          "id": "r-pass-1",
+          "text": "Your OTP code is only for you. No IT staff, bank, or courier has the right to ask for it.",
+          "evidenceTags": ["otp"]
+        },
+        {
+          "id": "r-pass-2",
+          "text": "A successful login from an unfamiliar location or device after an OTP was shared means the account was taken over: reset the password.",
+          "evidenceTags": ["login", "otp"]
+        },
+        {
+          "id": "r-pass-3",
+          "text": "MFA approval requests you didn't ask for must be denied and reported, even if the notifications keep coming.",
+          "evidenceTags": ["mfa"]
+        },
+        {
+          "id": "r-pass-4",
+          "text": "A login from a new place isn't always bad. Check supporting info (business trips, registered devices) before you act.",
+          "evidenceTags": ["context"]
+        },
+        {
+          "id": "r-pass-5",
+          "text": "Use long passwords, different for each account. A password manager helps you remember them.",
+          "evidenceTags": []
+        }
+      ]
+    },
+    {
+      "id": "ch-malware",
+      "title": "Chapter 4 · Dangerous Files",
+      "conceptId": "malware-files",
+      "unlockAtShift": 4,
+      "rules": [
+        {
+          "id": "r-mal-1",
+          "text": "What counts is the ending furthest to the right: resi.pdf.apk is an app, not a PDF.",
+          "evidenceTags": ["extension"]
+        },
+        {
+          "id": "r-mal-2",
+          "text": "Invitations, delivery receipts, bills, and photos are never .apk, .exe, or .scr files.",
+          "evidenceTags": ["extension"]
+        },
+        {
+          "id": "r-mal-3",
+          "text": "Documents that ask you to \"Enable Content\" (macros) are suspicious.",
+          "evidenceTags": ["macro"]
+        },
+        {
+          "id": "r-mal-4",
+          "text": "Dangerous file not opened yet: BLOCK. Already opened on a work device: QUARANTINE the device.",
+          "evidenceTags": ["quarantine"]
+        }
+      ]
+    },
+    {
+      "id": "ch-log",
+      "title": "Chapter 5 · Reading Logs",
+      "conceptId": "log-reading",
+      "unlockAtShift": 4,
+      "rules": [
+        {
+          "id": "r-log-1",
+          "text": "Many failed logins from one IP followed by a success means the password was guessed (brute force).",
+          "evidenceTags": ["failed-login"]
+        },
+        {
+          "id": "r-log-2",
+          "text": "Two logins from places nobody could travel between in such a short time are called impossible travel.",
+          "evidenceTags": ["location"]
+        },
+        {
+          "id": "r-log-3",
+          "text": "A login at unusual hours from a new device should be checked with the account owner.",
+          "evidenceTags": ["time"]
+        },
+        {
+          "id": "r-log-4",
+          "text": "Compare logs with other info (attendance, business trips, helpdesk tickets) before deciding.",
+          "evidenceTags": ["context"]
+        }
+      ]
+    },
+    {
+      "id": "ch-ir",
+      "title": "Chapter 6 · Incident Response",
+      "conceptId": "incident-response",
+      "unlockAtShift": 5,
+      "rules": [
+        {
+          "id": "r-ir-1",
+          "text": "Response order: detect, contain, clean up, recover, then report.",
+          "evidenceTags": []
+        },
+        {
+          "id": "r-ir-2",
+          "text": "Contain the spread first: reset broken-into accounts, quarantine devices, block the attack source.",
+          "evidenceTags": ["contain"]
+        },
+        {
+          "id": "r-ir-3",
+          "text": "Escalate when the incident affects many people or important data, or when you're unsure.",
+          "evidenceTags": ["escalate"]
+        }
+      ]
+    }
+  ]
+}

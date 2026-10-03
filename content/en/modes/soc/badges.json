@@ -1,0 +1,116 @@
+{
+  "badges": [
+    {
+      "id": "hari-pertama",
+      "title": "First Day",
+      "description": "Finished Shift 1. Welcome to the SOC desk!",
+      "icon": "🎫",
+      "tier": "bronze",
+      "rule": {
+        "type": "shift-complete",
+        "shiftId": "soc-01"
+      }
+    },
+    {
+      "id": "murid-teladan",
+      "title": "Model Student",
+      "description": "Answered every Quick Review question correctly in one shift.",
+      "icon": "📚",
+      "tier": "bronze",
+      "rule": {
+        "type": "review-perfect"
+      }
+    },
+    {
+      "id": "tanpa-celah",
+      "title": "No Gaps",
+      "description": "A whole shift with not a single threat reaching clients, with at least ★★.",
+      "icon": "🧱",
+      "tier": "silver",
+      "rule": {
+        "type": "no-threat-allowed",
+        "minCases": 8,
+        "minStars": 2
+      }
+    },
+    {
+      "id": "sahabat-klien",
+      "title": "Client's Friend",
+      "description": "A whole shift without blocking anything legit or escalating without need, with at least ★★.",
+      "icon": "🤝",
+      "tier": "silver",
+      "rule": {
+        "type": "no-legit-blocked",
+        "minCases": 8,
+        "minStars": 2
+      }
+    },
+    {
+      "id": "mata-elang",
+      "title": "Eagle Eye",
+      "description": "Five cases in a row with the right decision, full evidence, and no wrong marks.",
+      "icon": "🦅",
+      "tier": "silver",
+      "rule": {
+        "type": "evidence-streak",
+        "count": 5
+      }
+    },
+    {
+      "id": "analis-mandiri",
+      "title": "Independent Analyst",
+      "description": "Finished a shift without asking the mentor, with at least ★★.",
+      "icon": "🧠",
+      "tier": "silver",
+      "rule": {
+        "type": "no-hints",
+        "minCases": 8,
+        "minStars": 2
+      }
+    },
+    {
+      "id": "perkakas-lengkap",
+      "title": "Full Toolkit",
+      "description": "Own all four tools from the Tool Shop.",
+      "icon": "🧰",
+      "tier": "silver",
+      "rule": {
+        "type": "tools-owned",
+        "count": 4
+      }
+    },
+    {
+      "id": "tiga-bintang",
+      "title": "Three Stars",
+      "description": "Earned ★★★ in a shift.",
+      "icon": "⭐",
+      "tier": "gold",
+      "rule": {
+        "type": "shift-stars",
+        "stars": 3
+      }
+    },
+    {
+      "id": "sangat-dipercaya",
+      "title": "Highly Trusted",
+      "description": "Ended a shift with client trust of 90 or more.",
+      "icon": "💛",
+      "tier": "gold",
+      "rule": {
+        "type": "trust-at-least",
+        "value": 90
+      }
+    },
+    {
+      "id": "penjaga-nusa",
+      "title": "Guardian of Nusa",
+      "description": "Finished Shift 5 and faced Kelabu's multi-step attack.",
+      "icon": "🛡",
+      "tier": "gold",
+      "rule": {
+        "type": "shift-complete",
+        "shiftId": "soc-05"
+      }
+    }
+  ]
+}

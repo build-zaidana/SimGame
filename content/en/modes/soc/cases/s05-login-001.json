@@ -1,0 +1,59 @@
+{
+  "id": "s05-login-001",
+  "type": "login-alert",
+  "conceptIds": ["log-reading", "passwords-mfa"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "reset-password",
+  "acceptableDecisions": {
+    "block": 0.6,
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "account": {
+      "user": "Yudi Pratama",
+      "role": "Finance Staff"
+    },
+    "headline": {
+      "text": "Login from abroad soon after an office login",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "10:05",
+        "location": "Jakarta office",
+        "ip": "10.20.1.51",
+        "device": "Office laptop (registered)",
+        "method": "Password + OTP",
+        "result": "success",
+        "evidenceId": "ev-1"
+      },
+      {
+        "time": "10:21",
+        "location": "Abroad",
+        "ip": "198.51.100.66",
+        "device": "Linux (new device)",
+        "method": "Password + OTP",
+        "result": "success",
+        "evidenceId": "ev-2"
+      }
+    ],
+    "context": [
+      {
+        "text": "10:20 Yudi: \"Earlier I logged in to the audit portal from the Director's email, and it asked for my OTP code too.\"",
+        "evidenceId": "ctx-phish"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["ev-2", "ctx-phish"],
+    "supporting": ["ev-1"]
+  },
+  "explanation": "Yudi typed his password and OTP on a fake page, and a minute later the attacker used both to log in from abroad. Limit the damage: reset Yudi's password now.",
+  "ruleRefs": ["r-pass-2", "r-log-2", "r-ir-2"],
+  "hints": [
+    "Connect what Yudi said with the audit email from earlier.",
+    "The second login used the same OTP that Yudi typed on the fake site."
+  ]
+}

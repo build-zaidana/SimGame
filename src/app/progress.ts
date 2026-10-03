@@ -24,6 +24,7 @@ export function buildShift(
   shift: ShiftDef,
   generators: Record<string, CaseGenerator>,
   seed: number,
+  locale: 'id' | 'en' = 'id',
 ): { plan: ShiftPlan; generatedCases: Record<string, unknown> } {
   let rng = createRng(seed ^ 0x9e3779b9);
   const generatedCases: Record<string, unknown> = {};
@@ -36,7 +37,7 @@ export function buildShift(
     const generate = generators[q.generator];
     if (!generate) return;
     const id = `${shift.id}-gen-${i}`;
-    const [c, next] = generate(q.params, rng, { id });
+    const [c, next] = generate(q.params, rng, { id, locale });
     rng = next;
     generatedCases[id] = c;
     cases.push({ caseId: id, arriveAt: q.arriveAt });

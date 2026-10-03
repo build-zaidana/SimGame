@@ -1,0 +1,52 @@
+{
+  "id": "s03-email-003",
+  "type": "email",
+  "conceptIds": ["passwords-mfa", "phishing-signs"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 2,
+  "data": {
+    "from": {
+      "name": "Nusantara Bank Customer Service",
+      "address": "cs@nusantarabank-care.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Your reward points are ready to cash out",
+      "evidenceId": "prize"
+    },
+    "receivedAt": "10:40",
+    "body": [
+      {
+        "text": "Hello Loyal Customer,",
+        "evidenceId": "generic-greeting"
+      },
+      {
+        "text": "One of our staff will call you today.",
+        "evidenceId": "body-call"
+      },
+      {
+        "text": "Tell them the OTP code sent to your phone so your points can be cashed out right away.",
+        "evidenceId": "request-otp"
+      },
+      {
+        "text": "Nusantara Bank Customer Service",
+        "evidenceId": "signature"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["request-otp", "sender"],
+    "supporting": ["prize", "generic-greeting"]
+  },
+  "explanation": "A bank never asks for your OTP, not even by phone, and the domain is nusantarabank-care.test, not nusantarabank.test. A bank OTP is only for transactions you make yourself.",
+  "ruleRefs": ["r-pass-1", "r-phish-1", "r-phish-4"],
+  "hints": [
+    "What will the caller ask you for later?",
+    "Anyone asking for your OTP is a red flag. Also check the sender's domain."
+  ]
+}

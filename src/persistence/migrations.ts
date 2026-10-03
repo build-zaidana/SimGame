@@ -47,6 +47,12 @@ export const MIGRATIONS: Record<number, Migration> = {
       profile: { ...profile, settings: { music: settings['sound'] !== false, ...settings } },
     };
   },
+  /** v5 → v6: pengaturan bahasa; save lama tetap Bahasa Indonesia. */
+  5: (d) => {
+    const profile = (d['profile'] ?? {}) as Record<string, unknown>;
+    const settings = (profile['settings'] ?? {}) as Record<string, unknown>;
+    return { ...d, profile: { ...profile, settings: { language: 'id', ...settings } } };
+  },
 };
 
 export function runMigrations(

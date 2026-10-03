@@ -6,6 +6,7 @@ import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { checkModeContent, DEFAULT_LIMITS, type CheckPolicy } from '../src/content/checks.ts';
 import { parseModeContent, type CaseSchemas, type ContentError } from '../src/content/loader.ts';
+import { checkLocaleParity, type Renames } from '../src/content/parity.ts';
 import { createRng } from '../src/engine/rng.ts';
 import type { CaseGenerator } from '../src/modes/contract.ts';
 import { socCaseSchemas } from '../src/modes/soc/caseTypes/schemas.ts';
@@ -125,6 +126,46 @@ for (const locale of readdirSync(LOCALES_DIR)) {
     };
     const all = [...parseErrors, ...checkModeContent(content, policy)];
     errors.push(...all.map((e) => ({ ...e, file: prefix + e.file })));
+  }
+}
+
+// Paritas antarbahasa (ADR 023): setiap bahasa punya file yang sama dengan bahasa dasar, dan
+// terjemahan hanya mengubah teks manusia, bukan jawaban, ID bukti, atau alamat.
+const BASE_LOCALE = 'id';
+const frontmatterKeys = (md: string) =>
+  (/^---\n([\s\S]*?)\n---/.exec(md)?.[1] ?? '')
+    .split('\n')
+    .filter((l) => /^(id|mode|order):/.test(l))
+    .join('\n');
+for (const locale of readdirSync(LOCALES_DIR)) {
+  if (locale === BASE_LOCALE) continue;
+  const modesDir = join(LOCALES_DIR, locale, 'modes');
+  if (!existsSync(modesDir)) continue;
+  const renamesFile = join(LOCALES_DIR, locale, 'renames.json');
+  const renames: Renames = existsSync(renamesFile)
+    ? (JSON.parse(readFileSync(renamesFile, 'utf8')) as { renames: [string, string][] }).renames
+    : [];
+  for (const modeId of readdirSync(modesDir)) {
+    const baseDir = join(LOCALES_DIR, BASE_LOCALE, 'modes', modeId);
+    const dir = join(modesDir, modeId);
+    const base = readModeFiles(baseDir, []);
+    const other = readModeFiles(dir, []);
+    const prefix = `${locale}/modes/${modeId}/`;
+    for (const rel of Object.keys(base))
+      if (!(rel in other)) errors.push({ file: prefix + rel, message: 'terjemahan belum ada' });
+    for (const rel of Object.keys(other)) {
+      if (!(rel in base)) {
+        errors.push({ file: prefix + rel, message: `tidak ada di bahasa dasar (${BASE_LOCALE})` });
+        continue;
+      }
+      const diffs = rel.endsWith('.md')
+        ? frontmatterKeys(base[rel] as string) === frontmatterKeys(other[rel] as string)
+          ? []
+          : ['frontmatter id/mode/order berbeda']
+        : checkLocaleParity(base[rel], other[rel], renames);
+      for (const d of diffs.slice(0, 5))
+        errors.push({ file: prefix + rel, message: `paritas dengan ${BASE_LOCALE}: ${d}` });
+    }
   }
 }
 

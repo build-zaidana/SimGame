@@ -1,0 +1,34 @@
+{
+  "dialogues": [
+    {
+      "id": "soc-02-intro",
+      "lines": [
+        {
+          "speaker": "rani",
+          "text": "Morning! The office inbox is super busy today."
+        },
+        {
+          "speaker": "rani",
+          "text": "Be careful both ways, okay? Don't let traps slip through, but don't block legit emails either. That slows people's work down."
+        },
+        {
+          "speaker": "rani",
+          "text": "If an email comes from a coworker but looks weird, don't guess. Use ESCALATE."
+        }
+      ]
+    },
+    {
+      "id": "soc-02-outro",
+      "lines": [
+        {
+          "speaker": "rani",
+          "text": "Nice work. Telling the real from the fake is the heart of our job."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "You blocked our fake domains? Fine. What if we don't need links at all?"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "id": "s02-url-002",
+  "type": "url-request",
+  "conceptIds": ["url-anatomy"],
+  "difficulty": 1,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Maya Putri",
+      "department": "HR"
+    },
+    "url": {
+      "parts": [
+        {
+          "text": "https://",
+          "evidenceId": "url-scheme"
+        },
+        {
+          "text": "karier.",
+          "evidenceId": "url-subdomain"
+        },
+        {
+          "text": "nusadigital.test",
+          "evidenceId": "url-domain"
+        },
+        {
+          "text": "/lowongan",
+          "evidenceId": "url-path"
+        }
+      ]
+    },
+    "reason": {
+      "text": "I want to check the job openings we just posted on the office careers site.",
+      "evidenceId": "reason"
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["url-domain"]
+  },
+  "explanation": "Reading from the right, the domain owner is nusadigital.test, and karier is only a subdomain of our own office. HR's reason also makes sense.",
+  "ruleRefs": ["r-url-1"],
+  "hints": [
+    "Read the domain from right to left.",
+    "The owner is our own office. Does anything look odd?"
+  ]
+}

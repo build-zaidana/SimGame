@@ -1,0 +1,69 @@
+{
+  "items": [
+    {
+      "id": "rv-log-1",
+      "type": "mcq",
+      "conceptId": "log-reading",
+      "difficulty": 1,
+      "prompt": "Log: 8 failed logins from the same IP in 3 minutes, then 1 success. What does it mean?",
+      "choices": [
+        "The account owner forgot their password, no need to check",
+        "Probably a successful brute force, so the account needs a reset",
+        "The server is broken"
+      ],
+      "answerIndex": 1,
+      "explanation": "Many failed attempts from one source followed by a success is a password-guessing pattern. The account must be secured."
+    },
+    {
+      "id": "rv-log-2",
+      "type": "tap-evidence",
+      "conceptId": "log-reading",
+      "difficulty": 2,
+      "prompt": "Tap the log line that shows impossible travel.",
+      "parts": [
+        {
+          "text": "08:00 Success · Jakarta · work laptop",
+          "evidenceId": "l1"
+        },
+        {
+          "text": "08:07 Success · Abroad · new device",
+          "evidenceId": "l2"
+        },
+        {
+          "text": "12:00 Success · Jakarta · work laptop",
+          "evidenceId": "l3"
+        }
+      ],
+      "answer": ["l2"],
+      "explanation": "Seven minutes after logging in from Jakarta, the account owner can't possibly be abroad. The 08:07 login was made by someone else."
+    },
+    {
+      "id": "rv-log-3",
+      "type": "mcq",
+      "conceptId": "log-reading",
+      "difficulty": 1,
+      "prompt": "What is the IP address in a login log?",
+      "choices": [
+        "The network address of the device that logged in",
+        "The account owner's name",
+        "The password that was used"
+      ],
+      "answerIndex": 0,
+      "explanation": "An IP is a network address. Many logins from one unfamiliar IP can be a clue to an attack."
+    },
+    {
+      "id": "rv-log-4",
+      "type": "mcq",
+      "conceptId": "log-reading",
+      "difficulty": 2,
+      "prompt": "A login from Bandung, on a registered device, passed MFA, and there's a business trip record. What's your decision?",
+      "choices": [
+        "Reset the password right away",
+        "Allow it, because all the supporting info matches",
+        "Block the account forever"
+      ],
+      "answerIndex": 1,
+      "explanation": "A new location isn't always an attack. If all the supporting info matches, messing with the account only gets in the way of work."
+    }
+  ]
+}
