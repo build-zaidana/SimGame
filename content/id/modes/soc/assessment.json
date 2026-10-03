@@ -1,4 +1,4 @@
 {
-  "pre": ["rv-url-1", "rv-phish-1", "rv-pass-1", "rv-mal-1", "rv-log-1"],
-  "post": ["rv-url-4", "rv-phish-4", "rv-pass-2", "rv-mal-4", "rv-log-4"]
+  "pre": ["rv-url-1", "rv-phish-1", "rv-pass-1", "rv-mal-1", "rv-log-1", "rv-ir-3"],
+  "post": ["rv-url-4", "rv-phish-4", "rv-pass-2", "rv-mal-4", "rv-log-4", "rv-ir-4"]
 }

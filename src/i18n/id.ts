@@ -136,7 +136,7 @@ export const id = {
   assessment: {
     preHeading: 'Tes Awal',
     postHeading: 'Tes Akhir',
-    intro: 'Lima soal singkat untuk mengukur kemampuanmu. Tidak memengaruhi skor game.',
+    intro: 'Enam soal singkat untuk mengukur kemampuanmu. Tidak memengaruhi skor game.',
     done: (n: number, total: number) => `Hasil: ${n} dari ${total} benar`,
     finish: 'Selesai',
   },

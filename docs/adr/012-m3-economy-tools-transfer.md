@@ -40,6 +40,6 @@ dekompresi → JSON → migrasi → zod → ringkasan → konfirmasi; save lama 
 
 ## Tes awal/akhir memakai soal review
 
-`assessment.json` berisi dua daftar ID soal review yang tidak saling tumpang tindih (5 soal, satu per
-konsep inti 1–5). Hasilnya disimpan di `save.assessments` dan tidak masuk Leitner. Konsep
-`incident-response` belum tercakup di tes; perlu keputusan pemilik bila tes harus 6 soal.
+`assessment.json` berisi dua daftar ID soal review yang tidak saling tumpang tindih: 6 soal, satu per
+konsep inti (diputuskan pemilik; PRD §5.3 diperbarui dari 5 soal). Hasilnya disimpan di
+`save.assessments` dan tidak masuk Leitner.

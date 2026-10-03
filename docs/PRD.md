@@ -91,7 +91,7 @@ Laporan Shift → Review Cepat (3–5 soal) → Gaji & Kepercayaan → Shift ber
 | Umpan balik | Penjelasan per kasus yang salah | Langsung + di Laporan Shift |
 | Evaluasi | Review Cepat 3–5 soal (pilihan ganda / tandai bagian / urutkan langkah) | Akhir shift |
 | Retensi | Soal ulang berjarak (*spaced repetition*, Leitner 3 kotak) dari konsep yang pernah salah | Diselipkan ke Review Cepat shift berikutnya |
-| Pengukuran | Pre-test 5 soal (opsional, sebelum Shift 1) & post-test 5 soal (setelah Shift 5) | Untuk mengukur dampak belajar |
+| Pengukuran | Pre-test 6 soal (opsional, sebelum Shift 1) & post-test 6 soal (setelah Shift 5), satu soal per konsep inti | Untuk mengukur dampak belajar |
 
 ### 5.4 Nada & gaya
 - Visual: pixel art 2D, palet terbatas, UI seperti "OS kantor" retro. Pakai aset **CC0** (mis. Kenney) sebagai awal.
