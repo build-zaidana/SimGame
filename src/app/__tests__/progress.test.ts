@@ -4,7 +4,7 @@ import type { ShiftDef } from '../../content/schemas.ts';
 import { shiftReducer, startShift } from '../../engine/shift.ts';
 import type { CaseOutcome } from '../../engine/types.ts';
 import { createNewSave, newModeProgress } from '../../persistence/saveSchema.ts';
-import { commitShift, nextShift, planFromShift } from '../progress.ts';
+import { commitShift, nextShift, planFromShift, reviewItemsFor } from '../progress.ts';
 
 const shiftDef = (order: number): ShiftDef => ({
   id: `soc-0${order}`,
@@ -102,6 +102,15 @@ describe('commitShift', () => {
     expect(next.updatedAt).toBe('T1');
   });
 
+  it('records review answers in mastery so wrong items come back next shift', () => {
+    const next = commitShift(base(), played(), content, 'T1', [
+      { itemId: 'q-1', correct: false },
+      { itemId: 'q-2', correct: true },
+    ]);
+    expect(next.mastery['q-1']).toEqual({ box: 1, dueAtShiftIndex: 2, seen: 1, correct: 0 });
+    expect(next.mastery['q-2']).toEqual({ box: 2, dueAtShiftIndex: 3, seen: 1, correct: 1 });
+  });
+
   it('keeps the best score on replay and never lowers unlockedShift', () => {
     const first = commitShift(base(), played(), content, 'T1');
     const better = {
@@ -117,5 +126,42 @@ describe('commitShift', () => {
     const p = commitShift(better, played(), content, 'T2').modes['soc'];
     expect(p?.shifts['soc-01']).toEqual({ bestScore: 90, stars: 3, completedAt: 'T2' });
     expect(p?.unlockedShift).toBe(3);
+  });
+});
+
+describe('reviewItemsFor', () => {
+  const reviewContent = {
+    ...content,
+    rulebook: { chapters: [{ id: 'ch-1', conceptId: 'url', unlockAtShift: 1, rules: [] }] },
+    review: [
+      { id: 'u1', conceptId: 'url' },
+      { id: 'u2', conceptId: 'url' },
+      { id: 'u3', conceptId: 'url' },
+      { id: 'u4', conceptId: 'url' },
+      { id: 'p1', conceptId: 'phish' },
+    ],
+  } as unknown as ModeContent;
+
+  it('is stable for the same session and limited to the shift count', () => {
+    const s = startShift({
+      plan: planFromShift('soc', shiftDef(1)),
+      seed: 3,
+      playMode: 'relaxed',
+      trust: 75,
+    });
+    const a = reviewItemsFor(reviewContent, s, {});
+    expect(a).toHaveLength(3);
+    expect(reviewItemsFor(reviewContent, s, {})).toEqual(a);
+  });
+
+  it('includes items answered wrong in the previous shift', () => {
+    const s2 = startShift({
+      plan: planFromShift('soc', shiftDef(2)),
+      seed: 3,
+      playMode: 'relaxed',
+      trust: 75,
+    });
+    const mastery = { p1: { box: 1 as const, dueAtShiftIndex: 2, seen: 1, correct: 0 } };
+    expect(reviewItemsFor(reviewContent, s2, mastery).map((i) => i.id)).toContain('p1');
   });
 });

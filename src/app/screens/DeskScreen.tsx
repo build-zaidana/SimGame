@@ -18,6 +18,7 @@ export function DeskScreen() {
         content={content}
         session={session}
         wallet={wallet}
+        mastery={save?.mastery ?? {}}
         dispatch={dispatch}
       />
     </Suspense>

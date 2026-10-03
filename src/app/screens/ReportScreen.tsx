@@ -3,13 +3,14 @@ import { id } from '../../i18n/id.ts';
 import { getMode } from '../../modes/registry.ts';
 import { useAppStore } from '../store.ts';
 import { DialogueLine } from '../ui/desk/DialogueLines.tsx';
-import { btnPrimary, panel } from '../ui/styles.ts';
+import { btnPrimary, btnSecondary, panel } from '../ui/styles.ts';
 
-/** Laporan Shift. Review Cepat menyusul di M2. */
+/** Laporan Shift: skor, kesalahan + penjelasan + tautan ke bab, lalu Review Cepat. */
 export function ReportScreen() {
   const session = useAppStore((s) => s.session);
   const content = useAppStore((s) => s.content);
-  const finishShift = useAppStore((s) => s.finishShift);
+  const goTo = useAppStore((s) => s.goTo);
+  const openRulebook = useAppStore((s) => s.openRulebook);
   const mode = session ? getMode(session.modeId) : undefined;
   if (!session || !content || !mode) return null;
 
@@ -55,9 +56,12 @@ export function ReportScreen() {
             const ok = c.outcome?.correct === true;
             const perfect = ok && (c.score ?? 0) >= 100;
             const chapters = [
-              ...new Set(
-                (data?.ruleRefs ?? []).map((r) => chapterOfRule(r)?.title).filter(Boolean),
-              ),
+              ...new Map(
+                (data?.ruleRefs ?? [])
+                  .map((r) => chapterOfRule(r))
+                  .filter((ch) => ch !== undefined)
+                  .map((ch) => [ch.id, ch]),
+              ).values(),
             ];
             return (
               <li key={c.caseId} className={`${panel} p-3`}>
@@ -76,11 +80,19 @@ export function ReportScreen() {
                 {!perfect && data && (
                   <div className="mt-2 text-sm">
                     <p>{data.explanation}</p>
-                    {chapters.map((t) => (
-                      <p key={t} className="text-accent">
-                        {id.report.readChapter(t ?? '')}
-                      </p>
-                    ))}
+                    <div className="mt-1 flex flex-wrap gap-2">
+                      {chapters.map((ch) => (
+                        <button
+                          key={ch.id}
+                          type="button"
+                          className={`${btnSecondary} text-sm`}
+                          onClick={() => openRulebook(ch.id)}
+                        >
+                          <span aria-hidden="true">📖 </span>
+                          {id.report.readChapter(ch.title)}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 )}
               </li>
@@ -90,8 +102,8 @@ export function ReportScreen() {
       </section>
       <div className="fixed inset-x-0 bottom-0 border-t-2 border-ink/40 bg-panel p-2">
         <div className="mx-auto max-w-3xl">
-          <button type="button" className={`${btnPrimary} w-full`} onClick={finishShift}>
-            {id.report.finish}
+          <button type="button" className={`${btnPrimary} w-full`} onClick={() => goTo('review')}>
+            {id.report.toReview}
           </button>
         </div>
       </div>

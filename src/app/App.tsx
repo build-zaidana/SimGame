@@ -3,6 +3,8 @@ import { id } from '../i18n/id.ts';
 import { DeskScreen } from './screens/DeskScreen.tsx';
 import { HubScreen } from './screens/HubScreen.tsx';
 import { ReportScreen } from './screens/ReportScreen.tsx';
+import { ReviewScreen } from './screens/ReviewScreen.tsx';
+import { RulebookScreen } from './screens/RulebookScreen.tsx';
 import { TitleScreen } from './screens/TitleScreen.tsx';
 import { persistNow, useAppStore } from './store.ts';
 import { btnSecondary } from './ui/styles.ts';
@@ -22,6 +24,10 @@ function Screen() {
       return <DeskScreen />;
     case 'report':
       return <ReportScreen />;
+    case 'review':
+      return <ReviewScreen />;
+    case 'rulebook':
+      return <RulebookScreen />;
     default:
       return <HubScreen />;
   }

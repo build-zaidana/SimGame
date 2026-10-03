@@ -6,9 +6,8 @@ import { getMode } from '../modes/registry.ts';
 import { createLocalSaveRepository } from '../persistence/LocalSaveRepository.ts';
 import type { SaveRepository, StorageKind } from '../persistence/SaveRepository.ts';
 import { createNewSave, newModeProgress, type SaveData } from '../persistence/saveSchema.ts';
-import { noopTelemetry } from '../telemetry/NoopTelemetry.ts';
-import type { Telemetry } from '../telemetry/Telemetry.ts';
-import { commitShift, nextShift, planFromShift } from './progress.ts';
+import { commitShift, nextShift, planFromShift, type ReviewResult } from './progress.ts';
+import { telemetry } from './telemetry.ts';
 
 export type Screen =
   'title' | 'hub' | 'desk' | 'report' | 'review' | 'rulebook' | 'settings' | 'save-transfer';
@@ -23,6 +22,8 @@ interface AppState {
   save: SaveData | null;
   session: ShiftSession | null;
   content: ModeContent | null;
+  /** Layar Buku Panduan: bab yang dituju & layar asal. */
+  rulebook: { focusChapterId: string | null; returnTo: Screen };
   init(): Promise<void>;
   goTo(screen: Screen): void;
   dismissNotice(): void;
@@ -31,12 +32,13 @@ interface AppState {
   /** Masuk meja: lanjutkan shift yang tersimpan, atau mulai shift berikutnya. */
   enterMode(modeId: string): Promise<void>;
   dispatch(action: ShiftAction): void;
-  /** Laporan dibaca → simpan hasil → kembali ke HUB. */
-  finishShift(): void;
+  openRulebook(focusChapterId: string | null): void;
+  closeRulebook(): void;
+  /** Laporan → Review Cepat selesai → simpan hasil (termasuk jawaban review) → kembali ke HUB. */
+  finishShift(reviewResults: readonly ReviewResult[]): void;
 }
 
 let repo: SaveRepository | null = null;
-const telemetry: Telemetry = noopTelemetry;
 const contentCache = new Map<string, Promise<ModeContent>>();
 const AUTOSAVE_TICK_MS = 5000;
 let msSinceSave = 0;
@@ -82,6 +84,7 @@ export const useAppStore = create<AppState>()((set, get) => ({
   save: null,
   session: null,
   content: null,
+  rulebook: { focusChapterId: null, returnTo: 'hub' },
 
   async init() {
     if (repo) return;
@@ -181,7 +184,19 @@ export const useAppStore = create<AppState>()((set, get) => ({
     });
   },
 
-  finishShift() {
+  openRulebook(focusChapterId) {
+    const from = get().screen;
+    set({
+      rulebook: { focusChapterId, returnTo: from === 'rulebook' ? 'hub' : from },
+      screen: 'rulebook',
+    });
+  },
+
+  closeRulebook() {
+    set({ screen: get().rulebook.returnTo });
+  },
+
+  finishShift(reviewResults) {
     const { session, save, content } = get();
     if (!session || !save || !content || session.phase !== 'ended') return;
     const shift = content.shifts.find((s) => s.id === session.shiftId);
@@ -193,7 +208,7 @@ export const useAppStore = create<AppState>()((set, get) => ({
       averageScore: summary.averageScore,
       stars: summary.stars,
     });
-    const next = commitShift(save, session, content, nowIso());
+    const next = commitShift(save, session, content, nowIso(), reviewResults);
     write(next);
     set({ save: next, session: null, screen: 'hub' });
   },

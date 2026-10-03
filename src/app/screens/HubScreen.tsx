@@ -4,7 +4,7 @@ import { modes, upcomingModes } from '../../modes/registry.ts';
 import { newModeProgress } from '../../persistence/saveSchema.ts';
 import { nextShift } from '../progress.ts';
 import { useAppStore } from '../store.ts';
-import { btnPrimary, panel } from '../ui/styles.ts';
+import { btnPrimary, btnSecondary, panel } from '../ui/styles.ts';
 
 /** HUB versi menu (v1.0). Ilustrasi kantor pixel menyusul di M4. */
 export function HubScreen() {
@@ -12,6 +12,7 @@ export function HubScreen() {
   const content = useAppStore((s) => s.content);
   const enterMode = useAppStore((s) => s.enterMode);
   const preloadContent = useAppStore((s) => s.preloadContent);
+  const openRulebook = useAppStore((s) => s.openRulebook);
   const [entering, setEntering] = useState(false);
 
   useEffect(() => {
@@ -22,6 +23,12 @@ export function HubScreen() {
     <main className="mx-auto flex min-h-dvh max-w-3xl flex-col gap-4 p-4">
       <h1 className="font-display text-2xl text-accent">{id.hub.heading}</h1>
       <p className="text-ink-muted">{id.hub.intro}</p>
+      <div>
+        <button type="button" className={btnSecondary} onClick={() => openRulebook(null)}>
+          <span aria-hidden="true">📖 </span>
+          {id.hub.rulebook}
+        </button>
+      </div>
       <ul className="grid gap-4 sm:grid-cols-2">
         {modes.map((m) => {
           const progress = save?.modes[m.id] ?? newModeProgress();

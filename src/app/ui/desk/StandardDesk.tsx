@@ -6,7 +6,8 @@ import { BriefingDialog } from './BriefingDialog.tsx';
 import { FeedbackDialog } from './FeedbackDialog.tsx';
 import { Hud } from './Hud.tsx';
 import { QueuePane, type QueueItem } from './QueuePane.tsx';
-import { RulebookPane } from './RulebookPane.tsx';
+import { MentorHints } from './MentorHints.tsx';
+import { Rulebook } from '../Rulebook.tsx';
 import { useShiftClock } from './useShiftClock.ts';
 
 type Tab = 'queue' | 'document' | 'rulebook';
@@ -16,7 +17,7 @@ const TABS: Tab[] = ['queue', 'document', 'rulebook'];
  * Meja kerja standar: Antrian · Dokumen · Panduan + bar aksi.
  * Desktop ≥ 1024 px: 3 kolom. Lebih kecil: tab + bar aksi lengket di bawah.
  */
-export function StandardDesk({ mode, content, session, wallet, dispatch }: DeskProps) {
+export function StandardDesk({ mode, content, session, wallet, mastery, dispatch }: DeskProps) {
   const [tab, setTab] = useState<Tab>(session.activeCaseId ? 'document' : 'queue');
   const running =
     !session.paused && (session.phase === 'working' || session.phase === 'inspecting');
@@ -115,6 +116,14 @@ export function StandardDesk({ mode, content, session, wallet, dispatch }: DeskP
                     onToggleMark={(evidenceId) => dispatch({ type: 'TOGGLE_MARK', evidenceId })}
                   />
                 </div>
+                <div className="mt-3">
+                  <MentorHints
+                    hints={activeCase.hints}
+                    used={active.hintsUsed}
+                    disabled={session.phase !== 'inspecting'}
+                    onAsk={() => dispatch({ type: 'USE_HINT' })}
+                  />
+                </div>
               </>
             ) : (
               <p className="p-4 text-ink-muted">{id.desk.noCaseOpen}</p>
@@ -127,7 +136,15 @@ export function StandardDesk({ mode, content, session, wallet, dispatch }: DeskP
           aria-labelledby="tab-rulebook"
           className={paneClass('rulebook')}
         >
-          <RulebookPane chapters={content.rulebook.chapters} shiftOrder={session.shiftOrder} />
+          <div className="flex flex-col gap-3 p-3">
+            <h2 className="font-display text-ink-muted">{id.desk.rulebookHeading}</h2>
+            <Rulebook
+              chapters={content.rulebook.chapters}
+              concepts={content.concepts}
+              mastery={mastery}
+              openUpToShift={session.shiftOrder}
+            />
+          </div>
         </section>
       </main>
       <ActionBar
