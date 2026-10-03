@@ -32,6 +32,16 @@ export interface CaseTypeDef<TCase extends BaseCase = BaseCase> {
   Document: ComponentType<DocumentProps<TCase>>;
   /** Ikon & judul di antrian. */
   queueLabel(c: TCase): { icon: string; title: string };
+  /** Siapa yang membawa kasus ini ke meja (potret + satu kalimat). Tidak boleh membocorkan jawaban. */
+  visitor?(c: TCase): Visitor;
+}
+
+export interface Visitor {
+  name: string;
+  role: string;
+  /** 'person' digambar dari namanya; 'system' = alat pemantau otomatis. */
+  kind: 'person' | 'system';
+  line: string;
 }
 
 /** Membuang parameter tipe agar beberapa tipe kasus bisa disimpan dalam satu array. */

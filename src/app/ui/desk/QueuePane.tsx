@@ -44,7 +44,11 @@ export function QueuePane({ session, labelOf, onOpen }: QueuePaneProps) {
                 className={
                   'flex min-h-11 w-full items-start gap-2 border-2 px-2 py-2 text-left ' +
                   'focus-visible:outline-4 focus-visible:outline-focus disabled:opacity-60 ' +
-                  (active ? 'border-accent bg-accent/15' : 'border-ink/30 bg-bg')
+                  (active
+                    ? 'border-accent bg-accent/15'
+                    : c.status === 'arrived' && c.openedAtMs === null
+                      ? 'arrive-pulse border-accent/70 bg-bg'
+                      : 'border-ink/30 bg-bg')
                 }
               >
                 <span aria-hidden="true">{label.icon}</span>

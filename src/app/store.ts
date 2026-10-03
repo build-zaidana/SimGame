@@ -206,8 +206,19 @@ export const useAppStore = create<AppState>()((set, get) => ({
     const next = shiftReducer(session, action);
     if (next === session) return;
 
+    const sound = save.profile.settings.sound;
+    if (sound) {
+      const arrived = (x: typeof session) => x.cases.filter((c) => c.status !== 'pending').length;
+      if (arrived(next) > arrived(session) && next.phase !== 'briefing') playSfx('arrive');
+      if (next.phase === 'ended' && session.phase !== 'ended') playSfx('bell');
+    }
+
     if (action.type === 'DECIDE') {
-      if (save.profile.settings.sound) playSfx(action.outcome.correct ? 'correct' : 'wrong');
+      // Stempel menghantam kertas, lalu nada benar/salah saat slip muncul.
+      if (sound) {
+        playSfx('stamp');
+        playSfx(action.outcome.correct ? 'correct' : 'wrong', 0.45);
+      }
       const c = next.cases.find((x) => x.caseId === action.outcome.caseId);
       telemetry.track({
         name: 'case_decided',

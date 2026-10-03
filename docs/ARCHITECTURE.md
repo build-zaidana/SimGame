@@ -440,7 +440,8 @@ Desktop ≥ 1024px                         HP < 768px (potret)
 ```
 - Target sentuh ≥ 44 px; area tombol aksi di jangkauan jempol.
 - Bagian yang bisa ditandai: `<button aria-pressed>` dengan garis bawah putus-putus; saat ditandai muncul stempel/sorotan **dan** ikon (tidak bergantung warna).
-- Keputusan memicu animasi stempel singkat (dimatikan oleh "kurangi animasi").
+- Keputusan memicu stempel yang menghantam kertas dokumen, lalu slip umpan balik bergaya kertas (ADR 019; dimatikan oleh "kurangi animasi").
+- Dokumen tampil sebagai kertas (`.paper`) di atas meja (`.desk-surface`); di atasnya kartu pelapor dari `CaseTypeDef.visitor` (potret pixel + satu kalimat yang tidak membocorkan jawaban).
 - `textScale` diterapkan sebagai CSS variable `--text-scale` di `:root`.
 
 ### 9.3 Gaya visual

@@ -1,3 +1,5 @@
+import { staffVisitor } from '../../visitors.ts';
+import { id } from '../../../../i18n/id.ts';
 import { defineCaseType } from '../../../contract.ts';
 import { evaluateSocCase } from '../../evaluate.ts';
 import { FileDocument } from './FileDocument.tsx';
@@ -9,4 +11,5 @@ export const fileCaseType = defineCaseType({
   evaluate: evaluateSocCase,
   Document: FileDocument,
   queueLabel: (c) => ({ icon: '📄', title: c.data.fileName.text }),
+  visitor: (c) => staffVisitor(c.id, id.soc.visitors.fileLines),
 });

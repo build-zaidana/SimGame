@@ -1,3 +1,4 @@
+import { systemVisitor } from '../../visitors.ts';
 import { id } from '../../../../i18n/id.ts';
 import { defineCaseType } from '../../../contract.ts';
 import { evaluateSocCase } from '../../evaluate.ts';
@@ -10,4 +11,5 @@ export const loginAlertCaseType = defineCaseType({
   evaluate: evaluateSocCase,
   Document: LoginAlertDocument,
   queueLabel: (c) => ({ icon: '🔑', title: id.soc.loginAlert.queueTitle(c.data.account.user) }),
+  visitor: (c) => systemVisitor(c.id),
 });

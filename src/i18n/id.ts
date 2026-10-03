@@ -15,6 +15,12 @@ export const id = {
   },
   title: {
     play: 'Main',
+    terminal: [
+      'PT NUSA DIGITAL · MEJA SOC',
+      '> login analis_baru ... OK',
+      '> antrian kasus menunggu di meja',
+      '> peringatan: kelompok "Kelabu" aktif',
+    ],
   },
   learningReport: {
     heading: 'Laporan Belajar (uji main)',
@@ -85,6 +91,8 @@ export const id = {
     quarantine: 'Karantina',
   } as Record<string, string>,
   desk: {
+    visitorLabel: 'Dilaporkan oleh',
+    waiting: (n: number) => `${n} menunggu`,
     tabs: { queue: 'Antrian', document: 'Dokumen', rulebook: 'Panduan' },
     tabsLabel: 'Panel meja',
     clock: 'Jam',
@@ -246,6 +254,12 @@ export const id = {
     rules: 'Aturan terkait:',
     continue: 'Lanjut',
     trustChange: (delta: number) => `Kepercayaan ${delta > 0 ? '+' : ''}${delta}`,
+    slipHeader: (caseId: string) => `SLIP SOC · ${caseId.toUpperCase()}`,
+    citations: {
+      'threat-allowed': 'PERINGATAN: ancaman lolos ke klien. Kepercayaan turun banyak.',
+      'legit-blocked': 'CATATAN: yang sah ikut diblokir, pekerjaan klien jadi terganggu.',
+      'needless-escalation': 'CATATAN: eskalasi ini tidak perlu, tim senior jadi sibuk.',
+    } as Record<string, string>,
   },
   report: {
     heading: (order: number, title: string) => `Laporan Shift ${order} · ${title}`,
@@ -322,6 +336,39 @@ export const id = {
       url: 'Alamat yang diminta',
       reason: 'Alasan',
       queueTitle: (name: string) => `Permintaan akses dari ${name}`,
+    },
+    /** Karyawan fiktif yang membawa kasus ke meja SOC. Kalimatnya netral: tidak membocorkan jawaban. */
+    visitors: {
+      staff: [
+        { name: 'Sari Lestari', role: 'Keuangan' },
+        { name: 'Dimas Nugroho', role: 'Pemasaran' },
+        { name: 'Putri Ayu', role: 'HRD' },
+        { name: 'Agus Salim', role: 'Gudang' },
+        { name: 'Wulan Sari', role: 'Layanan Pelanggan' },
+        { name: 'Rizky Ramadhan', role: 'Penjualan' },
+        { name: 'Nadia Putri', role: 'Sekretariat' },
+        { name: 'Hendra Wijaya', role: 'Pengadaan' },
+      ],
+      emailLines: [
+        'Email ini masuk ke kotak saya. Aman nggak ya?',
+        'Saya belum klik apa-apa. Tolong dicek dulu, ya.',
+        'Ini beneran dari mereka? Saya ragu.',
+        'Boleh saya balas email ini?',
+      ],
+      fileLines: [
+        'File ini dikirim ke saya. Boleh dibuka?',
+        'Saya belum buka filenya. Tolong dicek dulu.',
+        'Ini aman dipasang di komputer kantor?',
+      ],
+      urlLines: [
+        'Situsnya diblokir firewall. Bisa dibuka aksesnya?',
+        'Saya butuh situs ini untuk kerja. Tolong dicek, ya.',
+      ],
+      system: { name: 'Sistem Pemantau Login', role: 'Alarm otomatis' },
+      loginLines: [
+        'BIP! Ada pola login yang perlu diperiksa manusia.',
+        'BIP! Log login baru masuk. Mohon ditinjau.',
+      ],
     },
   },
 } as const;
