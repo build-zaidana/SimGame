@@ -1,0 +1,44 @@
+{
+  "id": "s02-file-002",
+  "type": "file",
+  "conceptIds": ["phishing-signs"],
+  "difficulty": 1,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "fileName": {
+      "text": "Undangan_Pernikahan.apk",
+      "evidenceId": "file-name"
+    },
+    "fileType": {
+      "text": "Aplikasi Android (APK)",
+      "evidenceId": "file-type"
+    },
+    "size": {
+      "text": "6,2 MB",
+      "evidenceId": "file-size"
+    },
+    "source": {
+      "text": "Aplikasi chat, dari nomor tak dikenal +62 812-0000-1234",
+      "evidenceId": "source"
+    },
+    "message": {
+      "text": "Assalamualaikum, mohon hadir di pernikahan kami. Buka undangannya di sini ya 🙏",
+      "evidenceId": "message"
+    }
+  },
+  "evidence": {
+    "required": ["source", "file-type"],
+    "supporting": ["file-name", "message"]
+  },
+  "explanation": "Undangan dari nomor tak dikenal yang berupa aplikasi (APK), bukan gambar atau PDF, adalah modus penipuan yang umum. Jika dipasang, aplikasi seperti ini bisa mencuri data di HP.",
+  "ruleRefs": ["r-phish-6"],
+  "hints": [
+    "Apakah kamu kenal pengirimnya?",
+    "Undangan biasanya gambar atau PDF. Lihat jenis file-nya."
+  ]
+}

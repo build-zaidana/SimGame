@@ -1,0 +1,68 @@
+{
+  "id": "s03-login-003",
+  "type": "login-alert",
+  "conceptIds": ["passwords-mfa"],
+  "difficulty": 3,
+  "verdict": "malicious",
+  "correctDecision": "reset-password",
+  "acceptableDecisions": {
+    "block": 0.6,
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "account": {
+      "user": "Budi Santoso",
+      "role": "Logistik"
+    },
+    "headline": {
+      "text": "Banyak permintaan persetujuan MFA tengah malam",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "23:10",
+        "location": "Tidak diketahui",
+        "ip": "198.51.100.7",
+        "device": "Linux (perangkat baru)",
+        "method": "MFA ditolak",
+        "result": "failed",
+        "evidenceId": "ev-1"
+      },
+      {
+        "time": "23:12",
+        "location": "Tidak diketahui",
+        "ip": "198.51.100.7",
+        "device": "Linux (perangkat baru)",
+        "method": "MFA ditolak",
+        "result": "failed",
+        "evidenceId": "ev-2"
+      },
+      {
+        "time": "23:15",
+        "location": "Tidak diketahui",
+        "ip": "198.51.100.7",
+        "device": "Linux (perangkat baru)",
+        "method": "MFA disetujui",
+        "result": "success",
+        "evidenceId": "ev-3"
+      }
+    ],
+    "context": [
+      {
+        "text": "Budi: \"HP saya bunyi terus tengah malam, akhirnya saya tekan Setuju supaya berhenti.\"",
+        "evidenceId": "ctx-push"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["ev-3", "ctx-push"],
+    "supporting": ["ev-1", "ev-2"]
+  },
+  "explanation": "Penyerang sudah tahu password Budi dan terus mengirim permintaan MFA sampai Budi lelah lalu menyetujuinya. Login dari perangkat asing itu berhasil, jadi password harus direset.",
+  "ruleRefs": ["r-pass-3", "r-pass-2"],
+  "hints": [
+    "Siapa yang meminta persetujuan MFA itu, Budi atau orang lain?",
+    "Lihat baris log terakhir dan pengakuan Budi."
+  ]
+}

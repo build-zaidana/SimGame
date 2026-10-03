@@ -1,0 +1,52 @@
+{
+  "id": "s02-email-004",
+  "type": "email",
+  "conceptIds": ["phishing-signs", "url-anatomy"],
+  "difficulty": 2,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "from": {
+      "name": "KirimCepat",
+      "address": "noreply@kirimcepat.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Paketmu sedang diantar",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "10:20",
+    "body": [
+      {
+        "text": "Halo Sari Anggraini,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "Paket KC7731 untuk PT Nusa Digital sedang dibawa kurir dan tiba hari ini.",
+        "evidenceId": "body-info"
+      },
+      {
+        "link": {
+          "label": "kirimcepat.test/lacak/KC7731",
+          "href": "https://kirimcepat.test/lacak/KC7731"
+        },
+        "evidenceId": "link"
+      },
+      {
+        "text": "Tidak ada biaya tambahan untuk pengiriman ini.",
+        "evidenceId": "no-fee"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["sender", "greeting", "link"]
+  },
+  "explanation": "Pengirim dan tautannya sama-sama memakai domain resmi kirimcepat.test, emailnya menyapa dengan nama, dan tidak ada permintaan bayar. Ini notifikasi pengiriman biasa.",
+  "ruleRefs": ["r-phish-1", "r-url-3", "r-phish-5"],
+  "hints": [
+    "Cek domain pengirim dan alamat asli tautannya.",
+    "Keduanya kirimcepat.test. Ada permintaan uang atau data?"
+  ]
+}

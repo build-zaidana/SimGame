@@ -1,0 +1,45 @@
+{
+  "id": "s03-email-004",
+  "type": "email",
+  "conceptIds": ["passwords-mfa", "phishing-signs"],
+  "difficulty": 1,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 2,
+  "data": {
+    "from": {
+      "name": "Kurir KirimCepat",
+      "address": "kurir@kirimcepat-antar.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Kurir sudah di depan kantor",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "11:05",
+    "body": [
+      {
+        "text": "Halo,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "Kurir kami sudah di lobi. Untuk konfirmasi penerimaan, balas dengan kode OTP yang barusan masuk ke HP Anda.",
+        "evidenceId": "request-otp"
+      },
+      {
+        "text": "Paket dikembalikan jika tidak dibalas dalam 10 menit.",
+        "evidenceId": "urgency"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["request-otp", "sender"],
+    "supporting": ["urgency"]
+  },
+  "explanation": "Kurir asli tidak butuh OTP untuk mengantar paket, dan domain resmi KirimCepat adalah kirimcepat.test. OTP yang diminta kemungkinan untuk masuk ke akun milikmu.",
+  "ruleRefs": ["r-pass-1", "r-phish-1", "r-phish-3"],
+  "hints": ["Untuk apa kurir butuh kode OTP?", "Cek domain pengirim dan batas waktunya."]
+}

@@ -5,7 +5,9 @@
   "difficulty": 1,
   "verdict": "malicious",
   "correctDecision": "block",
-  "acceptableDecisions": { "escalate": 0.6 },
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
   "severity": 2,
   "data": {
     "from": {
@@ -19,7 +21,10 @@
     },
     "receivedAt": "09:41",
     "body": [
-      { "text": "Halo Pelanggan,", "evidenceId": "generic-greeting" },
+      {
+        "text": "Halo Pelanggan,",
+        "evidenceId": "generic-greeting"
+      },
       {
         "text": "Paket Anda tertahan di gudang karena ongkos kirim kurang Rp 5.000.",
         "evidenceId": "body-claim"
@@ -29,7 +34,10 @@
         "evidenceId": "urgency"
       },
       {
-        "link": { "label": "Bayar sekarang", "href": "https://kirimcepat-bayar.test/ongkir" },
+        "link": {
+          "label": "Bayar sekarang",
+          "href": "https://kirimcepat-bayar.test/ongkir"
+        },
         "evidenceId": "link"
       }
     ]
@@ -39,5 +47,9 @@
     "supporting": ["urgency", "generic-greeting"]
   },
   "explanation": "Domain pengirim kirimcepat-id.test bukan milik KirimCepat (kirimcepat.test), dan tautannya menuju situs lain yang meminta pembayaran. Nominal kecil dan batas waktu dipakai supaya kamu cepat membayar tanpa curiga.",
-  "ruleRefs": ["r-phish-1", "r-url-3", "r-phish-3"]
+  "ruleRefs": ["r-phish-1", "r-url-3", "r-phish-3"],
+  "hints": [
+    "Bandingkan alamat pengirim dengan domain resmi KirimCepat, yaitu kirimcepat.test.",
+    "Tahan tautan \"Bayar sekarang\". Domainnya milik siapa?"
+  ]
 }

@@ -1,0 +1,49 @@
+{
+  "id": "s02-email-001",
+  "type": "email",
+  "conceptIds": ["phishing-signs"],
+  "difficulty": 2,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "from": {
+      "name": "Tim IT PT Nusa Digital",
+      "address": "it@nusadigital.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "PENTING: Email kantor mati Sabtu pukul 22.00–24.00",
+      "evidenceId": "urgency"
+    },
+    "receivedAt": "09:03",
+    "body": [
+      {
+        "text": "Halo semua,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "Sabtu malam ada pemeliharaan server, jadi email kantor tidak bisa dipakai selama dua jam.",
+        "evidenceId": "body-info"
+      },
+      {
+        "text": "Kalian tidak perlu melakukan apa pun. Email akan kembali normal sendiri.",
+        "evidenceId": "body-no-action"
+      },
+      {
+        "text": "Salam, Tim IT",
+        "evidenceId": "signature"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["sender", "body-no-action"]
+  },
+  "explanation": "Subjeknya terdengar mendesak, tapi pengirimnya domain kantor yang asli dan email ini tidak meminta klik, data, atau tindakan apa pun. Satu tanda saja belum cukup untuk memblokir.",
+  "ruleRefs": ["r-phish-1", "r-phish-5"],
+  "hints": [
+    "Kata PENTING memang bikin curiga. Tanda bahaya lain apa yang ada?",
+    "Cek domain pengirim, lalu cari tautan atau permintaan data."
+  ]
+}

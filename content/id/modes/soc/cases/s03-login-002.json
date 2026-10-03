@@ -1,0 +1,50 @@
+{
+  "id": "s03-login-002",
+  "type": "login-alert",
+  "conceptIds": ["passwords-mfa"],
+  "difficulty": 2,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "account": {
+      "user": "Andi Saputra",
+      "role": "Pemasaran"
+    },
+    "headline": {
+      "text": "Login dari lokasi baru: Bandung",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "08:40",
+        "location": "Bandung",
+        "ip": "10.30.4.12",
+        "device": "Laptop kantor (terdaftar)",
+        "method": "Password + OTP",
+        "result": "success",
+        "evidenceId": "ev-1"
+      }
+    ],
+    "context": [
+      {
+        "text": "Absensi: Andi dinas luar ke kantor cabang Bandung, 2–4 Oktober.",
+        "evidenceId": "ctx-trip"
+      },
+      {
+        "text": "Tidak ada laporan telepon atau email aneh dari Andi.",
+        "evidenceId": "ctx-clean"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["ctx-trip", "ev-1"]
+  },
+  "explanation": "Lokasinya baru, tapi Andi memang sedang dinas ke Bandung, memakai laptop kantor yang terdaftar, dan lolos MFA dengan wajar. Mereset password di sini hanya mengganggu kerjanya.",
+  "ruleRefs": ["r-pass-4"],
+  "hints": [
+    "Lokasi baru belum tentu serangan. Cek info tambahan.",
+    "Perangkatnya terdaftar dan ada data dinas luar. Masih ada yang janggal?"
+  ]
+}

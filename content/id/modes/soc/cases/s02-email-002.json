@@ -1,0 +1,55 @@
+{
+  "id": "s02-email-002",
+  "type": "email",
+  "conceptIds": ["phishing-signs", "url-anatomy"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 2,
+  "data": {
+    "from": {
+      "name": "Tim IT PT Nusa Digital",
+      "address": "it@nusadlgital.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Kotak masuk Anda penuh 99%",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "09:11",
+    "body": [
+      {
+        "text": "Yth. Karyawan,",
+        "evidenceId": "generic-greeting"
+      },
+      {
+        "text": "Email baru akan ditolak mulai hari ini. Tambah kapasitas gratis sebelum pukul 12.00:",
+        "evidenceId": "urgency"
+      },
+      {
+        "link": {
+          "label": "Tambah kapasitas",
+          "href": "http://nusadlgital.test/kuota/login"
+        },
+        "evidenceId": "link"
+      },
+      {
+        "text": "Tim IT",
+        "evidenceId": "signature"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["sender", "link"],
+    "supporting": ["urgency", "generic-greeting"]
+  },
+  "explanation": "Pengirimnya nusadlgital.test (huruf l, bukan i), domain tiruan yang mirip nusadigital.test. Tautannya meminta login ke domain tiruan yang sama.",
+  "ruleRefs": ["r-phish-1", "r-url-1", "r-phish-3"],
+  "hints": [
+    "Baca alamat pengirim huruf demi huruf.",
+    "Bandingkan nusadlgital dengan nusadigital. Lalu tahan tautannya."
+  ]
+}

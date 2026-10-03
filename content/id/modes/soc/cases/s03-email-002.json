@@ -1,0 +1,49 @@
+{
+  "id": "s03-email-002",
+  "type": "email",
+  "conceptIds": ["passwords-mfa"],
+  "difficulty": 2,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "from": {
+      "name": "Tim IT PT Nusa Digital",
+      "address": "it@nusadigital.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Mulai Senin, login email wajib MFA",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "09:35",
+    "body": [
+      {
+        "text": "Halo semua,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "Mulai Senin, login email kantor butuh password dan kode OTP dari HP.",
+        "evidenceId": "body-info"
+      },
+      {
+        "text": "Panduan aktivasi ada di portal kantor. Buka lewat bookmark, bukan dari email.",
+        "evidenceId": "body-guide"
+      },
+      {
+        "text": "Ingat, Tim IT tidak akan pernah meminta kode OTP kalian.",
+        "evidenceId": "body-warning"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["sender", "body-warning"]
+  },
+  "explanation": "Email ini dari domain kantor yang asli, tidak berisi tautan, dan justru mengingatkan agar OTP tidak dibagikan. Ini pengumuman yang sah.",
+  "ruleRefs": ["r-phish-5", "r-pass-1"],
+  "hints": [
+    "Apakah email ini meminta sesuatu darimu?",
+    "Domainnya asli dan isinya justru nasihat keamanan."
+  ]
+}

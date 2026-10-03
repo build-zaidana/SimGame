@@ -53,6 +53,49 @@
           "id": "r-phish-5",
           "text": "Email sah: domain asli, menyapa dengan nama, dan tidak memaksa. Jangan asal blokir.",
           "evidenceTags": []
+        },
+        {
+          "id": "r-phish-6",
+          "text": "Lampiran yang tidak kamu tunggu, apalagi dari pengirim tak dikenal, jangan dibuka. Konfirmasi dulu lewat jalur lain.",
+          "evidenceTags": ["attachment", "sender"]
+        },
+        {
+          "id": "r-phish-7",
+          "text": "Permintaan aneh dari alamat rekan yang asli bisa berarti akunnya diambil alih. Eskalasi, lalu konfirmasi lewat telepon atau langsung.",
+          "evidenceTags": ["request"]
+        }
+      ]
+    },
+    {
+      "id": "ch-pass",
+      "title": "Bab 3 · Password & MFA",
+      "conceptId": "passwords-mfa",
+      "unlockAtShift": 3,
+      "rules": [
+        {
+          "id": "r-pass-1",
+          "text": "Kode OTP hanya untukmu. Tidak ada petugas IT, bank, atau kurir yang berhak memintanya.",
+          "evidenceTags": ["otp"]
+        },
+        {
+          "id": "r-pass-2",
+          "text": "Login berhasil dari lokasi atau perangkat asing setelah OTP dibagikan berarti akun diambil alih: reset password.",
+          "evidenceTags": ["login", "otp"]
+        },
+        {
+          "id": "r-pass-3",
+          "text": "Persetujuan MFA yang tidak kamu minta harus ditolak dan dilaporkan, walau notifikasinya terus muncul.",
+          "evidenceTags": ["mfa"]
+        },
+        {
+          "id": "r-pass-4",
+          "text": "Login dari tempat baru belum tentu jahat. Cek info pendukung (dinas luar, perangkat terdaftar) sebelum bertindak.",
+          "evidenceTags": ["context"]
+        },
+        {
+          "id": "r-pass-5",
+          "text": "Password panjang dan berbeda untuk tiap akun. Password manager membantu mengingatnya.",
+          "evidenceTags": []
         }
       ]
     }

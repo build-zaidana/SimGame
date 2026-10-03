@@ -12,10 +12,16 @@
       "address": "hr@nusadigital.test",
       "evidenceId": "sender"
     },
-    "subject": { "text": "Makan siang tim SOC hari Jumat", "evidenceId": "subject" },
+    "subject": {
+      "text": "Makan siang tim SOC hari Jumat",
+      "evidenceId": "subject"
+    },
     "receivedAt": "09:14",
     "body": [
-      { "text": "Halo tim SOC,", "evidenceId": "greeting" },
+      {
+        "text": "Halo tim SOC,",
+        "evidenceId": "greeting"
+      },
       {
         "text": "Makan siang bersama jadi hari Jumat pukul 12 di pantry lantai 3. Menunya nasi liwet.",
         "evidenceId": "body-info"
@@ -24,10 +30,20 @@
         "text": "Kalau punya alergi makanan, balas email ini sebelum Kamis, ya.",
         "evidenceId": "body-request"
       },
-      { "text": "Salam, Dewi (HR)", "evidenceId": "signature" }
+      {
+        "text": "Salam, Dewi (HR)",
+        "evidenceId": "signature"
+      }
     ]
   },
-  "evidence": { "required": [], "supporting": ["sender"] },
+  "evidence": {
+    "required": [],
+    "supporting": ["sender"]
+  },
   "explanation": "Pengirimnya memakai domain kantor yang asli, nusadigital.test, dan tidak ada tautan atau permintaan data. Email sah seperti ini sebaiknya diizinkan.",
-  "ruleRefs": ["r-phish-1", "r-phish-5"]
+  "ruleRefs": ["r-phish-1", "r-phish-5"],
+  "hints": [
+    "Cek domain setelah @. Milik siapa?",
+    "Tidak ada tautan, tidak ada permintaan data. Ada alasan untuk curiga?"
+  ]
 }

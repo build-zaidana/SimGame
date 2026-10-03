@@ -1,0 +1,48 @@
+{
+  "id": "s02-email-003",
+  "type": "email",
+  "conceptIds": ["phishing-signs"],
+  "difficulty": 3,
+  "verdict": "suspicious",
+  "correctDecision": "escalate",
+  "acceptableDecisions": {
+    "block": 0.6
+  },
+  "severity": 2,
+  "data": {
+    "from": {
+      "name": "Budi Santoso",
+      "address": "budi.santoso@nusadigital.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Tolong cepat",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "10:02",
+    "body": [
+      {
+        "text": "Hai, bisa bantu belikan 10 voucher pulsa Rp100.000? Nanti saya ganti.",
+        "evidenceId": "request"
+      },
+      {
+        "text": "Saya lagi rapat, jangan telepon dulu ya. Kirim kodenya lewat email saja.",
+        "evidenceId": "no-call"
+      },
+      {
+        "text": "Budi",
+        "evidenceId": "signature"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["request", "no-call"],
+    "supporting": ["subject"]
+  },
+  "explanation": "Alamatnya memang milik Budi, tapi permintaan voucher dan larangan menelepon adalah ciri akun yang diambil alih. Eskalasi supaya tim keamanan mengecek akun Budi dan mengonfirmasi langsung kepadanya.",
+  "ruleRefs": ["r-phish-7"],
+  "hints": [
+    "Alamatnya asli. Tapi apakah permintaannya wajar untuk rekan kerja?",
+    "Kenapa ia melarang kamu menelepon? Kalau ragu dengan akun rekan, itu saatnya eskalasi."
+  ]
+}

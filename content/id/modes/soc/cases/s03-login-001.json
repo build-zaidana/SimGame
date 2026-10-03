@@ -1,0 +1,63 @@
+{
+  "id": "s03-login-001",
+  "type": "login-alert",
+  "conceptIds": ["passwords-mfa"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "reset-password",
+  "acceptableDecisions": {
+    "block": 0.6,
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "account": {
+      "user": "Rina Wulandari",
+      "role": "Staf Keuangan"
+    },
+    "headline": {
+      "text": "Login dari perangkat baru di luar negeri",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "08:05",
+        "location": "Kantor Jakarta",
+        "ip": "10.20.1.31",
+        "device": "Laptop kantor (terdaftar)",
+        "method": "Password + OTP",
+        "result": "success",
+        "evidenceId": "ev-1"
+      },
+      {
+        "time": "10:01",
+        "location": "Luar negeri",
+        "ip": "203.0.113.45",
+        "device": "Windows (perangkat baru)",
+        "method": "Password + OTP",
+        "result": "success",
+        "evidenceId": "ev-2"
+      }
+    ],
+    "context": [
+      {
+        "text": "09:58 Rina melapor: ada yang menelepon mengaku dari IT, minta kode OTP, dan ia sudah memberikannya.",
+        "evidenceId": "ctx-call"
+      },
+      {
+        "text": "Rina sedang di kantor sepanjang hari (absensi).",
+        "evidenceId": "ctx-office"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["ev-2", "ctx-call"],
+    "supporting": ["ctx-office"]
+  },
+  "explanation": "Tiga menit setelah Rina memberikan OTP, ada login berhasil dari perangkat baru di luar negeri, padahal Rina di kantor. Akunnya sudah diambil alih, jadi password harus segera direset.",
+  "ruleRefs": ["r-pass-1", "r-pass-2"],
+  "hints": [
+    "Bandingkan jam di catatan telepon dengan jam login di log.",
+    "Rina di kantor, tapi ada login dari luar negeri memakai OTP yang ia bagikan."
+  ]
+}

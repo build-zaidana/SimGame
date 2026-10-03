@@ -1,0 +1,34 @@
+{
+  "dialogues": [
+    {
+      "id": "soc-03-intro",
+      "lines": [
+        {
+          "speaker": "rani",
+          "text": "Ada kabar kurang enak. Beberapa karyawan ditelepon orang yang mengaku dari IT, minta kode OTP."
+        },
+        {
+          "speaker": "rani",
+          "text": "Bab baru di Buku Panduan sudah terbuka: Password & MFA. Baca dulu kalau sempat."
+        },
+        {
+          "speaker": "rani",
+          "text": "Kamu juga dapat aksi baru: RESET PASSWORD. Pakai untuk akun yang sudah diambil alih orang lain."
+        }
+      ]
+    },
+    {
+      "id": "soc-03-outro",
+      "lines": [
+        {
+          "speaker": "rani",
+          "text": "Ingat ini seumur hidup: OTP itu seperti kunci rumah. Jangan diberikan ke siapa pun."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "Kalian mulai merepotkan. Untung karyawan kalian masih suka mengunduh file."
+        }
+      ]
+    }
+  ]
+}

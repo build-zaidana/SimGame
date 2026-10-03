@@ -1,0 +1,48 @@
+{
+  "id": "s03-url-001",
+  "type": "url-request",
+  "conceptIds": ["passwords-mfa", "url-anatomy"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "requester": {
+      "name": "Lina Marlina",
+      "department": "Administrasi"
+    },
+    "url": {
+      "parts": [
+        {
+          "text": "https://",
+          "evidenceId": "url-scheme"
+        },
+        {
+          "text": "reset-password-nusadigital.test",
+          "evidenceId": "url-domain"
+        },
+        {
+          "text": "/otp",
+          "evidenceId": "url-path"
+        }
+      ]
+    },
+    "reason": {
+      "text": "Dapat SMS: akun email akan dihapus kalau tidak memasukkan kode OTP di link ini.",
+      "evidenceId": "reason"
+    }
+  },
+  "evidence": {
+    "required": ["url-domain", "reason"],
+    "supporting": []
+  },
+  "explanation": "Pemilik domainnya reset-password-nusadigital.test, bukan kantor, dan halamannya meminta kode OTP. Ini jebakan untuk mencuri akun Lina.",
+  "ruleRefs": ["r-url-1", "r-pass-1"],
+  "hints": [
+    "Baca domainnya dari kanan. Milik kantor?",
+    "Halaman yang meminta OTP lewat tautan SMS adalah tanda bahaya besar."
+  ]
+}

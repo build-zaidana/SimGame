@@ -1,0 +1,34 @@
+{
+  "dialogues": [
+    {
+      "id": "soc-02-intro",
+      "lines": [
+        {
+          "speaker": "rani",
+          "text": "Pagi! Hari ini kotak masuk kantor lagi ramai sekali."
+        },
+        {
+          "speaker": "rani",
+          "text": "Hati-hati dua arah, ya. Jangan sampai jebakan lolos, tapi jangan juga memblokir email yang sah. Itu bikin kerja orang terhambat."
+        },
+        {
+          "speaker": "rani",
+          "text": "Kalau email datang dari rekan sendiri tapi isinya aneh, jangan tebak-tebakan. Pakai ESKALASI."
+        }
+      ]
+    },
+    {
+      "id": "soc-02-outro",
+      "lines": [
+        {
+          "speaker": "rani",
+          "text": "Kerja bagus. Membedakan yang sah dan yang palsu itu inti pekerjaan kita."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "Domain tiruan kalian blokir? Baik. Bagaimana kalau kami tidak butuh tautan sama sekali?"
+        }
+      ]
+    }
+  ]
+}

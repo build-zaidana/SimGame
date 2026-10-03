@@ -1,0 +1,52 @@
+{
+  "id": "s02-email-006",
+  "type": "email",
+  "conceptIds": ["phishing-signs"],
+  "difficulty": 3,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "from": {
+      "name": "PT Sinar Jaya",
+      "address": "tagihan@sinarjaya-pembayaran.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Perubahan rekening pembayaran",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "11:15",
+    "body": [
+      {
+        "text": "Kepada Tim Keuangan,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "Mulai bulan ini, mohon transfer tagihan ke rekening baru kami di bawah. Abaikan rekening lama.",
+        "evidenceId": "request"
+      },
+      {
+        "text": "Tagihan jatuh tempo besok. Mohon segera diproses agar pengiriman tidak tertunda.",
+        "evidenceId": "urgency"
+      },
+      {
+        "text": "Hormat kami, PT Sinar Jaya",
+        "evidenceId": "signature"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["sender", "request"],
+    "supporting": ["urgency"]
+  },
+  "explanation": "Vendor ini biasa memakai sinarjaya.test, sedangkan email ini dari sinarjaya-pembayaran.test dan meminta pindah rekening. Perubahan rekening wajib dikonfirmasi lewat telepon resmi vendor, bukan lewat email.",
+  "ruleRefs": ["r-phish-1", "r-phish-3"],
+  "hints": [
+    "Domain PT Sinar Jaya yang biasa adalah sinarjaya.test. Cocok dengan pengirim ini?",
+    "Permintaan pindah rekening plus desakan waktu adalah kombinasi berbahaya."
+  ]
+}

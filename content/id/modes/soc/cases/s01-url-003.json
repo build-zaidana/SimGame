@@ -5,15 +5,29 @@
   "difficulty": 2,
   "verdict": "malicious",
   "correctDecision": "block",
-  "acceptableDecisions": { "escalate": 0.6 },
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
   "severity": 3,
   "data": {
-    "requester": { "name": "Andi Saputra", "department": "Pemasaran" },
+    "requester": {
+      "name": "Andi Saputra",
+      "department": "Pemasaran"
+    },
     "url": {
       "parts": [
-        { "text": "https://", "evidenceId": "url-scheme" },
-        { "text": "login-banknusantara.test", "evidenceId": "url-domain" },
-        { "text": "/masuk", "evidenceId": "url-path" }
+        {
+          "text": "https://",
+          "evidenceId": "url-scheme"
+        },
+        {
+          "text": "login-banknusantara.test",
+          "evidenceId": "url-domain"
+        },
+        {
+          "text": "/masuk",
+          "evidenceId": "url-path"
+        }
       ]
     },
     "reason": {
@@ -21,7 +35,14 @@
       "evidenceId": "reason"
     }
   },
-  "evidence": { "required": ["url-domain"], "supporting": ["reason"] },
+  "evidence": {
+    "required": ["url-domain"],
+    "supporting": ["reason"]
+  },
   "explanation": "Pemilik domain ini login-banknusantara.test, bukan banknusantara.test. Gembok HTTPS hanya berarti koneksinya terenkripsi, bukan berarti situsnya milik bank.",
-  "ruleRefs": ["r-url-1", "r-url-2"]
+  "ruleRefs": ["r-url-1", "r-url-2"],
+  "hints": [
+    "Gembok HTTPS bukan bukti situs itu asli. Lihat domainnya.",
+    "Domain resmi bank adalah banknusantara.test. Apakah login-banknusantara.test sama?"
+  ]
 }

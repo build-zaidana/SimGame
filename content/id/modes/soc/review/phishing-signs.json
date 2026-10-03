@@ -13,6 +13,65 @@
       ],
       "answerIndex": 0,
       "explanation": "Ketiga tanda muncul sekaligus. Bank resmi tidak meminta verifikasi akun lewat tautan email."
+    },
+    {
+      "id": "rv-phish-2",
+      "type": "tap-evidence",
+      "conceptId": "phishing-signs",
+      "difficulty": 2,
+      "prompt": "Email ini phishing. Ketuk semua tanda bahayanya.",
+      "parts": [
+        {
+          "text": "Dari: Tim Keamanan <admin@nusadigital-keamanan.test>",
+          "evidenceId": "sender"
+        },
+        {
+          "text": "Halo Tim,",
+          "evidenceId": "greeting"
+        },
+        {
+          "text": "Password kamu kedaluwarsa HARI INI.",
+          "evidenceId": "urgency"
+        },
+        {
+          "text": "Masukkan password lama dan baru di formulir ini.",
+          "evidenceId": "request"
+        },
+        {
+          "text": "Terima kasih.",
+          "evidenceId": "closing"
+        }
+      ],
+      "answer": ["sender", "urgency", "request"],
+      "explanation": "Domain pengirim bukan nusadigital.test, ada desakan waktu, dan email meminta password. Salam dan penutupnya sendiri tidak berbahaya."
+    },
+    {
+      "id": "rv-phish-3",
+      "type": "mcq",
+      "conceptId": "phishing-signs",
+      "difficulty": 2,
+      "prompt": "Email dari alamat asli rekanmu meminta dibelikan voucher, katanya sedang rapat dan jangan ditelepon. Apa yang paling tepat?",
+      "choices": [
+        "Langsung belikan, alamatnya asli",
+        "Eskalasi, lalu konfirmasi ke rekan lewat jalur lain",
+        "Abaikan saja tanpa memberi tahu siapa pun"
+      ],
+      "answerIndex": 1,
+      "explanation": "Akun rekanmu mungkin diambil alih. Eskalasi membuat tim keamanan bisa mengecek akunnya dan melindungi orang lain."
+    },
+    {
+      "id": "rv-phish-4",
+      "type": "mcq",
+      "conceptId": "phishing-signs",
+      "difficulty": 1,
+      "prompt": "Nomor tak dikenal mengirim file Undangan.apk lewat chat. Apa tindakanmu?",
+      "choices": [
+        "Buka saja, siapa tahu teman lama",
+        "Jangan dibuka, hapus, dan laporkan bila di perangkat kantor",
+        "Teruskan ke grup supaya orang lain ikut mengecek"
+      ],
+      "answerIndex": 1,
+      "explanation": "Undangan asli berupa gambar atau PDF, bukan aplikasi. Meneruskannya hanya menyebarkan jebakan ke orang lain."
     }
   ]
 }

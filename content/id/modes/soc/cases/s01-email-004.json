@@ -5,7 +5,9 @@
   "difficulty": 1,
   "verdict": "malicious",
   "correctDecision": "block",
-  "acceptableDecisions": { "escalate": 0.6 },
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
   "severity": 2,
   "data": {
     "from": {
@@ -13,10 +15,16 @@
       "address": "promo@undian-nusantara.test",
       "evidenceId": "sender"
     },
-    "subject": { "text": "Selamat! Anda memenangkan HP baru", "evidenceId": "prize" },
+    "subject": {
+      "text": "Selamat! Anda memenangkan HP baru",
+      "evidenceId": "prize"
+    },
     "receivedAt": "10:12",
     "body": [
-      { "text": "Yth. Pemenang,", "evidenceId": "generic-greeting" },
+      {
+        "text": "Yth. Pemenang,",
+        "evidenceId": "generic-greeting"
+      },
       {
         "text": "Nomor Anda terpilih dalam Undian Akhir Tahun.",
         "evidenceId": "body-claim"
@@ -26,10 +34,16 @@
         "evidenceId": "request-data"
       },
       {
-        "link": { "label": "Klaim Hadiah", "href": "http://klaim-hadiah-nusantara.test/form" },
+        "link": {
+          "label": "Klaim Hadiah",
+          "href": "http://klaim-hadiah-nusantara.test/form"
+        },
         "evidenceId": "link"
       },
-      { "text": "Batas klaim: hari ini pukul 17.00.", "evidenceId": "urgency" }
+      {
+        "text": "Batas klaim: hari ini pukul 17.00.",
+        "evidenceId": "urgency"
+      }
     ]
   },
   "evidence": {
@@ -37,5 +51,9 @@
     "supporting": ["sender", "link", "urgency", "generic-greeting"]
   },
   "explanation": "Kamu tidak pernah ikut undian ini, dan pesannya meminta NIK serta nomor rekening lewat formulir. Itu ciri khas phishing, jadi blokir.",
-  "ruleRefs": ["r-phish-4", "r-phish-2"]
+  "ruleRefs": ["r-phish-4", "r-phish-2"],
+  "hints": [
+    "Pernahkah karyawan kita ikut undian ini?",
+    "Lihat data apa saja yang diminta. Pantaskah diminta lewat formulir di email?"
+  ]
 }

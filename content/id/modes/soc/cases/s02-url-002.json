@@ -1,5 +1,5 @@
 {
-  "id": "s01-url-002",
+  "id": "s02-url-002",
   "type": "url-request",
   "conceptIds": ["url-anatomy"],
   "difficulty": 1,
@@ -8,8 +8,8 @@
   "severity": 1,
   "data": {
     "requester": {
-      "name": "Sari Anggraini",
-      "department": "Keuangan"
+      "name": "Maya Putri",
+      "department": "HR"
     },
     "url": {
       "parts": [
@@ -18,7 +18,7 @@
           "evidenceId": "url-scheme"
         },
         {
-          "text": "portal.",
+          "text": "karier.",
           "evidenceId": "url-subdomain"
         },
         {
@@ -26,13 +26,13 @@
           "evidenceId": "url-domain"
         },
         {
-          "text": "/cuti",
+          "text": "/lowongan",
           "evidenceId": "url-path"
         }
       ]
     },
     "reason": {
-      "text": "Mau mengisi formulir cuti di portal internal kantor, tapi halamannya tidak bisa dibuka dari laptop baru saya.",
+      "text": "Mau cek lowongan yang baru kami pasang di situs karier kantor.",
       "evidenceId": "reason"
     }
   },
@@ -40,10 +40,10 @@
     "required": [],
     "supporting": ["url-domain"]
   },
-  "explanation": "Dibaca dari kanan, pemilik domainnya nusadigital.test, yaitu kantor kita sendiri, sedangkan portal hanya subdomainnya. Alasannya juga wajar, jadi akses ini aman diizinkan.",
+  "explanation": "Dibaca dari kanan, pemilik domainnya nusadigital.test, dan karier hanya subdomain milik kantor sendiri. Alasan HR juga wajar.",
   "ruleRefs": ["r-url-1"],
   "hints": [
-    "Baca domainnya dari kanan ke kiri. Siapa pemiliknya?",
-    "nusadigital.test adalah kantor kita sendiri. Apakah alasannya masuk akal?"
+    "Baca domainnya dari kanan ke kiri.",
+    "Pemiliknya kantor kita sendiri. Ada yang janggal?"
   ]
 }

@@ -12,10 +12,16 @@
       "address": "info@banknusantara.test",
       "evidenceId": "sender"
     },
-    "subject": { "text": "Ringkasan transaksi bulan September", "evidenceId": "subject" },
+    "subject": {
+      "text": "Ringkasan transaksi bulan September",
+      "evidenceId": "subject"
+    },
     "receivedAt": "11:05",
     "body": [
-      { "text": "Halo Rina Wulandari,", "evidenceId": "greeting" },
+      {
+        "text": "Halo Rina Wulandari,",
+        "evidenceId": "greeting"
+      },
       {
         "text": "Ringkasan transaksi rekening Anda bulan ini sudah tersedia di aplikasi resmi Bank Nusantara.",
         "evidenceId": "body-info"
@@ -24,10 +30,20 @@
         "text": "Ingat, kami tidak pernah meminta PIN atau password lewat email.",
         "evidenceId": "body-warning"
       },
-      { "text": "Salam hangat, Bank Nusantara", "evidenceId": "signature" }
+      {
+        "text": "Salam hangat, Bank Nusantara",
+        "evidenceId": "signature"
+      }
     ]
   },
-  "evidence": { "required": [], "supporting": ["sender", "greeting"] },
+  "evidence": {
+    "required": [],
+    "supporting": ["sender", "greeting"]
+  },
   "explanation": "Pengirimnya dari domain asli banknusantara.test, menyapa dengan nama, dan tidak ada tautan atau permintaan data. Tidak semua email bank itu penipuan, jadi izinkan.",
-  "ruleRefs": ["r-phish-1", "r-phish-5"]
+  "ruleRefs": ["r-phish-1", "r-phish-5"],
+  "hints": [
+    "Cek domain pengirim dan cara email ini menyapa.",
+    "Ada tautan atau permintaan data? Tidak semua email bank itu jebakan."
+  ]
 }

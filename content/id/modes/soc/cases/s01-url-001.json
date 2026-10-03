@@ -5,16 +5,33 @@
   "difficulty": 1,
   "verdict": "malicious",
   "correctDecision": "block",
-  "acceptableDecisions": { "escalate": 0.6 },
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
   "severity": 2,
   "data": {
-    "requester": { "name": "Bayu Pratama", "department": "Gudang" },
+    "requester": {
+      "name": "Bayu Pratama",
+      "department": "Gudang"
+    },
     "url": {
       "parts": [
-        { "text": "http://", "evidenceId": "url-scheme" },
-        { "text": "kirimcepat.", "evidenceId": "url-subdomain" },
-        { "text": "lacak-paket.test", "evidenceId": "url-domain" },
-        { "text": "/resi?no=KC8812", "evidenceId": "url-path" }
+        {
+          "text": "http://",
+          "evidenceId": "url-scheme"
+        },
+        {
+          "text": "kirimcepat.",
+          "evidenceId": "url-subdomain"
+        },
+        {
+          "text": "lacak-paket.test",
+          "evidenceId": "url-domain"
+        },
+        {
+          "text": "/resi?no=KC8812",
+          "evidenceId": "url-path"
+        }
       ]
     },
     "reason": {
@@ -22,7 +39,14 @@
       "evidenceId": "reason"
     }
   },
-  "evidence": { "required": ["url-domain"], "supporting": ["url-subdomain", "reason"] },
+  "evidence": {
+    "required": ["url-domain"],
+    "supporting": ["url-subdomain", "reason"]
+  },
   "explanation": "Dibaca dari kanan, pemilik domainnya adalah lacak-paket.test, sedangkan kirimcepat di depannya hanya subdomain palsu. Firewall sudah benar memblokirnya, jadi permintaan ini ditolak.",
-  "ruleRefs": ["r-url-1"]
+  "ruleRefs": ["r-url-1"],
+  "hints": [
+    "Baca domainnya dari kanan ke kiri.",
+    "Akhirannya .test, dan satu nama sebelumnya adalah lacak-paket. Apakah itu KirimCepat?"
+  ]
 }
