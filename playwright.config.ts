@@ -20,7 +20,8 @@ export default defineConfig({
     { name: 'desktop', use: { ...devices['Desktop Chrome'], launchOptions } },
   ],
   webServer: {
-    command: `pnpm build && pnpm preview --port ${PORT} --strictPort`,
+    // Endpoint analitik di origin yang sama agar e2e bisa menguji persetujuan (PRD S6); bawaan build tanpa endpoint.
+    command: `VITE_TELEMETRY_ENDPOINT=/__telemetry pnpm build && pnpm preview --port ${PORT} --strictPort`,
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

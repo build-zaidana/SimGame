@@ -418,7 +418,7 @@ export interface Telemetry { track<E extends TelemetryEvent>(e: E): void; flush(
 ```
 - v1.0 default: `NoopTelemetry`. Event tetap dipanggil di titik yang benar supaya siap dinyalakan.
 - `SessionReportTelemetry`: menyimpan event ke memori + IndexedDB terbatas (≤ 500 event) untuk **layar tersembunyi "Laporan Belajar"** (buka dengan menekan logo 5×) yang bisa mengekspor JSON saat uji main.
-- `AnonHttpTelemetry` (dimatikan default, `VITE_TELEMETRY=anon`): kirim batch ke endpoint insert-only; payload hanya `installId`, nama event, properti non-pribadi.
+- `AnonHttpTelemetry` (PRD S6, ADR 018): hanya ada bila build diberi `VITE_TELEMETRY_ENDPOINT`, dan hanya mengirim setelah pemain menyalakannya di Pengaturan (bawaan mati). Batch POST JSON `{ v: 1, installId, events: [{ name, …props, at }] }` ke endpoint insert-only; `at` dipotong per menit.
 
 ## 9. UI & layout
 

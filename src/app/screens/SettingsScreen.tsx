@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { id } from '../../i18n/id.ts';
 import type { Settings } from '../../persistence/saveSchema.ts';
 import { useAppStore } from '../store.ts';
+import { ANALYTICS_OPT_IN, analyticsAvailable, telemetry } from '../telemetry.ts';
 import { btnSecondary, panel } from '../ui/styles.ts';
 
 const TEXT_SCALES: Settings['textScale'][] = [1, 1.15, 1.3];
@@ -23,6 +24,8 @@ export function SettingsScreen() {
   const settings = useAppStore((s) => s.save?.profile.settings);
   const update = useAppStore((s) => s.updateSettings);
   const back = useAppStore((s) => s.back);
+  const analyticsOn = useAppStore((s) => s.save?.flags[ANALYTICS_OPT_IN] === true);
+  const setFlag = useAppStore((s) => s.setFlag);
   if (!settings) return null;
 
   return (
@@ -90,6 +93,25 @@ export function SettingsScreen() {
           {id.settings.sound}
         </label>
       </Fieldset>
+
+      {analyticsAvailable && (
+        <Fieldset legend={id.settings.analytics}>
+          <label className={optionClass}>
+            <input
+              type="checkbox"
+              className="size-5 shrink-0 accent-accent"
+              checked={analyticsOn}
+              onChange={(e) => {
+                setFlag(ANALYTICS_OPT_IN, e.target.checked);
+                // Mematikan: antrean yang belum terkirim langsung dibuang.
+                if (!e.target.checked) void telemetry.flush();
+              }}
+            />
+            {id.settings.analyticsOptIn}
+          </label>
+          <p className="text-sm text-ink-muted">{id.settings.analyticsNote}</p>
+        </Fieldset>
+      )}
     </main>
   );
 }

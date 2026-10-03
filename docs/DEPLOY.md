@@ -34,10 +34,26 @@ Netlify dan Cloudflare Pages dengan format yang sama. Vercel memakai `vercel.jso
 
 ## Variabel build
 
-| Variabel         | Nilai              | Arti                                                                     |
-| ---------------- | ------------------ | ------------------------------------------------------------------------ |
-| `VITE_TELEMETRY` | `session` (bawaan) | Log belajar lokal untuk layar Laporan Belajar; tidak dikirim ke mana pun |
-|                  | `none`             | Tidak mencatat apa pun                                                   |
+| Variabel                  | Nilai              | Arti                                                                                        |
+| ------------------------- | ------------------ | ------------------------------------------------------------------------------------------- |
+| `VITE_TELEMETRY`          | `session` (bawaan) | Log belajar lokal untuk layar Laporan Belajar; tidak dikirim ke mana pun                    |
+|                           | `none`             | Tidak mencatat apa pun                                                                      |
+| `VITE_TELEMETRY_ENDPOINT` | kosong (bawaan)    | URL `https://` (atau path `/…`) endpoint analitik anonim (PRD S6). Kosong = fitur tidak ada |
+
+## Menyalakan analitik anonim (PRD S6, ADR 018)
+
+Bawaan: **mati**. Sebelum menyalakan untuk publik, tinjau kewajiban **UU PDP (UU 27/2022)** soal data
+anak (banyak pemain di bawah 18 tahun). Untuk uji main terpandu, pastikan ada izin sekolah/orang tua.
+
+1. Siapkan endpoint _insert-only_ yang menerima `POST` JSON (CORS mengizinkan origin game, header
+   `content-type`) dan membalas 2xx. Bentuk body:
+   `{ "v": 1, "installId": "<uuid acak>", "events": [{ "name": "case_decided", …, "at": "2026-10-03T11:42Z" }] }`.
+   Jangan simpan alamat IP lebih lama dari yang diperlukan.
+2. Netlify → Site configuration → Environment variables: `VITE_TELEMETRY_ENDPOINT=https://…`.
+3. Tambahkan origin endpoint ke `connect-src` di `public/_headers` (dan `vercel.json` bila dipakai),
+   misalnya `connect-src 'self' https://telemetry.example`. Tanpa ini CSP memblokir pengiriman.
+4. Deploy ulang. Pemain tetap harus mencentang **Pengaturan → Analitik anonim**; tanpa centang
+   tidak ada yang dikirim.
 
 ## Uji main
 

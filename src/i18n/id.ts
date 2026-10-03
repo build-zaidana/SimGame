@@ -229,6 +229,10 @@ export const id = {
     on: 'Nyala',
     off: 'Mati',
     preview: 'Contoh teks dokumen: Yth. Nasabah, akun Anda akan diblokir dalam 1 jam.',
+    analytics: 'Analitik anonim',
+    analyticsOptIn: 'Bagikan data belajar anonim untuk membantu pengembang',
+    analyticsNote:
+      'Yang dikirim hanya kode acak perangkat ini dan hasil belajar (misalnya kasus mana yang benar atau salah), tanpa nama atau data pribadi. Bisa dimatikan kapan saja. Kalau umurmu di bawah 18 tahun, minta izin orang tua atau guru dulu.',
   },
   feedback: {
     correct: 'Tepat!',

@@ -24,7 +24,7 @@ import {
   type ReviewResult,
 } from './progress.ts';
 import { playSfx } from './sfx.ts';
-import { telemetry } from './telemetry.ts';
+import { ANALYTICS_OPT_IN, bindAnalyticsIdentity, telemetry } from './telemetry.ts';
 
 export type Screen =
   | 'title'
@@ -347,6 +347,12 @@ export const useAppStore = create<AppState>()((set, get) => ({
     set({ save: next, session: null, practice: false, screen: 'hub' });
   },
 }));
+
+// Analitik anonim (PRD S6) hanya mengirim bila pemain menyalakannya; ID-nya ID instalasi acak.
+bindAnalyticsIdentity(() => {
+  const { save } = useAppStore.getState();
+  return save?.flags[ANALYTICS_OPT_IN] === true ? { installId: save.installId } : null;
+});
 
 /** Membuka sesi jalur utama atau latihan: lanjutkan yang tersimpan, atau mulai shift baru. */
 async function openSession(modeId: string, practice: boolean, practiceShiftId?: string) {
