@@ -74,7 +74,7 @@ function fixture(): Record<string, unknown> {
         { caseId: 'c-3', arriveAt: 2 },
       ],
       review: { count: 3, conceptIds: ['url'] },
-      pay: { base: 100, perCorrect: 10 },
+      pay: { base: 100, perCase: 10 },
     },
     'review/url.json': {
       items: [1, 2, 3].map((n) => ({

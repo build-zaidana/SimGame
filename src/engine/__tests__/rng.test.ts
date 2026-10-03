@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createRng, nextFloat, nextInt } from '../rng.ts';
+import { createRng, nextFloat, nextInt, hashString } from '../rng.ts';
 
 describe('rng (mulberry32)', () => {
   it('is deterministic for the same seed', () => {
@@ -42,5 +42,19 @@ describe('rng (mulberry32)', () => {
     nextFloat(s);
     expect(s).toEqual(copy);
     expect(nextFloat(copy)[0]).toBe(nextFloat(s)[0]);
+  });
+});
+
+describe('hashString', () => {
+  it('is deterministic and spreads different strings', () => {
+    expect(hashString('Bayu Pratama')).toBe(hashString('Bayu Pratama'));
+    expect(hashString('Bayu Pratama')).not.toBe(hashString('Rina Wulandari'));
+    expect(hashString('')).toBe(0x811c9dc5);
+  });
+  it('returns an unsigned 32-bit integer', () => {
+    for (const s of ['a', 'soc-04-gen-6', 'ÿ€']) {
+      const h = hashString(s);
+      expect(Number.isInteger(h) && h >= 0 && h < 2 ** 32).toBe(true);
+    }
   });
 });

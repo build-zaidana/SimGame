@@ -159,6 +159,7 @@ export interface CaseTypeDef<TCase extends BaseCase = BaseCase> {
   Document: ComponentType<{ data: TCase; marks: Set<EvidenceId>; onToggleMark(id: EvidenceId): void }>;
   /** Ikon & label di antrian. */
   queueLabel(c: TCase): { icon: string; title: string };
+  visitor?(c: TCase): { name: string; role: string; kind: 'person' | 'system'; line: string }; // pelapor di loket (ADR 019)
 }
 
 export interface CareerMode {
@@ -267,7 +268,7 @@ Alamat web dibaca **dari kanan ke kiri** untuk mencari pemiliknya…
     { "generator": "typosquat-domain", "params": { "brand": "KirimCepat", "verdict": "malicious" }, "arriveAt": 20 }
   ],
   "review": { "count": 3, "conceptIds": ["url-anatomy", "phishing-signs"] },
-  "pay": { "base": 100, "perCorrect": 10 }
+  "pay": { "base": 40, "perCase": 12 }
 }
 ```
 
@@ -339,6 +340,10 @@ Kepercayaan klien (`economy.ts`):
 | Email/permintaan sah diblokir | −3 |
 | Eskalasi yang tidak perlu | −1 |
 | Keputusan benar | +1 (maks 100) |
+
+Antar-shift, kepercayaan di bawah 75 pulih separuh selisihnya (`carryTrust`, dibulatkan ke atas), supaya satu shift buruk tidak menyeret pemula sampai akhir (ADR 017).
+
+Gaji shift (`shiftPay`) = `pay.base + round(pay.perCase × Σ caseScore / 100)`: tiap kasus dibayar sebanding skornya, jadi bukti yang lengkap ikut menaikkan gaji. Angka gaji & harga alat disetel dengan `pnpm sim:economy` (ADR 017).
 
 Bintang shift: ★ ≥ 50 rata-rata, ★★ ≥ 70, ★★★ ≥ 85 dengan kepercayaan ≥ 70.
 
@@ -414,7 +419,7 @@ export interface Telemetry { track<E extends TelemetryEvent>(e: E): void; flush(
 ```
 - v1.0 default: `NoopTelemetry`. Event tetap dipanggil di titik yang benar supaya siap dinyalakan.
 - `SessionReportTelemetry`: menyimpan event ke memori + IndexedDB terbatas (≤ 500 event) untuk **layar tersembunyi "Laporan Belajar"** (buka dengan menekan logo 5×) yang bisa mengekspor JSON saat uji main.
-- `AnonHttpTelemetry` (dimatikan default, `VITE_TELEMETRY=anon`): kirim batch ke endpoint insert-only; payload hanya `installId`, nama event, properti non-pribadi.
+- `AnonHttpTelemetry` (PRD S6, ADR 018): hanya ada bila build diberi `VITE_TELEMETRY_ENDPOINT`, dan hanya mengirim setelah pemain menyalakannya di Pengaturan (bawaan mati). Batch POST JSON `{ v: 1, installId, events: [{ name, …props, at }] }` ke endpoint insert-only; `at` dipotong per menit.
 
 ## 9. UI & layout
 
@@ -436,7 +441,8 @@ Desktop ≥ 1024px                         HP < 768px (potret)
 ```
 - Target sentuh ≥ 44 px; area tombol aksi di jangkauan jempol.
 - Bagian yang bisa ditandai: `<button aria-pressed>` dengan garis bawah putus-putus; saat ditandai muncul stempel/sorotan **dan** ikon (tidak bergantung warna).
-- Keputusan memicu animasi stempel singkat (dimatikan oleh "kurangi animasi").
+- Keputusan memicu stempel yang menghantam kertas dokumen, lalu slip umpan balik bergaya kertas (ADR 019; dimatikan oleh "kurangi animasi").
+- Dokumen tampil sebagai kertas (`.paper`) di atas meja (`.desk-surface`); di atasnya kartu pelapor dari `CaseTypeDef.visitor` (potret pixel + satu kalimat yang tidak membocorkan jawaban).
 - `textScale` diterapkan sebagai CSS variable `--text-scale` di `:root`.
 
 ### 9.3 Gaya visual

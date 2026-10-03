@@ -5,7 +5,7 @@
       "name": "Pemeriksa Tautan",
       "icon": "🔍",
       "description": "Menampilkan alamat asli setiap tautan dan pemilik domainnya secara otomatis, tanpa perlu menahan tautan.",
-      "price": 60,
+      "price": 50,
       "conceptId": "url-anatomy",
       "unlockAtShift": 1
     },
@@ -14,7 +14,7 @@
       "name": "Cek WHOIS",
       "icon": "📅",
       "description": "Menunjukkan kapan sebuah domain didaftarkan. Domain penipu biasanya baru berumur beberapa hari.",
-      "price": 100,
+      "price": 80,
       "conceptId": "phishing-signs",
       "unlockAtShift": 2
     },
@@ -23,7 +23,7 @@
       "name": "Sandbox",
       "icon": "🧪",
       "description": "Menjalankan file di ruang terisolasi dan melaporkan perilakunya, tanpa membahayakan komputer kantor.",
-      "price": 150,
+      "price": 130,
       "conceptId": "malware-files",
       "unlockAtShift": 4
     },
@@ -32,7 +32,7 @@
       "name": "Filter Log",
       "icon": "🧮",
       "description": "Merangkum login per alamat IP: berapa yang gagal, berapa yang berhasil, dan dari mana.",
-      "price": 150,
+      "price": 130,
       "conceptId": "log-reading",
       "unlockAtShift": 4
     }

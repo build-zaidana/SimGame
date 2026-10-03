@@ -55,7 +55,7 @@
     "conceptIds": ["phishing-signs", "url-anatomy"]
   },
   "pay": {
-    "base": 110,
-    "perCorrect": 10
+    "base": 40,
+    "perCase": 12
   }
 }

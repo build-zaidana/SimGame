@@ -6,6 +6,8 @@ import { Dialog } from '../Dialog.tsx';
 import { btnPrimary } from '../styles.ts';
 import { evidenceText } from './format.ts';
 
+const CITATION: Partial<Record<string, string>> = id.feedback.citations;
+
 interface FeedbackDialogProps {
   caseData: BaseCase;
   sessionCase: SessionCase;
@@ -32,7 +34,10 @@ export function FeedbackDialog({
   const label = (ev: string) => evidenceText(caseData.data, ev) ?? ev;
 
   return (
-    <Dialog labelledBy="feedback-title" onClose={onContinue} initialFocus="content">
+    <Dialog labelledBy="feedback-title" onClose={onContinue} initialFocus="content" variant="paper">
+      <p className="mb-2 border-b-2 border-dashed border-ink/50 pb-1 font-mono text-xs tracking-widest text-ink-muted">
+        {id.feedback.slipHeader(caseData.id)}
+      </p>
       <p className="float-right ml-2" aria-hidden="true">
         <span className={`stamp border-4 px-2 py-1 font-display text-lg ${color} border-current`}>
           {id.stamps[o.decision] ?? o.decision.toUpperCase()}
@@ -46,6 +51,18 @@ export function FeedbackDialog({
         {id.feedback.score(sessionCase.score ?? 0)}
         {delta !== 0 && ` · ${id.feedback.trustChange(delta)}`}
       </p>
+      {CITATION[o.impact] && (
+        <p
+          className={
+            'mt-3 border-2 border-dashed px-2 py-1 font-display text-sm ' +
+            (o.impact === 'threat-allowed' ? 'border-danger text-danger' : 'border-ink/60')
+          }
+          data-testid="citation"
+        >
+          <span aria-hidden="true">{o.impact === 'threat-allowed' ? '⚠ ' : '✎ '}</span>
+          {CITATION[o.impact]}
+        </p>
+      )}
       <p className="mt-3">{id.feedback.yourDecision(decisionLabel(o.decision))}</p>
       {!o.correct && <p>{id.feedback.correctDecision(decisionLabel(caseData.correctDecision))}</p>}
       <p className="mt-3">{caseData.explanation}</p>

@@ -55,7 +55,7 @@
     "conceptIds": ["passwords-mfa", "phishing-signs"]
   },
   "pay": {
-    "base": 120,
-    "perCorrect": 10
+    "base": 40,
+    "perCase": 12
   }
 }

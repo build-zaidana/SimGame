@@ -205,7 +205,10 @@ export function summarizeShift(s: ShiftSession, pay: PayRule): ShiftSummary {
     correctCount,
     decidedCount: s.cases.filter((c) => c.status === 'decided').length,
     totalCount: total,
-    pay: shiftPay(pay, correctCount),
+    pay: shiftPay(
+      pay,
+      s.cases.map((c) => c.score ?? 0),
+    ),
     stars: shiftStars(averageScore, s.trust),
     trust: s.trust,
   };

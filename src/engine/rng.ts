@@ -25,3 +25,13 @@ export function nextInt(s: RngState, min: number, max: number): [number, RngStat
   const [f, next] = nextFloat(s);
   return [min + Math.floor(f * (max - min + 1)), next];
 }
+
+/** Hash string → bilangan 32-bit tak bertanda (FNV-1a). Untuk variasi kosmetik yang stabil. */
+export function hashString(s: string): number {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  return h >>> 0;
+}

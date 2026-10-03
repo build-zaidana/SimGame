@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { applyTrust, buyTool, shiftPay, trustDelta } from '../economy.ts';
+import {
+  applyTrust,
+  BASELINE_TRUST,
+  buyTool,
+  carryTrust,
+  shiftPay,
+  trustDelta,
+} from '../economy.ts';
 
 describe('trustDelta', () => {
   it.each([
@@ -23,9 +30,32 @@ describe('applyTrust', () => {
   });
 });
 
+describe('carryTrust', () => {
+  it('recovers half the gap to the baseline before the next shift (rounded up)', () => {
+    expect(BASELINE_TRUST).toBe(75);
+    expect(carryTrust(35)).toBe(55);
+    expect(carryTrust(0)).toBe(38);
+    expect(carryTrust(74)).toBe(75);
+  });
+  it('keeps trust at or above the baseline', () => {
+    expect(carryTrust(75)).toBe(75);
+    expect(carryTrust(92)).toBe(92);
+  });
+});
+
 describe('shiftPay', () => {
-  it('is base + perCorrect × correct', () => {
-    expect(shiftPay({ base: 100, perCorrect: 10 }, 6)).toBe(160);
+  it('is base + perCase × Σ(score / 100), rounded', () => {
+    expect(shiftPay({ base: 30, perCase: 12 }, [100, 100, 50, 0])).toBe(30 + 30);
+    expect(shiftPay({ base: 30, perCase: 12 }, [33, 33])).toBe(30 + 8);
+  });
+  it('pays only the base when nothing was scored', () => {
+    expect(shiftPay({ base: 30, perCase: 12 }, [])).toBe(30);
+    expect(shiftPay({ base: 30, perCase: 12 }, [0, 0, 0])).toBe(30);
+  });
+  it('rewards evidence: a right decision with full evidence pays more than without', () => {
+    expect(shiftPay({ base: 0, perCase: 20 }, [100])).toBeGreaterThan(
+      shiftPay({ base: 0, perCase: 20 }, [60]),
+    );
   });
 });
 

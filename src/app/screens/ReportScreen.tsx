@@ -1,3 +1,4 @@
+import { carryTrust } from '../../engine/economy.ts';
 import { summarizeShift } from '../../engine/shift.ts';
 import { id } from '../../i18n/id.ts';
 import { getMode } from '../../modes/registry.ts';
@@ -23,7 +24,7 @@ export function ReportScreen() {
   if (!session || !content || !mode) return null;
 
   const shift = content.shifts.find((s) => s.id === session.shiftId);
-  const summary = summarizeShift(session, shift?.pay ?? { base: 0, perCorrect: 0 });
+  const summary = summarizeShift(session, shift?.pay ?? { base: 0, perCase: 0 });
   const outro = shift ? content.dialogues[shift.outroDialogue] : undefined;
   const chapterOfRule = (ruleId: string) =>
     content.rulebook.chapters.find((ch) => ch.rules.some((r) => r.id === ruleId));
@@ -45,7 +46,10 @@ export function ReportScreen() {
         <p>{id.report.average(summary.averageScore)}</p>
         <p>{id.report.correct(summary.correctCount, summary.totalCount)}</p>
         <p>{id.report.trust(summary.trust)}</p>
-        <p>{practice ? id.report.practicePay : id.report.pay(summary.pay)}</p>
+        {!practice && carryTrust(summary.trust) > summary.trust && (
+          <p data-testid="trust-recovery">{id.report.trustRecovery(carryTrust(summary.trust))}</p>
+        )}
+        <p>{practice ? id.report.practicePay : id.report.pay(summary.pay, shift?.pay.base ?? 0)}</p>
       </section>
       {practice && (
         <p role="note" className="border-2 border-focus p-3" data-testid="practice-banner">

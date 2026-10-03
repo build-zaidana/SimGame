@@ -82,6 +82,129 @@ svg.sprite {
   animation: toast-in 200ms ease-out both;
 }
 
+/*
+ * Meja kerja ala "Papers, Please": dokumen adalah kertas di atas meja kayu gelap.
+ * `.paper` menimpa token warna untuk subtree-nya, jadi komponen dokumen tidak perlu tahu.
+ * Kontras di atas kertas: tinta ≥ 7:1, teks sekunder/aksen/tautan ≥ 4.5:1.
+ */
+.desk-surface {
+  background-color: #2a2119;
+  background-image:
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 0.03) 0 2px, transparent 2px 26px),
+    repeating-linear-gradient(0deg, rgb(0 0 0 / 0.18) 0 1px, transparent 1px 9px);
+}
+.paper {
+  --color-bg: #efe6cf;
+  --color-panel: #e5d9bb;
+  --color-panel-2: #d9cba7;
+  --color-ink: #2a2418;
+  --color-ink-muted: #5a4f3c;
+  --color-accent: #855600;
+  --color-focus: #1f5a96;
+  --color-danger: #a3271a;
+  --color-safe: #1f6b3a;
+  --color-shadow: #120d08;
+  background: var(--color-bg);
+  color: var(--color-ink);
+}
+.paper-sheet {
+  box-shadow:
+    0 0 0 1px #120d08,
+    6px 8px 0 0 rgb(0 0 0 / 0.45);
+}
+@keyframes paper-in {
+  from {
+    transform: translateY(-1.5rem) rotate(-2.5deg);
+    opacity: 0;
+  }
+}
+.paper-in {
+  animation: paper-in 260ms cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+@keyframes paper-shake {
+  0%,
+  100% {
+    transform: none;
+  }
+  25% {
+    transform: translate(-3px, 2px);
+  }
+  50% {
+    transform: translate(2px, -2px);
+  }
+  75% {
+    transform: translate(-1px, 1px);
+  }
+}
+.paper-shake {
+  animation: paper-shake 180ms linear 120ms both;
+}
+@keyframes stamp-slam {
+  0% {
+    transform: translate(-50%, -50%) scale(3) rotate(-20deg);
+    opacity: 0;
+  }
+  55% {
+    transform: translate(-50%, -50%) scale(0.92) rotate(-11deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1) rotate(-11deg);
+    opacity: 1;
+  }
+}
+.stamp-slam {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-11deg);
+  animation: stamp-slam 300ms cubic-bezier(0.3, 0.9, 0.3, 1.2) both;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+@keyframes slip-up {
+  from {
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+}
+.slip-up {
+  animation: slip-up 220ms ease-out both;
+}
+@keyframes float-up {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-1.25rem);
+    opacity: 0;
+  }
+}
+.float-up {
+  animation: float-up 1200ms ease-out both;
+}
+@keyframes arrive-pulse {
+  0%,
+  100% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: rgb(242 193 78 / 0.25);
+  }
+}
+.arrive-pulse {
+  animation: arrive-pulse 900ms ease-in-out 2;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+.blink {
+  animation: blink 1s steps(1) infinite;
+}
+
 /* "Kurangi animasi": dari pengaturan game atau dari sistem operasi. */
 :root[data-reduce-motion='true'] *,
 :root[data-reduce-motion='true'] *::before,

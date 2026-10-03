@@ -12,6 +12,16 @@ import { QueuePane, type QueueItem } from './QueuePane.tsx';
 import { MentorHints } from './MentorHints.tsx';
 import { Rulebook } from '../Rulebook.tsx';
 import { useShiftClock } from './useShiftClock.ts';
+import { VisitorCard } from './VisitorCard.tsx';
+import { prefersReducedMotion } from '../motion.ts';
+
+/** Lama stempel "menghantam" kertas sebelum slip umpan balik muncul. */
+const STAMP_MS = 650;
+const STAMP_COLOR: Record<string, string> = {
+  allow: 'text-safe',
+  block: 'text-danger',
+  escalate: 'text-accent',
+};
 
 type Tab = 'queue' | 'document' | 'rulebook';
 const TABS: Tab[] = ['queue', 'document', 'rulebook'];
@@ -74,6 +84,19 @@ export function StandardDesk({
   const decisions = mode.decisions.filter((d) => d.unlockedAtShift <= session.shiftOrder);
   const decisionLabel = (d: string) => mode.decisions.find((x) => x.id === d)?.label ?? d;
 
+  // Stempel dulu, baru slip umpan balik (langsung bila animasi dikurangi).
+  const [slipFor, setSlipFor] = useState<string | null>(null);
+  const feedbackId = session.phase === 'feedback' ? session.feedbackCaseId : null;
+  const instantSlip = prefersReducedMotion();
+  useEffect(() => {
+    if (!feedbackId || instantSlip) return;
+    const t = window.setTimeout(() => setSlipFor(feedbackId), STAMP_MS);
+    return () => window.clearTimeout(t);
+  }, [feedbackId, instantSlip]);
+  const slipReady = feedbackId !== null && (instantSlip || slipFor === feedbackId);
+  const visitor = activeCase ? activeType?.visitor?.(activeCase) : undefined;
+  const stamped = active?.outcome?.decision;
+
   const shift = content.shifts.find((s) => s.id === session.shiftId);
   const feedbackCase = session.cases.find((c) => c.caseId === session.feedbackCaseId);
   const feedbackData = feedbackCase ? content.cases[feedbackCase.caseId] : undefined;
@@ -92,7 +115,7 @@ export function StandardDesk({
         'lg:static lg:z-auto lg:block lg:w-auto lg:border-r-0 lg:bg-transparent lg:shadow-none'
       );
     }
-    if (t === 'document') return `${mobile} md:block lg:border-x-2 lg:border-ink/40`;
+    if (t === 'document') return `${mobile} desk-surface md:block lg:border-x-2 lg:border-ink/40`;
     return `${mobile} md:block md:border-l-2 md:border-ink/40 lg:border-l-0`;
   };
   const waitingCount = session.cases.filter((c) => c.status === 'arrived').length;
@@ -178,9 +201,29 @@ export function StandardDesk({
                   {id.desk.markHint} ·{' '}
                   <span data-testid="marks-count">{id.desk.marksCount(marks.size)}</span>
                 </p>
-                <div data-testid="document" data-case-id={active.caseId}>
+                {visitor && <VisitorCard visitor={visitor} />}
+                <div
+                  key={active.caseId}
+                  data-testid="document"
+                  data-case-id={active.caseId}
+                  className={
+                    'paper paper-sheet paper-in relative ' + (stamped ? 'paper-shake' : '')
+                  }
+                >
                   <activeType.Document data={activeCase} {...docProps} />
                   {renderExtra?.(activeCase, docProps)}
+                  {stamped && (
+                    <span
+                      aria-hidden="true"
+                      data-testid="stamp"
+                      className={
+                        'stamp-slam whitespace-nowrap border-4 border-current px-3 py-1 font-display text-3xl sm:text-4xl ' +
+                        (STAMP_COLOR[stamped] ?? 'text-focus')
+                      }
+                    >
+                      {id.stamps[stamped] ?? stamped.toUpperCase()}
+                    </span>
+                  )}
                 </div>
                 <div className="mt-3">
                   <MentorHints
@@ -218,6 +261,7 @@ export function StandardDesk({
         disabled={session.phase !== 'inspecting' || !activeCase}
         onDecide={(decision) => {
           if (!active || !activeCase || !activeType) return;
+          setTab('document');
           dispatch({
             type: 'DECIDE',
             outcome: activeType.evaluate(activeCase, { decision, marks: active.marks }),
@@ -231,7 +275,7 @@ export function StandardDesk({
           onStart={() => dispatch({ type: 'DISMISS_BRIEFING' })}
         />
       )}
-      {session.phase === 'feedback' && feedbackCase && feedbackData && (
+      {session.phase === 'feedback' && feedbackCase && feedbackData && slipReady && (
         <FeedbackDialog
           caseData={feedbackData}
           sessionCase={feedbackCase}

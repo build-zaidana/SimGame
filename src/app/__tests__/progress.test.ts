@@ -31,7 +31,7 @@ const shiftDef = (order: number): ShiftDef => ({
     { generator: 'typosquat-domain', params: {}, arriveAt: 5 },
   ],
   review: { count: 3, conceptIds: ['url'] },
-  pay: { base: 100, perCorrect: 10 },
+  pay: { base: 100, perCase: 10 },
 });
 
 const content = {
@@ -166,7 +166,8 @@ describe('commitShift', () => {
     expect(p?.activeSession).toBeUndefined();
     expect(p?.shifts['soc-01']).toEqual({ bestScore: 50, stars: 1, completedAt: 'T1' });
     expect(p?.wallet).toBe(110);
-    expect(p?.trust).toBe(71);
+    // Shift berakhir di 71; separuh selisih ke 75 dipulihkan untuk shift berikutnya.
+    expect(p?.trust).toBe(73);
     expect(p?.unlockedShift).toBe(2);
     expect(p?.chaptersUnlocked).toEqual(['ch-1']);
     expect(next.mastery['concept:url']).toMatchObject({ box: 1, seen: 2, correct: 1 });

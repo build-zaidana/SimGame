@@ -19,6 +19,7 @@
     "test:watch": "vitest",
     "e2e": "playwright test",
     "content:check": "node --experimental-strip-types scripts/content-check.ts",
+    "sim:economy": "node --experimental-strip-types scripts/economy-sim.ts",
     "size": "size-limit",
     "check": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test && pnpm content:check && pnpm build && pnpm size"
   },

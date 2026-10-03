@@ -24,7 +24,7 @@ import {
   type ReviewResult,
 } from './progress.ts';
 import { playSfx } from './sfx.ts';
-import { telemetry } from './telemetry.ts';
+import { ANALYTICS_OPT_IN, bindAnalyticsIdentity, telemetry } from './telemetry.ts';
 
 export type Screen =
   | 'title'
@@ -206,8 +206,19 @@ export const useAppStore = create<AppState>()((set, get) => ({
     const next = shiftReducer(session, action);
     if (next === session) return;
 
+    const sound = save.profile.settings.sound;
+    if (sound) {
+      const arrived = (x: typeof session) => x.cases.filter((c) => c.status !== 'pending').length;
+      if (arrived(next) > arrived(session) && next.phase !== 'briefing') playSfx('arrive');
+      if (next.phase === 'ended' && session.phase !== 'ended') playSfx('bell');
+    }
+
     if (action.type === 'DECIDE') {
-      if (save.profile.settings.sound) playSfx(action.outcome.correct ? 'correct' : 'wrong');
+      // Stempel menghantam kertas, lalu nada benar/salah saat slip muncul.
+      if (sound) {
+        playSfx('stamp');
+        playSfx(action.outcome.correct ? 'correct' : 'wrong', 0.45);
+      }
       const c = next.cases.find((x) => x.caseId === action.outcome.caseId);
       telemetry.track({
         name: 'case_decided',
@@ -330,7 +341,7 @@ export const useAppStore = create<AppState>()((set, get) => ({
     const { session, save, content, practice } = get();
     if (!session || !save || !content || session.phase !== 'ended') return;
     const shift = content.shifts.find((s) => s.id === session.shiftId);
-    const summary = summarizeShift(session, shift?.pay ?? { base: 0, perCorrect: 0 });
+    const summary = summarizeShift(session, shift?.pay ?? { base: 0, perCase: 0 });
     telemetry.track({
       name: 'shift_completed',
       modeId: session.modeId,
@@ -347,6 +358,12 @@ export const useAppStore = create<AppState>()((set, get) => ({
     set({ save: next, session: null, practice: false, screen: 'hub' });
   },
 }));
+
+// Analitik anonim (PRD S6) hanya mengirim bila pemain menyalakannya; ID-nya ID instalasi acak.
+bindAnalyticsIdentity(() => {
+  const { save } = useAppStore.getState();
+  return save?.flags[ANALYTICS_OPT_IN] === true ? { installId: save.installId } : null;
+});
 
 /** Membuka sesi jalur utama atau latihan: lanjutkan yang tersimpan, atau mulai shift baru. */
 async function openSession(modeId: string, practice: boolean, practiceShiftId?: string) {

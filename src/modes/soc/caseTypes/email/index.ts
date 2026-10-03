@@ -1,3 +1,5 @@
+import { staffVisitor } from '../../visitors.ts';
+import { id } from '../../../../i18n/id.ts';
 import { defineCaseType } from '../../../contract.ts';
 import { evaluateSocCase } from '../../evaluate.ts';
 import { EmailDocument } from './EmailDocument.tsx';
@@ -9,4 +11,5 @@ export const emailCaseType = defineCaseType({
   evaluate: evaluateSocCase,
   Document: EmailDocument,
   queueLabel: (c) => ({ icon: '✉', title: c.data.subject.text }),
+  visitor: (c) => staffVisitor(c.id, id.soc.visitors.emailLines),
 });

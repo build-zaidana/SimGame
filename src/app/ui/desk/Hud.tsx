@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import { id } from '../../../i18n/id.ts';
 import { btnSecondary } from '../styles.ts';
 import { formatClock } from './format.ts';
@@ -11,9 +12,40 @@ interface HudProps {
   onTogglePause(): void;
 }
 
-export function Hud({ deskTitle, session, wallet, practice, onTogglePause }: HudProps) {
+/** Meter kecil berbingkai pixel; nilai tetap ditulis sebagai angka di sebelahnya. */
+function Meter({ value, className }: { value: number; className: string }) {
   return (
-    <header className="flex items-center gap-3 border-b-2 border-ink/40 bg-panel px-4 py-1 text-sm">
+    <span className="inline-block h-2.5 w-14 border-2 border-ink/70 bg-bg" aria-hidden="true">
+      <span
+        className={`block h-full ${className}`}
+        style={{ width: `${Math.max(0, Math.min(100, value))}%` }}
+      />
+    </span>
+  );
+}
+
+/** Perubahan kepercayaan melayang sebentar di atas angka (+1 / −15). */
+function useDelta(value: number) {
+  const prev = useRef(value);
+  const [delta, setDelta] = useState<{ n: number; key: number } | null>(null);
+  useEffect(() => {
+    const n = value - prev.current;
+    prev.current = value;
+    if (n === 0) return;
+    setDelta({ n, key: Date.now() });
+    const t = window.setTimeout(() => setDelta(null), 1200);
+    return () => window.clearTimeout(t);
+  }, [value]);
+  return delta;
+}
+
+export function Hud({ deskTitle, session, wallet, practice, onTogglePause }: HudProps) {
+  const progress = (100 * session.elapsedMs) / Math.max(1, session.durationMs);
+  const waiting = session.cases.filter((c) => c.status === 'arrived').length;
+  const trustDelta = useDelta(session.trust);
+  const trustLow = session.trust < 50;
+  return (
+    <header className="flex items-center gap-3 border-b-2 border-ink/40 bg-panel px-3 py-1 text-sm">
       <h1 className="hidden font-display text-accent sm:block">{deskTitle}</h1>
       {practice && (
         <span
@@ -26,21 +58,53 @@ export function Hud({ deskTitle, session, wallet, practice, onTogglePause }: Hud
           <span className="sr-only">: {id.desk.practiceLabel}</span>
         </span>
       )}
-      <p className="flex flex-1 flex-wrap items-center gap-x-4 font-display">
-        <span>
+      <p className="flex flex-1 flex-wrap items-center gap-x-4 gap-y-1 font-display">
+        <span className="flex items-center gap-2">
           <span className="sr-only">{id.desk.clock} </span>
-          <span aria-hidden="true">🕘 </span>
-          <span data-testid="clock">{formatClock(session.elapsedMs, session.msPerGameMinute)}</span>
+          <span
+            className="border-2 border-ink/70 bg-[#0f1a14] px-1.5 tracking-widest text-[#74cf92]"
+            data-testid="clock"
+          >
+            {formatClock(session.elapsedMs, session.msPerGameMinute)}
+          </span>
+          <Meter value={progress} className="bg-ink-muted" />
+          {session.paused && (
+            <span className="blink text-accent" aria-hidden="true">
+              ❚❚
+            </span>
+          )}
         </span>
-        <span>
+        <span className="relative flex items-center gap-1.5">
           <span className="sr-only">{id.desk.trust} </span>
-          <span aria-hidden="true">♥ </span>
+          <span aria-hidden="true" className={trustLow ? 'text-danger' : 'text-[#f07a6a]'}>
+            ♥
+          </span>
+          <Meter value={session.trust} className={trustLow ? 'bg-danger' : 'bg-safe'} />
           <span data-testid="trust">{session.trust}</span>
+          {trustDelta && (
+            <span
+              key={trustDelta.key}
+              aria-hidden="true"
+              className={
+                'float-up absolute -top-1 right-0 text-xs ' +
+                (trustDelta.n > 0 ? 'text-safe' : 'text-danger')
+              }
+            >
+              {trustDelta.n > 0 ? `+${trustDelta.n}` : `−${-trustDelta.n}`}
+            </span>
+          )}
         </span>
         <span>
           <span className="sr-only">{id.desk.wallet} </span>
+          <span aria-hidden="true" className="text-accent">
+            ◉{' '}
+          </span>
           <span aria-hidden="true">Rp </span>
           {wallet}
+        </span>
+        <span className="hidden sm:inline">
+          <span aria-hidden="true">📥 </span>
+          {id.desk.waiting(waiting)}
         </span>
         {session.paused && <span className="text-accent">{id.desk.paused}</span>}
       </p>
