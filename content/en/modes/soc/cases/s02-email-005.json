@@ -11,8 +11,8 @@
   "severity": 3,
   "data": {
     "from": {
-      "name": "Bank Nusantara",
-      "address": "notifikasi@banknusantara.akun-verifikasi.test",
+      "name": "Nusantara Bank",
+      "address": "notifikasi@nusantarabank.akun-verifikasi.test",
       "evidenceId": "sender"
     },
     "subject": {
@@ -46,7 +46,7 @@
     "required": ["sender", "link"],
     "supporting": ["urgency", "generic-greeting"]
   },
-  "explanation": "Reading from the right, the sender's domain is akun-verifikasi.test, not banknusantara.test, and the link goes to a different site. Panic about losing money is used to make you click without thinking.",
+  "explanation": "Reading from the right, the sender's domain is akun-verifikasi.test, not nusantarabank.test, and the link goes to a different site. Panic about losing money is used to make you click without thinking.",
   "ruleRefs": ["r-phish-1", "r-url-1", "r-phish-3"],
   "hints": [
     "Scammers like to make you panic. Take a breath, then read the sender's domain from the right.",

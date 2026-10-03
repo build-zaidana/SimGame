@@ -18,7 +18,7 @@ export const en: Strings = {
   title: {
     play: 'Play',
     terminal: [
-      'PT NUSA DIGITAL · SOC DESK',
+      'NUSA DIGITAL · SOC DESK',
       '> login new_analyst ... OK',
       '> cases waiting at the desk',
       '> warning: group "Kelabu" is active',
@@ -50,7 +50,7 @@ export const en: Strings = {
     later: 'Later',
   },
   hub: {
-    heading: 'PT Nusa Digital Office',
+    heading: 'Nusa Digital Office',
     intro: 'Pick a desk to start working.',
     comingSoon: 'Coming soon',
     enterShift: (order, title) => `Start Shift ${order}: ${title}`,
@@ -218,7 +218,7 @@ export const en: Strings = {
     locked: (order) => `Unlocks in Shift ${order}`,
   },
   news: {
-    masthead: 'KABAR NUSA',
+    masthead: 'NUSA NEWS',
     edition: (n) => `Day ${n} edition`,
     price: 'Free for staff',
     impactHeading: 'Impact of your work yesterday',

@@ -62,9 +62,9 @@
     "headline": "Sale Season, Fake Email Season",
     "lead": "As the month ends, office inboxes fill up with promos, bills, and announcements. Security experts remind everyone: not every urgent email is bad, and not every neat email is safe.",
     "impact": {
-      "good": "Yesterday, PT Nusa Digital's new analyst stopped every phishing trap without blocking any work emails. Clients praised the careful work.",
+      "good": "Yesterday, Nusa Digital's new analyst stopped every phishing trap without blocking any work emails. Clients praised the careful work.",
       "mixed": "Yesterday, most fake emails were stopped, but some got through or were blocked by mistake. The new analyst was asked to check senders more carefully.",
-      "bad": "Yesterday, several fake emails reached PT Nusa Digital employees. The SOC team is checking the damage and tightening its checks."
+      "bad": "Yesterday, several fake emails reached Nusa Digital employees. The SOC team is checking the damage and tightening its checks."
     },
     "tip": {
       "title": "Tip: Check the Sender's Address",

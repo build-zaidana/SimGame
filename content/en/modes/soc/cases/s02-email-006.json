@@ -11,8 +11,8 @@
   "severity": 3,
   "data": {
     "from": {
-      "name": "PT Sinar Jaya",
-      "address": "tagihan@sinarjaya-pembayaran.test",
+      "name": "Bright Harbor",
+      "address": "tagihan@brightharbor-pembayaran.test",
       "evidenceId": "sender"
     },
     "subject": {
@@ -34,7 +34,7 @@
         "evidenceId": "urgency"
       },
       {
-        "text": "Sincerely, PT Sinar Jaya",
+        "text": "Sincerely, Bright Harbor",
         "evidenceId": "signature"
       }
     ]
@@ -43,10 +43,10 @@
     "required": ["sender", "request"],
     "supporting": ["urgency"]
   },
-  "explanation": "This vendor usually uses sinarjaya.test, but this email comes from sinarjaya-pembayaran.test and asks to switch bank accounts. A change of bank account must be confirmed through the vendor's official phone number, not by email.",
+  "explanation": "This vendor usually uses brightharbor.test, but this email comes from brightharbor-pembayaran.test and asks to switch bank accounts. A change of bank account must be confirmed through the vendor's official phone number, not by email.",
   "ruleRefs": ["r-phish-1", "r-phish-3"],
   "hints": [
-    "PT Sinar Jaya's usual domain is sinarjaya.test. Does it match this sender?",
+    "Bright Harbor's usual domain is brightharbor.test. Does it match this sender?",
     "A request to switch bank accounts plus time pressure is a dangerous combination."
   ]
 }

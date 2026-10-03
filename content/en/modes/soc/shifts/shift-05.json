@@ -44,8 +44,8 @@
     {
       "generator": "typosquat-domain",
       "params": {
-        "brand": "Bank Nusantara",
-        "domain": "banknusantara.test",
+        "brand": "Nusantara Bank",
+        "domain": "nusantarabank.test",
         "verdict": "malicious"
       },
       "arriveAt": 54

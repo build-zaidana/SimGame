@@ -51,11 +51,11 @@
     "perCase": 12
   },
   "newspaper": {
-    "headline": "PT Nusa Digital Opens a New SOC Desk",
-    "lead": "PT Nusa Digital has a new analyst at its SOC (Security Operations Center) desk. The job: check suspicious emails, links, and access requests before they hurt employees and clients.",
+    "headline": "Nusa Digital Opens a New SOC Desk",
+    "lead": "Nusa Digital has a new analyst at its SOC (Security Operations Center) desk. The job: check suspicious emails, links, and access requests before they hurt employees and clients.",
     "tip": {
       "title": "Tip: Read Domains from the Right",
-      "text": "The owner of a web address is the name just before its ending. In banknusantara.akun-aman.test, the owner is akun-aman.test, not Bank Nusantara."
+      "text": "The owner of a web address is the name just before its ending. In nusantarabank.akun-aman.test, the owner is akun-aman.test, not Nusantara Bank."
     },
     "classified": "JOB OPENING: Careful SOC analyst wanted. Must enjoy reading from right to left. Ask for Rani, 3rd floor.",
     "sources": ["APWG Phishing Activity Trends Report", "BSSN: guide to spotting phishing"]

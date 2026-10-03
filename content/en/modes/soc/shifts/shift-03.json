@@ -62,7 +62,7 @@
     "headline": "Callers Pretend to Be IT, Ask for OTP Codes",
     "lead": "Several employees in the Nusantara business district report phone calls from people pretending to be IT staff and asking for OTP codes. Real IT staff never ask for that code.",
     "impact": {
-      "good": "Yesterday, PT Nusa Digital's SOC analyst carefully told legit emails apart from fake ones. No client work was disrupted.",
+      "good": "Yesterday, Nusa Digital's SOC analyst carefully told legit emails apart from fake ones. No client work was disrupted.",
       "mixed": "Yesterday, some email traps got through and a few legit emails were blocked too. The SOC team is double-checking.",
       "bad": "Yesterday, several email traps got through and legit work emails were blocked too. Clients have asked for a repair report."
     },

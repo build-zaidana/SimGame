@@ -13,13 +13,13 @@ test('the whole game can be played in English, and the choice survives a reload'
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await page.getByRole('button', { name: 'Play' }).click();
 
-  await expect(page.getByRole('heading', { name: 'PT Nusa Digital Office' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Nusa Digital Office' })).toBeVisible();
   await page.getByRole('button', { name: 'Start Shift 1: First Day' }).click();
 
   // Morning paper and mentor briefing in English.
   const dialog = page.getByRole('dialog');
   await expect(dialog.getByRole('heading', { name: 'Shift 1 · First Day' })).toBeVisible();
-  await expect(page.getByTestId('newspaper')).toContainText('PT Nusa Digital Opens a New SOC Desk');
+  await expect(page.getByTestId('newspaper')).toContainText('Nusa Digital Opens a New SOC Desk');
   while (await dialog.getByRole('button', { name: 'Next' }).isVisible()) {
     await dialog.getByRole('button', { name: 'Next' }).click();
   }

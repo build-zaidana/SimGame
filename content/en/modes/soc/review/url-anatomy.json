@@ -5,8 +5,8 @@
       "type": "mcq",
       "conceptId": "url-anatomy",
       "difficulty": 1,
-      "prompt": "Who owns the site bantuan.kirimcepat.cek-resi.test?",
-      "choices": ["KirimCepat (kirimcepat.test)", "cek-resi.test", "bantuan"],
+      "prompt": "Who owns the site bantuan.sendfast.cek-resi.test?",
+      "choices": ["SendFast (sendfast.test)", "cek-resi.test", "bantuan"],
       "answerIndex": 1,
       "explanation": "Read from the right: the ending is .test, and the one name before it is cek-resi. The parts in front are just subdomains."
     },
@@ -40,7 +40,7 @@
           "evidenceId": "sub-1"
         },
         {
-          "text": "kirimcepat.",
+          "text": "sendfast.",
           "evidenceId": "sub-2"
         },
         {
@@ -53,21 +53,21 @@
         }
       ],
       "answer": ["owner"],
-      "explanation": "Read from the right: the owner is hadiah-gratis.test. The name kirimcepat in front is just a subdomain the scammer created."
+      "explanation": "Read from the right: the owner is hadiah-gratis.test. The name sendfast in front is just a subdomain the scammer created."
     },
     {
       "id": "rv-url-4",
       "type": "mcq",
       "conceptId": "url-anatomy",
       "difficulty": 1,
-      "prompt": "Which address really belongs to Bank Nusantara (banknusantara.test)?",
+      "prompt": "Which address really belongs to Nusantara Bank (nusantarabank.test)?",
       "choices": [
-        "banknusantara.akun-aman.test",
-        "login.banknusantara.test",
-        "banknusantara-login.test"
+        "nusantarabank.akun-aman.test",
+        "login.nusantarabank.test",
+        "nusantarabank-login.test"
       ],
       "answerIndex": 1,
-      "explanation": "In login.banknusantara.test, the owner is banknusantara.test and login is just a subdomain. The other two belong to akun-aman.test and banknusantara-login.test."
+      "explanation": "In login.nusantarabank.test, the owner is nusantarabank.test and login is just a subdomain. The other two belong to akun-aman.test and nusantarabank-login.test."
     }
   ]
 }

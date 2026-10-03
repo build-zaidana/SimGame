@@ -12,8 +12,8 @@
   "severity": 3,
   "data": {
     "from": {
-      "name": "KirimCepat",
-      "address": "info@kirimcepat-lacak.test",
+      "name": "SendFast",
+      "address": "info@sendfast-lacak.test",
       "evidenceId": "sender"
     },
     "subject": {
@@ -33,7 +33,7 @@
       {
         "link": {
           "label": "Download Tracking App",
-          "href": "https://kirimcepat-lacak.test/pelacak.apk"
+          "href": "https://sendfast-lacak.test/pelacak.apk"
         },
         "evidenceId": "link"
       }
@@ -43,7 +43,7 @@
     "required": ["sender", "link"],
     "supporting": ["generic-greeting", "whois-age"]
   },
-  "explanation": "The domain kirimcepat-lacak.test does not belong to KirimCepat, and the link downloads an .apk file. Real couriers do not ask customers to install an app from an email.",
+  "explanation": "The domain sendfast-lacak.test does not belong to SendFast, and the link downloads an .apk file. Real couriers do not ask customers to install an app from an email.",
   "ruleRefs": ["r-phish-1", "r-url-3", "r-mal-2"],
   "hints": [
     "Check the sender's domain.",
@@ -52,7 +52,7 @@
   "intel": {
     "whois": [
       {
-        "domain": "kirimcepat-lacak.test",
+        "domain": "sendfast-lacak.test",
         "registered": "4 days ago",
         "evidenceId": "whois-age"
       }

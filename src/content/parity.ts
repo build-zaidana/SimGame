@@ -38,7 +38,13 @@ const LOCKED_KEYS = new Set([
 
 const show = (v: unknown) => JSON.stringify(v);
 
-export function checkLocaleParity(base: unknown, other: unknown): string[] {
+/** Nama fiktif yang sengaja dilokalkan (mis. merek & domain), diterapkan pada bahasa dasar. */
+export type Renames = readonly (readonly [from: string, to: string])[];
+
+export const applyRenames = (s: string, renames: Renames) =>
+  renames.reduce((acc, [from, to]) => acc.split(from).join(to), s);
+
+export function checkLocaleParity(base: unknown, other: unknown, renames: Renames = []): string[] {
   const out: string[] = [];
   const walk = (a: unknown, b: unknown, path: string, locked: boolean) => {
     const at = path || '(akar)';
@@ -62,7 +68,12 @@ export function checkLocaleParity(base: unknown, other: unknown): string[] {
       }
       return;
     }
-    if (typeof a === 'string' && typeof b === 'string' && !locked) return;
+    if (typeof a === 'string' && typeof b === 'string') {
+      if (!locked) return;
+      const expected = applyRenames(a, renames);
+      if (expected !== b) out.push(`${at}: ${show(expected)} ≠ ${show(b)}`);
+      return;
+    }
     if (a !== b) out.push(`${at}: ${show(a)} ≠ ${show(b)}`);
   };
   walk(base, other, '', false);

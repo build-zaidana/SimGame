@@ -21,7 +21,7 @@
           "evidenceId": "url-scheme"
         },
         {
-          "text": "kirimcepat.",
+          "text": "sendfast.",
           "evidenceId": "url-subdomain"
         },
         {
@@ -43,10 +43,10 @@
     "required": ["url-domain"],
     "supporting": ["url-subdomain", "reason"]
   },
-  "explanation": "Reading from the right, the domain owner is lacak-paket.test, and the kirimcepat in front of it is only a fake subdomain. The firewall was right to block it, so this request is denied.",
+  "explanation": "Reading from the right, the domain owner is lacak-paket.test, and the sendfast in front of it is only a fake subdomain. The firewall was right to block it, so this request is denied.",
   "ruleRefs": ["r-url-1"],
   "hints": [
     "Read the domain from right to left.",
-    "It ends with .test, and the name just before that is lacak-paket. Is that KirimCepat?"
+    "It ends with .test, and the name just before that is lacak-paket. Is that SendFast?"
   ]
 }

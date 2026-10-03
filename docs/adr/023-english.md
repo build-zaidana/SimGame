@@ -26,6 +26,13 @@ kasus, dan Bahasa Indonesia tetap bahasa utama.
   mengubah jawaban. Domain, URL, dan nama file sengaja tidak diterjemahkan.
 - **Anggaran ukuran** diukur per bahasa (`.size-limit.json`).
 
+- **Nama perusahaan fiktif dilokalkan** (permintaan pemilik): di bahasa Inggris PT Nusa Digital →
+  Nusa Digital, Bank Nusantara → Nusantara Bank, KirimCepat → SendFast, PT Sinar Jaya → Bright Harbor,
+  dan koran "Kabar Nusa" → "Nusa News". Domain yang memuat nama merek ikut berubah
+  (`banknusantara…` → `nusantarabank…`, `kirimcepat…` → `sendfast…`) agar pelajaran
+  "nama merek vs domain" tetap konsisten. Padanannya ada di `content/en/renames.json`; paritas
+  menerapkan tabel ini sebelum membandingkan nilai terkunci, jadi perubahan lain tetap ditolak.
+
 ## Konsekuensi
 
 - Semua teks bahasa Inggris (UI + 76 file konten) adalah **draf untuk direview pemilik**.

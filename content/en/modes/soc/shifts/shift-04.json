@@ -36,8 +36,8 @@
     {
       "generator": "typosquat-domain",
       "params": {
-        "brand": "KirimCepat",
-        "domain": "kirimcepat.test",
+        "brand": "SendFast",
+        "domain": "sendfast.test",
         "verdict": "malicious"
       },
       "arriveAt": 44
@@ -71,7 +71,7 @@
     "headline": "Fake Delivery Receipts Spread Through Chat Apps",
     "lead": "Messages with a \"delivery receipt\" that is really a harmful app are spreading fast. People are advised not to install .apk files from messages, even if the name looks like a PDF.",
     "impact": {
-      "good": "Yesterday, every attempt to steal accounts with OTP codes failed at PT Nusa Digital. Suspicious accounts were secured right away.",
+      "good": "Yesterday, every attempt to steal accounts with OTP codes failed at Nusa Digital. Suspicious accounts were secured right away.",
       "mixed": "Yesterday, most accounts were secured, but a few strange logins were missed.",
       "bad": "Yesterday, some employee accounts were taken over because strange logins were missed. Passwords are being changed."
     },

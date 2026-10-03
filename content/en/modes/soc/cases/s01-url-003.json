@@ -21,7 +21,7 @@
           "evidenceId": "url-scheme"
         },
         {
-          "text": "login-banknusantara.test",
+          "text": "login-nusantarabank.test",
           "evidenceId": "url-domain"
         },
         {
@@ -39,10 +39,10 @@
     "required": ["url-domain"],
     "supporting": ["reason"]
   },
-  "explanation": "The owner of this domain is login-banknusantara.test, not banknusantara.test. The HTTPS padlock only means the connection is encrypted, not that the site belongs to the bank.",
+  "explanation": "The owner of this domain is login-nusantarabank.test, not nusantarabank.test. The HTTPS padlock only means the connection is encrypted, not that the site belongs to the bank.",
   "ruleRefs": ["r-url-1", "r-url-2"],
   "hints": [
     "The HTTPS padlock does not prove a site is real. Look at the domain.",
-    "The bank's official domain is banknusantara.test. Is login-banknusantara.test the same?"
+    "The bank's official domain is nusantarabank.test. Is login-nusantarabank.test the same?"
   ]
 }

@@ -13,7 +13,7 @@ sources:
 
 The most common warning signs:
 
-1. **A strange sender address.** The name says "Bank Nusantara", but the address is `@banknusantara-verifikasi.test`. Check the domain after the `@`, not the name.
+1. **A strange sender address.** The name says "Nusantara Bank", but the address is `@nusantarabank-verifikasi.test`. Check the domain after the `@`, not the name.
 2. **Time pressure.** "URGENT", "account blocked in 1 hour". Scammers want you to panic.
 3. **A generic greeting.** "Dear Customer", even though your bank knows your name.
 4. **Asking for data through a link.** Official organizations don't ask for passwords, PINs, or personal data through a link in an email.

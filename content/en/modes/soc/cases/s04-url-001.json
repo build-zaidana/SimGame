@@ -18,7 +18,7 @@
           "evidenceId": "url-scheme"
         },
         {
-          "text": "kirimcepat.test",
+          "text": "sendfast.test",
           "evidenceId": "url-domain"
         },
         {
@@ -28,7 +28,7 @@
       ]
     },
     "reason": {
-      "text": "I want to check where the office package is on KirimCepat's official site, not through a link in a chat.",
+      "text": "I want to check where the office package is on SendFast's official site, not through a link in a chat.",
       "evidenceId": "reason"
     }
   },
@@ -36,7 +36,7 @@
     "required": [],
     "supporting": ["url-domain", "reason"]
   },
-  "explanation": "The domain owner is kirimcepat.test, the courier's official site, and Bayu chose to open it himself instead of using a chat link. This is the right habit.",
+  "explanation": "The domain owner is sendfast.test, the courier's official site, and Bayu chose to open it himself instead of using a chat link. This is the right habit.",
   "ruleRefs": ["r-url-1"],
   "hints": [
     "Read the domain owner from the right.",

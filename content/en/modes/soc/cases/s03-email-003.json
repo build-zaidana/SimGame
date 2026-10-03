@@ -11,8 +11,8 @@
   "severity": 2,
   "data": {
     "from": {
-      "name": "Bank Nusantara Customer Service",
-      "address": "cs@banknusantara-care.test",
+      "name": "Nusantara Bank Customer Service",
+      "address": "cs@nusantarabank-care.test",
       "evidenceId": "sender"
     },
     "subject": {
@@ -34,7 +34,7 @@
         "evidenceId": "request-otp"
       },
       {
-        "text": "Bank Nusantara Customer Service",
+        "text": "Nusantara Bank Customer Service",
         "evidenceId": "signature"
       }
     ]
@@ -43,7 +43,7 @@
     "required": ["request-otp", "sender"],
     "supporting": ["prize", "generic-greeting"]
   },
-  "explanation": "A bank never asks for your OTP, not even by phone, and the domain is banknusantara-care.test, not banknusantara.test. A bank OTP is only for transactions you make yourself.",
+  "explanation": "A bank never asks for your OTP, not even by phone, and the domain is nusantarabank-care.test, not nusantarabank.test. A bank OTP is only for transactions you make yourself.",
   "ruleRefs": ["r-pass-1", "r-phish-1", "r-phish-4"],
   "hints": [
     "What will the caller ask you for later?",

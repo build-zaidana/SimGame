@@ -5,7 +5,7 @@
       "type": "mcq",
       "conceptId": "phishing-signs",
       "difficulty": 1,
-      "prompt": "Email from \"Bank Nusantara\": \"Dear Customer, your account will be blocked in 1 hour. Verify at this link.\" Which phishing signs appear?",
+      "prompt": "Email from \"Nusantara Bank\": \"Dear Customer, your account will be blocked in 1 hour. Verify at this link.\" Which phishing signs appear?",
       "choices": [
         "A generic greeting, time pressure, and a request to verify through a link",
         "None, banks often send emails like this",

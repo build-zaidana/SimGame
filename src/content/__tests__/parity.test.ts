@@ -50,3 +50,28 @@ describe('checkLocaleParity', () => {
     ]);
   });
 });
+
+describe('checkLocaleParity with renamed brands', () => {
+  const renames: [string, string][] = [
+    ['Bank Nusantara', 'Nusantara Bank'],
+    ['banknusantara', 'nusantarabank'],
+  ];
+  const mail = (address: string, href: string) => ({
+    from: { name: 'x', address, evidenceId: 'sender' },
+    link: { href },
+  });
+
+  it('accepts locked values that differ only by a declared rename', () => {
+    const id = mail('cs@banknusantara-verifikasi.test', 'https://login.banknusantara.test/a');
+    const en = mail('cs@nusantarabank-verifikasi.test', 'https://login.nusantarabank.test/a');
+    expect(checkLocaleParity(id, en, renames)).toEqual([]);
+  });
+
+  it('still rejects any other change to a locked value', () => {
+    const id = mail('cs@banknusantara.test', 'https://banknusantara.test');
+    const en = mail('cs@nusantara-bank.test', 'https://nusantarabank.test');
+    expect(checkLocaleParity(id, en, renames)).toEqual([
+      'from.address: "cs@nusantarabank.test" ≠ "cs@nusantara-bank.test"',
+    ]);
+  });
+});

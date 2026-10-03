@@ -11,8 +11,8 @@
   "severity": 2,
   "data": {
     "from": {
-      "name": "KirimCepat",
-      "address": "noreply@kirimcepat-id.test",
+      "name": "SendFast",
+      "address": "noreply@sendfast-id.test",
       "evidenceId": "sender"
     },
     "subject": {
@@ -36,7 +36,7 @@
       {
         "link": {
           "label": "Pay now",
-          "href": "https://kirimcepat-bayar.test/ongkir"
+          "href": "https://sendfast-bayar.test/ongkir"
         },
         "evidenceId": "link"
       }
@@ -46,10 +46,10 @@
     "required": ["sender", "link"],
     "supporting": ["urgency", "generic-greeting"]
   },
-  "explanation": "The sender domain kirimcepat-id.test does not belong to KirimCepat (kirimcepat.test), and the link goes to a different site that asks for payment. The small amount and the deadline are there to make you pay quickly without getting suspicious.",
+  "explanation": "The sender domain sendfast-id.test does not belong to SendFast (sendfast.test), and the link goes to a different site that asks for payment. The small amount and the deadline are there to make you pay quickly without getting suspicious.",
   "ruleRefs": ["r-phish-1", "r-url-3", "r-phish-3"],
   "hints": [
-    "Compare the sender's address with KirimCepat's official domain, kirimcepat.test.",
+    "Compare the sender's address with SendFast's official domain, sendfast.test.",
     "Press and hold the \"Pay now\" link. Who owns that domain?"
   ]
 }

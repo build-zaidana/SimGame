@@ -20,7 +20,7 @@
       "evidenceId": "file-size"
     },
     "source": {
-      "text": "Email attachment from noreply@kirimcepat.test to the Warehouse team",
+      "text": "Email attachment from noreply@sendfast.test to the Warehouse team",
       "evidenceId": "source"
     },
     "message": {
@@ -32,7 +32,7 @@
     "required": [],
     "supporting": ["file-type", "source", "sb-clean"]
   },
-  "explanation": "This really is a PDF from the official domain kirimcepat.test, and the Warehouse team is expecting this delivery. There are no signs of a harmful file.",
+  "explanation": "This really is a PDF from the official domain sendfast.test, and the Warehouse team is expecting this delivery. There are no signs of a harmful file.",
   "ruleRefs": ["r-mal-1", "r-phish-1"],
   "hints": [
     "Check the file ending on the far right and the sender.",

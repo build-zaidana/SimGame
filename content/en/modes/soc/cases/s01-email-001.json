@@ -11,8 +11,8 @@
   "severity": 2,
   "data": {
     "from": {
-      "name": "Bank Nusantara",
-      "address": "keamanan@banknusantara-verifikasi.test",
+      "name": "Nusantara Bank",
+      "address": "keamanan@nusantarabank-verifikasi.test",
       "evidenceId": "sender"
     },
     "subject": {
@@ -31,8 +31,8 @@
       },
       {
         "link": {
-          "label": "banknusantara.test/verifikasi",
-          "href": "http://banknusantara.akun-aman.test/login"
+          "label": "nusantarabank.test/verifikasi",
+          "href": "http://nusantarabank.akun-aman.test/login"
         },
         "evidenceId": "link"
       },
@@ -47,7 +47,7 @@
     "required": ["sender", "link"],
     "supporting": ["urgency", "generic-greeting", "threat"]
   },
-  "explanation": "The sender's domain is not banknusantara.test, and the real address of the link goes to akun-aman.test. A bank never asks you to verify your account through an email link.",
+  "explanation": "The sender's domain is not nusantarabank.test, and the real address of the link goes to akun-aman.test. A bank never asks you to verify your account through an email link.",
   "ruleRefs": ["r-phish-1", "r-url-3", "r-phish-2"],
   "hints": [
     "Don't trust the sender's name. Look at the full email address.",
