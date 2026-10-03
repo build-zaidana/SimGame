@@ -6,13 +6,24 @@ import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { checkModeContent, DEFAULT_LIMITS, type CheckPolicy } from '../src/content/checks.ts';
 import { parseModeContent, type CaseSchemas, type ContentError } from '../src/content/loader.ts';
+import { createRng } from '../src/engine/rng.ts';
+import type { CaseGenerator } from '../src/modes/contract.ts';
 import { socCaseSchemas } from '../src/modes/soc/caseTypes/schemas.ts';
+import { socGenerators } from '../src/modes/soc/generators/index.ts';
+import { SOC_TOOL_IDS } from '../src/modes/soc/tools.ts';
 
 const ROOT = join(import.meta.dirname, '..');
 const LOCALES_DIR = join(ROOT, 'content');
 
-/** Skema tipe kasus per mode. Mode baru wajib didaftarkan di sini. */
-const CASE_SCHEMAS: Record<string, CaseSchemas> = { soc: socCaseSchemas };
+/** Registri per mode (skema tipe kasus, generator, alat). Mode baru wajib didaftarkan di sini. */
+const MODES: Record<
+  string,
+  { schemas: CaseSchemas; generators: Record<string, CaseGenerator>; tools: string[] }
+> = {
+  soc: { schemas: socCaseSchemas, generators: socGenerators, tools: SOC_TOOL_IDS },
+};
+/** Jumlah seed yang dicoba untuk tiap entri generator di antrian shift. */
+const GENERATOR_SAMPLES = 20;
 
 const brands = JSON.parse(readFileSync(join(ROOT, 'scripts/brand-denylist.json'), 'utf8')) as {
   terms: CheckPolicy['brandDenylist'];
@@ -22,12 +33,11 @@ const fictional = JSON.parse(
   readFileSync(join(ROOT, 'scripts/fictional-domains.json'), 'utf8'),
 ) as { domains: string[] };
 
-const policy: CheckPolicy = {
+const basePolicy: Omit<CheckPolicy, 'knownGenerators' | 'knownTools'> = {
   ...DEFAULT_LIMITS,
   brandDenylist: brands.terms,
   conceptBrandAllowlist: brands.conceptAllowlist,
   fictionalDomains: fictional.domains,
-  knownGenerators: [],
 };
 
 function walk(dir: string): string[] {
@@ -62,11 +72,12 @@ for (const locale of readdirSync(LOCALES_DIR)) {
   if (!existsSync(modesDir)) continue;
   for (const modeId of readdirSync(modesDir)) {
     const prefix = `${locale}/modes/${modeId}/`;
-    const schemas = CASE_SCHEMAS[modeId];
-    if (!schemas) {
-      errors.push({ file: prefix, message: 'mode belum terdaftar di CASE_SCHEMAS' });
+    const registry = MODES[modeId];
+    if (!registry) {
+      errors.push({ file: prefix, message: 'mode belum terdaftar di MODES' });
       continue;
     }
+    const { schemas, generators, tools } = registry;
     const readErrors: ContentError[] = [];
     const files = readModeFiles(join(modesDir, modeId), readErrors);
     fileCount += Object.keys(files).length;
@@ -78,6 +89,40 @@ for (const locale of readdirSync(LOCALES_DIR)) {
         message: `id "${content.meta.id}" ≠ folder "${modeId}"`,
       });
     }
+    // Kasus prosedural: jalankan generator dengan banyak seed dan periksa hasilnya seperti kasus biasa.
+    for (const shift of content.shifts) {
+      shift.queue.forEach((q, i) => {
+        if (!('generator' in q)) return;
+        const generate = generators[q.generator];
+        if (!generate) return; // dilaporkan checkModeContent
+        for (let seed = 0; seed < GENERATOR_SAMPLES; seed++) {
+          const id = `gen-${shift.id}-${i}-${seed}`;
+          try {
+            const [raw] = generate(q.params, createRng(seed), { id });
+            const parsed = schemas[raw.type]?.safeParse(raw);
+            if (!parsed?.success) {
+              parseErrors.push({
+                file: `shifts/${shift.id}.json`,
+                message: `${q.generator} (seed ${seed}) menghasilkan kasus tidak valid`,
+              });
+              return;
+            }
+            content.cases[id] = parsed.data;
+          } catch (e) {
+            parseErrors.push({
+              file: `shifts/${shift.id}.json`,
+              message: `${q.generator}: params tidak valid (${(e as Error).message.slice(0, 120)})`,
+            });
+            return;
+          }
+        }
+      });
+    }
+    const policy: CheckPolicy = {
+      ...basePolicy,
+      knownGenerators: Object.keys(generators),
+      knownTools: tools,
+    };
     const all = [...parseErrors, ...checkModeContent(content, policy)];
     errors.push(...all.map((e) => ({ ...e, file: prefix + e.file })));
   }

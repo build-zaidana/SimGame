@@ -15,6 +15,8 @@ export interface CheckPolicy {
   /** Domain fiktif yang boleh dipakai selain TLD .test / .example. */
   fictionalDomains: string[];
   knownGenerators: string[];
+  /** ID alat yang mekaniknya ada di kode mode; undefined = tidak dicek. */
+  knownTools?: string[];
   safeRatio: { min: number; max: number };
   maxDocumentWords: number;
   maxConceptWords: number;
@@ -163,10 +165,17 @@ export function checkModeContent(content: ModeContent, policy: CheckPolicy): Con
     for (const id of c.ruleRefs) if (!ruleIds.has(id)) err(file, `aturan tidak ada: ${id}`);
 
     const evidenceIds = collectEvidenceIds(c.data);
+    const intelIds = collectEvidenceIds(c.intel ?? {});
     const evidenceSet = new Set(evidenceIds);
-    if (evidenceSet.size !== evidenceIds.length) err(file, 'evidenceId duplikat di data');
-    for (const id of [...c.evidence.required, ...c.evidence.supporting]) {
-      if (!evidenceSet.has(id)) err(file, `evidence "${id}" tidak ada di data`);
+    const allIds = [...evidenceIds, ...intelIds];
+    if (new Set(allIds).size !== allIds.length) err(file, 'evidenceId duplikat di data/intel');
+    for (const id of c.evidence.required) {
+      if (intelIds.includes(id)) err(file, `evidence wajib "${id}" hanya terlihat dengan alat`);
+      else if (!evidenceSet.has(id)) err(file, `evidence "${id}" tidak ada di data`);
+    }
+    for (const id of c.evidence.supporting) {
+      if (!evidenceSet.has(id) && !intelIds.includes(id))
+        err(file, `evidence "${id}" tidak ada di data`);
     }
     const overlap = c.evidence.required.filter((id) => c.evidence.supporting.includes(id));
     if (overlap.length) err(file, `evidence ada di required & supporting: ${overlap.join(', ')}`);
@@ -255,6 +264,26 @@ export function checkModeContent(content: ModeContent, policy: CheckPolicy): Con
     }
     const brands = findBrands(allStrings(r).join(' '), policy.brandDenylist);
     if (brands.length) err(file, `${r.id}: merek nyata: ${brands.join(', ')}`);
+  }
+
+  const seenTools = new Set<string>();
+  for (const t of content.tools) {
+    dupCheck(seenTools, t.id, 'tools.json', 'alat');
+    if (!conceptIds.has(t.conceptId))
+      err('tools.json', `${t.id}: konsep tidak ada: ${t.conceptId}`);
+    if (policy.knownTools && !policy.knownTools.includes(t.id)) {
+      err('tools.json', `${t.id}: alat belum diimplementasikan di kode mode`);
+    }
+  }
+
+  if (content.assessment) {
+    const { pre, post } = content.assessment;
+    for (const rid of [...pre, ...post]) {
+      if (!seenReview.has(rid)) err('assessment.json', `soal tidak ada: ${rid}`);
+    }
+    const overlap = pre.filter((x) => post.includes(x));
+    if (overlap.length)
+      err('assessment.json', `soal pre & post tumpang tindih: ${overlap.join(', ')}`);
   }
 
   for (const d of Object.values(content.dialogues)) {

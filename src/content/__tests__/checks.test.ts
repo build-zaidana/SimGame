@@ -107,6 +107,15 @@ describe('content validation', () => {
     expect(errorsFor(fixture())).toEqual([]);
   });
 
+  it('accepts tool intel as supporting evidence', () => {
+    const f = fixture();
+    f['cases/c-2.json'] = emailCase('c-2', 'malicious', {
+      intel: { whois: [{ domain: 'x.test', registered: 'kemarin', evidenceId: 'whois' }] },
+      evidence: { required: ['sender'], supporting: ['whois'] },
+    });
+    expect(errorsFor(f)).toEqual([]);
+  });
+
   const cases: [string, (f: Record<string, unknown>) => void, RegExp][] = [
     [
       'schema mismatch',
@@ -211,6 +220,38 @@ describe('content validation', () => {
       'missing hints',
       (f) => (f['cases/c-2.json'] = emailCase('c-2', 'malicious', { hints: [] })),
       /hints/,
+    ],
+    [
+      'required evidence only visible with a tool',
+      (f) =>
+        (f['cases/c-2.json'] = emailCase('c-2', 'malicious', {
+          intel: { whois: [{ domain: 'x.test', registered: 'kemarin', evidenceId: 'whois' }] },
+          evidence: { required: ['whois'], supporting: [] },
+        })),
+      /hanya terlihat dengan alat/,
+    ],
+    [
+      'tool with unknown concept',
+      (f) =>
+        (f['tools.json'] = {
+          tools: [
+            {
+              id: 'whois',
+              name: 'W',
+              icon: 'w',
+              description: 'd',
+              price: 10,
+              conceptId: 'nope',
+              unlockAtShift: 1,
+            },
+          ],
+        }),
+      /whois: konsep tidak ada: nope/,
+    ],
+    [
+      'assessment overlap / unknown item',
+      (f) => (f['assessment.json'] = { pre: ['q-1', 'q-2', 'q-x'], post: ['q-1', 'q-2', 'q-3'] }),
+      /soal tidak ada: q-x[\s\S]*tumpang tindih: q-1, q-2/,
     ],
     [
       'answerIndex out of range',

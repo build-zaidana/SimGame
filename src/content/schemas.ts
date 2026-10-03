@@ -109,6 +109,24 @@ export const dialogueSchema = z.strictObject({
 });
 export const dialogueFileSchema = z.strictObject({ dialogues: z.array(dialogueSchema).min(1) });
 
+export const toolSchema = z.strictObject({
+  id: idSchema,
+  name: text,
+  icon: text,
+  description: text,
+  price: z.number().int().positive(),
+  conceptId: idSchema,
+  /** Muncul di toko mulai shift ini. */
+  unlockAtShift: z.number().int().positive(),
+});
+export const toolsFileSchema = z.strictObject({ tools: z.array(toolSchema).min(1) });
+
+/** Tes awal/akhir (PRD §5.3): ID soal review, dua bentuk paralel yang tidak saling tumpang tindih. */
+export const assessmentSchema = z.strictObject({
+  pre: z.array(idSchema).min(3).max(10),
+  post: z.array(idSchema).min(3).max(10),
+});
+
 /** Bagian kasus yang sama untuk semua tipe; `data` divalidasi oleh skema tipe kasus. */
 export const baseCaseSchema = z.strictObject({
   id: idSchema,
@@ -128,6 +146,18 @@ export const baseCaseSchema = z.strictObject({
   ruleRefs: z.array(idSchema).min(1),
   /** Petunjuk bertingkat dari mentor: umum → spesifik. Petunjuk ke-2 dst. memotong skor. */
   hints: z.array(text).min(1).max(3),
+  /**
+   * Data tambahan yang hanya terlihat dengan alat (Cek WHOIS, Sandbox). Bukti di sini boleh menjadi
+   * `supporting`, tidak boleh `required`: kasus harus bisa diselesaikan tanpa alat.
+   */
+  intel: z
+    .strictObject({
+      whois: z
+        .array(z.strictObject({ domain: text, registered: text, evidenceId: idSchema.optional() }))
+        .optional(),
+      sandbox: z.array(z.strictObject({ text, evidenceId: idSchema.optional() })).optional(),
+    })
+    .optional(),
 });
 
 /** Bagian dokumen yang bisa ditandai sebagai bukti. */
@@ -145,4 +175,6 @@ export type QueueEntry = ShiftDef['queue'][number];
 export type ReviewItem = z.infer<typeof reviewItemSchema>;
 export type Dialogue = z.infer<typeof dialogueSchema>;
 export type BaseCase = z.infer<typeof baseCaseSchema>;
+export type Tool = z.infer<typeof toolSchema>;
+export type Assessment = z.infer<typeof assessmentSchema>;
 export type MarkableText = z.infer<typeof markableTextSchema>;

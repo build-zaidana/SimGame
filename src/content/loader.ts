@@ -7,6 +7,7 @@ import { marked } from 'marked';
 import { parse as parseYaml } from 'yaml';
 import type { z } from 'zod';
 import {
+  assessmentSchema,
   baseCaseSchema,
   conceptFrontmatterSchema,
   dialogueFileSchema,
@@ -14,6 +15,8 @@ import {
   reviewFileSchema,
   rulebookSchema,
   shiftSchema,
+  toolsFileSchema,
+  type Assessment,
   type BaseCase,
   type Concept,
   type Dialogue,
@@ -21,6 +24,7 @@ import {
   type ReviewItem,
   type Rulebook,
   type ShiftDef,
+  type Tool,
 } from './schemas.ts';
 
 export type CaseSchemas = Record<string, z.ZodType<BaseCase, unknown>>;
@@ -33,6 +37,8 @@ export interface ModeContent<TCase extends BaseCase = BaseCase> {
   cases: Record<string, TCase>;
   review: ReviewItem[];
   dialogues: Record<string, Dialogue>;
+  tools: Tool[];
+  assessment: Assessment | null;
 }
 
 export interface ContentError {
@@ -69,6 +75,8 @@ export function parseModeContent<TCase extends BaseCase = BaseCase>(
     cases: {},
     review: [],
     dialogues: {},
+    tools: [],
+    assessment: null,
   };
 
   const parse = <T>(file: string, schema: z.ZodType<T, unknown>, raw: unknown): T | null => {
@@ -85,6 +93,10 @@ export function parseModeContent<TCase extends BaseCase = BaseCase>(
   for (const [file, raw] of Object.entries(files).sort(([a], [b]) => a.localeCompare(b))) {
     if (file === 'mode.json') {
       content.meta = parse(file, modeMetaSchema, raw) ?? content.meta;
+    } else if (file === 'tools.json') {
+      content.tools = parse(file, toolsFileSchema, raw)?.tools ?? [];
+    } else if (file === 'assessment.json') {
+      content.assessment = parse(file, assessmentSchema, raw);
     } else if (file === 'rulebook.json') {
       content.rulebook = parse(file, rulebookSchema, raw) ?? content.rulebook;
     } else if (file.startsWith('concepts/') && file.endsWith('.md')) {
