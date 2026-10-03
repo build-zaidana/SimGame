@@ -54,6 +54,18 @@ describe('startShift', () => {
     expect(s.trust).toBe(75);
   });
 
+  it('keeps generated case data opaque in the session', () => {
+    const s = startShift({
+      plan,
+      seed: 1,
+      playMode: 'relaxed',
+      trust: 75,
+      generatedCases: { c: { any: 'data' } },
+    });
+    expect(s.generatedCases).toEqual({ c: { any: 'data' } });
+    expect(start().generatedCases).toEqual({});
+  });
+
   it('is JSON-serializable without loss', () => {
     const s = run(working(), { type: 'OPEN_CASE', caseId: 'a' });
     expect(JSON.parse(JSON.stringify(s))).toEqual(s);

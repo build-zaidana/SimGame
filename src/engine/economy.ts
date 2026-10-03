@@ -29,3 +29,21 @@ export interface PayRule {
 export function shiftPay(pay: PayRule, correctCount: number): number {
   return pay.base + pay.perCorrect * correctCount;
 }
+
+export type BuyResult =
+  | { ok: true; wallet: number; toolsOwned: string[] }
+  | { ok: false; reason: 'insufficient-funds' | 'already-owned' };
+
+/** Membeli alat di toko. Murni: mengembalikan dompet & daftar alat yang baru. */
+export function buyTool(
+  state: { wallet: number; toolsOwned: readonly string[] },
+  tool: { id: string; price: number },
+): BuyResult {
+  if (state.toolsOwned.includes(tool.id)) return { ok: false, reason: 'already-owned' };
+  if (state.wallet < tool.price) return { ok: false, reason: 'insufficient-funds' };
+  return {
+    ok: true,
+    wallet: state.wallet - tool.price,
+    toolsOwned: [...state.toolsOwned, tool.id],
+  };
+}

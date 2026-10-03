@@ -84,4 +84,9 @@ export interface ShiftSession {
   activeCaseId: string | null;
   feedbackCaseId: string | null;
   trust: number;
+  /**
+   * Data kasus prosedural (generator) yang dibuat saat shift dimulai. Engine tidak membacanya;
+   * disimpan di sini supaya shift yang dilanjutkan memakai kasus yang sama persis.
+   */
+  generatedCases: Record<string, unknown>;
 }

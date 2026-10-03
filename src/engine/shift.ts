@@ -15,6 +15,7 @@ export interface StartShiftParams {
   seed: number;
   playMode: PlayMode;
   trust: number;
+  generatedCases?: Record<string, unknown>;
 }
 
 export type ShiftAction =
@@ -31,7 +32,13 @@ export type ShiftAction =
   | { type: 'CLOSE_FEEDBACK' }
   | { type: 'END_SHIFT' };
 
-export function startShift({ plan, seed, playMode, trust }: StartShiftParams): ShiftSession {
+export function startShift({
+  plan,
+  seed,
+  playMode,
+  trust,
+  generatedCases = {},
+}: StartShiftParams): ShiftSession {
   const msPerGameMinute = plan.realSecondsPerGameMinute * 1000;
   const cases: SessionCase[] = [...plan.cases]
     .sort((a, b) => a.arriveAt - b.arriveAt)
@@ -61,6 +68,7 @@ export function startShift({ plan, seed, playMode, trust }: StartShiftParams): S
     activeCaseId: null,
     feedbackCaseId: null,
     trust,
+    generatedCases,
   });
 }
 
