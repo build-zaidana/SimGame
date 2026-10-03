@@ -5,8 +5,9 @@ import type { CaseCore, CaseImpact, CaseOutcome, PlayerInput } from '../../engin
 function impactOf(c: CaseCore, decision: string, decisionScore: number): CaseImpact {
   if (decision === c.correctDecision) return 'correct';
   if (c.verdict !== 'safe' && decision === 'allow') return 'threat-allowed';
-  if (c.verdict === 'safe' && decision === 'block') return 'legit-blocked';
   if (c.verdict === 'safe' && decision === 'escalate') return 'needless-escalation';
+  // Blokir, reset password, karantina pada sesuatu yang sah = mengganggu kerja klien.
+  if (c.verdict === 'safe') return 'legit-blocked';
   return decisionScore > 0 ? 'partial' : 'wrong';
 }
 

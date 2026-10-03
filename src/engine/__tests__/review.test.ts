@@ -1,7 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { recordResult } from '../mastery.ts';
 import { createRng } from '../rng.ts';
-import { selectReviewItems } from '../review.ts';
+import {
+  gradeMcq,
+  gradeOrderSteps,
+  gradeTapEvidence,
+  selectReviewItems,
+  shuffledOrder,
+} from '../review.ts';
 
 const items = [
   { id: 'url-1', conceptId: 'url' },
@@ -98,5 +104,32 @@ describe('selectReviewItems due timing', () => {
       rng: createRng(2),
     });
     expect(ids).not.toContain('url-1');
+  });
+});
+
+describe('grading', () => {
+  it('mcq: correct only for the answer index', () => {
+    expect(gradeMcq(1, 1)).toBe(true);
+    expect(gradeMcq(1, 0)).toBe(false);
+  });
+  it('tap-evidence: all answers marked and nothing else', () => {
+    expect(gradeTapEvidence(['a', 'b'], ['b', 'a'])).toBe(true);
+    expect(gradeTapEvidence(['a', 'b'], ['a'])).toBe(false);
+    expect(gradeTapEvidence(['a'], ['a', 'c'])).toBe(false);
+  });
+  it('order-steps: order must be 0..n-1', () => {
+    expect(gradeOrderSteps([0, 1, 2])).toBe(true);
+    expect(gradeOrderSteps([1, 0, 2])).toBe(false);
+  });
+});
+
+describe('shuffledOrder', () => {
+  it('is a deterministic permutation that is never already sorted (n ≥ 2)', () => {
+    for (let seed = 0; seed < 50; seed++) {
+      const order = shuffledOrder(4, createRng(seed));
+      expect([...order].sort()).toEqual([0, 1, 2, 3]);
+      expect(order).not.toEqual([0, 1, 2, 3]);
+      expect(shuffledOrder(4, createRng(seed))).toEqual(order);
+    }
   });
 });

@@ -83,3 +83,27 @@ describe('evaluateSocCase', () => {
     expect(evaluateSocCase(sus, { decision: 'escalate', marks: [] }).impact).toBe('correct');
   });
 });
+
+describe('evaluateSocCase with stronger actions', () => {
+  const compromised: CaseCore = {
+    id: 'l1',
+    verdict: 'malicious',
+    correctDecision: 'reset-password',
+    acceptableDecisions: { block: 0.6, escalate: 0.6 },
+    severity: 3,
+    evidence: { required: ['row-2'], supporting: [] },
+  };
+  it('reset-password on a compromised account is correct', () => {
+    expect(
+      evaluateSocCase(compromised, { decision: 'reset-password', marks: ['row-2'] }).impact,
+    ).toBe('correct');
+  });
+  it('blocking a compromised login is partial', () => {
+    expect(evaluateSocCase(compromised, { decision: 'block', marks: [] }).impact).toBe('partial');
+  });
+  it('resetting the password of a legit user counts as legit-blocked', () => {
+    expect(evaluateSocCase(safe, { decision: 'reset-password', marks: [] }).impact).toBe(
+      'legit-blocked',
+    );
+  });
+});

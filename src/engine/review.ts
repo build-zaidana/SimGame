@@ -62,3 +62,28 @@ export function selectReviewItems(args: SelectReviewArgs): string[] {
 
   return picked;
 }
+
+export function gradeMcq(answerIndex: number, chosen: number): boolean {
+  return answerIndex === chosen;
+}
+
+/** Benar jika semua bagian jawaban ditandai dan tidak ada tanda lain. */
+export function gradeTapEvidence(answer: readonly string[], marks: readonly string[]): boolean {
+  const m = new Set(marks);
+  return m.size === answer.length && answer.every((a) => m.has(a));
+}
+
+/** `order` = indeks langkah asli dalam urutan yang disusun pemain. */
+export function gradeOrderSteps(order: readonly number[]): boolean {
+  return order.every((v, i) => v === i);
+}
+
+/** Urutan acak awal untuk soal order-steps; tidak pernah sudah terurut (n ≥ 2). */
+export function shuffledOrder(n: number, rng: RngState): number[] {
+  const [order] = shuffle(
+    Array.from({ length: n }, (_, i) => i),
+    rng,
+  );
+  if (n >= 2 && gradeOrderSteps(order)) order.reverse();
+  return order;
+}
