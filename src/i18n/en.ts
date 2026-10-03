@@ -82,6 +82,20 @@ export const en: Strings = {
     viewBadges: 'View badges',
     dismissBadges: 'Close',
   },
+  explore: {
+    canvasLabel: 'Explorable office',
+    help: 'Click or touch the map, then walk with the arrow keys/WASD or tap where to go. Press E, Enter or Space to interact. Every destination is also a button below.',
+    idle: 'Walk to a desk, the bookshelf, the shop, the badge board, or Rani.',
+    enter: 'Enter',
+    open: 'Open',
+    talk: 'Talk',
+    shopLabel: 'Tool Shop',
+    rulebookLabel: 'Handbook shelf',
+    badgesLabel: 'Badge board',
+    raniLabel: 'Rani',
+    raniTip: (rule) => `Tip of the day: ${rule}`,
+    setting: 'Explorable office (walk with the arrow keys or tap)',
+  },
   badges: {
     heading: 'Badges',
     intro:

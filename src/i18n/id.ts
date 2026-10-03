@@ -81,6 +81,20 @@ export const id = {
     viewBadges: 'Lihat lencana',
     dismissBadges: 'Tutup',
   },
+  explore: {
+    canvasLabel: 'Kantor yang bisa dijelajahi',
+    help: 'Klik atau sentuh peta, lalu jalan dengan tombol panah/WASD atau ketuk tujuan. Tekan E, Enter, atau Spasi untuk berinteraksi. Semua tujuan juga ada sebagai tombol di bawah.',
+    idle: 'Jalan ke meja, rak buku, toko, papan lencana, atau Mbak Rani.',
+    enter: 'Masuk',
+    open: 'Buka',
+    talk: 'Ngobrol',
+    shopLabel: 'Toko Alat',
+    rulebookLabel: 'Rak Buku Panduan',
+    badgesLabel: 'Papan Lencana',
+    raniLabel: 'Mbak Rani',
+    raniTip: (rule: string) => `Tips hari ini: ${rule}`,
+    setting: 'Kantor yang bisa dijelajahi (jalan dengan panah atau ketuk)',
+  },
   badges: {
     heading: 'Lencana',
     intro:

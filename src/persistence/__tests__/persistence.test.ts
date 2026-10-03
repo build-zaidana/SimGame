@@ -223,6 +223,7 @@ describe('migration v4 → v5 (music setting)', () => {
     const save = JSON.parse(JSON.stringify(createNewSave({ installId: INSTALL_ID, now: NOW })));
     delete save.profile.settings.music;
     delete save.profile.settings.language;
+    delete save.profile.settings.exploreOffice;
     save.profile.settings.sound = sound;
     return { ...save, schemaVersion: 4 };
   };
@@ -237,10 +238,21 @@ describe('migration v5 → v6 (language setting)', () => {
   it('keeps old saves in Indonesian', () => {
     const save = JSON.parse(JSON.stringify(createNewSave({ installId: INSTALL_ID, now: NOW })));
     delete save.profile.settings.language;
+    delete save.profile.settings.exploreOffice;
     const migrated = migrate({ ...save, schemaVersion: 5 });
-    expect(SAVE_SCHEMA_VERSION).toBe(6);
-    expect(migrated.schemaVersion).toBe(6);
+    expect(migrated.schemaVersion).toBe(SAVE_SCHEMA_VERSION);
     expect(migrated.profile.settings.language).toBe('id');
+  });
+});
+
+describe('migration v6 → v7 (explorable office setting)', () => {
+  it('turns the explorable office on for existing saves', () => {
+    const save = JSON.parse(JSON.stringify(createNewSave({ installId: INSTALL_ID, now: NOW })));
+    delete save.profile.settings.exploreOffice;
+    const migrated = migrate({ ...save, schemaVersion: 6 });
+    expect(SAVE_SCHEMA_VERSION).toBe(7);
+    expect(migrated.schemaVersion).toBe(7);
+    expect(migrated.profile.settings.exploreOffice).toBe(true);
   });
 });
 

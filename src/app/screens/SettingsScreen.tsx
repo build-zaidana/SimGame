@@ -87,6 +87,18 @@ export function SettingsScreen() {
         <p className="text-sm text-ink-muted">{id.settings.playModeNote}</p>
       </Fieldset>
 
+      <Fieldset legend={id.hub.heading}>
+        <label className={optionClass}>
+          <input
+            type="checkbox"
+            className="size-5 shrink-0 accent-accent"
+            checked={settings.exploreOffice}
+            onChange={(e) => update({ exploreOffice: e.target.checked })}
+          />
+          {id.explore.setting}
+        </label>
+      </Fieldset>
+
       <Fieldset legend={id.settings.reduceMotion}>
         <label className={optionClass}>
           <input

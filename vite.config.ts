@@ -43,6 +43,11 @@ export default defineConfig({
       },
     }),
   ],
+  build: {
+    // Satu-satunya chunk besar adalah Phaser (kantor top-down, ADR 024): dimuat lazy, tidak di bundle
+    // awal, dan dibatasi .size-limit.json. Batas peringatan dinaikkan agar build tidak berisik.
+    chunkSizeWarningLimit: 1500,
+  },
   test: {
     include: ['src/**/*.test.ts', 'src/**/*.test.tsx', 'scripts/**/*.test.ts'],
     environment: 'node',
