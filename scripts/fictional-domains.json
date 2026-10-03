@@ -1,0 +1,4 @@
+{
+  "$comment": "Domain organisasi fiktif di dunia game (selain TLD .test/.example). Pemilik perlu memastikan domain ini tidak dipakai organisasi nyata sebelum rilis.",
+  "domains": ["nusadigital.co.id", "banknusantara.co.id", "kirimcepat.co.id"]
+}
