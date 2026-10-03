@@ -8,7 +8,12 @@ import type { CareerMode } from '../modes/contract.ts';
 import { getMode } from '../modes/registry.ts';
 import { createLocalSaveRepository } from '../persistence/LocalSaveRepository.ts';
 import type { SaveRepository, StorageKind } from '../persistence/SaveRepository.ts';
-import { createNewSave, newModeProgress, type SaveData } from '../persistence/saveSchema.ts';
+import {
+  createNewSave,
+  newModeProgress,
+  type SaveData,
+  type Settings,
+} from '../persistence/saveSchema.ts';
 import { encodeSave } from '../persistence/transfer.ts';
 import {
   buildShift,
@@ -17,6 +22,7 @@ import {
   withGeneratedCases,
   type ReviewResult,
 } from './progress.ts';
+import { playSfx } from './sfx.ts';
 import { telemetry } from './telemetry.ts';
 
 export type Screen =
@@ -29,10 +35,12 @@ export type Screen =
   | 'settings'
   | 'save-transfer'
   | 'shop'
-  | 'assessment';
+  | 'assessment'
+  | 'learning-report';
 
 /** Layar menu yang dibuka "di atas" layar lain dan kembali ke sana. */
-type MenuScreen = 'rulebook' | 'save-transfer' | 'shop' | 'assessment';
+type MenuScreen =
+  'rulebook' | 'save-transfer' | 'shop' | 'assessment' | 'settings' | 'learning-report';
 export type AssessmentKind = 'pre' | 'post';
 
 export type SaveNotice = 'memory-only' | 'restored-backup' | 'reset' | null;
@@ -66,6 +74,7 @@ interface AppState {
   /** Mengganti save di perangkat ini (save lama menjadi cadangan). */
   importSave(data: SaveData): void;
   setFlag(key: string, value: boolean): void;
+  updateSettings(patch: Partial<Settings>): void;
   saveAssessment(kind: AssessmentKind, correct: number, total: number): void;
   /** Laporan → Review Cepat selesai → simpan hasil (termasuk jawaban review) → kembali ke HUB. */
   finishShift(reviewResults: readonly ReviewResult[]): void;
@@ -204,6 +213,7 @@ export const useAppStore = create<AppState>()((set, get) => ({
     if (next === session) return;
 
     if (action.type === 'DECIDE') {
+      if (save.profile.settings.sound) playSfx(action.outcome.correct ? 'correct' : 'wrong');
       const c = next.cases.find((x) => x.caseId === action.outcome.caseId);
       telemetry.track({
         name: 'case_decided',
@@ -233,7 +243,14 @@ export const useAppStore = create<AppState>()((set, get) => ({
 
   openMenu(screen) {
     const from = get().screen;
-    const menus: Screen[] = ['rulebook', 'save-transfer', 'shop', 'assessment'];
+    const menus: Screen[] = [
+      'rulebook',
+      'save-transfer',
+      'shop',
+      'assessment',
+      'settings',
+      'learning-report',
+    ];
     set({ returnTo: menus.includes(from) ? get().returnTo : from, screen });
   },
 
@@ -283,6 +300,15 @@ export const useAppStore = create<AppState>()((set, get) => ({
     write(data);
     telemetry.track({ name: 'save_imported' });
     set({ save: data, session: null, screen: 'hub', returnTo: 'hub' });
+  },
+
+  updateSettings(patch) {
+    const { save } = get();
+    if (!save) return;
+    const settings = { ...save.profile.settings, ...patch };
+    const next = { ...save, updatedAt: nowIso(), profile: { ...save.profile, settings } };
+    write(next);
+    set({ save: next });
   },
 
   setFlag(key, value) {

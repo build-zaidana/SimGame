@@ -2,15 +2,18 @@ import { useEffect } from 'react';
 import { id } from '../i18n/id.ts';
 import { DeskScreen } from './screens/DeskScreen.tsx';
 import { HubScreen } from './screens/HubScreen.tsx';
+import { LearningReportScreen } from './screens/LearningReportScreen.tsx';
 import { ReportScreen } from './screens/ReportScreen.tsx';
 import { AssessmentScreen } from './screens/AssessmentScreen.tsx';
 import { ReviewScreen } from './screens/ReviewScreen.tsx';
 import { SaveTransferScreen } from './screens/SaveTransferScreen.tsx';
+import { SettingsScreen } from './screens/SettingsScreen.tsx';
 import { ShopScreen } from './screens/ShopScreen.tsx';
 import { RulebookScreen } from './screens/RulebookScreen.tsx';
 import { TitleScreen } from './screens/TitleScreen.tsx';
 import { persistNow, useAppStore } from './store.ts';
 import { btnSecondary } from './ui/styles.ts';
+import { UpdateToast } from './ui/UpdateToast.tsx';
 
 const NOTICE_TEXT = {
   'memory-only': id.storage.memoryOnly,
@@ -37,6 +40,10 @@ function Screen() {
       return <SaveTransferScreen />;
     case 'assessment':
       return <AssessmentScreen />;
+    case 'settings':
+      return <SettingsScreen />;
+    case 'learning-report':
+      return <LearningReportScreen />;
     default:
       return <HubScreen />;
   }
@@ -48,6 +55,7 @@ export function App() {
   const notice = useAppStore((s) => s.notice);
   const dismissNotice = useAppStore((s) => s.dismissNotice);
   const textScale = useAppStore((s) => s.save?.profile.settings.textScale ?? 1);
+  const reduceMotion = useAppStore((s) => s.save?.profile.settings.reduceMotion ?? false);
 
   useEffect(() => {
     void init();
@@ -65,6 +73,10 @@ export function App() {
   useEffect(() => {
     document.documentElement.style.setProperty('--text-scale', String(textScale));
   }, [textScale]);
+
+  useEffect(() => {
+    document.documentElement.dataset['reduceMotion'] = String(reduceMotion);
+  }, [reduceMotion]);
 
   if (status === 'error') {
     return (
@@ -84,6 +96,7 @@ export function App() {
         </div>
       )}
       <Screen />
+      <UpdateToast />
     </>
   );
 }
