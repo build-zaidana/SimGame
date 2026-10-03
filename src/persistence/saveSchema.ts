@@ -2,7 +2,7 @@ import { z } from 'zod';
 import type { ShiftSession } from '../engine/types.ts';
 
 /** Naikkan + tambah migrasi di migrations.ts + test setiap kali bentuk save berubah. */
-export const SAVE_SCHEMA_VERSION = 2;
+export const SAVE_SCHEMA_VERSION = 3;
 
 const level = z.literal([1, 2, 3]);
 const score01 = z.number().min(0).max(1);
@@ -81,6 +81,8 @@ export const modeProgressSchema = z.object({
   chaptersUnlocked: z.array(z.string()),
   /** Untuk melanjutkan di tengah shift. */
   activeSession: shiftSessionSchema.optional(),
+  /** v3: shift Mode Latihan yang sedang berjalan (PRD S5); tidak memengaruhi progres utama. */
+  practiceSession: shiftSessionSchema.optional(),
 });
 
 const assessmentResultSchema = z.object({

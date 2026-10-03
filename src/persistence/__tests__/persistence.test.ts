@@ -159,8 +159,28 @@ describe('migration v1 → v2 (generatedCases in active sessions)', () => {
     };
     delete v1.modes.other.activeSession;
     const migrated = migrate(v1);
-    expect(migrated.schemaVersion).toBe(2);
+    expect(migrated.schemaVersion).toBe(SAVE_SCHEMA_VERSION);
     expect(migrated.modes['soc']?.activeSession?.generatedCases).toEqual({});
     expect(migrated.modes['other']?.activeSession).toBeUndefined();
+  });
+});
+
+describe('migration v2 → v3 (separate practice session slot)', () => {
+  it('keeps the save as-is and bumps the version; practiceSession is optional', () => {
+    const v2 = { ...JSON.parse(JSON.stringify(saveWithSession())), schemaVersion: 2 };
+    const migrated = migrate(v2);
+    expect(migrated.schemaVersion).toBe(3);
+    expect(migrated.modes['soc']?.activeSession?.shiftId).toBe('soc-01');
+    expect(migrated.modes['soc']?.practiceSession).toBeUndefined();
+  });
+
+  it('a v3 save with both a main and a practice session roundtrips', () => {
+    const save = saveWithSession();
+    const soc = save.modes['soc']!;
+    const withPractice = {
+      ...save,
+      modes: { soc: { ...soc, practiceSession: soc.activeSession! } },
+    };
+    expect(migrate(JSON.parse(JSON.stringify(withPractice)))).toEqual(withPractice);
   });
 });
