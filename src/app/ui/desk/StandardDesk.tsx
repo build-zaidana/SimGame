@@ -218,7 +218,7 @@ export function StandardDesk({
                       aria-hidden="true"
                       data-testid="stamp"
                       className={
-                        'stamp-slam whitespace-nowrap border-4 border-current px-3 py-1 font-display text-3xl sm:text-4xl ' +
+                        'stamp-slam whitespace-nowrap border-4 border-current px-3 py-1 font-stamp text-3xl sm:text-4xl ' +
                         (STAMP_COLOR[stamped] ?? 'text-focus')
                       }
                     >

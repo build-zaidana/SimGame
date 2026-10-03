@@ -13,6 +13,7 @@ import { ShopScreen } from './screens/ShopScreen.tsx';
 import { RulebookScreen } from './screens/RulebookScreen.tsx';
 import { TitleScreen } from './screens/TitleScreen.tsx';
 import { persistNow, useAppStore } from './store.ts';
+import { useMusic } from './music/useMusic.ts';
 import { telemetry } from './telemetry.ts';
 import { btnSecondary } from './ui/styles.ts';
 import { UpdateToast } from './ui/UpdateToast.tsx';
@@ -60,6 +61,7 @@ export function App() {
   const dismissNotice = useAppStore((s) => s.dismissNotice);
   const textScale = useAppStore((s) => s.save?.profile.settings.textScale ?? 1);
   const reduceMotion = useAppStore((s) => s.save?.profile.settings.reduceMotion ?? false);
+  useMusic();
 
   useEffect(() => {
     void init();

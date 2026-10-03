@@ -207,8 +207,7 @@ describe('migration v3 → v4 (badges per mode)', () => {
     };
     delete v3.modes.other.activeSession;
     const migrated = migrate(JSON.parse(JSON.stringify(v3)));
-    expect(SAVE_SCHEMA_VERSION).toBe(4);
-    expect(migrated.schemaVersion).toBe(4);
+    expect(migrated.schemaVersion).toBe(SAVE_SCHEMA_VERSION);
     expect(migrated.modes['soc']?.badges).toEqual({});
     expect(migrated.modes['other']?.badges).toEqual({});
     expect(migrated.modes['soc']?.activeSession?.shiftId).toBe('soc-01');
@@ -216,6 +215,21 @@ describe('migration v3 → v4 (badges per mode)', () => {
 
   it('new mode progress starts with no badges', () => {
     expect(newModeProgress().badges).toEqual({});
+  });
+});
+
+describe('migration v4 → v5 (music setting)', () => {
+  const v4With = (sound: boolean) => {
+    const save = JSON.parse(JSON.stringify(createNewSave({ installId: INSTALL_ID, now: NOW })));
+    delete save.profile.settings.music;
+    save.profile.settings.sound = sound;
+    return { ...save, schemaVersion: 4 };
+  };
+  it('turns music on when sound effects were on, and off when they were off', () => {
+    expect(SAVE_SCHEMA_VERSION).toBe(5);
+    expect(migrate(v4With(true)).profile.settings.music).toBe(true);
+    expect(migrate(v4With(false)).profile.settings.music).toBe(false);
+    expect(migrate(v4With(true)).schemaVersion).toBe(5);
   });
 });
 

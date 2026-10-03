@@ -255,6 +255,8 @@ export const id = {
     playModeNote: 'Mode baru berlaku mulai shift berikutnya.',
     reduceMotion: 'Kurangi animasi',
     sound: 'Efek suara',
+    music: 'Musik latar',
+    audio: 'Suara',
     on: 'Nyala',
     off: 'Mati',
     preview: 'Contoh teks dokumen: Yth. Nasabah, akun Anda akan diblokir dalam 1 jam.',

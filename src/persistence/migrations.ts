@@ -38,6 +38,15 @@ export const MIGRATIONS: Record<number, Migration> = {
     for (const [id, progress] of Object.entries(modes)) next[id] = { badges: {}, ...progress };
     return { ...d, modes: next };
   },
+  /** v4 → v5: pengaturan `music`; ikut pilihan efek suara yang sudah ada. */
+  4: (d) => {
+    const profile = (d['profile'] ?? {}) as Record<string, unknown>;
+    const settings = (profile['settings'] ?? {}) as Record<string, unknown>;
+    return {
+      ...d,
+      profile: { ...profile, settings: { music: settings['sound'] !== false, ...settings } },
+    };
+  },
 };
 
 export function runMigrations(

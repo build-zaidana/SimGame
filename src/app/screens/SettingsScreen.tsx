@@ -82,7 +82,7 @@ export function SettingsScreen() {
         </label>
       </Fieldset>
 
-      <Fieldset legend={id.settings.sound}>
+      <Fieldset legend={id.settings.audio}>
         <label className={optionClass}>
           <input
             type="checkbox"
@@ -91,6 +91,15 @@ export function SettingsScreen() {
             onChange={(e) => update({ sound: e.target.checked })}
           />
           {id.settings.sound}
+        </label>
+        <label className={optionClass}>
+          <input
+            type="checkbox"
+            className="size-5 accent-accent"
+            checked={settings.music}
+            onChange={(e) => update({ music: e.target.checked })}
+          />
+          {id.settings.music}
         </label>
       </Fieldset>
 

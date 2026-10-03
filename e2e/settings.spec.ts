@@ -36,3 +36,15 @@ test('the hidden learning report opens after tapping the logo 5 times', async ({
   await page.getByRole('button', { name: 'Ekspor JSON' }).click();
   expect((await download).suggestedFilename()).toMatch(/^shiftit-laporan-belajar-.*\.json$/);
 });
+
+test('background music can be turned off and stays off after reload', async ({ page }) => {
+  await page.getByRole('button', { name: 'Pengaturan' }).click();
+  const music = page.getByRole('checkbox', { name: 'Musik latar' });
+  await expect(music).toBeChecked();
+  await music.uncheck();
+  await page.reload();
+  await page.getByRole('button', { name: 'Main' }).click();
+  await page.getByRole('button', { name: 'Pengaturan' }).click();
+  await expect(page.getByRole('checkbox', { name: 'Musik latar' })).not.toBeChecked();
+  await expect(page.getByRole('checkbox', { name: 'Efek suara' })).toBeChecked();
+});
