@@ -5,12 +5,19 @@ import { useAppStore } from '../store.ts';
 import { DialogueLine } from '../ui/desk/DialogueLines.tsx';
 import { btnPrimary, btnSecondary, panel } from '../ui/styles.ts';
 
+/** Pengingat ekspor muncul di laporan shift ini (ARCHITECTURE §7.3). */
+const EXPORT_REMINDER_SHIFTS = [2, 4];
+const EXPORT_REMINDER_OFF = 'exportReminderOff';
+
 /** Laporan Shift: skor, kesalahan + penjelasan + tautan ke bab, lalu Review Cepat. */
 export function ReportScreen() {
   const session = useAppStore((s) => s.session);
   const content = useAppStore((s) => s.content);
   const goTo = useAppStore((s) => s.goTo);
   const openRulebook = useAppStore((s) => s.openRulebook);
+  const openMenu = useAppStore((s) => s.openMenu);
+  const setFlag = useAppStore((s) => s.setFlag);
+  const reminderOff = useAppStore((s) => s.save?.flags[EXPORT_REMINDER_OFF] === true);
   const mode = session ? getMode(session.modeId) : undefined;
   if (!session || !content || !mode) return null;
 
@@ -39,6 +46,30 @@ export function ReportScreen() {
         <p>{id.report.trust(summary.trust)}</p>
         <p>{id.report.pay(summary.pay)}</p>
       </section>
+      {EXPORT_REMINDER_SHIFTS.includes(session.shiftOrder) && !reminderOff && (
+        <section
+          role="note"
+          className="flex flex-col gap-2 border-2 border-accent p-3"
+          data-testid="export-reminder"
+        >
+          <p>
+            <span aria-hidden="true">💾 </span>
+            {id.exportReminder.text}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <button type="button" className={btnPrimary} onClick={() => openMenu('save-transfer')}>
+              {id.exportReminder.now}
+            </button>
+            <button
+              type="button"
+              className={btnSecondary}
+              onClick={() => setFlag(EXPORT_REMINDER_OFF, true)}
+            >
+              {id.exportReminder.never}
+            </button>
+          </div>
+        </section>
+      )}
       {outro && (
         <section className={`${panel} flex flex-col gap-2 p-4`}>
           {outro.lines.map((line, i) => (

@@ -4,7 +4,15 @@ import type { ShiftDef } from '../../content/schemas.ts';
 import { shiftReducer, startShift } from '../../engine/shift.ts';
 import type { CaseOutcome } from '../../engine/types.ts';
 import { createNewSave, newModeProgress } from '../../persistence/saveSchema.ts';
-import { commitShift, nextShift, planFromShift, reviewItemsFor } from '../progress.ts';
+import type { CaseGenerator } from '../../modes/contract.ts';
+import {
+  buildShift,
+  commitShift,
+  nextShift,
+  planFromShift,
+  reviewItemsFor,
+  withGeneratedCases,
+} from '../progress.ts';
 
 const shiftDef = (order: number): ShiftDef => ({
   id: `soc-0${order}`,
@@ -39,6 +47,53 @@ describe('planFromShift', () => {
       { caseId: 'a', arriveAt: 0 },
       { caseId: 'b', arriveAt: 3 },
     ]);
+  });
+});
+
+describe('buildShift', () => {
+  const fakeGen: CaseGenerator = (params, rng, ctx) => [
+    { id: ctx.id, type: 'email', marker: params['brand'], seed: rng.a } as never,
+    { a: rng.a + 1 },
+  ];
+
+  it('turns generator entries into cases with stable ids, stored as session data', () => {
+    const { plan, generatedCases } = buildShift(
+      'soc',
+      shiftDef(1),
+      { 'typosquat-domain': fakeGen },
+      42,
+    );
+    expect(plan.cases).toEqual([
+      { caseId: 'a', arriveAt: 0 },
+      { caseId: 'b', arriveAt: 3 },
+      { caseId: 'soc-01-gen-2', arriveAt: 5 },
+    ]);
+    expect(Object.keys(generatedCases)).toEqual(['soc-01-gen-2']);
+    expect(buildShift('soc', shiftDef(1), { 'typosquat-domain': fakeGen }, 42)).toEqual({
+      plan,
+      generatedCases,
+    });
+  });
+
+  it('skips entries whose generator is unknown', () => {
+    expect(buildShift('soc', shiftDef(1), {}, 1).plan.cases).toHaveLength(2);
+  });
+});
+
+describe('withGeneratedCases', () => {
+  it('adds valid generated cases to the content and drops invalid ones', () => {
+    const s = {
+      generatedCases: { good: { id: 'good', type: 'email' }, bad: { id: 'bad', type: 'email' } },
+    } as never;
+    const schemas = {
+      email: {
+        safeParse: (x: { id: string }) =>
+          x.id === 'good' ? { success: true, data: x } : { success: false },
+      },
+    } as never;
+    const merged = withGeneratedCases(content, s, schemas);
+    expect(Object.keys(merged.cases).sort()).toEqual(['a', 'b', 'good']);
+    expect(content.cases).not.toHaveProperty('good');
   });
 });
 

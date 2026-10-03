@@ -19,6 +19,7 @@ export function DeskScreen() {
         session={session}
         wallet={wallet}
         mastery={save?.mastery ?? {}}
+        toolsOwned={save?.modes[mode.id]?.toolsOwned ?? []}
         dispatch={dispatch}
       />
     </Suspense>

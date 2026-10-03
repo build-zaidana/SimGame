@@ -11,8 +11,8 @@ export function RulebookScreen() {
   const content = useAppStore((s) => s.content);
   const save = useAppStore((s) => s.save);
   const session = useAppStore((s) => s.session);
-  const { focusChapterId } = useAppStore((s) => s.rulebook);
-  const closeRulebook = useAppStore((s) => s.closeRulebook);
+  const focusChapterId = useAppStore((s) => s.rulebookFocus);
+  const closeRulebook = useAppStore((s) => s.back);
   const preloadContent = useAppStore((s) => s.preloadContent);
   const modeId = session?.modeId ?? modes[0]?.id ?? 'soc';
 

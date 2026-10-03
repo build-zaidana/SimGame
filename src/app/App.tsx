@@ -3,7 +3,10 @@ import { id } from '../i18n/id.ts';
 import { DeskScreen } from './screens/DeskScreen.tsx';
 import { HubScreen } from './screens/HubScreen.tsx';
 import { ReportScreen } from './screens/ReportScreen.tsx';
+import { AssessmentScreen } from './screens/AssessmentScreen.tsx';
 import { ReviewScreen } from './screens/ReviewScreen.tsx';
+import { SaveTransferScreen } from './screens/SaveTransferScreen.tsx';
+import { ShopScreen } from './screens/ShopScreen.tsx';
 import { RulebookScreen } from './screens/RulebookScreen.tsx';
 import { TitleScreen } from './screens/TitleScreen.tsx';
 import { persistNow, useAppStore } from './store.ts';
@@ -28,6 +31,12 @@ function Screen() {
       return <ReviewScreen />;
     case 'rulebook':
       return <RulebookScreen />;
+    case 'shop':
+      return <ShopScreen />;
+    case 'save-transfer':
+      return <SaveTransferScreen />;
+    case 'assessment':
+      return <AssessmentScreen />;
     default:
       return <HubScreen />;
   }

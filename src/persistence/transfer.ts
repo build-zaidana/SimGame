@@ -36,12 +36,21 @@ function fromBase64Url(s: string): Uint8Array {
   return Uint8Array.from(bin, (c) => c.charCodeAt(0));
 }
 
-async function pipe(bytes: Uint8Array, stream: GenericTransformStream): Promise<Uint8Array> {
-  const out = new Blob([bytes as BlobPart])
-    .stream()
-    .pipeThrough(stream as ReadableWritablePair<Uint8Array, Uint8Array>);
-  return new Uint8Array(await new Response(out).arrayBuffer());
+type ByteTransform = TransformStream<Uint8Array, Uint8Array>;
+
+/** Menjalankan bytes lewat (De)CompressionStream. Hanya memakai API yang ada di browser dan Node. */
+async function pipe(bytes: Uint8Array, stream: ByteTransform): Promise<Uint8Array> {
+  const source = new ReadableStream<Uint8Array>({
+    start(controller) {
+      controller.enqueue(bytes);
+      controller.close();
+    },
+  });
+  return new Uint8Array(await new Response(source.pipeThrough(stream)).arrayBuffer());
 }
+
+const gzip = () => new CompressionStream('gzip') as unknown as ByteTransform;
+const gunzip = () => new DecompressionStream('gzip') as unknown as ByteTransform;
 
 async function checksum(payload: string): Promise<string> {
   const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(payload));
@@ -67,9 +76,7 @@ export async function encodeJson(
 ): Promise<string> {
   const json = new TextEncoder().encode(JSON.stringify(value));
   const compress = (opts.compress ?? true) && canCompress();
-  const payload = compress
-    ? 'z' + toBase64Url(await pipe(json, new CompressionStream('gzip')))
-    : 'j' + toBase64Url(json);
+  const payload = compress ? 'z' + toBase64Url(await pipe(json, gzip())) : 'j' + toBase64Url(json);
   return `${PREFIX}.${payload}.${await checksum(payload)}`;
 }
 
@@ -90,7 +97,7 @@ export async function decodeSave(input: string): Promise<SaveData> {
     let bytes = fromBase64Url(payload.slice(1));
     if (kind === 'z') {
       if (!canCompress()) throw new TransferError('corrupt', 'browser tidak mendukung dekompresi');
-      bytes = await pipe(bytes, new DecompressionStream('gzip'));
+      bytes = await pipe(bytes, gunzip());
     }
     raw = JSON.parse(new TextDecoder().decode(bytes));
   } catch (e) {

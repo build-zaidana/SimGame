@@ -1,6 +1,8 @@
 import { useCallback, useState } from 'react';
 import { id } from '../../../i18n/id.ts';
-import type { DeskProps } from '../../../modes/contract.ts';
+import type { ReactNode } from 'react';
+import type { BaseCase } from '../../../content/schemas.ts';
+import type { DeskProps, DocumentProps } from '../../../modes/contract.ts';
 import { ActionBar } from './ActionBar.tsx';
 import { BriefingDialog } from './BriefingDialog.tsx';
 import { FeedbackDialog } from './FeedbackDialog.tsx';
@@ -17,7 +19,21 @@ const TABS: Tab[] = ['queue', 'document', 'rulebook'];
  * Meja kerja standar: Antrian · Dokumen · Panduan + bar aksi.
  * Desktop ≥ 1024 px: 3 kolom. Lebih kecil: tab + bar aksi lengket di bawah.
  */
-export function StandardDesk({ mode, content, session, wallet, mastery, dispatch }: DeskProps) {
+interface StandardDeskProps extends DeskProps {
+  /** Panel tambahan di bawah dokumen (mis. hasil alat). */
+  renderExtra?(c: BaseCase, doc: Omit<DocumentProps, 'data'>): ReactNode;
+}
+
+export function StandardDesk({
+  mode,
+  content,
+  session,
+  wallet,
+  mastery,
+  toolsOwned,
+  dispatch,
+  renderExtra,
+}: StandardDeskProps) {
   const [tab, setTab] = useState<Tab>(session.activeCaseId ? 'document' : 'queue');
   const running =
     !session.paused && (session.phase === 'working' || session.phase === 'inspecting');
@@ -37,6 +53,13 @@ export function StandardDesk({ mode, content, session, wallet, mastery, dispatch
   const activeCase = active ? content.cases[active.caseId] : undefined;
   const activeType = activeCase ? caseTypeOf(activeCase.type) : undefined;
   const marks = new Set(active?.marks ?? []);
+  const tools = new Set(toolsOwned);
+  const docProps: Omit<DocumentProps, 'data'> = {
+    marks,
+    tools,
+    locked: session.phase !== 'inspecting',
+    onToggleMark: (evidenceId) => dispatch({ type: 'TOGGLE_MARK', evidenceId }),
+  };
   const decisions = mode.decisions.filter((d) => d.unlockedAtShift <= session.shiftOrder);
   const decisionLabel = (d: string) => mode.decisions.find((x) => x.id === d)?.label ?? d;
 
@@ -109,12 +132,8 @@ export function StandardDesk({ mode, content, session, wallet, mastery, dispatch
                   <span data-testid="marks-count">{id.desk.marksCount(marks.size)}</span>
                 </p>
                 <div data-testid="document" data-case-id={active.caseId}>
-                  <activeType.Document
-                    data={activeCase}
-                    marks={marks}
-                    locked={session.phase !== 'inspecting'}
-                    onToggleMark={(evidenceId) => dispatch({ type: 'TOGGLE_MARK', evidenceId })}
-                  />
+                  <activeType.Document data={activeCase} {...docProps} />
+                  {renderExtra?.(activeCase, docProps)}
                 </div>
                 <div className="mt-3">
                   <MentorHints

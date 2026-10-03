@@ -1,24 +1,72 @@
-import type { ModeContent } from '../content/loader.ts';
+import type { CaseSchemas, ModeContent } from '../content/loader.ts';
 import type { ReviewItem, ShiftDef } from '../content/schemas.ts';
 import { recordResult, recordShiftConcepts, type MasteryMap } from '../engine/mastery.ts';
 import { createRng } from '../engine/rng.ts';
 import { selectReviewItems } from '../engine/review.ts';
 import { summarizeShift } from '../engine/shift.ts';
 import type { ShiftPlan, ShiftSession } from '../engine/types.ts';
+import type { CaseGenerator } from '../modes/contract.ts';
 import { newModeProgress, type ModeProgress, type SaveData } from '../persistence/saveSchema.ts';
 
-/** ShiftDef (konten) → ShiftPlan (engine). Entri generator diabaikan sampai M3. */
+/** ShiftDef (konten) → ShiftPlan (engine), hanya kasus tetap. */
 export function planFromShift(modeId: string, shift: ShiftDef): ShiftPlan {
+  return buildShift(modeId, shift, {}, 0).plan;
+}
+
+/**
+ * ShiftDef → ShiftPlan + kasus prosedural. Generator dijalankan sekali saat shift dimulai;
+ * hasilnya disimpan di sesi (`generatedCases`) supaya shift yang dilanjutkan tetap sama.
+ */
+export function buildShift(
+  modeId: string,
+  shift: ShiftDef,
+  generators: Record<string, CaseGenerator>,
+  seed: number,
+): { plan: ShiftPlan; generatedCases: Record<string, unknown> } {
+  let rng = createRng(seed ^ 0x9e3779b9);
+  const generatedCases: Record<string, unknown> = {};
+  const cases: ShiftPlan['cases'] = [];
+  shift.queue.forEach((q, i) => {
+    if ('caseId' in q) {
+      cases.push({ caseId: q.caseId, arriveAt: q.arriveAt });
+      return;
+    }
+    const generate = generators[q.generator];
+    if (!generate) return;
+    const id = `${shift.id}-gen-${i}`;
+    const [c, next] = generate(q.params, rng, { id });
+    rng = next;
+    generatedCases[id] = c;
+    cases.push({ caseId: id, arriveAt: q.arriveAt });
+  });
   return {
-    shiftId: shift.id,
-    modeId,
-    order: shift.order,
-    durationGameMinutes: shift.durationGameMinutes,
-    realSecondsPerGameMinute: shift.realSecondsPerGameMinute,
-    cases: shift.queue.flatMap((q) =>
-      'caseId' in q ? [{ caseId: q.caseId, arriveAt: q.arriveAt }] : [],
-    ),
+    plan: {
+      shiftId: shift.id,
+      modeId,
+      order: shift.order,
+      durationGameMinutes: shift.durationGameMinutes,
+      realSecondsPerGameMinute: shift.realSecondsPerGameMinute,
+      cases,
+    },
+    generatedCases,
   };
+}
+
+/** Konten mode + kasus prosedural sesi ini (divalidasi ulang dengan skema tipe kasus). */
+export function withGeneratedCases(
+  content: ModeContent,
+  session: Pick<ShiftSession, 'generatedCases'>,
+  schemas: CaseSchemas,
+): ModeContent {
+  const extra: ModeContent['cases'] = {};
+  for (const [cid, raw] of Object.entries(session.generatedCases)) {
+    const type = (raw as { type?: unknown } | null)?.type;
+    const parsed = typeof type === 'string' ? schemas[type]?.safeParse(raw) : undefined;
+    if (parsed?.success) extra[cid] = parsed.data;
+  }
+  return Object.keys(extra).length === 0
+    ? content
+    : { ...content, cases: { ...content.cases, ...extra } };
 }
 
 /** Shift yang terbuka; jika belum ada konten untuknya, shift terakhir (ulangi). */
