@@ -232,5 +232,5 @@ Aturan potong jika mepet (sudah disepakati): **HUB tetap menu sederhana**, janga
 
 1. Nama final game (sementara: **ShiftIT**).
 2. Apakah perlu kerja sama dengan sekolah/komunitas untuk uji main?
-3. Domain & hosting final (Vercel / Cloudflare Pages).
+3. ~~Domain & hosting final~~ → hosting: **Netlify** (dipilih pemilik, Oktober 2026); domain final masih terbuka.
 4. Gratis selamanya, atau ada model donasi/sponsor nanti?
