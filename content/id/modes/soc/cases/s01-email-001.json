@@ -1,0 +1,44 @@
+{
+  "id": "s01-email-001",
+  "type": "email",
+  "conceptIds": ["phishing-signs", "url-anatomy"],
+  "difficulty": 1,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": { "escalate": 0.6 },
+  "severity": 2,
+  "data": {
+    "from": {
+      "name": "Bank Nusantara",
+      "address": "keamanan@banknusantara-verifikasi.test",
+      "evidenceId": "sender"
+    },
+    "subject": { "text": "SEGERA: Akun Anda akan diblokir dalam 1 jam", "evidenceId": "urgency" },
+    "receivedAt": "09:02",
+    "body": [
+      { "text": "Yth. Nasabah,", "evidenceId": "generic-greeting" },
+      {
+        "text": "Kami mendeteksi aktivitas mencurigakan di akun Anda. Klik tautan berikut untuk verifikasi:",
+        "evidenceId": "body-claim"
+      },
+      {
+        "link": {
+          "label": "banknusantara.co.id/verifikasi",
+          "href": "http://banknusantara.co.id.akun-aman.test/login"
+        },
+        "evidenceId": "link"
+      },
+      {
+        "text": "Jika tidak diverifikasi, akun Anda akan diblokir permanen.",
+        "evidenceId": "threat"
+      }
+    ],
+    "attachments": []
+  },
+  "evidence": {
+    "required": ["sender", "link"],
+    "supporting": ["urgency", "generic-greeting", "threat"]
+  },
+  "explanation": "Domain pengirim bukan banknusantara.co.id, dan alamat asli tautannya mengarah ke akun-aman.test. Bank tidak pernah meminta verifikasi akun lewat tautan email.",
+  "ruleRefs": ["r-phish-1", "r-url-3", "r-phish-2"]
+}

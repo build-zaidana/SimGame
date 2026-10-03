@@ -1,0 +1,60 @@
+{
+  "chapters": [
+    {
+      "id": "ch-url",
+      "title": "Bab 1 · Tautan",
+      "conceptId": "url-anatomy",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-url-1",
+          "text": "Pemilik situs = satu nama tepat sebelum akhiran (.co.id, .com, .test). Baca domain dari kanan ke kiri.",
+          "evidenceTags": ["domain"]
+        },
+        {
+          "id": "r-url-2",
+          "text": "Gembok HTTPS hanya berarti koneksi terenkripsi, bukan berarti situsnya jujur.",
+          "evidenceTags": ["https"]
+        },
+        {
+          "id": "r-url-3",
+          "text": "Teks tautan bisa berbeda dari alamat aslinya. Tahan atau klik kanan tautan untuk melihat alamat asli.",
+          "evidenceTags": ["link"]
+        }
+      ]
+    },
+    {
+      "id": "ch-phish",
+      "title": "Bab 2 · Phishing",
+      "conceptId": "phishing-signs",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-phish-1",
+          "text": "Cek alamat pengirim (domain setelah @), bukan hanya nama yang tampil.",
+          "evidenceTags": ["sender"]
+        },
+        {
+          "id": "r-phish-2",
+          "text": "Organisasi resmi tidak meminta verifikasi akun, password, atau data pribadi lewat tautan email.",
+          "evidenceTags": ["link", "request"]
+        },
+        {
+          "id": "r-phish-3",
+          "text": "Desakan waktu (\"SEGERA\", \"1 jam\") dan salam umum (\"Yth. Nasabah\") adalah tanda bahaya.",
+          "evidenceTags": ["urgency", "greeting"]
+        },
+        {
+          "id": "r-phish-4",
+          "text": "Hadiah atau undian yang tidak pernah kamu ikuti hampir selalu penipuan.",
+          "evidenceTags": ["prize"]
+        },
+        {
+          "id": "r-phish-5",
+          "text": "Email sah: domain asli, menyapa dengan nama, dan tidak memaksa. Jangan asal blokir.",
+          "evidenceTags": []
+        }
+      ]
+    }
+  ]
+}

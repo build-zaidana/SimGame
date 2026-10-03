@@ -1,0 +1,43 @@
+{
+  "id": "s01-email-003",
+  "type": "email",
+  "conceptIds": ["phishing-signs", "url-anatomy"],
+  "difficulty": 1,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": { "escalate": 0.6 },
+  "severity": 2,
+  "data": {
+    "from": {
+      "name": "KirimCepat",
+      "address": "noreply@kirimcepat-id.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Paket Anda tertahan, ongkos kirim kurang Rp 5.000",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "09:41",
+    "body": [
+      { "text": "Halo Pelanggan,", "evidenceId": "generic-greeting" },
+      {
+        "text": "Paket Anda tertahan di gudang karena ongkos kirim kurang Rp 5.000.",
+        "evidenceId": "body-claim"
+      },
+      {
+        "text": "Bayar dalam 24 jam atau paket dikembalikan ke pengirim.",
+        "evidenceId": "urgency"
+      },
+      {
+        "link": { "label": "Bayar sekarang", "href": "https://kirimcepat-bayar.test/ongkir" },
+        "evidenceId": "link"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["sender", "link"],
+    "supporting": ["urgency", "generic-greeting"]
+  },
+  "explanation": "Domain pengirim kirimcepat-id.test bukan milik KirimCepat (kirimcepat.co.id), dan tautannya menuju situs lain yang meminta pembayaran. Nominal kecil dan batas waktu dipakai supaya kamu cepat membayar tanpa curiga.",
+  "ruleRefs": ["r-phish-1", "r-url-3", "r-phish-3"]
+}

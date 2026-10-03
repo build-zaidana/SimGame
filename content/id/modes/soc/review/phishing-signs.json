@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "id": "rv-phish-1",
+      "type": "mcq",
+      "conceptId": "phishing-signs",
+      "difficulty": 1,
+      "prompt": "Email dari \"Bank Nusantara\": \"Yth. Nasabah, akun Anda diblokir dalam 1 jam. Verifikasi di tautan ini.\" Tanda phishing apa saja yang muncul?",
+      "choices": [
+        "Salam umum, desakan waktu, dan minta verifikasi lewat tautan",
+        "Tidak ada, bank memang biasa mengirim email seperti ini",
+        "Hanya salam umum"
+      ],
+      "answerIndex": 0,
+      "explanation": "Ketiga tanda muncul sekaligus. Bank resmi tidak meminta verifikasi akun lewat tautan email."
+    }
+  ]
+}

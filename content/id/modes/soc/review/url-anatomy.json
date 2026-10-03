@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "id": "rv-url-1",
+      "type": "mcq",
+      "conceptId": "url-anatomy",
+      "difficulty": 1,
+      "prompt": "Siapa pemilik situs bantuan.kirimcepat.co.id.cek-resi.test?",
+      "choices": ["KirimCepat (kirimcepat.co.id)", "cek-resi.test", "bantuan"],
+      "answerIndex": 1,
+      "explanation": "Baca dari kanan: akhirannya .test, dan satu nama sebelumnya adalah cek-resi. Bagian di depannya hanya subdomain."
+    },
+    {
+      "id": "rv-url-2",
+      "type": "mcq",
+      "conceptId": "url-anatomy",
+      "difficulty": 1,
+      "prompt": "Sebuah situs punya gembok HTTPS. Apa artinya?",
+      "choices": [
+        "Situsnya pasti milik organisasi resmi",
+        "Koneksinya terenkripsi, tapi pemiliknya belum tentu jujur",
+        "Situsnya sudah diperiksa polisi siber"
+      ],
+      "answerIndex": 1,
+      "explanation": "HTTPS hanya mengenkripsi koneksi antara browser dan situs. Situs penipu juga bisa memakai HTTPS."
+    }
+  ]
+}
