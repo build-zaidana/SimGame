@@ -1,31 +1,13 @@
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test } from '@playwright/test';
+import { answerReview, decideAll, openNextCase, startShift } from './helpers.ts';
 
-async function startShift1(page: Page) {
+test.beforeEach(async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'Main' }).click();
-  await page.getByRole('button', { name: 'Mulai Shift 1: Hari Pertama' }).click();
-  const briefing = page.getByRole('dialog');
-  await expect(briefing.getByRole('heading', { name: 'Shift 1 · Hari Pertama' })).toBeVisible();
-  while (await briefing.getByRole('button', { name: 'Lanjut' }).isVisible()) {
-    await briefing.getByRole('button', { name: 'Lanjut' }).click();
-  }
-  await briefing.getByRole('button', { name: 'Mulai shift' }).click();
-  await expect(briefing).toBeHidden();
-}
+  await startShift(page, 'Mulai Shift 1: Hari Pertama', 'Shift 1 · Hari Pertama');
+});
 
-/** Di HP, antrian ada di tab sendiri; di desktop selalu terlihat. */
-async function openNextCase(page: Page) {
-  const queueTab = page.getByRole('tab', { name: 'Antrian' });
-  if (await queueTab.isVisible()) await queueTab.click();
-  const next = page.locator('[data-case]:enabled').first();
-  await expect(next).toBeVisible();
-  await next.click();
-  await expect(page.getByTestId('document')).toBeVisible();
-}
-
-test('Shift 1 can be played through to the report', async ({ page }) => {
-  await startShift1(page);
-
+test('Shift 1 can be played through the report and review', async ({ page }) => {
   // Kasus pertama: tandai bukti yang benar lalu blokir → umpan balik "Tepat!".
   await openNextCase(page);
   await expect(page.getByTestId('document')).toHaveAttribute('data-case-id', 's01-email-001');
@@ -44,27 +26,44 @@ test('Shift 1 can be played through to the report', async ({ page }) => {
   await expect(feedback.getByRole('heading', { name: 'Tepat!' })).toBeVisible();
   await feedback.getByRole('button', { name: 'Lanjut' }).click();
 
-  // Sisa kasus: putuskan apa saja sampai shift selesai.
-  for (let i = 1; i < 8; i++) {
-    await openNextCase(page);
-    await page.locator('[data-decision="allow"]').click();
-    await page.getByRole('dialog').getByRole('button', { name: 'Lanjut' }).click();
-  }
+  await decideAll(page, 7);
 
   await expect(page.getByRole('heading', { name: 'Laporan Shift 1 · Hari Pertama' })).toBeVisible();
   await expect(page.getByText('Keputusan tepat: 4 dari 8')).toBeVisible();
   await expect(page.getByText(/Nusa Digital punya analis baru/)).toBeVisible();
 
-  await page.getByRole('button', { name: 'Kembali ke kantor' }).click();
+  // Tautan "Baca lagi" membuka bab terkait, lalu kembali ke laporan.
+  await page.getByRole('button', { name: 'Baca lagi: Bab 1 · Tautan' }).first().click();
+  await expect(page.getByRole('heading', { name: 'Buku Panduan SOC' })).toBeVisible();
+  await expect(page.locator('[data-chapter="ch-url"] details')).toHaveAttribute('open', '');
+  await page.getByRole('button', { name: 'Kembali' }).click();
+
+  await page.getByRole('button', { name: 'Lanjut ke Review Cepat' }).click();
+  const ids = await answerReview(page, 'wrong');
+  expect(ids).toHaveLength(3);
+  await expect(page.getByTestId('review-score')).toHaveText('0 dari 3 benar');
+  await page.getByRole('button', { name: 'Simpan & kembali ke kantor' }).click();
+
   await expect(page.getByText('Shift selesai: 1')).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Ulangi Shift 1: Hari Pertama' })).toBeVisible();
+  await expect(
+    page.getByRole('button', { name: 'Mulai Shift 2: Kotak Masuk Penuh' }),
+  ).toBeVisible();
+});
+
+test('mentor hints are tiered and shown in the document pane', async ({ page }) => {
+  await openNextCase(page);
+  const ask = page.getByTestId('ask-mentor');
+  await expect(page.getByText('Petunjuk pertama gratis.')).toBeVisible();
+  await ask.click();
+  await expect(page.getByText(/Petunjuk 1 dari 2/)).toBeVisible();
+  await ask.click();
+  await expect(page.getByText(/Petunjuk 2 dari 2/)).toBeVisible();
+  await expect(ask).toBeDisabled();
 });
 
 test('reloading mid-shift resumes the same case with its marks', async ({ page }) => {
-  await startShift1(page);
   await openNextCase(page);
-  const doc = page.getByTestId('document');
-  const caseId = await doc.getAttribute('data-case-id');
+  const caseId = await page.getByTestId('document').getAttribute('data-case-id');
   await page.locator('[data-evidence="sender"]').click();
   await expect(page.locator('[data-evidence="sender"]')).toHaveAttribute('aria-pressed', 'true');
 
