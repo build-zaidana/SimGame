@@ -101,19 +101,25 @@ async function works(store: KeyValueStore): Promise<boolean> {
   }
 }
 
-/** IndexedDB → localStorage → memori (progres tidak tersimpan; UI menampilkan banner). */
+/** Penyimpanan terbaik yang tersedia: IndexedDB → localStorage → memori. */
+export async function detectStore(): Promise<{ store: KeyValueStore; kind: StorageKind }> {
+  if (typeof indexedDB !== 'undefined' && (await works(idbStore()))) {
+    return { store: idbStore(), kind: 'indexeddb' };
+  }
+  try {
+    const ls = localStorageStore();
+    if (await works(ls)) return { store: ls, kind: 'localstorage' };
+  } catch {
+    // localStorage diblokir.
+  }
+  return { store: memoryStore(), kind: 'memory' };
+}
+
+/** Repository save lokal. Jika hanya memori yang tersedia, UI menampilkan banner. */
 export async function createLocalSaveRepository(): Promise<{
   repo: LocalSaveRepository;
   kind: StorageKind;
 }> {
-  if (typeof indexedDB !== 'undefined' && (await works(idbStore()))) {
-    return { repo: new LocalSaveRepository(idbStore()), kind: 'indexeddb' };
-  }
-  try {
-    const ls = localStorageStore();
-    if (await works(ls)) return { repo: new LocalSaveRepository(ls), kind: 'localstorage' };
-  } catch {
-    // localStorage diblokir.
-  }
-  return { repo: new LocalSaveRepository(memoryStore()), kind: 'memory' };
+  const { store, kind } = await detectStore();
+  return { repo: new LocalSaveRepository(store), kind };
 }
