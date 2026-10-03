@@ -64,7 +64,14 @@ describe('summarizeEvents', () => {
   it('computes learning metrics for the play-test report', () => {
     const at = 'x';
     const events: LoggedEvent[] = [
-      { name: 'shift_started', modeId: 'soc', shiftId: 'soc-01', playMode: 'relaxed', at },
+      {
+        name: 'shift_started',
+        modeId: 'soc',
+        shiftId: 'soc-01',
+        playMode: 'relaxed',
+        practice: false,
+        at,
+      },
       {
         name: 'case_decided',
         modeId: 'soc',
@@ -85,14 +92,22 @@ describe('summarizeEvents', () => {
         hintsUsed: 2,
         at,
       },
-      { name: 'shift_completed', modeId: 'soc', shiftId: 'soc-01', averageScore: 70, stars: 2, at },
+      {
+        name: 'shift_completed',
+        modeId: 'soc',
+        shiftId: 'soc-01',
+        averageScore: 70,
+        stars: 2,
+        practice: true,
+        at,
+      },
       { name: 'review_answered', itemId: 'q1', correct: true, at },
       { name: 'review_answered', itemId: 'q2', correct: false, at },
       { name: 'lesson_opened', conceptId: 'url-anatomy', at },
     ];
     expect(summarizeEvents(events)).toEqual({
       shiftsStarted: 1,
-      shiftsCompleted: [{ shiftId: 'soc-01', averageScore: 70, stars: 2 }],
+      shiftsCompleted: [{ shiftId: 'soc-01', averageScore: 70, stars: 2, practice: true }],
       cases: 2,
       caseAccuracy: 0.5,
       avgEvidenceScore: 0.75,

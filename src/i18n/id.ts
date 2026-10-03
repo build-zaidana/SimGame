@@ -22,8 +22,8 @@ export const id = {
       'Data ini hanya ada di perangkat ini. Ekspor sebagai JSON untuk dikirim ke penyelenggara uji main.',
     shiftsStarted: (n: number) => `Shift dimulai: ${n}`,
     shiftsCompleted: 'Shift selesai',
-    shiftRow: (id: string, score: number, stars: number) =>
-      `${id}: skor ${score}, ${stars} bintang`,
+    shiftRow: (id: string, score: number, stars: number, practice: boolean) =>
+      `${id}${practice ? ' (latihan)' : ''}: skor ${score}, ${stars} bintang`,
     cases: (n: number, acc: number) => `Kasus diputuskan: ${n} (akurasi ${acc}%)`,
     evidence: (pct: number) => `Rata-rata skor bukti: ${pct}%`,
     decisionTime: (s: number) => `Rata-rata waktu memutuskan: ${s} detik`,
@@ -47,7 +47,13 @@ export const id = {
     intro: 'Pilih meja untuk mulai bekerja.',
     comingSoon: 'Segera hadir',
     enterShift: (order: number, title: string) => `Mulai Shift ${order}: ${title}`,
-    replayShift: (order: number, title: string) => `Ulangi Shift ${order}: ${title}`,
+    allShiftsDone: 'Semua shift selesai! Ulangi shift mana pun lewat Mode Latihan.',
+    practiceHeading: 'Mode Latihan',
+    practiceIntro:
+      'Ulangi shift yang sudah selesai. Tidak memengaruhi gaji, kepercayaan, skor terbaik, atau review.',
+    practiceShift: (order: number, title: string) => `Latihan Shift ${order}: ${title}`,
+    continuePractice: (order: number) => `Lanjutkan latihan Shift ${order}`,
+    cancelPractice: 'Batalkan latihan',
     continueShift: (order: number) => `Lanjutkan Shift ${order}`,
     viewReport: (order: number) => `Lihat laporan Shift ${order}`,
     moreShiftsSoon: 'Shift berikutnya segera hadir.',
@@ -87,6 +93,8 @@ export const id = {
     pause: 'Jeda',
     resume: 'Lanjut',
     paused: 'Jam dijeda',
+    practiceBadge: 'LATIHAN',
+    practiceLabel: 'Mode Latihan: hasil tidak disimpan ke progres',
     queueEmpty: 'Antrian kosong. Kasus berikutnya segera datang…',
     queueHeading: 'Antrian kasus',
     queueToggle: (n: number) => `Antrian (${n} menunggu)`,
@@ -247,6 +255,8 @@ export const id = {
     missed: 'terlewat',
     readChapter: (title: string) => `Baca lagi: ${title}`,
     toReview: 'Lanjut ke Review Cepat',
+    practiceBanner: 'Ini shift latihan. Gaji, kepercayaan, dan skor terbaikmu tidak berubah.',
+    practicePay: 'Gaji shift ini: tidak dibayar (latihan)',
     finish: 'Kembali ke kantor',
   },
   review: {
@@ -266,6 +276,8 @@ export const id = {
     score: (n: number, total: number) => `${n} dari ${total} benar`,
     retryNote: 'Soal yang salah akan muncul lagi di review shift berikutnya.',
     finish: 'Simpan & kembali ke kantor',
+    finishPractice: 'Selesai latihan & kembali ke kantor',
+    practiceNote: 'Jawaban di latihan tidak memengaruhi jadwal review.',
     empty: 'Tidak ada soal review untuk shift ini.',
   },
   soc: {

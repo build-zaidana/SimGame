@@ -56,6 +56,8 @@ export interface DeskProps {
   wallet: number;
   mastery: MasteryMap;
   toolsOwned: readonly string[];
+  /** Mode Latihan (PRD S5): meja menampilkan penanda bahwa hasil tidak disimpan. */
+  practice: boolean;
   dispatch(action: ShiftAction): void;
 }
 

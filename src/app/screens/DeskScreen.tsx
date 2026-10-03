@@ -8,6 +8,7 @@ export function DeskScreen() {
   const content = useAppStore((s) => s.content);
   const save = useAppStore((s) => s.save);
   const dispatch = useAppStore((s) => s.dispatch);
+  const practice = useAppStore((s) => s.practice);
   const mode = session ? getMode(session.modeId) : undefined;
   if (!session || !content || !mode) return null;
   const wallet = save?.modes[mode.id]?.wallet ?? 0;
@@ -20,6 +21,7 @@ export function DeskScreen() {
         wallet={wallet}
         mastery={save?.mastery ?? {}}
         toolsOwned={save?.modes[mode.id]?.toolsOwned ?? []}
+        practice={practice}
         dispatch={dispatch}
       />
     </Suspense>

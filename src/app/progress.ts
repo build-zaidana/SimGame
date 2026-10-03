@@ -69,12 +69,14 @@ export function withGeneratedCases(
     : { ...content, cases: { ...content.cases, ...extra } };
 }
 
-/** Shift yang terbuka; jika belum ada konten untuknya, shift terakhir (ulangi). */
+/** Shift berikutnya di jalur utama; tidak ada bila semua shift selesai (ulangi lewat Latihan). */
 export function nextShift(content: ModeContent, progress: ModeProgress): ShiftDef | undefined {
-  return (
-    content.shifts.find((s) => s.order === progress.unlockedShift) ??
-    content.shifts.filter((s) => s.order <= progress.unlockedShift).at(-1)
-  );
+  return content.shifts.find((s) => s.order === progress.unlockedShift);
+}
+
+/** Shift yang sudah pernah diselesaikan dan bisa diulang di Mode Latihan (PRD S5). */
+export function practiceShifts(content: ModeContent, progress: ModeProgress): ShiftDef[] {
+  return content.shifts.filter((s) => s.id in progress.shifts);
 }
 
 export interface ReviewResult {

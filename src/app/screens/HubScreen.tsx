@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { id } from '../../i18n/id.ts';
 import { modes, upcomingModes } from '../../modes/registry.ts';
 import { newModeProgress } from '../../persistence/saveSchema.ts';
-import { nextShift } from '../progress.ts';
+import { nextShift, practiceShifts } from '../progress.ts';
 import { useAppStore } from '../store.ts';
 import { OfficeIllustration } from '../ui/hub/OfficeIllustration.tsx';
 import { btnPrimary, btnSecondary, panel } from '../ui/styles.ts';
@@ -12,6 +12,8 @@ export function HubScreen() {
   const save = useAppStore((s) => s.save);
   const content = useAppStore((s) => s.content);
   const enterMode = useAppStore((s) => s.enterMode);
+  const enterPractice = useAppStore((s) => s.enterPractice);
+  const cancelPractice = useAppStore((s) => s.cancelPractice);
   const preloadContent = useAppStore((s) => s.preloadContent);
   const openRulebook = useAppStore((s) => s.openRulebook);
   const openMenu = useAppStore((s) => s.openMenu);
@@ -88,18 +90,22 @@ export function HubScreen() {
         {modes.map((m) => {
           const progress = save?.modes[m.id] ?? newModeProgress();
           const active = progress.activeSession;
-          const shift =
-            content && content.meta.id === m.id ? nextShift(content, progress) : undefined;
+          const practiceRun = progress.practiceSession;
+          const ownContent = content && content.meta.id === m.id ? content : null;
+          const shift = ownContent ? nextShift(ownContent, progress) : undefined;
+          const practiceList = ownContent ? practiceShifts(ownContent, progress) : [];
           const done = Object.keys(progress.shifts).length;
-          const replay = shift !== undefined && shift.order < progress.unlockedShift;
+          const allDone = !!ownContent && !active && !shift && done > 0;
+          const run = (start: () => Promise<void>) => {
+            setEntering(true);
+            void start().finally(() => setEntering(false));
+          };
           const label = active
             ? active.phase === 'ended'
               ? id.hub.viewReport(active.shiftOrder)
               : id.hub.continueShift(active.shiftOrder)
             : shift
-              ? replay
-                ? id.hub.replayShift(shift.order, shift.title)
-                : id.hub.enterShift(shift.order, shift.title)
+              ? id.hub.enterShift(shift.order, shift.title)
               : id.hub.loadingDesk;
           return (
             <li key={m.id} className={`${panel} flex flex-col gap-2 p-4`}>
@@ -109,18 +115,64 @@ export function HubScreen() {
                 {id.hub.progress(done)} · {id.hub.wallet(progress.wallet)} ·{' '}
                 {id.hub.trust(progress.trust)}
               </p>
-              {replay && !active && <p className="text-sm text-accent">{id.hub.moreShiftsSoon}</p>}
-              <button
-                type="button"
-                className={btnPrimary}
-                disabled={entering || (!active && !shift)}
-                onClick={() => {
-                  setEntering(true);
-                  void enterMode(m.id).finally(() => setEntering(false));
-                }}
-              >
-                {label}
-              </button>
+              {allDone ? (
+                <p className="text-sm text-accent">{id.hub.allShiftsDone}</p>
+              ) : (
+                <button
+                  type="button"
+                  className={btnPrimary}
+                  disabled={entering || (!active && !shift)}
+                  onClick={() => run(() => enterMode(m.id))}
+                >
+                  {label}
+                </button>
+              )}
+              {(practiceRun || practiceList.length > 0) && (
+                <section
+                  aria-labelledby={`practice-${m.id}`}
+                  className="mt-2 flex flex-col gap-2 border-t-2 border-ink/30 pt-2"
+                >
+                  <h3 id={`practice-${m.id}`} className="font-display">
+                    <span aria-hidden="true">🎯 </span>
+                    {id.hub.practiceHeading}
+                  </h3>
+                  <p className="text-xs text-ink-muted">{id.hub.practiceIntro}</p>
+                  {practiceRun ? (
+                    <div className="flex flex-wrap gap-2">
+                      <button
+                        type="button"
+                        className={btnSecondary}
+                        disabled={entering}
+                        onClick={() => run(() => enterPractice(m.id))}
+                      >
+                        {id.hub.continuePractice(practiceRun.shiftOrder)}
+                      </button>
+                      <button
+                        type="button"
+                        className={btnSecondary}
+                        onClick={() => cancelPractice(m.id)}
+                      >
+                        {id.hub.cancelPractice}
+                      </button>
+                    </div>
+                  ) : (
+                    <ul className="flex flex-col gap-2">
+                      {practiceList.map((s) => (
+                        <li key={s.id}>
+                          <button
+                            type="button"
+                            className={`${btnSecondary} w-full justify-start text-left`}
+                            disabled={entering}
+                            onClick={() => run(() => enterPractice(m.id, s.id))}
+                          >
+                            {id.hub.practiceShift(s.order, s.title)}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </section>
+              )}
             </li>
           );
         })}

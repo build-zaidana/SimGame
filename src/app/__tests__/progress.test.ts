@@ -10,6 +10,7 @@ import {
   commitShift,
   nextShift,
   planFromShift,
+  practiceShifts,
   reviewItemsFor,
   withGeneratedCases,
 } from '../progress.ts';
@@ -98,9 +99,24 @@ describe('withGeneratedCases', () => {
 });
 
 describe('nextShift', () => {
-  it('picks the unlocked shift, or the last one when no newer shift exists', () => {
+  it('picks the unlocked shift; none once every shift is done (replays go through practice)', () => {
     expect(nextShift(content, { ...newModeProgress(), unlockedShift: 2 })?.order).toBe(2);
-    expect(nextShift(content, { ...newModeProgress(), unlockedShift: 9 })?.order).toBe(2);
+    expect(nextShift(content, { ...newModeProgress(), unlockedShift: 9 })).toBeUndefined();
+  });
+});
+
+describe('practiceShifts', () => {
+  it('lists completed shifts in order', () => {
+    const progress = {
+      ...newModeProgress(),
+      unlockedShift: 3,
+      shifts: {
+        'soc-02': { bestScore: 50, stars: 1 as const },
+        'soc-01': { bestScore: 90, stars: 3 as const },
+      },
+    };
+    expect(practiceShifts(content, progress).map((s) => s.id)).toEqual(['soc-01', 'soc-02']);
+    expect(practiceShifts(content, newModeProgress())).toEqual([]);
   });
 });
 

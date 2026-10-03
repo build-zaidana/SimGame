@@ -7,13 +7,25 @@ interface HudProps {
   deskTitle: string;
   session: ShiftSession;
   wallet: number;
+  practice: boolean;
   onTogglePause(): void;
 }
 
-export function Hud({ deskTitle, session, wallet, onTogglePause }: HudProps) {
+export function Hud({ deskTitle, session, wallet, practice, onTogglePause }: HudProps) {
   return (
     <header className="flex items-center gap-3 border-b-2 border-ink/40 bg-panel px-4 py-1 text-sm">
       <h1 className="hidden font-display text-accent sm:block">{deskTitle}</h1>
+      {practice && (
+        <span
+          className="border-2 border-focus px-1 font-display text-xs text-focus"
+          title={id.desk.practiceLabel}
+          data-testid="practice-badge"
+        >
+          <span aria-hidden="true">🎯 </span>
+          {id.desk.practiceBadge}
+          <span className="sr-only">: {id.desk.practiceLabel}</span>
+        </span>
+      )}
       <p className="flex flex-1 flex-wrap items-center gap-x-4 font-display">
         <span>
           <span className="sr-only">{id.desk.clock} </span>

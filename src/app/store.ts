@@ -19,6 +19,7 @@ import {
   buildShift,
   commitShift,
   nextShift,
+  practiceShifts,
   withGeneratedCases,
   type ReviewResult,
 } from './progress.ts';
@@ -52,6 +53,8 @@ interface AppState {
   screen: Screen;
   save: SaveData | null;
   session: ShiftSession | null;
+  /** true = sesi Mode Latihan: hasilnya tidak disimpan ke progres utama. */
+  practice: boolean;
   content: ModeContent | null;
   /** Layar asal untuk tombol Kembali di layar menu. */
   returnTo: Screen;
@@ -64,6 +67,9 @@ interface AppState {
   preloadContent(modeId: string): Promise<void>;
   /** Masuk meja: lanjutkan shift yang tersimpan, atau mulai shift berikutnya. */
   enterMode(modeId: string): Promise<void>;
+  /** Mode Latihan: lanjutkan latihan tersimpan, atau mulai latihan shift yang sudah selesai. */
+  enterPractice(modeId: string, shiftId?: string): Promise<void>;
+  cancelPractice(modeId: string): void;
   dispatch(action: ShiftAction): void;
   openMenu(screen: MenuScreen): void;
   openRulebook(focusChapterId: string | null): void;
@@ -111,13 +117,22 @@ function write(save: SaveData) {
     .catch((e: unknown) => console.error('save failed', e));
 }
 
-function withSession(save: SaveData, session: ShiftSession | null, modeId: string): SaveData {
+/** Slot save untuk sesi: jalur utama atau Mode Latihan (PRD S5). */
+type SessionSlot = 'activeSession' | 'practiceSession';
+const slotOf = (practice: boolean): SessionSlot => (practice ? 'practiceSession' : 'activeSession');
+
+function withSession(
+  save: SaveData,
+  session: ShiftSession | null,
+  modeId: string,
+  slot: SessionSlot,
+): SaveData {
   const progress = save.modes[modeId] ?? newModeProgress();
-  const { activeSession: _old, ...rest } = progress;
+  const { [slot]: _old, ...rest } = progress;
   return {
     ...save,
     updatedAt: nowIso(),
-    modes: { ...save.modes, [modeId]: session ? { ...rest, activeSession: session } : rest },
+    modes: { ...save.modes, [modeId]: session ? { ...rest, [slot]: session } : rest },
   };
 }
 
@@ -128,6 +143,7 @@ export const useAppStore = create<AppState>()((set, get) => ({
   screen: 'title',
   save: null,
   session: null,
+  practice: false,
   content: null,
   returnTo: 'hub',
   rulebookFocus: null,
@@ -170,39 +186,22 @@ export const useAppStore = create<AppState>()((set, get) => ({
     if (!get().session) set({ content });
   },
 
-  async enterMode(modeId) {
-    const { save } = get();
-    const mode = getMode(modeId);
-    if (!save || !mode) return;
-    const content = await loadContent(modeId);
-    const progress = save.modes[modeId] ?? newModeProgress();
-    let session = progress.activeSession ?? null;
-    if (!session) {
-      const shift = nextShift(content, progress);
-      if (!shift) return;
-      const seed = crypto.getRandomValues(new Uint32Array(1))[0] ?? 1;
-      const { plan, generatedCases } = buildShift(modeId, shift, mode.generators ?? {}, seed);
-      session = startShift({
-        plan,
-        seed,
-        playMode: save.profile.settings.playMode,
-        trust: progress.trust,
-        generatedCases,
-      });
-      telemetry.track({
-        name: 'shift_started',
-        modeId,
-        shiftId: shift.id,
-        playMode: session.playMode,
-      });
-    }
-    const next = withSession(save, session, modeId);
+  enterMode(modeId) {
+    return openSession(modeId, false);
+  },
+
+  enterPractice(modeId, shiftId) {
+    return openSession(modeId, true, shiftId);
+  },
+
+  cancelPractice(modeId) {
+    const { save, session, practice } = get();
+    if (!save) return;
+    const next = withSession(save, null, modeId, 'practiceSession');
     write(next);
     set({
-      content: withGeneratedCases(content, session, schemasOf(mode)),
-      session,
       save: next,
-      screen: session.phase === 'ended' ? 'report' : 'desk',
+      ...(practice && session?.modeId === modeId ? { session: null, practice: false } : {}),
     });
   },
 
@@ -231,7 +230,7 @@ export const useAppStore = create<AppState>()((set, get) => ({
     if (action.type === 'TICK') msSinceSave += action.dtMs;
     if (action.type !== 'TICK' || msSinceSave >= AUTOSAVE_TICK_MS || next.phase === 'ended') {
       msSinceSave = 0;
-      nextSave = withSession(save, next, next.modeId);
+      nextSave = withSession(save, next, next.modeId, slotOf(get().practice));
       write(nextSave);
     }
     set({
@@ -333,7 +332,7 @@ export const useAppStore = create<AppState>()((set, get) => ({
   },
 
   finishShift(reviewResults) {
-    const { session, save, content } = get();
+    const { session, save, content, practice } = get();
     if (!session || !save || !content || session.phase !== 'ended') return;
     const shift = content.shifts.find((s) => s.id === session.shiftId);
     const summary = summarizeShift(session, shift?.pay ?? { base: 0, perCorrect: 0 });
@@ -343,19 +342,65 @@ export const useAppStore = create<AppState>()((set, get) => ({
       shiftId: session.shiftId,
       averageScore: summary.averageScore,
       stars: summary.stars,
+      practice,
     });
-    const next = commitShift(save, session, content, nowIso(), reviewResults);
+    // Latihan: hanya slot latihan yang dikosongkan; gaji, kepercayaan, skor, dan Leitner tidak berubah.
+    const next = practice
+      ? withSession(save, null, session.modeId, 'practiceSession')
+      : commitShift(save, session, content, nowIso(), reviewResults);
     write(next);
-    set({ save: next, session: null, screen: 'hub' });
+    set({ save: next, session: null, practice: false, screen: 'hub' });
   },
 }));
 
+/** Membuka sesi jalur utama atau latihan: lanjutkan yang tersimpan, atau mulai shift baru. */
+async function openSession(modeId: string, practice: boolean, practiceShiftId?: string) {
+  const { save } = useAppStore.getState();
+  const mode = getMode(modeId);
+  if (!save || !mode) return;
+  const content = await loadContent(modeId);
+  const progress = save.modes[modeId] ?? newModeProgress();
+  const slot = slotOf(practice);
+  let session = progress[slot] ?? null;
+  if (!session) {
+    const shift = practice
+      ? practiceShifts(content, progress).find((s) => s.id === practiceShiftId)
+      : nextShift(content, progress);
+    if (!shift) return;
+    const seed = crypto.getRandomValues(new Uint32Array(1))[0] ?? 1;
+    const { plan, generatedCases } = buildShift(modeId, shift, mode.generators ?? {}, seed);
+    session = startShift({
+      plan,
+      seed,
+      playMode: save.profile.settings.playMode,
+      trust: progress.trust,
+      generatedCases,
+    });
+    telemetry.track({
+      name: 'shift_started',
+      modeId,
+      shiftId: shift.id,
+      playMode: session.playMode,
+      practice,
+    });
+  }
+  const next = withSession(save, session, modeId, slot);
+  write(next);
+  useAppStore.setState({
+    content: withGeneratedCases(content, session, schemasOf(mode)),
+    session,
+    practice,
+    save: next,
+    screen: session.phase === 'ended' ? 'report' : 'desk',
+  });
+}
+
 /** Simpan posisi jam saat tab disembunyikan / halaman ditutup. */
 export function persistNow() {
-  const { session, save } = useAppStore.getState();
+  const { session, save, practice } = useAppStore.getState();
   if (!session || !save) return;
   msSinceSave = 0;
-  const next = withSession(save, session, session.modeId);
+  const next = withSession(save, session, session.modeId, slotOf(practice));
   write(next);
   useAppStore.setState({ save: next });
 }

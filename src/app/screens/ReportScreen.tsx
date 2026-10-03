@@ -18,6 +18,7 @@ export function ReportScreen() {
   const openMenu = useAppStore((s) => s.openMenu);
   const setFlag = useAppStore((s) => s.setFlag);
   const reminderOff = useAppStore((s) => s.save?.flags[EXPORT_REMINDER_OFF] === true);
+  const practice = useAppStore((s) => s.practice);
   const mode = session ? getMode(session.modeId) : undefined;
   if (!session || !content || !mode) return null;
 
@@ -44,9 +45,15 @@ export function ReportScreen() {
         <p>{id.report.average(summary.averageScore)}</p>
         <p>{id.report.correct(summary.correctCount, summary.totalCount)}</p>
         <p>{id.report.trust(summary.trust)}</p>
-        <p>{id.report.pay(summary.pay)}</p>
+        <p>{practice ? id.report.practicePay : id.report.pay(summary.pay)}</p>
       </section>
-      {EXPORT_REMINDER_SHIFTS.includes(session.shiftOrder) && !reminderOff && (
+      {practice && (
+        <p role="note" className="border-2 border-focus p-3" data-testid="practice-banner">
+          <span aria-hidden="true">🎯 </span>
+          {id.report.practiceBanner}
+        </p>
+      )}
+      {!practice && EXPORT_REMINDER_SHIFTS.includes(session.shiftOrder) && !reminderOff && (
         <section
           role="note"
           className="flex flex-col gap-2 border-2 border-accent p-3"
