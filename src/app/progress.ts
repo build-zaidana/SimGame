@@ -1,5 +1,6 @@
 import type { CaseSchemas, ModeContent } from '../content/loader.ts';
 import type { ReviewItem, ShiftDef } from '../content/schemas.ts';
+import { carryTrust } from '../engine/economy.ts';
 import { recordResult, recordShiftConcepts, type MasteryMap } from '../engine/mastery.ts';
 import { createRng } from '../engine/rng.ts';
 import { selectReviewItems } from '../engine/review.ts';
@@ -117,7 +118,7 @@ export function commitShift(
 ): SaveData {
   const shift = content.shifts.find((s) => s.id === session.shiftId);
   const progress = save.modes[session.modeId] ?? newModeProgress();
-  const summary = summarizeShift(session, shift?.pay ?? { base: 0, perCorrect: 0 });
+  const summary = summarizeShift(session, shift?.pay ?? { base: 0, perCase: 0 });
   const prev = progress.shifts[session.shiftId];
   const best = !prev || summary.averageScore >= prev.bestScore;
 
@@ -133,7 +134,7 @@ export function commitShift(
       },
     },
     wallet: progress.wallet + summary.pay,
-    trust: summary.trust,
+    trust: carryTrust(summary.trust),
     unlockedShift: Math.max(progress.unlockedShift, session.shiftOrder + 1),
     chaptersUnlocked: [
       ...new Set([...progress.chaptersUnlocked, ...(shift?.unlocksChapters ?? [])]),

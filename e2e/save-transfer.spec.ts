@@ -15,9 +15,9 @@ async function finishShift1(page: Page) {
 
 async function buyLinkChecker(page: Page) {
   await page.getByRole('button', { name: 'Toko Alat' }).click();
-  await expect(page.getByTestId('wallet')).toHaveText('Gajimu: Rp 130');
-  await page.getByRole('button', { name: 'Beli Pemeriksa Tautan (Rp 60)' }).click();
-  await expect(page.getByTestId('wallet')).toHaveText('Gajimu: Rp 70');
+  await expect(page.getByTestId('wallet')).toHaveText('Gajimu: Rp 76');
+  await page.getByRole('button', { name: 'Beli Pemeriksa Tautan (Rp 50)' }).click();
+  await expect(page.getByTestId('wallet')).toHaveText('Gajimu: Rp 26');
   await expect(page.locator('[data-tool="link-checker"]')).toContainText('Sudah dimiliki');
   await page.getByRole('button', { name: 'Kembali' }).click();
 }
@@ -66,7 +66,7 @@ test('export on a phone, import on a desktop keeps all progress', async ({ brows
   await page.getByRole('button', { name: 'Ya, timpa' }).click();
 
   await expect(page.getByText('Shift selesai: 1')).toBeVisible();
-  await expect(page.getByText('Gaji: Rp 70')).toBeVisible();
+  await expect(page.getByText('Gaji: Rp 26')).toBeVisible();
   await expect(
     page.getByRole('button', { name: 'Mulai Shift 2: Kotak Masuk Penuh' }),
   ).toBeVisible();

@@ -330,7 +330,7 @@ export const useAppStore = create<AppState>()((set, get) => ({
     const { session, save, content, practice } = get();
     if (!session || !save || !content || session.phase !== 'ended') return;
     const shift = content.shifts.find((s) => s.id === session.shiftId);
-    const summary = summarizeShift(session, shift?.pay ?? { base: 0, perCorrect: 0 });
+    const summary = summarizeShift(session, shift?.pay ?? { base: 0, perCase: 0 });
     telemetry.track({
       name: 'shift_completed',
       modeId: session.modeId,

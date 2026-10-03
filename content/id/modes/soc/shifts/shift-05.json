@@ -68,7 +68,7 @@
     "conceptIds": ["incident-response", "malware-files", "log-reading"]
   },
   "pay": {
-    "base": 140,
-    "perCorrect": 10
+    "base": 50,
+    "perCase": 12
   }
 }

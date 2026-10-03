@@ -64,7 +64,7 @@
     "conceptIds": ["malware-files", "log-reading", "passwords-mfa"]
   },
   "pay": {
-    "base": 130,
-    "perCorrect": 10
+    "base": 50,
+    "perCase": 12
   }
 }

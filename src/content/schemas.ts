@@ -63,7 +63,10 @@ export const shiftSchema = z.strictObject({
     count: z.number().int().min(3).max(5),
     conceptIds: z.array(idSchema).min(1),
   }),
-  pay: z.strictObject({ base: z.number().int().nonnegative(), perCorrect: z.number().int() }),
+  pay: z.strictObject({
+    base: z.number().int().nonnegative(),
+    perCase: z.number().int().nonnegative(),
+  }),
 });
 
 const reviewBase = {

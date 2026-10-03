@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import type { ShiftSession } from '../engine/types.ts';
+import { BASELINE_TRUST } from '../engine/economy.ts';
 
 /** Naikkan + tambah migrasi di migrations.ts + test setiap kali bentuk save berubah. */
 export const SAVE_SCHEMA_VERSION = 3;
@@ -119,7 +120,7 @@ export type SaveData = z.infer<typeof saveDataSchema>;
 export type Settings = z.infer<typeof settingsSchema>;
 export type ModeProgress = z.infer<typeof modeProgressSchema>;
 
-export const INITIAL_TRUST = 75;
+export const INITIAL_TRUST = BASELINE_TRUST;
 
 export function createNewSave({ installId, now }: { installId: string; now: string }): SaveData {
   return {

@@ -267,7 +267,7 @@ Alamat web dibaca **dari kanan ke kiri** untuk mencari pemiliknya…
     { "generator": "typosquat-domain", "params": { "brand": "KirimCepat", "verdict": "malicious" }, "arriveAt": 20 }
   ],
   "review": { "count": 3, "conceptIds": ["url-anatomy", "phishing-signs"] },
-  "pay": { "base": 100, "perCorrect": 10 }
+  "pay": { "base": 40, "perCase": 12 }
 }
 ```
 
@@ -339,6 +339,10 @@ Kepercayaan klien (`economy.ts`):
 | Email/permintaan sah diblokir | −3 |
 | Eskalasi yang tidak perlu | −1 |
 | Keputusan benar | +1 (maks 100) |
+
+Antar-shift, kepercayaan di bawah 75 pulih separuh selisihnya (`carryTrust`, dibulatkan ke atas), supaya satu shift buruk tidak menyeret pemula sampai akhir (ADR 017).
+
+Gaji shift (`shiftPay`) = `pay.base + round(pay.perCase × Σ caseScore / 100)`: tiap kasus dibayar sebanding skornya, jadi bukti yang lengkap ikut menaikkan gaji. Angka gaji & harga alat disetel dengan `pnpm sim:economy` (ADR 017).
 
 Bintang shift: ★ ≥ 50 rata-rata, ★★ ≥ 70, ★★★ ≥ 85 dengan kepercayaan ≥ 70.
 

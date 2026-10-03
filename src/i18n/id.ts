@@ -249,7 +249,10 @@ export const id = {
     average: (n: number) => `Skor rata-rata: ${n}`,
     correct: (n: number, total: number) => `Keputusan tepat: ${n} dari ${total}`,
     trust: (n: number) => `Kepercayaan klien: ${n}`,
-    pay: (n: number) => `Gaji shift ini: +Rp ${n}`,
+    trustRecovery: (n: number) =>
+      `Klien memberi kesempatan lagi: shift berikutnya kepercayaan mulai dari ${n}.`,
+    pay: (n: number, base: number) =>
+      `Gaji shift ini: +Rp ${n} (pokok Rp ${base} + Rp ${n - base} dari skor kasus)`,
     casesHeading: 'Rincian kasus',
     caseScore: (n: number) => `skor ${n}`,
     missed: 'terlewat',

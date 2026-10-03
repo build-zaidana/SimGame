@@ -232,7 +232,7 @@ describe('summarizeShift', () => {
       ...decide('b', { decisionScore: 0, evidenceScore: 0, correct: false, impact: 'wrong' }),
       { type: 'END_SHIFT' },
     );
-    const sum = summarizeShift(s, { base: 100, perCorrect: 10 });
+    const sum = summarizeShift(s, { base: 100, perCase: 10 });
     expect(sum).toMatchObject({
       averageScore: 33,
       correctCount: 1,
