@@ -16,6 +16,7 @@ import {
 } from '../persistence/saveSchema.ts';
 import { encodeSave } from '../persistence/transfer.ts';
 import {
+  awardBadges,
   buildShift,
   commitShift,
   nextShift,
@@ -37,11 +38,12 @@ export type Screen =
   | 'save-transfer'
   | 'shop'
   | 'assessment'
-  | 'learning-report';
+  | 'learning-report'
+  | 'badges';
 
 /** Layar menu yang dibuka "di atas" layar lain dan kembali ke sana. */
 type MenuScreen =
-  'rulebook' | 'save-transfer' | 'shop' | 'assessment' | 'settings' | 'learning-report';
+  'rulebook' | 'save-transfer' | 'shop' | 'assessment' | 'settings' | 'learning-report' | 'badges';
 export type AssessmentKind = 'pre' | 'post';
 
 export type SaveNotice = 'memory-only' | 'restored-backup' | 'reset' | null;
@@ -60,6 +62,9 @@ interface AppState {
   returnTo: Screen;
   rulebookFocus: string | null;
   assessmentKind: AssessmentKind;
+  /** Lencana yang baru didapat (ditampilkan sebagai banner di kantor sampai ditutup). */
+  newBadges: string[];
+  dismissBadges(): void;
   init(): Promise<void>;
   goTo(screen: Screen): void;
   dismissNotice(): void;
@@ -135,6 +140,7 @@ export const useAppStore = create<AppState>()((set, get) => ({
   status: 'loading',
   storageKind: null,
   notice: null,
+  newBadges: [],
   screen: 'title',
   save: null,
   session: null,
@@ -170,6 +176,10 @@ export const useAppStore = create<AppState>()((set, get) => ({
 
   goTo(screen) {
     set({ screen });
+  },
+
+  dismissBadges() {
+    set({ newBadges: [] });
   },
 
   dismissNotice() {
@@ -255,6 +265,7 @@ export const useAppStore = create<AppState>()((set, get) => ({
       'assessment',
       'settings',
       'learning-report',
+      'badges',
     ];
     set({ returnTo: menus.includes(from) ? get().returnTo : from, screen });
   },
@@ -279,17 +290,20 @@ export const useAppStore = create<AppState>()((set, get) => ({
     if (!save || !tool) return null;
     const progress = save.modes[modeId] ?? newModeProgress();
     const result = buyTool(progress, tool);
-    if (result.ok) {
+    if (result.ok && content) {
+      const now = nowIso();
+      const { progress: withBadges, earned } = awardBadges(
+        { ...progress, wallet: result.wallet, toolsOwned: result.toolsOwned },
+        content,
+        now,
+      );
       const next: SaveData = {
         ...save,
-        updatedAt: nowIso(),
-        modes: {
-          ...save.modes,
-          [modeId]: { ...progress, wallet: result.wallet, toolsOwned: result.toolsOwned },
-        },
+        updatedAt: now,
+        modes: { ...save.modes, [modeId]: withBadges },
       };
       write(next);
-      set({ save: next });
+      set({ save: next, newBadges: [...get().newBadges, ...earned] });
     }
     return result;
   },
@@ -355,7 +369,18 @@ export const useAppStore = create<AppState>()((set, get) => ({
       ? withSession(save, null, session.modeId, 'practiceSession')
       : commitShift(save, session, content, nowIso(), reviewResults);
     write(next);
-    set({ save: next, session: null, practice: false, screen: 'hub' });
+    const before = save.modes[session.modeId]?.badges ?? {};
+    const earned = Object.keys(next.modes[session.modeId]?.badges ?? {}).filter(
+      (b) => !(b in before),
+    );
+    if (earned.length && save.profile.settings.sound) playSfx('bell');
+    set({
+      save: next,
+      session: null,
+      practice: false,
+      screen: 'hub',
+      newBadges: [...get().newBadges, ...earned],
+    });
   },
 }));
 

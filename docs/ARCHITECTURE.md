@@ -374,9 +374,9 @@ Saat pertama kali menyimpan: panggil `navigator.storage.persist()` (abaikan jika
 ### 7.2 Bentuk save
 ```ts
 // src/persistence/saveSchema.ts
-export const SAVE_SCHEMA_VERSION = 1;
+export const SAVE_SCHEMA_VERSION = 4;
 SaveData = {
-  schemaVersion: 1,
+  schemaVersion: 4,
   createdAt: string, updatedAt: string,
   installId: string,                  // UUID acak; tidak terkait identitas
   profile: { nickname: string, settings: { textScale: 1|1.15|1.3, playMode: 'relaxed'|'normal', reduceMotion: boolean, sound: boolean } },
@@ -387,6 +387,8 @@ SaveData = {
       wallet: number, trust: number,
       toolsOwned: string[], chaptersUnlocked: string[],
       activeSession?: ShiftSession,   // untuk lanjut di tengah shift
+      practiceSession?: ShiftSession, // v3: Mode Latihan (ADR 014)
+      badges: Record<badgeId, string>, // v4: lencana → waktu didapat (ADR 021)
     }
   },
   mastery: Record<itemId, { box: 1|2|3, dueAtShiftIndex: number, seen: number, correct: number }>,
@@ -394,7 +396,7 @@ SaveData = {
   flags: Record<string, boolean>,     // dialog yang sudah dilihat, tutorial, pengingat ekspor
 }
 ```
-`migrations.ts` berisi fungsi `v1→v2`, `v2→v3`, … yang dijalankan berurutan saat `load()` dan saat impor. Setiap perubahan skema **wajib** menambah migrasi + test.
+`migrations.ts` berisi fungsi `v1→v2`, `v2→v3`, `v3→v4`, … yang dijalankan berurutan saat `load()` dan saat impor. Setiap perubahan skema **wajib** menambah migrasi + test.
 
 ### 7.3 Ekspor / impor (`transfer.ts`)
 ```

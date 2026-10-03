@@ -337,3 +337,42 @@ describe('morning newspaper (koran pagi)', () => {
     );
   });
 });
+
+describe('badges (lencana)', () => {
+  const badge = (id: string, rule: object) => ({
+    id,
+    title: 'Lencana',
+    description: 'Deskripsi.',
+    icon: '🏅',
+    tier: 'bronze',
+    rule,
+  });
+  const withBadges = (badges: object[]) => {
+    const f = fixture();
+    f['badges.json'] = { badges };
+    return errorsFor(f);
+  };
+
+  it('loads valid badges', () => {
+    const f = fixture();
+    f['badges.json'] = { badges: [badge('b-1', { type: 'shift-complete', shiftId: 's-1' })] };
+    const { content } = parseModeContent(f, socCaseSchemas);
+    expect(content.badges.map((b) => b.id)).toEqual(['b-1']);
+    expect(errorsFor(f)).toEqual([]);
+  });
+  it('rejects duplicates, unknown shifts and impossible tool counts', () => {
+    expect(
+      withBadges([
+        badge('b-1', { type: 'shift-complete', shiftId: 's-x' }),
+        badge('b-1', { type: 'tools-owned', count: 9 }),
+      ]),
+    ).toEqual([
+      expect.stringMatching(/b-1: shift tidak ada: s-x/),
+      expect.stringMatching(/ID lencana duplikat: b-1/),
+      expect.stringMatching(/b-1: butuh 9 alat, toko hanya punya 0/),
+    ]);
+  });
+  it('rejects unknown rule types', () => {
+    expect(withBadges([badge('b-1', { type: 'hack-the-planet' })]).length).toBeGreaterThan(0);
+  });
+});

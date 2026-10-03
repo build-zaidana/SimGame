@@ -5,6 +5,7 @@ import { newModeProgress } from '../../persistence/saveSchema.ts';
 import { nextShift, practiceShifts } from '../progress.ts';
 import { useAppStore } from '../store.ts';
 import { OfficeIllustration } from '../ui/hub/OfficeIllustration.tsx';
+import { Medal } from '../ui/Medal.tsx';
 import { btnPrimary, btnSecondary, panel } from '../ui/styles.ts';
 
 /** HUB versi menu (v1.0). Ilustrasi kantor pixel menyusul di M4. */
@@ -18,6 +19,8 @@ export function HubScreen() {
   const openRulebook = useAppStore((s) => s.openRulebook);
   const openMenu = useAppStore((s) => s.openMenu);
   const openAssessment = useAppStore((s) => s.openAssessment);
+  const newBadges = useAppStore((s) => s.newBadges);
+  const dismissBadges = useAppStore((s) => s.dismissBadges);
   const [entering, setEntering] = useState(false);
 
   useEffect(() => {
@@ -37,6 +40,32 @@ export function HubScreen() {
     <main className="mx-auto flex min-h-dvh max-w-3xl flex-col gap-4 p-4">
       <h1 className="font-display text-2xl text-accent">{id.hub.heading}</h1>
       <p className="text-ink-muted">{id.hub.intro}</p>
+      {newBadges.length > 0 && content && (
+        <section
+          role="status"
+          className="flex flex-wrap items-center gap-3 border-4 border-accent bg-panel p-3 pixel-shadow"
+          data-testid="new-badges"
+        >
+          <p className="font-display text-accent">{id.hub.newBadges}</p>
+          <ul className="flex flex-1 flex-wrap gap-3">
+            {newBadges.map((bid) => {
+              const b = content.badges.find((x) => x.id === bid);
+              return b ? (
+                <li key={bid} className="stamp flex items-center gap-2">
+                  <Medal tier={b.tier} icon={b.icon} locked={false} className="w-9 text-lg" />
+                  <span className="font-display text-sm">{b.title}</span>
+                </li>
+              ) : null;
+            })}
+          </ul>
+          <button type="button" className={btnSecondary} onClick={() => openMenu('badges')}>
+            {id.hub.viewBadges}
+          </button>
+          <button type="button" className={btnSecondary} onClick={dismissBadges}>
+            {id.hub.dismissBadges}
+          </button>
+        </section>
+      )}
       <OfficeIllustration
         desks={[
           ...modes.map((m) => ({
@@ -59,6 +88,10 @@ export function HubScreen() {
         <button type="button" className={btnSecondary} onClick={() => openMenu('shop')}>
           <span aria-hidden="true">🛒 </span>
           {id.hub.shop}
+        </button>
+        <button type="button" className={btnSecondary} onClick={() => openMenu('badges')}>
+          <span aria-hidden="true">🏅 </span>
+          {id.hub.badges(Object.keys(socProgress.badges ?? {}).length, content?.badges.length ?? 0)}
         </button>
         <button type="button" className={btnSecondary} onClick={() => openMenu('settings')}>
           <span aria-hidden="true">⚙ </span>

@@ -31,6 +31,13 @@ export const MIGRATIONS: Record<number, Migration> = {
   },
   /** v2 → v3: slot `practiceSession` (opsional) ditambahkan; data lama tidak perlu diubah. */
   2: (d) => d,
+  /** v3 → v4: setiap progres mode mendapat peta lencana kosong (PRD C3). */
+  3: (d) => {
+    const modes = (d['modes'] ?? {}) as Record<string, Record<string, unknown>>;
+    const next: Record<string, unknown> = {};
+    for (const [id, progress] of Object.entries(modes)) next[id] = { badges: {}, ...progress };
+    return { ...d, modes: next };
+  },
 };
 
 export function runMigrations(

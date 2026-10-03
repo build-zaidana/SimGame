@@ -76,6 +76,19 @@ export const id = {
     wallet: (coins: number) => `Gaji: Rp ${coins}`,
     trust: (trust: number) => `Kepercayaan klien: ${trust}`,
     loadingDesk: 'Menyiapkan meja…',
+    badges: (n: number, total: number) => `Lencana (${n}/${total})`,
+    newBadges: 'Lencana baru!',
+    viewBadges: 'Lihat lencana',
+    dismissBadges: 'Tutup',
+  },
+  badges: {
+    heading: 'Lencana',
+    intro:
+      'Kumpulkan lencana dengan bekerja teliti. Lencana hanya didapat di jalur utama, bukan Mode Latihan.',
+    count: (n: number, total: number) => `${n} dari ${total} lencana`,
+    earned: (date: string) => `Didapat ${date}`,
+    locked: 'Belum didapat',
+    tier: { bronze: 'Perunggu', silver: 'Perak', gold: 'Emas' } as Record<string, string>,
   },
   modes: {
     soc: { title: 'Analis Keamanan (SOC)', deskTitle: 'Meja SOC' },

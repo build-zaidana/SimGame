@@ -16,6 +16,8 @@ import {
   rulebookSchema,
   shiftSchema,
   toolsFileSchema,
+  badgesFileSchema,
+  type Badge,
   type Assessment,
   type BaseCase,
   type Concept,
@@ -38,6 +40,7 @@ export interface ModeContent<TCase extends BaseCase = BaseCase> {
   review: ReviewItem[];
   dialogues: Record<string, Dialogue>;
   tools: Tool[];
+  badges: Badge[];
   assessment: Assessment | null;
 }
 
@@ -76,6 +79,7 @@ export function parseModeContent<TCase extends BaseCase = BaseCase>(
     review: [],
     dialogues: {},
     tools: [],
+    badges: [],
     assessment: null,
   };
 
@@ -95,6 +99,8 @@ export function parseModeContent<TCase extends BaseCase = BaseCase>(
       content.meta = parse(file, modeMetaSchema, raw) ?? content.meta;
     } else if (file === 'tools.json') {
       content.tools = parse(file, toolsFileSchema, raw)?.tools ?? [];
+    } else if (file === 'badges.json') {
+      content.badges = parse(file, badgesFileSchema, raw)?.badges ?? [];
     } else if (file === 'assessment.json') {
       content.assessment = parse(file, assessmentSchema, raw);
     } else if (file === 'rulebook.json') {

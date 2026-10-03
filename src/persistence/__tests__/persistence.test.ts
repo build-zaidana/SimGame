@@ -7,7 +7,12 @@ import {
   type SyncJournal,
 } from '../LocalSaveRepository.ts';
 import { migrate, runMigrations, SaveFormatError } from '../migrations.ts';
-import { createNewSave, SAVE_SCHEMA_VERSION, type SaveData } from '../saveSchema.ts';
+import {
+  createNewSave,
+  newModeProgress,
+  SAVE_SCHEMA_VERSION,
+  type SaveData,
+} from '../saveSchema.ts';
 
 const INSTALL_ID = '6f1c2b8e-3a4d-4c5e-8f9a-0b1c2d3e4f5a';
 const NOW = '2026-10-03T10:00:00.000Z';
@@ -37,6 +42,7 @@ function saveWithSession(): SaveData {
         trust: 75,
         toolsOwned: [],
         chaptersUnlocked: [],
+        badges: {},
         activeSession: session,
       },
     },
@@ -174,7 +180,7 @@ describe('migration v2 → v3 (separate practice session slot)', () => {
   it('keeps the save as-is and bumps the version; practiceSession is optional', () => {
     const v2 = { ...JSON.parse(JSON.stringify(saveWithSession())), schemaVersion: 2 };
     const migrated = migrate(v2);
-    expect(migrated.schemaVersion).toBe(3);
+    expect(migrated.schemaVersion).toBe(SAVE_SCHEMA_VERSION);
     expect(migrated.modes['soc']?.activeSession?.shiftId).toBe('soc-01');
     expect(migrated.modes['soc']?.practiceSession).toBeUndefined();
   });
@@ -187,6 +193,29 @@ describe('migration v2 → v3 (separate practice session slot)', () => {
       modes: { soc: { ...soc, practiceSession: soc.activeSession! } },
     };
     expect(migrate(JSON.parse(JSON.stringify(withPractice)))).toEqual(withPractice);
+  });
+});
+
+describe('migration v3 → v4 (badges per mode)', () => {
+  it('adds an empty badge map to every mode and bumps the version', () => {
+    const v4 = saveWithSession();
+    const { badges: _b, ...v3Soc } = v4.modes['soc']!;
+    const v3 = {
+      ...JSON.parse(JSON.stringify(v4)),
+      schemaVersion: 3,
+      modes: { soc: v3Soc, other: { ...v3Soc, activeSession: undefined } },
+    };
+    delete v3.modes.other.activeSession;
+    const migrated = migrate(JSON.parse(JSON.stringify(v3)));
+    expect(SAVE_SCHEMA_VERSION).toBe(4);
+    expect(migrated.schemaVersion).toBe(4);
+    expect(migrated.modes['soc']?.badges).toEqual({});
+    expect(migrated.modes['other']?.badges).toEqual({});
+    expect(migrated.modes['soc']?.activeSession?.shiftId).toBe('soc-01');
+  });
+
+  it('new mode progress starts with no badges', () => {
+    expect(newModeProgress().badges).toEqual({});
   });
 });
 

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { id } from '../i18n/id.ts';
+import { BadgesScreen } from './screens/BadgesScreen.tsx';
 import { DeskScreen } from './screens/DeskScreen.tsx';
 import { HubScreen } from './screens/HubScreen.tsx';
 import { LearningReportScreen } from './screens/LearningReportScreen.tsx';
@@ -45,6 +46,8 @@ function Screen() {
       return <SettingsScreen />;
     case 'learning-report':
       return <LearningReportScreen />;
+    case 'badges':
+      return <BadgesScreen />;
     default:
       return <HubScreen />;
   }

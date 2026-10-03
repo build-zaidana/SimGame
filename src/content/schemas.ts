@@ -137,6 +137,31 @@ export const toolSchema = z.strictObject({
 });
 export const toolsFileSchema = z.strictObject({ tools: z.array(toolSchema).min(1) });
 
+/** Lencana (PRD C3, ADR 021). Aturannya dinilai oleh engine/badges.ts. */
+const minCases = z.number().int().positive();
+const minStars = z.literal([1, 2, 3]).optional();
+export const badgeRuleSchema = z.discriminatedUnion('type', [
+  z.strictObject({ type: z.literal('shift-complete'), shiftId: idSchema.optional() }),
+  z.strictObject({ type: z.literal('shift-stars'), stars: z.literal([1, 2, 3]) }),
+  z.strictObject({ type: z.literal('no-threat-allowed'), minCases, minStars }),
+  z.strictObject({ type: z.literal('no-legit-blocked'), minCases, minStars }),
+  z.strictObject({ type: z.literal('evidence-streak'), count: minCases }),
+  z.strictObject({ type: z.literal('no-hints'), minCases, minStars }),
+  z.strictObject({ type: z.literal('review-perfect') }),
+  z.strictObject({ type: z.literal('tools-owned'), count: minCases }),
+  z.strictObject({ type: z.literal('trust-at-least'), value: z.number().int().min(1).max(100) }),
+]);
+export const badgeSchema = z.strictObject({
+  id: idSchema,
+  title: text,
+  description: text,
+  icon: text,
+  tier: z.enum(['bronze', 'silver', 'gold']),
+  rule: badgeRuleSchema,
+});
+export const badgesFileSchema = z.strictObject({ badges: z.array(badgeSchema).min(1) });
+export type Badge = z.infer<typeof badgeSchema>;
+
 /** Tes awal/akhir (PRD §5.3): ID soal review, dua bentuk paralel yang tidak saling tumpang tindih. */
 export const assessmentSchema = z.strictObject({
   pre: z.array(idSchema).min(3).max(10),

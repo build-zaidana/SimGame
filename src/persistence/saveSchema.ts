@@ -3,7 +3,7 @@ import type { ShiftSession } from '../engine/types.ts';
 import { BASELINE_TRUST } from '../engine/economy.ts';
 
 /** Naikkan + tambah migrasi di migrations.ts + test setiap kali bentuk save berubah. */
-export const SAVE_SCHEMA_VERSION = 3;
+export const SAVE_SCHEMA_VERSION = 4;
 
 const level = z.literal([1, 2, 3]);
 const score01 = z.number().min(0).max(1);
@@ -84,6 +84,8 @@ export const modeProgressSchema = z.object({
   activeSession: shiftSessionSchema.optional(),
   /** v3: shift Mode Latihan yang sedang berjalan (PRD S5); tidak memengaruhi progres utama. */
   practiceSession: shiftSessionSchema.optional(),
+  /** v4: lencana yang sudah didapat → waktu didapat (ISO). */
+  badges: z.record(z.string(), z.string()),
 });
 
 const assessmentResultSchema = z.object({
@@ -146,5 +148,6 @@ export function newModeProgress(): ModeProgress {
     trust: INITIAL_TRUST,
     toolsOwned: [],
     chaptersUnlocked: [],
+    badges: {},
   };
 }

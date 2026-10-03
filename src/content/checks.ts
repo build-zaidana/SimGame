@@ -302,6 +302,21 @@ export function checkModeContent(content: ModeContent, policy: CheckPolicy): Con
     }
   }
 
+  const seenBadges = new Set<string>();
+  const shiftIds = new Set(content.shifts.map((s) => s.id));
+  for (const b of content.badges) {
+    if (b.rule.type === 'shift-complete' && b.rule.shiftId && !shiftIds.has(b.rule.shiftId))
+      err('badges.json', `${b.id}: shift tidak ada: ${b.rule.shiftId}`);
+    dupCheck(seenBadges, b.id, 'badges.json', 'lencana');
+    if (b.rule.type === 'tools-owned' && b.rule.count > content.tools.length)
+      err(
+        'badges.json',
+        `${b.id}: butuh ${b.rule.count} alat, toko hanya punya ${content.tools.length}`,
+      );
+    const brands = findBrands(allStrings(b).join(' '), policy.brandDenylist);
+    if (brands.length) err('badges.json', `${b.id}: merek nyata: ${brands.join(', ')}`);
+  }
+
   if (content.assessment) {
     const { pre, post } = content.assessment;
     for (const rid of [...pre, ...post]) {
