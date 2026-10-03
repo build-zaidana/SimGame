@@ -56,7 +56,8 @@ export async function answerReview(page: Page, mode: 'right' | 'wrong'): Promise
   const ids: string[] = [];
   for (;;) {
     const section = page.locator('[data-review-item]');
-    const finish = page.getByRole('button', { name: 'Simpan & kembali ke kantor' });
+    // Jalur utama: "Simpan & kembali ke kantor"; latihan: "Selesai latihan & kembali ke kantor".
+    const finish = page.getByRole('button', { name: /kembali ke kantor$/ });
     await expect(section.or(finish)).toBeVisible();
     if (await finish.isVisible()) return ids;
 

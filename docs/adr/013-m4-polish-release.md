@@ -37,7 +37,6 @@ latar, Escape, atau setelah memilih kasus), sesuai §9.2.
 
 ## Ditunda
 
-- PRD S5 (Mode Latihan): mengulang shift saat ini tetap memengaruhi progres (skor terbaik dijaga, tetapi
-  gaji ditambahkan lagi). Perlu sesi terpisah + migrasi save.
+- ~~PRD S5 (Mode Latihan)~~: selesai, lihat ADR 014.
 - PRD S6 (analitik anonim yang mengirim data): butuh endpoint & tinjauan UU PDP.
 - Deploy publik: konfigurasi siap (`docs/DEPLOY.md`), butuh akun Cloudflare/Vercel milik pemilik.
