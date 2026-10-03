@@ -33,6 +33,11 @@ export function FeedbackDialog({
 
   return (
     <Dialog labelledBy="feedback-title" onClose={onContinue} initialFocus="content">
+      <p className="float-right ml-2" aria-hidden="true">
+        <span className={`stamp border-4 px-2 py-1 font-display text-lg ${color} border-current`}>
+          {id.stamps[o.decision] ?? o.decision.toUpperCase()}
+        </span>
+      </p>
       <h2 id="feedback-title" className={`font-display text-xl ${color}`}>
         <span aria-hidden="true">{icon} </span>
         {id.feedback[verdict]}

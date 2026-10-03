@@ -1,17 +1,23 @@
 @import 'tailwindcss';
 
-/* Token tema (ARCHITECTURE §9.3). Palet final menyusul di M4. */
+/*
+ * Tema ShiftIT (ARCHITECTURE §9.3): palet terbatas, grid 4/8 px, "OS kantor" retro.
+ * Kontras teks utama ≥ 7:1, teks sekunder & tombol ≥ 4.5:1 terhadap latar yang dipakai.
+ */
 @theme {
-  --color-bg: #1b1f2b;
-  --color-panel: #262c3d;
-  --color-ink: #f2efe6;
-  --color-ink-muted: #b8b4a8;
+  --color-bg: #161a24;
+  --color-panel: #232a3a;
+  --color-panel-2: #2d3549;
+  --color-ink: #f4efe4;
+  --color-ink-muted: #bdb7a9;
   --color-accent: #f2c14e;
-  --color-danger: #e5604f;
-  --color-safe: #6cc28a;
-  --color-focus: #7fc8f8;
-  --font-display: ui-monospace, 'Courier New', monospace;
-  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --color-danger: #f07a6a;
+  --color-safe: #74cf92;
+  --color-focus: #8fd0fa;
+  --color-shadow: #0b0d13;
+  --font-display: 'Pixelify Sans', ui-monospace, 'Courier New', monospace;
+  --font-body: 'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Mono', 'Courier New', monospace;
 }
 
 :root {
@@ -25,12 +31,64 @@ body {
   background: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-tap-highlight-color: transparent;
 }
 
-img.sprite {
+/* Bayangan pixel ala jendela OS retro untuk panel & tombol. */
+@utility pixel-shadow {
+  box-shadow: 4px 4px 0 0 var(--color-shadow);
+}
+@utility pixel-press {
+  &:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 0 var(--color-shadow);
+  }
+}
+
+img.sprite,
+svg.sprite {
   image-rendering: pixelated;
+  shape-rendering: crispEdges;
 }
 
+/* Stempel keputusan di umpan balik. */
+@keyframes stamp-in {
+  0% {
+    transform: scale(2.2) rotate(-14deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(0.92) rotate(-8deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(-8deg);
+  }
+}
+.stamp {
+  display: inline-block;
+  transform: rotate(-8deg);
+  animation: stamp-in 320ms cubic-bezier(0.2, 0.9, 0.3, 1.3) both;
+}
+
+@keyframes toast-in {
+  from {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+}
+.toast {
+  animation: toast-in 200ms ease-out both;
+}
+
+/* "Kurangi animasi": dari pengaturan game atau dari sistem operasi. */
+:root[data-reduce-motion='true'] *,
+:root[data-reduce-motion='true'] *::before,
+:root[data-reduce-motion='true'] *::after {
+  animation: none !important;
+  transition: none !important;
+}
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -55,6 +113,7 @@ img.sprite {
 .concept-card code {
   overflow-wrap: anywhere;
   color: var(--color-accent);
+  font-family: var(--font-mono);
 }
 .concept-card strong {
   color: var(--color-ink);
