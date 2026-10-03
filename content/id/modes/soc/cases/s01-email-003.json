@@ -38,6 +38,6 @@
     "required": ["sender", "link"],
     "supporting": ["urgency", "generic-greeting"]
   },
-  "explanation": "Domain pengirim kirimcepat-id.test bukan milik KirimCepat (kirimcepat.co.id), dan tautannya menuju situs lain yang meminta pembayaran. Nominal kecil dan batas waktu dipakai supaya kamu cepat membayar tanpa curiga.",
+  "explanation": "Domain pengirim kirimcepat-id.test bukan milik KirimCepat (kirimcepat.test), dan tautannya menuju situs lain yang meminta pembayaran. Nominal kecil dan batas waktu dipakai supaya kamu cepat membayar tanpa curiga.",
   "ruleRefs": ["r-phish-1", "r-url-3", "r-phish-3"]
 }

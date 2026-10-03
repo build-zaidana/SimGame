@@ -22,6 +22,6 @@
     }
   },
   "evidence": { "required": ["url-domain"], "supporting": ["reason"] },
-  "explanation": "Pemilik domain ini login-banknusantara.test, bukan banknusantara.co.id. Gembok HTTPS hanya berarti koneksinya terenkripsi, bukan berarti situsnya milik bank.",
+  "explanation": "Pemilik domain ini login-banknusantara.test, bukan banknusantara.test. Gembok HTTPS hanya berarti koneksinya terenkripsi, bukan berarti situsnya milik bank.",
   "ruleRefs": ["r-url-1", "r-url-2"]
 }

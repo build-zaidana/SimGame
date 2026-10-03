@@ -5,8 +5,8 @@
       "type": "mcq",
       "conceptId": "url-anatomy",
       "difficulty": 1,
-      "prompt": "Siapa pemilik situs bantuan.kirimcepat.co.id.cek-resi.test?",
-      "choices": ["KirimCepat (kirimcepat.co.id)", "cek-resi.test", "bantuan"],
+      "prompt": "Siapa pemilik situs bantuan.kirimcepat.cek-resi.test?",
+      "choices": ["KirimCepat (kirimcepat.test)", "cek-resi.test", "bantuan"],
       "answerIndex": 1,
       "explanation": "Baca dari kanan: akhirannya .test, dan satu nama sebelumnya adalah cek-resi. Bagian di depannya hanya subdomain."
     },

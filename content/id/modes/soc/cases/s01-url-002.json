@@ -12,7 +12,7 @@
       "parts": [
         { "text": "https://", "evidenceId": "url-scheme" },
         { "text": "portal.", "evidenceId": "url-subdomain" },
-        { "text": "nusadigital.co.id", "evidenceId": "url-domain" },
+        { "text": "nusadigital.test", "evidenceId": "url-domain" },
         { "text": "/cuti", "evidenceId": "url-path" }
       ]
     },
@@ -22,6 +22,6 @@
     }
   },
   "evidence": { "required": [], "supporting": ["url-domain"] },
-  "explanation": "Dibaca dari kanan, pemilik domainnya nusadigital.co.id, yaitu kantor kita sendiri, sedangkan portal hanya subdomainnya. Alasannya juga wajar, jadi akses ini aman diizinkan.",
+  "explanation": "Dibaca dari kanan, pemilik domainnya nusadigital.test, yaitu kantor kita sendiri, sedangkan portal hanya subdomainnya. Alasannya juga wajar, jadi akses ini aman diizinkan.",
   "ruleRefs": ["r-url-1"]
 }

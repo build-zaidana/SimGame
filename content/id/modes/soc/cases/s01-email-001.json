@@ -23,8 +23,8 @@
       },
       {
         "link": {
-          "label": "banknusantara.co.id/verifikasi",
-          "href": "http://banknusantara.co.id.akun-aman.test/login"
+          "label": "banknusantara.test/verifikasi",
+          "href": "http://banknusantara.akun-aman.test/login"
         },
         "evidenceId": "link"
       },
@@ -39,6 +39,6 @@
     "required": ["sender", "link"],
     "supporting": ["urgency", "generic-greeting", "threat"]
   },
-  "explanation": "Domain pengirim bukan banknusantara.co.id, dan alamat asli tautannya mengarah ke akun-aman.test. Bank tidak pernah meminta verifikasi akun lewat tautan email.",
+  "explanation": "Domain pengirim bukan banknusantara.test, dan alamat asli tautannya mengarah ke akun-aman.test. Bank tidak pernah meminta verifikasi akun lewat tautan email.",
   "ruleRefs": ["r-phish-1", "r-url-3", "r-phish-2"]
 }

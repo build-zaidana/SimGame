@@ -1,4 +1,4 @@
 {
-  "$comment": "Domain organisasi fiktif di dunia game (selain TLD .test/.example). Pemilik perlu memastikan domain ini tidak dipakai organisasi nyata sebelum rilis.",
-  "domains": ["nusadigital.co.id", "banknusantara.co.id", "kirimcepat.co.id"]
+  "$comment": "Domain fiktif tambahan yang boleh dipakai di kasus. Kosong: semua domain di kasus wajib memakai TLD .test atau .example (dicadangkan RFC 2606/6761, tidak bisa didaftarkan siapa pun).",
+  "domains": []
 }

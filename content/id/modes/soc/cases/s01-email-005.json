@@ -9,7 +9,7 @@
   "data": {
     "from": {
       "name": "Bank Nusantara",
-      "address": "info@banknusantara.co.id",
+      "address": "info@banknusantara.test",
       "evidenceId": "sender"
     },
     "subject": { "text": "Ringkasan transaksi bulan September", "evidenceId": "subject" },
@@ -28,6 +28,6 @@
     ]
   },
   "evidence": { "required": [], "supporting": ["sender", "greeting"] },
-  "explanation": "Pengirimnya dari domain asli banknusantara.co.id, menyapa dengan nama, dan tidak ada tautan atau permintaan data. Tidak semua email bank itu penipuan, jadi izinkan.",
+  "explanation": "Pengirimnya dari domain asli banknusantara.test, menyapa dengan nama, dan tidak ada tautan atau permintaan data. Tidak semua email bank itu penipuan, jadi izinkan.",
   "ruleRefs": ["r-phish-1", "r-phish-5"]
 }

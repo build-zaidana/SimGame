@@ -9,7 +9,7 @@
   "data": {
     "from": {
       "name": "Tim HR PT Nusa Digital",
-      "address": "hr@nusadigital.co.id",
+      "address": "hr@nusadigital.test",
       "evidenceId": "sender"
     },
     "subject": { "text": "Makan siang tim SOC hari Jumat", "evidenceId": "subject" },
@@ -28,6 +28,6 @@
     ]
   },
   "evidence": { "required": [], "supporting": ["sender"] },
-  "explanation": "Pengirimnya memakai domain kantor yang asli, nusadigital.co.id, dan tidak ada tautan atau permintaan data. Email sah seperti ini sebaiknya diizinkan.",
+  "explanation": "Pengirimnya memakai domain kantor yang asli, nusadigital.test, dan tidak ada tautan atau permintaan data. Email sah seperti ini sebaiknya diizinkan.",
   "ruleRefs": ["r-phish-1", "r-phish-5"]
 }

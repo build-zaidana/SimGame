@@ -12,7 +12,7 @@
     "url": {
       "parts": [
         { "text": "http://", "evidenceId": "url-scheme" },
-        { "text": "kirimcepat.co.id.", "evidenceId": "url-subdomain" },
+        { "text": "kirimcepat.", "evidenceId": "url-subdomain" },
         { "text": "lacak-paket.test", "evidenceId": "url-domain" },
         { "text": "/resi?no=KC8812", "evidenceId": "url-path" }
       ]
@@ -23,6 +23,6 @@
     }
   },
   "evidence": { "required": ["url-domain"], "supporting": ["url-subdomain", "reason"] },
-  "explanation": "Dibaca dari kanan, pemilik domainnya adalah lacak-paket.test, sedangkan kirimcepat.co.id di depannya hanya subdomain palsu. Firewall sudah benar memblokirnya, jadi permintaan ini ditolak.",
+  "explanation": "Dibaca dari kanan, pemilik domainnya adalah lacak-paket.test, sedangkan kirimcepat di depannya hanya subdomain palsu. Firewall sudah benar memblokirnya, jadi permintaan ini ditolak.",
   "ruleRefs": ["r-url-1"]
 }
