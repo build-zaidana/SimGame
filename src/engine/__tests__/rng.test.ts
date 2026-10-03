@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createRng, nextFloat, nextInt } from '../rng';
+import { createRng, nextFloat, nextInt } from '../rng.ts';
 
 describe('rng (mulberry32)', () => {
   it('is deterministic for the same seed', () => {
