@@ -159,6 +159,7 @@ export interface CaseTypeDef<TCase extends BaseCase = BaseCase> {
   Document: ComponentType<{ data: TCase; marks: Set<EvidenceId>; onToggleMark(id: EvidenceId): void }>;
   /** Ikon & label di antrian. */
   queueLabel(c: TCase): { icon: string; title: string };
+  visitor?(c: TCase): { name: string; role: string; kind: 'person' | 'system'; line: string }; // pelapor di loket (ADR 019)
 }
 
 export interface CareerMode {
