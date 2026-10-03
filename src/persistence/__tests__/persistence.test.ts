@@ -143,3 +143,24 @@ describe('LocalSaveRepository', () => {
     expect((await repo.load())?.flags).toEqual({});
   });
 });
+
+describe('migration v1 → v2 (generatedCases in active sessions)', () => {
+  it('adds an empty generatedCases map to saved sessions and bumps the version', () => {
+    const v2 = saveWithSession();
+    const soc = v2.modes['soc']!;
+    const { generatedCases: _g, ...v1Session } = soc.activeSession!;
+    const v1 = {
+      ...JSON.parse(JSON.stringify(v2)),
+      schemaVersion: 1,
+      modes: {
+        soc: { ...soc, activeSession: v1Session },
+        other: { ...soc, activeSession: undefined },
+      },
+    };
+    delete v1.modes.other.activeSession;
+    const migrated = migrate(v1);
+    expect(migrated.schemaVersion).toBe(2);
+    expect(migrated.modes['soc']?.activeSession?.generatedCases).toEqual({});
+    expect(migrated.modes['other']?.activeSession).toBeUndefined();
+  });
+});

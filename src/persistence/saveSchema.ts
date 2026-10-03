@@ -2,7 +2,7 @@ import { z } from 'zod';
 import type { ShiftSession } from '../engine/types.ts';
 
 /** Naikkan + tambah migrasi di migrations.ts + test setiap kali bentuk save berubah. */
-export const SAVE_SCHEMA_VERSION = 1;
+export const SAVE_SCHEMA_VERSION = 2;
 
 const level = z.literal([1, 2, 3]);
 const score01 = z.number().min(0).max(1);
@@ -54,6 +54,8 @@ export const shiftSessionSchema: z.ZodType<ShiftSession> = z.object({
   activeCaseId: z.string().nullable(),
   feedbackCaseId: z.string().nullable(),
   trust: z.number().min(0).max(100),
+  /** v2: kasus prosedural; divalidasi skema tipe kasus saat dipakai. */
+  generatedCases: z.record(z.string(), z.unknown()),
 });
 
 export const settingsSchema = z.object({

@@ -15,8 +15,21 @@ export class SaveFormatError extends Error {
 type RawSave = Record<string, unknown>;
 export type Migration = (data: RawSave) => RawSave;
 
-/** Kunci = versi asal. Contoh nanti: `1: (d) => ({ ...d, newField: … })` untuk v1 → v2. */
-export const MIGRATIONS: Record<number, Migration> = {};
+/** Kunci = versi asal. Setiap langkah wajib punya test di persistence.test.ts. */
+export const MIGRATIONS: Record<number, Migration> = {
+  /** v1 → v2: sesi aktif menyimpan kasus prosedural (`generatedCases`). */
+  1: (d) => {
+    const modes = (d['modes'] ?? {}) as Record<string, Record<string, unknown>>;
+    const next: Record<string, unknown> = {};
+    for (const [id, progress] of Object.entries(modes)) {
+      const session = progress['activeSession'] as Record<string, unknown> | undefined;
+      next[id] = session
+        ? { ...progress, activeSession: { generatedCases: {}, ...session } }
+        : progress;
+    }
+    return { ...d, modes: next };
+  },
+};
 
 export function runMigrations(
   raw: unknown,
