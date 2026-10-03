@@ -1,0 +1,69 @@
+{
+  "items": [
+    {
+      "id": "rv-log-1",
+      "type": "mcq",
+      "conceptId": "log-reading",
+      "difficulty": 1,
+      "prompt": "Log: 8 login gagal dari IP yang sama dalam 3 menit, lalu 1 berhasil. Apa artinya?",
+      "choices": [
+        "Pemilik akun lupa password, tidak perlu dicek",
+        "Kemungkinan brute force yang berhasil, jadi akun perlu direset",
+        "Server sedang rusak"
+      ],
+      "answerIndex": 1,
+      "explanation": "Banyak percobaan gagal dari satu sumber lalu berhasil adalah pola menebak password. Akunnya harus diamankan."
+    },
+    {
+      "id": "rv-log-2",
+      "type": "tap-evidence",
+      "conceptId": "log-reading",
+      "difficulty": 2,
+      "prompt": "Ketuk baris log yang menunjukkan impossible travel.",
+      "parts": [
+        {
+          "text": "08:00 Berhasil · Jakarta · laptop kantor",
+          "evidenceId": "l1"
+        },
+        {
+          "text": "08:07 Berhasil · Luar negeri · perangkat baru",
+          "evidenceId": "l2"
+        },
+        {
+          "text": "12:00 Berhasil · Jakarta · laptop kantor",
+          "evidenceId": "l3"
+        }
+      ],
+      "answer": ["l2"],
+      "explanation": "Tujuh menit setelah login di Jakarta, mustahil pemilik akun sudah berada di luar negeri. Login pukul 08.07 dilakukan orang lain."
+    },
+    {
+      "id": "rv-log-3",
+      "type": "mcq",
+      "conceptId": "log-reading",
+      "difficulty": 1,
+      "prompt": "Apa yang dimaksud alamat IP di sebuah log login?",
+      "choices": [
+        "Alamat jaringan perangkat yang login",
+        "Nama pemilik akun",
+        "Password yang dipakai"
+      ],
+      "answerIndex": 0,
+      "explanation": "IP adalah alamat jaringan. Banyak login dari satu IP asing bisa menjadi petunjuk serangan."
+    },
+    {
+      "id": "rv-log-4",
+      "type": "mcq",
+      "conceptId": "log-reading",
+      "difficulty": 2,
+      "prompt": "Login dari Bandung, perangkat terdaftar, lolos MFA, dan ada data dinas luar. Apa keputusannya?",
+      "choices": [
+        "Reset password segera",
+        "Izinkan, karena semua info pendukung cocok",
+        "Blokir akunnya selamanya"
+      ],
+      "answerIndex": 1,
+      "explanation": "Lokasi baru belum tentu serangan. Jika semua info pendukung cocok, mengganggu akun itu justru menghambat kerja."
+    }
+  ]
+}

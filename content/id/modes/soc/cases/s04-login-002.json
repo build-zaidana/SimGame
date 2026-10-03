@@ -1,0 +1,91 @@
+{
+  "id": "s04-login-002",
+  "type": "login-alert",
+  "conceptIds": ["log-reading"],
+  "difficulty": 2,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "account": {
+      "user": "Lina Marlina",
+      "role": "Administrasi"
+    },
+    "headline": {
+      "text": "5 login gagal pagi ini",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "09:00",
+        "location": "Kantor Jakarta",
+        "ip": "10.20.1.40",
+        "device": "Laptop kantor (terdaftar)",
+        "method": "Password salah",
+        "result": "failed",
+        "evidenceId": "ev-1"
+      },
+      {
+        "time": "09:01",
+        "location": "Kantor Jakarta",
+        "ip": "10.20.1.40",
+        "device": "Laptop kantor (terdaftar)",
+        "method": "Password salah",
+        "result": "failed",
+        "evidenceId": "ev-2"
+      },
+      {
+        "time": "09:02",
+        "location": "Kantor Jakarta",
+        "ip": "10.20.1.40",
+        "device": "Laptop kantor (terdaftar)",
+        "method": "Password salah",
+        "result": "failed",
+        "evidenceId": "ev-3"
+      },
+      {
+        "time": "09:03",
+        "location": "Kantor Jakarta",
+        "ip": "10.20.1.40",
+        "device": "Laptop kantor (terdaftar)",
+        "method": "Password salah",
+        "result": "failed",
+        "evidenceId": "ev-4"
+      },
+      {
+        "time": "09:04",
+        "location": "Kantor Jakarta",
+        "ip": "10.20.1.40",
+        "device": "Laptop kantor (terdaftar)",
+        "method": "Password salah",
+        "result": "failed",
+        "evidenceId": "ev-5"
+      },
+      {
+        "time": "09:14",
+        "location": "Kantor Jakarta",
+        "ip": "10.20.1.40",
+        "device": "Laptop kantor (terdaftar)",
+        "method": "Password + OTP",
+        "result": "success",
+        "evidenceId": "ev-6"
+      }
+    ],
+    "context": [
+      {
+        "text": "Tiket helpdesk #2291: Lina lupa password, direset helpdesk pukul 09.12.",
+        "evidenceId": "ctx-ticket"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["ctx-ticket", "ev-6"]
+  },
+  "explanation": "Semua percobaan berasal dari laptop Lina yang terdaftar di kantor, dan tiket helpdesk mencatat ia lupa password lalu direset. Login terakhir pun lolos MFA, jadi ini bukan serangan.",
+  "ruleRefs": ["r-log-4"],
+  "hints": [
+    "Banyak gagal belum tentu brute force. Dari mana asalnya?",
+    "Cocokkan jam login dengan tiket helpdesk."
+  ]
+}

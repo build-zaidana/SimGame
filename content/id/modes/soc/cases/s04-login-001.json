@@ -1,0 +1,122 @@
+{
+  "id": "s04-login-001",
+  "type": "login-alert",
+  "conceptIds": ["log-reading", "passwords-mfa"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "reset-password",
+  "acceptableDecisions": {
+    "block": 0.6,
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "account": {
+      "user": "Maya Putri",
+      "role": "HR"
+    },
+    "headline": {
+      "text": "Banyak login gagal tengah malam",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "02:10",
+        "location": "Tidak diketahui",
+        "ip": "203.0.113.80",
+        "device": "Linux (perangkat baru)",
+        "method": "Password salah",
+        "result": "failed",
+        "evidenceId": "ev-1"
+      },
+      {
+        "time": "02:11",
+        "location": "Tidak diketahui",
+        "ip": "203.0.113.80",
+        "device": "Linux (perangkat baru)",
+        "method": "Password salah",
+        "result": "failed",
+        "evidenceId": "ev-2"
+      },
+      {
+        "time": "02:12",
+        "location": "Tidak diketahui",
+        "ip": "203.0.113.80",
+        "device": "Linux (perangkat baru)",
+        "method": "Password salah",
+        "result": "failed",
+        "evidenceId": "ev-3"
+      },
+      {
+        "time": "02:13",
+        "location": "Tidak diketahui",
+        "ip": "203.0.113.80",
+        "device": "Linux (perangkat baru)",
+        "method": "Password salah",
+        "result": "failed",
+        "evidenceId": "ev-4"
+      },
+      {
+        "time": "02:14",
+        "location": "Tidak diketahui",
+        "ip": "203.0.113.80",
+        "device": "Linux (perangkat baru)",
+        "method": "Password salah",
+        "result": "failed",
+        "evidenceId": "ev-5"
+      },
+      {
+        "time": "02:15",
+        "location": "Tidak diketahui",
+        "ip": "203.0.113.80",
+        "device": "Linux (perangkat baru)",
+        "method": "Password salah",
+        "result": "failed",
+        "evidenceId": "ev-6"
+      },
+      {
+        "time": "02:16",
+        "location": "Tidak diketahui",
+        "ip": "203.0.113.80",
+        "device": "Linux (perangkat baru)",
+        "method": "Password salah",
+        "result": "failed",
+        "evidenceId": "ev-7"
+      },
+      {
+        "time": "02:17",
+        "location": "Tidak diketahui",
+        "ip": "203.0.113.80",
+        "device": "Linux (perangkat baru)",
+        "method": "Password salah",
+        "result": "failed",
+        "evidenceId": "ev-8"
+      },
+      {
+        "time": "02:19",
+        "location": "Tidak diketahui",
+        "ip": "203.0.113.80",
+        "device": "Linux (perangkat baru)",
+        "method": "Password",
+        "result": "success",
+        "evidenceId": "ev-9"
+      }
+    ],
+    "context": [
+      {
+        "text": "Maya bekerja pukul 08.00–17.00 dan tidak sedang lembur.",
+        "evidenceId": "ctx-hours"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["ev-9"],
+    "supporting": ["ev-1", "ev-8", "ctx-hours"]
+  },
+  "explanation": "Delapan kali gagal dari satu IP dalam beberapa menit lalu berhasil adalah pola brute force: password Maya berhasil ditebak. Akunnya harus segera direset.",
+  "ruleRefs": ["r-log-1", "r-log-3", "r-pass-2"],
+  "hints": [
+    "Perhatikan IP, jam, dan baris terakhir log.",
+    "Banyak gagal dari IP yang sama, lalu satu berhasil. Apa artinya?"
+  ]
+}

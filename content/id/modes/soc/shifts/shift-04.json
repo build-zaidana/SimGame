@@ -1,0 +1,70 @@
+{
+  "id": "soc-04",
+  "order": 4,
+  "title": "Paket Tak Dikenal",
+  "durationGameMinutes": 120,
+  "realSecondsPerGameMinute": 3,
+  "unlocksChapters": ["ch-malware", "ch-log"],
+  "introDialogue": "soc-04-intro",
+  "outroDialogue": "soc-04-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s04-file-002",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s04-file-001",
+      "arriveAt": 5
+    },
+    {
+      "caseId": "s04-login-001",
+      "arriveAt": 12
+    },
+    {
+      "caseId": "s04-email-002",
+      "arriveAt": 20
+    },
+    {
+      "caseId": "s04-file-003",
+      "arriveAt": 28
+    },
+    {
+      "caseId": "s04-url-001",
+      "arriveAt": 36
+    },
+    {
+      "generator": "typosquat-domain",
+      "params": {
+        "brand": "KirimCepat",
+        "domain": "kirimcepat.test",
+        "verdict": "malicious"
+      },
+      "arriveAt": 44
+    },
+    {
+      "caseId": "s04-login-002",
+      "arriveAt": 52
+    },
+    {
+      "caseId": "s04-email-001",
+      "arriveAt": 62
+    },
+    {
+      "caseId": "s04-file-004",
+      "arriveAt": 72
+    },
+    {
+      "caseId": "s04-login-003",
+      "arriveAt": 84
+    }
+  ],
+  "review": {
+    "count": 4,
+    "conceptIds": ["malware-files", "log-reading", "passwords-mfa"]
+  },
+  "pay": {
+    "base": 130,
+    "perCorrect": 10
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "dialogues": [
+    {
+      "id": "soc-04-intro",
+      "lines": [
+        {
+          "speaker": "rani",
+          "text": "Hari ini banyak paket datang, dan banyak \"resi\" palsu ikut menumpang."
+        },
+        {
+          "speaker": "rani",
+          "text": "Dua bab baru terbuka: File Berbahaya dan Membaca Log. Kamu juga dapat aksi KARANTINA untuk perangkat yang sudah terinfeksi."
+        },
+        {
+          "speaker": "rani",
+          "text": "Ingat bedanya: file yang belum dibuka cukup diblokir. Kalau sudah dibuka di laptop kantor, karantina laptopnya."
+        },
+        {
+          "speaker": "rani",
+          "text": "Gajimu sudah lumayan. Mampir ke Toko Alat, Sandbox dan Filter Log akan sangat membantu."
+        }
+      ]
+    },
+    {
+      "id": "soc-04-outro",
+      "lines": [
+        {
+          "speaker": "rani",
+          "text": "Kerja bagus. Membaca log memang butuh latihan, dan kamu sudah mulai melihat polanya."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "Cukup main-main. Besok kami datang sendiri. Bersiaplah, Nusa Digital."
+        }
+      ]
+    }
+  ]
+}

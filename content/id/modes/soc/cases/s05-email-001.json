@@ -1,0 +1,64 @@
+{
+  "id": "s05-email-001",
+  "type": "email",
+  "conceptIds": ["phishing-signs", "url-anatomy"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "from": {
+      "name": "Direktur Keuangan",
+      "address": "direktur.keuangan@nusa-digital.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Tolong review laporan audit sebelum rapat",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "09:05",
+    "body": [
+      {
+        "text": "Yudi,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "Laporan audit harus kamu cek sebelum rapat jam 10. Login dulu di portal ini:",
+        "evidenceId": "body-claim"
+      },
+      {
+        "link": {
+          "label": "portal.nusadigital.test/audit",
+          "href": "https://nusa-digital.test/audit/login"
+        },
+        "evidenceId": "link"
+      },
+      {
+        "text": "Jangan sampai terlambat.",
+        "evidenceId": "urgency"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["sender", "link"],
+    "supporting": ["urgency", "whois-age"]
+  },
+  "explanation": "Domain kantor adalah nusadigital.test, sedangkan email ini dari nusa-digital.test (ada tanda hubung) dan tautannya menuju domain tiruan itu. Ini pembuka serangan Kelabu ke bagian Keuangan.",
+  "ruleRefs": ["r-phish-1", "r-url-1", "r-url-3"],
+  "hints": [
+    "Bandingkan domain pengirim dengan domain kantor, huruf demi huruf.",
+    "Tahan tautannya. Teks dan alamat aslinya sama?"
+  ],
+  "intel": {
+    "whois": [
+      {
+        "domain": "nusa-digital.test",
+        "registered": "2 hari lalu",
+        "evidenceId": "whois-age"
+      }
+    ]
+  }
+}

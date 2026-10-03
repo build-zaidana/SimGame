@@ -1,0 +1,46 @@
+{
+  "id": "s05-url-002",
+  "type": "url-request",
+  "conceptIds": ["incident-response"],
+  "difficulty": 1,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Rina Wulandari",
+      "department": "Keuangan"
+    },
+    "url": {
+      "parts": [
+        {
+          "text": "https://",
+          "evidenceId": "url-scheme"
+        },
+        {
+          "text": "portal.",
+          "evidenceId": "url-subdomain"
+        },
+        {
+          "text": "nusadigital.test",
+          "evidenceId": "url-domain"
+        },
+        {
+          "text": "/lapor-insiden",
+          "evidenceId": "url-path"
+        }
+      ]
+    },
+    "reason": {
+      "text": "Mau melaporkan bahwa saya tadi membuka file invoice yang aneh.",
+      "evidenceId": "reason"
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["url-domain", "reason"]
+  },
+  "explanation": "Ini portal kantor yang asli, dan Rina ingin melapor. Melapor cepat justru membantu tim menangani insiden.",
+  "ruleRefs": ["r-url-1", "r-ir-1"],
+  "hints": ["Domainnya milik siapa?", "Rina ingin melaporkan insiden. Pantaskah dihalangi?"]
+}

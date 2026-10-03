@@ -1,0 +1,57 @@
+{
+  "id": "s04-file-003",
+  "type": "file",
+  "conceptIds": ["malware-files"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "quarantine",
+  "acceptableDecisions": {
+    "block": 0.6,
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "fileName": {
+      "text": "Tagihan_Oktober.docm",
+      "evidenceId": "file-name"
+    },
+    "fileType": {
+      "text": "Dokumen Word dengan makro",
+      "evidenceId": "file-type"
+    },
+    "size": {
+      "text": "48 KB",
+      "evidenceId": "file-size"
+    },
+    "source": {
+      "text": "Lampiran email dari tagihan@vendor-baru.test. SUDAH dibuka Dewi di laptop kantor.",
+      "evidenceId": "source"
+    },
+    "message": {
+      "text": "Dewi: \"Tadi muncul tulisan 'Dokumen dilindungi, klik Aktifkan Konten', jadi saya klik.\"",
+      "evidenceId": "message"
+    }
+  },
+  "evidence": {
+    "required": ["message", "source"],
+    "supporting": ["file-type", "sb-download", "sb-encrypt"]
+  },
+  "explanation": "Makro sudah dijalankan di laptop kantor setelah Dewi menekan Aktifkan Konten. Laptopnya harus dikarantina agar malware tidak menyebar ke jaringan.",
+  "ruleRefs": ["r-mal-3", "r-mal-4"],
+  "hints": [
+    "Filenya sudah dibuka atau belum?",
+    "Apa yang terjadi saat Dewi menekan Aktifkan Konten? Ingat bedanya Blokir dan Karantina."
+  ],
+  "intel": {
+    "sandbox": [
+      {
+        "text": "Makro mengunduh program dari internet",
+        "evidenceId": "sb-download"
+      },
+      {
+        "text": "Program mulai mengunci file di folder Dokumen",
+        "evidenceId": "sb-encrypt"
+      }
+    ]
+  }
+}

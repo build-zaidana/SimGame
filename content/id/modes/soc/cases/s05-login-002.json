@@ -1,0 +1,104 @@
+{
+  "id": "s05-login-002",
+  "type": "login-alert",
+  "conceptIds": ["log-reading"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "reset-password",
+  "acceptableDecisions": {
+    "block": 0.6,
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "account": {
+      "user": "Budi Santoso",
+      "role": "Logistik"
+    },
+    "headline": {
+      "text": "Percobaan login beruntun dari IP asing",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "11:00",
+        "location": "Tidak diketahui",
+        "ip": "203.0.113.99",
+        "device": "Linux (perangkat baru)",
+        "method": "Password salah",
+        "result": "failed",
+        "evidenceId": "ev-1"
+      },
+      {
+        "time": "11:01",
+        "location": "Tidak diketahui",
+        "ip": "203.0.113.99",
+        "device": "Linux (perangkat baru)",
+        "method": "Password salah",
+        "result": "failed",
+        "evidenceId": "ev-2"
+      },
+      {
+        "time": "11:02",
+        "location": "Tidak diketahui",
+        "ip": "203.0.113.99",
+        "device": "Linux (perangkat baru)",
+        "method": "Password salah",
+        "result": "failed",
+        "evidenceId": "ev-3"
+      },
+      {
+        "time": "11:03",
+        "location": "Tidak diketahui",
+        "ip": "203.0.113.99",
+        "device": "Linux (perangkat baru)",
+        "method": "Password salah",
+        "result": "failed",
+        "evidenceId": "ev-4"
+      },
+      {
+        "time": "11:04",
+        "location": "Tidak diketahui",
+        "ip": "203.0.113.99",
+        "device": "Linux (perangkat baru)",
+        "method": "Password salah",
+        "result": "failed",
+        "evidenceId": "ev-5"
+      },
+      {
+        "time": "11:05",
+        "location": "Tidak diketahui",
+        "ip": "203.0.113.99",
+        "device": "Linux (perangkat baru)",
+        "method": "Password salah",
+        "result": "failed",
+        "evidenceId": "ev-6"
+      },
+      {
+        "time": "11:07",
+        "location": "Tidak diketahui",
+        "ip": "203.0.113.99",
+        "device": "Linux (perangkat baru)",
+        "method": "Password",
+        "result": "success",
+        "evidenceId": "ev-7"
+      }
+    ],
+    "context": [
+      {
+        "text": "IP 203.0.113.99 adalah server yang dihubungi malware Invoice_Okt.",
+        "evidenceId": "ctx-c2"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["ev-7"],
+    "supporting": ["ev-1", "ev-6", "ctx-c2"]
+  },
+  "explanation": "Enam kali gagal lalu berhasil dari IP yang sama dengan server malware: password Budi berhasil ditebak penyerang. Reset password Budi untuk memutus akses mereka.",
+  "ruleRefs": ["r-log-1", "r-ir-2"],
+  "hints": [
+    "Hitung login gagal dari IP yang sama, lalu lihat baris terakhir.",
+    "Kenali IP itu? Cek info tambahan."
+  ]
+}

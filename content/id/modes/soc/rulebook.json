@@ -98,6 +98,85 @@
           "evidenceTags": []
         }
       ]
+    },
+    {
+      "id": "ch-malware",
+      "title": "Bab 4 · File Berbahaya",
+      "conceptId": "malware-files",
+      "unlockAtShift": 4,
+      "rules": [
+        {
+          "id": "r-mal-1",
+          "text": "Yang berlaku adalah akhiran paling kanan: resi.pdf.apk adalah aplikasi, bukan PDF.",
+          "evidenceTags": ["extension"]
+        },
+        {
+          "id": "r-mal-2",
+          "text": "Undangan, resi, tagihan, dan foto tidak pernah berbentuk .apk, .exe, atau .scr.",
+          "evidenceTags": ["extension"]
+        },
+        {
+          "id": "r-mal-3",
+          "text": "Dokumen yang meminta \"Aktifkan Konten\" (makro) patut dicurigai.",
+          "evidenceTags": ["macro"]
+        },
+        {
+          "id": "r-mal-4",
+          "text": "File berbahaya yang belum dibuka: BLOKIR. Sudah dibuka di perangkat kantor: KARANTINA perangkatnya.",
+          "evidenceTags": ["quarantine"]
+        }
+      ]
+    },
+    {
+      "id": "ch-log",
+      "title": "Bab 5 · Membaca Log",
+      "conceptId": "log-reading",
+      "unlockAtShift": 4,
+      "rules": [
+        {
+          "id": "r-log-1",
+          "text": "Banyak login gagal dari satu IP lalu berhasil berarti password berhasil ditebak (brute force).",
+          "evidenceTags": ["failed-login"]
+        },
+        {
+          "id": "r-log-2",
+          "text": "Dua login dari tempat yang mustahil dijangkau dalam waktu sesingkat itu disebut impossible travel.",
+          "evidenceTags": ["location"]
+        },
+        {
+          "id": "r-log-3",
+          "text": "Login pada jam tidak wajar dari perangkat baru patut dicek ke pemilik akun.",
+          "evidenceTags": ["time"]
+        },
+        {
+          "id": "r-log-4",
+          "text": "Bandingkan log dengan info lain (absensi, dinas, tiket helpdesk) sebelum memutuskan.",
+          "evidenceTags": ["context"]
+        }
+      ]
+    },
+    {
+      "id": "ch-ir",
+      "title": "Bab 6 · Respons Insiden",
+      "conceptId": "incident-response",
+      "unlockAtShift": 5,
+      "rules": [
+        {
+          "id": "r-ir-1",
+          "text": "Urutan respons: deteksi, batasi, bersihkan, pulihkan, lalu laporkan.",
+          "evidenceTags": []
+        },
+        {
+          "id": "r-ir-2",
+          "text": "Batasi penyebaran dulu: reset akun yang dibobol, karantina perangkat, blokir sumber serangan.",
+          "evidenceTags": ["contain"]
+        },
+        {
+          "id": "r-ir-3",
+          "text": "Eskalasi bila insiden menyangkut banyak orang, data penting, atau kamu ragu.",
+          "evidenceTags": ["escalate"]
+        }
+      ]
     }
   ]
 }

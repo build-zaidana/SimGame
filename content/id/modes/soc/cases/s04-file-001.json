@@ -1,0 +1,57 @@
+{
+  "id": "s04-file-001",
+  "type": "file",
+  "conceptIds": ["malware-files"],
+  "difficulty": 1,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6,
+    "quarantine": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "fileName": {
+      "text": "Resi_KC88213.pdf.apk",
+      "evidenceId": "file-name"
+    },
+    "fileType": {
+      "text": "Aplikasi Android (APK)",
+      "evidenceId": "file-type"
+    },
+    "size": {
+      "text": "5,8 MB",
+      "evidenceId": "file-size"
+    },
+    "source": {
+      "text": "Chat di HP kantor bagian Gudang, dari nomor tak dikenal. Belum dibuka.",
+      "evidenceId": "source"
+    },
+    "message": {
+      "text": "Paket kantor gagal dikirim. Cek resinya di sini sebelum dikembalikan ya.",
+      "evidenceId": "message"
+    }
+  },
+  "evidence": {
+    "required": ["file-name", "file-type"],
+    "supporting": ["source", "message", "sb-sms", "sb-send"]
+  },
+  "explanation": "Akhiran paling kanan adalah .apk, jadi ini aplikasi yang menyamar sebagai PDF resi. Filenya belum dibuka, jadi cukup diblokir dan dihapus.",
+  "ruleRefs": ["r-mal-1", "r-mal-2", "r-mal-4"],
+  "hints": [
+    "Baca nama file sampai ujung kanan.",
+    "Resi berbentuk aplikasi? Lalu cek: sudah dibuka atau belum?"
+  ],
+  "intel": {
+    "sandbox": [
+      {
+        "text": "Meminta izin membaca semua SMS dan notifikasi",
+        "evidenceId": "sb-sms"
+      },
+      {
+        "text": "Mengirim isi SMS ke server di luar negeri",
+        "evidenceId": "sb-send"
+      }
+    ]
+  }
+}

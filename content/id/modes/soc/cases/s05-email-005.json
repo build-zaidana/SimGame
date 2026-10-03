@@ -1,0 +1,48 @@
+{
+  "id": "s05-email-005",
+  "type": "email",
+  "conceptIds": ["incident-response"],
+  "difficulty": 3,
+  "verdict": "malicious",
+  "correctDecision": "escalate",
+  "acceptableDecisions": {
+    "block": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "from": {
+      "name": "Kelabu",
+      "address": "kelabu@tebusan-kelabu.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "File kalian sudah kami kunci",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "12:00",
+    "body": [
+      {
+        "text": "Halo Nusa Digital,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "Sebagian file di folder bersama kalian sudah kami kunci.",
+        "evidenceId": "claim"
+      },
+      {
+        "text": "Kirim tebusan dalam 24 jam, atau file akan kami sebarkan.",
+        "evidenceId": "ransom"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["ransom", "claim"],
+    "supporting": ["sender"]
+  },
+  "explanation": "Ini ancaman ransomware yang menyangkut data seluruh kantor. Jangan dibalas atau dibayar: eskalasikan ke analis senior dan pimpinan agar respons insiden dijalankan.",
+  "ruleRefs": ["r-ir-3", "r-ir-1"],
+  "hints": [
+    "Ini bukan soal satu email lagi. Seberapa besar dampaknya?",
+    "Keputusan soal tebusan dan data seluruh kantor bukan wewenang satu analis."
+  ]
+}

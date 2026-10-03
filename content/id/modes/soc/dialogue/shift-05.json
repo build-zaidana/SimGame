@@ -1,0 +1,38 @@
+{
+  "dialogues": [
+    {
+      "id": "soc-05-intro",
+      "lines": [
+        {
+          "speaker": "rani",
+          "text": "Ini dia. Kelabu menyerang bagian Keuangan hari ini."
+        },
+        {
+          "speaker": "rani",
+          "text": "Serangannya berlapis: email palsu, akun dibobol, lalu file berbahaya menyebar. Ikuti jejaknya dari satu kasus ke kasus berikutnya."
+        },
+        {
+          "speaker": "rani",
+          "text": "Bab terakhir terbuka: Respons Insiden. Batasi dulu penyebarannya, baru bersihkan. Kalau dampaknya besar, eskalasi."
+        }
+      ]
+    },
+    {
+      "id": "soc-05-outro",
+      "lines": [
+        {
+          "speaker": "rani",
+          "text": "Kamu berhasil melewati hari terberat. Begini rasanya jadi analis SOC sungguhan."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "...Lain kali kami akan lebih pintar."
+        },
+        {
+          "speaker": "rani",
+          "text": "Kalau mau, coba Tes Akhir di menu kantor untuk melihat seberapa jauh kamu berkembang."
+        }
+      ]
+    }
+  ]
+}
