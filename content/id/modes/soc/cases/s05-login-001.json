@@ -1,0 +1,59 @@
+{
+  "id": "s05-login-001",
+  "type": "login-alert",
+  "conceptIds": ["log-reading", "passwords-mfa"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "reset-password",
+  "acceptableDecisions": {
+    "block": 0.6,
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "account": {
+      "user": "Yudi Pratama",
+      "role": "Staf Keuangan"
+    },
+    "headline": {
+      "text": "Login dari luar negeri tak lama setelah login kantor",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "10:05",
+        "location": "Kantor Jakarta",
+        "ip": "10.20.1.51",
+        "device": "Laptop kantor (terdaftar)",
+        "method": "Password + OTP",
+        "result": "success",
+        "evidenceId": "ev-1"
+      },
+      {
+        "time": "10:21",
+        "location": "Luar negeri",
+        "ip": "198.51.100.66",
+        "device": "Linux (perangkat baru)",
+        "method": "Password + OTP",
+        "result": "success",
+        "evidenceId": "ev-2"
+      }
+    ],
+    "context": [
+      {
+        "text": "10:20 Yudi: \"Tadi saya login di portal audit dari email Direktur, terus diminta kode OTP juga.\"",
+        "evidenceId": "ctx-phish"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["ev-2", "ctx-phish"],
+    "supporting": ["ev-1"]
+  },
+  "explanation": "Yudi memasukkan password dan OTP di halaman palsu, dan semenit kemudian penyerang login dari luar negeri memakai keduanya. Batasi kerusakan: reset password Yudi sekarang.",
+  "ruleRefs": ["r-pass-2", "r-log-2", "r-ir-2"],
+  "hints": [
+    "Hubungkan pengakuan Yudi dengan email audit tadi.",
+    "Login kedua memakai OTP yang sama yang Yudi ketik di situs palsu."
+  ]
+}

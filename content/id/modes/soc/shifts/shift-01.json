@@ -1,0 +1,23 @@
+{
+  "id": "soc-01",
+  "order": 1,
+  "title": "Hari Pertama",
+  "durationGameMinutes": 120,
+  "realSecondsPerGameMinute": 3,
+  "unlocksChapters": ["ch-url", "ch-phish"],
+  "introDialogue": "soc-01-intro",
+  "outroDialogue": "soc-01-outro",
+  "tutorial": true,
+  "queue": [
+    { "caseId": "s01-email-001", "arriveAt": 0 },
+    { "caseId": "s01-email-002", "arriveAt": 5 },
+    { "caseId": "s01-url-001", "arriveAt": 12 },
+    { "caseId": "s01-email-003", "arriveAt": 20 },
+    { "caseId": "s01-url-002", "arriveAt": 30 },
+    { "caseId": "s01-email-004", "arriveAt": 42 },
+    { "caseId": "s01-url-003", "arriveAt": 55 },
+    { "caseId": "s01-email-005", "arriveAt": 70 }
+  ],
+  "review": { "count": 3, "conceptIds": ["url-anatomy", "phishing-signs"] },
+  "pay": { "base": 100, "perCorrect": 10 }
+}

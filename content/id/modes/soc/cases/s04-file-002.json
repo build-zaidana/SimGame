@@ -1,0 +1,49 @@
+{
+  "id": "s04-file-002",
+  "type": "file",
+  "conceptIds": ["malware-files"],
+  "difficulty": 1,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "fileName": {
+      "text": "Resi_Pengiriman_KC77120.pdf",
+      "evidenceId": "file-name"
+    },
+    "fileType": {
+      "text": "Dokumen PDF",
+      "evidenceId": "file-type"
+    },
+    "size": {
+      "text": "120 KB",
+      "evidenceId": "file-size"
+    },
+    "source": {
+      "text": "Lampiran email dari noreply@kirimcepat.test untuk bagian Gudang",
+      "evidenceId": "source"
+    },
+    "message": {
+      "text": "Terlampir resi pengiriman pesanan kantor nomor KC77120.",
+      "evidenceId": "message"
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["file-type", "source", "sb-clean"]
+  },
+  "explanation": "Ini benar-benar PDF dari domain resmi kirimcepat.test, dan Gudang memang menunggu kiriman ini. Tidak ada tanda file berbahaya.",
+  "ruleRefs": ["r-mal-1", "r-phish-1"],
+  "hints": [
+    "Cek akhiran file paling kanan dan pengirimnya.",
+    "PDF dari domain resmi untuk pesanan yang memang ditunggu. Ada yang aneh?"
+  ],
+  "intel": {
+    "sandbox": [
+      {
+        "text": "Hanya berisi teks dan gambar. Tidak menjalankan program apa pun.",
+        "evidenceId": "sb-clean"
+      }
+    ]
+  }
+}

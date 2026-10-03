@@ -1,0 +1,49 @@
+{
+  "id": "s05-email-004",
+  "type": "email",
+  "conceptIds": ["incident-response"],
+  "difficulty": 2,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "from": {
+      "name": "Tim IT PT Nusa Digital",
+      "address": "it@nusadigital.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "PERINGATAN: jangan buka lampiran Invoice_Okt",
+      "evidenceId": "urgency"
+    },
+    "receivedAt": "11:30",
+    "body": [
+      {
+        "text": "Halo semua,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "Kami sedang menangani insiden keamanan. Jangan membuka lampiran Invoice_Okt dari siapa pun.",
+        "evidenceId": "body-info"
+      },
+      {
+        "text": "Kalau sudah terlanjur membukanya, matikan Wi-Fi laptop dan hubungi helpdesk di ext. 110.",
+        "evidenceId": "body-action"
+      },
+      {
+        "text": "Tim IT",
+        "evidenceId": "signature"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["sender", "body-action"]
+  },
+  "explanation": "Peringatan ini dari domain kantor yang asli, tidak berisi tautan, dan memberi langkah yang benar. Email ini harus sampai ke karyawan, jadi izinkan.",
+  "ruleRefs": ["r-phish-5", "r-ir-2"],
+  "hints": [
+    "Subjeknya mengkhawatirkan. Tapi siapa pengirimnya?",
+    "Apakah email ini meminta data, uang, atau klik tautan?"
+  ]
+}

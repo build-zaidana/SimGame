@@ -1,0 +1,55 @@
+{
+  "id": "s05-email-003",
+  "type": "email",
+  "conceptIds": ["incident-response", "malware-files"],
+  "difficulty": 3,
+  "verdict": "malicious",
+  "correctDecision": "escalate",
+  "acceptableDecisions": {
+    "block": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "from": {
+      "name": "Yudi Pratama",
+      "address": "yudi.pratama@nusadigital.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Invoice Oktober, mohon segera dibayar",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "10:30",
+    "body": [
+      {
+        "text": "Kepada semua karyawan,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "Mohon buka invoice terlampir dan proses hari ini.",
+        "evidenceId": "request"
+      },
+      {
+        "text": "Yudi",
+        "evidenceId": "signature"
+      }
+    ],
+    "attachments": [
+      {
+        "name": "Invoice_Okt.pdf.exe",
+        "size": "2,1 MB",
+        "evidenceId": "attachment"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["attachment", "request"],
+    "supporting": ["sender"]
+  },
+  "explanation": "Akun Yudi yang sudah dibobol dipakai mengirim program .exe ke semua karyawan. Insiden yang menyangkut banyak orang harus dieskalasi agar tim bisa menarik email ini dari semua kotak masuk.",
+  "ruleRefs": ["r-ir-3", "r-mal-1", "r-phish-7"],
+  "hints": [
+    "Lihat akhiran lampirannya, lalu lihat siapa saja penerimanya.",
+    "Ini bukan lagi satu email jahat, tapi serangan ke seluruh kantor. Siapa yang perlu tahu?"
+  ]
+}

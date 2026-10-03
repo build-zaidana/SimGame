@@ -1,0 +1,74 @@
+{
+  "id": "soc-05",
+  "order": 5,
+  "title": "Kelabu Datang",
+  "durationGameMinutes": 120,
+  "realSecondsPerGameMinute": 3,
+  "unlocksChapters": ["ch-ir"],
+  "introDialogue": "soc-05-intro",
+  "outroDialogue": "soc-05-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s05-email-002",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s05-email-001",
+      "arriveAt": 4
+    },
+    {
+      "caseId": "s05-login-001",
+      "arriveAt": 10
+    },
+    {
+      "caseId": "s05-email-003",
+      "arriveAt": 16
+    },
+    {
+      "caseId": "s05-file-001",
+      "arriveAt": 22
+    },
+    {
+      "caseId": "s05-email-004",
+      "arriveAt": 30
+    },
+    {
+      "caseId": "s05-login-002",
+      "arriveAt": 38
+    },
+    {
+      "caseId": "s05-url-002",
+      "arriveAt": 46
+    },
+    {
+      "generator": "typosquat-domain",
+      "params": {
+        "brand": "Bank Nusantara",
+        "domain": "banknusantara.test",
+        "verdict": "malicious"
+      },
+      "arriveAt": 54
+    },
+    {
+      "caseId": "s05-url-001",
+      "arriveAt": 62
+    },
+    {
+      "caseId": "s05-login-003",
+      "arriveAt": 72
+    },
+    {
+      "caseId": "s05-email-005",
+      "arriveAt": 84
+    }
+  ],
+  "review": {
+    "count": 5,
+    "conceptIds": ["incident-response", "malware-files", "log-reading"]
+  },
+  "pay": {
+    "base": 140,
+    "perCorrect": 10
+  }
+}

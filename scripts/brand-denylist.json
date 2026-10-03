@@ -1,0 +1,207 @@
+{
+  "$comment": "Merek nyata yang tidak boleh muncul di kasus/soal/dialog. caseSensitive=true untuk singkatan yang juga kata umum.",
+  "terms": [
+    {
+      "term": "BCA",
+      "caseSensitive": true
+    },
+    {
+      "term": "Bank Central Asia"
+    },
+    {
+      "term": "Bank Mandiri"
+    },
+    {
+      "term": "Livin",
+      "caseSensitive": true
+    },
+    {
+      "term": "BRI",
+      "caseSensitive": true
+    },
+    {
+      "term": "BRImo"
+    },
+    {
+      "term": "Bank Rakyat Indonesia"
+    },
+    {
+      "term": "BNI",
+      "caseSensitive": true
+    },
+    {
+      "term": "Bank Negara Indonesia"
+    },
+    {
+      "term": "BSI",
+      "caseSensitive": true
+    },
+    {
+      "term": "BTN",
+      "caseSensitive": true
+    },
+    {
+      "term": "CIMB"
+    },
+    {
+      "term": "Danamon"
+    },
+    {
+      "term": "Permata Bank"
+    },
+    {
+      "term": "PermataBank"
+    },
+    {
+      "term": "Jenius"
+    },
+    {
+      "term": "Bank Jago"
+    },
+    {
+      "term": "SeaBank"
+    },
+    {
+      "term": "blu by BCA"
+    },
+    {
+      "term": "OVO",
+      "caseSensitive": true
+    },
+    {
+      "term": "GoPay"
+    },
+    {
+      "term": "Gojek"
+    },
+    {
+      "term": "Grab",
+      "caseSensitive": true
+    },
+    {
+      "term": "DANA",
+      "caseSensitive": true
+    },
+    {
+      "term": "ShopeePay"
+    },
+    {
+      "term": "LinkAja"
+    },
+    {
+      "term": "Shopee"
+    },
+    {
+      "term": "Tokopedia"
+    },
+    {
+      "term": "Lazada"
+    },
+    {
+      "term": "Bukalapak"
+    },
+    {
+      "term": "Blibli"
+    },
+    {
+      "term": "TikTok"
+    },
+    {
+      "term": "Traveloka"
+    },
+    {
+      "term": "tiket.com"
+    },
+    {
+      "term": "JNE",
+      "caseSensitive": true
+    },
+    {
+      "term": "J&T"
+    },
+    {
+      "term": "SiCepat"
+    },
+    {
+      "term": "AnterAja"
+    },
+    {
+      "term": "Ninja Xpress"
+    },
+    {
+      "term": "Pos Indonesia"
+    },
+    {
+      "term": "Lion Parcel"
+    },
+    {
+      "term": "Telkomsel"
+    },
+    {
+      "term": "Indosat"
+    },
+    {
+      "term": "IM3",
+      "caseSensitive": true
+    },
+    {
+      "term": "Smartfren"
+    },
+    {
+      "term": "IndiHome"
+    },
+    {
+      "term": "PLN",
+      "caseSensitive": true
+    },
+    {
+      "term": "BPJS",
+      "caseSensitive": true
+    },
+    {
+      "term": "PayPal"
+    },
+    {
+      "term": "Google"
+    },
+    {
+      "term": "Gmail"
+    },
+    {
+      "term": "Microsoft"
+    },
+    {
+      "term": "Outlook"
+    },
+    {
+      "term": "Apple",
+      "caseSensitive": true
+    },
+    {
+      "term": "iCloud"
+    },
+    {
+      "term": "Netflix"
+    },
+    {
+      "term": "Facebook"
+    },
+    {
+      "term": "Instagram"
+    },
+    {
+      "term": "WhatsApp"
+    },
+    {
+      "term": "Telegram"
+    },
+    {
+      "term": "Amazon"
+    },
+    {
+      "term": "Steam",
+      "caseSensitive": true
+    }
+  ],
+  "conceptAllowlist": ["WhatsApp", "Telegram"]
+}

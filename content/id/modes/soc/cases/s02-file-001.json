@@ -1,0 +1,41 @@
+{
+  "id": "s02-file-001",
+  "type": "file",
+  "conceptIds": ["phishing-signs"],
+  "difficulty": 1,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "fileName": {
+      "text": "Laporan_Penjualan_September.xlsx",
+      "evidenceId": "file-name"
+    },
+    "fileType": {
+      "text": "Spreadsheet (Excel)",
+      "evidenceId": "file-type"
+    },
+    "size": {
+      "text": "84 KB",
+      "evidenceId": "file-size"
+    },
+    "source": {
+      "text": "Chat kantor, dari akun Dewi Lestari (Tim Penjualan)",
+      "evidenceId": "source"
+    },
+    "message": {
+      "text": "Ini laporan yang kamu minta tadi pagi, ya. Cek halaman 2 untuk ringkasannya.",
+      "evidenceId": "message"
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["source", "message"]
+  },
+  "explanation": "File ini datang dari rekan yang dikenal lewat chat kantor, dan memang diminta sebelumnya. Jenis dan ukurannya wajar untuk sebuah laporan.",
+  "ruleRefs": ["r-phish-6", "r-phish-5"],
+  "hints": [
+    "Apakah file ini ditunggu? Siapa pengirimnya?",
+    "Pesannya menyebut permintaan tadi pagi, dan pengirimnya rekan satu kantor."
+  ]
+}

@@ -1,0 +1,4 @@
+{
+  "$comment": "Domain fiktif tambahan yang boleh dipakai di kasus. Kosong: semua domain di kasus wajib memakai TLD .test atau .example (dicadangkan RFC 2606/6761, tidak bisa didaftarkan siapa pun).",
+  "domains": []
+}

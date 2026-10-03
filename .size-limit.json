@@ -1,0 +1,14 @@
+[
+  {
+    "name": "JS awal (gzip)",
+    "path": "dist/assets/index-*.js",
+    "limit": "250 KB",
+    "gzip": true
+  },
+  {
+    "name": "Chunk mode SOC: meja + konten (gzip)",
+    "path": ["dist/assets/SocDesk-*.js", "dist/assets/content-*.js"],
+    "limit": "150 KB",
+    "gzip": true
+  }
+]

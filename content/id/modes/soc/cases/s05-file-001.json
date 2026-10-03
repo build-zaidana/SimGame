@@ -1,0 +1,57 @@
+{
+  "id": "s05-file-001",
+  "type": "file",
+  "conceptIds": ["malware-files", "incident-response"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "quarantine",
+  "acceptableDecisions": {
+    "block": 0.6,
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "fileName": {
+      "text": "Invoice_Okt.pdf.exe",
+      "evidenceId": "file-name"
+    },
+    "fileType": {
+      "text": "Program Windows",
+      "evidenceId": "file-type"
+    },
+    "size": {
+      "text": "2,1 MB",
+      "evidenceId": "file-size"
+    },
+    "source": {
+      "text": "Lampiran email dari akun Yudi. SUDAH dibuka Rina di laptop kantor.",
+      "evidenceId": "source"
+    },
+    "message": {
+      "text": "Rina: \"Saya kira invoice biasa, tapi kok yang terbuka jendela hitam sebentar lalu hilang?\"",
+      "evidenceId": "message"
+    }
+  },
+  "evidence": {
+    "required": ["file-name", "source"],
+    "supporting": ["message", "sb-spread", "sb-c2"]
+  },
+  "explanation": "Program jahat sudah berjalan di laptop Rina. Karantina laptopnya sekarang supaya malware tidak menyebar ke folder bersama dan perangkat lain.",
+  "ruleRefs": ["r-mal-1", "r-mal-4", "r-ir-2"],
+  "hints": [
+    "Sudah dibuka atau belum?",
+    "Program sudah berjalan di perangkat kantor. Aksi apa yang memutusnya dari jaringan?"
+  ],
+  "intel": {
+    "sandbox": [
+      {
+        "text": "Mencoba menyalin dirinya ke folder bersama kantor",
+        "evidenceId": "sb-spread"
+      },
+      {
+        "text": "Menghubungi server di 203.0.113.99",
+        "evidenceId": "sb-c2"
+      }
+    ]
+  }
+}

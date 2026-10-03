@@ -1,0 +1,55 @@
+{
+  "id": "s02-email-005",
+  "type": "email",
+  "conceptIds": ["phishing-signs", "url-anatomy"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "from": {
+      "name": "Bank Nusantara",
+      "address": "notifikasi@banknusantara.akun-verifikasi.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Transaksi Rp 4.750.000 berhasil",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "10:47",
+    "body": [
+      {
+        "text": "Yth. Nasabah,",
+        "evidenceId": "generic-greeting"
+      },
+      {
+        "text": "Rekening Anda baru saja mengirim Rp 4.750.000 ke rekening lain.",
+        "evidenceId": "body-claim"
+      },
+      {
+        "text": "Bukan Anda? Batalkan dalam 15 menit:",
+        "evidenceId": "urgency"
+      },
+      {
+        "link": {
+          "label": "Batalkan transaksi",
+          "href": "http://batalkan-transaksi.test/bank"
+        },
+        "evidenceId": "link"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["sender", "link"],
+    "supporting": ["urgency", "generic-greeting"]
+  },
+  "explanation": "Dibaca dari kanan, domain pengirimnya akun-verifikasi.test, bukan banknusantara.test, dan tautannya menuju situs lain. Rasa panik soal uang hilang dipakai agar kamu mengklik tanpa berpikir.",
+  "ruleRefs": ["r-phish-1", "r-url-1", "r-phish-3"],
+  "hints": [
+    "Penipu suka membuat kamu panik. Tarik napas, lalu baca domain pengirim dari kanan.",
+    "Pemiliknya akun-verifikasi.test. Sekarang tahan tautannya."
+  ]
+}

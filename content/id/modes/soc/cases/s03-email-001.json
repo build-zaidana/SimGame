@@ -1,0 +1,52 @@
+{
+  "id": "s03-email-001",
+  "type": "email",
+  "conceptIds": ["passwords-mfa", "phishing-signs"],
+  "difficulty": 1,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "from": {
+      "name": "Helpdesk IT",
+      "address": "helpdesk@nusadigital-it.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Verifikasi akun email",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "09:20",
+    "body": [
+      {
+        "text": "Halo,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "Kami sedang memindahkan akun ke server baru. Balas email ini dengan kode OTP yang barusan masuk ke HP Anda.",
+        "evidenceId": "request-otp"
+      },
+      {
+        "text": "Akun yang tidak diverifikasi hari ini akan dinonaktifkan.",
+        "evidenceId": "urgency"
+      },
+      {
+        "text": "Helpdesk IT",
+        "evidenceId": "signature"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["request-otp", "sender"],
+    "supporting": ["urgency"]
+  },
+  "explanation": "Tim IT yang asli tidak pernah meminta kode OTP, dan pengirimnya nusadigital-it.test, bukan domain kantor. Siapa pun yang memegang OTP-mu bisa masuk ke akunmu.",
+  "ruleRefs": ["r-pass-1", "r-phish-1"],
+  "hints": [
+    "Apa yang diminta email ini?",
+    "Ingat aturan emas tentang OTP. Lalu cek domain pengirimnya."
+  ]
+}

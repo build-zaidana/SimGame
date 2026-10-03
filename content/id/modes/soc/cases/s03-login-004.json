@@ -1,0 +1,64 @@
+{
+  "id": "s03-login-004",
+  "type": "login-alert",
+  "conceptIds": ["passwords-mfa"],
+  "difficulty": 2,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "account": {
+      "user": "Sari Anggraini",
+      "role": "Keuangan"
+    },
+    "headline": {
+      "text": "2 login gagal sebelum berhasil",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "08:01",
+        "location": "Kantor Jakarta",
+        "ip": "10.20.1.15",
+        "device": "Laptop kantor (terdaftar)",
+        "method": "Password salah",
+        "result": "failed",
+        "evidenceId": "ev-1"
+      },
+      {
+        "time": "08:02",
+        "location": "Kantor Jakarta",
+        "ip": "10.20.1.15",
+        "device": "Laptop kantor (terdaftar)",
+        "method": "Password salah",
+        "result": "failed",
+        "evidenceId": "ev-2"
+      },
+      {
+        "time": "08:02",
+        "location": "Kantor Jakarta",
+        "ip": "10.20.1.15",
+        "device": "Laptop kantor (terdaftar)",
+        "method": "Password + OTP",
+        "result": "success",
+        "evidenceId": "ev-3"
+      }
+    ],
+    "context": [
+      {
+        "text": "Sari ke helpdesk: \"Tadi pagi Caps Lock-nya nyala, hehe.\"",
+        "evidenceId": "ctx-capslock"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["ctx-capslock", "ev-3"]
+  },
+  "explanation": "Semua percobaan dari laptop Sari yang terdaftar di kantor, hanya dua kali salah, lalu lolos MFA. Ini salah ketik biasa, bukan serangan.",
+  "ruleRefs": ["r-pass-4"],
+  "hints": [
+    "Dari mana dan perangkat apa login-login ini?",
+    "Dua kali salah dari laptop sendiri di kantor. Wajar, bukan?"
+  ]
+}

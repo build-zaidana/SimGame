@@ -1,0 +1,48 @@
+{
+  "id": "s02-url-001",
+  "type": "url-request",
+  "conceptIds": ["url-anatomy"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Yogi Firmansyah",
+      "department": "Produksi"
+    },
+    "url": {
+      "parts": [
+        {
+          "text": "https://",
+          "evidenceId": "url-scheme"
+        },
+        {
+          "text": "nusadigital-portal.test",
+          "evidenceId": "url-domain"
+        },
+        {
+          "text": "/slip-gaji",
+          "evidenceId": "url-path"
+        }
+      ]
+    },
+    "reason": {
+      "text": "Dapat SMS: slip gaji bulan ini bisa diunduh di link ini. Kok diblokir?",
+      "evidenceId": "reason"
+    }
+  },
+  "evidence": {
+    "required": ["url-domain"],
+    "supporting": ["reason"]
+  },
+  "explanation": "Pemilik domain ini nusadigital-portal.test, bukan nusadigital.test milik kantor. Slip gaji resmi ada di portal kantor, bukan di tautan dari SMS.",
+  "ruleRefs": ["r-url-1"],
+  "hints": [
+    "Domain kantor kita adalah nusadigital.test. Bandingkan dengan yang ini.",
+    "Tanda hubung membuat nama domain yang sama sekali berbeda."
+  ]
+}

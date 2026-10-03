@@ -1,0 +1,52 @@
+{
+  "id": "s04-email-002",
+  "type": "email",
+  "conceptIds": ["malware-files", "phishing-signs"],
+  "difficulty": 1,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "from": {
+      "name": "Maya Putri (HR)",
+      "address": "maya.putri@nusadigital.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Undangan pernikahan Maya 🎉",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "11:30",
+    "body": [
+      {
+        "text": "Halo tim SOC,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "Aku menikah bulan depan! Undangannya kulampirkan, semoga kalian bisa datang.",
+        "evidenceId": "body-info"
+      },
+      {
+        "text": "Maya",
+        "evidenceId": "signature"
+      }
+    ],
+    "attachments": [
+      {
+        "name": "Undangan_Maya.jpg",
+        "size": "640 KB",
+        "evidenceId": "attachment"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["sender", "attachment"]
+  },
+  "explanation": "Pengirimnya rekan kantor dari domain asli, dan undangannya berupa gambar .jpg biasa, bukan aplikasi. Tidak semua undangan itu jebakan.",
+  "ruleRefs": ["r-mal-2", "r-phish-5"],
+  "hints": [
+    "Siapa pengirimnya, dan apa jenis lampirannya?",
+    "Undangan berupa gambar dari rekan kantor sendiri. Ada tanda bahaya?"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "id": "s03-url-002",
+  "type": "url-request",
+  "conceptIds": ["passwords-mfa", "url-anatomy"],
+  "difficulty": 1,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Andi Saputra",
+      "department": "Pemasaran"
+    },
+    "url": {
+      "parts": [
+        {
+          "text": "https://",
+          "evidenceId": "url-scheme"
+        },
+        {
+          "text": "portal.",
+          "evidenceId": "url-subdomain"
+        },
+        {
+          "text": "nusadigital.test",
+          "evidenceId": "url-domain"
+        },
+        {
+          "text": "/mfa",
+          "evidenceId": "url-path"
+        }
+      ]
+    },
+    "reason": {
+      "text": "Mau mengaktifkan MFA sesuai pengumuman Tim IT, tapi halamannya belum bisa dibuka dari laptop cabang.",
+      "evidenceId": "reason"
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["url-domain", "reason"]
+  },
+  "explanation": "Domainnya milik kantor (nusadigital.test), dan tujuannya mengaktifkan MFA sesuai pengumuman resmi. Akses ini justru membuat akun Andi lebih aman.",
+  "ruleRefs": ["r-url-1"],
+  "hints": [
+    "Baca pemilik domainnya dari kanan.",
+    "Halaman portal kantor untuk aktivasi MFA. Ada yang salah?"
+  ]
+}

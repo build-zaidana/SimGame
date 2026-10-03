@@ -1,0 +1,52 @@
+{
+  "id": "s03-email-003",
+  "type": "email",
+  "conceptIds": ["passwords-mfa", "phishing-signs"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 2,
+  "data": {
+    "from": {
+      "name": "CS Bank Nusantara",
+      "address": "cs@banknusantara-care.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Poin hadiah Anda siap dicairkan",
+      "evidenceId": "prize"
+    },
+    "receivedAt": "10:40",
+    "body": [
+      {
+        "text": "Halo Nasabah Setia,",
+        "evidenceId": "generic-greeting"
+      },
+      {
+        "text": "Petugas kami akan menelepon Anda hari ini.",
+        "evidenceId": "body-call"
+      },
+      {
+        "text": "Sebutkan kode OTP yang masuk ke HP Anda agar poin langsung dicairkan.",
+        "evidenceId": "request-otp"
+      },
+      {
+        "text": "CS Bank Nusantara",
+        "evidenceId": "signature"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["request-otp", "sender"],
+    "supporting": ["prize", "generic-greeting"]
+  },
+  "explanation": "Bank tidak pernah meminta OTP, termasuk lewat telepon, dan domainnya banknusantara-care.test, bukan banknusantara.test. OTP dari bank hanya untuk transaksi yang kamu lakukan sendiri.",
+  "ruleRefs": ["r-pass-1", "r-phish-1", "r-phish-4"],
+  "hints": [
+    "Apa yang akan diminta penelepon nanti?",
+    "Siapa pun yang meminta OTP adalah tanda bahaya. Cek juga domain pengirimnya."
+  ]
+}

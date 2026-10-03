@@ -1,0 +1,53 @@
+{
+  "id": "s04-file-004",
+  "type": "file",
+  "conceptIds": ["malware-files"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6,
+    "quarantine": 0.6
+  },
+  "severity": 2,
+  "data": {
+    "fileName": {
+      "text": "Scan_KTP_Pelamar.jpg.scr",
+      "evidenceId": "file-name"
+    },
+    "fileType": {
+      "text": "Screensaver Windows (program)",
+      "evidenceId": "file-type"
+    },
+    "size": {
+      "text": "1,2 MB",
+      "evidenceId": "file-size"
+    },
+    "source": {
+      "text": "Lampiran email dari pelamar.kerja@kirim-berkas.test ke HR. Belum dibuka.",
+      "evidenceId": "source"
+    },
+    "message": {
+      "text": "Berikut scan KTP saya untuk lamaran staf admin. Mohon dibuka ya, Bu.",
+      "evidenceId": "message"
+    }
+  },
+  "evidence": {
+    "required": ["file-name", "file-type"],
+    "supporting": ["source", "sb-remote"]
+  },
+  "explanation": "Akhiran paling kanan adalah .scr, yaitu program, bukan gambar. Scan KTP asli berbentuk .jpg atau .pdf, jadi file ini diblokir sebelum dibuka.",
+  "ruleRefs": ["r-mal-1", "r-mal-2"],
+  "hints": [
+    "Akhiran paling kanan menentukan jenis file.",
+    "Gambar KTP tidak pernah berupa program."
+  ],
+  "intel": {
+    "sandbox": [
+      {
+        "text": "Membuka akses jarak jauh ke komputer",
+        "evidenceId": "sb-remote"
+      }
+    ]
+  }
+}

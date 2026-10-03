@@ -1,0 +1,45 @@
+{
+  "id": "s05-email-002",
+  "type": "email",
+  "conceptIds": ["phishing-signs"],
+  "difficulty": 2,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "from": {
+      "name": "Direktur Keuangan",
+      "address": "direktur.keuangan@nusadigital.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Rapat audit dipindah ke pukul 14.00",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "09:20",
+    "body": [
+      {
+        "text": "Halo tim Keuangan,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "Rapat audit hari ini dipindah ke pukul 14.00 di ruang rapat 2. Bahan rapat dibagikan langsung di sana.",
+        "evidenceId": "body-info"
+      },
+      {
+        "text": "Terima kasih.",
+        "evidenceId": "signature"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["sender", "body-info"]
+  },
+  "explanation": "Email ini dari domain kantor yang asli, tidak ada tautan, dan tidak meminta login atau data. Pengumuman jadwal seperti ini sah, walau datang di hari yang sedang ramai serangan.",
+  "ruleRefs": ["r-phish-1", "r-phish-5"],
+  "hints": [
+    "Bandingkan domain pengirim ini dengan email audit sebelumnya.",
+    "Ada tautan, lampiran, atau permintaan data?"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "id": "s01-url-002",
+  "type": "url-request",
+  "conceptIds": ["url-anatomy"],
+  "difficulty": 1,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Sari Anggraini",
+      "department": "Keuangan"
+    },
+    "url": {
+      "parts": [
+        {
+          "text": "https://",
+          "evidenceId": "url-scheme"
+        },
+        {
+          "text": "portal.",
+          "evidenceId": "url-subdomain"
+        },
+        {
+          "text": "nusadigital.test",
+          "evidenceId": "url-domain"
+        },
+        {
+          "text": "/cuti",
+          "evidenceId": "url-path"
+        }
+      ]
+    },
+    "reason": {
+      "text": "Mau mengisi formulir cuti di portal internal kantor, tapi halamannya tidak bisa dibuka dari laptop baru saya.",
+      "evidenceId": "reason"
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["url-domain"]
+  },
+  "explanation": "Dibaca dari kanan, pemilik domainnya nusadigital.test, yaitu kantor kita sendiri, sedangkan portal hanya subdomainnya. Alasannya juga wajar, jadi akses ini aman diizinkan.",
+  "ruleRefs": ["r-url-1"],
+  "hints": [
+    "Baca domainnya dari kanan ke kiri. Siapa pemiliknya?",
+    "nusadigital.test adalah kantor kita sendiri. Apakah alasannya masuk akal?"
+  ]
+}

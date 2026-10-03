@@ -1,0 +1,61 @@
+{
+  "id": "soc-02",
+  "order": 2,
+  "title": "Kotak Masuk Penuh",
+  "durationGameMinutes": 120,
+  "realSecondsPerGameMinute": 3,
+  "unlocksChapters": [],
+  "introDialogue": "soc-02-intro",
+  "outroDialogue": "soc-02-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s02-email-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s02-email-002",
+      "arriveAt": 6
+    },
+    {
+      "caseId": "s02-file-001",
+      "arriveAt": 14
+    },
+    {
+      "caseId": "s02-email-003",
+      "arriveAt": 22
+    },
+    {
+      "caseId": "s02-file-002",
+      "arriveAt": 30
+    },
+    {
+      "caseId": "s02-email-004",
+      "arriveAt": 40
+    },
+    {
+      "caseId": "s02-url-001",
+      "arriveAt": 50
+    },
+    {
+      "caseId": "s02-email-005",
+      "arriveAt": 60
+    },
+    {
+      "caseId": "s02-url-002",
+      "arriveAt": 72
+    },
+    {
+      "caseId": "s02-email-006",
+      "arriveAt": 85
+    }
+  ],
+  "review": {
+    "count": 3,
+    "conceptIds": ["phishing-signs", "url-anatomy"]
+  },
+  "pay": {
+    "base": 110,
+    "perCorrect": 10
+  }
+}

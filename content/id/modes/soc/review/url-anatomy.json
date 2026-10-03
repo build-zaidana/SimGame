@@ -1,0 +1,73 @@
+{
+  "items": [
+    {
+      "id": "rv-url-1",
+      "type": "mcq",
+      "conceptId": "url-anatomy",
+      "difficulty": 1,
+      "prompt": "Siapa pemilik situs bantuan.kirimcepat.cek-resi.test?",
+      "choices": ["KirimCepat (kirimcepat.test)", "cek-resi.test", "bantuan"],
+      "answerIndex": 1,
+      "explanation": "Baca dari kanan: akhirannya .test, dan satu nama sebelumnya adalah cek-resi. Bagian di depannya hanya subdomain."
+    },
+    {
+      "id": "rv-url-2",
+      "type": "mcq",
+      "conceptId": "url-anatomy",
+      "difficulty": 1,
+      "prompt": "Sebuah situs punya gembok HTTPS. Apa artinya?",
+      "choices": [
+        "Situsnya pasti milik organisasi resmi",
+        "Koneksinya terenkripsi, tapi pemiliknya belum tentu jujur",
+        "Situsnya sudah diperiksa polisi siber"
+      ],
+      "answerIndex": 1,
+      "explanation": "HTTPS hanya mengenkripsi koneksi antara browser dan situs. Situs penipu juga bisa memakai HTTPS."
+    },
+    {
+      "id": "rv-url-3",
+      "type": "tap-evidence",
+      "conceptId": "url-anatomy",
+      "difficulty": 2,
+      "prompt": "Ketuk bagian alamat yang menunjukkan pemilik situs sebenarnya.",
+      "parts": [
+        {
+          "text": "https://",
+          "evidenceId": "scheme"
+        },
+        {
+          "text": "promo.",
+          "evidenceId": "sub-1"
+        },
+        {
+          "text": "kirimcepat.",
+          "evidenceId": "sub-2"
+        },
+        {
+          "text": "hadiah-gratis.test",
+          "evidenceId": "owner"
+        },
+        {
+          "text": "/klaim",
+          "evidenceId": "path"
+        }
+      ],
+      "answer": ["owner"],
+      "explanation": "Baca dari kanan: pemiliknya hadiah-gratis.test. Nama kirimcepat di depannya hanya subdomain yang dibuat penipu."
+    },
+    {
+      "id": "rv-url-4",
+      "type": "mcq",
+      "conceptId": "url-anatomy",
+      "difficulty": 1,
+      "prompt": "Alamat mana yang benar-benar milik Bank Nusantara (banknusantara.test)?",
+      "choices": [
+        "banknusantara.akun-aman.test",
+        "login.banknusantara.test",
+        "banknusantara-login.test"
+      ],
+      "answerIndex": 1,
+      "explanation": "Pada login.banknusantara.test, pemiliknya banknusantara.test dan login hanya subdomain. Dua lainnya milik akun-aman.test dan banknusantara-login.test."
+    }
+  ]
+}

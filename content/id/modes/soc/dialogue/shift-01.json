@@ -1,0 +1,42 @@
+{
+  "dialogues": [
+    {
+      "id": "soc-01-intro",
+      "lines": [
+        {
+          "speaker": "rani",
+          "text": "Halo! Aku Rani, analis senior di meja SOC PT Nusa Digital. Selamat datang di hari pertamamu!"
+        },
+        {
+          "speaker": "rani",
+          "text": "SOC itu singkatan dari Security Operations Center: tim yang menjaga keamanan kantor dan klien kita setiap hari."
+        },
+        {
+          "speaker": "rani",
+          "text": "Buka kasus dari Antrian, lalu ketuk bagian yang mencurigakan untuk menandainya sebagai bukti."
+        },
+        {
+          "speaker": "rani",
+          "text": "Setelah itu putuskan: IZINKAN, BLOKIR, atau ESKALASI (serahkan ke analis senior) kalau kamu ragu."
+        },
+        {
+          "speaker": "rani",
+          "text": "Bingung? Buka Buku Panduan. Satu lagi: tahan atau klik kanan sebuah tautan untuk melihat alamat aslinya."
+        }
+      ]
+    },
+    {
+      "id": "soc-01-outro",
+      "lines": [
+        {
+          "speaker": "rani",
+          "text": "Shift pertama beres! Lihat laporanmu, terutama kasus yang meleset. Dari situ kita belajar paling banyak."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "Nusa Digital punya analis baru, ya? Kita lihat seberapa teliti dia."
+        }
+      ]
+    }
+  ]
+}

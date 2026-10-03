@@ -1,0 +1,58 @@
+{
+  "id": "s04-email-001",
+  "type": "email",
+  "conceptIds": ["malware-files", "phishing-signs"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6,
+    "quarantine": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "from": {
+      "name": "KirimCepat",
+      "address": "info@kirimcepat-lacak.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Paket gagal dikirim: pasang aplikasi pelacak",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "09:40",
+    "body": [
+      {
+        "text": "Yth. Pelanggan,",
+        "evidenceId": "generic-greeting"
+      },
+      {
+        "text": "Paket Anda tertahan. Unduh aplikasi pelacak resmi kami untuk menjadwalkan ulang.",
+        "evidenceId": "body-claim"
+      },
+      {
+        "link": {
+          "label": "Unduh Aplikasi Pelacak",
+          "href": "https://kirimcepat-lacak.test/pelacak.apk"
+        },
+        "evidenceId": "link"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["sender", "link"],
+    "supporting": ["generic-greeting", "whois-age"]
+  },
+  "explanation": "Domain kirimcepat-lacak.test bukan milik KirimCepat, dan tautannya mengunduh file .apk. Kurir resmi tidak meminta pelanggan memasang aplikasi dari email.",
+  "ruleRefs": ["r-phish-1", "r-url-3", "r-mal-2"],
+  "hints": ["Cek domain pengirim.", "Tahan tautannya: apa akhiran file yang akan diunduh?"],
+  "intel": {
+    "whois": [
+      {
+        "domain": "kirimcepat-lacak.test",
+        "registered": "4 hari lalu",
+        "evidenceId": "whois-age"
+      }
+    ]
+  }
+}

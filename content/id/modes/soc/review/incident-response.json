@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "id": "rv-ir-1",
+      "type": "order-steps",
+      "conceptId": "incident-response",
+      "difficulty": 2,
+      "prompt": "Urutkan langkah respons insiden.",
+      "steps": ["Deteksi", "Batasi penyebaran", "Bersihkan", "Pulihkan", "Laporkan & pelajari"],
+      "explanation": "Batasi dulu agar kerusakan berhenti, baru bersihkan dan pulihkan. Laporan di akhir mencegah insiden yang sama terulang."
+    },
+    {
+      "id": "rv-ir-2",
+      "type": "mcq",
+      "conceptId": "incident-response",
+      "difficulty": 2,
+      "prompt": "Akun Yudi dibobol dan dipakai mengirim malware ke semua karyawan. Langkah membatasi yang tepat adalah…",
+      "choices": [
+        "Reset password Yudi dan tarik email berlampiran itu",
+        "Menunggu sampai ada yang mengeluh",
+        "Menghapus semua email kantor"
+      ],
+      "answerIndex": 0,
+      "explanation": "Membatasi berarti memutus akses penyerang dan menghentikan penyebaran, tanpa merusak hal lain."
+    },
+    {
+      "id": "rv-ir-3",
+      "type": "mcq",
+      "conceptId": "incident-response",
+      "difficulty": 1,
+      "prompt": "Kapan sebaiknya kamu eskalasi?",
+      "choices": [
+        "Hanya kalau yakin 100% itu serangan",
+        "Saat insiden menyangkut banyak orang, atau kamu ragu",
+        "Tidak pernah, analis harus menyelesaikannya sendiri"
+      ],
+      "answerIndex": 1,
+      "explanation": "Eskalasi cepat membuat tim yang tepat bisa bertindak. Ragu adalah alasan yang sah untuk eskalasi."
+    },
+    {
+      "id": "rv-ir-4",
+      "type": "mcq",
+      "conceptId": "incident-response",
+      "difficulty": 1,
+      "prompt": "Kenapa langkah \"laporkan & pelajari\" tetap penting setelah sistem pulih?",
+      "choices": [
+        "Supaya insiden yang sama tidak terulang",
+        "Supaya ada yang bisa disalahkan",
+        "Tidak penting kalau sistem sudah pulih"
+      ],
+      "answerIndex": 0,
+      "explanation": "Pelajaran dari insiden dipakai untuk memperbaiki aturan dan pelatihan. Tujuannya mencegah, bukan menyalahkan."
+    }
+  ]
+}

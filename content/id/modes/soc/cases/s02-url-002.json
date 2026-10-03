@@ -1,0 +1,49 @@
+{
+  "id": "s02-url-002",
+  "type": "url-request",
+  "conceptIds": ["url-anatomy"],
+  "difficulty": 1,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Maya Putri",
+      "department": "HR"
+    },
+    "url": {
+      "parts": [
+        {
+          "text": "https://",
+          "evidenceId": "url-scheme"
+        },
+        {
+          "text": "karier.",
+          "evidenceId": "url-subdomain"
+        },
+        {
+          "text": "nusadigital.test",
+          "evidenceId": "url-domain"
+        },
+        {
+          "text": "/lowongan",
+          "evidenceId": "url-path"
+        }
+      ]
+    },
+    "reason": {
+      "text": "Mau cek lowongan yang baru kami pasang di situs karier kantor.",
+      "evidenceId": "reason"
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["url-domain"]
+  },
+  "explanation": "Dibaca dari kanan, pemilik domainnya nusadigital.test, dan karier hanya subdomain milik kantor sendiri. Alasan HR juga wajar.",
+  "ruleRefs": ["r-url-1"],
+  "hints": [
+    "Baca domainnya dari kanan ke kiri.",
+    "Pemiliknya kantor kita sendiri. Ada yang janggal?"
+  ]
+}

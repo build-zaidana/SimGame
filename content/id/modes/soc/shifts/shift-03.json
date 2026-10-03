@@ -1,0 +1,61 @@
+{
+  "id": "soc-03",
+  "order": 3,
+  "title": "Kode Rahasia",
+  "durationGameMinutes": 120,
+  "realSecondsPerGameMinute": 3,
+  "unlocksChapters": ["ch-pass"],
+  "introDialogue": "soc-03-intro",
+  "outroDialogue": "soc-03-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s03-email-002",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s03-login-001",
+      "arriveAt": 6
+    },
+    {
+      "caseId": "s03-email-001",
+      "arriveAt": 14
+    },
+    {
+      "caseId": "s03-login-002",
+      "arriveAt": 22
+    },
+    {
+      "caseId": "s03-url-001",
+      "arriveAt": 30
+    },
+    {
+      "caseId": "s03-login-003",
+      "arriveAt": 40
+    },
+    {
+      "caseId": "s03-email-003",
+      "arriveAt": 50
+    },
+    {
+      "caseId": "s03-login-004",
+      "arriveAt": 60
+    },
+    {
+      "caseId": "s03-email-004",
+      "arriveAt": 72
+    },
+    {
+      "caseId": "s03-url-002",
+      "arriveAt": 85
+    }
+  ],
+  "review": {
+    "count": 4,
+    "conceptIds": ["passwords-mfa", "phishing-signs"]
+  },
+  "pay": {
+    "base": 120,
+    "perCorrect": 10
+  }
+}

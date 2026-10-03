@@ -1,0 +1,40 @@
+{
+  "tools": [
+    {
+      "id": "link-checker",
+      "name": "Pemeriksa Tautan",
+      "icon": "🔍",
+      "description": "Menampilkan alamat asli setiap tautan dan pemilik domainnya secara otomatis, tanpa perlu menahan tautan.",
+      "price": 60,
+      "conceptId": "url-anatomy",
+      "unlockAtShift": 1
+    },
+    {
+      "id": "whois",
+      "name": "Cek WHOIS",
+      "icon": "📅",
+      "description": "Menunjukkan kapan sebuah domain didaftarkan. Domain penipu biasanya baru berumur beberapa hari.",
+      "price": 100,
+      "conceptId": "phishing-signs",
+      "unlockAtShift": 2
+    },
+    {
+      "id": "sandbox",
+      "name": "Sandbox",
+      "icon": "🧪",
+      "description": "Menjalankan file di ruang terisolasi dan melaporkan perilakunya, tanpa membahayakan komputer kantor.",
+      "price": 150,
+      "conceptId": "malware-files",
+      "unlockAtShift": 4
+    },
+    {
+      "id": "log-filter",
+      "name": "Filter Log",
+      "icon": "🧮",
+      "description": "Merangkum login per alamat IP: berapa yang gagal, berapa yang berhasil, dan dari mana.",
+      "price": 150,
+      "conceptId": "log-reading",
+      "unlockAtShift": 4
+    }
+  ]
+}

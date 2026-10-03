@@ -1,0 +1,45 @@
+{
+  "id": "s04-url-001",
+  "type": "url-request",
+  "conceptIds": ["url-anatomy"],
+  "difficulty": 1,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Bayu Pratama",
+      "department": "Gudang"
+    },
+    "url": {
+      "parts": [
+        {
+          "text": "https://",
+          "evidenceId": "url-scheme"
+        },
+        {
+          "text": "kirimcepat.test",
+          "evidenceId": "url-domain"
+        },
+        {
+          "text": "/lacak/KC77120",
+          "evidenceId": "url-path"
+        }
+      ]
+    },
+    "reason": {
+      "text": "Mau cek posisi paket kantor lewat situs resmi KirimCepat, bukan dari link di chat.",
+      "evidenceId": "reason"
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["url-domain", "reason"]
+  },
+  "explanation": "Pemilik domainnya kirimcepat.test, situs resmi kurir, dan Bayu sengaja membukanya sendiri alih-alih dari tautan chat. Ini kebiasaan yang benar.",
+  "ruleRefs": ["r-url-1"],
+  "hints": [
+    "Baca pemilik domainnya dari kanan.",
+    "Domain resmi kurir, dibuka sendiri. Ada masalah?"
+  ]
+}

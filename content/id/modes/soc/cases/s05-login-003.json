@@ -1,0 +1,46 @@
+{
+  "id": "s05-login-003",
+  "type": "login-alert",
+  "conceptIds": ["log-reading"],
+  "difficulty": 2,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "account": {
+      "user": "Direktur Keuangan",
+      "role": "Direksi"
+    },
+    "headline": {
+      "text": "Login dari lokasi baru: Bandung",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "13:10",
+        "location": "Bandung",
+        "ip": "10.30.4.20",
+        "device": "Laptop kantor (terdaftar)",
+        "method": "Password + OTP",
+        "result": "success",
+        "evidenceId": "ev-1"
+      }
+    ],
+    "context": [
+      {
+        "text": "Kalender: Direktur Keuangan berada di kantor cabang Bandung hari ini.",
+        "evidenceId": "ctx-trip"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["ctx-trip", "ev-1"]
+  },
+  "explanation": "Lokasinya baru, tapi sesuai kalender dinas, memakai laptop terdaftar, dan lolos MFA. Di tengah insiden pun, tidak semua alert adalah serangan.",
+  "ruleRefs": ["r-log-4", "r-pass-4"],
+  "hints": [
+    "Cocokkan lokasi dengan info tambahan.",
+    "Perangkat terdaftar, MFA lolos, dan ada jadwal dinas. Ada yang janggal?"
+  ]
+}

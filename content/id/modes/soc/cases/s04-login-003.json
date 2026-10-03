@@ -1,0 +1,59 @@
+{
+  "id": "s04-login-003",
+  "type": "login-alert",
+  "conceptIds": ["log-reading"],
+  "difficulty": 3,
+  "verdict": "malicious",
+  "correctDecision": "reset-password",
+  "acceptableDecisions": {
+    "block": 0.6,
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "account": {
+      "user": "Andi Saputra",
+      "role": "Pemasaran"
+    },
+    "headline": {
+      "text": "Dua login berhasil dari tempat berjauhan",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "09:00",
+        "location": "Kantor Jakarta",
+        "ip": "10.20.1.22",
+        "device": "Laptop kantor (terdaftar)",
+        "method": "Password + OTP",
+        "result": "success",
+        "evidenceId": "ev-1"
+      },
+      {
+        "time": "09:12",
+        "location": "Luar negeri",
+        "ip": "198.51.100.23",
+        "device": "Windows (perangkat baru)",
+        "method": "Password",
+        "result": "success",
+        "evidenceId": "ev-2"
+      }
+    ],
+    "context": [
+      {
+        "text": "Andi hadir di rapat kantor Jakarta pukul 09.00–10.00.",
+        "evidenceId": "ctx-meeting"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["ev-2"],
+    "supporting": ["ev-1", "ctx-meeting"]
+  },
+  "explanation": "Andi di Jakarta, tetapi 12 menit kemudian ada login berhasil dari luar negeri dengan perangkat baru. Ini impossible travel: ada orang lain yang memegang password Andi.",
+  "ruleRefs": ["r-log-2", "r-pass-2"],
+  "hints": [
+    "Bandingkan jam dan lokasi kedua login.",
+    "Bisakah Andi berpindah ke luar negeri dalam 12 menit?"
+  ]
+}
