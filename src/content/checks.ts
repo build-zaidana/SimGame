@@ -185,6 +185,15 @@ export function checkModeContent(content: ModeContent, policy: CheckPolicy): Con
       err(file, `penjelasan ${sentences} kalimat (maks ${policy.maxExplanationSentences})`);
     }
 
+    for (const hint of c.hints) {
+      if (countSentences(hint) > policy.maxExplanationSentences) {
+        err(
+          file,
+          `petunjuk lebih dari ${policy.maxExplanationSentences} kalimat: "${hint.slice(0, 40)}…"`,
+        );
+      }
+    }
+
     const text = allStrings(c).join(' ');
     const brands = findBrands(text, policy.brandDenylist);
     if (brands.length) err(file, `merek nyata: ${brands.join(', ')}`);
@@ -233,6 +242,9 @@ export function checkModeContent(content: ModeContent, policy: CheckPolicy): Con
     if (!conceptIds.has(r.conceptId)) err(file, `${r.id}: konsep tidak ada: ${r.conceptId}`);
     if (r.type === 'mcq' && r.answerIndex >= r.choices.length)
       err(file, `${r.id}: answerIndex di luar pilihan`);
+    if (r.type === 'order-steps' && new Set(r.steps).size !== r.steps.length) {
+      err(file, `${r.id}: langkah duplikat`);
+    }
     if (r.type === 'tap-evidence') {
       const ids = new Set(r.parts.flatMap((p) => (p.evidenceId ? [p.evidenceId] : [])));
       for (const a of r.answer)

@@ -3,6 +3,7 @@
  * Kunci peta = path relatif terhadap folder mode (mis. `cases/s01-email-001.json`);
  * nilai = objek JSON hasil parse, atau string untuk file `.md`.
  */
+import { marked } from 'marked';
 import { parse as parseYaml } from 'yaml';
 import type { z } from 'zod';
 import {
@@ -102,7 +103,8 @@ export function parseModeContent<TCase extends BaseCase = BaseCase>(
       const meta = parse(file, conceptFrontmatterSchema, fm);
       if (meta) {
         requireIdMatchesFile(file, meta.id);
-        content.concepts.push({ ...meta, body: (m[2] ?? '').trim() });
+        const body = (m[2] ?? '').trim();
+        content.concepts.push({ ...meta, body, html: marked.parse(body, { async: false }) });
       }
     } else if (file.startsWith('shifts/') && file.endsWith('.json')) {
       const shift = parse(file, shiftSchema, raw);

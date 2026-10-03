@@ -35,6 +35,7 @@ const emailCase = (id: string, verdict: 'safe' | 'malicious', over: object = {})
   evidence: { required: verdict === 'safe' ? [] : ['sender'], supporting: [] },
   explanation: 'Satu kalimat.',
   ruleRefs: ['r-1'],
+  hints: ['Lihat pengirimnya.'],
   ...over,
 });
 
@@ -202,6 +203,16 @@ describe('content validation', () => {
     ['bad frontmatter', (f) => (f['concepts/url.md'] = 'tanpa frontmatter'), /frontmatter/],
     ['missing mode.json', (f) => delete f['mode.json'], /mode.json: file wajib tidak ada/],
     [
+      'hint too long',
+      (f) => (f['cases/c-2.json'] = emailCase('c-2', 'malicious', { hints: ['Satu. Dua. Tiga.'] })),
+      /petunjuk lebih dari 2 kalimat/,
+    ],
+    [
+      'missing hints',
+      (f) => (f['cases/c-2.json'] = emailCase('c-2', 'malicious', { hints: [] })),
+      /hints/,
+    ],
+    [
       'answerIndex out of range',
       (f) =>
         ((f['review/url.json'] as { items: { answerIndex: number }[] }).items[0]!.answerIndex = 5),
@@ -236,5 +247,12 @@ describe('text helpers', () => {
     expect(findNonFictionalDomains('buka contoh-asli.com', policy.fictionalDomains)).toEqual([
       'contoh-asli.com',
     ]);
+  });
+});
+
+describe('concept rendering', () => {
+  it('renders concept Markdown to HTML at load time', () => {
+    const { content } = parseModeContent(fixture(), socCaseSchemas);
+    expect(content.concepts[0]?.html).toBe('<p>Isi materi.</p>\n');
   });
 });

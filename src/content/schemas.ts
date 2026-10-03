@@ -126,6 +126,8 @@ export const baseCaseSchema = z.strictObject({
   }),
   explanation: text,
   ruleRefs: z.array(idSchema).min(1),
+  /** Petunjuk bertingkat dari mentor: umum → spesifik. Petunjuk ke-2 dst. memotong skor. */
+  hints: z.array(text).min(1).max(3),
 });
 
 /** Bagian dokumen yang bisa ditandai sebagai bukti. */
@@ -133,7 +135,8 @@ export const markableTextSchema = z.strictObject({ text, evidenceId: idSchema.op
 
 export type ModeMeta = z.infer<typeof modeMetaSchema>;
 export type ConceptFrontmatter = z.infer<typeof conceptFrontmatterSchema>;
-export type Concept = ConceptFrontmatter & { body: string };
+/** `html` = materi Markdown yang sudah di-render (konten tepercaya dari repo). */
+export type Concept = ConceptFrontmatter & { body: string; html: string };
 export type Rule = z.infer<typeof ruleSchema>;
 export type Chapter = z.infer<typeof chapterSchema>;
 export type Rulebook = z.infer<typeof rulebookSchema>;
