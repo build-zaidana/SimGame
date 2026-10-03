@@ -31,6 +31,13 @@ Semua perubahan di lapisan UI (`app/`) dan kontrak mode; engine dan bentuk save 
 
 Tidak ada dependensi atau aset baru. Bundel naik ±2 kB gzip.
 
+## Tambahan: resolusi seni lebih tinggi
+
+Masukan pemilik: gaya pixel dipertahankan, tapi jangan terlalu kotak. Seni digambar ulang lewat
+`ui/pixel/canvas.ts` (elips dengan bayangan dari kiri atas, outline otomatis, satu `<path>` per warna):
+potret 32×32 (sebelumnya 12×14) dan ilustrasi kantor 128×72 (sebelumnya 64×36). Hasil di-cache per
+wajah; tetap tanpa file gambar.
+
 ## Konsekuensi
 
 - Nama karyawan & kalimat pelapor ada di `src/i18n/id.ts` (`soc.visitors`): perlu direview pemilik.
