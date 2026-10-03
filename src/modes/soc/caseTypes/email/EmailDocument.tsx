@@ -2,6 +2,8 @@ import { useRef, useState } from 'react';
 import { Evidence } from '../../../../app/ui/Evidence.tsx';
 import { id } from '../../../../i18n/id.ts';
 import type { DocumentProps } from '../../../contract.ts';
+import { hostOf, ownerOf } from '../../intel.ts';
+import { SOC_TOOLS } from '../../tools.ts';
 import type { EmailCase } from './schema.ts';
 
 const LONG_PRESS_MS = 500;
@@ -15,7 +17,9 @@ function LinkEvidence({
   part,
   ...ev
 }: { part: LinkPart } & Omit<DocumentProps, 'data' | 'marks'> & { marked: boolean }) {
-  const [revealed, setRevealed] = useState(false);
+  const hasChecker = ev.tools.has(SOC_TOOLS.linkChecker);
+  const [revealedByHand, setRevealed] = useState(false);
+  const revealed = hasChecker || revealedByHand;
   const timer = useRef<number | null>(null);
   const suppressClick = useRef(false);
   const cancel = () => {
@@ -55,14 +59,29 @@ function LinkEvidence({
       </Evidence>
       {revealed && (
         <p className="px-1 text-sm" data-testid="real-address">
+          {hasChecker && (
+            <span className="sr-only">{id.tools.activeLabel('Pemeriksa Tautan')}: </span>
+          )}
           {id.soc.email.realAddress} <code className="break-all text-accent">{part.link.href}</code>
+          {hasChecker && (
+            <span className="block" data-testid="link-owner">
+              <span aria-hidden="true">🔍 </span>
+              {id.tools.owner} <strong>{ownerOf(hostOf(part.link.href))}</strong>
+            </span>
+          )}
         </p>
       )}
     </div>
   );
 }
 
-export function EmailDocument({ data, marks, onToggleMark, locked }: DocumentProps<EmailCase>) {
+export function EmailDocument({
+  data,
+  marks,
+  onToggleMark,
+  locked,
+  tools,
+}: DocumentProps<EmailCase>) {
   const { from, subject, receivedAt, body, attachments } = data.data;
   const mark = (evidenceId: string | undefined) => ({
     evidenceId,
@@ -106,6 +125,7 @@ export function EmailDocument({ data, marks, onToggleMark, locked }: DocumentPro
               marked={part.evidenceId ? marks.has(part.evidenceId) : false}
               locked={locked}
               onToggleMark={onToggleMark}
+              tools={tools}
             />
           ) : (
             <Evidence key={i} {...mark(part.evidenceId)}>

@@ -1,6 +1,8 @@
 import { Evidence } from '../../../../app/ui/Evidence.tsx';
 import { id } from '../../../../i18n/id.ts';
 import type { DocumentProps } from '../../../contract.ts';
+import { hostOf, ownerOf } from '../../intel.ts';
+import { SOC_TOOLS } from '../../tools.ts';
 import type { UrlRequestCase } from './schema.ts';
 
 export function UrlRequestDocument({
@@ -8,8 +10,10 @@ export function UrlRequestDocument({
   marks,
   onToggleMark,
   locked,
+  tools,
 }: DocumentProps<UrlRequestCase>) {
   const { requester, url, reason } = data.data;
+  const fullUrl = url.parts.map((p) => p.text).join('');
   const mark = (evidenceId: string | undefined) => ({
     evidenceId,
     marked: evidenceId ? marks.has(evidenceId) : false,
@@ -37,6 +41,12 @@ export function UrlRequestDocument({
                 {p.text}
               </Evidence>
             ))}
+            {tools.has(SOC_TOOLS.linkChecker) && (
+              <span className="block px-1 font-body text-sm" data-testid="link-owner">
+                <span aria-hidden="true">🔍 </span>
+                {id.tools.owner} <strong>{ownerOf(hostOf(fullUrl))}</strong>
+              </span>
+            )}
           </dd>
         </div>
         <div>

@@ -17,7 +17,7 @@ export const loginEventSchema = z.strictObject({
 export const loginAlertDataSchema = z.strictObject({
   account: z.strictObject({ user: t, role: t }),
   headline: markableTextSchema,
-  events: z.array(loginEventSchema).min(1).max(8),
+  events: z.array(loginEventSchema).min(1).max(12),
   /** Info pendukung (absensi, tiket, catatan telepon). */
   context: z.array(markableTextSchema).default([]),
 });

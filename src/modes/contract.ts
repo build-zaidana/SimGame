@@ -19,6 +19,8 @@ export interface DocumentProps<TCase extends BaseCase = BaseCase> {
   onToggleMark(id: EvidenceId): void;
   /** true setelah keputusan dibuat: bukti tidak bisa diubah lagi. */
   locked: boolean;
+  /** ID alat yang dimiliki pemain; Document memakai ini untuk mekanik alat. */
+  tools: ReadonlySet<string>;
 }
 
 export interface CaseTypeDef<TCase extends BaseCase = BaseCase> {
@@ -37,10 +39,14 @@ export function defineCaseType<TCase extends BaseCase>(def: CaseTypeDef<TCase>):
   return def as unknown as CaseTypeDef;
 }
 
-/** Variasi kasus prosedural (M3). */
+/**
+ * Variasi kasus prosedural. Murni & deterministik: kasus yang sama untuk rng yang sama.
+ * Melempar error jika `params` tidak valid (ditangkap content:check).
+ */
 export type CaseGenerator = (
   params: Record<string, unknown>,
   rng: RngState,
+  ctx: { id: string },
 ) => [BaseCase, RngState];
 
 export interface DeskProps {
@@ -49,6 +55,7 @@ export interface DeskProps {
   session: ShiftSession;
   wallet: number;
   mastery: MasteryMap;
+  toolsOwned: readonly string[];
   dispatch(action: ShiftAction): void;
 }
 

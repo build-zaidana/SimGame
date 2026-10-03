@@ -1,6 +1,8 @@
 import { Evidence } from '../../../../app/ui/Evidence.tsx';
 import { id } from '../../../../i18n/id.ts';
 import type { DocumentProps } from '../../../contract.ts';
+import { summarizeByIp } from '../../intel.ts';
+import { SOC_TOOLS } from '../../tools.ts';
 import type { LoginAlertCase } from './schema.ts';
 
 export function LoginAlertDocument({
@@ -8,6 +10,7 @@ export function LoginAlertDocument({
   marks,
   onToggleMark,
   locked,
+  tools,
 }: DocumentProps<LoginAlertCase>) {
   const { account, headline, events, context } = data.data;
   const t = id.soc.loginAlert;
@@ -52,6 +55,21 @@ export function LoginAlertDocument({
           </li>
         ))}
       </ol>
+      {tools.has(SOC_TOOLS.logFilter) && (
+        <section className="mt-3 border-2 border-focus/60 p-2" data-testid="log-filter">
+          <h3 className="text-sm font-bold">
+            <span aria-hidden="true">🧮 </span>
+            {id.tools.logFilterHeading}
+          </h3>
+          <ul className="mt-1 font-mono text-sm">
+            {summarizeByIp(events).map((r) => (
+              <li key={r.ip}>
+                {r.ip} ({r.locations.join(', ')}): {id.tools.logFilterRow(r.failed, r.success)}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
       {context.length > 0 && (
         <>
           <h3 className="mt-3 px-1 text-sm text-ink-muted">{t.context}</h3>
