@@ -1,0 +1,56 @@
+{
+  "id": "s01-email-001",
+  "type": "email",
+  "conceptIds": ["phishing-signs", "url-anatomy"],
+  "difficulty": 1,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 2,
+  "data": {
+    "from": {
+      "name": "Bank Nusantara",
+      "address": "keamanan@banknusantara-verifikasi.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "URGENT: Your account will be blocked in 1 hour",
+      "evidenceId": "urgency"
+    },
+    "receivedAt": "09:02",
+    "body": [
+      {
+        "text": "Dear Customer,",
+        "evidenceId": "generic-greeting"
+      },
+      {
+        "text": "We detected suspicious activity on your account. Click the link below to verify:",
+        "evidenceId": "body-claim"
+      },
+      {
+        "link": {
+          "label": "banknusantara.test/verifikasi",
+          "href": "http://banknusantara.akun-aman.test/login"
+        },
+        "evidenceId": "link"
+      },
+      {
+        "text": "If you do not verify, your account will be blocked permanently.",
+        "evidenceId": "threat"
+      }
+    ],
+    "attachments": []
+  },
+  "evidence": {
+    "required": ["sender", "link"],
+    "supporting": ["urgency", "generic-greeting", "threat"]
+  },
+  "explanation": "The sender's domain is not banknusantara.test, and the real address of the link goes to akun-aman.test. A bank never asks you to verify your account through an email link.",
+  "ruleRefs": ["r-phish-1", "r-url-3", "r-phish-2"],
+  "hints": [
+    "Don't trust the sender's name. Look at the full email address.",
+    "Press and hold or right-click the link. Where does it really go, and who owns that domain?"
+  ]
+}

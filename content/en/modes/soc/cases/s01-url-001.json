@@ -1,0 +1,52 @@
+{
+  "id": "s01-url-001",
+  "type": "url-request",
+  "conceptIds": ["url-anatomy"],
+  "difficulty": 1,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Bayu Pratama",
+      "department": "Warehouse"
+    },
+    "url": {
+      "parts": [
+        {
+          "text": "http://",
+          "evidenceId": "url-scheme"
+        },
+        {
+          "text": "kirimcepat.",
+          "evidenceId": "url-subdomain"
+        },
+        {
+          "text": "lacak-paket.test",
+          "evidenceId": "url-domain"
+        },
+        {
+          "text": "/resi?no=KC8812",
+          "evidenceId": "url-path"
+        }
+      ]
+    },
+    "reason": {
+      "text": "I got an SMS saying an office package is on hold and I have to check it at this link. Please open access, the firewall is blocking it.",
+      "evidenceId": "reason"
+    }
+  },
+  "evidence": {
+    "required": ["url-domain"],
+    "supporting": ["url-subdomain", "reason"]
+  },
+  "explanation": "Reading from the right, the domain owner is lacak-paket.test, and the kirimcepat in front of it is only a fake subdomain. The firewall was right to block it, so this request is denied.",
+  "ruleRefs": ["r-url-1"],
+  "hints": [
+    "Read the domain from right to left.",
+    "It ends with .test, and the name just before that is lacak-paket. Is that KirimCepat?"
+  ]
+}

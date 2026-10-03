@@ -1,0 +1,48 @@
+{
+  "id": "s03-url-001",
+  "type": "url-request",
+  "conceptIds": ["passwords-mfa", "url-anatomy"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "requester": {
+      "name": "Lina Marlina",
+      "department": "Administration"
+    },
+    "url": {
+      "parts": [
+        {
+          "text": "https://",
+          "evidenceId": "url-scheme"
+        },
+        {
+          "text": "reset-password-nusadigital.test",
+          "evidenceId": "url-domain"
+        },
+        {
+          "text": "/otp",
+          "evidenceId": "url-path"
+        }
+      ]
+    },
+    "reason": {
+      "text": "Got a text message: my email account will be deleted if I do not enter my OTP code at this link.",
+      "evidenceId": "reason"
+    }
+  },
+  "evidence": {
+    "required": ["url-domain", "reason"],
+    "supporting": []
+  },
+  "explanation": "The domain owner is reset-password-nusadigital.test, not the office, and the page asks for an OTP code. This is a trap to steal Lina's account.",
+  "ruleRefs": ["r-url-1", "r-pass-1"],
+  "hints": [
+    "Read the domain from the right. Does it belong to the office?",
+    "A page that asks for your OTP through a text message link is a big red flag."
+  ]
+}

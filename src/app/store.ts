@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import type { ModeContent } from '../content/loader.ts';
 import type { CaseSchemas } from '../content/loader.ts';
+import { locale, setLocale, type Locale } from '../i18n/index.ts';
 import { buyTool, type BuyResult } from '../engine/economy.ts';
 import { shiftReducer, startShift, summarizeShift, type ShiftAction } from '../engine/shift.ts';
 import type { ShiftSession } from '../engine/types.ts';
@@ -65,6 +66,9 @@ interface AppState {
   /** Lencana yang baru didapat (ditampilkan sebagai banner di kantor sampai ditutup). */
   newBadges: string[];
   dismissBadges(): void;
+  /** Bahasa aktif (PRD C4); App memasang ulang layar saat berubah. */
+  locale: Locale;
+  setLanguage(next: Locale): Promise<void>;
   init(): Promise<void>;
   goTo(screen: Screen): void;
   dismissNotice(): void;
@@ -99,10 +103,11 @@ let msSinceSave = 0;
 function loadContent(modeId: string): Promise<ModeContent> {
   const mode = getMode(modeId);
   if (!mode) return Promise.reject(new Error(`unknown mode ${modeId}`));
-  let p = contentCache.get(modeId);
+  const key = `${modeId}:${locale}`;
+  let p = contentCache.get(key);
   if (!p) {
-    p = mode.loadContent();
-    contentCache.set(modeId, p);
+    p = mode.loadContent(locale);
+    contentCache.set(key, p);
   }
   return p;
 }
@@ -141,6 +146,7 @@ export const useAppStore = create<AppState>()((set, get) => ({
   storageKind: null,
   notice: null,
   newBadges: [],
+  locale: 'id',
   screen: 'title',
   save: null,
   session: null,
@@ -167,7 +173,8 @@ export const useAppStore = create<AppState>()((set, get) => ({
         save = createNewSave({ installId: crypto.randomUUID(), now: nowIso() });
         write(save);
       }
-      set({ status: 'ready', storageKind: kind, notice, save });
+      await setLocale(save.profile.settings.language);
+      set({ status: 'ready', storageKind: kind, notice, save, locale });
     } catch (e) {
       console.error(e);
       set({ status: 'error' });
@@ -319,6 +326,22 @@ export const useAppStore = create<AppState>()((set, get) => ({
     write(data);
     telemetry.track({ name: 'save_imported' });
     set({ save: data, session: null, screen: 'hub', returnTo: 'hub' });
+    if (data.profile.settings.language !== locale)
+      void get().setLanguage(data.profile.settings.language);
+  },
+
+  async setLanguage(next) {
+    await setLocale(next);
+    get().updateSettings({ language: next });
+    // Konten ikut berganti; kasus prosedural sesi yang sedang berjalan tetap dalam bahasa awalnya.
+    const { content, session } = get();
+    const modeId = session?.modeId ?? content?.meta.id;
+    const mode = modeId ? getMode(modeId) : undefined;
+    if (content && mode) {
+      const fresh = await loadContent(mode.id);
+      set({ content: session ? withGeneratedCases(fresh, session, schemasOf(mode)) : fresh });
+    }
+    set({ locale: next });
   },
 
   updateSettings(patch) {
@@ -405,7 +428,7 @@ async function openSession(modeId: string, practice: boolean, practiceShiftId?: 
       : nextShift(content, progress);
     if (!shift) return;
     const seed = crypto.getRandomValues(new Uint32Array(1))[0] ?? 1;
-    const { plan, generatedCases } = buildShift(modeId, shift, mode.generators ?? {}, seed);
+    const { plan, generatedCases } = buildShift(modeId, shift, mode.generators ?? {}, seed, locale);
     session = startShift({
       plan,
       seed,

@@ -1,0 +1,49 @@
+{
+  "id": "s01-url-002",
+  "type": "url-request",
+  "conceptIds": ["url-anatomy"],
+  "difficulty": 1,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Sari Anggraini",
+      "department": "Finance"
+    },
+    "url": {
+      "parts": [
+        {
+          "text": "https://",
+          "evidenceId": "url-scheme"
+        },
+        {
+          "text": "portal.",
+          "evidenceId": "url-subdomain"
+        },
+        {
+          "text": "nusadigital.test",
+          "evidenceId": "url-domain"
+        },
+        {
+          "text": "/cuti",
+          "evidenceId": "url-path"
+        }
+      ]
+    },
+    "reason": {
+      "text": "I want to fill in the leave form on the office's internal portal, but the page won't open on my new laptop.",
+      "evidenceId": "reason"
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["url-domain"]
+  },
+  "explanation": "Reading from the right, the domain owner is nusadigital.test, our own office, and portal is only its subdomain. The reason also makes sense, so this access is safe to allow.",
+  "ruleRefs": ["r-url-1"],
+  "hints": [
+    "Read the domain from right to left. Who owns it?",
+    "nusadigital.test is our own office. Does the reason make sense?"
+  ]
+}

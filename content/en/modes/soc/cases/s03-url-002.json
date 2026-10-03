@@ -1,0 +1,49 @@
+{
+  "id": "s03-url-002",
+  "type": "url-request",
+  "conceptIds": ["passwords-mfa", "url-anatomy"],
+  "difficulty": 1,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Andi Saputra",
+      "department": "Marketing"
+    },
+    "url": {
+      "parts": [
+        {
+          "text": "https://",
+          "evidenceId": "url-scheme"
+        },
+        {
+          "text": "portal.",
+          "evidenceId": "url-subdomain"
+        },
+        {
+          "text": "nusadigital.test",
+          "evidenceId": "url-domain"
+        },
+        {
+          "text": "/mfa",
+          "evidenceId": "url-path"
+        }
+      ]
+    },
+    "reason": {
+      "text": "I want to turn on MFA as the IT Team announced, but the page will not open yet from the branch office laptop.",
+      "evidenceId": "reason"
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["url-domain", "reason"]
+  },
+  "explanation": "The domain belongs to the office (nusadigital.test), and the goal is to turn on MFA as the official announcement said. This access actually makes Andi's account safer.",
+  "ruleRefs": ["r-url-1"],
+  "hints": [
+    "Read the domain owner from the right.",
+    "An office portal page for turning on MFA. Is anything wrong?"
+  ]
+}

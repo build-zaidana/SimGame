@@ -1,0 +1,53 @@
+{
+  "id": "s04-file-004",
+  "type": "file",
+  "conceptIds": ["malware-files"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6,
+    "quarantine": 0.6
+  },
+  "severity": 2,
+  "data": {
+    "fileName": {
+      "text": "Scan_KTP_Pelamar.jpg.scr",
+      "evidenceId": "file-name"
+    },
+    "fileType": {
+      "text": "Windows screensaver (program)",
+      "evidenceId": "file-type"
+    },
+    "size": {
+      "text": "1.2 MB",
+      "evidenceId": "file-size"
+    },
+    "source": {
+      "text": "Email attachment from pelamar.kerja@kirim-berkas.test to HR. Not opened yet.",
+      "evidenceId": "source"
+    },
+    "message": {
+      "text": "Here is a scan of my ID card (KTP) for the admin staff job. Please open it, ma'am.",
+      "evidenceId": "message"
+    }
+  },
+  "evidence": {
+    "required": ["file-name", "file-type"],
+    "supporting": ["source", "sb-remote"]
+  },
+  "explanation": "The ending on the far right is .scr, which is a program, not an image. A real ID card scan is a .jpg or .pdf, so this file is blocked before anyone opens it.",
+  "ruleRefs": ["r-mal-1", "r-mal-2"],
+  "hints": [
+    "The ending on the far right decides the file type.",
+    "An ID card image is never a program."
+  ],
+  "intel": {
+    "sandbox": [
+      {
+        "text": "Opens remote access to the computer",
+        "evidenceId": "sb-remote"
+      }
+    ]
+  }
+}

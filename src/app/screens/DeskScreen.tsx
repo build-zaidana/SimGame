@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { id } from '../../i18n/id.ts';
+import { t as id } from '../../i18n/index.ts';
 import { newsTier } from '../../engine/news.ts';
 import { getMode } from '../../modes/registry.ts';
 import { useAppStore } from '../store.ts';

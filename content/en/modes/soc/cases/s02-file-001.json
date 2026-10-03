@@ -1,0 +1,41 @@
+{
+  "id": "s02-file-001",
+  "type": "file",
+  "conceptIds": ["phishing-signs"],
+  "difficulty": 1,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "fileName": {
+      "text": "Laporan_Penjualan_September.xlsx",
+      "evidenceId": "file-name"
+    },
+    "fileType": {
+      "text": "Spreadsheet (Excel)",
+      "evidenceId": "file-type"
+    },
+    "size": {
+      "text": "84 KB",
+      "evidenceId": "file-size"
+    },
+    "source": {
+      "text": "Office chat, from Dewi Lestari's account (Sales Team)",
+      "evidenceId": "source"
+    },
+    "message": {
+      "text": "Here's the report you asked for this morning. Check page 2 for the summary.",
+      "evidenceId": "message"
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["source", "message"]
+  },
+  "explanation": "This file came from a known coworker through office chat, and it was requested earlier. Its type and size are normal for a report.",
+  "ruleRefs": ["r-phish-6", "r-phish-5"],
+  "hints": [
+    "Were you expecting this file? Who sent it?",
+    "The message mentions this morning's request, and the sender is a coworker from the same office."
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "id": "soc-03",
+  "order": 3,
+  "title": "Secret Code",
+  "durationGameMinutes": 120,
+  "realSecondsPerGameMinute": 3,
+  "unlocksChapters": ["ch-pass"],
+  "introDialogue": "soc-03-intro",
+  "outroDialogue": "soc-03-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s03-email-002",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s03-login-001",
+      "arriveAt": 6
+    },
+    {
+      "caseId": "s03-email-001",
+      "arriveAt": 14
+    },
+    {
+      "caseId": "s03-login-002",
+      "arriveAt": 22
+    },
+    {
+      "caseId": "s03-url-001",
+      "arriveAt": 30
+    },
+    {
+      "caseId": "s03-login-003",
+      "arriveAt": 40
+    },
+    {
+      "caseId": "s03-email-003",
+      "arriveAt": 50
+    },
+    {
+      "caseId": "s03-login-004",
+      "arriveAt": 60
+    },
+    {
+      "caseId": "s03-email-004",
+      "arriveAt": 72
+    },
+    {
+      "caseId": "s03-url-002",
+      "arriveAt": 85
+    }
+  ],
+  "review": {
+    "count": 4,
+    "conceptIds": ["passwords-mfa", "phishing-signs"]
+  },
+  "pay": {
+    "base": 40,
+    "perCase": 12
+  },
+  "newspaper": {
+    "headline": "Callers Pretend to Be IT, Ask for OTP Codes",
+    "lead": "Several employees in the Nusantara business district report phone calls from people pretending to be IT staff and asking for OTP codes. Real IT staff never ask for that code.",
+    "impact": {
+      "good": "Yesterday, PT Nusa Digital's SOC analyst carefully told legit emails apart from fake ones. No client work was disrupted.",
+      "mixed": "Yesterday, some email traps got through and a few legit emails were blocked too. The SOC team is double-checking.",
+      "bad": "Yesterday, several email traps got through and legit work emails were blocked too. Clients have asked for a repair report."
+    },
+    "tip": {
+      "title": "Tip: Your OTP Is a Secret",
+      "text": "An OTP (one-time code) is for you only. Anyone who asks for it, even someone claiming to be from a bank or the IT team, is suspicious."
+    },
+    "classified": "THANK YOU to everyone who read their code out over the phone. You were a big help. — K.",
+    "sources": ["BSSN: advice on keeping your OTP secret", "NIST SP 800-63B"]
+  }
+}

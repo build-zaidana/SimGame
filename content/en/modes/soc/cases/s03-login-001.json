@@ -1,0 +1,63 @@
+{
+  "id": "s03-login-001",
+  "type": "login-alert",
+  "conceptIds": ["passwords-mfa"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "reset-password",
+  "acceptableDecisions": {
+    "block": 0.6,
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "account": {
+      "user": "Rina Wulandari",
+      "role": "Finance Staff"
+    },
+    "headline": {
+      "text": "Login from a new device abroad",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "08:05",
+        "location": "Jakarta office",
+        "ip": "10.20.1.31",
+        "device": "Office laptop (registered)",
+        "method": "Password + OTP",
+        "result": "success",
+        "evidenceId": "ev-1"
+      },
+      {
+        "time": "10:01",
+        "location": "Abroad",
+        "ip": "203.0.113.45",
+        "device": "Windows (new device)",
+        "method": "Password + OTP",
+        "result": "success",
+        "evidenceId": "ev-2"
+      }
+    ],
+    "context": [
+      {
+        "text": "09:58 Rina reports: someone called saying they were from IT, asked for her OTP code, and she gave it to them.",
+        "evidenceId": "ctx-call"
+      },
+      {
+        "text": "Rina is in the office all day (attendance record).",
+        "evidenceId": "ctx-office"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["ev-2", "ctx-call"],
+    "supporting": ["ctx-office"]
+  },
+  "explanation": "Three minutes after Rina gave away her OTP, there was a successful login from a new device abroad, while Rina was in the office. Her account has been taken over, so the password must be reset right away.",
+  "ruleRefs": ["r-pass-1", "r-pass-2"],
+  "hints": [
+    "Compare the time of the phone call with the login times in the log.",
+    "Rina is in the office, but there is a login from abroad using the OTP she shared."
+  ]
+}

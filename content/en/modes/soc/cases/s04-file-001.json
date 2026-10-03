@@ -1,0 +1,57 @@
+{
+  "id": "s04-file-001",
+  "type": "file",
+  "conceptIds": ["malware-files"],
+  "difficulty": 1,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6,
+    "quarantine": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "fileName": {
+      "text": "Resi_KC88213.pdf.apk",
+      "evidenceId": "file-name"
+    },
+    "fileType": {
+      "text": "Android app (APK)",
+      "evidenceId": "file-type"
+    },
+    "size": {
+      "text": "5.8 MB",
+      "evidenceId": "file-size"
+    },
+    "source": {
+      "text": "Chat on the Warehouse team's office phone, from an unknown number. Not opened yet.",
+      "evidenceId": "source"
+    },
+    "message": {
+      "text": "The office package could not be delivered. Check the receipt here before it gets sent back.",
+      "evidenceId": "message"
+    }
+  },
+  "evidence": {
+    "required": ["file-name", "file-type"],
+    "supporting": ["source", "message", "sb-sms", "sb-send"]
+  },
+  "explanation": "The ending on the far right is .apk, so this is an app pretending to be a PDF receipt. The file has not been opened yet, so blocking and deleting it is enough.",
+  "ruleRefs": ["r-mal-1", "r-mal-2", "r-mal-4"],
+  "hints": [
+    "Read the file name all the way to the right end.",
+    "A delivery receipt that is an app? Then check: has it been opened or not?"
+  ],
+  "intel": {
+    "sandbox": [
+      {
+        "text": "Asks for permission to read all text messages and notifications",
+        "evidenceId": "sb-sms"
+      },
+      {
+        "text": "Sends the text messages to a server abroad",
+        "evidenceId": "sb-send"
+      }
+    ]
+  }
+}

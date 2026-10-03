@@ -1,12 +1,10 @@
-import { id } from '../../../i18n/id.ts';
+import { t as id } from '../../../i18n/index.ts';
 import { trustDelta } from '../../../engine/economy.ts';
 import type { BaseCase, Rule } from '../../../content/schemas.ts';
 import type { SessionCase } from '../../../engine/types.ts';
 import { Dialog } from '../Dialog.tsx';
 import { btnPrimary } from '../styles.ts';
 import { evidenceText } from './format.ts';
-
-const CITATION: Partial<Record<string, string>> = id.feedback.citations;
 
 interface FeedbackDialogProps {
   caseData: BaseCase;
@@ -51,7 +49,7 @@ export function FeedbackDialog({
         {id.feedback.score(sessionCase.score ?? 0)}
         {delta !== 0 && ` · ${id.feedback.trustChange(delta)}`}
       </p>
-      {CITATION[o.impact] && (
+      {(id.feedback.citations as Partial<Record<string, string>>)[o.impact] && (
         <p
           className={
             'mt-3 border-2 border-dashed px-2 py-1 font-display text-sm ' +
@@ -60,7 +58,7 @@ export function FeedbackDialog({
           data-testid="citation"
         >
           <span aria-hidden="true">{o.impact === 'threat-allowed' ? '⚠ ' : '✎ '}</span>
-          {CITATION[o.impact]}
+          {(id.feedback.citations as Partial<Record<string, string>>)[o.impact]}
         </p>
       )}
       <p className="mt-3">{id.feedback.yourDecision(decisionLabel(o.decision))}</p>

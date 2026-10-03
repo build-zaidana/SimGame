@@ -1,0 +1,104 @@
+{
+  "id": "s05-login-002",
+  "type": "login-alert",
+  "conceptIds": ["log-reading"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "reset-password",
+  "acceptableDecisions": {
+    "block": 0.6,
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "account": {
+      "user": "Budi Santoso",
+      "role": "Logistics"
+    },
+    "headline": {
+      "text": "Many login attempts in a row from an unknown IP",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "11:00",
+        "location": "Unknown",
+        "ip": "203.0.113.99",
+        "device": "Linux (new device)",
+        "method": "Wrong password",
+        "result": "failed",
+        "evidenceId": "ev-1"
+      },
+      {
+        "time": "11:01",
+        "location": "Unknown",
+        "ip": "203.0.113.99",
+        "device": "Linux (new device)",
+        "method": "Wrong password",
+        "result": "failed",
+        "evidenceId": "ev-2"
+      },
+      {
+        "time": "11:02",
+        "location": "Unknown",
+        "ip": "203.0.113.99",
+        "device": "Linux (new device)",
+        "method": "Wrong password",
+        "result": "failed",
+        "evidenceId": "ev-3"
+      },
+      {
+        "time": "11:03",
+        "location": "Unknown",
+        "ip": "203.0.113.99",
+        "device": "Linux (new device)",
+        "method": "Wrong password",
+        "result": "failed",
+        "evidenceId": "ev-4"
+      },
+      {
+        "time": "11:04",
+        "location": "Unknown",
+        "ip": "203.0.113.99",
+        "device": "Linux (new device)",
+        "method": "Wrong password",
+        "result": "failed",
+        "evidenceId": "ev-5"
+      },
+      {
+        "time": "11:05",
+        "location": "Unknown",
+        "ip": "203.0.113.99",
+        "device": "Linux (new device)",
+        "method": "Wrong password",
+        "result": "failed",
+        "evidenceId": "ev-6"
+      },
+      {
+        "time": "11:07",
+        "location": "Unknown",
+        "ip": "203.0.113.99",
+        "device": "Linux (new device)",
+        "method": "Password",
+        "result": "success",
+        "evidenceId": "ev-7"
+      }
+    ],
+    "context": [
+      {
+        "text": "IP 203.0.113.99 is the server that the Invoice_Okt malware contacted.",
+        "evidenceId": "ctx-c2"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["ev-7"],
+    "supporting": ["ev-1", "ev-6", "ctx-c2"]
+  },
+  "explanation": "Six failed tries, then a success, from the same IP as the malware server: the attacker guessed Budi's password. Reset Budi's password to cut off their access.",
+  "ruleRefs": ["r-log-1", "r-ir-2"],
+  "hints": [
+    "Count the failed logins from the same IP, then look at the last line.",
+    "Do you recognize that IP? Check the extra info."
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "s05-login-003",
+  "type": "login-alert",
+  "conceptIds": ["log-reading"],
+  "difficulty": 2,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "account": {
+      "user": "Finance Director",
+      "role": "Board of Directors"
+    },
+    "headline": {
+      "text": "Login from a new location: Bandung",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "13:10",
+        "location": "Bandung",
+        "ip": "10.30.4.20",
+        "device": "Office laptop (registered)",
+        "method": "Password + OTP",
+        "result": "success",
+        "evidenceId": "ev-1"
+      }
+    ],
+    "context": [
+      {
+        "text": "Calendar: the Finance Director is at the Bandung branch office today.",
+        "evidenceId": "ctx-trip"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["ctx-trip", "ev-1"]
+  },
+  "explanation": "The location is new, but it matches the work-trip calendar, uses a registered laptop, and passed MFA. Even in the middle of an incident, not every alert is an attack.",
+  "ruleRefs": ["r-log-4", "r-pass-4"],
+  "hints": [
+    "Match the location with the extra info.",
+    "Registered device, MFA passed, and a work trip on the calendar. Anything odd?"
+  ]
+}

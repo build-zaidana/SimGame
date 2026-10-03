@@ -1,0 +1,49 @@
+{
+  "id": "s04-file-002",
+  "type": "file",
+  "conceptIds": ["malware-files"],
+  "difficulty": 1,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "fileName": {
+      "text": "Resi_Pengiriman_KC77120.pdf",
+      "evidenceId": "file-name"
+    },
+    "fileType": {
+      "text": "PDF document",
+      "evidenceId": "file-type"
+    },
+    "size": {
+      "text": "120 KB",
+      "evidenceId": "file-size"
+    },
+    "source": {
+      "text": "Email attachment from noreply@kirimcepat.test to the Warehouse team",
+      "evidenceId": "source"
+    },
+    "message": {
+      "text": "Attached is the shipping receipt for office order number KC77120.",
+      "evidenceId": "message"
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["file-type", "source", "sb-clean"]
+  },
+  "explanation": "This really is a PDF from the official domain kirimcepat.test, and the Warehouse team is expecting this delivery. There are no signs of a harmful file.",
+  "ruleRefs": ["r-mal-1", "r-phish-1"],
+  "hints": [
+    "Check the file ending on the far right and the sender.",
+    "A PDF from the official domain for an order they are expecting. Anything strange?"
+  ],
+  "intel": {
+    "sandbox": [
+      {
+        "text": "Only contains text and images. Does not run any program.",
+        "evidenceId": "sb-clean"
+      }
+    ]
+  }
+}

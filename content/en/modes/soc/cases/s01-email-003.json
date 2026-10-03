@@ -1,0 +1,55 @@
+{
+  "id": "s01-email-003",
+  "type": "email",
+  "conceptIds": ["phishing-signs", "url-anatomy"],
+  "difficulty": 1,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 2,
+  "data": {
+    "from": {
+      "name": "KirimCepat",
+      "address": "noreply@kirimcepat-id.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Your package is on hold, shipping fee short by Rp 5.000",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "09:41",
+    "body": [
+      {
+        "text": "Hello Customer,",
+        "evidenceId": "generic-greeting"
+      },
+      {
+        "text": "Your package is being held at our warehouse because the shipping fee is Rp 5.000 short.",
+        "evidenceId": "body-claim"
+      },
+      {
+        "text": "Pay within 24 hours or the package will be returned to the sender.",
+        "evidenceId": "urgency"
+      },
+      {
+        "link": {
+          "label": "Pay now",
+          "href": "https://kirimcepat-bayar.test/ongkir"
+        },
+        "evidenceId": "link"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["sender", "link"],
+    "supporting": ["urgency", "generic-greeting"]
+  },
+  "explanation": "The sender domain kirimcepat-id.test does not belong to KirimCepat (kirimcepat.test), and the link goes to a different site that asks for payment. The small amount and the deadline are there to make you pay quickly without getting suspicious.",
+  "ruleRefs": ["r-phish-1", "r-url-3", "r-phish-3"],
+  "hints": [
+    "Compare the sender's address with KirimCepat's official domain, kirimcepat.test.",
+    "Press and hold the \"Pay now\" link. Who owns that domain?"
+  ]
+}

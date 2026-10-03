@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { id } from '../../i18n/id.ts';
+import { t as id } from '../../i18n/index.ts';
 import { modes } from '../../modes/registry.ts';
 import { newModeProgress } from '../../persistence/saveSchema.ts';
 import { useAppStore } from '../store.ts';

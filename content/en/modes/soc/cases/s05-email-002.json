@@ -1,0 +1,45 @@
+{
+  "id": "s05-email-002",
+  "type": "email",
+  "conceptIds": ["phishing-signs"],
+  "difficulty": 2,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "from": {
+      "name": "Finance Director",
+      "address": "direktur.keuangan@nusadigital.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Audit meeting moved to 14.00",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "09:20",
+    "body": [
+      {
+        "text": "Hi Finance team,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "Today's audit meeting has moved to 14.00 in meeting room 2. The meeting papers will be handed out there.",
+        "evidenceId": "body-info"
+      },
+      {
+        "text": "Thank you.",
+        "evidenceId": "signature"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["sender", "body-info"]
+  },
+  "explanation": "This email comes from the real office domain, has no link, and does not ask for a login or any data. A schedule update like this is legit, even on a day full of attacks.",
+  "ruleRefs": ["r-phish-1", "r-phish-5"],
+  "hints": [
+    "Compare this sender's domain with the earlier audit email.",
+    "Is there a link, an attachment, or a request for data?"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "id": "s03-email-002",
+  "type": "email",
+  "conceptIds": ["passwords-mfa"],
+  "difficulty": 2,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "from": {
+      "name": "PT Nusa Digital IT Team",
+      "address": "it@nusadigital.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Starting Monday, email login requires MFA",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "09:35",
+    "body": [
+      {
+        "text": "Hi everyone,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "Starting Monday, logging in to office email needs your password and an OTP code from your phone.",
+        "evidenceId": "body-info"
+      },
+      {
+        "text": "The setup guide is on the office portal. Open it from your bookmark, not from an email.",
+        "evidenceId": "body-guide"
+      },
+      {
+        "text": "Remember, the IT Team will never ask for your OTP code.",
+        "evidenceId": "body-warning"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["sender", "body-warning"]
+  },
+  "explanation": "This email comes from the real office domain, has no links, and even reminds you not to share your OTP. It is a legitimate announcement.",
+  "ruleRefs": ["r-phish-5", "r-pass-1"],
+  "hints": [
+    "Is this email asking you for anything?",
+    "The domain is real and the message is actually security advice."
+  ]
+}

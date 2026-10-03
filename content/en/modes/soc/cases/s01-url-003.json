@@ -1,0 +1,48 @@
+{
+  "id": "s01-url-003",
+  "type": "url-request",
+  "conceptIds": ["url-anatomy"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "requester": {
+      "name": "Andi Saputra",
+      "department": "Marketing"
+    },
+    "url": {
+      "parts": [
+        {
+          "text": "https://",
+          "evidenceId": "url-scheme"
+        },
+        {
+          "text": "login-banknusantara.test",
+          "evidenceId": "url-domain"
+        },
+        {
+          "text": "/masuk",
+          "evidenceId": "url-path"
+        }
+      ]
+    },
+    "reason": {
+      "text": "It has the padlock, so it's safe. I need to log in to the office bank account here.",
+      "evidenceId": "reason"
+    }
+  },
+  "evidence": {
+    "required": ["url-domain"],
+    "supporting": ["reason"]
+  },
+  "explanation": "The owner of this domain is login-banknusantara.test, not banknusantara.test. The HTTPS padlock only means the connection is encrypted, not that the site belongs to the bank.",
+  "ruleRefs": ["r-url-1", "r-url-2"],
+  "hints": [
+    "The HTTPS padlock does not prove a site is real. Look at the domain.",
+    "The bank's official domain is banknusantara.test. Is login-banknusantara.test the same?"
+  ]
+}

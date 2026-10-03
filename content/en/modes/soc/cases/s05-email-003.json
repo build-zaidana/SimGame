@@ -1,0 +1,55 @@
+{
+  "id": "s05-email-003",
+  "type": "email",
+  "conceptIds": ["incident-response", "malware-files"],
+  "difficulty": 3,
+  "verdict": "malicious",
+  "correctDecision": "escalate",
+  "acceptableDecisions": {
+    "block": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "from": {
+      "name": "Yudi Pratama",
+      "address": "yudi.pratama@nusadigital.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "October invoice, please pay now",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "10:30",
+    "body": [
+      {
+        "text": "To all employees,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "Please open the attached invoice and process it today.",
+        "evidenceId": "request"
+      },
+      {
+        "text": "Yudi",
+        "evidenceId": "signature"
+      }
+    ],
+    "attachments": [
+      {
+        "name": "Invoice_Okt.pdf.exe",
+        "size": "2.1 MB",
+        "evidenceId": "attachment"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["attachment", "request"],
+    "supporting": ["sender"]
+  },
+  "explanation": "Yudi's hacked account is being used to send an .exe program to every employee. An incident that affects many people must be escalated, so the team can pull this email from every inbox.",
+  "ruleRefs": ["r-ir-3", "r-mal-1", "r-phish-7"],
+  "hints": [
+    "Look at the attachment's ending, then look at who received it.",
+    "This is no longer one bad email, it's an attack on the whole office. Who needs to know?"
+  ]
+}

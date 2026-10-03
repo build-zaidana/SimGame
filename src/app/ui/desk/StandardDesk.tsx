@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { btnSecondary } from '../styles.ts';
-import { id } from '../../../i18n/id.ts';
+import { t as id } from '../../../i18n/index.ts';
 import type { ReactNode } from 'react';
 import type { BaseCase } from '../../../content/schemas.ts';
 import type { DeskProps, DocumentProps } from '../../../modes/contract.ts';

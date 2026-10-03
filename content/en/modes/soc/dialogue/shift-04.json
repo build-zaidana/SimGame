@@ -1,0 +1,38 @@
+{
+  "dialogues": [
+    {
+      "id": "soc-04-intro",
+      "lines": [
+        {
+          "speaker": "rani",
+          "text": "Lots of packages are arriving today, and lots of fake \"receipts\" are tagging along."
+        },
+        {
+          "speaker": "rani",
+          "text": "Two new chapters are open: Harmful Files and Reading Logs. You also get the QUARANTINE action for devices that are already infected."
+        },
+        {
+          "speaker": "rani",
+          "text": "Remember the difference: if a file hasn't been opened, just block it. If it was opened on an office laptop, quarantine the laptop."
+        },
+        {
+          "speaker": "rani",
+          "text": "Your pay is looking pretty good. Drop by the Tool Shop: the Sandbox and Log Filter will help a lot."
+        }
+      ]
+    },
+    {
+      "id": "soc-04-outro",
+      "lines": [
+        {
+          "speaker": "rani",
+          "text": "Nice work. Reading logs takes practice, and you're starting to see the patterns."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "Enough games. Tomorrow we're coming in person. Get ready, Nusa Digital."
+        }
+      ]
+    }
+  ]
+}

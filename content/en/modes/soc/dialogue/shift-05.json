@@ -1,0 +1,38 @@
+{
+  "dialogues": [
+    {
+      "id": "soc-05-intro",
+      "lines": [
+        {
+          "speaker": "rani",
+          "text": "This is it. Kelabu is attacking the Finance team today."
+        },
+        {
+          "speaker": "rani",
+          "text": "The attack comes in steps: fake emails, hacked accounts, then harmful files spreading. Follow the trail from one case to the next."
+        },
+        {
+          "speaker": "rani",
+          "text": "The last chapter is open: Incident Response. Contain the spread first, then clean up. If the impact is big, escalate."
+        }
+      ]
+    },
+    {
+      "id": "soc-05-outro",
+      "lines": [
+        {
+          "speaker": "rani",
+          "text": "You made it through the toughest day. This is what being a real SOC analyst feels like."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "...Next time we'll be smarter."
+        },
+        {
+          "speaker": "rani",
+          "text": "If you want, try the Final Test in the office menu to see how far you've come."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "id": "s04-login-001",
+  "type": "login-alert",
+  "conceptIds": ["log-reading", "passwords-mfa"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "reset-password",
+  "acceptableDecisions": {
+    "block": 0.6,
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "account": {
+      "user": "Maya Putri",
+      "role": "HR"
+    },
+    "headline": {
+      "text": "Many failed logins in the middle of the night",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "02:10",
+        "location": "Unknown",
+        "ip": "203.0.113.80",
+        "device": "Linux (new device)",
+        "method": "Wrong password",
+        "result": "failed",
+        "evidenceId": "ev-1"
+      },
+      {
+        "time": "02:11",
+        "location": "Unknown",
+        "ip": "203.0.113.80",
+        "device": "Linux (new device)",
+        "method": "Wrong password",
+        "result": "failed",
+        "evidenceId": "ev-2"
+      },
+      {
+        "time": "02:12",
+        "location": "Unknown",
+        "ip": "203.0.113.80",
+        "device": "Linux (new device)",
+        "method": "Wrong password",
+        "result": "failed",
+        "evidenceId": "ev-3"
+      },
+      {
+        "time": "02:13",
+        "location": "Unknown",
+        "ip": "203.0.113.80",
+        "device": "Linux (new device)",
+        "method": "Wrong password",
+        "result": "failed",
+        "evidenceId": "ev-4"
+      },
+      {
+        "time": "02:14",
+        "location": "Unknown",
+        "ip": "203.0.113.80",
+        "device": "Linux (new device)",
+        "method": "Wrong password",
+        "result": "failed",
+        "evidenceId": "ev-5"
+      },
+      {
+        "time": "02:15",
+        "location": "Unknown",
+        "ip": "203.0.113.80",
+        "device": "Linux (new device)",
+        "method": "Wrong password",
+        "result": "failed",
+        "evidenceId": "ev-6"
+      },
+      {
+        "time": "02:16",
+        "location": "Unknown",
+        "ip": "203.0.113.80",
+        "device": "Linux (new device)",
+        "method": "Wrong password",
+        "result": "failed",
+        "evidenceId": "ev-7"
+      },
+      {
+        "time": "02:17",
+        "location": "Unknown",
+        "ip": "203.0.113.80",
+        "device": "Linux (new device)",
+        "method": "Wrong password",
+        "result": "failed",
+        "evidenceId": "ev-8"
+      },
+      {
+        "time": "02:19",
+        "location": "Unknown",
+        "ip": "203.0.113.80",
+        "device": "Linux (new device)",
+        "method": "Password",
+        "result": "success",
+        "evidenceId": "ev-9"
+      }
+    ],
+    "context": [
+      {
+        "text": "Maya works from 08.00 to 17.00 and is not working overtime.",
+        "evidenceId": "ctx-hours"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["ev-9"],
+    "supporting": ["ev-1", "ev-8", "ctx-hours"]
+  },
+  "explanation": "Eight failures from one IP within a few minutes and then a success is a brute force pattern: Maya's password was guessed. Her account must be reset right away.",
+  "ruleRefs": ["r-log-1", "r-log-3", "r-pass-2"],
+  "hints": [
+    "Look at the IP, the time, and the last line of the log.",
+    "Many failures from the same IP, then one success. What does that mean?"
+  ]
+}

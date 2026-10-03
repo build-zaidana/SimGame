@@ -1,5 +1,5 @@
 import { useRegisterSW } from 'virtual:pwa-register/react';
-import { id } from '../../i18n/id.ts';
+import { t as id } from '../../i18n/index.ts';
 import { useAppStore } from '../store.ts';
 import { btnPrimary, btnSecondary } from './styles.ts';
 

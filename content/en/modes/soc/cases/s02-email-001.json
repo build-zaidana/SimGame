@@ -1,0 +1,49 @@
+{
+  "id": "s02-email-001",
+  "type": "email",
+  "conceptIds": ["phishing-signs"],
+  "difficulty": 2,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "from": {
+      "name": "PT Nusa Digital IT Team",
+      "address": "it@nusadigital.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "IMPORTANT: Office email down Saturday 22.00–24.00",
+      "evidenceId": "urgency"
+    },
+    "receivedAt": "09:03",
+    "body": [
+      {
+        "text": "Hi everyone,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "There is server maintenance on Saturday night, so office email can't be used for two hours.",
+        "evidenceId": "body-info"
+      },
+      {
+        "text": "You don't need to do anything. Email will go back to normal by itself.",
+        "evidenceId": "body-no-action"
+      },
+      {
+        "text": "Regards, IT Team",
+        "evidenceId": "signature"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["sender", "body-no-action"]
+  },
+  "explanation": "The subject sounds urgent, but the sender is the real office domain and this email does not ask for any click, data, or action. One warning sign alone is not enough to block it.",
+  "ruleRefs": ["r-phish-1", "r-phish-5"],
+  "hints": [
+    "The word IMPORTANT does make you suspicious. What other warning signs are there?",
+    "Check the sender's domain, then look for links or requests for data."
+  ]
+}

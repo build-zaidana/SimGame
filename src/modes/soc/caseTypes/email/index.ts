@@ -1,5 +1,5 @@
 import { staffVisitor } from '../../visitors.ts';
-import { id } from '../../../../i18n/id.ts';
+import { t as id } from '../../../../i18n/index.ts';
 import { defineCaseType } from '../../../contract.ts';
 import { evaluateSocCase } from '../../evaluate.ts';
 import { EmailDocument } from './EmailDocument.tsx';

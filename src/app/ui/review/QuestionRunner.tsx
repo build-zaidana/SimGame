@@ -7,7 +7,7 @@ import {
   gradeTapEvidence,
   shuffledOrder,
 } from '../../../engine/review.ts';
-import { id } from '../../../i18n/id.ts';
+import { t as id } from '../../../i18n/index.ts';
 import { Evidence } from '../Evidence.tsx';
 import { btn, btnPrimary, btnSecondary, panel } from '../styles.ts';
 

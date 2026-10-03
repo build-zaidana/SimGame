@@ -1,15 +1,16 @@
 import { useEffect } from 'react';
-import { id } from '../../i18n/id.ts';
+import { intlLocale, t as id } from '../../i18n/index.ts';
 import { modes } from '../../modes/registry.ts';
 import { useAppStore } from '../store.ts';
 import { Medal } from '../ui/Medal.tsx';
 import { btnSecondary, panel } from '../ui/styles.ts';
 
-const dateFmt = new Intl.DateTimeFormat('id-ID', {
-  day: 'numeric',
-  month: 'short',
-  year: 'numeric',
-});
+const dateFmt = () =>
+  new Intl.DateTimeFormat(intlLocale(), {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  });
 
 /** Koleksi lencana (PRD C3): yang sudah didapat dan yang belum, dengan cara mendapatkannya. */
 export function BadgesScreen() {
@@ -57,7 +58,7 @@ export function BadgesScreen() {
                 <p className="text-sm">{b.description}</p>
                 <p className="mt-1 text-xs text-ink-muted">
                   {id.badges.tier[b.tier]} ·{' '}
-                  {at ? id.badges.earned(dateFmt.format(new Date(at))) : id.badges.locked}
+                  {at ? id.badges.earned(dateFmt().format(new Date(at))) : id.badges.locked}
                 </p>
               </div>
             </li>

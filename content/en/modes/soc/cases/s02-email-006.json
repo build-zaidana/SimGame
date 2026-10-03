@@ -1,0 +1,52 @@
+{
+  "id": "s02-email-006",
+  "type": "email",
+  "conceptIds": ["phishing-signs"],
+  "difficulty": 3,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "from": {
+      "name": "PT Sinar Jaya",
+      "address": "tagihan@sinarjaya-pembayaran.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Change of payment account",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "11:15",
+    "body": [
+      {
+        "text": "To the Finance Team,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "Starting this month, please transfer invoice payments to our new bank account below. Ignore the old account.",
+        "evidenceId": "request"
+      },
+      {
+        "text": "The invoice is due tomorrow. Please process it right away so the delivery is not delayed.",
+        "evidenceId": "urgency"
+      },
+      {
+        "text": "Sincerely, PT Sinar Jaya",
+        "evidenceId": "signature"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["sender", "request"],
+    "supporting": ["urgency"]
+  },
+  "explanation": "This vendor usually uses sinarjaya.test, but this email comes from sinarjaya-pembayaran.test and asks to switch bank accounts. A change of bank account must be confirmed through the vendor's official phone number, not by email.",
+  "ruleRefs": ["r-phish-1", "r-phish-3"],
+  "hints": [
+    "PT Sinar Jaya's usual domain is sinarjaya.test. Does it match this sender?",
+    "A request to switch bank accounts plus time pressure is a dangerous combination."
+  ]
+}

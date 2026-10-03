@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { id } from '../../../i18n/id.ts';
+import { t as id } from '../../../i18n/index.ts';
 import type { Dialogue, Newspaper as NewspaperData } from '../../../content/schemas.ts';
 import type { NewsTier } from '../../../engine/news.ts';
 import { Dialog } from '../Dialog.tsx';

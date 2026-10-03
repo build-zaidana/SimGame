@@ -1,0 +1,57 @@
+{
+  "id": "s05-file-001",
+  "type": "file",
+  "conceptIds": ["malware-files", "incident-response"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "quarantine",
+  "acceptableDecisions": {
+    "block": 0.6,
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "fileName": {
+      "text": "Invoice_Okt.pdf.exe",
+      "evidenceId": "file-name"
+    },
+    "fileType": {
+      "text": "Windows program",
+      "evidenceId": "file-type"
+    },
+    "size": {
+      "text": "2.1 MB",
+      "evidenceId": "file-size"
+    },
+    "source": {
+      "text": "Email attachment from Yudi's account. Rina has ALREADY opened it on her office laptop.",
+      "evidenceId": "source"
+    },
+    "message": {
+      "text": "Rina: \"I thought it was a normal invoice, but a black window popped up for a second and then vanished. Why?\"",
+      "evidenceId": "message"
+    }
+  },
+  "evidence": {
+    "required": ["file-name", "source"],
+    "supporting": ["message", "sb-spread", "sb-c2"]
+  },
+  "explanation": "The malicious program is already running on Rina's laptop. Quarantine her laptop now so the malware can't spread to the shared folder and other devices.",
+  "ruleRefs": ["r-mal-1", "r-mal-4", "r-ir-2"],
+  "hints": [
+    "Has it been opened yet or not?",
+    "The program is already running on an office device. Which action cuts it off from the network?"
+  ],
+  "intel": {
+    "sandbox": [
+      {
+        "text": "Tries to copy itself to the office shared folder",
+        "evidenceId": "sb-spread"
+      },
+      {
+        "text": "Contacts a server at 203.0.113.99",
+        "evidenceId": "sb-c2"
+      }
+    ]
+  }
+}

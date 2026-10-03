@@ -1,4 +1,4 @@
-import { id } from '../../../i18n/id.ts';
+import { t as id } from '../../../i18n/index.ts';
 import {
   DESK_HEIGHT,
   DESK_TOP,

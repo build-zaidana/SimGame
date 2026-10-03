@@ -242,6 +242,11 @@ export const id = {
     'reset-password': 'DIRESET',
     quarantine: 'DIKARANTINA',
   } as Record<string, string>,
+  language: {
+    label: 'Bahasa',
+    names: { id: 'Bahasa Indonesia', en: 'English' } as Record<string, string>,
+    note: 'Bahasa bisa diganti kapan saja; progresmu tidak berubah.',
+  },
   settings: {
     heading: 'Pengaturan',
     textScale: 'Ukuran teks',

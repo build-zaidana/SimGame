@@ -1,0 +1,57 @@
+{
+  "id": "s04-file-003",
+  "type": "file",
+  "conceptIds": ["malware-files"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "quarantine",
+  "acceptableDecisions": {
+    "block": 0.6,
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "fileName": {
+      "text": "Tagihan_Oktober.docm",
+      "evidenceId": "file-name"
+    },
+    "fileType": {
+      "text": "Word document with macros",
+      "evidenceId": "file-type"
+    },
+    "size": {
+      "text": "48 KB",
+      "evidenceId": "file-size"
+    },
+    "source": {
+      "text": "Email attachment from tagihan@vendor-baru.test. ALREADY opened by Dewi on her office laptop.",
+      "evidenceId": "source"
+    },
+    "message": {
+      "text": "Dewi: \"A message said 'Protected document, click Enable Content', so I clicked it.\"",
+      "evidenceId": "message"
+    }
+  },
+  "evidence": {
+    "required": ["message", "source"],
+    "supporting": ["file-type", "sb-download", "sb-encrypt"]
+  },
+  "explanation": "The macro already ran on the office laptop after Dewi clicked Enable Content. The laptop must be quarantined so the malware does not spread to the network.",
+  "ruleRefs": ["r-mal-3", "r-mal-4"],
+  "hints": [
+    "Has the file been opened or not?",
+    "What happened when Dewi clicked Enable Content? Remember the difference between Block and Quarantine."
+  ],
+  "intel": {
+    "sandbox": [
+      {
+        "text": "The macro downloads a program from the internet",
+        "evidenceId": "sb-download"
+      },
+      {
+        "text": "The program starts locking files in the Documents folder",
+        "evidenceId": "sb-encrypt"
+      }
+    ]
+  }
+}

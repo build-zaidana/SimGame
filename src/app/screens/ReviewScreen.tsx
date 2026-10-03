@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { id } from '../../i18n/id.ts';
+import { t as id } from '../../i18n/index.ts';
 import { reviewItemsFor } from '../progress.ts';
 import { useAppStore } from '../store.ts';
 import { telemetry } from '../telemetry.ts';

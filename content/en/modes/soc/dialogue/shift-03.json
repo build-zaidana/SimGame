@@ -1,0 +1,34 @@
+{
+  "dialogues": [
+    {
+      "id": "soc-03-intro",
+      "lines": [
+        {
+          "speaker": "rani",
+          "text": "Some bad news. A few employees got phone calls from people pretending to be from IT, asking for OTP codes."
+        },
+        {
+          "speaker": "rani",
+          "text": "A new Handbook chapter is open: Passwords & MFA. Give it a read if you have time."
+        },
+        {
+          "speaker": "rani",
+          "text": "You also get a new action: RESET PASSWORD. Use it for accounts that someone else has taken over."
+        }
+      ]
+    },
+    {
+      "id": "soc-03-outro",
+      "lines": [
+        {
+          "speaker": "rani",
+          "text": "Remember this forever: an OTP is like your house key. Never give it to anyone."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "You're getting annoying. Lucky for us, your employees still love downloading files."
+        }
+      ]
+    }
+  ]
+}

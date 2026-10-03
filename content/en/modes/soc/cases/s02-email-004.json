@@ -1,0 +1,52 @@
+{
+  "id": "s02-email-004",
+  "type": "email",
+  "conceptIds": ["phishing-signs", "url-anatomy"],
+  "difficulty": 2,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "from": {
+      "name": "KirimCepat",
+      "address": "noreply@kirimcepat.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Your package is on its way",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "10:20",
+    "body": [
+      {
+        "text": "Hello Sari Anggraini,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "Package KC7731 for PT Nusa Digital is with the courier and will arrive today.",
+        "evidenceId": "body-info"
+      },
+      {
+        "link": {
+          "label": "kirimcepat.test/lacak/KC7731",
+          "href": "https://kirimcepat.test/lacak/KC7731"
+        },
+        "evidenceId": "link"
+      },
+      {
+        "text": "There is no extra fee for this delivery.",
+        "evidenceId": "no-fee"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["sender", "greeting", "link"]
+  },
+  "explanation": "The sender and the link both use the official domain kirimcepat.test, the email greets you by name, and it does not ask for payment. This is a normal delivery notice.",
+  "ruleRefs": ["r-phish-1", "r-url-3", "r-phish-5"],
+  "hints": [
+    "Check the sender's domain and the link's real address.",
+    "Both are kirimcepat.test. Is there any request for money or data?"
+  ]
+}

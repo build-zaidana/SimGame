@@ -1,0 +1,48 @@
+{
+  "id": "s02-url-001",
+  "type": "url-request",
+  "conceptIds": ["url-anatomy"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Yogi Firmansyah",
+      "department": "Production"
+    },
+    "url": {
+      "parts": [
+        {
+          "text": "https://",
+          "evidenceId": "url-scheme"
+        },
+        {
+          "text": "nusadigital-portal.test",
+          "evidenceId": "url-domain"
+        },
+        {
+          "text": "/slip-gaji",
+          "evidenceId": "url-path"
+        }
+      ]
+    },
+    "reason": {
+      "text": "Got an SMS: this month's payslip can be downloaded at this link. Why is it blocked?",
+      "evidenceId": "reason"
+    }
+  },
+  "evidence": {
+    "required": ["url-domain"],
+    "supporting": ["reason"]
+  },
+  "explanation": "The owner of this domain is nusadigital-portal.test, not the office's nusadigital.test. Official payslips are on the office portal, not at a link from an SMS.",
+  "ruleRefs": ["r-url-1"],
+  "hints": [
+    "Our office domain is nusadigital.test. Compare it with this one.",
+    "A hyphen turns it into a completely different domain name."
+  ]
+}

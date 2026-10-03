@@ -1,4 +1,4 @@
-import { id } from '../../../i18n/id.ts';
+import { t as id } from '../../../i18n/index.ts';
 import type { ShiftSession } from '../../../engine/types.ts';
 
 export interface QueueItem {

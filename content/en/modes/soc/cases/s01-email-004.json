@@ -1,0 +1,59 @@
+{
+  "id": "s01-email-004",
+  "type": "email",
+  "conceptIds": ["phishing-signs"],
+  "difficulty": 1,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 2,
+  "data": {
+    "from": {
+      "name": "Nusantara Lucky Draw Committee",
+      "address": "promo@undian-nusantara.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Congratulations! You won a new phone",
+      "evidenceId": "prize"
+    },
+    "receivedAt": "10:12",
+    "body": [
+      {
+        "text": "Dear Winner,",
+        "evidenceId": "generic-greeting"
+      },
+      {
+        "text": "Your number was chosen in our Year-End Lucky Draw.",
+        "evidenceId": "body-claim"
+      },
+      {
+        "text": "To claim your prize, enter your full name, NIK, and bank account number in the form below:",
+        "evidenceId": "request-data"
+      },
+      {
+        "link": {
+          "label": "Claim Prize",
+          "href": "http://klaim-hadiah-nusantara.test/form"
+        },
+        "evidenceId": "link"
+      },
+      {
+        "text": "Claim deadline: today at 17.00.",
+        "evidenceId": "urgency"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["prize", "request-data"],
+    "supporting": ["sender", "link", "urgency", "generic-greeting"]
+  },
+  "explanation": "You never joined this lucky draw, and the message asks for your NIK and bank account number through a form. That is a classic sign of phishing, so block it.",
+  "ruleRefs": ["r-phish-4", "r-phish-2"],
+  "hints": [
+    "Has any of our employees ever joined this lucky draw?",
+    "Look at what data it asks for. Should anyone ask for that through a form in an email?"
+  ]
+}

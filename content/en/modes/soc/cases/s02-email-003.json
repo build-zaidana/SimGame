@@ -1,0 +1,48 @@
+{
+  "id": "s02-email-003",
+  "type": "email",
+  "conceptIds": ["phishing-signs"],
+  "difficulty": 3,
+  "verdict": "suspicious",
+  "correctDecision": "escalate",
+  "acceptableDecisions": {
+    "block": 0.6
+  },
+  "severity": 2,
+  "data": {
+    "from": {
+      "name": "Budi Santoso",
+      "address": "budi.santoso@nusadigital.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Please hurry",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "10:02",
+    "body": [
+      {
+        "text": "Hi, can you help me buy 10 phone credit vouchers of Rp100.000? I'll pay you back later.",
+        "evidenceId": "request"
+      },
+      {
+        "text": "I'm in a meeting, so don't call me for now. Just send the codes by email.",
+        "evidenceId": "no-call"
+      },
+      {
+        "text": "Budi",
+        "evidenceId": "signature"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["request", "no-call"],
+    "supporting": ["subject"]
+  },
+  "explanation": "The address really belongs to Budi, but asking for vouchers and saying not to call are signs of a taken-over account. Escalate so the security team can check Budi's account and confirm with him directly.",
+  "ruleRefs": ["r-phish-7"],
+  "hints": [
+    "The address is real. But is this a normal request from a coworker?",
+    "Why does he tell you not to call? If you are unsure about a coworker's account, that is the time to escalate."
+  ]
+}

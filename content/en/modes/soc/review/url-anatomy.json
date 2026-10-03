@@ -1,0 +1,73 @@
+{
+  "items": [
+    {
+      "id": "rv-url-1",
+      "type": "mcq",
+      "conceptId": "url-anatomy",
+      "difficulty": 1,
+      "prompt": "Who owns the site bantuan.kirimcepat.cek-resi.test?",
+      "choices": ["KirimCepat (kirimcepat.test)", "cek-resi.test", "bantuan"],
+      "answerIndex": 1,
+      "explanation": "Read from the right: the ending is .test, and the one name before it is cek-resi. The parts in front are just subdomains."
+    },
+    {
+      "id": "rv-url-2",
+      "type": "mcq",
+      "conceptId": "url-anatomy",
+      "difficulty": 1,
+      "prompt": "A site has an HTTPS padlock. What does that mean?",
+      "choices": [
+        "The site definitely belongs to an official organization",
+        "The connection is encrypted, but the owner isn't necessarily honest",
+        "The site has been checked by the cyber police"
+      ],
+      "answerIndex": 1,
+      "explanation": "HTTPS only encrypts the connection between the browser and the site. Scam sites can use HTTPS too."
+    },
+    {
+      "id": "rv-url-3",
+      "type": "tap-evidence",
+      "conceptId": "url-anatomy",
+      "difficulty": 2,
+      "prompt": "Tap the part of the address that shows the site's real owner.",
+      "parts": [
+        {
+          "text": "https://",
+          "evidenceId": "scheme"
+        },
+        {
+          "text": "promo.",
+          "evidenceId": "sub-1"
+        },
+        {
+          "text": "kirimcepat.",
+          "evidenceId": "sub-2"
+        },
+        {
+          "text": "hadiah-gratis.test",
+          "evidenceId": "owner"
+        },
+        {
+          "text": "/klaim",
+          "evidenceId": "path"
+        }
+      ],
+      "answer": ["owner"],
+      "explanation": "Read from the right: the owner is hadiah-gratis.test. The name kirimcepat in front is just a subdomain the scammer created."
+    },
+    {
+      "id": "rv-url-4",
+      "type": "mcq",
+      "conceptId": "url-anatomy",
+      "difficulty": 1,
+      "prompt": "Which address really belongs to Bank Nusantara (banknusantara.test)?",
+      "choices": [
+        "banknusantara.akun-aman.test",
+        "login.banknusantara.test",
+        "banknusantara-login.test"
+      ],
+      "answerIndex": 1,
+      "explanation": "In login.banknusantara.test, the owner is banknusantara.test and login is just a subdomain. The other two belong to akun-aman.test and banknusantara-login.test."
+    }
+  ]
+}

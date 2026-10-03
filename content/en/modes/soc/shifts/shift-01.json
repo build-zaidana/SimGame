@@ -1,0 +1,63 @@
+{
+  "id": "soc-01",
+  "order": 1,
+  "title": "First Day",
+  "durationGameMinutes": 120,
+  "realSecondsPerGameMinute": 3,
+  "unlocksChapters": ["ch-url", "ch-phish"],
+  "introDialogue": "soc-01-intro",
+  "outroDialogue": "soc-01-outro",
+  "tutorial": true,
+  "queue": [
+    {
+      "caseId": "s01-email-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s01-email-002",
+      "arriveAt": 5
+    },
+    {
+      "caseId": "s01-url-001",
+      "arriveAt": 12
+    },
+    {
+      "caseId": "s01-email-003",
+      "arriveAt": 20
+    },
+    {
+      "caseId": "s01-url-002",
+      "arriveAt": 30
+    },
+    {
+      "caseId": "s01-email-004",
+      "arriveAt": 42
+    },
+    {
+      "caseId": "s01-url-003",
+      "arriveAt": 55
+    },
+    {
+      "caseId": "s01-email-005",
+      "arriveAt": 70
+    }
+  ],
+  "review": {
+    "count": 3,
+    "conceptIds": ["url-anatomy", "phishing-signs"]
+  },
+  "pay": {
+    "base": 40,
+    "perCase": 12
+  },
+  "newspaper": {
+    "headline": "PT Nusa Digital Opens a New SOC Desk",
+    "lead": "PT Nusa Digital has a new analyst at its SOC (Security Operations Center) desk. The job: check suspicious emails, links, and access requests before they hurt employees and clients.",
+    "tip": {
+      "title": "Tip: Read Domains from the Right",
+      "text": "The owner of a web address is the name just before its ending. In banknusantara.akun-aman.test, the owner is akun-aman.test, not Bank Nusantara."
+    },
+    "classified": "JOB OPENING: Careful SOC analyst wanted. Must enjoy reading from right to left. Ask for Rani, 3rd floor.",
+    "sources": ["APWG Phishing Activity Trends Report", "BSSN: guide to spotting phishing"]
+  }
+}
