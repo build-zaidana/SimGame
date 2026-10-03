@@ -29,6 +29,8 @@ export const MIGRATIONS: Record<number, Migration> = {
     }
     return { ...d, modes: next };
   },
+  /** v2 → v3: slot `practiceSession` (opsional) ditambahkan; data lama tidak perlu diubah. */
+  2: (d) => d,
 };
 
 export function runMigrations(

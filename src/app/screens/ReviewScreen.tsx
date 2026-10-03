@@ -12,6 +12,7 @@ export function ReviewScreen() {
   const content = useAppStore((s) => s.content);
   const save = useAppStore((s) => s.save);
   const finishShift = useAppStore((s) => s.finishShift);
+  const practice = useAppStore((s) => s.practice);
   const [items] = useState(() =>
     session && content && save ? reviewItemsFor(content, session, save.mastery) : [],
   );
@@ -35,7 +36,11 @@ export function ReviewScreen() {
                 <>
                   <h2 className="font-display text-lg">{id.review.doneHeading}</h2>
                   <p data-testid="review-score">{id.review.score(correct, items.length)}</p>
-                  {correct < items.length && <p className="text-sm">{id.review.retryNote}</p>}
+                  {practice ? (
+                    <p className="text-sm">{id.review.practiceNote}</p>
+                  ) : (
+                    correct < items.length && <p className="text-sm">{id.review.retryNote}</p>
+                  )}
                 </>
               )}
               <button
@@ -43,7 +48,7 @@ export function ReviewScreen() {
                 className={`${btnPrimary} mt-2`}
                 onClick={() => finishShift(results)}
               >
-                {id.review.finish}
+                {practice ? id.review.finishPractice : id.review.finish}
               </button>
             </section>
           );

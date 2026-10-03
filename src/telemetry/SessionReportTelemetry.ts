@@ -62,7 +62,7 @@ export class SessionReportTelemetry implements Telemetry {
 
 export interface LearningSummary {
   shiftsStarted: number;
-  shiftsCompleted: { shiftId: string; averageScore: number; stars: number }[];
+  shiftsCompleted: { shiftId: string; averageScore: number; stars: number; practice: boolean }[];
   cases: number;
   caseAccuracy: number;
   avgEvidenceScore: number;
@@ -83,7 +83,14 @@ export function summarizeEvents(events: readonly LoggedEvent[]): LearningSummary
     shiftsStarted: events.filter((e) => e.name === 'shift_started').length,
     shiftsCompleted: events.flatMap((e) =>
       e.name === 'shift_completed'
-        ? [{ shiftId: e.shiftId, averageScore: e.averageScore, stars: e.stars }]
+        ? [
+            {
+              shiftId: e.shiftId,
+              averageScore: e.averageScore,
+              stars: e.stars,
+              practice: e.practice,
+            },
+          ]
         : [],
     ),
     cases: cases.length,

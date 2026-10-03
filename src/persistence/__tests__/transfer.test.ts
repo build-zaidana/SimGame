@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createNewSave, type SaveData } from '../saveSchema.ts';
+import { createNewSave, SAVE_SCHEMA_VERSION, type SaveData } from '../saveSchema.ts';
 import {
   decodeSave,
   encodeJson,
@@ -87,7 +87,7 @@ describe('encodeSave / decodeSave', () => {
 
   it('migrates a code exported by an older version', async () => {
     const v1 = { ...JSON.parse(JSON.stringify(save())), schemaVersion: 1 };
-    expect((await decodeSave(await encodeJson(v1))).schemaVersion).toBe(2);
+    expect((await decodeSave(await encodeJson(v1))).schemaVersion).toBe(SAVE_SCHEMA_VERSION);
   });
 
   it('rejects a code from a newer game version', async () => {

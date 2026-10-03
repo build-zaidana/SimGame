@@ -32,6 +32,7 @@ export function StandardDesk({
   wallet,
   mastery,
   toolsOwned,
+  practice,
   dispatch,
   renderExtra,
 }: StandardDeskProps) {
@@ -100,6 +101,7 @@ export function StandardDesk({
     <div className="flex h-dvh flex-col">
       <Hud
         deskTitle={mode.deskTitle}
+        practice={practice}
         session={session}
         wallet={wallet}
         onTogglePause={() => dispatch({ type: session.paused ? 'RESUME' : 'PAUSE' })}

@@ -61,7 +61,9 @@ export function LearningReportScreen() {
               <h2 className="mt-2 font-display">{id.learningReport.shiftsCompleted}</h2>
               <ul className="list-disc pl-5 text-sm">
                 {summary.shiftsCompleted.map((s, i) => (
-                  <li key={i}>{id.learningReport.shiftRow(s.shiftId, s.averageScore, s.stars)}</li>
+                  <li key={i}>
+                    {id.learningReport.shiftRow(s.shiftId, s.averageScore, s.stars, s.practice)}
+                  </li>
                 ))}
               </ul>
             </>

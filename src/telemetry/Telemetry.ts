@@ -1,6 +1,6 @@
 /** Event belajar (PRD §10). Tanpa data pribadi; default no-op. */
 export type TelemetryEvent =
-  | { name: 'shift_started'; modeId: string; shiftId: string; playMode: string }
+  | { name: 'shift_started'; modeId: string; shiftId: string; playMode: string; practice: boolean }
   | {
       name: 'case_decided';
       modeId: string;
@@ -12,6 +12,7 @@ export type TelemetryEvent =
     }
   | {
       name: 'shift_completed';
+      practice: boolean;
       modeId: string;
       shiftId: string;
       averageScore: number;

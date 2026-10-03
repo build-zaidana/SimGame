@@ -1,6 +1,11 @@
 import { describe, expect, it, vi } from 'vitest';
 import { startShift } from '../../engine/shift.ts';
-import { LocalSaveRepository, memoryStore, SAVE_KEY } from '../LocalSaveRepository.ts';
+import {
+  LocalSaveRepository,
+  memoryStore,
+  SAVE_KEY,
+  type SyncJournal,
+} from '../LocalSaveRepository.ts';
 import { migrate, runMigrations, SaveFormatError } from '../migrations.ts';
 import { createNewSave, SAVE_SCHEMA_VERSION, type SaveData } from '../saveSchema.ts';
 
@@ -159,8 +164,96 @@ describe('migration v1 → v2 (generatedCases in active sessions)', () => {
     };
     delete v1.modes.other.activeSession;
     const migrated = migrate(v1);
-    expect(migrated.schemaVersion).toBe(2);
+    expect(migrated.schemaVersion).toBe(SAVE_SCHEMA_VERSION);
     expect(migrated.modes['soc']?.activeSession?.generatedCases).toEqual({});
     expect(migrated.modes['other']?.activeSession).toBeUndefined();
+  });
+});
+
+describe('migration v2 → v3 (separate practice session slot)', () => {
+  it('keeps the save as-is and bumps the version; practiceSession is optional', () => {
+    const v2 = { ...JSON.parse(JSON.stringify(saveWithSession())), schemaVersion: 2 };
+    const migrated = migrate(v2);
+    expect(migrated.schemaVersion).toBe(3);
+    expect(migrated.modes['soc']?.activeSession?.shiftId).toBe('soc-01');
+    expect(migrated.modes['soc']?.practiceSession).toBeUndefined();
+  });
+
+  it('a v3 save with both a main and a practice session roundtrips', () => {
+    const save = saveWithSession();
+    const soc = save.modes['soc']!;
+    const withPractice = {
+      ...save,
+      modes: { soc: { ...soc, practiceSession: soc.activeSession! } },
+    };
+    expect(migrate(JSON.parse(JSON.stringify(withPractice)))).toEqual(withPractice);
+  });
+});
+
+describe('LocalSaveRepository journal (durable against closing the tab right away)', () => {
+  function memoryJournal(): SyncJournal & { value: unknown } {
+    return {
+      value: undefined,
+      get() {
+        return this.value;
+      },
+      set(v) {
+        this.value = JSON.parse(JSON.stringify(v));
+      },
+      del() {
+        this.value = undefined;
+      },
+    };
+  }
+  const at = (iso: string): SaveData => ({
+    ...createNewSave({ installId: INSTALL_ID, now: NOW }),
+    updatedAt: iso,
+  });
+
+  it('writes the journal synchronously, before the async store write finishes', () => {
+    const journal = memoryJournal();
+    const repo = new LocalSaveRepository(memoryStore(), async () => true, journal);
+    void repo.save(at('2026-10-03T10:00:01.000Z'));
+    expect((journal.value as SaveData).updatedAt).toBe('2026-10-03T10:00:01.000Z');
+  });
+
+  it('load prefers the journal when it is newer than the store (write was cut off)', async () => {
+    const store = memoryStore();
+    const journal = memoryJournal();
+    const repo = new LocalSaveRepository(store, async () => true, journal);
+    await repo.save(at('2026-10-03T10:00:01.000Z'));
+    journal.set(at('2026-10-03T10:00:05.000Z')); // tab ditutup sebelum IndexedDB selesai
+    expect((await repo.load())?.updatedAt).toBe('2026-10-03T10:00:05.000Z');
+  });
+
+  it('load uses the store when the journal is older, missing or corrupt', async () => {
+    const journal = memoryJournal();
+    const repo = new LocalSaveRepository(memoryStore(), async () => true, journal);
+    await repo.save(at('2026-10-03T10:00:05.000Z'));
+    journal.set(at('2026-10-03T10:00:01.000Z'));
+    expect((await repo.load())?.updatedAt).toBe('2026-10-03T10:00:05.000Z');
+    journal.set({ schemaVersion: 1, broken: true });
+    expect((await repo.load())?.updatedAt).toBe('2026-10-03T10:00:05.000Z');
+    journal.del();
+    expect((await repo.load())?.updatedAt).toBe('2026-10-03T10:00:05.000Z');
+  });
+
+  it('writes land in call order even when save() is not awaited', async () => {
+    const store = memoryStore();
+    const repo = new LocalSaveRepository(store);
+    void repo.save(at('2026-10-03T10:00:01.000Z'));
+    void repo.save(at('2026-10-03T10:00:02.000Z'));
+    await repo.save(at('2026-10-03T10:00:03.000Z'));
+    expect((await repo.load())?.updatedAt).toBe('2026-10-03T10:00:03.000Z');
+    expect((await repo.loadBackup())?.updatedAt).toBe('2026-10-03T10:00:02.000Z');
+  });
+
+  it('clear also removes the journal', async () => {
+    const journal = memoryJournal();
+    const repo = new LocalSaveRepository(memoryStore(), async () => true, journal);
+    await repo.save(at('2026-10-03T10:00:01.000Z'));
+    await repo.clear();
+    expect(journal.value).toBeUndefined();
+    expect(await repo.load()).toBeNull();
   });
 });
