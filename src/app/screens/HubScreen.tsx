@@ -4,6 +4,7 @@ import { modes, upcomingModes } from '../../modes/registry.ts';
 import { newModeProgress } from '../../persistence/saveSchema.ts';
 import { nextShift } from '../progress.ts';
 import { useAppStore } from '../store.ts';
+import { OfficeIllustration } from '../ui/hub/OfficeIllustration.tsx';
 import { btnPrimary, btnSecondary, panel } from '../ui/styles.ts';
 
 /** HUB versi menu (v1.0). Ilustrasi kantor pixel menyusul di M4. */
@@ -34,6 +35,20 @@ export function HubScreen() {
     <main className="mx-auto flex min-h-dvh max-w-3xl flex-col gap-4 p-4">
       <h1 className="font-display text-2xl text-accent">{id.hub.heading}</h1>
       <p className="text-ink-muted">{id.hub.intro}</p>
+      <OfficeIllustration
+        desks={[
+          ...modes.map((m) => ({
+            label: m.deskTitle,
+            available: m.status === 'available',
+            disabled: entering,
+            onEnter: () => {
+              setEntering(true);
+              void enterMode(m.id).finally(() => setEntering(false));
+            },
+          })),
+          ...upcomingModes.map((m) => ({ label: m.deskTitle, available: false })),
+        ]}
+      />
       <nav className="flex flex-wrap gap-2" aria-label={id.hub.heading}>
         <button type="button" className={btnSecondary} onClick={() => openRulebook(null)}>
           <span aria-hidden="true">📖 </span>
@@ -42,6 +57,10 @@ export function HubScreen() {
         <button type="button" className={btnSecondary} onClick={() => openMenu('shop')}>
           <span aria-hidden="true">🛒 </span>
           {id.hub.shop}
+        </button>
+        <button type="button" className={btnSecondary} onClick={() => openMenu('settings')}>
+          <span aria-hidden="true">⚙ </span>
+          {id.hub.settings}
         </button>
         <button type="button" className={btnSecondary} onClick={() => openMenu('save-transfer')}>
           <span aria-hidden="true">💾 </span>
@@ -106,7 +125,7 @@ export function HubScreen() {
           );
         })}
         {upcomingModes.map((m) => (
-          <li key={m.id} className={`${panel} flex flex-col gap-2 p-4 opacity-70`}>
+          <li key={m.id} className="flex flex-col gap-2 border-2 border-dashed border-ink/40 p-4">
             <h2 className="font-display text-lg">{m.deskTitle}</h2>
             <p className="text-sm text-ink-muted">{m.title}</p>
             <p className="font-display text-sm">

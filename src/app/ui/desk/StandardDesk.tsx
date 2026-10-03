@@ -1,4 +1,5 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { btnSecondary } from '../styles.ts';
 import { id } from '../../../i18n/id.ts';
 import type { ReactNode } from 'react';
 import type { BaseCase } from '../../../content/schemas.ts';
@@ -35,6 +36,15 @@ export function StandardDesk({
   renderExtra,
 }: StandardDeskProps) {
   const [tab, setTab] = useState<Tab>(session.activeCaseId ? 'document' : 'queue');
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  useEffect(() => {
+    if (!drawerOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setDrawerOpen(false);
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [drawerOpen]);
   const running =
     !session.paused && (session.phase === 'working' || session.phase === 'inspecting');
   useShiftClock(dispatch, running);
@@ -68,9 +78,23 @@ export function StandardDesk({
   const feedbackData = feedbackCase ? content.cases[feedbackCase.caseId] : undefined;
   const rules = content.rulebook.chapters.flatMap((ch) => ch.rules);
 
-  const paneClass = (t: Tab) =>
-    `${tab === t ? 'block' : 'hidden'} h-full overflow-y-auto lg:block ` +
-    (t === 'document' ? 'lg:border-x-2 lg:border-ink/40' : '');
+  // HP: satu panel per tab. Tablet (md): Dokumen + Panduan berdampingan, Antrian jadi laci.
+  // Desktop (lg): tiga kolom.
+  const paneClass = (t: Tab) => {
+    const mobile = `${tab === t ? 'block' : 'hidden'} h-full overflow-y-auto`;
+    if (t === 'queue') {
+      return (
+        `${mobile} ` +
+        (drawerOpen
+          ? 'md:fixed md:inset-y-0 md:left-0 md:z-30 md:block md:w-72 md:border-r-2 md:border-ink/40 md:bg-panel md:pixel-shadow '
+          : 'md:hidden ') +
+        'lg:static lg:z-auto lg:block lg:w-auto lg:border-r-0 lg:bg-transparent lg:shadow-none'
+      );
+    }
+    if (t === 'document') return `${mobile} md:block lg:border-x-2 lg:border-ink/40`;
+    return `${mobile} md:block md:border-l-2 md:border-ink/40 lg:border-l-0`;
+  };
+  const waitingCount = session.cases.filter((c) => c.status === 'arrived').length;
 
   return (
     <div className="flex h-dvh flex-col">
@@ -80,7 +104,27 @@ export function StandardDesk({
         wallet={wallet}
         onTogglePause={() => dispatch({ type: session.paused ? 'RESUME' : 'PAUSE' })}
       />
-      <div role="tablist" aria-label={id.desk.tabsLabel} className="grid grid-cols-3 lg:hidden">
+      <div className="hidden items-center gap-2 border-b-2 border-ink/40 p-2 md:flex lg:hidden">
+        <button
+          type="button"
+          className={btnSecondary}
+          aria-expanded={drawerOpen}
+          aria-controls="pane-queue"
+          onClick={() => setDrawerOpen(!drawerOpen)}
+        >
+          <span aria-hidden="true">☰ </span>
+          {id.desk.queueToggle(waitingCount)}
+        </button>
+      </div>
+      {drawerOpen && (
+        <button
+          type="button"
+          aria-label={id.desk.closeQueue}
+          className="fixed inset-0 z-20 hidden bg-bg/60 md:block lg:hidden"
+          onClick={() => setDrawerOpen(false)}
+        />
+      )}
+      <div role="tablist" aria-label={id.desk.tabsLabel} className="grid grid-cols-3 md:hidden">
         {TABS.map((t) => (
           <button
             key={t}
@@ -102,7 +146,7 @@ export function StandardDesk({
           </button>
         ))}
       </div>
-      <main className="min-h-0 flex-1 lg:grid lg:grid-cols-[16rem_minmax(0,1fr)_20rem]">
+      <main className="min-h-0 flex-1 md:grid md:grid-cols-[minmax(0,1fr)_18rem] lg:grid-cols-[16rem_minmax(0,1fr)_20rem]">
         <section
           id="pane-queue"
           role="tabpanel"
@@ -115,6 +159,7 @@ export function StandardDesk({
             onOpen={(caseId) => {
               dispatch({ type: 'OPEN_CASE', caseId });
               setTab('document');
+              setDrawerOpen(false);
             }}
           />
         </section>
