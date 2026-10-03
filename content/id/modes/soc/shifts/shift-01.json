@@ -49,5 +49,15 @@
   "pay": {
     "base": 40,
     "perCase": 12
+  },
+  "newspaper": {
+    "headline": "PT Nusa Digital Buka Meja SOC Baru",
+    "lead": "PT Nusa Digital menambah analis baru di meja SOC (Security Operations Center). Tugasnya memeriksa email, tautan, dan permintaan akses yang mencurigakan sebelum merugikan karyawan dan klien.",
+    "tip": {
+      "title": "Tips: Baca Domain dari Kanan",
+      "text": "Pemilik alamat web adalah nama tepat sebelum akhirannya. Pada banknusantara.akun-aman.test, pemiliknya akun-aman.test, bukan Bank Nusantara."
+    },
+    "classified": "LOWONGAN: Dicari analis SOC yang teliti dan suka membaca dari kanan ke kiri. Hubungi Mbak Rani, lantai 3.",
+    "sources": ["APWG Phishing Activity Trends Report", "BSSN: panduan mengenali phishing"]
   }
 }

@@ -48,6 +48,18 @@ const generatorQueueEntrySchema = z.strictObject({
   arriveAt: z.number().nonnegative(),
 });
 
+/** Koran pagi sebelum shift (ADR 020): berita, dampak shift kemarin, tips, iklan baris. */
+export const newspaperSchema = z.strictObject({
+  headline: text,
+  lead: text,
+  /** Berita dampak shift sebelumnya, menurut hasil pemain. Tidak ada di shift pertama. */
+  impact: z.strictObject({ good: text, mixed: text, bad: text }).optional(),
+  tip: z.strictObject({ title: text, text }),
+  classified: text.optional(),
+  sources: z.array(text).min(1),
+});
+export type Newspaper = z.infer<typeof newspaperSchema>;
+
 export const shiftSchema = z.strictObject({
   id: idSchema,
   order: z.number().int().positive(),
@@ -67,6 +79,7 @@ export const shiftSchema = z.strictObject({
     base: z.number().int().nonnegative(),
     perCase: z.number().int().nonnegative(),
   }),
+  newspaper: newspaperSchema.optional(),
 });
 
 const reviewBase = {

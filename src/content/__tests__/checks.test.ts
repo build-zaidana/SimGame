@@ -297,3 +297,43 @@ describe('concept rendering', () => {
     expect(content.concepts[0]?.html).toBe('<p>Isi materi.</p>\n');
   });
 });
+
+describe('morning newspaper (koran pagi)', () => {
+  const paper = (over: object = {}) => ({
+    headline: 'Judul',
+    lead: 'Isi berita singkat.',
+    tip: { title: 'Tips', text: 'Baca domain dari kanan.' },
+    sources: ['BSSN'],
+    ...over,
+  });
+  const impact = { good: 'Bagus.', mixed: 'Lumayan.', bad: 'Buruk.' };
+  const withPaper = (newspaper: object, order = 1) => {
+    const f = fixture();
+    Object.assign(f['shifts/s-1.json'] as object, { order, newspaper });
+    return errorsFor(f);
+  };
+
+  it('accepts a first-day paper without an impact story', () => {
+    expect(withPaper(paper())).toEqual([]);
+  });
+  it('rejects an impact story on the first shift', () => {
+    expect(withPaper(paper({ impact }))).toEqual([
+      expect.stringMatching(/berita dampak tidak ada di shift pertama/),
+    ]);
+  });
+  it('requires an impact story on later shifts', () => {
+    expect(withPaper(paper(), 2)).toContainEqual(expect.stringMatching(/butuh berita dampak/));
+    expect(withPaper(paper({ impact }), 2).filter((e) => /berita dampak/.test(e))).toEqual([]);
+  });
+  it('limits story length and checks brands and domains', () => {
+    expect(withPaper(paper({ lead: 'kata '.repeat(61) }))).toContainEqual(
+      expect.stringMatching(/koran: lead 61 kata/),
+    );
+    expect(withPaper(paper({ headline: 'Promo Tokopedia' }))).toContainEqual(
+      expect.stringMatching(/merek nyata: Tokopedia/),
+    );
+    expect(withPaper(paper({ lead: 'Buka nusa-promo.com sekarang.' }))).toContainEqual(
+      expect.stringMatching(/domain bukan/),
+    );
+  });
+});

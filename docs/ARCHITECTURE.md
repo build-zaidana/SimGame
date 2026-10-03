@@ -268,8 +268,10 @@ Alamat web dibaca **dari kanan ke kiri** untuk mencari pemiliknya…
     { "generator": "typosquat-domain", "params": { "brand": "KirimCepat", "verdict": "malicious" }, "arriveAt": 20 }
   ],
   "review": { "count": 3, "conceptIds": ["url-anatomy", "phishing-signs"] },
-  "pay": { "base": 40, "perCase": 12 }
+  "pay": { "base": 40, "perCase": 12 },
+  "newspaper": { "headline": "…", "lead": "…", "tip": { "title": "…", "text": "…" }, "sources": ["BSSN"] }
 }
+// newspaper (opsional, ADR 020): koran pagi; mulai shift 2 wajib punya "impact": { "good", "mixed", "bad" }.
 ```
 
 ### 5.5 Soal review — `review/url-anatomy.json`

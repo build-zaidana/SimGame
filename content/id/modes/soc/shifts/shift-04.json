@@ -66,5 +66,20 @@
   "pay": {
     "base": 50,
     "perCase": 12
+  },
+  "newspaper": {
+    "headline": "Resi Palsu Beredar Lewat Aplikasi Chat",
+    "lead": "Pesan berisi \"resi pengiriman\" yang ternyata aplikasi berbahaya ramai beredar. Warga diimbau tidak memasang file .apk dari pesan, walau namanya terlihat seperti PDF.",
+    "impact": {
+      "good": "Kemarin, upaya pencurian akun lewat OTP gagal total di PT Nusa Digital. Akun yang dicurigai langsung diamankan.",
+      "mixed": "Kemarin, sebagian besar akun berhasil diamankan, tetapi beberapa login aneh sempat terlewat.",
+      "bad": "Kemarin, beberapa akun karyawan sempat diambil alih karena login aneh terlewat. Password sedang diganti."
+    },
+    "tip": {
+      "title": "Tips: Lihat Akhiran Paling Kanan",
+      "text": "Resi.pdf.apk adalah aplikasi Android, bukan PDF. Jenis file ditentukan oleh akhiran paling kanan di namanya."
+    },
+    "classified": "PAKET UNTUK ANDA sedang dalam perjalanan. Jangan lupa dibuka, ya. — K.",
+    "sources": ["BSSN: imbauan waspada file APK", "OWASP: glosarium malware"]
   }
 }

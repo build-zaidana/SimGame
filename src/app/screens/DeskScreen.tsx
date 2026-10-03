@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import { id } from '../../i18n/id.ts';
+import { newsTier } from '../../engine/news.ts';
 import { getMode } from '../../modes/registry.ts';
 import { useAppStore } from '../store.ts';
 
@@ -11,7 +12,13 @@ export function DeskScreen() {
   const practice = useAppStore((s) => s.practice);
   const mode = session ? getMode(session.modeId) : undefined;
   if (!session || !content || !mode) return null;
-  const wallet = save?.modes[mode.id]?.wallet ?? 0;
+  const progress = save?.modes[mode.id];
+  const wallet = progress?.wallet ?? 0;
+  const prevShift = content.shifts.find((s) => s.order === session.shiftOrder - 1);
+  const tier =
+    practice || !progress || !prevShift
+      ? null
+      : newsTier(progress.shifts[prevShift.id], progress.trust);
   return (
     <Suspense fallback={<p className="p-4">{id.hub.loadingDesk}</p>}>
       <mode.Desk
@@ -22,6 +29,7 @@ export function DeskScreen() {
         mastery={save?.mastery ?? {}}
         toolsOwned={save?.modes[mode.id]?.toolsOwned ?? []}
         practice={practice}
+        newsTier={tier}
         dispatch={dispatch}
       />
     </Suspense>

@@ -204,6 +204,14 @@ export const id = {
     sources: 'Sumber',
     locked: (order: number) => `Terbuka di Shift ${order}`,
   },
+  news: {
+    masthead: 'KABAR NUSA',
+    edition: (n: number) => `Edisi hari ke-${n}`,
+    price: 'Gratis untuk karyawan',
+    impactHeading: 'Dampak kerjamu kemarin',
+    tier: { good: 'kabar baik', mixed: 'kabar campuran', bad: 'kabar buruk' },
+    classified: 'IKLAN BARIS:',
+  },
   briefing: {
     next: 'Lanjut',
     start: 'Mulai shift',

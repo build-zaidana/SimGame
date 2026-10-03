@@ -12,6 +12,7 @@ import type {
 } from '../engine/types.ts';
 import type { RngState } from '../engine/rng.ts';
 import type { MasteryMap } from '../engine/mastery.ts';
+import type { NewsTier } from '../engine/news.ts';
 
 export interface DocumentProps<TCase extends BaseCase = BaseCase> {
   data: TCase;
@@ -68,6 +69,8 @@ export interface DeskProps {
   toolsOwned: readonly string[];
   /** Mode Latihan (PRD S5): meja menampilkan penanda bahwa hasil tidak disimpan. */
   practice: boolean;
+  /** Nada berita dampak di koran pagi (dari shift sebelumnya); null = tanpa berita dampak. */
+  newsTier?: NewsTier | null;
   dispatch(action: ShiftAction): void;
 }
 

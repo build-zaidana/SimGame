@@ -43,6 +43,7 @@ export function StandardDesk({
   mastery,
   toolsOwned,
   practice,
+  newsTier,
   dispatch,
   renderExtra,
 }: StandardDeskProps) {
@@ -272,6 +273,11 @@ export function StandardDesk({
         <BriefingDialog
           heading={id.briefing.shiftHeading(session.shiftOrder, shift?.title ?? '')}
           dialogue={shift ? content.dialogues[shift.introDialogue] : undefined}
+          newspaper={
+            shift?.newspaper
+              ? { paper: shift.newspaper, edition: shift.order, tier: newsTier ?? null }
+              : undefined
+          }
           onStart={() => dispatch({ type: 'DISMISS_BRIEFING' })}
         />
       )}
