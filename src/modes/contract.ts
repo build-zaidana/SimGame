@@ -11,6 +11,7 @@ import type {
   ShiftSession,
 } from '../engine/types.ts';
 import type { RngState } from '../engine/rng.ts';
+import type { MasteryMap } from '../engine/mastery.ts';
 
 export interface DocumentProps<TCase extends BaseCase = BaseCase> {
   data: TCase;
@@ -47,6 +48,7 @@ export interface DeskProps {
   content: ModeContent;
   session: ShiftSession;
   wallet: number;
+  mastery: MasteryMap;
   dispatch(action: ShiftAction): void;
 }
 
