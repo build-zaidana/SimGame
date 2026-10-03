@@ -65,6 +65,10 @@ export default tseslint.config(
     plugins: { 'react-hooks': reactHooks },
     rules: {
       ...reactHooks.configs.recommended.rules,
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { varsIgnorePattern: '^_', argsIgnorePattern: '^_', ignoreRestSiblings: true },
+      ],
       'no-restricted-imports': ['error', { patterns: GLOBAL_RESTRICTIONS }],
       'no-restricted-syntax': ['error', ...GLOBAL_SYNTAX],
     },
