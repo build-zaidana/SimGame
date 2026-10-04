@@ -13,7 +13,7 @@
 │  app/  (React)  ── layar: Title · Hub · Desk · Report · Review · Settings      │
 │     │                                                                          │
 │     ├── modes/soc/   ← paket mode: CaseType (schema + evaluator + renderer)     │
-│     ├── modes/…      ← mode berikutnya (support, dev, data) dengan kontrak sama │
+│     ├── modes/support ← Bengkel IT (ADR 025); dev, data menyusul, kontrak sama │
 │     │                                                                          │
 │     ├── engine/      ← TS murni: shift reducer, scoring, mastery, RNG, clock   │
 │     │                  (tanpa React, tanpa DOM, tanpa Phaser → mudah dites)     │
@@ -498,7 +498,7 @@ Tidak perlu menyentuh `engine/`, `persistence/`, atau layar Report/Review. Jika 
 Rencana mode berikutnya:
 | Mode | Tipe kasus contoh | Meja |
 |---|---|---|
-| IT Support | `hardware-ticket`, `network-diag`, `os-issue` | Bengkel: rak komponen, multimeter, ping |
+| IT Support (✅ ADR 025) | `ticket`, `diagnostic`, `hardware` | Bengkel: Pemindai Perangkat Keras, Alat Ping |
 | Software Engineer | `bug-ticket` (baca kode & log), `code-review`, `git-conflict` | Editor kode mini (CodeMirror, lazy) |
 | Data / AI | `data-cleaning`, `chart-misleading`, `model-eval` | Tabel & grafik |
 

@@ -5,9 +5,17 @@
  */
 import { AUTO, Game, Scale, Scene, type Types } from 'phaser';
 import type { PixelCanvas } from '../../app/ui/pixel/canvas.ts';
-import { drawCharacter, drawOffice, PLAYER_LOOK, RANI_LOOK, type Facing } from '../officeArt.ts';
+import {
+  drawCharacter,
+  drawOffice,
+  JOKO_LOOK,
+  PLAYER_LOOK,
+  RANI_LOOK,
+  type Facing,
+} from '../officeArt.ts';
 import {
   HOTSPOTS,
+  JOKO_TILE,
   PLAYER_SIZE,
   RANI_TILE,
   SPAWN,
@@ -75,9 +83,11 @@ class OfficeScene extends Scene {
         addPixelTexture(this, `player-${f}-${fr}`, drawCharacter(PLAYER_LOOK, f, fr));
       }
     addPixelTexture(this, 'rani', drawCharacter(RANI_LOOK, 'down', 0));
+    addPixelTexture(this, 'joko', drawCharacter(JOKO_LOOK, 'down', 0));
 
     this.add.image(0, 0, 'office').setOrigin(0);
     this.add.image(RANI_TILE.x * TILE - 4, (RANI_TILE.y + 1) * TILE - 8, 'rani').setOrigin(0);
+    this.add.image(JOKO_TILE.x * TILE - 4, (JOKO_TILE.y + 1) * TILE - 8, 'joko').setOrigin(0);
     this.player = this.add.image(0, 0, 'player-down-0').setOrigin(0);
     this.placePlayer();
 

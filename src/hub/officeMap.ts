@@ -42,6 +42,8 @@ export const DESK_Y = 6;
 export const DESK_W = 6;
 export const DESK_H = 3;
 export const RANI_TILE = { x: 11, y: 8 };
+/** Pak Joko berdiri di antara meja Bengkel IT dan meja berikutnya. */
+export const JOKO_TILE = { x: 19, y: 8 };
 export const SHOP = { x: 3, y: 17, w: 8, h: 2 };
 export const SHELF = { x: 33, y: 16, w: 5, h: 3 };
 export const BADGE_BOARD = { x: 25, y: 1, w: 6, h: 2 };
@@ -53,6 +55,7 @@ const SOLIDS: TileRect[] = [
   { x: 0, y: ROWS - 1, w: COLS, h: 1 },
   ...DESKS.map((d) => ({ x: d.x, y: DESK_Y, w: DESK_W, h: DESK_H })),
   { x: RANI_TILE.x, y: RANI_TILE.y + 1, w: 1, h: 1 },
+  { x: JOKO_TILE.x, y: JOKO_TILE.y + 1, w: 1, h: 1 },
   SHOP,
   SHELF,
   { x: 1, y: 4, w: 2, h: 2 },
@@ -66,6 +69,7 @@ export const HOTSPOTS: Hotspot[] = [
     zone: { x: d.x, y: DESK_Y + DESK_H, w: DESK_W, h: 3 },
   })),
   { id: 'npc:rani', kind: 'npc', zone: { x: 10, y: 10, w: 3, h: 2 } },
+  { id: 'npc:joko', kind: 'npc', zone: { x: 19, y: 10, w: 2, h: 2 } },
   { id: 'menu:shop', kind: 'menu', zone: { x: SHOP.x, y: SHOP.y + SHOP.h, w: SHOP.w, h: 3 } },
   {
     id: 'menu:rulebook',

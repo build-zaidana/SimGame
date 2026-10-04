@@ -14,7 +14,7 @@ test('the whole game can be played in English, and the choice survives a reload'
   await page.getByRole('button', { name: 'Play' }).click();
 
   await expect(page.getByRole('heading', { name: 'Nusa Digital Office' })).toBeVisible();
-  await page.getByRole('button', { name: 'Start Shift 1: First Day' }).click();
+  await page.getByRole('button', { name: 'Start Shift 1: First Day', exact: true }).click();
 
   // Morning paper and mentor briefing in English.
   const dialog = page.getByRole('dialog');

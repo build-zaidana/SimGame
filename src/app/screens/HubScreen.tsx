@@ -4,7 +4,7 @@ import { modes, upcomingModes } from '../../modes/registry.ts';
 import { newModeProgress } from '../../persistence/saveSchema.ts';
 import { nextShift, practiceShifts } from '../progress.ts';
 import { useAppStore } from '../store.ts';
-import { PhaserHub, type HotspotInfo } from '../../hub/PhaserHub.tsx';
+import { PhaserHub, type HotspotInfo, type HubSpeech } from '../../hub/PhaserHub.tsx';
 import { OfficeIllustration } from '../ui/hub/OfficeIllustration.tsx';
 import { Medal } from '../ui/Medal.tsx';
 import { btnPrimary, btnSecondary, panel } from '../ui/styles.ts';
@@ -56,12 +56,13 @@ export function HubScreen() {
         : { label: m?.deskTitle ?? key ?? '' };
     }
     if (hotspotId === 'npc:rani') return { label: id.explore.raniLabel, action: id.explore.talk };
+    if (hotspotId === 'npc:joko') return { label: id.explore.jokoLabel, action: id.explore.talk };
     if (hotspotId === 'menu:shop') return { label: id.explore.shopLabel, action: id.explore.open };
     if (hotspotId === 'menu:rulebook')
       return { label: id.explore.rulebookLabel, action: id.explore.open };
     return { label: id.explore.badgesLabel, action: id.explore.open };
   };
-  const interactHotspot = (hotspotId: string): string | void => {
+  const interactHotspot = (hotspotId: string): HubSpeech | void => {
     const [kind, key] = hotspotId.split(':');
     if (kind === 'desk') {
       if (modes.some((m) => m.id === key && m.status === 'available')) startDesk(key ?? '');
@@ -70,12 +71,15 @@ export function HubScreen() {
     if (hotspotId === 'menu:shop') return openMenu('shop');
     if (hotspotId === 'menu:rulebook') return openRulebook(null);
     if (hotspotId === 'menu:badges') return openMenu('badges');
-    // Mbak Rani: satu aturan acak dari bab yang sudah terbuka.
-    const rules = (content?.rulebook.chapters ?? [])
-      .filter((ch) => ch.unlockAtShift <= Math.max(1, socProgress.unlockedShift))
+    // Mentor (Mbak Rani: SOC, Pak Joko: Bengkel IT): satu aturan acak dari bab yang sudah terbuka.
+    const mentor = modes.find((m) => `npc:${m.mentor}` === hotspotId);
+    if (!mentor || (mentor.mentor !== 'rani' && mentor.mentor !== 'joko')) return;
+    const unlocked = Math.max(1, save?.modes[mentor.id]?.unlockedShift ?? 1);
+    const rules = (contents[mentor.id]?.rulebook.chapters ?? [])
+      .filter((ch) => ch.unlockAtShift <= unlocked)
       .flatMap((ch) => ch.rules);
     const rule = rules[Math.floor(Math.random() * rules.length)];
-    return rule ? id.explore.raniTip(rule.text) : undefined;
+    return rule ? { speaker: mentor.mentor, text: id.explore.raniTip(rule.text) } : undefined;
   };
 
   useEffect(() => {

@@ -94,6 +94,7 @@ export const en: Strings = {
     rulebookLabel: 'Handbook shelf',
     badgesLabel: 'Badge board',
     raniLabel: 'Rani',
+    jokoLabel: 'Pak Joko',
     raniTip: (rule) => `Tip of the day: ${rule}`,
     setting: 'Explorable office (walk with the arrow keys or tap)',
   },
@@ -351,6 +352,61 @@ export const en: Strings = {
     finishPractice: 'Finish practice & back to the office',
     practiceNote: 'Answers in practice do not change your review schedule.',
     empty: 'There are no review questions for this shift.',
+  },
+  support: {
+    ticket: {
+      heading: 'Help ticket',
+      requester: 'Reported by',
+      device: 'Device',
+      subject: 'Problem',
+      description: "User's story",
+      history: 'Ticket history',
+      queueTitle: (subject) => subject,
+    },
+    diagnostic: {
+      heading: 'Diagnostic report',
+      device: 'Device',
+      readings: 'System readings',
+      console: 'Command output',
+      note: 'Note',
+      queueTitle: (device) => `Diagnostics: ${device}`,
+    },
+    hardware: {
+      heading: 'Hardware inspection',
+      device: 'Device',
+      checks: 'Inspection results',
+      note: 'Note',
+      queueTitle: (device) => `Inspection: ${device}`,
+    },
+    tools: {
+      pingHeading: 'Ping Tool: connection test results',
+      scanHeading: 'Hardware Scanner: component health',
+      pingName: 'Ping Tool',
+      scanName: 'Hardware Scanner',
+    },
+    citations: {
+      'threat-allowed':
+        'WARNING: a real fault was left alone. The user will come back with a worse problem.',
+      'legit-blocked': 'NOTE: nothing was broken. Time and parts were wasted.',
+      'needless-escalation':
+        'NOTE: guiding the user was enough; the specialists were bothered for nothing.',
+    },
+    visitors: {
+      ticketLines: [
+        "Here's my ticket. Can you help?",
+        "It's been like this all morning. Please take a look.",
+        "I was afraid to press the wrong thing, so I'm reporting it.",
+      ],
+      hardwareLines: [
+        "I'll leave the laptop here with you.",
+        "Please check the hardware. I don't dare open it myself.",
+      ],
+      system: { name: 'Diagnostic Agent', role: 'Automatic report' },
+      systemLines: [
+        'BEEP! A new device health report came in.',
+        'BEEP! Diagnostic results are ready to read.',
+      ],
+    },
   },
   soc: {
     email: {

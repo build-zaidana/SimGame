@@ -1,10 +1,11 @@
 import { t as id } from '../i18n/index.ts';
 import type { CareerMode, UpcomingMode } from './contract.ts';
 import { socMode } from './soc/index.ts';
+import { supportMode } from './support/index.ts';
 
-export const modes: CareerMode[] = [socMode];
+export const modes: CareerMode[] = [socMode, supportMode];
 
-export const upcomingModes: UpcomingMode[] = (['support', 'dev', 'data'] as const).map((m) => ({
+export const upcomingModes: UpcomingMode[] = (['dev', 'data'] as const).map((m) => ({
   id: m,
   get title() {
     return id.modes[m].title;
