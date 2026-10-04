@@ -25,8 +25,17 @@ const noticeText = () =>
     reset: id.storage.reset,
   }) as const;
 
+/** Pergantian layar: pudar singkat (hanya opacity, agar elemen `fixed` di dalamnya tetap benar). */
 function Screen() {
   const screen = useAppStore((s) => s.screen);
+  return (
+    <div key={screen} className="screen-in">
+      <ScreenBody screen={screen} />
+    </div>
+  );
+}
+
+function ScreenBody({ screen }: { screen: ReturnType<typeof useAppStore.getState>['screen'] }) {
   switch (screen) {
     case 'title':
       return <TitleScreen />;

@@ -4,6 +4,8 @@ import { PixelCanvas } from './canvas.ts';
 /** Potret 32×32. Cahaya dari kiri atas; outline gelap seperti sprite game. */
 export const PORTRAIT_SIZE = 32;
 export type PortraitKind = 'person' | 'system' | 'rani' | 'kelabu' | 'joko';
+/** Ekspresi wajah: reaksi pengunjung setelah keputusan pemain. */
+export type Mood = 'neutral' | 'happy' | 'upset';
 
 const OUTLINE = '#14101c';
 const SKIN = ['#f3cfac', '#dcab80', '#bd875c', '#8f5c3c'];
@@ -38,16 +40,37 @@ function neckAndHead(p: PixelCanvas, skin: string) {
   p.ellipse(16, 14.5, 7.6, 8.6, skin, { shade: tint(skin, 0.86), light: tint(skin, 1.08) });
 }
 
-function faceFeatures(p: PixelCanvas, skin: string, brow: string, seed: number) {
+function faceFeatures(
+  p: PixelCanvas,
+  skin: string,
+  brow: string,
+  seed: number,
+  mood: Mood = 'neutral',
+) {
   const pupil = '#1b1b22';
   // Mata: putih + pupil, dengan kilau 1 px.
   p.rect(11, 14, 3, 2, '#f8f4ea').rect(18, 14, 3, 2, '#f8f4ea');
   p.rect(12, 14, 1, 2, pupil).rect(19, 14, 1, 2, pupil);
   p.set(13, 15, '#d8d2c4').set(20, 15, '#d8d2c4');
-  p.rect(11, 12, 3, 1, brow).rect(18, 12, 3, 1, brow);
-  // Hidung & mulut.
+  // Hidung.
   p.set(16, 16, tint(skin, 0.78)).set(16, 17, tint(skin, 0.78)).set(15, 18, tint(skin, 0.86));
   const mouth = '#8a3b3b';
+  if (mood === 'happy') {
+    // Alis terangkat, senyum lebar terbuka, pipi merona.
+    p.rect(11, 11, 3, 1, brow).rect(18, 11, 3, 1, brow);
+    p.set(12, 18, mouth).set(19, 18, mouth).rect(13, 19, 6, 1, mouth);
+    p.rect(14, 20, 4, 1, '#c2575a');
+    p.set(10, 17, '#e58a7a').set(21, 17, '#e58a7a');
+    return;
+  }
+  if (mood === 'upset') {
+    // Alis menukik ke tengah, mulut cemberut, setetes keringat.
+    p.set(11, 11, brow).rect(12, 12, 2, 1, brow).rect(18, 12, 2, 1, brow).set(20, 11, brow);
+    p.rect(14, 19, 4, 1, mouth).set(13, 20, mouth).set(18, 20, mouth);
+    p.rect(23, 9, 1, 2, '#8fd0fa').set(23, 11, '#5aa9d6');
+    return;
+  }
+  p.rect(11, 12, 3, 1, brow).rect(18, 12, 3, 1, brow);
   if (seed % 3 === 0) {
     p.rect(14, 20, 4, 1, mouth).set(13, 19, mouth).set(18, 19, mouth);
   } else {
@@ -99,7 +122,7 @@ function hair(p: PixelCanvas, color: string, style: number) {
   if (style === 3) p.line(18, 6, 22, 10, s.shade); // belahan samping
 }
 
-function person(seed: string): PixelCanvas {
+function person(seed: string, mood: Mood): PixelCanvas {
   const h = hashString(seed);
   const skin = pick(SKIN, h);
   const hairColor = pick(HAIR, h >>> 3);
@@ -109,23 +132,23 @@ function person(seed: string): PixelCanvas {
   if (style === 5) {
     shoulders(p, cloth);
     hijab(p, pick(HIJAB, h >>> 12), skin);
-    faceFeatures(p, skin, tint(skin, 0.55), h >>> 14);
+    faceFeatures(p, skin, tint(skin, 0.55), h >>> 14, mood);
   } else {
     if (style === 1) p.ellipse(16, 17, 10, 10.5, hairColor, shaded(hairColor));
     shoulders(p, cloth);
     neckAndHead(p, skin);
     hair(p, hairColor, style);
-    faceFeatures(p, skin, tint(hairColor, 0.8), h >>> 14);
+    faceFeatures(p, skin, tint(hairColor, 0.8), h >>> 14, mood);
   }
   if ((h >>> 17) % 3 === 0) glasses(p, '#1b1b22');
   return p.outline(OUTLINE);
 }
 
-function rani(): PixelCanvas {
+function rani(mood: Mood): PixelCanvas {
   const p = new PixelCanvas(32, 32);
   shoulders(p, '#2f6f9f');
   hijab(p, '#3f9a8a', '#dcab80');
-  faceFeatures(p, '#dcab80', '#6b4a2b', 0);
+  faceFeatures(p, '#dcab80', '#6b4a2b', 0, mood);
   glasses(p, '#1b1b22');
   // Tali ID kantor + kartu.
   p.line(12, 25, 15, 29, '#f2c14e').line(20, 25, 17, 29, '#f2c14e');
@@ -134,7 +157,7 @@ function rani(): PixelCanvas {
 }
 
 /** Pak Joko: teknisi senior Bengkel IT. Rambut beruban, kumis, kacamata di dahi, rompi kerja. */
-function joko(): PixelCanvas {
+function joko(mood: Mood): PixelCanvas {
   const p = new PixelCanvas(32, 32);
   const skin = '#bd875c';
   const grey = '#b8b8bc';
@@ -151,7 +174,7 @@ function joko(): PixelCanvas {
   p.rect(8, 9, 2, 6, grey).rect(22, 9, 2, 6, grey);
   // Kacamata bertengger di dahi.
   p.line(11, 10, 20, 10, '#1b1b22').rect(11, 9, 3, 2, '#8fd0fa').rect(17, 9, 3, 2, '#8fd0fa');
-  faceFeatures(p, skin, grey, 2);
+  faceFeatures(p, skin, grey, 2, mood);
   // Kumis.
   p.rect(13, 18, 6, 2, '#6e6e74').set(12, 19, '#6e6e74').set(19, 19, '#6e6e74');
   return p.outline(OUTLINE);
@@ -180,16 +203,25 @@ function kelabu(): PixelCanvas {
   return p;
 }
 
-function system(): PixelCanvas {
+function system(mood: Mood): PixelCanvas {
   const p = new PixelCanvas(32, 32);
   p.line(16, 1, 16, 4, '#9aa3b8');
   p.ellipse(16, 1.5, 1.6, 1.6, '#f07a6a');
   p.rect(4, 5, 24, 18, '#5d6b82', { shade: '#48536a', light: '#76839c' });
   p.rect(6, 7, 20, 14, '#0f1a14');
   for (let y = 8; y < 21; y += 2) p.line(6, y, 25, y, '#0c140f');
-  p.rect(10, 10, 3, 3, '#74cf92').rect(19, 10, 3, 3, '#74cf92');
-  p.set(10, 10, '#b8f0c8').set(19, 10, '#b8f0c8');
-  p.rect(12, 16, 8, 1, '#74cf92').set(11, 15, '#74cf92').set(20, 15, '#74cf92');
+  if (mood === 'upset') {
+    // Mata "X" merah dan garis datar: layar galat.
+    for (const x of [10, 19]) {
+      p.line(x, 10, x + 2, 12, '#f07a6a').line(x + 2, 10, x, 12, '#f07a6a');
+    }
+    p.rect(12, 16, 8, 1, '#f07a6a');
+  } else {
+    p.rect(10, 10, 3, 3, '#74cf92').rect(19, 10, 3, 3, '#74cf92');
+    p.set(10, 10, '#b8f0c8').set(19, 10, '#b8f0c8');
+    p.rect(12, 16, 8, 1, '#74cf92').set(11, 15, '#74cf92').set(20, 15, '#74cf92');
+    if (mood === 'happy') p.set(10, 14, '#74cf92').set(21, 14, '#74cf92');
+  }
   p.set(24, 21, '#f2c14e');
   p.rect(14, 23, 4, 3, '#48536a').rect(9, 26, 14, 3, '#3d4658', { light: '#56617a' });
   return p.outline(OUTLINE);
@@ -198,20 +230,24 @@ function system(): PixelCanvas {
 const cache = new Map<string, { fill: string; d: string }[]>();
 
 /** Path SVG potret (di-cache: wajah yang sama tidak digambar ulang). */
-export function portraitPaths(kind: PortraitKind, seed = ''): { fill: string; d: string }[] {
-  const key = `${kind}:${seed}`;
+export function portraitPaths(
+  kind: PortraitKind,
+  seed = '',
+  mood: Mood = 'neutral',
+): { fill: string; d: string }[] {
+  const key = `${kind}:${seed}:${mood}`;
   let paths = cache.get(key);
   if (!paths) {
     const canvas =
       kind === 'system'
-        ? system()
+        ? system(mood)
         : kind === 'joko'
-          ? joko()
+          ? joko(mood)
           : kind === 'rani'
-            ? rani()
+            ? rani(mood)
             : kind === 'kelabu'
               ? kelabu()
-              : person(seed);
+              : person(seed, mood);
     paths = canvas.toPaths();
     cache.set(key, paths);
   }

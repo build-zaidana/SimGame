@@ -26,6 +26,7 @@ import {
   type ReviewResult,
 } from './progress.ts';
 import { playSfx } from './sfx.ts';
+import { currentStreak } from '../engine/badges.ts';
 import { ANALYTICS_OPT_IN, bindAnalyticsIdentity, telemetry } from './telemetry.ts';
 
 export type Screen =
@@ -243,11 +244,20 @@ export const useAppStore = create<AppState>()((set, get) => ({
       if (next.phase === 'ended' && session.phase !== 'ended') playSfx('bell');
     }
 
+    if (action.type === 'TOGGLE_MARK' && sound) {
+      const was = session.cases.find((c) => c.caseId === session.activeCaseId)?.marks;
+      playSfx('tick', 0, was?.includes(action.evidenceId) ? 0.75 : 1);
+    }
+
     if (action.type === 'DECIDE') {
       // Stempel menghantam kertas, lalu nada benar/salah saat slip muncul.
       if (sound) {
         playSfx('stamp');
-        playSfx(action.outcome.correct ? 'correct' : 'wrong', 0.45);
+        // Nada benar naik setiap keputusan tepat beruntun; tiap kelipatan 3 dapat arpeggio.
+        const streak = currentStreak(next.cases);
+        if (!action.outcome.correct) playSfx('wrong', 0.45);
+        else if (streak >= 3 && streak % 3 === 0) playSfx('combo', 0.45);
+        else playSfx('correct', 0.45, 2 ** (Math.min(streak - 1, 7) / 12));
       }
       const c = next.cases.find((x) => x.caseId === action.outcome.caseId);
       telemetry.track({

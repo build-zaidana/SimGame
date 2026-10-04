@@ -216,6 +216,115 @@ svg.sprite {
   animation: blink 1s steps(1) infinite;
 }
 
+/* Reaksi pengunjung: melompat senang / tersentak kecewa, gelembung kata muncul. */
+@keyframes hop {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-6px);
+  }
+  55% {
+    transform: translateY(0);
+  }
+  75% {
+    transform: translateY(-3px);
+  }
+}
+.hop {
+  display: inline-block;
+  animation: hop 520ms ease-out 250ms both;
+}
+@keyframes flinch {
+  0%,
+  100% {
+    transform: none;
+  }
+  20% {
+    transform: translateX(-4px) rotate(-3deg);
+  }
+  45% {
+    transform: translateX(3px) rotate(2deg);
+  }
+  70% {
+    transform: translateX(-2px);
+  }
+}
+.flinch {
+  display: inline-block;
+  animation: flinch 360ms linear 250ms both;
+}
+@keyframes bubble-pop {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.bubble-pop {
+  transform-origin: left center;
+  animation: bubble-pop 260ms cubic-bezier(0.3, 0.9, 0.4, 1.3) 300ms both;
+}
+
+/* Penghitung beruntun & bintang laporan: "pop" kecil. */
+@keyframes combo-pop {
+  0% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.combo-pop {
+  display: inline-block;
+  animation: combo-pop 300ms cubic-bezier(0.3, 0.9, 0.4, 1.3) 400ms both;
+}
+.star-pop {
+  display: inline-block;
+  animation: combo-pop 320ms cubic-bezier(0.3, 0.9, 0.4, 1.3) both;
+}
+
+/* Bukti yang baru ditandai sedikit "menonjol". */
+@keyframes mark-pop {
+  50% {
+    transform: scale(1.03);
+  }
+}
+.mark-pop {
+  animation: mark-pop 160ms ease-out;
+}
+
+/* Jam berdenyut saat waktu shift hampir habis. */
+@keyframes clock-urgent {
+  50% {
+    background-color: #3a1210;
+  }
+}
+.clock-urgent {
+  animation: clock-urgent 1s steps(2) infinite;
+}
+
+@keyframes screen-in {
+  from {
+    opacity: 0;
+  }
+}
+.screen-in {
+  animation: screen-in 180ms ease-out;
+}
+
 /* "Kurangi animasi": dari pengaturan game atau dari sistem operasi. */
 :root[data-reduce-motion='true'] *,
 :root[data-reduce-motion='true'] *::before,

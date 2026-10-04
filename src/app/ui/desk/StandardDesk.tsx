@@ -15,9 +15,10 @@ import { Rulebook } from '../Rulebook.tsx';
 import { useShiftClock } from './useShiftClock.ts';
 import { VisitorCard } from './VisitorCard.tsx';
 import { prefersReducedMotion } from '../motion.ts';
+import { currentStreak } from '../../../engine/badges.ts';
 
-/** Lama stempel "menghantam" kertas sebelum slip umpan balik muncul. */
-const STAMP_MS = 650;
+/** Lama stempel "menghantam" kertas + reaksi pengunjung sebelum slip umpan balik muncul. */
+const STAMP_MS = 1000;
 const STAMP_COLOR: Record<string, string> = {
   allow: 'text-safe',
   block: 'text-danger',
@@ -100,6 +101,13 @@ export function StandardDesk({
   const slipReady = feedbackId !== null && (instantSlip || slipFor === feedbackId);
   const visitor = activeCase ? activeType?.visitor?.(activeCase) : undefined;
   const stamped = active?.outcome?.decision;
+  const visitorMood = active?.outcome
+    ? active.outcome.correct
+      ? 'happy'
+      : active.outcome.decisionScore > 0
+        ? 'neutral'
+        : 'upset'
+    : undefined;
 
   const shift = content.shifts.find((s) => s.id === session.shiftId);
   const feedbackCase = session.cases.find((c) => c.caseId === session.feedbackCaseId);
@@ -128,6 +136,7 @@ export function StandardDesk({
     <div className="flex h-dvh flex-col">
       <Hud
         deskTitle={mode.deskTitle}
+        streak={currentStreak(session.cases)}
         practice={practice}
         session={session}
         wallet={wallet}
@@ -205,7 +214,7 @@ export function StandardDesk({
                   {id.desk.markHint} ·{' '}
                   <span data-testid="marks-count">{id.desk.marksCount(marks.size)}</span>
                 </p>
-                {visitor && <VisitorCard visitor={visitor} />}
+                {visitor && <VisitorCard visitor={visitor} mood={visitorMood} />}
                 <div
                   key={active.caseId}
                   data-testid="document"

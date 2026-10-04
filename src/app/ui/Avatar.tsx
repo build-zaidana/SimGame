@@ -1,4 +1,4 @@
-import { PORTRAIT_SIZE, portraitPaths, type PortraitKind } from './pixel/portraits.ts';
+import { PORTRAIT_SIZE, portraitPaths, type Mood, type PortraitKind } from './pixel/portraits.ts';
 
 /**
  * Potret pixel 32×32 yang digambar dari kode (tanpa file gambar). Wajah karyawan dibuat
@@ -10,18 +10,21 @@ interface AvatarProps {
   kind: AvatarKind;
   /** Untuk 'person': nama orangnya. */
   seed?: string;
+  /** Ekspresi (reaksi pengunjung); bawaan netral. */
+  mood?: Mood;
   className?: string;
 }
 
-export function Avatar({ kind, seed = '', className = 'size-14' }: AvatarProps) {
+export function Avatar({ kind, seed = '', mood = 'neutral', className = 'size-14' }: AvatarProps) {
   return (
     <svg
       viewBox={`0 0 ${PORTRAIT_SIZE} ${PORTRAIT_SIZE}`}
       className={`sprite shrink-0 border-2 border-ink/60 bg-panel-2 ${className}`}
       aria-hidden="true"
       data-avatar={kind}
+      data-mood={mood}
     >
-      {portraitPaths(kind, seed).map(({ fill, d }) => (
+      {portraitPaths(kind, seed, mood).map(({ fill, d }) => (
         <path key={fill} fill={fill} d={d} />
       ))}
     </svg>

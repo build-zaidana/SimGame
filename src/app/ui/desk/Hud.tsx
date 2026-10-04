@@ -3,12 +3,19 @@ import { t as id } from '../../../i18n/index.ts';
 import { btnSecondary } from '../styles.ts';
 import { formatClock } from './format.ts';
 import type { ShiftSession } from '../../../engine/types.ts';
+import { playSfx } from '../../sfx.ts';
+import { useAppStore } from '../../store.ts';
+
+/** Sisa waktu (bagian dari durasi shift) saat jam mulai berdenyut merah. */
+const LOW_TIME = 0.15;
 
 interface HudProps {
   deskTitle: string;
   session: ShiftSession;
   wallet: number;
   practice: boolean;
+  /** Keputusan tepat beruntun; tampil mulai 2. */
+  streak: number;
   onTogglePause(): void;
 }
 
@@ -39,11 +46,18 @@ function useDelta(value: number) {
   return delta;
 }
 
-export function Hud({ deskTitle, session, wallet, practice, onTogglePause }: HudProps) {
+export function Hud({ deskTitle, session, wallet, practice, streak, onTogglePause }: HudProps) {
   const progress = (100 * session.elapsedMs) / Math.max(1, session.durationMs);
   const waiting = session.cases.filter((c) => c.status === 'arrived').length;
   const trustDelta = useDelta(session.trust);
   const trustLow = session.trust < 50;
+  const running = session.phase === 'working' || session.phase === 'inspecting';
+  const timeLow = running && session.elapsedMs >= session.durationMs * (1 - LOW_TIME);
+  const sound = useAppStore((s) => s.save?.profile.settings.sound ?? false);
+  useEffect(() => {
+    if (!timeLow || !sound) return;
+    for (const d of [0, 0.25, 0.5]) playSfx('tick', d, 0.6);
+  }, [timeLow, sound]);
   return (
     <header className="flex items-center gap-3 border-b-2 border-ink/40 bg-panel px-3 py-1 text-sm">
       <h1 className="hidden font-display text-accent sm:block">{deskTitle}</h1>
@@ -62,11 +76,23 @@ export function Hud({ deskTitle, session, wallet, practice, onTogglePause }: Hud
         <span className="flex items-center gap-2">
           <span className="sr-only">{id.desk.clock} </span>
           <span
-            className="border-2 border-ink/70 bg-[#0f1a14] px-1.5 tracking-widest text-[#74cf92]"
+            className={
+              'border-2 bg-[#0f1a14] px-1.5 tracking-widest ' +
+              (timeLow
+                ? 'clock-urgent border-danger text-[#f07a6a]'
+                : 'border-ink/70 text-[#74cf92]')
+            }
             data-testid="clock"
+            data-low={timeLow || undefined}
           >
             {formatClock(session.elapsedMs, session.msPerGameMinute)}
           </span>
+          {timeLow && (
+            <span className="text-danger" title={id.desk.timeLow}>
+              <span aria-hidden="true">⏰</span>
+              <span className="sr-only">{id.desk.timeLow}</span>
+            </span>
+          )}
           <Meter value={progress} className="bg-ink-muted" />
           {session.paused && (
             <span className="blink text-accent" aria-hidden="true">
@@ -102,6 +128,16 @@ export function Hud({ deskTitle, session, wallet, practice, onTogglePause }: Hud
           <span aria-hidden="true">Rp </span>
           {wallet}
         </span>
+        {streak >= 2 && (
+          <span
+            key={streak}
+            className="combo-pop border-2 border-accent px-1 text-xs text-accent"
+            data-testid="streak"
+          >
+            <span aria-hidden="true">🔥 </span>
+            {id.desk.streak(streak)}
+          </span>
+        )}
         <span className="hidden sm:inline">
           <span aria-hidden="true">📥 </span>
           {id.desk.waiting(waiting)}

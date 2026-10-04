@@ -5,6 +5,45 @@ import { getMode } from '../../modes/registry.ts';
 import { useAppStore } from '../store.ts';
 import { DialogueLine } from '../ui/desk/DialogueLines.tsx';
 import { btnPrimary, btnSecondary, panel } from '../ui/styles.ts';
+import { useEffect } from 'react';
+import { playSfx } from '../sfx.ts';
+import { useCountUp } from '../ui/useCountUp.ts';
+import { prefersReducedMotion } from '../ui/motion.ts';
+
+/** Jeda antar-bintang di laporan (ms). */
+const STAR_STEP = 350;
+
+/** Bintang muncul satu per satu (dengan nada naik), lalu gaji "menghitung naik" + bunyi koin. */
+function ShiftTally({ stars, pay }: { stars: number; pay: number | null }) {
+  const sound = useAppStore((s) => s.save?.profile.settings.sound ?? false);
+  const payDelay = stars * STAR_STEP + 150;
+  const shown = useCountUp(pay ?? 0, 800, payDelay);
+  useEffect(() => {
+    if (!sound || prefersReducedMotion()) return;
+    for (let i = 0; i < stars; i++) playSfx('star', (i * STAR_STEP) / 1000, 1 + i * 0.12);
+    if (pay) playSfx('coin', (payDelay + 800) / 1000);
+  }, [sound, stars, pay, payDelay]);
+  return (
+    <div className="flex flex-wrap items-baseline gap-4" aria-hidden="true">
+      <p className="font-display text-3xl" data-testid="star-row">
+        {[0, 1, 2].map((i) => (
+          <span
+            key={i}
+            className={i < stars ? 'star-pop text-accent' : 'text-ink-muted'}
+            style={i < stars ? { animationDelay: `${i * STAR_STEP}ms` } : undefined}
+          >
+            {i < stars ? '★' : '☆'}
+          </span>
+        ))}
+      </p>
+      {pay !== null && (
+        <p className="font-display text-xl text-accent">
+          <span>◉ </span>+Rp {shown}
+        </p>
+      )}
+    </div>
+  );
+}
 
 /** Pengingat ekspor muncul di laporan shift ini (ARCHITECTURE §7.3). */
 const EXPORT_REMINDER_SHIFTS = [2, 4];
@@ -38,10 +77,7 @@ export function ReportScreen() {
         className={`${panel} grid gap-1 p-4`}
         aria-label={id.report.average(summary.averageScore)}
       >
-        <p className="font-display text-2xl text-accent" aria-hidden="true">
-          {'★'.repeat(summary.stars)}
-          {'☆'.repeat(3 - summary.stars)}
-        </p>
+        <ShiftTally stars={summary.stars} pay={practice ? null : summary.pay} />
         <p data-testid="stars">{id.report.stars(summary.stars)}</p>
         <p>{id.report.average(summary.averageScore)}</p>
         <p>{id.report.correct(summary.correctCount, summary.totalCount)}</p>

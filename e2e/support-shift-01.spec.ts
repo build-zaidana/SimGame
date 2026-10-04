@@ -19,6 +19,9 @@ test('Bengkel IT shift 1 can be played through the report and review', async ({ 
   // Ganti Komponen baru terbuka di shift 2.
   await expect(page.locator('[data-decision="replace"]')).toHaveCount(0);
   await page.locator('[data-decision="guide"]').click();
+  // Pengunjung bereaksi senang setelah stempel.
+  await expect(page.getByTestId('visitor-reaction')).toHaveAttribute('data-mood', 'happy');
+  await expect(page.locator('[data-testid="visitor"] [data-mood="happy"]').first()).toBeVisible();
   const feedback = page.getByRole('dialog');
   await expect(feedback.getByRole('heading', { name: 'Tepat!' })).toBeVisible();
   await expect(feedback.getByText('SLIP BENGKEL IT', { exact: false })).toBeVisible();

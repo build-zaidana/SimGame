@@ -37,10 +37,22 @@ function allDecided(cases: readonly SessionCase[], min: number): boolean {
   return cases.length >= min && cases.every((c) => c.status === 'decided' && c.outcome);
 }
 
-function longestEvidenceStreak(cases: readonly SessionCase[]): number {
-  const ordered = cases
+/** Kasus yang sudah diputuskan, urut saat dibuka (satu kasus diperiksa dalam satu waktu). */
+function inDecisionOrder(cases: readonly SessionCase[]): SessionCase[] {
+  return cases
     .filter((c) => c.status === 'decided' && c.outcome)
     .sort((a, b) => (a.openedAtMs ?? 0) - (b.openedAtMs ?? 0));
+}
+
+/** Keputusan tepat berturut-turut sampai kasus terakhir (penghitung "beruntun" di meja). */
+export function currentStreak(cases: readonly SessionCase[]): number {
+  let run = 0;
+  for (const c of inDecisionOrder(cases)) run = c.outcome?.correct ? run + 1 : 0;
+  return run;
+}
+
+function longestEvidenceStreak(cases: readonly SessionCase[]): number {
+  const ordered = inDecisionOrder(cases);
   let best = 0;
   let run = 0;
   for (const c of ordered) {
