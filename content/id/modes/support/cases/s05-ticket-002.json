@@ -1,0 +1,61 @@
+{
+  "id": "s05-ticket-002",
+  "type": "ticket",
+  "conceptIds": ["escalation-safety"],
+  "difficulty": 2,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Hendra Wijaya",
+      "department": "Keuangan"
+    },
+    "device": {
+      "text": "Server berkas Keuangan SRV-FIN-01",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Minta folder baru dan izin akses di server Keuangan",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Tim kami butuh folder baru untuk laporan pajak tahun ini di server berkas Keuangan.",
+        "evidenceId": "desc-need"
+      },
+      {
+        "text": "Hanya admin server yang bisa membuat folder dan mengatur siapa yang boleh membukanya.",
+        "evidenceId": "desc-server"
+      },
+      {
+        "text": "Laptop saya sendiri tidak ada masalah.",
+        "evidenceId": "desc-laptop"
+      },
+      {
+        "text": "Kalau bisa selesai minggu ini, terima kasih.",
+        "evidenceId": "desc-deadline"
+      }
+    ],
+    "history": [
+      {
+        "text": "Bengkel IT sudah mengecek: laptop Hendra bisa membuka server dengan normal.",
+        "evidenceId": "hist-tried"
+      },
+      {
+        "text": "Akun teknisi Bengkel IT tidak punya hak admin di server berkas.",
+        "evidenceId": "hist-noaccess"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-server"],
+    "supporting": ["subject", "hist-tried", "hist-noaccess"]
+  },
+  "explanation": "Membuat folder dan mengatur izin di server butuh hak admin server yang tidak dimiliki Bengkel IT. Eskalasi ke tim server sambil mencatat bahwa laptop Hendra sudah dicek dan normal.",
+  "ruleRefs": ["r-esc-1"],
+  "hints": [
+    "Siapa yang punya kunci untuk melakukan permintaan ini?",
+    "Pekerjaan di server butuh akses khusus, dan riwayat tiket menunjukkan teknisi tidak punya hak itu."
+  ]
+}

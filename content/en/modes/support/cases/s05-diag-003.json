@@ -1,0 +1,77 @@
+{
+  "id": "s05-diag-003",
+  "type": "diagnostic",
+  "conceptIds": ["network-basics"],
+  "difficulty": 3,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "Office laptop NB-0457",
+      "owner": "Dimas Prakoso (Legal)"
+    },
+    "readings": [
+      {
+        "label": "IP address",
+        "value": "10.20.4.62",
+        "evidenceId": "r-ip"
+      },
+      {
+        "label": "Gateway (router)",
+        "value": "10.20.0.1",
+        "evidenceId": "r-gw"
+      },
+      {
+        "label": "DNS server",
+        "value": "10.99.9.9 (set manually)",
+        "evidenceId": "r-dns"
+      },
+      {
+        "label": "Office standard DNS server",
+        "value": "10.20.0.53",
+        "evidenceId": "r-dnsstd"
+      },
+      {
+        "label": "Wi-Fi",
+        "value": "Connected, strong signal",
+        "evidenceId": "r-wifi"
+      }
+    ],
+    "console": [
+      {
+        "text": "> ping 10.20.0.15  →  Reply from 10.20.0.15: time=3ms",
+        "evidenceId": "con-ip"
+      },
+      {
+        "text": "> ping portal.nusadigital.test  →  Failed: name not found",
+        "evidenceId": "con-name"
+      }
+    ],
+    "note": {
+      "text": "Yesterday Dimas followed tips from an internet video to speed up his connection.",
+      "evidenceId": "note-tips"
+    }
+  },
+  "evidence": {
+    "required": ["r-dns", "con-name"],
+    "supporting": ["con-ip", "r-ip", "ping-gw"]
+  },
+  "explanation": "The laptop can ping an IP address but cannot look up site names because the DNS server was set manually to a wrong address. Fix it by setting DNS back to the office standard server.",
+  "ruleRefs": ["r-net-3", "r-ts-4"],
+  "hints": [
+    "Compare the ping to an IP address with the ping to a site name.",
+    "Look at the DNS server the laptop uses and compare it with the office standard."
+  ],
+  "intel": {
+    "ping": [
+      {
+        "text": "Router 10.20.0.1: reply 2 ms",
+        "evidenceId": "ping-gw"
+      },
+      {
+        "text": "DNS server 10.99.9.9: no reply"
+      }
+    ]
+  }
+}

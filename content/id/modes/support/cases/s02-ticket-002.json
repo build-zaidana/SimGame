@@ -1,0 +1,52 @@
+{
+  "id": "s02-ticket-002",
+  "type": "ticket",
+  "conceptIds": ["user-guidance"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Fitri Handayani",
+      "department": "Resepsionis"
+    },
+    "device": {
+      "text": "PC resepsionis KS-0101 dengan monitor meja",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Monitor gelap sekali, hampir tidak terlihat",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Layar monitor jadi gelap gulita sejak siang, tapi kalau didekati tulisannya masih samar-samar kelihatan.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "Tadi petugas kebersihan mengelap monitor, termasuk tombol-tombol di bawahnya.",
+        "evidenceId": "desc-cleaning"
+      },
+      {
+        "text": "Saat saya tekan tombol menu, muncul tulisan Kecerahan: 0.",
+        "evidenceId": "desc-brightness"
+      },
+      {
+        "text": "Lampu monitor tetap biru seperti biasa. Apa monitornya mau rusak?",
+        "evidenceId": "desc-led"
+      }
+    ],
+    "history": []
+  },
+  "evidence": {
+    "required": ["desc-brightness"],
+    "supporting": ["desc-cleaning", "desc-led"]
+  },
+  "explanation": "Kecerahan monitor ter-setel ke 0, kemungkinan karena tombolnya tertekan saat monitor dilap. Monitornya sehat, jadi arahkan Fitri menaikkan kecerahan lewat tombol menu.",
+  "ruleRefs": ["r-guide-1", "r-ts-2"],
+  "hints": [
+    "Tulisan masih terlihat samar dan lampu monitor normal. Apa yang berubah tadi siang?",
+    "Lihat angka yang muncul di menu monitor."
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "id": "s02-ticket-002",
+  "type": "ticket",
+  "conceptIds": ["user-guidance"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Fitri Handayani",
+      "department": "Reception"
+    },
+    "device": {
+      "text": "Reception PC KS-0101 with desk monitor",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Monitor is very dark, almost unreadable",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "The monitor has been pitch dark since noon, but if I look closely I can still faintly see the text.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "Earlier the cleaning staff wiped the monitor, including the buttons underneath.",
+        "evidenceId": "desc-cleaning"
+      },
+      {
+        "text": "When I press the menu button, it shows Brightness: 0.",
+        "evidenceId": "desc-brightness"
+      },
+      {
+        "text": "The monitor light is still blue as usual. Is the monitor about to break?",
+        "evidenceId": "desc-led"
+      }
+    ],
+    "history": []
+  },
+  "evidence": {
+    "required": ["desc-brightness"],
+    "supporting": ["desc-cleaning", "desc-led"]
+  },
+  "explanation": "The monitor brightness was set to 0, probably because its buttons were pressed while it was being wiped. The monitor is healthy, so guide Fitri to raise the brightness with the menu button.",
+  "ruleRefs": ["r-guide-1", "r-ts-2"],
+  "hints": [
+    "The text is still faintly visible and the monitor light is normal. What changed at noon?",
+    "Look at the number shown in the monitor menu."
+  ]
+}

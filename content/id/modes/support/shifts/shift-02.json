@@ -1,0 +1,76 @@
+{
+  "id": "support-02",
+  "order": 2,
+  "title": "Hari Obeng",
+  "durationGameMinutes": 120,
+  "realSecondsPerGameMinute": 3,
+  "unlocksChapters": ["ch-hw"],
+  "introDialogue": "support-02-intro",
+  "outroDialogue": "support-02-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s02-ticket-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s02-hw-001",
+      "arriveAt": 9
+    },
+    {
+      "caseId": "s02-hw-002",
+      "arriveAt": 18
+    },
+    {
+      "caseId": "s02-ticket-002",
+      "arriveAt": 27
+    },
+    {
+      "caseId": "s02-diag-001",
+      "arriveAt": 36
+    },
+    {
+      "caseId": "s02-hw-003",
+      "arriveAt": 45
+    },
+    {
+      "caseId": "s02-ticket-003",
+      "arriveAt": 54
+    },
+    {
+      "caseId": "s02-hw-004",
+      "arriveAt": 63
+    },
+    {
+      "caseId": "s02-ticket-004",
+      "arriveAt": 72
+    },
+    {
+      "caseId": "s02-hw-005",
+      "arriveAt": 81
+    }
+  ],
+  "review": {
+    "count": 3,
+    "conceptIds": ["hardware-basics", "troubleshooting"]
+  },
+  "pay": {
+    "base": 40,
+    "perCase": 12
+  },
+  "newspaper": {
+    "headline": "Laptop Lama, Masalah Baru",
+    "lead": "Banyak laptop kantor sudah berumur lebih dari empat tahun. Kipas berdebu, baterai lemah, dan RAM longgar mulai jadi keluhan rutin di Bengkel IT.",
+    "impact": {
+      "good": "Kemarin, teknisi baru Bengkel IT menyelesaikan semua tiket dengan tepat. Karyawan senang tidak perlu menunggu lama.",
+      "mixed": "Kemarin, sebagian besar tiket di Bengkel IT selesai, walau ada yang salah tangani. Pak Joko meminta teknisi baru lebih teliti membaca gejala.",
+      "bad": "Kemarin, beberapa keluhan di Bengkel IT tidak terselesaikan dan pengguna kembali dengan masalah yang sama. Antrean tiket menumpuk."
+    },
+    "tip": {
+      "title": "Tips: Baterai Menggembung",
+      "text": "Casing laptop terangkat atau touchpad sulit ditekan? Bisa jadi baterainya menggembung. Jangan dicas, segera bawa ke teknisi."
+    },
+    "classified": "DIJUAL: Pasta termal, obeng mini, dan sabar yang tidak ada habisnya. Hubungi gudang suku cadang.",
+    "sources": ["CompTIA A+ Core 1: Hardware", "US CPSC: peringatan baterai lithium-ion"]
+  }
+}

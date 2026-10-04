@@ -1,0 +1,57 @@
+{
+  "id": "s01-ticket-002",
+  "type": "ticket",
+  "conceptIds": ["troubleshooting"],
+  "difficulty": 1,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Bayu Saputra",
+      "department": "Warehouse"
+    },
+    "device": {
+      "text": "2nd-floor printer (PR-0207)",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Printer won't print since this morning",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "I sent the stock report to the printer, but nothing comes out.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "The paper tray is full, the ink (toner) is still at 70%, and the printer light is green.",
+        "evidenceId": "desc-paper"
+      },
+      {
+        "text": "In the print queue screen, the top document has the status \"Error – Stuck\" and 12 other documents are waiting behind it.",
+        "evidenceId": "desc-queue"
+      },
+      {
+        "text": "Coworkers on the same floor also complain their prints don't come out.",
+        "evidenceId": "desc-others"
+      }
+    ],
+    "history": [
+      {
+        "text": "Two weeks ago: this printer was serviced and declared normal.",
+        "evidenceId": "hist-service"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-queue"],
+    "supporting": ["desc-others", "desc-paper"]
+  },
+  "explanation": "One stuck document with an error status is holding up the whole print queue, even though the paper, toner, and printer are healthy. Fix it by deleting that stuck document and restarting the print service.",
+  "ruleRefs": ["r-ts-4", "r-ts-3"],
+  "hints": [
+    "Paper, toner, and lights are already checked. Which other part shows an error?",
+    "Look at the top document in the print queue. What happens to the documents behind it?"
+  ]
+}

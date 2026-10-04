@@ -1,0 +1,62 @@
+{
+  "id": "s03-hw-001",
+  "type": "hardware",
+  "conceptIds": ["hardware-basics", "network-basics"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "replace",
+  "severity": 2,
+  "acceptableDecisions": {
+    "fix": 0.3
+  },
+  "data": {
+    "device": {
+      "name": "Reception desk LAN cable",
+      "owner": "Ratna Kusuma"
+    },
+    "checks": [
+      {
+        "part": "Cable plug (connector)",
+        "observation": "Plastic locking clip is broken, the plug slips out of the port by itself",
+        "evidenceId": "chk-clip"
+      },
+      {
+        "part": "Cable body",
+        "observation": "Torn near the chair leg, the copper wires inside are visible",
+        "evidenceId": "chk-torn"
+      },
+      {
+        "part": "LAN port on the laptop",
+        "observation": "Clean, not bent",
+        "evidenceId": "chk-port"
+      },
+      {
+        "part": "Test with a spare cable",
+        "observation": "Connects right away and stays stable",
+        "evidenceId": "chk-spare"
+      }
+    ],
+    "note": {
+      "text": "Ratna: the connection drops every time my chair moves.",
+      "evidenceId": "note"
+    }
+  },
+  "intel": {
+    "scan": [
+      {
+        "text": "LAN port: link dropped 23 times in 1 hour with the old cable",
+        "evidenceId": "scan-link"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["chk-clip", "chk-torn"],
+    "supporting": ["chk-spare", "note", "scan-link"]
+  },
+  "explanation": "The LAN cable is physically damaged: the clip is broken and the body is torn until the wires show, while the spare cable is stable right away. Replace the cable, then route it so the chair does not run over it.",
+  "ruleRefs": ["r-hw-1", "r-net-1"],
+  "hints": [
+    "Check the nearest thing first: what is the physical condition of the cable?",
+    "A broken clip and a torn cable cannot be cleaned or reseated. Compare with the spare cable result."
+  ]
+}

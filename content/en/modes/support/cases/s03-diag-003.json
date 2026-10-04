@@ -1,0 +1,61 @@
+{
+  "id": "s03-diag-003",
+  "type": "diagnostic",
+  "conceptIds": ["network-basics", "user-guidance"],
+  "difficulty": 2,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "device": {
+      "name": "Office laptop NB-0705",
+      "owner": "Andi Saputra"
+    },
+    "readings": [
+      {
+        "label": "Wi-Fi connected to",
+        "value": "NusaTamu (guest network)",
+        "evidenceId": "r-ssid"
+      },
+      {
+        "label": "Signal strength",
+        "value": "Excellent (4/4)",
+        "evidenceId": "r-signal"
+      },
+      {
+        "label": "IP address",
+        "value": "192.168.50.23",
+        "evidenceId": "r-ip"
+      },
+      {
+        "label": "Office Wi-Fi available",
+        "value": "NusaKantor (not selected)",
+        "evidenceId": "r-office"
+      }
+    ],
+    "console": [
+      {
+        "text": "> ping 203.0.113.10  →  Reply from 203.0.113.10: time=15ms",
+        "evidenceId": "con-internet"
+      },
+      {
+        "text": "> ping portal.nusadigital.test  →  Failed: blocked by the guest network",
+        "evidenceId": "con-portal"
+      }
+    ],
+    "note": {
+      "text": "Andi: the internet works, but the office App Portal will not open. Was the portal hacked?",
+      "evidenceId": "note"
+    }
+  },
+  "evidence": {
+    "required": ["r-ssid"],
+    "supporting": ["r-office", "con-portal", "con-internet"]
+  },
+  "explanation": "Andi's laptop is connected to NusaTamu, the guest network that is not allowed to open internal office systems. The device is healthy, so guide Andi to switch to the office Wi-Fi, NusaKantor.",
+  "ruleRefs": ["r-guide-1", "r-guide-2"],
+  "hints": [
+    "The internet works and only the office portal fails. First check which network this laptop is on.",
+    "The guest network is kept separate from internal systems on purpose. Is anything broken here?"
+  ]
+}

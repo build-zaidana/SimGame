@@ -1,0 +1,65 @@
+{
+  "id": "s03-ticket-003",
+  "type": "ticket",
+  "conceptIds": ["network-basics", "troubleshooting"],
+  "difficulty": 3,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Dimas Nugroho",
+      "department": "Gudang"
+    },
+    "device": {
+      "text": "PC meja PC-0221",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Jaringan muncul-hilang sejak kemarin",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Muncul pesan: \"Alamat IP 10.20.1.45 sudah dipakai perangkat lain di jaringan.\"",
+        "evidenceId": "desc-error"
+      },
+      {
+        "text": "Kemarin rekan saya mengisi alamat IP PC ini secara manual supaya \"tidak berubah-ubah\".",
+        "evidenceId": "desc-static"
+      },
+      {
+        "text": "Pemindai barcode baru di gudang juga mulai dipakai kemarin.",
+        "evidenceId": "desc-scanner"
+      },
+      {
+        "text": "Kabel dan lampu port LAN menyala normal.",
+        "evidenceId": "desc-cable"
+      }
+    ],
+    "history": [
+      {
+        "text": "Catatan jaringan: pemindai barcode gudang mendapat alamat 10.20.1.45 dari router.",
+        "evidenceId": "hist-dhcp"
+      }
+    ]
+  },
+  "intel": {
+    "ping": [
+      {
+        "text": "10.20.1.45: dua perangkat berbeda membalas bergantian (bentrok alamat)",
+        "evidenceId": "ping-conflict"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-error", "desc-static"],
+    "supporting": ["hist-dhcp", "desc-cable", "ping-conflict"]
+  },
+  "explanation": "Alamat IP yang diisi manual di PC Dimas bentrok dengan alamat yang diberikan router ke pemindai barcode, sehingga keduanya bergantian putus. Perbaiki dengan mengembalikan pengaturan IP PC ke otomatis (DHCP), lalu sambungkan ulang.",
+  "ruleRefs": ["r-ts-2", "r-ts-4"],
+  "hints": [
+    "Apa yang berubah kemarin? Baca pesan error-nya dengan teliti.",
+    "Dua perangkat memakai satu alamat yang sama. Mana yang diisi manual dan bisa dikembalikan ke otomatis?"
+  ]
+}

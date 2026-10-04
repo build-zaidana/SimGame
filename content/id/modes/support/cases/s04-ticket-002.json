@@ -1,0 +1,65 @@
+{
+  "id": "s04-ticket-002",
+  "type": "ticket",
+  "conceptIds": ["os-maintenance", "troubleshooting"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Lestari Wahyuni",
+      "department": "Keuangan"
+    },
+    "device": {
+      "text": "Laptop kantor NB-0244 (mencetak ke printer lantai 2)",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Hasil cetak berantakan, hurufnya jadi simbol aneh",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Sejak tadi pagi semua laporan saya tercetak penuh simbol acak.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "Kemarin sore laptop saya memasang update driver printer versi baru.",
+        "evidenceId": "desc-driver"
+      },
+      {
+        "text": "Rekan di sebelah yang belum update bisa mencetak normal ke printer yang sama.",
+        "evidenceId": "desc-colleague"
+      },
+      {
+        "text": "Kertas dan tinta sudah saya cek, masih penuh.",
+        "evidenceId": "desc-supplies"
+      }
+    ],
+    "history": [
+      {
+        "text": "Minggu lalu: printer lantai 2 diservis, hasil uji cetak bagus.",
+        "evidenceId": "hist-service"
+      }
+    ]
+  },
+  "intel": {
+    "ping": [
+      {
+        "text": "Printer lantai 2 (10.20.2.15): balas 1 ms, 0% hilang",
+        "evidenceId": "ping-printer"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-driver", "desc-colleague"],
+    "supporting": ["desc-symptom", "hist-service", "ping-printer"]
+  },
+  "explanation": "Masalah muncul tepat setelah driver printer di laptop Lestari diperbarui, sementara printernya normal untuk rekan lain. Perbaiki dengan rollback driver ke versi sebelumnya.",
+  "ruleRefs": ["r-os-3", "r-ts-2"],
+  "hints": [
+    "Apa yang berubah tepat sebelum masalah muncul?",
+    "Rekan dengan printer yang sama tidak bermasalah. Bedanya ada di driver laptop Lestari."
+  ]
+}

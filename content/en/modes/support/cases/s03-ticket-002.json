@@ -1,0 +1,73 @@
+{
+  "id": "s03-ticket-002",
+  "type": "ticket",
+  "conceptIds": ["network-basics", "troubleshooting"],
+  "difficulty": 2,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "severity": 3,
+  "data": {
+    "requester": {
+      "name": "Hendra Wijaya",
+      "department": "Sales"
+    },
+    "device": {
+      "text": "Desktop PC PC-0412",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Internet is down on floor 4",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Since 09:10 I cannot open NusaMail or the internet.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "The whole Sales room on floor 4 has the same problem.",
+        "evidenceId": "desc-room"
+      },
+      {
+        "text": "I already restarted the PC and unplugged and replugged the cable, still down.",
+        "evidenceId": "desc-tried"
+      }
+    ],
+    "history": [
+      {
+        "text": "09:12: ticket \"Cannot get online\" from Design, floor 4.",
+        "evidenceId": "hist-design"
+      },
+      {
+        "text": "09:13: ticket \"NusaMail disconnected\" from Legal, floor 4.",
+        "evidenceId": "hist-legal"
+      },
+      {
+        "text": "09:15: 6 more similar tickets, all from floor 4.",
+        "evidenceId": "hist-more"
+      }
+    ]
+  },
+  "intel": {
+    "ping": [
+      {
+        "text": "Floor 4 router (10.20.4.1): timed out, no reply",
+        "evidenceId": "ping-r4"
+      },
+      {
+        "text": "Floor 3 router (10.20.3.1): replies in 2 ms",
+        "evidenceId": "ping-r3"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-room", "hist-more"],
+    "supporting": ["hist-design", "hist-legal", "desc-tried", "ping-r4"]
+  },
+  "explanation": "Many users from different departments on floor 4 lost connection at the same time, so the problem is in that floor's central network, not Hendra's PC. Escalate to the network team with the list of tickets and the start time.",
+  "ruleRefs": ["r-net-4", "r-ts-2"],
+  "hints": [
+    "Do not look at just one PC. Who else is complaining, and when?",
+    "A whole floor going down at once means the problem is beyond the user's desk. Who handles the central network?"
+  ]
+}

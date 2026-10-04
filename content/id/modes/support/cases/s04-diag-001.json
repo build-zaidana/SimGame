@@ -1,0 +1,70 @@
+{
+  "id": "s04-diag-001",
+  "type": "diagnostic",
+  "conceptIds": ["os-maintenance", "troubleshooting"],
+  "difficulty": 1,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "Laptop kantor NB-0318",
+      "owner": "Wulan Sari (Desain)"
+    },
+    "readings": [
+      {
+        "label": "Disk C: terpakai",
+        "value": "97% (233 dari 240 GB)",
+        "evidenceId": "r-disk"
+      },
+      {
+        "label": "File sementara (temp)",
+        "value": "41 GB",
+        "evidenceId": "r-temp"
+      },
+      {
+        "label": "Folder Unduhan",
+        "value": "68 GB, isinya video mentah",
+        "evidenceId": "r-downloads"
+      },
+      {
+        "label": "CPU",
+        "value": "12%",
+        "evidenceId": "r-cpu"
+      },
+      {
+        "label": "RAM",
+        "value": "45% dari 16 GB",
+        "evidenceId": "r-ram"
+      }
+    ],
+    "console": [
+      {
+        "text": "> cek-disk C:  →  Peringatan: ruang kosong tinggal 7 GB",
+        "evidenceId": "c-warn"
+      }
+    ],
+    "note": {
+      "text": "Wulan: 'Laptop lambat sekali, buka satu file desain bisa lima menit.'",
+      "evidenceId": "note-user"
+    }
+  },
+  "intel": {
+    "scan": [
+      {
+        "text": "SSD: kesehatan 96%, tidak ada sektor rusak",
+        "evidenceId": "scan-ssd"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["r-disk", "r-temp"],
+    "supporting": ["r-downloads", "c-warn", "note-user", "scan-ssd"]
+  },
+  "explanation": "Disk yang terisi 97% membuat laptop kehabisan ruang kerja, padahal CPU, RAM, dan SSD-nya sehat. Perbaiki dengan menghapus 41 GB file sementara dan memindahkan video besar ke penyimpanan kantor.",
+  "ruleRefs": ["r-os-1", "r-ts-4"],
+  "hints": [
+    "Bandingkan semua angka. Mana yang jauh di atas batas wajar?",
+    "Disk di atas 90% membuat komputer lambat. Apa yang bisa dibuang atau dipindahkan?"
+  ]
+}

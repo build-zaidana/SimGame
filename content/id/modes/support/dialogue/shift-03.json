@@ -1,0 +1,30 @@
+{
+  "dialogues": [
+    {
+      "id": "support-03-intro",
+      "lines": [
+        {
+          "speaker": "joko",
+          "text": "Router baru dipasang akhir pekan lalu, dan keluhan internet langsung berdatangan."
+        },
+        {
+          "speaker": "joko",
+          "text": "Bab Jaringan terbuka. Ingat urutannya: kabel atau Wi-Fi, alamat IP, router, internet, lalu DNS."
+        },
+        {
+          "speaker": "joko",
+          "text": "Kalau satu lantai putus bersamaan, jangan sibuk dengan satu laptop. Itu urusan tim jaringan."
+        }
+      ]
+    },
+    {
+      "id": "support-03-outro",
+      "lines": [
+        {
+          "speaker": "joko",
+          "text": "Jaringan memang membingungkan di awal. Kalau sudah paham urutannya, semuanya jadi masuk akal."
+        }
+      ]
+    }
+  ]
+}

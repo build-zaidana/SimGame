@@ -1,0 +1,22 @@
+{
+  "tools": [
+    {
+      "id": "hw-scanner",
+      "name": "Hardware Scanner",
+      "icon": "🩺",
+      "description": "Reads component health (battery, disk, RAM, temperature) automatically, without opening the device.",
+      "price": 70,
+      "conceptId": "hardware-basics",
+      "unlockAtShift": 2
+    },
+    {
+      "id": "ping-tool",
+      "name": "Ping Tool",
+      "icon": "📶",
+      "description": "Tests whether the device can reach the router, the internet, and the name server (DNS), then sums up the results.",
+      "price": 90,
+      "conceptId": "network-basics",
+      "unlockAtShift": 3
+    }
+  ]
+}

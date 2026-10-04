@@ -1,0 +1,67 @@
+{
+  "id": "s02-hw-001",
+  "type": "hardware",
+  "conceptIds": ["hardware-basics"],
+  "difficulty": 1,
+  "verdict": "fault",
+  "correctDecision": "replace",
+  "severity": 3,
+  "data": {
+    "device": {
+      "name": "Laptop kantor NB-0388",
+      "owner": "Wulan Sari (Pemasaran)"
+    },
+    "checks": [
+      {
+        "part": "Casing bawah",
+        "observation": "Melengkung ke atas, ada celah di sisi belakang",
+        "evidenceId": "chk-casing"
+      },
+      {
+        "part": "Touchpad",
+        "observation": "Terangkat dan susah diklik",
+        "evidenceId": "chk-touchpad"
+      },
+      {
+        "part": "Baterai",
+        "observation": "Menggembung jelas, bentuknya seperti bantal",
+        "evidenceId": "chk-battery"
+      },
+      {
+        "part": "Layar",
+        "observation": "Normal, tidak ada garis",
+        "evidenceId": "chk-screen"
+      },
+      {
+        "part": "Charger",
+        "observation": "Kabel utuh, lampu indikator menyala",
+        "evidenceId": "chk-charger"
+      }
+    ],
+    "note": {
+      "text": "Wulan: laptop masih saya cas semalaman tiap hari, akhir-akhir ini terasa hangat di bawah.",
+      "evidenceId": "note-charging"
+    }
+  },
+  "evidence": {
+    "required": ["chk-battery"],
+    "supporting": ["chk-casing", "chk-touchpad", "scan-battery"]
+  },
+  "explanation": "Baterai menggembung bisa terbakar, dan itulah yang mendorong casing serta touchpad terangkat. Baterainya harus segera diganti, jangan dicas lagi dan jangan ditekan.",
+  "ruleRefs": ["r-hw-3", "r-hw-1"],
+  "hints": [
+    "Cari bagian yang bentuknya berubah, lalu pikirkan apa yang mendorongnya dari dalam.",
+    "Baterai yang menggembung termasuk kerusakan fisik yang berbahaya."
+  ],
+  "intel": {
+    "scan": [
+      {
+        "text": "Baterai: kesehatan 31%, menggembung terdeteksi",
+        "evidenceId": "scan-battery"
+      },
+      {
+        "text": "Layar: normal, tidak ada piksel mati"
+      }
+    ]
+  }
+}

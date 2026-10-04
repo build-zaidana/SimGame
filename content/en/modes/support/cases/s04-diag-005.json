@@ -1,0 +1,75 @@
+{
+  "id": "s04-diag-005",
+  "type": "diagnostic",
+  "conceptIds": ["hardware-basics", "troubleshooting"],
+  "difficulty": 3,
+  "verdict": "fault",
+  "correctDecision": "replace",
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "Office PC PC-0122",
+      "owner": "Yoga Prasetyo (Warehouse)"
+    },
+    "readings": [
+      {
+        "label": "Blue screen (crash) in the last 7 days",
+        "value": "9 times",
+        "evidenceId": "r-crash"
+      },
+      {
+        "label": "Last error code",
+        "value": "Memory error",
+        "evidenceId": "r-code"
+      },
+      {
+        "label": "RAM test slot 1",
+        "value": "Passed, 0 errors",
+        "evidenceId": "r-ram1"
+      },
+      {
+        "label": "RAM test slot 2",
+        "value": "FAILED, 1,284 errors",
+        "evidenceId": "r-ram2"
+      },
+      {
+        "label": "Driver changes",
+        "value": "None in the last 3 months",
+        "evidenceId": "r-driver"
+      },
+      {
+        "label": "Disk used",
+        "value": "40%",
+        "evidenceId": "r-disk"
+      }
+    ],
+    "console": [
+      {
+        "text": "> test-ram slot 2 (after reseating the module)  →  FAILED, 1,302 errors",
+        "evidenceId": "c-retest"
+      }
+    ],
+    "note": {
+      "text": "Yoga: 'The computer suddenly shows a blue screen and then restarts by itself.'",
+      "evidenceId": "note-user"
+    }
+  },
+  "intel": {
+    "scan": [
+      {
+        "text": "RAM slot 2: unstable module, failed test",
+        "evidenceId": "scan-ram"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["r-ram2", "c-retest"],
+    "supporting": ["r-crash", "r-code", "r-driver", "scan-ram"]
+  },
+  "explanation": "The RAM module in slot 2 still fails the test even after reseating, and that is what causes the repeated blue screens. Replace the slot 2 RAM module, because physical damage cannot be fixed with settings.",
+  "ruleRefs": ["r-hw-1", "r-ts-3"],
+  "hints": [
+    "The error code mentions memory. Compare the test results of both RAM slots.",
+    "Slot 2 was already reseated but still fails the test. Reseating no longer helps."
+  ]
+}

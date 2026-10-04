@@ -1,0 +1,67 @@
+{
+  "id": "s02-hw-001",
+  "type": "hardware",
+  "conceptIds": ["hardware-basics"],
+  "difficulty": 1,
+  "verdict": "fault",
+  "correctDecision": "replace",
+  "severity": 3,
+  "data": {
+    "device": {
+      "name": "Office laptop NB-0388",
+      "owner": "Wulan Sari (Marketing)"
+    },
+    "checks": [
+      {
+        "part": "Bottom case",
+        "observation": "Bent upward, with a gap at the back edge",
+        "evidenceId": "chk-casing"
+      },
+      {
+        "part": "Touchpad",
+        "observation": "Lifted up and hard to click",
+        "evidenceId": "chk-touchpad"
+      },
+      {
+        "part": "Battery",
+        "observation": "Clearly swollen, shaped like a pillow",
+        "evidenceId": "chk-battery"
+      },
+      {
+        "part": "Screen",
+        "observation": "Normal, no lines",
+        "evidenceId": "chk-screen"
+      },
+      {
+        "part": "Charger",
+        "observation": "Cable intact, indicator light on",
+        "evidenceId": "chk-charger"
+      }
+    ],
+    "note": {
+      "text": "Wulan: I still charge the laptop overnight every day, and lately the bottom feels warm.",
+      "evidenceId": "note-charging"
+    }
+  },
+  "evidence": {
+    "required": ["chk-battery"],
+    "supporting": ["chk-casing", "chk-touchpad", "scan-battery"]
+  },
+  "explanation": "A swollen battery can catch fire, and it is what pushed the case and touchpad upward. The battery must be replaced right away, so do not charge it again and do not press on it.",
+  "ruleRefs": ["r-hw-3", "r-hw-1"],
+  "hints": [
+    "Look for a part whose shape has changed, then think about what is pushing it from inside.",
+    "A swollen battery counts as dangerous physical damage."
+  ],
+  "intel": {
+    "scan": [
+      {
+        "text": "Battery: health 31%, swelling detected",
+        "evidenceId": "scan-battery"
+      },
+      {
+        "text": "Screen: normal, no dead pixels"
+      }
+    ]
+  }
+}

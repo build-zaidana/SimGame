@@ -1,0 +1,56 @@
+{
+  "id": "s01-ticket-004",
+  "type": "ticket",
+  "conceptIds": ["user-guidance"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Ratna Dewi",
+      "department": "Design"
+    },
+    "device": {
+      "text": "Desk monitor MN-0145",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "My monitor is dead, please replace it",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "The monitor screen has been black since I came back from lunch.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "The monitor's power light is blue.",
+        "evidenceId": "desc-power"
+      },
+      {
+        "text": "In the middle of the screen there is small text: \"No signal – HDMI 2\".",
+        "evidenceId": "desc-input"
+      },
+      {
+        "text": "The cable from the computer is plugged into port HDMI 1 and is not loose.",
+        "evidenceId": "desc-cable"
+      },
+      {
+        "text": "Earlier my bag bumped the buttons under the monitor.",
+        "evidenceId": "desc-button"
+      }
+    ],
+    "history": []
+  },
+  "evidence": {
+    "required": ["desc-input"],
+    "supporting": ["desc-cable", "desc-button"]
+  },
+  "explanation": "The monitor is on and the cable is in HDMI 1, but the monitor is reading HDMI 2 because its buttons were bumped. The monitor is healthy, so guide Ratna to choose input source HDMI 1 with the monitor buttons.",
+  "ruleRefs": ["r-guide-1", "r-guide-2"],
+  "hints": [
+    "The power light is on and the cable is plugged in. What is the monitor reading right now?",
+    "Compare the port written on the screen with the port the cable is plugged into."
+  ]
+}

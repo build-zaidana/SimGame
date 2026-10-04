@@ -1,0 +1,66 @@
+{
+  "id": "s05-hw-002",
+  "type": "hardware",
+  "conceptIds": ["escalation-safety", "hardware-basics"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "replace",
+  "acceptableDecisions": {
+    "fix": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "Office laptop NB-0721",
+      "owner": "Lestari Utami (HR)"
+    },
+    "checks": [
+      {
+        "part": "History",
+        "observation": "Sweet coffee spilled onto the keyboard yesterday. Lestari shut the laptop down right away and unplugged the charger.",
+        "evidenceId": "note-spill"
+      },
+      {
+        "part": "Keyboard",
+        "observation": "Dried for 24 hours, but the row of keys A to L still does not respond",
+        "evidenceId": "chk-keys"
+      },
+      {
+        "part": "Keyboard connector",
+        "observation": "Sticky residue and greenish rust on the keyboard's copper traces",
+        "evidenceId": "chk-corrosion"
+      },
+      {
+        "part": "Main board (motherboard)",
+        "observation": "Dry and clean, no trace of liquid",
+        "evidenceId": "chk-board"
+      },
+      {
+        "part": "Screen and battery",
+        "observation": "Normal",
+        "evidenceId": "chk-other"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["chk-keys", "chk-corrosion"],
+    "supporting": ["note-spill", "chk-board", "scan-kb"]
+  },
+  "explanation": "The keys stay dead after drying and there is rust on the keyboard traces, so the damage is physical and the keyboard needs replacing. Lestari was right to cut the power first, and the main board is safe.",
+  "ruleRefs": ["r-hw-1", "r-esc-4"],
+  "hints": [
+    "The liquid has dried, but what is still left on the keyboard?",
+    "Rust and keys that stay dead after drying are no longer just dirt."
+  ],
+  "intel": {
+    "scan": [
+      {
+        "text": "Internal keyboard: 9 keys not detected",
+        "evidenceId": "scan-kb"
+      },
+      {
+        "text": "Battery: health 91%, normal"
+      }
+    ]
+  }
+}

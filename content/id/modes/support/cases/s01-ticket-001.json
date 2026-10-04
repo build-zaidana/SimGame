@@ -1,0 +1,45 @@
+{
+  "id": "s01-ticket-001",
+  "type": "ticket",
+  "conceptIds": ["user-guidance", "troubleshooting"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": { "name": "Sari Puspita", "department": "Keuangan" },
+    "device": { "text": "Laptop kantor NB-0412", "evidenceId": "device" },
+    "subject": { "text": "Password saya tiba-tiba salah terus", "evidenceId": "subject" },
+    "description": [
+      {
+        "text": "Pagi ini saya tidak bisa masuk ke laptop. Katanya password salah, padahal kemarin bisa.",
+        "evidenceId": "desc-symptom"
+      },
+      { "text": "Saya tidak mengganti password apa pun.", "evidenceId": "desc-nochange" },
+      {
+        "text": "Lampu kecil bertanda A di keyboard menyala terus.",
+        "evidenceId": "desc-capslock"
+      },
+      {
+        "text": "Saya sudah mencoba lima kali. Apa laptopnya rusak?",
+        "evidenceId": "desc-question"
+      }
+    ],
+    "history": [
+      {
+        "text": "Bulan lalu: laptop ini lolos pemeriksaan rutin, semua komponen sehat.",
+        "evidenceId": "hist-check"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-capslock"],
+    "supporting": ["desc-nochange", "hist-check"]
+  },
+  "explanation": "Lampu A yang menyala berarti Caps Lock aktif, jadi semua huruf yang diketik menjadi kapital. Laptopnya sehat; cukup arahkan Sari mematikan Caps Lock lalu mengetik ulang.",
+  "ruleRefs": ["r-guide-1", "r-ts-3"],
+  "hints": [
+    "Apa yang berubah sejak kemarin? Perhatikan lampu di keyboard.",
+    "Lampu bertanda A adalah Caps Lock. Apa akibatnya pada password?"
+  ]
+}

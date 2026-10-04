@@ -1,0 +1,68 @@
+{
+  "id": "s03-diag-005",
+  "type": "diagnostic",
+  "conceptIds": ["network-basics", "troubleshooting"],
+  "difficulty": 3,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "severity": 3,
+  "data": {
+    "device": {
+      "name": "Office laptop NB-0476",
+      "owner": "Agus Setiawan"
+    },
+    "readings": [
+      {
+        "label": "IP address",
+        "value": "10.20.2.71 (automatic)",
+        "evidenceId": "r-ip"
+      },
+      {
+        "label": "DNS server",
+        "value": "Automatic from the router",
+        "evidenceId": "r-dns"
+      },
+      {
+        "label": "Tickets \"Portal will not open\"",
+        "value": "14 tickets from 5 floors within 20 minutes",
+        "evidenceId": "r-tickets"
+      }
+    ],
+    "console": [
+      {
+        "text": "> ping 10.20.2.1  →  Reply from 10.20.2.1: time=2ms",
+        "evidenceId": "con-gw"
+      },
+      {
+        "text": "> ping 203.0.113.10  →  Reply from 203.0.113.10: time=17ms",
+        "evidenceId": "con-internet"
+      },
+      {
+        "text": "> ping portal.nusadigital.test [10.20.1.15]  →  Timed out, no reply",
+        "evidenceId": "con-portal"
+      }
+    ],
+    "note": {
+      "text": "Agus: I need the App Portal to install the Attendance app today.",
+      "evidenceId": "note"
+    }
+  },
+  "intel": {
+    "ping": [
+      {
+        "text": "From the IT Workshop desk: 10.20.1.15 (portal server) also timed out",
+        "evidenceId": "ping-it"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["con-portal", "r-tickets"],
+    "supporting": ["con-gw", "con-internet", "r-dns", "ping-it"]
+  },
+  "explanation": "Agus's laptop is healthy because the router and internet reply, and the portal name already resolves to its address, but the portal server itself is silent and users on five floors complain at once. Escalate to the server team with the ping results and the ticket count.",
+  "ruleRefs": ["r-ts-5", "r-net-1"],
+  "hints": [
+    "Follow near to far: router, internet, DNS, then the target server. Where does the path stop?",
+    "This laptop is healthy, and many people report the same thing. Who handles the portal server?"
+  ]
+}

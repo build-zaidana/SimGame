@@ -1,0 +1,83 @@
+{
+  "id": "s05-diag-004",
+  "type": "diagnostic",
+  "conceptIds": ["escalation-safety", "network-basics"],
+  "difficulty": 3,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "acceptableDecisions": {},
+  "severity": 3,
+  "data": {
+    "device": {
+      "name": "Laptop tanpa label (ditemukan di ruang rapat lantai 3)",
+      "owner": "Tidak diketahui"
+    },
+    "readings": [
+      {
+        "label": "Antivirus",
+        "value": "Mati, dimatikan pukul 02.14 tanpa perintah pengguna",
+        "evidenceId": "r-av"
+      },
+      {
+        "label": "Program saat startup",
+        "value": "PembaruSistem (penerbit tidak dikenal, tidak ada di Portal Aplikasi)",
+        "evidenceId": "r-startup"
+      },
+      {
+        "label": "File di folder Dokumen",
+        "value": "214 file berganti nama menjadi huruf acak",
+        "evidenceId": "r-files"
+      },
+      {
+        "label": "Penyimpanan disk",
+        "value": "41% terpakai",
+        "evidenceId": "r-disk"
+      },
+      {
+        "label": "Suhu prosesor",
+        "value": "52°C, normal",
+        "evidenceId": "r-temp"
+      }
+    ],
+    "console": [
+      {
+        "text": "> daftar koneksi  →  terhubung ke sinkron-kelabu.example setiap 60 detik",
+        "evidenceId": "con-conn"
+      },
+      {
+        "text": "> daftar akun  →  satu akun lokal bernama \"K\"",
+        "evidenceId": "con-user"
+      }
+    ],
+    "note": {
+      "text": "Laptop ini tercolok ke port kabel jaringan di bawah meja rapat. Tidak ada yang mengaku memilikinya.",
+      "evidenceId": "note-found"
+    }
+  },
+  "evidence": {
+    "required": ["r-av", "r-startup", "con-conn"],
+    "supporting": ["r-files", "note-found", "ping-unknown"]
+  },
+  "explanation": "Antivirus mati sendiri, program asing berjalan saat startup, dan laptop terus menghubungi domain tak dikenal adalah tanda serangan. Putuskan jaringannya, jangan hapus atau perbaiki apa pun agar bukti tetap utuh, lalu eskalasi ke tim SOC.",
+  "ruleRefs": ["r-esc-2", "r-esc-1"],
+  "hints": [
+    "Perangkat kerasnya sehat, jadi lihat apa yang berjalan di dalamnya.",
+    "Antivirus yang mati sendiri dan program asing bukan tugas teknisi biasa, apalagi bila ada koneksi ke domain tak dikenal."
+  ],
+  "intel": {
+    "ping": [
+      {
+        "text": "sinkron-kelabu.example (203.0.113.77): balas 180 ms, bukan server PT Nusa Digital",
+        "evidenceId": "ping-unknown"
+      }
+    ],
+    "scan": [
+      {
+        "text": "Disk: sehat"
+      },
+      {
+        "text": "RAM: lolos tes"
+      }
+    ]
+  }
+}

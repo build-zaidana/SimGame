@@ -1,0 +1,65 @@
+{
+  "id": "s03-ticket-003",
+  "type": "ticket",
+  "conceptIds": ["network-basics", "troubleshooting"],
+  "difficulty": 3,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Dimas Nugroho",
+      "department": "Warehouse"
+    },
+    "device": {
+      "text": "Desktop PC PC-0221",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Network keeps coming and going since yesterday",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "A message appears: \"IP address 10.20.1.45 is already used by another device on the network.\"",
+        "evidenceId": "desc-error"
+      },
+      {
+        "text": "Yesterday my coworker set this PC's IP address manually so it \"would not keep changing\".",
+        "evidenceId": "desc-static"
+      },
+      {
+        "text": "The new barcode scanner in the warehouse also started being used yesterday.",
+        "evidenceId": "desc-scanner"
+      },
+      {
+        "text": "The cable and the LAN port light look normal.",
+        "evidenceId": "desc-cable"
+      }
+    ],
+    "history": [
+      {
+        "text": "Network log: the warehouse barcode scanner got the address 10.20.1.45 from the router.",
+        "evidenceId": "hist-dhcp"
+      }
+    ]
+  },
+  "intel": {
+    "ping": [
+      {
+        "text": "10.20.1.45: two different devices reply in turns (address conflict)",
+        "evidenceId": "ping-conflict"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-error", "desc-static"],
+    "supporting": ["hist-dhcp", "desc-cable", "ping-conflict"]
+  },
+  "explanation": "The IP address set manually on Dimas's PC conflicts with the address the router gave to the barcode scanner, so both keep dropping in turns. Fix it by setting the PC's IP back to automatic (DHCP), then reconnect.",
+  "ruleRefs": ["r-ts-2", "r-ts-4"],
+  "hints": [
+    "What changed yesterday? Read the error message carefully.",
+    "Two devices are using the same address. Which one was set manually and can go back to automatic?"
+  ]
+}

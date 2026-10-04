@@ -1,0 +1,56 @@
+{
+  "id": "s01-ticket-004",
+  "type": "ticket",
+  "conceptIds": ["user-guidance"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Ratna Dewi",
+      "department": "Desain"
+    },
+    "device": {
+      "text": "Monitor meja MN-0145",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Monitor saya mati, tolong ganti yang baru",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Layar monitor hitam sejak saya kembali dari makan siang.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "Lampu daya monitor menyala biru.",
+        "evidenceId": "desc-power"
+      },
+      {
+        "text": "Di tengah layar ada tulisan kecil: \"Tidak ada sinyal – HDMI 2\".",
+        "evidenceId": "desc-input"
+      },
+      {
+        "text": "Kabel dari komputer terpasang di port HDMI 1 dan tidak longgar.",
+        "evidenceId": "desc-cable"
+      },
+      {
+        "text": "Tadi tas saya sempat menyenggol tombol-tombol di bawah monitor.",
+        "evidenceId": "desc-button"
+      }
+    ],
+    "history": []
+  },
+  "evidence": {
+    "required": ["desc-input"],
+    "supporting": ["desc-cable", "desc-button"]
+  },
+  "explanation": "Monitor menyala dan kabelnya terpasang di HDMI 1, tapi monitor sedang membaca HDMI 2 karena tombolnya tersenggol. Monitornya sehat, jadi arahkan Ratna memilih sumber input HDMI 1 lewat tombol monitor.",
+  "ruleRefs": ["r-guide-1", "r-guide-2"],
+  "hints": [
+    "Lampu daya menyala dan kabel terpasang. Apa yang dibaca monitor saat ini?",
+    "Bandingkan port yang tertulis di layar dengan port tempat kabel terpasang."
+  ]
+}

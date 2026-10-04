@@ -1,0 +1,64 @@
+{
+  "id": "s05-hw-004",
+  "type": "hardware",
+  "conceptIds": ["user-guidance", "hardware-basics"],
+  "difficulty": 2,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "device": {
+      "name": "Laptop kantor NB-0662",
+      "owner": "Andi Nugroho (Gudang)"
+    },
+    "checks": [
+      {
+        "part": "Keluhan",
+        "observation": "Tombol F1 sampai F12 malah mengubah volume dan kecerahan layar",
+        "evidenceId": "chk-complaint"
+      },
+      {
+        "part": "Lampu indikator Fn Lock",
+        "observation": "Menyala",
+        "evidenceId": "chk-fnlock"
+      },
+      {
+        "part": "Keyboard",
+        "observation": "Semua tombol menekan dengan baik, tidak ada yang macet",
+        "evidenceId": "chk-keys"
+      },
+      {
+        "part": "Bekas cairan",
+        "observation": "Tidak ada, keyboard kering dan bersih",
+        "evidenceId": "chk-dry"
+      },
+      {
+        "part": "Layar dan baterai",
+        "observation": "Normal",
+        "evidenceId": "chk-other"
+      }
+    ],
+    "note": {
+      "text": "Andi khawatir keyboardnya rusak seperti laptop yang kena tumpahan kopi minggu ini.",
+      "evidenceId": "note-worry"
+    }
+  },
+  "evidence": {
+    "required": ["chk-fnlock"],
+    "supporting": ["chk-keys", "chk-dry", "scan-kb"]
+  },
+  "explanation": "Lampu Fn Lock yang menyala membuat tombol F1 sampai F12 menjalankan fungsi khusus, sedangkan keyboardnya sendiri sehat. Arahkan Andi menekan Fn dan Esc bersamaan untuk mematikan Fn Lock.",
+  "ruleRefs": ["r-guide-1", "r-ts-3"],
+  "hints": [
+    "Keyboardnya kering dan semua tombol berfungsi, jadi cek lampu indikator.",
+    "Lampu Fn Lock mengubah arti tombol F1 sampai F12."
+  ],
+  "intel": {
+    "scan": [
+      {
+        "text": "Keyboard internal: semua tombol terdeteksi",
+        "evidenceId": "scan-kb"
+      }
+    ]
+  }
+}

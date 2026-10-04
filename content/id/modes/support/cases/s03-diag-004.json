@@ -1,0 +1,61 @@
+{
+  "id": "s03-diag-004",
+  "type": "diagnostic",
+  "conceptIds": ["network-basics", "user-guidance"],
+  "difficulty": 3,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "device": {
+      "name": "Laptop kantor NB-0833",
+      "owner": "Maya Lestari"
+    },
+    "readings": [
+      {
+        "label": "Alamat IP",
+        "value": "10.20.3.64 (otomatis)",
+        "evidenceId": "r-ip"
+      },
+      {
+        "label": "Kekuatan sinyal Wi-Fi",
+        "value": "Sangat baik (4/4)",
+        "evidenceId": "r-signal"
+      },
+      {
+        "label": "Pemakaian unggah",
+        "value": "100% oleh unggahan video 8 GB ke NusaDrive",
+        "evidenceId": "r-upload"
+      },
+      {
+        "label": "Aplikasi aktif",
+        "value": "Rapat video NusaMeet",
+        "evidenceId": "r-meet"
+      }
+    ],
+    "console": [
+      {
+        "text": "> ping 10.20.3.1  →  Balasan dari 10.20.3.1: waktu=3ms, hilang 0%",
+        "evidenceId": "con-gw"
+      },
+      {
+        "text": "> ping 203.0.113.10  →  Balasan dari 203.0.113.10: waktu=21ms, hilang 0%",
+        "evidenceId": "con-internet"
+      }
+    ],
+    "note": {
+      "text": "Maya: suara rapat saya patah-patah, kata teman jaringan kantor sedang diserang!",
+      "evidenceId": "note"
+    }
+  },
+  "evidence": {
+    "required": ["r-upload"],
+    "supporting": ["con-gw", "con-internet", "r-signal", "r-meet"]
+  },
+  "explanation": "Ping ke router dan internet cepat tanpa paket hilang, tetapi jalur unggah habis dipakai unggahan video 8 GB bersamaan dengan rapat video. Arahkan Maya menjeda unggahan sampai rapat selesai.",
+  "ruleRefs": ["r-guide-1", "r-ts-3"],
+  "hints": [
+    "Percaya angka, bukan rumor. Apakah hasil ping menunjukkan jaringan bermasalah?",
+    "Lihat apa yang memakai jalur unggah saat rapat berlangsung. Perlukah ada yang diperbaiki?"
+  ]
+}

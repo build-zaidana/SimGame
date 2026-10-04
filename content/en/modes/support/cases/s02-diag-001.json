@@ -1,0 +1,76 @@
+{
+  "id": "s02-diag-001",
+  "type": "diagnostic",
+  "conceptIds": ["hardware-basics"],
+  "difficulty": 3,
+  "verdict": "fault",
+  "correctDecision": "replace",
+  "acceptableDecisions": {
+    "escalate": 0.25
+  },
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "Office laptop NB-0450",
+      "owner": "Hendra Gunawan (Legal)"
+    },
+    "readings": [
+      {
+        "label": "Disk health status",
+        "value": "FAILED (failure predicted)",
+        "evidenceId": "r-health"
+      },
+      {
+        "label": "Bad sectors",
+        "value": "1284 and still increasing",
+        "evidenceId": "r-badsector"
+      },
+      {
+        "label": "Disk temperature",
+        "value": "38°C (normal)",
+        "evidenceId": "r-temp"
+      },
+      {
+        "label": "Last backup",
+        "value": "Yesterday 17.00, complete, stored on the office server",
+        "evidenceId": "r-backup"
+      },
+      {
+        "label": "Battery",
+        "value": "Health 88%",
+        "evidenceId": "r-battery"
+      }
+    ],
+    "console": [
+      {
+        "text": "> cek-disk C:  →  Failed to read 37 blocks, retrying...",
+        "evidenceId": "con-readerr"
+      }
+    ],
+    "note": {
+      "text": "Hendra: since yesterday there has been a repeating click-click sound inside the laptop, and opening files is very slow.",
+      "evidenceId": "note-click"
+    }
+  },
+  "evidence": {
+    "required": ["r-health", "note-click"],
+    "supporting": ["r-badsector", "con-readerr", "r-backup", "scan-disk"]
+  },
+  "explanation": "Repeating clicks, bad sectors that keep increasing, and a FAILED status show the disk is physically dying. All files are in yesterday's backup, so the disk can be replaced right away and the data restored from the backup.",
+  "ruleRefs": ["r-hw-1", "r-ts-3"],
+  "hints": [
+    "What sound did Hendra hear, and what does the disk health status say?",
+    "A dying disk needs replacing; also check whether the data is already safe in a backup."
+  ],
+  "intel": {
+    "scan": [
+      {
+        "text": "Disk: read head clicking, surface test failed",
+        "evidenceId": "scan-disk"
+      },
+      {
+        "text": "RAM: memory test passed"
+      }
+    ]
+  }
+}

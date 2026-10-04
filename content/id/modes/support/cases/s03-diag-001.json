@@ -1,0 +1,61 @@
+{
+  "id": "s03-diag-001",
+  "type": "diagnostic",
+  "conceptIds": ["network-basics", "troubleshooting"],
+  "difficulty": 1,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "PC meja PC-0318",
+      "owner": "Bayu Pratama"
+    },
+    "readings": [
+      {
+        "label": "Kabel LAN",
+        "value": "Tersambung, lampu port hijau",
+        "evidenceId": "r-cable"
+      },
+      {
+        "label": "Alamat IP",
+        "value": "169.254.33.7",
+        "evidenceId": "r-ip"
+      },
+      {
+        "label": "Gateway (router)",
+        "value": "(kosong)",
+        "evidenceId": "r-gw"
+      },
+      {
+        "label": "Mode alamat",
+        "value": "Otomatis (DHCP)",
+        "evidenceId": "r-mode"
+      }
+    ],
+    "console": [
+      {
+        "text": "> ping 10.20.3.1  →  Gagal: jaringan tidak terjangkau",
+        "evidenceId": "con-ping-gw"
+      },
+      {
+        "text": "> ping 10.20.3.27 (PC sebelah)  →  Gagal: jaringan tidak terjangkau",
+        "evidenceId": "con-ping-peer"
+      }
+    ],
+    "note": {
+      "text": "Bayu: PC baru dipindah ke meja lain tadi pagi. Rekan di lantai 3 lancar.",
+      "evidenceId": "note"
+    }
+  },
+  "evidence": {
+    "required": ["r-ip"],
+    "supporting": ["r-mode", "con-ping-gw", "note"]
+  },
+  "explanation": "Alamat 169.254.33.7 berarti PC gagal mendapat alamat dari router lewat DHCP, padahal kabel tersambung dan rekan lain lancar. Perbaiki dengan meminta ulang alamat IP (renew) atau menyalakan ulang adaptor jaringan.",
+  "ruleRefs": ["r-net-2", "r-ts-4"],
+  "hints": [
+    "Periksa dari dekat ke jauh: kabel sudah oke, lalu bagaimana alamat IP-nya?",
+    "Alamat yang diawali 169.254 punya arti khusus. Apakah ini butuh suku cadang baru?"
+  ]
+}

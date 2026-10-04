@@ -1,0 +1,57 @@
+{
+  "id": "s02-ticket-004",
+  "type": "ticket",
+  "conceptIds": ["hardware-basics", "troubleshooting"],
+  "difficulty": 3,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Lestari Wibowo",
+      "department": "HR"
+    },
+    "device": {
+      "text": "New laptop NB-0702, manufacturer warranty until March 2027",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "New laptop completely dead after two months",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "I've only used this laptop for two months, and suddenly it won't turn on at all.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "I tried a coworker's charger of the same type, and it still won't turn on.",
+        "evidenceId": "desc-charger"
+      },
+      {
+        "text": "Could you open it up and replace the broken part here? I need it fast.",
+        "evidenceId": "desc-request"
+      }
+    ],
+    "history": [
+      {
+        "text": "Yesterday, IT Workshop technician: power and charger normal, motherboard test failed, error code light blinking.",
+        "evidenceId": "hist-mbtest"
+      },
+      {
+        "text": "Asset note: the warranty seal on the case screw is still intact. Opening the case voids the warranty; repairs must go through the official vendor.",
+        "evidenceId": "hist-seal"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["hist-mbtest", "hist-seal"],
+    "supporting": ["desc-charger", "device"]
+  },
+  "explanation": "The motherboard failed its test, but the laptop is still under warranty with the seal intact, so opening it ourselves would void the warranty. Escalate to the official vendor through a warranty claim, including notes on the tests already done.",
+  "ruleRefs": ["r-ts-5", "r-hw-1"],
+  "hints": [
+    "The broken part has been found. But who is allowed to repair it?",
+    "Read the asset note about the warranty seal before opening the case."
+  ]
+}

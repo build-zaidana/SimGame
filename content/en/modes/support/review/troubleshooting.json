@@ -1,0 +1,82 @@
+{
+  "items": [
+    {
+      "id": "rv-ts-1",
+      "type": "order-steps",
+      "conceptId": "troubleshooting",
+      "difficulty": 1,
+      "prompt": "Put the troubleshooting steps in the right order.",
+      "steps": [
+        "Gather the symptoms",
+        "Check the simplest things first",
+        "Look at the evidence",
+        "Change one thing, then test again",
+        "Write the cause and fix in the ticket"
+      ],
+      "explanation": "Start with the symptoms and simple checks, then change things while testing. The note at the end helps similar cases get solved faster."
+    },
+    {
+      "id": "rv-ts-2",
+      "type": "mcq",
+      "conceptId": "troubleshooting",
+      "difficulty": 1,
+      "prompt": "Mrs Sari's monitor at Nusa Digital suddenly went dark. What do you check first?",
+      "choices": [
+        "Order a new monitor right away",
+        "The power cable, video cable, and the monitor's power button",
+        "Open up the computer case",
+        "Reinstall the operating system"
+      ],
+      "answerIndex": 1,
+      "explanation": "Many \"breakdowns\" turn out to be a loose cable or a switched-off button. Check the simplest things before taking anything apart."
+    },
+    {
+      "id": "rv-ts-3",
+      "type": "mcq",
+      "conceptId": "troubleshooting",
+      "difficulty": 2,
+      "prompt": "You swap the cable, change the mouse, and restart all at once, and the problem goes away. What is the downside?",
+      "choices": [
+        "None, it's fixed and that's what matters",
+        "The old mouse must be broken",
+        "You don't know which change actually solved the problem",
+        "Restarting always makes problems worse"
+      ],
+      "answerIndex": 2,
+      "explanation": "Change one thing at a time, then test again. That way the real cause is clear and can be written in the ticket."
+    },
+    {
+      "id": "rv-ts-4",
+      "type": "tap-evidence",
+      "conceptId": "troubleshooting",
+      "difficulty": 2,
+      "prompt": "Tap the parts of the ticket that are evidence, not rumor.",
+      "parts": [
+        {
+          "text": "The coworker next door says this laptop brand always breaks.",
+          "evidenceId": "t1"
+        },
+        { "text": "The screen shows the error message \"Disk not found\".", "evidenceId": "t2" },
+        { "text": "The disk indicator light does not turn on at all.", "evidenceId": "t3" },
+        { "text": "The user feels the laptop is already old.", "evidenceId": "t4" }
+      ],
+      "answer": ["t2", "t3"],
+      "explanation": "Error messages and indicator lights are evidence you can trust. Opinions and rumors don't prove anything."
+    },
+    {
+      "id": "rv-ts-5",
+      "type": "mcq",
+      "conceptId": "troubleshooting",
+      "difficulty": 1,
+      "prompt": "The laptop fan is covered in thick dust, so the laptop often shuts down by itself. The right decision is…",
+      "choices": [
+        "Repair: clean out the dust, then test again",
+        "Guide the User",
+        "Replace the fan",
+        "Escalate to the SOC team"
+      ],
+      "answerIndex": 0,
+      "explanation": "Dust can be cleaned without new parts, so Repair is enough. Replace only when there is physical damage."
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "id": "s05-ticket-002",
+  "type": "ticket",
+  "conceptIds": ["escalation-safety"],
+  "difficulty": 2,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Hendra Wijaya",
+      "department": "Finance"
+    },
+    "device": {
+      "text": "Finance file server SRV-FIN-01",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Request a new folder and access rights on the Finance server",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Our team needs a new folder for this year's tax reports on the Finance file server.",
+        "evidenceId": "desc-need"
+      },
+      {
+        "text": "Only a server admin can create folders and set who is allowed to open them.",
+        "evidenceId": "desc-server"
+      },
+      {
+        "text": "My own laptop has no problems.",
+        "evidenceId": "desc-laptop"
+      },
+      {
+        "text": "If it can be done this week, thank you.",
+        "evidenceId": "desc-deadline"
+      }
+    ],
+    "history": [
+      {
+        "text": "IT Workshop checked: Hendra's laptop opens the server normally.",
+        "evidenceId": "hist-tried"
+      },
+      {
+        "text": "IT Workshop technician accounts have no admin rights on the file server.",
+        "evidenceId": "hist-noaccess"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-server"],
+    "supporting": ["subject", "hist-tried", "hist-noaccess"]
+  },
+  "explanation": "Creating folders and setting permissions on the server needs server admin rights that the IT Workshop does not have. Escalate to the server team and note that Hendra's laptop was already checked and is fine.",
+  "ruleRefs": ["r-esc-1"],
+  "hints": [
+    "Who holds the keys to do this request?",
+    "Server work needs special access, and the ticket history shows technicians do not have it."
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "id": "s04-ticket-001",
+  "type": "ticket",
+  "conceptIds": ["os-maintenance", "user-guidance"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Bayu Pratama",
+      "department": "Marketing"
+    },
+    "device": {
+      "text": "Office laptop NB-0527",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "My laptop keeps asking to restart, is it a virus?",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Since yesterday a message keeps appearing: 'Update ready to install. Restart to finish.'",
+        "evidenceId": "desc-msg"
+      },
+      {
+        "text": "It pops up again every hour and I always click 'Later'.",
+        "evidenceId": "desc-later"
+      },
+      {
+        "text": "I'm afraid to restart because many presentation files are still open.",
+        "evidenceId": "desc-files"
+      },
+      {
+        "text": "Other than that the laptop is fine, not slow and no errors.",
+        "evidenceId": "desc-normal"
+      }
+    ],
+    "history": [
+      {
+        "text": "Monday: the IT team pushed an official security update to all office laptops.",
+        "evidenceId": "hist-official"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-msg"],
+    "supporting": ["desc-later", "desc-normal", "hist-official"]
+  },
+  "explanation": "That message comes from an official update that only needs a restart, not a virus and not a fault. Guide Bayu to save all his files first, then restart so the update can finish installing.",
+  "ruleRefs": ["r-os-2", "r-guide-2"],
+  "hints": [
+    "Read the message carefully. Who sent that update?",
+    "An official update that is ready only needs a restart. What should Bayu do before restarting?"
+  ]
+}

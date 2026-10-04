@@ -1,0 +1,77 @@
+{
+  "id": "s05-diag-003",
+  "type": "diagnostic",
+  "conceptIds": ["network-basics"],
+  "difficulty": 3,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "Laptop kantor NB-0457",
+      "owner": "Dimas Prakoso (Legal)"
+    },
+    "readings": [
+      {
+        "label": "Alamat IP",
+        "value": "10.20.4.62",
+        "evidenceId": "r-ip"
+      },
+      {
+        "label": "Gateway (router)",
+        "value": "10.20.0.1",
+        "evidenceId": "r-gw"
+      },
+      {
+        "label": "Server DNS",
+        "value": "10.99.9.9 (diisi manual)",
+        "evidenceId": "r-dns"
+      },
+      {
+        "label": "Server DNS standar kantor",
+        "value": "10.20.0.53",
+        "evidenceId": "r-dnsstd"
+      },
+      {
+        "label": "Wi-Fi",
+        "value": "Terhubung, sinyal kuat",
+        "evidenceId": "r-wifi"
+      }
+    ],
+    "console": [
+      {
+        "text": "> ping 10.20.0.15  →  Balasan dari 10.20.0.15: waktu=3ms",
+        "evidenceId": "con-ip"
+      },
+      {
+        "text": "> ping portal.nusadigital.test  →  Gagal: nama tidak ditemukan",
+        "evidenceId": "con-name"
+      }
+    ],
+    "note": {
+      "text": "Dimas kemarin mengikuti tips dari video di internet untuk mempercepat koneksi.",
+      "evidenceId": "note-tips"
+    }
+  },
+  "evidence": {
+    "required": ["r-dns", "con-name"],
+    "supporting": ["con-ip", "r-ip", "ping-gw"]
+  },
+  "explanation": "Laptop bisa ping alamat IP tapi gagal mencari nama situs karena server DNS diisi manual ke alamat yang salah. Perbaiki dengan mengembalikan pengaturan DNS ke server standar kantor.",
+  "ruleRefs": ["r-net-3", "r-ts-4"],
+  "hints": [
+    "Bandingkan hasil ping ke alamat IP dengan ping ke nama situs.",
+    "Lihat server DNS yang dipakai laptop dan bandingkan dengan standar kantor."
+  ],
+  "intel": {
+    "ping": [
+      {
+        "text": "Router 10.20.0.1: balas 2 ms",
+        "evidenceId": "ping-gw"
+      },
+      {
+        "text": "Server DNS 10.99.9.9: tidak ada balasan"
+      }
+    ]
+  }
+}

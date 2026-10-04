@@ -1,0 +1,38 @@
+{
+  "dialogues": [
+    {
+      "id": "support-05-intro",
+      "lines": [
+        {
+          "speaker": "joko",
+          "text": "Hari ini kasusnya campur aduk. Ada juga yang berbahaya."
+        },
+        {
+          "speaker": "joko",
+          "text": "Bab terakhir terbuka: Eskalasi & Keselamatan. Tahu batas itu tanda teknisi hebat."
+        },
+        {
+          "speaker": "joko",
+          "text": "Kalau ada laptop yang berperilaku aneh, jangan dibersihkan sendiri. Putuskan jaringannya dan serahkan ke tim SOC Mbak Rani."
+        }
+      ]
+    },
+    {
+      "id": "support-05-outro",
+      "lines": [
+        {
+          "speaker": "joko",
+          "text": "Laptop aneh tadi sudah di tangan tim SOC. Mbak Rani bilang, untung kamu tidak menghapus apa pun."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "...Teknisi yang terlalu teliti. Merepotkan."
+        },
+        {
+          "speaker": "joko",
+          "text": "Kamu sudah layak disebut teknisi Bengkel IT. Mampir lagi kapan saja!"
+        }
+      ]
+    }
+  ]
+}

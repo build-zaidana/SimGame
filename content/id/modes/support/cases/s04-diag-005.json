@@ -1,0 +1,75 @@
+{
+  "id": "s04-diag-005",
+  "type": "diagnostic",
+  "conceptIds": ["hardware-basics", "troubleshooting"],
+  "difficulty": 3,
+  "verdict": "fault",
+  "correctDecision": "replace",
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "PC kantor PC-0122",
+      "owner": "Yoga Prasetyo (Gudang)"
+    },
+    "readings": [
+      {
+        "label": "Layar biru (crash) 7 hari terakhir",
+        "value": "9 kali",
+        "evidenceId": "r-crash"
+      },
+      {
+        "label": "Kode error terakhir",
+        "value": "Kesalahan memori",
+        "evidenceId": "r-code"
+      },
+      {
+        "label": "Uji RAM slot 1",
+        "value": "Lolos, 0 kesalahan",
+        "evidenceId": "r-ram1"
+      },
+      {
+        "label": "Uji RAM slot 2",
+        "value": "GAGAL, 1.284 kesalahan",
+        "evidenceId": "r-ram2"
+      },
+      {
+        "label": "Perubahan driver",
+        "value": "Tidak ada dalam 3 bulan terakhir",
+        "evidenceId": "r-driver"
+      },
+      {
+        "label": "Disk terpakai",
+        "value": "40%",
+        "evidenceId": "r-disk"
+      }
+    ],
+    "console": [
+      {
+        "text": "> uji-ram slot 2 (setelah modul dipasang ulang)  →  GAGAL, 1.302 kesalahan",
+        "evidenceId": "c-retest"
+      }
+    ],
+    "note": {
+      "text": "Yoga: 'Komputer tiba-tiba layar biru lalu restart sendiri.'",
+      "evidenceId": "note-user"
+    }
+  },
+  "intel": {
+    "scan": [
+      {
+        "text": "RAM slot 2: modul tidak stabil, gagal uji",
+        "evidenceId": "scan-ram"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["r-ram2", "c-retest"],
+    "supporting": ["r-crash", "r-code", "r-driver", "scan-ram"]
+  },
+  "explanation": "Modul RAM di slot 2 tetap gagal uji meski sudah dipasang ulang, dan itulah penyebab layar biru berulang. Ganti modul RAM slot 2 karena kerusakan fisik tidak bisa dibenahi dengan pengaturan.",
+  "ruleRefs": ["r-hw-1", "r-ts-3"],
+  "hints": [
+    "Kode error menyebut memori. Bandingkan hasil uji kedua slot RAM.",
+    "Slot 2 sudah dipasang ulang tetapi masih gagal uji. Memasang ulang tidak menolong lagi."
+  ]
+}

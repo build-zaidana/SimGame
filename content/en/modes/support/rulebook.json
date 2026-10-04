@@ -1,0 +1,177 @@
+{
+  "chapters": [
+    {
+      "id": "ch-trouble",
+      "title": "Chapter 1 · Troubleshooting",
+      "conceptId": "troubleshooting",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-ts-1",
+          "text": "Check the simplest things first: power, cables, buttons, then a restart. Don't start by taking things apart.",
+          "evidenceTags": ["power", "cable"]
+        },
+        {
+          "id": "r-ts-2",
+          "text": "Gather symptoms: when it started, what changed before, and whether it can be repeated.",
+          "evidenceTags": ["symptom", "change"]
+        },
+        {
+          "id": "r-ts-3",
+          "text": "Trust evidence (error messages, indicator lights, system readings), not guesses or rumors.",
+          "evidenceTags": ["error", "indicator"]
+        },
+        {
+          "id": "r-ts-4",
+          "text": "FIX when something is wrong or broken but can be sorted out without a new part: reseat, clean, or reset it.",
+          "evidenceTags": ["fixable"]
+        },
+        {
+          "id": "r-ts-5",
+          "text": "ESCALATE when it needs permission or access that Workshop technicians don't have (restricted folders, servers, licenses). Don't look for shortcuts.",
+          "evidenceTags": ["access"]
+        }
+      ]
+    },
+    {
+      "id": "ch-guide",
+      "title": "Chapter 2 · Helping Users",
+      "conceptId": "user-guidance",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-guide-1",
+          "text": "If the device is healthy and the problem is how it's used or a simple setting, GUIDE THE USER. Don't take anything apart.",
+          "evidenceTags": ["user-setting"]
+        },
+        {
+          "id": "r-guide-2",
+          "text": "Explain the steps one at a time in simple words, then make sure the user can repeat them alone.",
+          "evidenceTags": ["steps"]
+        },
+        {
+          "id": "r-guide-3",
+          "text": "Technicians never ask for a user's password. Forgot the password? Point them to the official reset page.",
+          "evidenceTags": ["password"]
+        },
+        {
+          "id": "r-guide-4",
+          "text": "Write the cause and the fix in the ticket, so similar problems get solved faster.",
+          "evidenceTags": ["history"]
+        }
+      ]
+    },
+    {
+      "id": "ch-hw",
+      "title": "Chapter 3 · Hardware",
+      "conceptId": "hardware-basics",
+      "unlockAtShift": 2,
+      "rules": [
+        {
+          "id": "r-hw-1",
+          "text": "REPLACE A PART only when the evidence shows physical damage: cracked, burnt, swollen, clicking, or failing tests.",
+          "evidenceTags": ["damage"]
+        },
+        {
+          "id": "r-hw-2",
+          "text": "Parts that are loose, dirty, or dusty just need FIXING: reseat or clean them, then test again.",
+          "evidenceTags": ["loose", "dust"]
+        },
+        {
+          "id": "r-hw-3",
+          "text": "A swollen battery can catch fire: don't charge it, don't press it, replace it right away.",
+          "evidenceTags": ["battery"]
+        },
+        {
+          "id": "r-hw-4",
+          "text": "Shut down and unplug the power before opening the case. Touch metal or wear an antistatic strap.",
+          "evidenceTags": ["safety"]
+        }
+      ]
+    },
+    {
+      "id": "ch-net",
+      "title": "Chapter 4 · Networking",
+      "conceptId": "network-basics",
+      "unlockAtShift": 3,
+      "rules": [
+        {
+          "id": "r-net-1",
+          "text": "Check from nearest to farthest: cable or Wi-Fi, IP address, router (gateway), internet, then DNS.",
+          "evidenceTags": ["layer"]
+        },
+        {
+          "id": "r-net-2",
+          "text": "An IP address of 169.254.x.x means the device didn't get an address from the router (DHCP failed).",
+          "evidenceTags": ["ip"]
+        },
+        {
+          "id": "r-net-3",
+          "text": "Can ping an IP address but website names won't open? That's a DNS problem, not a dead internet.",
+          "evidenceTags": ["dns"]
+        },
+        {
+          "id": "r-net-4",
+          "text": "If many people or a whole floor drop at once, the problem is in the central network: ESCALATE to the network team.",
+          "evidenceTags": ["outage"]
+        }
+      ]
+    },
+    {
+      "id": "ch-os",
+      "title": "Chapter 5 · System Care",
+      "conceptId": "os-maintenance",
+      "unlockAtShift": 4,
+      "rules": [
+        {
+          "id": "r-os-1",
+          "text": "A nearly full disk (above 90%) makes the computer slow. Clear temporary files and move big files.",
+          "evidenceTags": ["disk"]
+        },
+        {
+          "id": "r-os-2",
+          "text": "Install official security updates regularly. Updates put off for months are a security hole.",
+          "evidenceTags": ["update"]
+        },
+        {
+          "id": "r-os-3",
+          "text": "Problem started right after a driver update? Roll the driver back to the previous version.",
+          "evidenceTags": ["driver"]
+        },
+        {
+          "id": "r-os-4",
+          "text": "Install apps only from the company App Portal, not from websites or files people send.",
+          "evidenceTags": ["software"]
+        }
+      ]
+    },
+    {
+      "id": "ch-esc",
+      "title": "Chapter 6 · Escalation & Safety",
+      "conceptId": "escalation-safety",
+      "unlockAtShift": 5,
+      "rules": [
+        {
+          "id": "r-esc-1",
+          "text": "ESCALATE when it needs special access or expertise (servers, licenses, data recovery). Write down what you've tried.",
+          "evidenceTags": ["access"]
+        },
+        {
+          "id": "r-esc-2",
+          "text": "Signs of an attack (unknown programs, antivirus turning itself off, locked files, cursor moving by itself): disconnect the network and escalate to the SOC team.",
+          "evidenceTags": ["security"]
+        },
+        {
+          "id": "r-esc-3",
+          "text": "Don't experiment with important data on a dying disk. Escalate to the data recovery team before anything is replaced.",
+          "evidenceTags": ["data"]
+        },
+        {
+          "id": "r-esc-4",
+          "text": "Burning smell, smoke, or spilled liquid: unplug the power first and don't switch it on again.",
+          "evidenceTags": ["hazard"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "items": [
+    {
+      "id": "rv-esc-1",
+      "type": "order-steps",
+      "conceptId": "escalation-safety",
+      "difficulty": 2,
+      "prompt": "Kursor di laptop Bu Wati bergerak sendiri dan antivirus mati. Urutkan langkahnya.",
+      "steps": [
+        "Putuskan jaringan (cabut kabel atau matikan Wi-Fi)",
+        "Jangan matikan laptop atau menghapus apa pun",
+        "Tulis apa yang kamu lihat dan sudah dicoba",
+        "Eskalasi ke tim SOC"
+      ],
+      "explanation": "Memutus jaringan menghentikan penyerang, dan jejak di laptop adalah bukti penting. Tim SOC yang menyelidiki lebih lanjut."
+    },
+    {
+      "id": "rv-esc-2",
+      "type": "mcq",
+      "conceptId": "escalation-safety",
+      "difficulty": 1,
+      "prompt": "Tercium bau terbakar dari komputer dan ada sedikit asap. Apa yang pertama dilakukan?",
+      "choices": [
+        "Nyalakan ulang untuk melihat apakah masih bisa",
+        "Buka casing sambil komputer menyala",
+        "Cabut daya dan jangan nyalakan lagi",
+        "Lanjutkan kerja dulu, lapor besok"
+      ],
+      "answerIndex": 2,
+      "explanation": "Keselamatan dulu: cabut daya supaya tidak terjadi kebakaran. Perangkat itu jangan dinyalakan lagi sebelum diperiksa."
+    },
+    {
+      "id": "rv-esc-3",
+      "type": "mcq",
+      "conceptId": "escalation-safety",
+      "difficulty": 2,
+      "prompt": "Disk berbunyi klik dan berisi data laporan keuangan penting yang belum dicadangkan. Keputusannya?",
+      "choices": [
+        "Ganti disk sekarang juga",
+        "Coba salin data berulang kali sampai berhasil",
+        "Arahkan Pengguna",
+        "Eskalasi ke tim pemulihan data"
+      ],
+      "answerIndex": 3,
+      "explanation": "Data penting di disk sekarat jangan dicoba-coba. Tim pemulihan data punya alat khusus untuk menyelamatkannya."
+    },
+    {
+      "id": "rv-esc-4",
+      "type": "tap-evidence",
+      "conceptId": "escalation-safety",
+      "difficulty": 2,
+      "prompt": "Ketuk tanda yang menunjukkan kemungkinan serangan.",
+      "parts": [
+        { "text": "Muncul program asing yang tidak pernah dipasang pengguna.", "evidenceId": "e1" },
+        { "text": "Layar sedikit redup karena mode hemat baterai.", "evidenceId": "e2" },
+        {
+          "text": "File di folder kerja tiba-tiba terkunci dan tidak bisa dibuka.",
+          "evidenceId": "e3"
+        },
+        { "text": "Mouse nirkabel baterainya lemah.", "evidenceId": "e4" }
+      ],
+      "answer": ["e1", "e3"],
+      "explanation": "Program asing dan file yang tiba-tiba terkunci adalah tanda serangan, jadi eskalasi ke SOC. Layar redup dan baterai mouse lemah adalah hal biasa."
+    },
+    {
+      "id": "rv-esc-5",
+      "type": "mcq",
+      "conceptId": "escalation-safety",
+      "difficulty": 1,
+      "prompt": "Pengguna tidak bisa mendengar suara karena speaker di-mute. Perlukah eskalasi?",
+      "choices": [
+        "Ya, semua tiket harus dieskalasi",
+        "Tidak, cukup arahkan pengguna di meja",
+        "Ya, ke tim SOC",
+        "Ya, ke tim jaringan"
+      ],
+      "answerIndex": 1,
+      "explanation": "Masalah sederhana yang bisa diselesaikan di meja tidak perlu dieskalasi. Eskalasi yang tidak perlu hanya membuat spesialis repot."
+    }
+  ]
+}

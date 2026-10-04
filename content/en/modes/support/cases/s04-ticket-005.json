@@ -1,0 +1,57 @@
+{
+  "id": "s04-ticket-005",
+  "type": "ticket",
+  "conceptIds": ["user-guidance", "os-maintenance"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Fitri Handayani",
+      "department": "Finance"
+    },
+    "device": {
+      "text": "Office laptop NB-0395",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "My report file is gone, is the disk broken?",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "The file 'Laporan Kas September' suddenly disappeared from the Desktop.",
+        "evidenceId": "desc-missing"
+      },
+      {
+        "text": "Yesterday afternoon I tidied up the Desktop and deleted a lot of old files.",
+        "evidenceId": "desc-cleanup"
+      },
+      {
+        "text": "The laptop starts normally and other files open fine.",
+        "evidenceId": "desc-normal"
+      }
+    ],
+    "history": [
+      {
+        "text": "Technician's search result: the file is in the Recycle Bin (trash), deleted yesterday at 16.05.",
+        "evidenceId": "hist-recycle"
+      },
+      {
+        "text": "Two weeks ago: routine check, disk healthy.",
+        "evidenceId": "hist-check"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["hist-recycle"],
+    "supporting": ["desc-cleanup", "desc-normal", "hist-check"]
+  },
+  "explanation": "The file is not lost because of a fault; it was deleted when Fitri tidied up her Desktop and is still in the Recycle Bin. Guide Fitri to get it back by right-clicking it and choosing Restore.",
+  "ruleRefs": ["r-guide-1", "r-guide-2"],
+  "hints": [
+    "What did Fitri do the day before the file went missing?",
+    "Deleted files usually go to the trash first. Look at the technician’s search result."
+  ]
+}

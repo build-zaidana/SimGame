@@ -1,0 +1,63 @@
+{
+  "id": "support-01",
+  "order": 1,
+  "title": "Hari Pertama di Bengkel",
+  "durationGameMinutes": 120,
+  "realSecondsPerGameMinute": 3,
+  "unlocksChapters": ["ch-trouble", "ch-guide"],
+  "introDialogue": "support-01-intro",
+  "outroDialogue": "support-01-outro",
+  "tutorial": true,
+  "queue": [
+    {
+      "caseId": "s01-ticket-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s01-ticket-002",
+      "arriveAt": 10
+    },
+    {
+      "caseId": "s01-diag-001",
+      "arriveAt": 20
+    },
+    {
+      "caseId": "s01-ticket-003",
+      "arriveAt": 30
+    },
+    {
+      "caseId": "s01-ticket-004",
+      "arriveAt": 40
+    },
+    {
+      "caseId": "s01-diag-002",
+      "arriveAt": 50
+    },
+    {
+      "caseId": "s01-ticket-005",
+      "arriveAt": 60
+    },
+    {
+      "caseId": "s01-ticket-006",
+      "arriveAt": 70
+    }
+  ],
+  "review": {
+    "count": 3,
+    "conceptIds": ["troubleshooting", "user-guidance"]
+  },
+  "pay": {
+    "base": 40,
+    "perCase": 12
+  },
+  "newspaper": {
+    "headline": "Bengkel IT PT Nusa Digital Buka Lagi",
+    "lead": "Setelah lama kekurangan orang, Bengkel IT PT Nusa Digital kembali buka di lantai 2. Teknisi baru akan menerima tiket keluhan dan laporan diagnostik dari seluruh karyawan.",
+    "tip": {
+      "title": "Tips: Cek yang Sederhana Dulu",
+      "text": "Sebelum membongkar apa pun, cek daya, kabel, dan tombol, lalu coba restart. Banyak keluhan selesai di langkah ini."
+    },
+    "classified": "DICARI: Teknisi sabar yang tidak panik melihat lampu berkedip. Temui Pak Joko di Bengkel IT, lantai 2.",
+    "sources": ["CompTIA A+ Core 2: Troubleshooting Methodology", "ITIL 4: Service Desk practice"]
+  }
+}

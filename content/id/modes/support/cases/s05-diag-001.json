@@ -1,0 +1,77 @@
+{
+  "id": "s05-diag-001",
+  "type": "diagnostic",
+  "conceptIds": ["os-maintenance"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 1,
+  "data": {
+    "device": {
+      "name": "Laptop kantor NB-0618",
+      "owner": "Fitri Handayani (Pemasaran)"
+    },
+    "readings": [
+      {
+        "label": "Penyimpanan disk",
+        "value": "97% terpakai (sisa 7 GB dari 256 GB)",
+        "evidenceId": "r-disk"
+      },
+      {
+        "label": "File sementara",
+        "value": "38 GB",
+        "evidenceId": "r-temp"
+      },
+      {
+        "label": "RAM",
+        "value": "8 GB, terpakai 45%",
+        "evidenceId": "r-ram"
+      },
+      {
+        "label": "Antivirus",
+        "value": "Aktif, definisi terbaru",
+        "evidenceId": "r-av"
+      },
+      {
+        "label": "Update sistem",
+        "value": "Terpasang semua",
+        "evidenceId": "r-update"
+      }
+    ],
+    "console": [
+      {
+        "text": "> buka aplikasi Absensi  →  butuh 3 menit untuk terbuka",
+        "evidenceId": "con-slow"
+      },
+      {
+        "text": "> simpan video promosi  →  Gagal: ruang penyimpanan tidak cukup",
+        "evidenceId": "con-save"
+      }
+    ],
+    "note": {
+      "text": "Fitri bilang laptopnya makin lambat sejak ia menyimpan banyak video promosi bulan ini.",
+      "evidenceId": "note-video"
+    }
+  },
+  "evidence": {
+    "required": ["r-disk"],
+    "supporting": ["r-temp", "con-slow", "scan-disk"]
+  },
+  "explanation": "Disk terpakai 97% dengan 38 GB file sementara membuat laptop lambat dan gagal menyimpan. Perbaiki dengan membersihkan file sementara dan memindahkan video besar ke penyimpanan bersama, tanpa perlu suku cadang baru.",
+  "ruleRefs": ["r-os-1", "r-ts-4"],
+  "hints": [
+    "Cari angka yang jauh melewati batas normal di laporan.",
+    "Disk di atas 90% membuat komputer lambat, dan disknya sendiri sehat."
+  ],
+  "intel": {
+    "scan": [
+      {
+        "text": "Disk: sehat, tidak ada sektor rusak",
+        "evidenceId": "scan-disk"
+      },
+      {
+        "text": "RAM: lolos tes"
+      }
+    ]
+  }
+}

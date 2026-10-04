@@ -1,0 +1,76 @@
+{
+  "id": "support-03",
+  "order": 3,
+  "title": "No Signal Day",
+  "durationGameMinutes": 120,
+  "realSecondsPerGameMinute": 3,
+  "unlocksChapters": ["ch-net"],
+  "introDialogue": "support-03-intro",
+  "outroDialogue": "support-03-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s03-ticket-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s03-diag-001",
+      "arriveAt": 9
+    },
+    {
+      "caseId": "s03-diag-002",
+      "arriveAt": 18
+    },
+    {
+      "caseId": "s03-ticket-002",
+      "arriveAt": 27
+    },
+    {
+      "caseId": "s03-diag-003",
+      "arriveAt": 36
+    },
+    {
+      "caseId": "s03-hw-001",
+      "arriveAt": 45
+    },
+    {
+      "caseId": "s03-ticket-003",
+      "arriveAt": 54
+    },
+    {
+      "caseId": "s03-diag-004",
+      "arriveAt": 63
+    },
+    {
+      "caseId": "s03-ticket-004",
+      "arriveAt": 72
+    },
+    {
+      "caseId": "s03-diag-005",
+      "arriveAt": 81
+    }
+  ],
+  "review": {
+    "count": 4,
+    "conceptIds": ["network-basics", "hardware-basics"]
+  },
+  "pay": {
+    "base": 40,
+    "perCase": 12
+  },
+  "newspaper": {
+    "headline": "New Routers Installed, Wi-Fi Complaints Pour In",
+    "lead": "Nusa Digital replaced the routers on every floor last weekend. Since then, the IT Workshop has received many complaints about slow or missing internet.",
+    "impact": {
+      "good": "Yesterday, the IT Workshop didn't open a single healthy laptop, and every broken part was replaced. The spare parts store praised the new technician.",
+      "mixed": "Yesterday, most devices were handled correctly, but some parts were replaced needlessly or missed. Pak Joko's reminder: look at the evidence first.",
+      "bad": "Yesterday, several laptops were opened needlessly and some damage was missed. The spare parts store is running out of stock."
+    },
+    "tip": {
+      "title": "Tip: Ping from Near to Far",
+      "text": "Test the router first, then an internet address, then website names. If only names fail, suspect DNS."
+    },
+    "classified": "LOST: One blue network cable, last seen under the Marketing desk. Please return it.",
+    "sources": ["CompTIA Network+: Troubleshooting Methodology", "IETF RFC 3927"]
+  }
+}

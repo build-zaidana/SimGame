@@ -1,0 +1,70 @@
+{
+  "id": "s04-diag-003",
+  "type": "diagnostic",
+  "conceptIds": ["os-maintenance", "network-basics"],
+  "difficulty": 1,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "PC kantor PC-0207",
+      "owner": "Ratna Dewi (Legal)"
+    },
+    "readings": [
+      {
+        "label": "Update keamanan tertunda",
+        "value": "14 update",
+        "evidenceId": "r-pending"
+      },
+      {
+        "label": "Update terakhir dipasang",
+        "value": "4 bulan lalu",
+        "evidenceId": "r-last"
+      },
+      {
+        "label": "Pengaturan update",
+        "value": "Dijeda manual oleh pengguna",
+        "evidenceId": "r-paused"
+      },
+      {
+        "label": "Disk terpakai",
+        "value": "61%",
+        "evidenceId": "r-disk"
+      },
+      {
+        "label": "Antivirus",
+        "value": "Aktif, definisi terbaru",
+        "evidenceId": "r-av"
+      }
+    ],
+    "console": [
+      {
+        "text": "> cek-update  →  14 update keamanan tersedia di update.nusadigital.test",
+        "evidenceId": "c-avail"
+      }
+    ],
+    "note": {
+      "text": "Ratna menjeda update karena takut komputer restart saat rapat.",
+      "evidenceId": "note-user"
+    }
+  },
+  "intel": {
+    "ping": [
+      {
+        "text": "Server update 10.20.0.30: balas 3 ms, 0% hilang",
+        "evidenceId": "ping-update"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["r-pending", "r-last"],
+    "supporting": ["r-paused", "c-avail", "note-user", "ping-update"]
+  },
+  "explanation": "Update keamanan yang tertunda empat bulan meninggalkan celah yang sudah diketahui penyerang. Perbaiki dengan melanjutkan update, memasang ke-14 update resmi, lalu restart di luar jam rapat.",
+  "ruleRefs": ["r-os-2", "r-ts-4"],
+  "hints": [
+    "Antivirus aktif belum tentu cukup. Kapan sistem terakhir diperbarui?",
+    "Empat bulan tanpa update keamanan adalah celah. Server update juga bisa dijangkau."
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "id": "s02-ticket-001",
+  "type": "ticket",
+  "conceptIds": ["troubleshooting", "user-guidance"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Bayu Pratama",
+      "department": "Warehouse"
+    },
+    "device": {
+      "text": "Office laptop NB-0527",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Laptop is completely dead, won't turn on",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "This morning my laptop shut down by itself while I was using it, and now pressing the power button does nothing.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "I plugged the charger into the power strip under my desk.",
+        "evidenceId": "desc-charger"
+      },
+      {
+        "text": "The small light on the power strip switch is off, and the switch is in the OFF position.",
+        "evidenceId": "desc-switch"
+      },
+      {
+        "text": "Could the machine be burnt out? It was still fine yesterday.",
+        "evidenceId": "desc-worry"
+      }
+    ],
+    "history": [
+      {
+        "text": "Two weeks ago: routine check, battery healthy at 94%.",
+        "evidenceId": "hist-battery"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-switch"],
+    "supporting": ["hist-battery", "desc-charger"]
+  },
+  "explanation": "The power strip switch is OFF, so the charger delivers no power and the healthy battery finally ran out. Guide Bayu to turn the switch on, wait a moment for the battery to charge, then turn the laptop on.",
+  "ruleRefs": ["r-ts-1", "r-guide-1"],
+  "hints": [
+    "Before suspecting the machine, check the power path from the wall socket to the laptop.",
+    "Look at the light and the switch position on the power strip the charger is plugged into."
+  ]
+}

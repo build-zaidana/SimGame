@@ -1,0 +1,34 @@
+{
+  "dialogues": [
+    {
+      "id": "support-04-intro",
+      "lines": [
+        {
+          "speaker": "joko",
+          "text": "Update season is here. Today there are lots of slow laptops and misbehaving apps."
+        },
+        {
+          "speaker": "joko",
+          "text": "The System Care chapter is open: full disks, delayed updates, and fussy drivers."
+        },
+        {
+          "speaker": "joko",
+          "text": "If a problem shows up right after something changed, suspect that change first."
+        }
+      ]
+    },
+    {
+      "id": "support-04-outro",
+      "lines": [
+        {
+          "speaker": "joko",
+          "text": "The office laptops are fresh again. Tomorrow is your last day as the new technician. Get ready."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "The IT Workshop, huh? A nice place to leave something behind..."
+        }
+      ]
+    }
+  ]
+}

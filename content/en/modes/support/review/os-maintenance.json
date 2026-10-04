@@ -1,0 +1,78 @@
+{
+  "items": [
+    {
+      "id": "rv-os-1",
+      "type": "mcq",
+      "conceptId": "os-maintenance",
+      "difficulty": 1,
+      "prompt": "The laptop disk is 97% full and the computer feels very slow. The right step is…",
+      "choices": [
+        "Buy a new laptop",
+        "Delete temporary files, empty the Recycle Bin, and move large files",
+        "Install a cleaner app from an unknown site",
+        "Turn off security updates"
+      ],
+      "answerIndex": 1,
+      "explanation": "A disk above 90% leaves the computer no working space. Clean out unneeded files and move large files to office storage."
+    },
+    {
+      "id": "rv-os-2",
+      "type": "mcq",
+      "conceptId": "os-maintenance",
+      "difficulty": 2,
+      "prompt": "The printer stopped working right after its driver was updated yesterday. What do you do?",
+      "choices": [
+        "Replace the printer",
+        "Delete the operating system",
+        "Leave it, it will fix itself",
+        "Roll back the driver to the previous version"
+      ],
+      "answerIndex": 3,
+      "explanation": "A problem that appears right after a driver update is most likely caused by the new driver. Rolling back restores the version that worked before."
+    },
+    {
+      "id": "rv-os-3",
+      "type": "tap-evidence",
+      "conceptId": "os-maintenance",
+      "difficulty": 2,
+      "prompt": "Tap the findings that need fixing to keep the laptop secure.",
+      "parts": [
+        { "text": "The last security update was installed 8 months ago.", "evidenceId": "o1" },
+        { "text": "The wallpaper shows a beach scene.", "evidenceId": "o2" },
+        { "text": "A pirated app was installed from a file sent by a friend.", "evidenceId": "o3" },
+        { "text": "The disk is 45% full.", "evidenceId": "o4" }
+      ],
+      "answer": ["o1", "o3"],
+      "explanation": "Updates delayed for months leave a gap, and pirated apps can carry malware. The wallpaper and a 45% full disk are fine."
+    },
+    {
+      "id": "rv-os-4",
+      "type": "order-steps",
+      "conceptId": "os-maintenance",
+      "difficulty": 1,
+      "prompt": "Put the steps for installing a security update in order.",
+      "steps": [
+        "Save any open work",
+        "Install the official update",
+        "Restart the computer",
+        "Make sure the computer runs normally"
+      ],
+      "explanation": "Save your work first because updates usually need a restart. After restarting, check that everything runs normally."
+    },
+    {
+      "id": "rv-os-5",
+      "type": "mcq",
+      "conceptId": "os-maintenance",
+      "difficulty": 1,
+      "prompt": "Where should Nusa Digital employees install apps from?",
+      "choices": [
+        "The office App Portal",
+        "A link sent in a group chat",
+        "Any free download site",
+        "A friend's flash drive"
+      ],
+      "answerIndex": 0,
+      "explanation": "The office App Portal only has official apps that have been checked. Apps from other sources can carry malware."
+    }
+  ]
+}

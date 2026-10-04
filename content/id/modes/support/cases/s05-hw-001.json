@@ -1,0 +1,62 @@
+{
+  "id": "s05-hw-001",
+  "type": "hardware",
+  "conceptIds": ["escalation-safety", "hardware-basics"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "replace",
+  "severity": 3,
+  "data": {
+    "device": {
+      "name": "Adaptor daya laptop NB-0533",
+      "owner": "Bayu Saputra (Penjualan)"
+    },
+    "checks": [
+      {
+        "part": "Kotak adaptor (charger)",
+        "observation": "Ada noda hitam gosong dan plastiknya sedikit meleleh di dekat ujung kabel",
+        "evidenceId": "chk-charger"
+      },
+      {
+        "part": "Bau",
+        "observation": "Tercium bau plastik terbakar dari adaptor saat masih tercolok",
+        "evidenceId": "chk-smell"
+      },
+      {
+        "part": "Kabel colokan dinding",
+        "observation": "Utuh, tidak ada sobekan",
+        "evidenceId": "chk-cable"
+      },
+      {
+        "part": "Laptop NB-0533",
+        "observation": "Menyala normal dengan baterai, port pengisian bersih",
+        "evidenceId": "chk-laptop"
+      }
+    ],
+    "note": {
+      "text": "Bayu langsung mencabut adaptor dari stopkontak sebelum membawanya ke bengkel.",
+      "evidenceId": "note-unplug"
+    }
+  },
+  "evidence": {
+    "required": ["chk-charger", "chk-smell"],
+    "supporting": ["chk-laptop", "note-unplug", "scan-adapter"]
+  },
+  "explanation": "Bau terbakar dan plastik gosong yang meleleh adalah kerusakan fisik yang berbahaya, jadi adaptornya harus diganti dan tidak boleh dipakai lagi. Laptopnya sendiri sehat, yang rusak hanya adaptornya.",
+  "ruleRefs": ["r-esc-4", "r-hw-1"],
+  "hints": [
+    "Mulai dari keselamatan: tanda bahaya apa yang terlihat dan tercium?",
+    "Plastik gosong yang meleleh tidak bisa dibersihkan atau dipasang ulang."
+  ],
+  "intel": {
+    "scan": [
+      {
+        "text": "Adaptor daya: keluaran tidak stabil, suhu terlalu tinggi",
+        "evidenceId": "scan-adapter"
+      },
+      {
+        "text": "Baterai laptop: kesehatan 88%, normal"
+      }
+    ]
+  }
+}

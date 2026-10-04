@@ -1,0 +1,84 @@
+{
+  "id": "support-05",
+  "order": 5,
+  "title": "Laptop Aneh",
+  "durationGameMinutes": 120,
+  "realSecondsPerGameMinute": 3,
+  "unlocksChapters": ["ch-esc"],
+  "introDialogue": "support-05-intro",
+  "outroDialogue": "support-05-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s05-ticket-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s05-hw-001",
+      "arriveAt": 8
+    },
+    {
+      "caseId": "s05-diag-001",
+      "arriveAt": 15
+    },
+    {
+      "caseId": "s05-ticket-002",
+      "arriveAt": 22
+    },
+    {
+      "caseId": "s05-hw-002",
+      "arriveAt": 30
+    },
+    {
+      "caseId": "s05-diag-002",
+      "arriveAt": 38
+    },
+    {
+      "caseId": "s05-ticket-003",
+      "arriveAt": 45
+    },
+    {
+      "caseId": "s05-hw-003",
+      "arriveAt": 52
+    },
+    {
+      "caseId": "s05-diag-003",
+      "arriveAt": 60
+    },
+    {
+      "caseId": "s05-ticket-004",
+      "arriveAt": 68
+    },
+    {
+      "caseId": "s05-hw-004",
+      "arriveAt": 75
+    },
+    {
+      "caseId": "s05-diag-004",
+      "arriveAt": 82
+    }
+  ],
+  "review": {
+    "count": 5,
+    "conceptIds": ["escalation-safety", "os-maintenance", "network-basics"]
+  },
+  "pay": {
+    "base": 50,
+    "perCase": 12
+  },
+  "newspaper": {
+    "headline": "Tahu Batas, Tanda Teknisi Hebat",
+    "lead": "Pakar layanan TI mengingatkan bahwa teknisi yang baik tahu kapan harus menyerahkan kasus ke tim khusus, terutama bila ada tanda serangan atau data penting dipertaruhkan.",
+    "impact": {
+      "good": "Kemarin, laptop-laptop PT Nusa Digital kembali segar: disk lega, update terpasang, dan driver bermasalah dikembalikan.",
+      "mixed": "Kemarin, sebagian besar masalah perangkat lunak beres, walau ada laptop yang masih lambat. Pak Joko meminta pemeriksaan ulang.",
+      "bad": "Kemarin, banyak laptop dikembalikan ke pemiliknya dalam keadaan masih lambat atau bermasalah. Keluhan ke Bengkel IT meningkat."
+    },
+    "tip": {
+      "title": "Tips: Curiga? Putuskan, Jangan Hapus",
+      "text": "Kalau laptop berperilaku aneh, cabut jaringannya dan serahkan ke tim keamanan. Jangan hapus apa pun: jejaknya adalah bukti."
+    },
+    "classified": "DICARI: Pemilik laptop tanpa nama yang ditemukan di ruang rapat lantai 3. Tanyakan ke Bengkel IT. — Satpam",
+    "sources": ["NIST SP 800-61: Incident Handling Guide", "ITIL 4: Incident Management"]
+  }
+}

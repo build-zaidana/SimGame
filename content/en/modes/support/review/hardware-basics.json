@@ -1,0 +1,78 @@
+{
+  "items": [
+    {
+      "id": "rv-hw-1",
+      "type": "mcq",
+      "conceptId": "hardware-basics",
+      "difficulty": 1,
+      "prompt": "A laptop battery is swollen so much that the case is lifting. What is right?",
+      "choices": [
+        "Charge it to full first",
+        "Press the case so it's flat again",
+        "Leave it as long as it still turns on",
+        "Don't charge it, don't press it, replace the battery right away"
+      ],
+      "answerIndex": 3,
+      "explanation": "A swollen battery can catch fire. Don't charge or press it, and replace it right away."
+    },
+    {
+      "id": "rv-hw-2",
+      "type": "mcq",
+      "conceptId": "hardware-basics",
+      "difficulty": 2,
+      "prompt": "A laptop beeps and the screen shows nothing. After opening it, the RAM stick is a bit loose. The decision?",
+      "choices": [
+        "Replace the RAM",
+        "Repair: reseat the RAM, then test again",
+        "Escalate to the network team",
+        "Guide the User"
+      ],
+      "answerIndex": 1,
+      "explanation": "A loose part just needs to be reseated, with no new parts. Replace only when it is cracked, burnt, or fails a test."
+    },
+    {
+      "id": "rv-hw-3",
+      "type": "tap-evidence",
+      "conceptId": "hardware-basics",
+      "difficulty": 2,
+      "prompt": "Tap the check results that show the disk is dying.",
+      "parts": [
+        { "text": "A repeated \"click\" sound comes from inside the laptop.", "evidenceId": "h1" },
+        { "text": "The fan spins normally and is not dusty.", "evidenceId": "h2" },
+        { "text": "Disk test: many bad sectors found.", "evidenceId": "h3" },
+        { "text": "Battery health is 92%.", "evidenceId": "h4" }
+      ],
+      "answer": ["h1", "h3"],
+      "explanation": "Repeated clicking and many bad sectors are signs of a dying disk. The fan and battery are healthy."
+    },
+    {
+      "id": "rv-hw-4",
+      "type": "order-steps",
+      "conceptId": "hardware-basics",
+      "difficulty": 1,
+      "prompt": "Put in order the safe steps to clean a dusty laptop fan.",
+      "steps": [
+        "Turn off the laptop and unplug the power cable",
+        "Touch metal or wear an antistatic wrist strap",
+        "Open the case and clean the dust from the fan",
+        "Close the case, turn it on, then test again"
+      ],
+      "explanation": "Power must be unplugged and static discharged before touching parts. After cleaning, always test again."
+    },
+    {
+      "id": "rv-hw-5",
+      "type": "mcq",
+      "conceptId": "hardware-basics",
+      "difficulty": 1,
+      "prompt": "What does RAM do inside a computer?",
+      "choices": [
+        "Working memory for programs that are running",
+        "Stores files permanently",
+        "Cools the computer",
+        "Powers the laptop"
+      ],
+      "answerIndex": 0,
+      "explanation": "RAM is working memory, while files are stored on the disk. The fan and heatsink do the cooling."
+    }
+  ]
+}

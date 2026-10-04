@@ -1,0 +1,67 @@
+{
+  "id": "s02-hw-003",
+  "type": "hardware",
+  "conceptIds": ["hardware-basics"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "Laptop desain NB-0613",
+      "owner": "Maya Kartika (Desain)"
+    },
+    "checks": [
+      {
+        "part": "Lubang angin",
+        "observation": "Tertutup gumpalan debu abu-abu tebal",
+        "evidenceId": "chk-vent"
+      },
+      {
+        "part": "Kipas",
+        "observation": "Bilah utuh, berputar lancar saat diputar dengan tangan, tapi penuh debu",
+        "evidenceId": "chk-fan"
+      },
+      {
+        "part": "Suhu prosesor",
+        "observation": "97°C setelah 10 menit dipakai, lalu laptop mati sendiri",
+        "evidenceId": "chk-temp"
+      },
+      {
+        "part": "Baterai",
+        "observation": "Bentuk normal, kesehatan 85%",
+        "evidenceId": "chk-battery"
+      },
+      {
+        "part": "Casing",
+        "observation": "Tidak ada retak atau bekas gosong",
+        "evidenceId": "chk-casing"
+      }
+    ],
+    "note": {
+      "text": "Maya: laptop sering dipakai di atas kasur atau bantal waktu lembur di rumah.",
+      "evidenceId": "note-bed"
+    }
+  },
+  "evidence": {
+    "required": ["chk-vent", "chk-temp"],
+    "supporting": ["chk-fan", "note-bed", "chk-casing", "scan-fan"]
+  },
+  "explanation": "Debu tebal menyumbat lubang angin dan kipas, jadi panas tidak bisa keluar dan laptop mati sendiri. Kipasnya masih utuh, jadi cukup dibersihkan lalu diuji lagi.",
+  "ruleRefs": ["r-hw-2", "r-hw-4"],
+  "hints": [
+    "Laptop mati sendiri setelah beberapa menit dipakai. Apa yang membuatnya terlalu panas?",
+    "Apakah kipasnya rusak secara fisik, atau hanya kotor?"
+  ],
+  "intel": {
+    "scan": [
+      {
+        "text": "Kipas: berputar 2100 RPM, aliran udara terhambat",
+        "evidenceId": "scan-fan"
+      },
+      {
+        "text": "Baterai: kesehatan 85%, bentuk normal"
+      }
+    ]
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "id": "support-05",
+  "order": 5,
+  "title": "The Strange Laptop",
+  "durationGameMinutes": 120,
+  "realSecondsPerGameMinute": 3,
+  "unlocksChapters": ["ch-esc"],
+  "introDialogue": "support-05-intro",
+  "outroDialogue": "support-05-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s05-ticket-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s05-hw-001",
+      "arriveAt": 8
+    },
+    {
+      "caseId": "s05-diag-001",
+      "arriveAt": 15
+    },
+    {
+      "caseId": "s05-ticket-002",
+      "arriveAt": 22
+    },
+    {
+      "caseId": "s05-hw-002",
+      "arriveAt": 30
+    },
+    {
+      "caseId": "s05-diag-002",
+      "arriveAt": 38
+    },
+    {
+      "caseId": "s05-ticket-003",
+      "arriveAt": 45
+    },
+    {
+      "caseId": "s05-hw-003",
+      "arriveAt": 52
+    },
+    {
+      "caseId": "s05-diag-003",
+      "arriveAt": 60
+    },
+    {
+      "caseId": "s05-ticket-004",
+      "arriveAt": 68
+    },
+    {
+      "caseId": "s05-hw-004",
+      "arriveAt": 75
+    },
+    {
+      "caseId": "s05-diag-004",
+      "arriveAt": 82
+    }
+  ],
+  "review": {
+    "count": 5,
+    "conceptIds": ["escalation-safety", "os-maintenance", "network-basics"]
+  },
+  "pay": {
+    "base": 50,
+    "perCase": 12
+  },
+  "newspaper": {
+    "headline": "Knowing Your Limits Makes a Great Technician",
+    "lead": "IT service experts remind us that a good technician knows when to hand a case to a specialist team, especially when there are signs of an attack or important data is at stake.",
+    "impact": {
+      "good": "Yesterday, Nusa Digital laptops were refreshed: disks cleared, updates installed, and troublesome drivers rolled back.",
+      "mixed": "Yesterday, most software problems were solved, though some laptops are still slow. Pak Joko asked for a recheck.",
+      "bad": "Yesterday, many laptops went back to their owners still slow or faulty. Complaints to the IT Workshop are rising."
+    },
+    "tip": {
+      "title": "Tip: Suspicious? Disconnect, Don't Delete",
+      "text": "If a laptop acts strangely, unplug it from the network and hand it to the security team. Don't delete anything: the traces are evidence."
+    },
+    "classified": "WANTED: The owner of an unnamed laptop found in the floor 3 meeting room. Ask at the IT Workshop. — Security",
+    "sources": ["NIST SP 800-61: Incident Handling Guide", "ITIL 4: Incident Management"]
+  }
+}

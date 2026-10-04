@@ -1,0 +1,63 @@
+{
+  "id": "s05-hw-003",
+  "type": "hardware",
+  "conceptIds": ["escalation-safety", "hardware-basics"],
+  "difficulty": 3,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "acceptableDecisions": {},
+  "severity": 3,
+  "data": {
+    "device": {
+      "name": "Komputer meja PC-0315",
+      "owner": "Ratna Sari (Keuangan)"
+    },
+    "checks": [
+      {
+        "part": "Disk",
+        "observation": "Berbunyi klik-klik berulang saat menyala, kadang tidak terbaca",
+        "evidenceId": "chk-disk"
+      },
+      {
+        "part": "Isi disk",
+        "observation": "Berisi seluruh catatan gaji dan pajak Keuangan tiga tahun terakhir",
+        "evidenceId": "chk-files"
+      },
+      {
+        "part": "Kabel data disk",
+        "observation": "Terpasang kencang, sudah dicoba kabel lain, bunyi tetap ada",
+        "evidenceId": "chk-cable"
+      },
+      {
+        "part": "Kipas dan casing",
+        "observation": "Bersih, suhu normal",
+        "evidenceId": "chk-fan"
+      }
+    ],
+    "note": {
+      "text": "Ratna bilang ini satu-satunya salinan. Tidak ada cadangan (backup) di server atau tempat lain.",
+      "evidenceId": "note-nobackup"
+    }
+  },
+  "evidence": {
+    "required": ["chk-disk", "note-nobackup"],
+    "supporting": ["chk-files", "scan-disk"]
+  },
+  "explanation": "Disk berbunyi klik dan sekarat padahal menyimpan satu-satunya salinan data Keuangan yang penting, jadi setiap percobaan bisa menghapus data selamanya. Jangan ganti atau utak-atik dulu; eskalasi ke tim pemulihan data.",
+  "ruleRefs": ["r-esc-3", "r-esc-1"],
+  "hints": [
+    "Disknya memang rusak, tapi apa yang paling berharga di dalamnya?",
+    "Tidak ada backup, jadi pikirkan siapa yang ahli menyelamatkan data sebelum disk diganti."
+  ],
+  "intel": {
+    "scan": [
+      {
+        "text": "Disk: 1.204 sektor rusak, jumlahnya terus bertambah",
+        "evidenceId": "scan-disk"
+      },
+      {
+        "text": "RAM: lolos tes"
+      }
+    ]
+  }
+}

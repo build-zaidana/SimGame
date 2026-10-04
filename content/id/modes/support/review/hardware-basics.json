@@ -1,0 +1,78 @@
+{
+  "items": [
+    {
+      "id": "rv-hw-1",
+      "type": "mcq",
+      "conceptId": "hardware-basics",
+      "difficulty": 1,
+      "prompt": "Baterai laptop terlihat menggembung sampai casing terangkat. Apa yang benar?",
+      "choices": [
+        "Cas sampai penuh dulu",
+        "Tekan casing supaya rata lagi",
+        "Biarkan saja selama masih menyala",
+        "Jangan dicas, jangan ditekan, segera ganti baterainya"
+      ],
+      "answerIndex": 3,
+      "explanation": "Baterai menggembung bisa terbakar. Jangan dicas atau ditekan, dan segera ganti."
+    },
+    {
+      "id": "rv-hw-2",
+      "type": "mcq",
+      "conceptId": "hardware-basics",
+      "difficulty": 2,
+      "prompt": "Laptop berbunyi bip dan layar tidak tampil apa-apa. Setelah dibuka, keping RAM sedikit longgar. Keputusannya?",
+      "choices": [
+        "Ganti Komponen RAM",
+        "Perbaiki: pasang ulang RAM, lalu uji lagi",
+        "Eskalasi ke tim jaringan",
+        "Arahkan Pengguna"
+      ],
+      "answerIndex": 1,
+      "explanation": "Komponen longgar cukup dipasang ulang tanpa suku cadang baru. Ganti hanya bila retak, gosong, atau gagal tes."
+    },
+    {
+      "id": "rv-hw-3",
+      "type": "tap-evidence",
+      "conceptId": "hardware-basics",
+      "difficulty": 2,
+      "prompt": "Ketuk hasil pemeriksaan yang menunjukkan disk sekarat.",
+      "parts": [
+        { "text": "Terdengar bunyi \"klik\" berulang dari dalam laptop.", "evidenceId": "h1" },
+        { "text": "Kipas berputar normal dan tidak berdebu.", "evidenceId": "h2" },
+        { "text": "Tes disk: ditemukan banyak bad sector.", "evidenceId": "h3" },
+        { "text": "Kesehatan baterai 92%.", "evidenceId": "h4" }
+      ],
+      "answer": ["h1", "h3"],
+      "explanation": "Bunyi klik berulang dan banyak bad sector adalah tanda disk sekarat. Kipas dan baterai dalam keadaan sehat."
+    },
+    {
+      "id": "rv-hw-4",
+      "type": "order-steps",
+      "conceptId": "hardware-basics",
+      "difficulty": 1,
+      "prompt": "Urutkan langkah aman membersihkan kipas laptop yang berdebu.",
+      "steps": [
+        "Matikan laptop dan cabut kabel daya",
+        "Sentuh logam atau pakai gelang antistatis",
+        "Buka casing dan bersihkan debu dari kipas",
+        "Tutup casing, nyalakan, lalu uji lagi"
+      ],
+      "explanation": "Daya harus dicabut dan listrik statis dibuang sebelum menyentuh komponen. Setelah dibersihkan, selalu uji ulang."
+    },
+    {
+      "id": "rv-hw-5",
+      "type": "mcq",
+      "conceptId": "hardware-basics",
+      "difficulty": 1,
+      "prompt": "Apa fungsi RAM di dalam komputer?",
+      "choices": [
+        "Memori kerja untuk program yang sedang berjalan",
+        "Tempat menyimpan file secara permanen",
+        "Pendingin komputer",
+        "Sumber daya listrik laptop"
+      ],
+      "answerIndex": 0,
+      "explanation": "RAM adalah memori kerja, sedangkan file disimpan di disk. Kipas dan heatsink yang bertugas mendinginkan."
+    }
+  ]
+}

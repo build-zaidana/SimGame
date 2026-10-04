@@ -1,0 +1,75 @@
+{
+  "id": "s04-diag-004",
+  "type": "diagnostic",
+  "conceptIds": ["os-maintenance", "troubleshooting"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 1,
+  "data": {
+    "device": {
+      "name": "Office laptop NB-0481",
+      "owner": "Agus Setiawan (Sales)"
+    },
+    "readings": [
+      {
+        "label": "Time from power on to ready",
+        "value": "6 minutes 30 seconds",
+        "evidenceId": "r-boot"
+      },
+      {
+        "label": "Active startup programs",
+        "value": "23 programs",
+        "evidenceId": "r-startup"
+      },
+      {
+        "label": "RAM right after power on",
+        "value": "91% of 8 GB",
+        "evidenceId": "r-ram"
+      },
+      {
+        "label": "Disk used",
+        "value": "48%",
+        "evidenceId": "r-disk"
+      },
+      {
+        "label": "SSD health",
+        "value": "95% (good)",
+        "evidenceId": "r-ssd"
+      },
+      {
+        "label": "Updates",
+        "value": "All installed",
+        "evidenceId": "r-update"
+      }
+    ],
+    "console": [
+      {
+        "text": "> list-startup  →  Music player, 3 chat apps, 4 browser toolbars, 2 downloaders, and 13 others",
+        "evidenceId": "c-list"
+      }
+    ],
+    "note": {
+      "text": "Agus: 'Once it has been on a while, the laptop is smooth. It is only slow right after I turn it on.'",
+      "evidenceId": "note-user"
+    }
+  },
+  "intel": {
+    "scan": [
+      {
+        "text": "All components: passed tests",
+        "evidenceId": "scan-health"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["r-startup", "r-boot"],
+    "supporting": ["c-list", "r-ram", "note-user", "r-ssd", "scan-health"]
+  },
+  "explanation": "There are 23 programs that start together with the laptop, so it takes long to get ready even though the disk, SSD and updates are fine. Fix it by turning off the startup programs that are not needed.",
+  "ruleRefs": ["r-ts-4", "r-ts-2"],
+  "hints": [
+    "The laptop is only slow right after power on. What starts running at that moment?",
+    "Dozens of startup programs fight over RAM at power on. The parts themselves are healthy."
+  ]
+}

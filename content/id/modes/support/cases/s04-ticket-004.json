@@ -1,0 +1,57 @@
+{
+  "id": "s04-ticket-004",
+  "type": "ticket",
+  "conceptIds": ["troubleshooting", "os-maintenance"],
+  "difficulty": 2,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Dimas Saputra",
+      "department": "Desain"
+    },
+    "device": {
+      "text": "Enam laptop tim Desain",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Aplikasi desain tidak bisa dibuka satu tim",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Sejak tanggal 1, aplikasi DesainPro di semua laptop tim kami menolak dibuka.",
+        "evidenceId": "desc-team"
+      },
+      {
+        "text": "Pesannya: 'Lisensi tim telah berakhir. Hubungi administrator lisensi.'",
+        "evidenceId": "desc-license"
+      },
+      {
+        "text": "Aplikasi lain dan internet berjalan normal.",
+        "evidenceId": "desc-normal"
+      },
+      {
+        "text": "Ada teman yang menawarkan kode aktivasi gratis dari forum, boleh dipakai?",
+        "evidenceId": "desc-forum"
+      }
+    ],
+    "history": [
+      {
+        "text": "Lisensi DesainPro dibeli bagian Pengadaan, berlaku sampai 30 September.",
+        "evidenceId": "hist-procure"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-license", "hist-procure"],
+    "supporting": ["desc-team", "desc-normal"]
+  },
+  "explanation": "Pesan error menunjukkan lisensi tim sudah habis, dan memperpanjangnya butuh admin lisensi serta bagian Pengadaan, bukan teknisi meja. Eskalasi tiketnya, dan jangan pakai kode aktivasi tidak resmi dari forum.",
+  "ruleRefs": ["r-ts-5", "r-os-4"],
+  "hints": [
+    "Baca pesan error dengan teliti. Siapa yang biasanya mengurus lisensi?",
+    "Teknisi tidak bisa membeli lisensi sendiri. Lisensi resmi diurus admin lisensi dan Pengadaan."
+  ]
+}

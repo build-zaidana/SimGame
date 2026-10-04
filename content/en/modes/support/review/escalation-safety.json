@@ -1,0 +1,81 @@
+{
+  "items": [
+    {
+      "id": "rv-esc-1",
+      "type": "order-steps",
+      "conceptId": "escalation-safety",
+      "difficulty": 2,
+      "prompt": "The cursor on Mrs Wati's laptop moves by itself and the antivirus is off. Put the steps in order.",
+      "steps": [
+        "Disconnect the network (unplug the cable or turn off Wi-Fi)",
+        "Don't shut down the laptop or delete anything",
+        "Write down what you saw and what you tried",
+        "Escalate to the SOC team"
+      ],
+      "explanation": "Disconnecting the network stops the attacker, and the traces on the laptop are important evidence. The SOC team investigates further."
+    },
+    {
+      "id": "rv-esc-2",
+      "type": "mcq",
+      "conceptId": "escalation-safety",
+      "difficulty": 1,
+      "prompt": "You smell burning from a computer and see a little smoke. What do you do first?",
+      "choices": [
+        "Restart it to see if it still works",
+        "Open the case while it's still on",
+        "Unplug the power and don't turn it on again",
+        "Keep working and report it tomorrow"
+      ],
+      "answerIndex": 2,
+      "explanation": "Safety first: unplug the power so a fire doesn't start. Don't turn that device on again until it has been checked."
+    },
+    {
+      "id": "rv-esc-3",
+      "type": "mcq",
+      "conceptId": "escalation-safety",
+      "difficulty": 2,
+      "prompt": "A disk is clicking and holds important financial reports with no backup. The decision?",
+      "choices": [
+        "Replace the disk right now",
+        "Keep trying to copy the data until it works",
+        "Guide the User",
+        "Escalate to the data recovery team"
+      ],
+      "answerIndex": 3,
+      "explanation": "Don't experiment with important data on a dying disk. The data recovery team has special tools to save it."
+    },
+    {
+      "id": "rv-esc-4",
+      "type": "tap-evidence",
+      "conceptId": "escalation-safety",
+      "difficulty": 2,
+      "prompt": "Tap the signs that point to a possible attack.",
+      "parts": [
+        { "text": "A strange program appears that the user never installed.", "evidenceId": "e1" },
+        { "text": "The screen is a bit dim because of battery saver mode.", "evidenceId": "e2" },
+        {
+          "text": "Files in the work folder are suddenly locked and won't open.",
+          "evidenceId": "e3"
+        },
+        { "text": "The wireless mouse has a weak battery.", "evidenceId": "e4" }
+      ],
+      "answer": ["e1", "e3"],
+      "explanation": "A strange program and suddenly locked files are signs of an attack, so escalate to the SOC. A dim screen and a weak mouse battery are normal."
+    },
+    {
+      "id": "rv-esc-5",
+      "type": "mcq",
+      "conceptId": "escalation-safety",
+      "difficulty": 1,
+      "prompt": "A user can't hear any sound because the speaker is muted. Does this need escalation?",
+      "choices": [
+        "Yes, every ticket must be escalated",
+        "No, just guide the user at the desk",
+        "Yes, to the SOC team",
+        "Yes, to the network team"
+      ],
+      "answerIndex": 1,
+      "explanation": "Simple problems that can be solved at the desk don't need escalation. Unneeded escalation only keeps specialists busy."
+    }
+  ]
+}

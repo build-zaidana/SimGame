@@ -1,0 +1,69 @@
+{
+  "id": "s04-hw-001",
+  "type": "hardware",
+  "conceptIds": ["hardware-basics", "os-maintenance"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "replace",
+  "severity": 3,
+  "data": {
+    "device": {
+      "name": "Office laptop NB-0150",
+      "owner": "Hendra Gunawan (Warehouse)"
+    },
+    "checks": [
+      {
+        "part": "SSD (health test)",
+        "observation": "Health 4%, status CRITICAL",
+        "evidenceId": "chk-health"
+      },
+      {
+        "part": "SSD (sectors)",
+        "observation": "1,912 bad sectors already moved aside (reallocated) and still growing",
+        "evidenceId": "chk-sectors"
+      },
+      {
+        "part": "Data backup",
+        "observation": "All data was copied to the office server yesterday and verified",
+        "evidenceId": "chk-backup"
+      },
+      {
+        "part": "Battery",
+        "observation": "88% health, normal shape",
+        "evidenceId": "chk-battery"
+      },
+      {
+        "part": "Fan",
+        "observation": "A little dusty, spins normally",
+        "evidenceId": "chk-fan"
+      },
+      {
+        "part": "Screen and hinges",
+        "observation": "Normal",
+        "evidenceId": "chk-screen"
+      }
+    ],
+    "note": {
+      "text": "Hendra: 'The laptop often freezes when opening files, sometimes a disk error message appears.'",
+      "evidenceId": "note-user"
+    }
+  },
+  "intel": {
+    "scan": [
+      {
+        "text": "SSD: estimated remaining life less than 1 week",
+        "evidenceId": "scan-ssd"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["chk-health", "chk-sectors"],
+    "supporting": ["chk-backup", "note-user", "scan-ssd"]
+  },
+  "explanation": "The SSD is at 4% health and its bad sectors keep growing, which means the disk is physically failing and cannot be repaired. The data is already safe on the server, so the SSD can be replaced right away.",
+  "ruleRefs": ["r-hw-1", "r-ts-3"],
+  "hints": [
+    "Look at the health numbers of each part. Which one is the most worrying?",
+    "An SSD at 4% with growing bad sectors cannot be cleaned up. Its data is also already backed up."
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "id": "s02-ticket-004",
+  "type": "ticket",
+  "conceptIds": ["hardware-basics", "troubleshooting"],
+  "difficulty": 3,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Lestari Wibowo",
+      "department": "HR"
+    },
+    "device": {
+      "text": "Laptop baru NB-0702, garansi pabrik sampai Maret 2027",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Laptop baru mati total setelah dua bulan",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Laptop ini baru dua bulan saya pakai, tiba-tiba tidak mau menyala sama sekali.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "Charger sudah saya ganti dengan charger rekan yang sama tipenya, tetap tidak menyala.",
+        "evidenceId": "desc-charger"
+      },
+      {
+        "text": "Bisa tolong dibongkar dan diganti bagian yang rusak di sini saja? Saya butuh cepat.",
+        "evidenceId": "desc-request"
+      }
+    ],
+    "history": [
+      {
+        "text": "Kemarin, teknisi Bengkel IT: daya dan charger normal, tes papan induk (motherboard) gagal, lampu kode error berkedip.",
+        "evidenceId": "hist-mbtest"
+      },
+      {
+        "text": "Catatan aset: segel garansi di sekrup casing masih utuh. Membuka casing membatalkan garansi; perbaikan wajib lewat vendor resmi.",
+        "evidenceId": "hist-seal"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["hist-mbtest", "hist-seal"],
+    "supporting": ["desc-charger", "device"]
+  },
+  "explanation": "Papan induk gagal tes, tapi laptop masih bergaransi dan segelnya utuh, jadi membongkarnya sendiri justru membatalkan garansi. Eskalasikan ke vendor resmi lewat klaim garansi beserta catatan tes yang sudah dilakukan.",
+  "ruleRefs": ["r-ts-5", "r-hw-1"],
+  "hints": [
+    "Bagian yang rusak sudah ketemu. Tapi siapa yang berhak memperbaikinya?",
+    "Baca catatan aset soal segel garansi sebelum membuka casing."
+  ]
+}

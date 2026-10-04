@@ -1,0 +1,62 @@
+{
+  "id": "s02-hw-005",
+  "type": "hardware",
+  "conceptIds": ["hardware-basics", "user-guidance"],
+  "difficulty": 2,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "device": {
+      "name": "Laptop desain NB-0640",
+      "owner": "Yoga Permana (Desain)"
+    },
+    "checks": [
+      {
+        "part": "Bunyi kipas",
+        "observation": "Keras berdengung saat mengekspor video, pelan lagi setelah selesai",
+        "evidenceId": "chk-noise"
+      },
+      {
+        "part": "Suhu prosesor",
+        "observation": "78°C saat ekspor, 45°C saat diam (batas aman di bawah 90°C)",
+        "evidenceId": "chk-temp"
+      },
+      {
+        "part": "Kipas dan lubang angin",
+        "observation": "Bersih, bilah utuh, tidak ada bunyi gesekan",
+        "evidenceId": "chk-fan"
+      },
+      {
+        "part": "Kinerja",
+        "observation": "Tidak pernah mati sendiri, ekspor selesai normal",
+        "evidenceId": "chk-perf"
+      }
+    ],
+    "note": {
+      "text": "Yoga: kipasnya berisik banget tiap ekspor video, saya takut laptopnya mau meledak.",
+      "evidenceId": "note-worry"
+    }
+  },
+  "evidence": {
+    "required": ["chk-temp"],
+    "supporting": ["chk-fan", "chk-noise", "chk-perf", "scan-temp"]
+  },
+  "explanation": "Kipas memang berputar kencang saat kerja berat seperti ekspor video, dan suhunya tetap aman dengan kipas yang bersih dan utuh. Laptopnya sehat, jadi arahkan Yoga bahwa bunyi itu normal dan sarankan memakai alas yang rata.",
+  "ruleRefs": ["r-guide-1", "r-ts-3"],
+  "hints": [
+    "Bunyi keras belum tentu rusak. Lihat angkanya, bukan kekhawatirannya.",
+    "Bandingkan suhu saat ekspor dengan batas aman, lalu cek kondisi kipas."
+  ],
+  "intel": {
+    "scan": [
+      {
+        "text": "Pendingin: suhu dalam batas aman, kipas normal",
+        "evidenceId": "scan-temp"
+      },
+      {
+        "text": "Baterai: kesehatan 91%"
+      }
+    ]
+  }
+}

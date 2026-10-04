@@ -1,0 +1,61 @@
+{
+  "id": "s01-ticket-005",
+  "type": "ticket",
+  "conceptIds": ["troubleshooting"],
+  "difficulty": 1,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Fitri Handayani",
+      "department": "Reception"
+    },
+    "device": {
+      "text": "Reception desk PC PC-0102",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Keyboard can't type at all",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Since this morning no letters appear when I type.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "The Num Lock light on the keyboard doesn't turn on at all either.",
+        "evidenceId": "desc-light"
+      },
+      {
+        "text": "The mouse plugged in next to it works normally.",
+        "evidenceId": "desc-mouse"
+      },
+      {
+        "text": "Yesterday afternoon the reception desk was moved for cleaning.",
+        "evidenceId": "desc-moved"
+      },
+      {
+        "text": "Behind the PC, the keyboard's USB plug looks half pulled out of its port.",
+        "evidenceId": "desc-plug"
+      }
+    ],
+    "history": [
+      {
+        "text": "Last month: this keyboard passed the all-keys test.",
+        "evidenceId": "hist-test"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-plug"],
+    "supporting": ["desc-moved", "desc-mouse"]
+  },
+  "explanation": "The keyboard plug came half out when the desk was moved, so the keyboard gets no power and its light stays off. Fix it by plugging it back in properly, then test typing.",
+  "ruleRefs": ["r-ts-1", "r-ts-4"],
+  "hints": [
+    "Remember the rule: check power and cables first. What changed yesterday?",
+    "Look at the back of the PC. What state is the keyboard plug in?"
+  ]
+}

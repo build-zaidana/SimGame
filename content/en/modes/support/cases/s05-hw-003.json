@@ -1,0 +1,63 @@
+{
+  "id": "s05-hw-003",
+  "type": "hardware",
+  "conceptIds": ["escalation-safety", "hardware-basics"],
+  "difficulty": 3,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "acceptableDecisions": {},
+  "severity": 3,
+  "data": {
+    "device": {
+      "name": "Desktop computer PC-0315",
+      "owner": "Ratna Sari (Finance)"
+    },
+    "checks": [
+      {
+        "part": "Disk",
+        "observation": "Makes repeated clicking sounds when on, sometimes not detected",
+        "evidenceId": "chk-disk"
+      },
+      {
+        "part": "Disk contents",
+        "observation": "Holds all of Finance's salary and tax records from the last three years",
+        "evidenceId": "chk-files"
+      },
+      {
+        "part": "Disk data cable",
+        "observation": "Firmly connected, another cable was tried, the sound remains",
+        "evidenceId": "chk-cable"
+      },
+      {
+        "part": "Fan and case",
+        "observation": "Clean, normal temperature",
+        "evidenceId": "chk-fan"
+      }
+    ],
+    "note": {
+      "text": "Ratna says this is the only copy. There is no backup on the server or anywhere else.",
+      "evidenceId": "note-nobackup"
+    }
+  },
+  "evidence": {
+    "required": ["chk-disk", "note-nobackup"],
+    "supporting": ["chk-files", "scan-disk"]
+  },
+  "explanation": "The disk is clicking and dying while holding the only copy of important Finance data, so every attempt could erase it forever. Do not replace or tinker with it yet; escalate to the data recovery team.",
+  "ruleRefs": ["r-esc-3", "r-esc-1"],
+  "hints": [
+    "The disk is broken, but what is most valuable inside it?",
+    "There is no backup, so think about who is expert at rescuing data before the disk is replaced."
+  ],
+  "intel": {
+    "scan": [
+      {
+        "text": "Disk: 1,204 bad sectors, and the number keeps growing",
+        "evidenceId": "scan-disk"
+      },
+      {
+        "text": "RAM: passed test"
+      }
+    ]
+  }
+}

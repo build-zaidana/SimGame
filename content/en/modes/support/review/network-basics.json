@@ -1,0 +1,79 @@
+{
+  "items": [
+    {
+      "id": "rv-net-1",
+      "type": "mcq",
+      "conceptId": "network-basics",
+      "difficulty": 1,
+      "prompt": "Dewi's laptop has the IP address 169.254.12.7. What does it mean?",
+      "choices": [
+        "The internet is very fast",
+        "DNS is broken",
+        "The laptop failed to get an address from the router (DHCP failed)",
+        "The laptop has a virus"
+      ],
+      "answerIndex": 2,
+      "explanation": "A 169.254.x.x address appears when the computer doesn't get an IP address from the router. Check the cable, Wi-Fi, and router."
+    },
+    {
+      "id": "rv-net-2",
+      "type": "order-steps",
+      "conceptId": "network-basics",
+      "difficulty": 2,
+      "prompt": "Put the network checks in order, from nearest to farthest.",
+      "steps": [
+        "Check the cable is plugged in or Wi-Fi is on",
+        "Check the IP address it got",
+        "Ping the router (gateway)",
+        "Ping an IP address on the internet",
+        "Try opening a site name (DNS)"
+      ],
+      "explanation": "Check from your own device outward to the internet. That way you know at which point the path breaks."
+    },
+    {
+      "id": "rv-net-3",
+      "type": "tap-evidence",
+      "conceptId": "network-basics",
+      "difficulty": 2,
+      "prompt": "Tap the ping results that show the problem is in DNS.",
+      "parts": [
+        { "text": "Ping 192.168.1.1 (router): reply received.", "evidenceId": "n1" },
+        { "text": "Ping 203.0.113.10 (internet server): reply received.", "evidenceId": "n2" },
+        { "text": "Ping portal.nusa.test: name not found.", "evidenceId": "n3" },
+        { "text": "Network cable plugged in, port light on.", "evidenceId": "n4" }
+      ],
+      "answer": ["n2", "n3"],
+      "explanation": "An internet IP address can be pinged, but the site name isn't recognized. So the internet is connected and DNS is the problem."
+    },
+    {
+      "id": "rv-net-4",
+      "type": "mcq",
+      "conceptId": "network-basics",
+      "difficulty": 2,
+      "prompt": "Every computer on the 3rd floor of Nusa Digital loses internet at the same time. What is the decision?",
+      "choices": [
+        "Escalate to the network team, because the problem is in the central network",
+        "Replace the cable at every desk one by one",
+        "Guide all users to restart",
+        "Replace the Wi-Fi card in every laptop"
+      ],
+      "answerIndex": 0,
+      "explanation": "When a whole floor drops at once, the cause isn't each person's device. Hand it to the network team."
+    },
+    {
+      "id": "rv-net-5",
+      "type": "mcq",
+      "conceptId": "network-basics",
+      "difficulty": 1,
+      "prompt": "What is the job of DNS?",
+      "choices": [
+        "Giving the computer an IP address",
+        "Cooling the router",
+        "Storing the Wi-Fi password",
+        "Translating site names into IP addresses"
+      ],
+      "answerIndex": 3,
+      "explanation": "DNS is like a phone book that looks up the IP address of a site name. The router's DHCP is what gives computers their IP address."
+    }
+  ]
+}
