@@ -1,0 +1,34 @@
+{
+  "dialogues": [
+    {
+      "id": "support-01-intro",
+      "lines": [
+        {
+          "speaker": "joko",
+          "text": "Welcome to the IT Workshop! I'm Joko, the most senior technician here. Just call me Pak Joko."
+        },
+        {
+          "speaker": "joko",
+          "text": "Your job: read help tickets and diagnostic reports, mark the evidence, then decide."
+        },
+        {
+          "speaker": "joko",
+          "text": "GUIDE USER if the device is healthy and they just need to be shown how. FIX if something is wrong but can be sorted out."
+        },
+        {
+          "speaker": "joko",
+          "text": "If it needs special access or expertise, ESCALATE. Confused? Open the Workshop Handbook."
+        }
+      ]
+    },
+    {
+      "id": "support-01-outro",
+      "lines": [
+        {
+          "speaker": "joko",
+          "text": "First day done. Remember, half of all complaints are solved just by checking the simple things."
+        }
+      ]
+    }
+  ]
+}

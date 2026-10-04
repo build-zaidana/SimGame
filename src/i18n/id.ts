@@ -80,11 +80,12 @@ export const id = {
     newBadges: 'Lencana baru!',
     viewBadges: 'Lihat lencana',
     dismissBadges: 'Tutup',
+    deskPicker: 'Pilih meja',
   },
   explore: {
     canvasLabel: 'Kantor yang bisa dijelajahi',
     help: 'Klik atau sentuh peta, lalu jalan dengan tombol panah/WASD atau ketuk tujuan. Tekan E, Enter, atau Spasi untuk berinteraksi. Semua tujuan juga ada sebagai tombol di bawah.',
-    idle: 'Jalan ke meja, rak buku, toko, papan lencana, atau Mbak Rani.',
+    idle: 'Jalan ke meja, rak buku, toko, papan lencana, Mbak Rani, atau Pak Joko.',
     enter: 'Masuk',
     open: 'Buka',
     talk: 'Ngobrol',
@@ -92,6 +93,7 @@ export const id = {
     rulebookLabel: 'Rak Buku Panduan',
     badgesLabel: 'Papan Lencana',
     raniLabel: 'Mbak Rani',
+    jokoLabel: 'Pak Joko',
     raniTip: (rule: string) => `Tips hari ini: ${rule}`,
     setting: 'Kantor yang bisa dijelajahi (jalan dengan panah atau ketuk)',
   },
@@ -105,10 +107,14 @@ export const id = {
     tier: { bronze: 'Perunggu', silver: 'Perak', gold: 'Emas' } as Record<string, string>,
   },
   modes: {
-    soc: { title: 'Analis Keamanan (SOC)', deskTitle: 'Meja SOC' },
-    support: { title: 'Teknisi IT Support', deskTitle: 'Bengkel IT' },
-    dev: { title: 'Software Engineer', deskTitle: 'Meja Developer' },
-    data: { title: 'Analis Data / AI', deskTitle: 'Meja Data' },
+    soc: { title: 'Analis Keamanan (SOC)', deskTitle: 'Meja SOC', rulebook: 'Buku Panduan SOC' },
+    support: {
+      title: 'Teknisi IT Support',
+      deskTitle: 'Bengkel IT',
+      rulebook: 'Buku Panduan Bengkel',
+    },
+    dev: { title: 'Software Engineer', deskTitle: 'Meja Developer', rulebook: 'Buku Panduan' },
+    data: { title: 'Analis Data / AI', deskTitle: 'Meja Data', rulebook: 'Buku Panduan' },
   },
   decisions: {
     allow: 'Izinkan',
@@ -116,6 +122,9 @@ export const id = {
     escalate: 'Eskalasi',
     'reset-password': 'Reset Password',
     quarantine: 'Karantina',
+    guide: 'Arahkan Pengguna',
+    fix: 'Perbaiki',
+    replace: 'Ganti Komponen',
   } as Record<string, string>,
   desk: {
     visitorLabel: 'Dilaporkan oleh',
@@ -215,7 +224,7 @@ export const id = {
   mentor: {
     ask: 'Tanya Mentor',
     askAgain: 'Petunjuk lagi',
-    heading: 'Petunjuk Mbak Rani',
+    heading: (mentor: string) => `Petunjuk ${mentor}`,
     free: 'Petunjuk pertama gratis.',
     costs: 'Petunjuk berikutnya mengurangi skor kasus 10 poin.',
     noMore: 'Itu semua petunjuk untuk kasus ini.',
@@ -247,6 +256,7 @@ export const id = {
   speakers: {
     rani: 'Mbak Rani',
     kelabu: 'Kelabu',
+    joko: 'Pak Joko',
     narrator: '',
   } as Record<string, string>,
   stamps: {
@@ -255,6 +265,9 @@ export const id = {
     escalate: 'DIESKALASI',
     'reset-password': 'DIRESET',
     quarantine: 'DIKARANTINA',
+    guide: 'DIARAHKAN',
+    fix: 'DIPERBAIKI',
+    replace: 'DIGANTI',
   } as Record<string, string>,
   language: {
     label: 'Bahasa',
@@ -296,7 +309,8 @@ export const id = {
     rules: 'Aturan terkait:',
     continue: 'Lanjut',
     trustChange: (delta: number) => `Kepercayaan ${delta > 0 ? '+' : ''}${delta}`,
-    slipHeader: (caseId: string) => `SLIP SOC · ${caseId.toUpperCase()}`,
+    slipHeader: (desk: string, caseId: string) =>
+      `SLIP ${desk.toUpperCase()} · ${caseId.toUpperCase()}`,
     citations: {
       'threat-allowed': 'PERINGATAN: ancaman lolos ke klien. Kepercayaan turun banyak.',
       'legit-blocked': 'CATATAN: yang sah ikut diblokir, pekerjaan klien jadi terganggu.',
@@ -342,6 +356,60 @@ export const id = {
     finishPractice: 'Selesai latihan & kembali ke kantor',
     practiceNote: 'Jawaban di latihan tidak memengaruhi jadwal review.',
     empty: 'Tidak ada soal review untuk shift ini.',
+  },
+  support: {
+    ticket: {
+      heading: 'Tiket keluhan',
+      requester: 'Pelapor',
+      device: 'Perangkat',
+      subject: 'Keluhan',
+      description: 'Cerita pengguna',
+      history: 'Riwayat tiket',
+      queueTitle: (subject: string) => subject,
+    },
+    diagnostic: {
+      heading: 'Laporan diagnostik',
+      device: 'Perangkat',
+      readings: 'Angka sistem',
+      console: 'Keluaran perintah',
+      note: 'Catatan',
+      queueTitle: (device: string) => `Diagnostik: ${device}`,
+    },
+    hardware: {
+      heading: 'Inspeksi perangkat keras',
+      device: 'Perangkat',
+      checks: 'Hasil pemeriksaan',
+      note: 'Catatan',
+      queueTitle: (device: string) => `Inspeksi: ${device}`,
+    },
+    tools: {
+      pingHeading: 'Alat Ping: hasil uji koneksi',
+      scanHeading: 'Pemindai Perangkat Keras: kesehatan komponen',
+      pingName: 'Alat Ping',
+      scanName: 'Pemindai Perangkat Keras',
+    },
+    citations: {
+      'threat-allowed':
+        'PERINGATAN: kerusakan dibiarkan. Pengguna akan kembali dengan masalah lebih parah.',
+      'legit-blocked': 'CATATAN: tidak ada yang rusak. Waktu dan komponen terbuang.',
+      'needless-escalation': 'CATATAN: cukup diarahkan; spesialis jadi repot tanpa perlu.',
+    } as Record<string, string>,
+    visitors: {
+      ticketLines: [
+        'Pak, ini tiket saya. Bisa dibantu?',
+        'Dari pagi begini terus. Tolong dicek, ya.',
+        'Saya takut salah pencet, jadi saya lapor saja.',
+      ],
+      hardwareLines: [
+        'Laptopnya saya tinggal di sini, ya.',
+        'Tolong dicek fisiknya. Saya tidak berani buka sendiri.',
+      ],
+      system: { name: 'Agen Diagnostik', role: 'Laporan otomatis' },
+      systemLines: [
+        'BIP! Laporan kesehatan perangkat baru masuk.',
+        'BIP! Hasil diagnostik siap dibaca.',
+      ],
+    },
   },
   soc: {
     email: {

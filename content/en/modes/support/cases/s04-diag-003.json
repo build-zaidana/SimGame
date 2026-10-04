@@ -1,0 +1,70 @@
+{
+  "id": "s04-diag-003",
+  "type": "diagnostic",
+  "conceptIds": ["os-maintenance", "network-basics"],
+  "difficulty": 1,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "Office PC PC-0207",
+      "owner": "Ratna Dewi (Legal)"
+    },
+    "readings": [
+      {
+        "label": "Pending security updates",
+        "value": "14 updates",
+        "evidenceId": "r-pending"
+      },
+      {
+        "label": "Last update installed",
+        "value": "4 months ago",
+        "evidenceId": "r-last"
+      },
+      {
+        "label": "Update setting",
+        "value": "Paused manually by the user",
+        "evidenceId": "r-paused"
+      },
+      {
+        "label": "Disk used",
+        "value": "61%",
+        "evidenceId": "r-disk"
+      },
+      {
+        "label": "Antivirus",
+        "value": "On, latest definitions",
+        "evidenceId": "r-av"
+      }
+    ],
+    "console": [
+      {
+        "text": "> check-update  →  14 security updates available at update.nusadigital.test",
+        "evidenceId": "c-avail"
+      }
+    ],
+    "note": {
+      "text": "Ratna paused updates because she was afraid the computer would restart during a meeting.",
+      "evidenceId": "note-user"
+    }
+  },
+  "intel": {
+    "ping": [
+      {
+        "text": "Update server 10.20.0.30: reply 3 ms, 0% loss",
+        "evidenceId": "ping-update"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["r-pending", "r-last"],
+    "supporting": ["r-paused", "c-avail", "note-user", "ping-update"]
+  },
+  "explanation": "Security updates delayed for four months leave holes that attackers already know about. Fix it by resuming updates, installing all 14 official updates, then restarting outside meeting hours.",
+  "ruleRefs": ["r-os-2", "r-ts-4"],
+  "hints": [
+    "An active antivirus is not always enough. When was the system last updated?",
+    "Four months without security updates is a weak spot. The update server is also reachable."
+  ]
+}

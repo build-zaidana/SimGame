@@ -1,0 +1,76 @@
+{
+  "id": "support-03",
+  "order": 3,
+  "title": "Hari Tanpa Sinyal",
+  "durationGameMinutes": 120,
+  "realSecondsPerGameMinute": 3,
+  "unlocksChapters": ["ch-net"],
+  "introDialogue": "support-03-intro",
+  "outroDialogue": "support-03-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s03-ticket-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s03-diag-001",
+      "arriveAt": 9
+    },
+    {
+      "caseId": "s03-diag-002",
+      "arriveAt": 18
+    },
+    {
+      "caseId": "s03-ticket-002",
+      "arriveAt": 27
+    },
+    {
+      "caseId": "s03-diag-003",
+      "arriveAt": 36
+    },
+    {
+      "caseId": "s03-hw-001",
+      "arriveAt": 45
+    },
+    {
+      "caseId": "s03-ticket-003",
+      "arriveAt": 54
+    },
+    {
+      "caseId": "s03-diag-004",
+      "arriveAt": 63
+    },
+    {
+      "caseId": "s03-ticket-004",
+      "arriveAt": 72
+    },
+    {
+      "caseId": "s03-diag-005",
+      "arriveAt": 81
+    }
+  ],
+  "review": {
+    "count": 4,
+    "conceptIds": ["network-basics", "hardware-basics"]
+  },
+  "pay": {
+    "base": 40,
+    "perCase": 12
+  },
+  "newspaper": {
+    "headline": "Router Baru Dipasang, Keluhan Wi-Fi Berdatangan",
+    "lead": "PT Nusa Digital mengganti router di semua lantai akhir pekan lalu. Sejak itu, Bengkel IT menerima banyak keluhan internet lambat dan tidak tersambung.",
+    "impact": {
+      "good": "Kemarin, Bengkel IT tidak membongkar satu pun laptop sehat, dan semua komponen rusak terganti. Gudang suku cadang memuji teknisi baru.",
+      "mixed": "Kemarin, sebagian besar perangkat ditangani dengan benar, tapi ada komponen yang diganti tanpa perlu atau terlewat. Pak Joko mengingatkan: lihat buktinya dulu.",
+      "bad": "Kemarin, beberapa laptop dibongkar tanpa perlu dan ada kerusakan yang terlewat. Gudang suku cadang mulai kehabisan stok."
+    },
+    "tip": {
+      "title": "Tips: Ping dari Dekat ke Jauh",
+      "text": "Uji dulu router, lalu alamat internet, baru nama situs. Kalau hanya nama situs yang gagal, curigai DNS."
+    },
+    "classified": "HILANG: Satu kabel jaringan biru, terakhir terlihat di bawah meja Pemasaran. Harap dikembalikan.",
+    "sources": ["CompTIA Network+: Troubleshooting Methodology", "IETF RFC 3927"]
+  }
+}

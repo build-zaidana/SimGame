@@ -1,0 +1,61 @@
+{
+  "id": "s03-diag-001",
+  "type": "diagnostic",
+  "conceptIds": ["network-basics", "troubleshooting"],
+  "difficulty": 1,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "Desktop PC PC-0318",
+      "owner": "Bayu Pratama"
+    },
+    "readings": [
+      {
+        "label": "LAN cable",
+        "value": "Connected, port light green",
+        "evidenceId": "r-cable"
+      },
+      {
+        "label": "IP address",
+        "value": "169.254.33.7",
+        "evidenceId": "r-ip"
+      },
+      {
+        "label": "Gateway (router)",
+        "value": "(empty)",
+        "evidenceId": "r-gw"
+      },
+      {
+        "label": "Address mode",
+        "value": "Automatic (DHCP)",
+        "evidenceId": "r-mode"
+      }
+    ],
+    "console": [
+      {
+        "text": "> ping 10.20.3.1  →  Failed: network unreachable",
+        "evidenceId": "con-ping-gw"
+      },
+      {
+        "text": "> ping 10.20.3.27 (next PC)  →  Failed: network unreachable",
+        "evidenceId": "con-ping-peer"
+      }
+    ],
+    "note": {
+      "text": "Bayu: the PC was moved to another desk this morning. Coworkers on floor 3 are fine.",
+      "evidenceId": "note"
+    }
+  },
+  "evidence": {
+    "required": ["r-ip"],
+    "supporting": ["r-mode", "con-ping-gw", "note"]
+  },
+  "explanation": "The address 169.254.33.7 means the PC failed to get an address from the router via DHCP, even though the cable is connected and coworkers are fine. Fix it by requesting a new IP address (renew) or restarting the network adapter.",
+  "ruleRefs": ["r-net-2", "r-ts-4"],
+  "hints": [
+    "Check from near to far: the cable is fine, so what about the IP address?",
+    "An address starting with 169.254 has a special meaning. Does this need a new part?"
+  ]
+}

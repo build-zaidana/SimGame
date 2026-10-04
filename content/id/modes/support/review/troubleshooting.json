@@ -1,0 +1,79 @@
+{
+  "items": [
+    {
+      "id": "rv-ts-1",
+      "type": "order-steps",
+      "conceptId": "troubleshooting",
+      "difficulty": 1,
+      "prompt": "Urutkan langkah troubleshooting yang benar.",
+      "steps": [
+        "Kumpulkan gejala",
+        "Cek yang paling sederhana dulu",
+        "Lihat bukti",
+        "Ubah satu hal, lalu uji lagi",
+        "Catat penyebab dan solusinya di tiket"
+      ],
+      "explanation": "Mulai dari gejala dan hal sederhana, baru ubah sesuatu sambil menguji. Catatan di akhir membantu kasus serupa selesai lebih cepat."
+    },
+    {
+      "id": "rv-ts-2",
+      "type": "mcq",
+      "conceptId": "troubleshooting",
+      "difficulty": 1,
+      "prompt": "Monitor Bu Sari di PT Nusa Digital tiba-tiba gelap. Apa yang dicek pertama kali?",
+      "choices": [
+        "Langsung pesan monitor baru",
+        "Kabel daya, kabel video, dan tombol power monitor",
+        "Bongkar casing komputer",
+        "Pasang ulang sistem operasi"
+      ],
+      "answerIndex": 1,
+      "explanation": "Banyak \"kerusakan\" ternyata hanya kabel copot atau tombol mati. Cek yang paling sederhana dulu sebelum membongkar."
+    },
+    {
+      "id": "rv-ts-3",
+      "type": "mcq",
+      "conceptId": "troubleshooting",
+      "difficulty": 2,
+      "prompt": "Kamu mengganti kabel, menukar mouse, dan restart sekaligus, lalu masalahnya hilang. Apa kekurangannya?",
+      "choices": [
+        "Tidak ada, yang penting sudah beres",
+        "Mouse lama pasti rusak",
+        "Kamu tidak tahu perubahan mana yang benar-benar menyelesaikan masalah",
+        "Restart selalu memperburuk masalah"
+      ],
+      "answerIndex": 2,
+      "explanation": "Ubah satu hal setiap kali, lalu uji lagi. Dengan begitu penyebab aslinya jelas dan bisa dicatat di tiket."
+    },
+    {
+      "id": "rv-ts-4",
+      "type": "tap-evidence",
+      "conceptId": "troubleshooting",
+      "difficulty": 2,
+      "prompt": "Ketuk bagian tiket yang merupakan bukti, bukan rumor.",
+      "parts": [
+        { "text": "Kata teman sebelah, laptop merek ini memang sering rusak.", "evidenceId": "t1" },
+        { "text": "Layar menampilkan pesan error \"Disk tidak ditemukan\".", "evidenceId": "t2" },
+        { "text": "Lampu indikator disk tidak menyala sama sekali.", "evidenceId": "t3" },
+        { "text": "Pengguna merasa laptopnya sudah tua.", "evidenceId": "t4" }
+      ],
+      "answer": ["t2", "t3"],
+      "explanation": "Pesan error dan lampu indikator adalah bukti yang bisa dipercaya. Pendapat dan rumor tidak membuktikan apa pun."
+    },
+    {
+      "id": "rv-ts-5",
+      "type": "mcq",
+      "conceptId": "troubleshooting",
+      "difficulty": 1,
+      "prompt": "Kipas laptop berdebu tebal sehingga laptop sering mati sendiri. Keputusan yang tepat adalah…",
+      "choices": [
+        "Perbaiki: bersihkan debunya, lalu uji lagi",
+        "Arahkan Pengguna",
+        "Ganti Komponen kipasnya",
+        "Eskalasi ke tim SOC"
+      ],
+      "answerIndex": 0,
+      "explanation": "Debu bisa dibersihkan tanpa suku cadang baru, jadi cukup Perbaiki. Ganti hanya kalau ada kerusakan fisik."
+    }
+  ]
+}

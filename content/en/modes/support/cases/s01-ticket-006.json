@@ -1,0 +1,57 @@
+{
+  "id": "s01-ticket-006",
+  "type": "ticket",
+  "conceptIds": ["troubleshooting"],
+  "difficulty": 1,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Yoga Prasetyo",
+      "department": "Legal"
+    },
+    "device": {
+      "text": "Wired mouse MS-0377 on PC-0421",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Mouse cursor jumps around by itself",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "When I move the mouse, the cursor stutters and then jumps to the corner of the screen.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "The mouse cable is plugged in firmly and its sensor light is red.",
+        "evidenceId": "desc-cable"
+      },
+      {
+        "text": "When I flipped the mouse over, the sensor hole underneath was covered by a clump of dust and hair.",
+        "evidenceId": "desc-dust"
+      },
+      {
+        "text": "Does my computer have a virus?",
+        "evidenceId": "desc-virus"
+      }
+    ],
+    "history": [
+      {
+        "text": "Last week: this mouse worked normally in the routine test.",
+        "evidenceId": "hist-ok"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-dust"],
+    "supporting": ["desc-cable", "hist-ok"]
+  },
+  "explanation": "A clump of dust and hair covers the sensor hole, so the mouse misreads movement; it is not a virus. Fix it by cleaning the sensor, then test again.",
+  "ruleRefs": ["r-ts-4", "r-ts-3"],
+  "hints": [
+    "Don't jump to the virus guess. Look at the physical evidence on the mouse.",
+    "The mouse sensor reads the desk surface. What is blocking it?"
+  ]
+}

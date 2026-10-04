@@ -1,0 +1,73 @@
+{
+  "id": "s03-diag-002",
+  "type": "diagnostic",
+  "conceptIds": ["network-basics"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "Laptop kantor NB-0644",
+      "owner": "Fitri Handayani"
+    },
+    "readings": [
+      {
+        "label": "Alamat IP",
+        "value": "10.20.2.58",
+        "evidenceId": "r-ip"
+      },
+      {
+        "label": "Gateway (router)",
+        "value": "10.20.2.1",
+        "evidenceId": "r-gw"
+      },
+      {
+        "label": "Server DNS",
+        "value": "10.99.99.99 (diisi manual)",
+        "evidenceId": "r-dns"
+      },
+      {
+        "label": "Server DNS kantor",
+        "value": "Otomatis dari router",
+        "evidenceId": "r-dns-office"
+      }
+    ],
+    "console": [
+      {
+        "text": "> ping 10.20.2.1  →  Balasan dari 10.20.2.1: waktu=2ms",
+        "evidenceId": "con-ping-gw"
+      },
+      {
+        "text": "> ping 203.0.113.10  →  Balasan dari 203.0.113.10: waktu=18ms",
+        "evidenceId": "con-ping-ip"
+      },
+      {
+        "text": "> ping portal.nusadigital.test  →  Gagal: nama tidak ditemukan",
+        "evidenceId": "con-ping-name"
+      }
+    ],
+    "note": {
+      "text": "Fitri: kemarin saya ikut tutorial di internet untuk \"mempercepat internet\".",
+      "evidenceId": "note"
+    }
+  },
+  "intel": {
+    "ping": [
+      {
+        "text": "Server DNS 10.99.99.99: tidak ada balasan (alamat tidak dikenal di jaringan kantor)",
+        "evidenceId": "ping-dns"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["r-dns", "con-ping-name"],
+    "supporting": ["con-ping-ip", "note", "ping-dns"]
+  },
+  "explanation": "Ping ke alamat IP berhasil, tapi nama situs gagal ditemukan karena server DNS diisi manual dengan alamat yang salah. Perbaiki dengan mengembalikan pengaturan DNS ke otomatis.",
+  "ruleRefs": ["r-net-3", "r-ts-4"],
+  "hints": [
+    "Bandingkan ping ke alamat IP dengan ping ke nama situs.",
+    "IP bisa, nama gagal: lihat siapa yang menerjemahkan nama, dan apakah pengaturannya diubah manual."
+  ]
+}

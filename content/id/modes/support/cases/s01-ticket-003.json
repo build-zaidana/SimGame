@@ -1,0 +1,57 @@
+{
+  "id": "s01-ticket-003",
+  "type": "ticket",
+  "conceptIds": ["troubleshooting", "user-guidance"],
+  "difficulty": 2,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Dimas Pratama",
+      "department": "Penjualan"
+    },
+    "device": {
+      "text": "Laptop kantor NB-0518",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Tidak bisa membuka folder Laporan-Direksi",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Atasan meminta saya ikut menyiapkan laporan di folder bersama Laporan-Direksi.",
+        "evidenceId": "desc-new-access"
+      },
+      {
+        "text": "Saat dibuka muncul pesan: \"Akses ditolak. Anda tidak punya izin ke folder ini di server fs01.nusadigital.test.\"",
+        "evidenceId": "desc-denied"
+      },
+      {
+        "text": "Folder Penjualan di server yang sama bisa saya buka seperti biasa.",
+        "evidenceId": "desc-other-ok"
+      },
+      {
+        "text": "Internet dan email saya lancar.",
+        "evidenceId": "desc-net"
+      }
+    ],
+    "history": [
+      {
+        "text": "Tahun lalu: laptop ini dipasang ulang, semua normal.",
+        "evidenceId": "hist-reinstall"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-denied", "desc-new-access"],
+    "supporting": ["desc-other-ok"]
+  },
+  "explanation": "Laptop dan jaringannya sehat; pesan \"Akses ditolak\" berarti akun Dimas belum diberi izin ke folder server yang terbatas. Izin seperti itu hanya bisa diberikan admin server setelah disetujui pemilik folder, jadi eskalasi.",
+  "ruleRefs": ["r-ts-5", "r-ts-3"],
+  "hints": [
+    "Folder lain di server yang sama bisa dibuka. Jadi apa yang berbeda dengan folder ini?",
+    "Baca pesan errornya. Siapa yang berwenang memberi izin ke folder server?"
+  ]
+}

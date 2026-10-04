@@ -1,0 +1,30 @@
+{
+  "dialogues": [
+    {
+      "id": "support-02-intro",
+      "lines": [
+        {
+          "speaker": "joko",
+          "text": "Hari ini banyak laptop datang ke meja. Kita mulai belajar perangkat keras."
+        },
+        {
+          "speaker": "joko",
+          "text": "Keputusan baru terbuka: GANTI KOMPONEN. Pakai hanya kalau buktinya menunjukkan kerusakan fisik."
+        },
+        {
+          "speaker": "joko",
+          "text": "Yang longgar atau berdebu cukup diperbaiki. Suku cadang itu mahal, jangan diganti sembarangan."
+        }
+      ]
+    },
+    {
+      "id": "support-02-outro",
+      "lines": [
+        {
+          "speaker": "joko",
+          "text": "Bagus. Tanganmu mulai terbiasa memegang obeng. Pemindai di Toko Alat bisa membantu membaca kesehatan komponen."
+        }
+      ]
+    }
+  ]
+}

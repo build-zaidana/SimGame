@@ -3,7 +3,7 @@ import { answerReview, decideAll, openNextCase, startShift } from './helpers.ts'
 
 /** Teks progres di kartu Meja SOC (shift selesai · gaji · kepercayaan). */
 const progressLine = (page: Page) =>
-  page.getByText(/^Shift selesai: \d+ · Gaji: Rp \d+ · Kepercayaan klien: \d+$/);
+  page.getByText(/^Shift selesai: \d+ · Gaji: Rp \d+ · Kepercayaan klien: \d+$/).first();
 
 // PRD S5: Mode Latihan mengulang shift yang sudah selesai tanpa memengaruhi progres utama.
 test('practice replays a finished shift without changing main progress', async ({ page }) => {

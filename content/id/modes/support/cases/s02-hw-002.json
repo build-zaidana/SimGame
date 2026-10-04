@@ -1,0 +1,70 @@
+{
+  "id": "s02-hw-002",
+  "type": "hardware",
+  "conceptIds": ["hardware-basics", "troubleshooting"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "acceptableDecisions": {
+    "replace": 0.5
+  },
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "PC meja KS-0214",
+      "owner": "Andi Wijaya (Penjualan)"
+    },
+    "checks": [
+      {
+        "part": "Bunyi saat dinyalakan",
+        "observation": "Bip panjang berulang, layar tetap hitam",
+        "evidenceId": "chk-beep"
+      },
+      {
+        "part": "RAM slot 1",
+        "observation": "Terpasang rapat, pengunci kiri-kanan terkunci",
+        "evidenceId": "chk-ram1"
+      },
+      {
+        "part": "RAM slot 2",
+        "observation": "Miring, salah satu pengunci terbuka",
+        "evidenceId": "chk-ram2"
+      },
+      {
+        "part": "Keping RAM",
+        "observation": "Utuh, tidak ada bekas gosong atau retak",
+        "evidenceId": "chk-ramchip"
+      },
+      {
+        "part": "Kabel daya",
+        "observation": "Terpasang, lampu power menyala",
+        "evidenceId": "chk-power"
+      }
+    ],
+    "note": {
+      "text": "Andi: kemarin PC ini dipindah ke meja baru dan sempat terbentur.",
+      "evidenceId": "note-moved"
+    }
+  },
+  "evidence": {
+    "required": ["chk-ram2", "chk-beep"],
+    "supporting": ["note-moved", "chk-ramchip", "scan-ram"]
+  },
+  "explanation": "Benturan saat dipindah membuat RAM di slot 2 miring, sehingga PC berbunyi bip dan tidak tampil apa-apa. Kepingnya utuh, jadi cukup pasang ulang RAM sampai terkunci lalu uji lagi.",
+  "ruleRefs": ["r-hw-2", "r-ts-4"],
+  "hints": [
+    "Bunyi bip saat menyala sering terkait memori kerja komputer.",
+    "Bandingkan dua slot RAM: mana yang posisinya tidak rapat, dan apakah kepingnya sendiri rusak?"
+  ],
+  "intel": {
+    "scan": [
+      {
+        "text": "RAM slot 2: kontak tidak sempurna terdeteksi",
+        "evidenceId": "scan-ram"
+      },
+      {
+        "text": "Tes memori kedua keping: lulus"
+      }
+    ]
+  }
+}

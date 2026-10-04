@@ -1,0 +1,30 @@
+{
+  "dialogues": [
+    {
+      "id": "support-02-intro",
+      "lines": [
+        {
+          "speaker": "joko",
+          "text": "Lots of laptops are coming to the desk today. Let's start learning hardware."
+        },
+        {
+          "speaker": "joko",
+          "text": "A new decision is open: REPLACE PART. Use it only when the evidence shows physical damage."
+        },
+        {
+          "speaker": "joko",
+          "text": "Loose or dusty parts just need fixing. Spare parts are expensive, don't swap them carelessly."
+        }
+      ]
+    },
+    {
+      "id": "support-02-outro",
+      "lines": [
+        {
+          "speaker": "joko",
+          "text": "Good. Your hands are getting used to a screwdriver. The scanner in the Tool Shop can help you read component health."
+        }
+      ]
+    }
+  ]
+}

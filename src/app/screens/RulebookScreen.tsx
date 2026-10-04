@@ -1,24 +1,19 @@
-import { useEffect } from 'react';
 import { t as id } from '../../i18n/index.ts';
-import { modes } from '../../modes/registry.ts';
+import { rulebookTitle } from '../../modes/registry.ts';
 import { newModeProgress } from '../../persistence/saveSchema.ts';
 import { useAppStore } from '../store.ts';
+import { useMenuMode } from '../useMenuMode.ts';
+import { ModeTabs } from '../ui/ModeTabs.tsx';
 import { telemetry } from '../telemetry.ts';
 import { Rulebook } from '../ui/Rulebook.tsx';
 import { btnSecondary } from '../ui/styles.ts';
 
 export function RulebookScreen() {
-  const content = useAppStore((s) => s.content);
   const save = useAppStore((s) => s.save);
   const session = useAppStore((s) => s.session);
   const focusChapterId = useAppStore((s) => s.rulebookFocus);
   const closeRulebook = useAppStore((s) => s.back);
-  const preloadContent = useAppStore((s) => s.preloadContent);
-  const modeId = session?.modeId ?? modes[0]?.id ?? 'soc';
-
-  useEffect(() => {
-    if (!content) void preloadContent(modeId);
-  }, [content, modeId, preloadContent]);
+  const { modeId, content, inSession } = useMenuMode();
 
   const progress = save?.modes[modeId] ?? newModeProgress();
   return (
@@ -28,8 +23,9 @@ export function RulebookScreen() {
           <span aria-hidden="true">← </span>
           {id.rulebook.back}
         </button>
-        <h1 className="font-display text-2xl text-accent">{id.rulebook.heading}</h1>
+        <h1 className="font-display text-2xl text-accent">{rulebookTitle(modeId)}</h1>
       </div>
+      <ModeTabs current={modeId} hidden={inSession} />
       {content && (
         <Rulebook
           chapters={content.rulebook.chapters}

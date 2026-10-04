@@ -1,0 +1,61 @@
+{
+  "id": "s03-diag-003",
+  "type": "diagnostic",
+  "conceptIds": ["network-basics", "user-guidance"],
+  "difficulty": 2,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "device": {
+      "name": "Laptop kantor NB-0705",
+      "owner": "Andi Saputra"
+    },
+    "readings": [
+      {
+        "label": "Wi-Fi tersambung ke",
+        "value": "NusaTamu (jaringan tamu)",
+        "evidenceId": "r-ssid"
+      },
+      {
+        "label": "Kekuatan sinyal",
+        "value": "Sangat baik (4/4)",
+        "evidenceId": "r-signal"
+      },
+      {
+        "label": "Alamat IP",
+        "value": "192.168.50.23",
+        "evidenceId": "r-ip"
+      },
+      {
+        "label": "Wi-Fi kantor tersedia",
+        "value": "NusaKantor (belum dipilih)",
+        "evidenceId": "r-office"
+      }
+    ],
+    "console": [
+      {
+        "text": "> ping 203.0.113.10  →  Balasan dari 203.0.113.10: waktu=15ms",
+        "evidenceId": "con-internet"
+      },
+      {
+        "text": "> ping portal.nusadigital.test  →  Gagal: diblokir oleh jaringan tamu",
+        "evidenceId": "con-portal"
+      }
+    ],
+    "note": {
+      "text": "Andi: internet lancar, tapi Portal Aplikasi kantor tidak mau terbuka. Apa portalnya diretas?",
+      "evidenceId": "note"
+    }
+  },
+  "evidence": {
+    "required": ["r-ssid"],
+    "supporting": ["r-office", "con-portal", "con-internet"]
+  },
+  "explanation": "Laptop Andi tersambung ke NusaTamu, jaringan tamu yang memang tidak boleh membuka sistem internal kantor. Perangkat sehat, jadi arahkan Andi berpindah ke Wi-Fi kantor NusaKantor.",
+  "ruleRefs": ["r-guide-1", "r-guide-2"],
+  "hints": [
+    "Internet lancar, hanya portal kantor yang gagal. Lihat dulu laptop ini tersambung ke jaringan mana.",
+    "Jaringan tamu sengaja dipisah dari sistem internal. Apakah ada yang rusak di sini?"
+  ]
+}

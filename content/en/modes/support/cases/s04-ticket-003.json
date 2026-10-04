@@ -1,0 +1,57 @@
+{
+  "id": "s04-ticket-003",
+  "type": "ticket",
+  "conceptIds": ["os-maintenance", "user-guidance"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Maya Anggraini",
+      "department": "HR"
+    },
+    "device": {
+      "text": "Office laptop NB-0733",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "My laptop blocks an app I downloaded, is it broken?",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "I wanted to install a free PDF editor from the site pdf-gratis-banget.example.",
+        "evidenceId": "desc-site"
+      },
+      {
+        "text": "When I opened it a warning appeared: 'Installation blocked. Use the office App Portal.'",
+        "evidenceId": "desc-blocked"
+      },
+      {
+        "text": "Other than that the laptop runs smoothly, email and the Attendance app open fine.",
+        "evidenceId": "desc-normal"
+      },
+      {
+        "text": "Can you please turn off the block?",
+        "evidenceId": "desc-ask"
+      }
+    ],
+    "history": [
+      {
+        "text": "The App Portal (portal.nusadigital.test) already offers an official PDF editor.",
+        "evidenceId": "hist-portal"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-blocked"],
+    "supporting": ["desc-site", "desc-normal", "hist-portal"]
+  },
+  "explanation": "The laptop is healthy; the block is an office rule so apps from random sites can't bring in malware (harmful programs). Guide Maya to install the official PDF editor from the App Portal.",
+  "ruleRefs": ["r-os-4", "r-guide-1"],
+  "hints": [
+    "Read the warning. Is it a sign of damage or an office rule?",
+    "Office apps are installed from the App Portal, and it already has an official PDF editor."
+  ]
+}

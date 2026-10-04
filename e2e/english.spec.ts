@@ -14,7 +14,7 @@ test('the whole game can be played in English, and the choice survives a reload'
   await page.getByRole('button', { name: 'Play' }).click();
 
   await expect(page.getByRole('heading', { name: 'Nusa Digital Office' })).toBeVisible();
-  await page.getByRole('button', { name: 'Start Shift 1: First Day' }).click();
+  await page.getByRole('button', { name: 'Start Shift 1: First Day', exact: true }).click();
 
   // Morning paper and mentor briefing in English.
   const dialog = page.getByRole('dialog');
@@ -29,7 +29,7 @@ test('the whole game can be played in English, and the choice survives a reload'
   await expect(page.getByTestId('document')).toContainText('Dear Customer');
   await page.locator('[data-evidence="sender"]').click();
   await page.getByRole('button', { name: /Block/ }).click();
-  await expect(page.getByRole('dialog')).toContainText('SOC SLIP');
+  await expect(page.getByRole('dialog')).toContainText('SOC DESK SLIP');
   await expect(page.getByRole('dialog').getByRole('button', { name: 'Continue' })).toBeVisible();
 
   // Reload: still English, and the shift resumes where it was.

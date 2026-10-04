@@ -1,0 +1,57 @@
+{
+  "id": "s02-ticket-003",
+  "type": "ticket",
+  "conceptIds": ["user-guidance"],
+  "difficulty": 2,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Rudi Hartono",
+      "department": "Keuangan"
+    },
+    "device": {
+      "text": "Laptop kantor NB-0299",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Tombol F5 rusak, malah mengecilkan suara",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Biasanya F5 saya pakai untuk memuat ulang halaman Portal Aplikasi.",
+        "evidenceId": "desc-usual"
+      },
+      {
+        "text": "Sejak tadi, F5 malah mengecilkan suara dan F2 meredupkan layar.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "Saya sempat menekan tombol Fn dan Esc bersamaan waktu membersihkan keyboard.",
+        "evidenceId": "desc-fnesc"
+      },
+      {
+        "text": "Lampu kecil di tombol Fn sekarang menyala. Semua huruf dan angka lain normal.",
+        "evidenceId": "desc-fnlamp"
+      }
+    ],
+    "history": [
+      {
+        "text": "Tiga bulan lalu: keyboard laptop ini diganti baru karena ketumpahan kopi.",
+        "evidenceId": "hist-keyboard"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-fnlamp"],
+    "supporting": ["desc-fnesc", "desc-symptom"]
+  },
+  "explanation": "Menekan Fn dan Esc bersamaan menyalakan Fn Lock, jadi tombol F1 sampai F12 menjalankan fungsi khusus seperti suara dan kecerahan. Keyboardnya sehat, cukup arahkan Rudi menekan Fn dan Esc lagi untuk mematikannya.",
+  "ruleRefs": ["r-guide-1", "r-guide-2"],
+  "hints": [
+    "Semua tombol lain normal, hanya deretan F yang berubah. Apa yang Rudi tekan sebelumnya?",
+    "Lampu di tombol Fn menandakan Fn Lock sedang aktif."
+  ]
+}

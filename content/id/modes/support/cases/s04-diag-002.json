@@ -1,0 +1,70 @@
+{
+  "id": "s04-diag-002",
+  "type": "diagnostic",
+  "conceptIds": ["os-maintenance", "user-guidance"],
+  "difficulty": 2,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "device": {
+      "name": "Laptop kantor NB-0609",
+      "owner": "Andi Kurniawan (Penjualan)"
+    },
+    "readings": [
+      {
+        "label": "Update terakhir",
+        "value": "Selesai dipasang pukul 08.10",
+        "evidenceId": "r-update"
+      },
+      {
+        "label": "CPU",
+        "value": "9% sekarang (sempat 95% pukul 08.10–08.20)",
+        "evidenceId": "r-cpu"
+      },
+      {
+        "label": "RAM",
+        "value": "38% dari 8 GB",
+        "evidenceId": "r-ram"
+      },
+      {
+        "label": "Disk terpakai",
+        "value": "52%",
+        "evidenceId": "r-disk"
+      },
+      {
+        "label": "Kesehatan SSD",
+        "value": "97% (baik)",
+        "evidenceId": "r-ssd"
+      }
+    ],
+    "console": [
+      {
+        "text": "> proses-berat  →  Tidak ada proses yang memakai CPU di atas 5%",
+        "evidenceId": "c-proc"
+      }
+    ],
+    "note": {
+      "text": "Andi: 'Habis update, laptop lemot sekali sepuluh menit. Tolong ganti laptop saya!'",
+      "evidenceId": "note-user"
+    }
+  },
+  "intel": {
+    "scan": [
+      {
+        "text": "Semua komponen: lolos uji, suhu 48°C",
+        "evidenceId": "scan-health"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["r-cpu"],
+    "supporting": ["r-update", "r-ram", "r-disk", "r-ssd", "c-proc", "scan-health"]
+  },
+  "explanation": "Setelah update, sistem butuh beberapa menit untuk menyelesaikan pemasangan, jadi wajar sempat lambat; sekarang CPU, RAM, disk, dan SSD semuanya normal. Arahkan Andi bahwa ini wajar dan laptopnya tidak perlu diganti.",
+  "ruleRefs": ["r-guide-1", "r-ts-3"],
+  "hints": [
+    "Kapan laptop lambat, dan bagaimana angkanya sekarang?",
+    "CPU tinggi hanya sesaat tepat setelah update selesai. Apakah ada komponen yang bermasalah sekarang?"
+  ]
+}

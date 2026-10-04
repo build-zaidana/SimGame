@@ -1,0 +1,65 @@
+{
+  "id": "s04-ticket-002",
+  "type": "ticket",
+  "conceptIds": ["os-maintenance", "troubleshooting"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Lestari Wahyuni",
+      "department": "Finance"
+    },
+    "device": {
+      "text": "Office laptop NB-0244 (prints to the 2nd floor printer)",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Printouts are a mess, letters turn into strange symbols",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Since this morning all my reports print out full of random symbols.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "Yesterday afternoon my laptop installed a new printer driver update.",
+        "evidenceId": "desc-driver"
+      },
+      {
+        "text": "My colleague next to me, who has not updated, can print normally to the same printer.",
+        "evidenceId": "desc-colleague"
+      },
+      {
+        "text": "I already checked the paper and ink, both are still full.",
+        "evidenceId": "desc-supplies"
+      }
+    ],
+    "history": [
+      {
+        "text": "Last week: the 2nd floor printer was serviced, the test print was good.",
+        "evidenceId": "hist-service"
+      }
+    ]
+  },
+  "intel": {
+    "ping": [
+      {
+        "text": "2nd floor printer (10.20.2.15): reply 1 ms, 0% loss",
+        "evidenceId": "ping-printer"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-driver", "desc-colleague"],
+    "supporting": ["desc-symptom", "hist-service", "ping-printer"]
+  },
+  "explanation": "The problem started right after the printer driver on Lestari's laptop was updated, while the printer works fine for others. Fix it by rolling the driver back to the previous version.",
+  "ruleRefs": ["r-os-3", "r-ts-2"],
+  "hints": [
+    "What changed right before the problem started?",
+    "A colleague using the same printer has no problem. The difference is the driver on Lestari's laptop."
+  ]
+}

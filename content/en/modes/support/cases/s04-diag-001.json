@@ -1,0 +1,70 @@
+{
+  "id": "s04-diag-001",
+  "type": "diagnostic",
+  "conceptIds": ["os-maintenance", "troubleshooting"],
+  "difficulty": 1,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "Office laptop NB-0318",
+      "owner": "Wulan Sari (Design)"
+    },
+    "readings": [
+      {
+        "label": "Disk C: used",
+        "value": "97% (233 of 240 GB)",
+        "evidenceId": "r-disk"
+      },
+      {
+        "label": "Temporary files (temp)",
+        "value": "41 GB",
+        "evidenceId": "r-temp"
+      },
+      {
+        "label": "Downloads folder",
+        "value": "68 GB, mostly raw videos",
+        "evidenceId": "r-downloads"
+      },
+      {
+        "label": "CPU",
+        "value": "12%",
+        "evidenceId": "r-cpu"
+      },
+      {
+        "label": "RAM",
+        "value": "45% of 16 GB",
+        "evidenceId": "r-ram"
+      }
+    ],
+    "console": [
+      {
+        "text": "> check-disk C:  →  Warning: only 7 GB of free space left",
+        "evidenceId": "c-warn"
+      }
+    ],
+    "note": {
+      "text": "Wulan: 'The laptop is very slow, opening one design file can take five minutes.'",
+      "evidenceId": "note-user"
+    }
+  },
+  "intel": {
+    "scan": [
+      {
+        "text": "SSD: 96% health, no bad sectors",
+        "evidenceId": "scan-ssd"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["r-disk", "r-temp"],
+    "supporting": ["r-downloads", "c-warn", "note-user", "scan-ssd"]
+  },
+  "explanation": "A disk that is 97% full leaves the laptop no room to work, even though the CPU, RAM and SSD are healthy. Fix it by deleting 41 GB of temporary files and moving the big videos to office storage.",
+  "ruleRefs": ["r-os-1", "r-ts-4"],
+  "hints": [
+    "Compare all the numbers. Which one is far above a normal level?",
+    "A disk above 90% makes a computer slow. What can be deleted or moved?"
+  ]
+}

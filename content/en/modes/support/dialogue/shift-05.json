@@ -1,0 +1,38 @@
+{
+  "dialogues": [
+    {
+      "id": "support-05-intro",
+      "lines": [
+        {
+          "speaker": "joko",
+          "text": "Today's cases are all mixed up. Some are dangerous, too."
+        },
+        {
+          "speaker": "joko",
+          "text": "The last chapter is open: Escalation & Safety. Knowing your limits is the mark of a great technician."
+        },
+        {
+          "speaker": "joko",
+          "text": "If a laptop acts strangely, don't clean it yourself. Disconnect it from the network and hand it to Mbak Rani's SOC team."
+        }
+      ]
+    },
+    {
+      "id": "support-05-outro",
+      "lines": [
+        {
+          "speaker": "joko",
+          "text": "The strange laptop is with the SOC team now. Mbak Rani says it's lucky you didn't delete anything."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "...Too careful for a technician. How annoying."
+        },
+        {
+          "speaker": "joko",
+          "text": "You've earned the title of IT Workshop technician. Drop by anytime!"
+        }
+      ]
+    }
+  ]
+}

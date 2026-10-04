@@ -57,7 +57,7 @@ test('export on a phone, import on a desktop keeps all progress', async ({ brows
   const page = await desktop.newPage();
   await page.goto('/');
   await page.getByRole('button', { name: 'Main' }).click();
-  await expect(page.getByText('Shift selesai: 0')).toBeVisible();
+  await expect(page.getByText('Shift selesai: 0').first()).toBeVisible();
 
   await page.getByRole('button', { name: 'Pindah Save' }).click();
   await page.getByTestId('import-code').fill(code);

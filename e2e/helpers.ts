@@ -2,7 +2,9 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { expect, type Page } from '@playwright/test';
 
-const REVIEW_DIR = join(import.meta.dirname, '..', 'content/id/modes/soc/review');
+const REVIEW_DIRS = ['soc', 'support'].map((m) =>
+  join(import.meta.dirname, '..', `content/id/modes/${m}/review`),
+);
 
 interface ReviewKey {
   id: string;
@@ -14,15 +16,19 @@ interface ReviewKey {
 
 /** Kunci jawaban dibaca dari konten di disk (tidak pernah dikirim ke UI). */
 export const reviewKeys: Map<string, ReviewKey> = new Map(
-  readdirSync(REVIEW_DIR).flatMap((f) =>
-    (JSON.parse(readFileSync(join(REVIEW_DIR, f), 'utf8')) as { items: ReviewKey[] }).items.map(
-      (i) => [i.id, i] as const,
+  REVIEW_DIRS.flatMap((dir) =>
+    readdirSync(dir).flatMap((f) =>
+      (JSON.parse(readFileSync(join(dir, f), 'utf8')) as { items: ReviewKey[] }).items.map(
+        (i) => [i.id, i] as const,
+      ),
     ),
   ),
 );
 
 export async function startShift(page: Page, buttonName: string | RegExp, heading: string) {
-  await page.getByRole('button', { name: buttonName }).click();
+  await page
+    .getByRole('button', { name: buttonName, exact: typeof buttonName === 'string' })
+    .click();
   const briefing = page.getByRole('dialog');
   await expect(briefing.getByRole('heading', { name: heading })).toBeVisible();
   while (await briefing.getByRole('button', { name: 'Lanjut' }).isVisible()) {

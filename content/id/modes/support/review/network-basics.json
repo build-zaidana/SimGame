@@ -1,0 +1,79 @@
+{
+  "items": [
+    {
+      "id": "rv-net-1",
+      "type": "mcq",
+      "conceptId": "network-basics",
+      "difficulty": 1,
+      "prompt": "Alamat IP laptop Dewi adalah 169.254.12.7. Apa artinya?",
+      "choices": [
+        "Internetnya sangat cepat",
+        "DNS rusak",
+        "Laptop gagal mendapat alamat dari router (DHCP gagal)",
+        "Laptop terkena virus"
+      ],
+      "answerIndex": 2,
+      "explanation": "Alamat 169.254.x.x muncul saat komputer tidak mendapat alamat IP dari router. Periksa kabel, Wi-Fi, dan router."
+    },
+    {
+      "id": "rv-net-2",
+      "type": "order-steps",
+      "conceptId": "network-basics",
+      "difficulty": 2,
+      "prompt": "Urutkan pemeriksaan jaringan dari yang terdekat ke yang terjauh.",
+      "steps": [
+        "Cek kabel tercolok atau Wi-Fi menyala",
+        "Cek alamat IP yang didapat",
+        "Ping router (gateway)",
+        "Ping alamat IP di internet",
+        "Coba buka nama situs (DNS)"
+      ],
+      "explanation": "Periksa dari perangkat sendiri keluar sampai internet. Dengan begitu kamu tahu di titik mana jalurnya putus."
+    },
+    {
+      "id": "rv-net-3",
+      "type": "tap-evidence",
+      "conceptId": "network-basics",
+      "difficulty": 2,
+      "prompt": "Ketuk hasil ping yang menunjukkan masalahnya ada di DNS.",
+      "parts": [
+        { "text": "Ping 192.168.1.1 (router): ada balasan.", "evidenceId": "n1" },
+        { "text": "Ping 203.0.113.10 (server internet): ada balasan.", "evidenceId": "n2" },
+        { "text": "Ping portal.nusa.test: nama tidak ditemukan.", "evidenceId": "n3" },
+        { "text": "Kabel jaringan tercolok, lampu port menyala.", "evidenceId": "n4" }
+      ],
+      "answer": ["n2", "n3"],
+      "explanation": "Alamat IP di internet bisa di-ping, tapi nama situs tidak dikenali. Artinya internet tersambung dan yang bermasalah DNS."
+    },
+    {
+      "id": "rv-net-4",
+      "type": "mcq",
+      "conceptId": "network-basics",
+      "difficulty": 2,
+      "prompt": "Semua komputer di lantai 3 PT Nusa Digital putus internet bersamaan. Apa keputusannya?",
+      "choices": [
+        "Eskalasi ke tim jaringan, karena masalahnya di jaringan pusat",
+        "Ganti kabel di setiap meja satu per satu",
+        "Arahkan semua pengguna untuk restart",
+        "Ganti kartu Wi-Fi semua laptop"
+      ],
+      "answerIndex": 0,
+      "explanation": "Kalau satu lantai putus bersamaan, penyebabnya bukan perangkat masing-masing. Serahkan ke tim jaringan."
+    },
+    {
+      "id": "rv-net-5",
+      "type": "mcq",
+      "conceptId": "network-basics",
+      "difficulty": 1,
+      "prompt": "Apa tugas DNS?",
+      "choices": [
+        "Memberi alamat IP ke komputer",
+        "Mendinginkan router",
+        "Menyimpan password Wi-Fi",
+        "Menerjemahkan nama situs menjadi alamat IP"
+      ],
+      "answerIndex": 3,
+      "explanation": "DNS seperti buku telepon yang mencari alamat IP dari nama situs. Yang memberi alamat IP ke komputer adalah DHCP di router."
+    }
+  ]
+}

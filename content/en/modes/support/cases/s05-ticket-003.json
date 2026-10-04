@@ -1,0 +1,57 @@
+{
+  "id": "s05-ticket-003",
+  "type": "ticket",
+  "conceptIds": ["os-maintenance", "troubleshooting"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Maya Kusuma",
+      "department": "Design"
+    },
+    "device": {
+      "text": "Design laptop NB-0904",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Screen has been flickering since yesterday afternoon",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "My laptop screen keeps flickering, especially when I open the drawing app.",
+        "evidenceId": "desc-flicker"
+      },
+      {
+        "text": "The flickering started right after the laptop restarted for an update yesterday afternoon.",
+        "evidenceId": "desc-after"
+      },
+      {
+        "text": "When I plug in an external monitor, that monitor flickers too.",
+        "evidenceId": "desc-external"
+      },
+      {
+        "text": "The laptop has never been dropped or bumped.",
+        "evidenceId": "desc-safe"
+      }
+    ],
+    "history": [
+      {
+        "text": "Yesterday 16.30: NB-0904 graphics card driver updated to version 31.2 by automatic update.",
+        "evidenceId": "hist-driver"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-after", "hist-driver"],
+    "supporting": ["desc-external", "desc-safe"]
+  },
+  "explanation": "The flickering started right after the graphics driver was updated and also shows on the external monitor, so the cause is the driver, not the screen. Fix it by rolling the driver back to the previous version.",
+  "ruleRefs": ["r-os-3", "r-ts-2"],
+  "hints": [
+    "What changed just before the problem appeared?",
+    "If the external monitor flickers too, the screen panel is probably fine, so check the driver history."
+  ]
+}

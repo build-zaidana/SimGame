@@ -1,0 +1,57 @@
+{
+  "id": "s02-ticket-001",
+  "type": "ticket",
+  "conceptIds": ["troubleshooting", "user-guidance"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Bayu Pratama",
+      "department": "Gudang"
+    },
+    "device": {
+      "text": "Laptop kantor NB-0527",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Laptop mati total, tidak mau menyala",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Tadi pagi laptop saya mati sendiri saat dipakai, sekarang ditekan tombol power pun tidak ada reaksi.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "Charger sudah saya colok ke stopkontak sambungan (terminal) di bawah meja.",
+        "evidenceId": "desc-charger"
+      },
+      {
+        "text": "Lampu kecil di saklar terminal itu tidak menyala, saklarnya posisi OFF.",
+        "evidenceId": "desc-switch"
+      },
+      {
+        "text": "Jangan-jangan mesinnya terbakar? Kemarin masih normal.",
+        "evidenceId": "desc-worry"
+      }
+    ],
+    "history": [
+      {
+        "text": "Dua minggu lalu: pemeriksaan rutin, baterai sehat 94%.",
+        "evidenceId": "hist-battery"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-switch"],
+    "supporting": ["hist-battery", "desc-charger"]
+  },
+  "explanation": "Saklar terminal dalam posisi OFF, jadi charger tidak mengalirkan listrik dan baterai yang sehat akhirnya habis. Arahkan Bayu menyalakan saklar, menunggu sebentar sampai baterai terisi, lalu menyalakan laptop.",
+  "ruleRefs": ["r-ts-1", "r-guide-1"],
+  "hints": [
+    "Sebelum curiga ke mesin, cek dulu jalur listriknya dari stopkontak sampai laptop.",
+    "Perhatikan lampu dan posisi saklar di terminal tempat charger dicolok."
+  ]
+}

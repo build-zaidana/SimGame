@@ -1,0 +1,57 @@
+{
+  "id": "s05-ticket-001",
+  "type": "ticket",
+  "conceptIds": ["escalation-safety", "user-guidance"],
+  "difficulty": 2,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Wulan Anggraini",
+      "department": "Reception"
+    },
+    "device": {
+      "text": "Reception desk computer PC-0207",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Someone called asking for my password",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "This morning a caller said he was from the IT Workshop. He said my account had a problem and he needed my password to fix it.",
+        "evidenceId": "desc-caller"
+      },
+      {
+        "text": "I refused and hung up right away. I did not give my password.",
+        "evidenceId": "desc-refused"
+      },
+      {
+        "text": "My computer is running normally as usual.",
+        "evidenceId": "desc-normal"
+      },
+      {
+        "text": "Did I do the right thing? What should I do if he calls again?",
+        "evidenceId": "desc-question"
+      }
+    ],
+    "history": [
+      {
+        "text": "Last week: PC-0207 passed the routine check, antivirus active.",
+        "evidenceId": "hist-check"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-refused"],
+    "supporting": ["desc-caller", "hist-check"]
+  },
+  "explanation": "A real technician never asks for a password, so Wulan was right to refuse and nothing leaked. Guide Wulan to always refuse password requests and report similar calls to the IT Workshop.",
+  "ruleRefs": ["r-guide-3", "r-guide-1"],
+  "hints": [
+    "Did anything actually leak? Look at what Wulan did after the call.",
+    "The password was not given and the computer is normal, so Wulan needs guidance, not a repair."
+  ]
+}

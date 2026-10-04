@@ -1,0 +1,57 @@
+{
+  "id": "s04-ticket-003",
+  "type": "ticket",
+  "conceptIds": ["os-maintenance", "user-guidance"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Maya Anggraini",
+      "department": "HR"
+    },
+    "device": {
+      "text": "Laptop kantor NB-0733",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Laptop memblokir aplikasi yang saya unduh, rusak ya?",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Saya mau memasang aplikasi pengedit PDF gratis dari situs pdf-gratis-banget.example.",
+        "evidenceId": "desc-site"
+      },
+      {
+        "text": "Saat dibuka muncul peringatan: 'Pemasangan diblokir. Gunakan Portal Aplikasi kantor.'",
+        "evidenceId": "desc-blocked"
+      },
+      {
+        "text": "Selain itu laptop lancar, email dan aplikasi Absensi bisa dibuka.",
+        "evidenceId": "desc-normal"
+      },
+      {
+        "text": "Bisa tolong matikan blokirnya?",
+        "evidenceId": "desc-ask"
+      }
+    ],
+    "history": [
+      {
+        "text": "Portal Aplikasi (portal.nusadigital.test) sudah menyediakan pengedit PDF resmi.",
+        "evidenceId": "hist-portal"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-blocked"],
+    "supporting": ["desc-site", "desc-normal", "hist-portal"]
+  },
+  "explanation": "Laptopnya sehat; blokir itu memang aturan kantor agar aplikasi dari situs sembarangan tidak membawa malware (program jahat). Arahkan Maya memasang pengedit PDF resmi dari Portal Aplikasi.",
+  "ruleRefs": ["r-os-4", "r-guide-1"],
+  "hints": [
+    "Baca peringatannya. Apakah itu tanda kerusakan atau aturan kantor?",
+    "Aplikasi kantor dipasang dari Portal Aplikasi, dan di sana sudah ada pengedit PDF resmi."
+  ]
+}

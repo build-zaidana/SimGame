@@ -3,7 +3,7 @@ import { PixelCanvas } from './canvas.ts';
 
 /** Potret 32×32. Cahaya dari kiri atas; outline gelap seperti sprite game. */
 export const PORTRAIT_SIZE = 32;
-export type PortraitKind = 'person' | 'system' | 'rani' | 'kelabu';
+export type PortraitKind = 'person' | 'system' | 'rani' | 'kelabu' | 'joko';
 
 const OUTLINE = '#14101c';
 const SKIN = ['#f3cfac', '#dcab80', '#bd875c', '#8f5c3c'];
@@ -133,6 +133,30 @@ function rani(): PixelCanvas {
   return p.outline(OUTLINE);
 }
 
+/** Pak Joko: teknisi senior Bengkel IT. Rambut beruban, kumis, kacamata di dahi, rompi kerja. */
+function joko(): PixelCanvas {
+  const p = new PixelCanvas(32, 32);
+  const skin = '#bd875c';
+  const grey = '#b8b8bc';
+  shoulders(p, '#5e6b4a');
+  // Kaus di balik rompi + kantong berisi obeng.
+  p.rect(13, 25, 6, 7, '#d0644e');
+  p.rect(20, 27, 4, 3, '#4a5639').line(21, 24, 21, 27, '#f2c14e').line(22, 25, 22, 27, '#c3cad6');
+  neckAndHead(p, skin);
+  // Rambut beruban di samping, atas agak botak.
+  p.ellipse(16, 9.5, 8.4, 4.2, grey, {
+    shade: '#8f8f96',
+    clip: (x, y) => y <= 9 && (x < 12 || x > 19),
+  });
+  p.rect(8, 9, 2, 6, grey).rect(22, 9, 2, 6, grey);
+  // Kacamata bertengger di dahi.
+  p.line(11, 10, 20, 10, '#1b1b22').rect(11, 9, 3, 2, '#8fd0fa').rect(17, 9, 3, 2, '#8fd0fa');
+  faceFeatures(p, skin, grey, 2);
+  // Kumis.
+  p.rect(13, 18, 6, 2, '#6e6e74').set(12, 19, '#6e6e74').set(19, 19, '#6e6e74');
+  return p.outline(OUTLINE);
+}
+
 function kelabu(): PixelCanvas {
   const p = new PixelCanvas(32, 32);
   const hood = '#5b6070';
@@ -181,11 +205,13 @@ export function portraitPaths(kind: PortraitKind, seed = ''): { fill: string; d:
     const canvas =
       kind === 'system'
         ? system()
-        : kind === 'rani'
-          ? rani()
-          : kind === 'kelabu'
-            ? kelabu()
-            : person(seed);
+        : kind === 'joko'
+          ? joko()
+          : kind === 'rani'
+            ? rani()
+            : kind === 'kelabu'
+              ? kelabu()
+              : person(seed);
     paths = canvas.toPaths();
     cache.set(key, paths);
   }

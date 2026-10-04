@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { btnSecondary } from '../styles.ts';
 import { t as id } from '../../../i18n/index.ts';
+import { rulebookTitle } from '../../../modes/registry.ts';
 import type { ReactNode } from 'react';
 import type { BaseCase } from '../../../content/schemas.ts';
 import type { DeskProps, DocumentProps } from '../../../modes/contract.ts';
@@ -21,6 +22,8 @@ const STAMP_COLOR: Record<string, string> = {
   allow: 'text-safe',
   block: 'text-danger',
   escalate: 'text-accent',
+  guide: 'text-safe',
+  replace: 'text-danger',
 };
 
 type Tab = 'queue' | 'document' | 'rulebook';
@@ -228,6 +231,7 @@ export function StandardDesk({
                 </div>
                 <div className="mt-3">
                   <MentorHints
+                    mentorName={id.speakers[mode.mentor] ?? mode.mentor}
                     hints={activeCase.hints}
                     used={active.hintsUsed}
                     disabled={session.phase !== 'inspecting'}
@@ -247,7 +251,7 @@ export function StandardDesk({
           className={paneClass('rulebook')}
         >
           <div className="flex flex-col gap-3 p-3">
-            <h2 className="font-display text-ink-muted">{id.desk.rulebookHeading}</h2>
+            <h2 className="font-display text-ink-muted">{rulebookTitle(mode.id)}</h2>
             <Rulebook
               chapters={content.rulebook.chapters}
               concepts={content.concepts}
@@ -287,6 +291,8 @@ export function StandardDesk({
           sessionCase={feedbackCase}
           rules={rules.filter((r) => feedbackData.ruleRefs.includes(r.id))}
           decisionLabel={decisionLabel}
+          deskTitle={mode.deskTitle}
+          citations={mode.citations}
           onContinue={() => dispatch({ type: 'CLOSE_FEEDBACK' })}
         />
       )}

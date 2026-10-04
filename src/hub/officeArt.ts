@@ -234,6 +234,14 @@ export const RANI_LOOK: CharacterLook = {
   hijab: '#3f9a8a',
 };
 
+/** Pak Joko: rambut beruban, rompi kerja hijau zaitun. */
+export const JOKO_LOOK: CharacterLook = {
+  skin: '#bd875c',
+  hair: '#b8b8bc',
+  shirt: '#5e6b4a',
+  pants: '#3a3226',
+};
+
 /** Karakter 16×16 dilihat dari atas-depan; `frame` 0/1 = langkah kaki. */
 export function drawCharacter(look: CharacterLook, facing: Facing, frame: 0 | 1): PixelCanvas {
   const p = new PixelCanvas(16, 16);

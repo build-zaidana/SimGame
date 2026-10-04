@@ -1,0 +1,64 @@
+{
+  "id": "s05-hw-004",
+  "type": "hardware",
+  "conceptIds": ["user-guidance", "hardware-basics"],
+  "difficulty": 2,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "device": {
+      "name": "Office laptop NB-0662",
+      "owner": "Andi Nugroho (Warehouse)"
+    },
+    "checks": [
+      {
+        "part": "Complaint",
+        "observation": "Keys F1 to F12 change the volume and screen brightness instead",
+        "evidenceId": "chk-complaint"
+      },
+      {
+        "part": "Fn Lock indicator light",
+        "observation": "On",
+        "evidenceId": "chk-fnlock"
+      },
+      {
+        "part": "Keyboard",
+        "observation": "All keys press well, none are stuck",
+        "evidenceId": "chk-keys"
+      },
+      {
+        "part": "Liquid traces",
+        "observation": "None, the keyboard is dry and clean",
+        "evidenceId": "chk-dry"
+      },
+      {
+        "part": "Screen and battery",
+        "observation": "Normal",
+        "evidenceId": "chk-other"
+      }
+    ],
+    "note": {
+      "text": "Andi worries his keyboard is broken like the laptop that got coffee spilled on it this week.",
+      "evidenceId": "note-worry"
+    }
+  },
+  "evidence": {
+    "required": ["chk-fnlock"],
+    "supporting": ["chk-keys", "chk-dry", "scan-kb"]
+  },
+  "explanation": "The Fn Lock light being on makes keys F1 to F12 run special functions, while the keyboard itself is healthy. Guide Andi to press Fn and Esc together to turn Fn Lock off.",
+  "ruleRefs": ["r-guide-1", "r-ts-3"],
+  "hints": [
+    "The keyboard is dry and every key works, so check the indicator lights.",
+    "The Fn Lock light changes what keys F1 to F12 do."
+  ],
+  "intel": {
+    "scan": [
+      {
+        "text": "Internal keyboard: all keys detected",
+        "evidenceId": "scan-kb"
+      }
+    ]
+  }
+}

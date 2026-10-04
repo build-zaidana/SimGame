@@ -1,0 +1,66 @@
+{
+  "id": "s05-hw-002",
+  "type": "hardware",
+  "conceptIds": ["escalation-safety", "hardware-basics"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "replace",
+  "acceptableDecisions": {
+    "fix": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "Laptop kantor NB-0721",
+      "owner": "Lestari Utami (HR)"
+    },
+    "checks": [
+      {
+        "part": "Riwayat",
+        "observation": "Kopi manis tumpah ke keyboard kemarin. Lestari langsung mematikan laptop dan mencabut charger.",
+        "evidenceId": "note-spill"
+      },
+      {
+        "part": "Keyboard",
+        "observation": "Sudah dikeringkan 24 jam, tapi deretan tombol A sampai L tetap tidak merespons",
+        "evidenceId": "chk-keys"
+      },
+      {
+        "part": "Konektor keyboard",
+        "observation": "Ada bekas lengket dan karat kehijauan di jalur tembaga keyboard",
+        "evidenceId": "chk-corrosion"
+      },
+      {
+        "part": "Papan utama (motherboard)",
+        "observation": "Kering dan bersih, tidak ada bekas cairan",
+        "evidenceId": "chk-board"
+      },
+      {
+        "part": "Layar dan baterai",
+        "observation": "Normal",
+        "evidenceId": "chk-other"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["chk-keys", "chk-corrosion"],
+    "supporting": ["note-spill", "chk-board", "scan-kb"]
+  },
+  "explanation": "Tombol tetap mati setelah dikeringkan dan ada karat di jalur keyboard, jadi kerusakannya fisik dan keyboard perlu diganti. Lestari sudah benar mencabut daya duluan, dan papan utamanya aman.",
+  "ruleRefs": ["r-hw-1", "r-esc-4"],
+  "hints": [
+    "Cairan sudah kering, tapi apa yang masih tertinggal di keyboard?",
+    "Karat dan tombol yang tetap mati setelah kering bukan lagi soal kotor biasa."
+  ],
+  "intel": {
+    "scan": [
+      {
+        "text": "Keyboard internal: 9 tombol tidak terdeteksi",
+        "evidenceId": "scan-kb"
+      },
+      {
+        "text": "Baterai: kesehatan 91%, normal"
+      }
+    ]
+  }
+}

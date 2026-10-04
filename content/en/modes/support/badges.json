@@ -1,0 +1,116 @@
+{
+  "badges": [
+    {
+      "id": "obeng-pertama",
+      "title": "First Screwdriver",
+      "description": "Finished Shift 1 at the IT Workshop.",
+      "icon": "🪛",
+      "tier": "bronze",
+      "rule": {
+        "type": "shift-complete",
+        "shiftId": "support-01"
+      }
+    },
+    {
+      "id": "murid-bengkel",
+      "title": "Workshop Student",
+      "description": "Answered every Quick Review question correctly in one shift.",
+      "icon": "📚",
+      "tier": "bronze",
+      "rule": {
+        "type": "review-perfect"
+      }
+    },
+    {
+      "id": "tak-ada-yang-tertinggal",
+      "title": "Nothing Left Behind",
+      "description": "A full shift without leaving any fault unfixed, with at least ★★.",
+      "icon": "🧯",
+      "tier": "silver",
+      "rule": {
+        "type": "no-threat-allowed",
+        "minCases": 8,
+        "minStars": 2
+      }
+    },
+    {
+      "id": "hemat-suku-cadang",
+      "title": "Parts Saver",
+      "description": "A full shift without opening healthy devices and without needless escalation, with at least ★★.",
+      "icon": "🔩",
+      "tier": "silver",
+      "rule": {
+        "type": "no-legit-blocked",
+        "minCases": 8,
+        "minStars": 2
+      }
+    },
+    {
+      "id": "mata-teknisi",
+      "title": "Technician's Eye",
+      "description": "Five cases in a row with the right decision, complete evidence, and no wrong marks.",
+      "icon": "🔎",
+      "tier": "silver",
+      "rule": {
+        "type": "evidence-streak",
+        "count": 5
+      }
+    },
+    {
+      "id": "teknisi-mandiri",
+      "title": "Independent Technician",
+      "description": "Finished a shift without asking Pak Joko, with at least ★★.",
+      "icon": "🧠",
+      "tier": "silver",
+      "rule": {
+        "type": "no-hints",
+        "minCases": 8,
+        "minStars": 2
+      }
+    },
+    {
+      "id": "kotak-perkakas",
+      "title": "Toolbox",
+      "description": "Own both IT Workshop tools.",
+      "icon": "🧰",
+      "tier": "silver",
+      "rule": {
+        "type": "tools-owned",
+        "count": 2
+      }
+    },
+    {
+      "id": "bengkel-bintang",
+      "title": "Star Workshop",
+      "description": "Earned ★★★ in an IT Workshop shift.",
+      "icon": "⭐",
+      "tier": "gold",
+      "rule": {
+        "type": "shift-stars",
+        "stars": 3
+      }
+    },
+    {
+      "id": "andalan-kantor",
+      "title": "Office Hero",
+      "description": "Ended a shift with user trust of 90 or more.",
+      "icon": "💛",
+      "tier": "gold",
+      "rule": {
+        "type": "trust-at-least",
+        "value": 90
+      }
+    },
+    {
+      "id": "kepala-bengkel",
+      "title": "Head of the Workshop",
+      "description": "Finished Shift 5 and found Kelabu's trail on the strange laptop.",
+      "icon": "🏅",
+      "tier": "gold",
+      "rule": {
+        "type": "shift-complete",
+        "shiftId": "support-05"
+      }
+    }
+  ]
+}

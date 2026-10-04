@@ -35,7 +35,7 @@ describe('office map', () => {
     }
   });
 
-  it('includes the four desks, the mentor, the shop and the rulebook', () => {
+  it('includes the four desks, both mentors, the shop and the rulebook', () => {
     expect(HOTSPOTS.map((h) => h.id).sort()).toEqual(
       [
         'desk:data',
@@ -45,6 +45,7 @@ describe('office map', () => {
         'menu:badges',
         'menu:rulebook',
         'menu:shop',
+        'npc:joko',
         'npc:rani',
       ].sort(),
     );

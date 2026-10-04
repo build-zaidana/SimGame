@@ -1,0 +1,22 @@
+{
+  "tools": [
+    {
+      "id": "hw-scanner",
+      "name": "Pemindai Perangkat Keras",
+      "icon": "🩺",
+      "description": "Membaca kesehatan komponen (baterai, disk, RAM, suhu) secara otomatis, tanpa perlu membongkar perangkat.",
+      "price": 70,
+      "conceptId": "hardware-basics",
+      "unlockAtShift": 2
+    },
+    {
+      "id": "ping-tool",
+      "name": "Alat Ping",
+      "icon": "📶",
+      "description": "Menguji apakah perangkat bisa menjangkau router, internet, dan server nama (DNS), lalu merangkum hasilnya.",
+      "price": 90,
+      "conceptId": "network-basics",
+      "unlockAtShift": 3
+    }
+  ]
+}

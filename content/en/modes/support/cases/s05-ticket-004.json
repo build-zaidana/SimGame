@@ -1,0 +1,57 @@
+{
+  "id": "s05-ticket-004",
+  "type": "ticket",
+  "conceptIds": ["user-guidance", "troubleshooting"],
+  "difficulty": 2,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Agus Setiawan",
+      "department": "Sales"
+    },
+    "device": {
+      "text": "Office laptop NB-0389 and the 3rd floor meeting room projector",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "The projector does not show my laptop screen",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "I plugged the projector cable in firmly, and the projector light is blue.",
+        "evidenceId": "desc-cable"
+      },
+      {
+        "text": "On the laptop, the display mode says \"Laptop screen only\".",
+        "evidenceId": "desc-mode"
+      },
+      {
+        "text": "The projector only shows \"No signal\".",
+        "evidenceId": "desc-nosignal"
+      },
+      {
+        "text": "Oh, and there is an unlabeled laptop left in the corner of the room. It is not mine.",
+        "evidenceId": "desc-strange"
+      }
+    ],
+    "history": [
+      {
+        "text": "This morning: the 3rd floor projector was used for another meeting without problems.",
+        "evidenceId": "hist-projector"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-mode"],
+    "supporting": ["desc-cable", "hist-projector"]
+  },
+  "explanation": "The cable is connected and the projector is healthy, but the laptop is set to \"Laptop screen only\" so no picture is sent. Guide Agus to switch the display mode to \"Duplicate\" in the display settings.",
+  "ruleRefs": ["r-guide-1", "r-guide-2"],
+  "hints": [
+    "The cable and projector look fine, so check the laptop's settings.",
+    "The display mode decides where the picture is sent."
+  ]
+}

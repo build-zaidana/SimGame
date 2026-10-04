@@ -1,0 +1,65 @@
+{
+  "id": "s03-ticket-001",
+  "type": "ticket",
+  "conceptIds": ["network-basics", "user-guidance"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Wulan Sari",
+      "department": "Pemasaran"
+    },
+    "device": {
+      "text": "Laptop kantor NB-0527",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Wi-Fi hilang total, sinyal tidak ada!",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Sejak kembali dari dinas luar kota, laptop saya tidak bisa terhubung ke Wi-Fi.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "Di pojok layar ada ikon pesawat kecil, dan daftar Wi-Fi kosong.",
+        "evidenceId": "desc-plane"
+      },
+      {
+        "text": "Laptop rekan di sebelah saya bisa internetan dengan lancar.",
+        "evidenceId": "desc-neighbor"
+      },
+      {
+        "text": "Apa kartu Wi-Fi-nya rusak? Saya panik karena ada presentasi siang ini.",
+        "evidenceId": "desc-panic"
+      }
+    ],
+    "history": [
+      {
+        "text": "Dua minggu lalu: pemeriksaan rutin, kartu Wi-Fi dan antena sehat.",
+        "evidenceId": "hist-check"
+      }
+    ]
+  },
+  "intel": {
+    "ping": [
+      {
+        "text": "Router lantai 2 (10.20.2.1): balas 2 ms ke laptop rekan Wulan",
+        "evidenceId": "ping-router"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-plane"],
+    "supporting": ["desc-neighbor", "hist-check", "ping-router"]
+  },
+  "explanation": "Ikon pesawat berarti mode pesawat (airplane mode) aktif, yang mematikan semua sinyal nirkabel, mungkin lupa dimatikan sejak perjalanan. Laptop dan jaringan sehat, jadi cukup arahkan Wulan mematikan mode pesawat.",
+  "ruleRefs": ["r-guide-1", "r-net-1"],
+  "hints": [
+    "Apa yang berubah sejak perjalanan dinas? Lihat ikon di pojok layar.",
+    "Ikon pesawat berarti semua sinyal nirkabel dimatikan dengan sengaja. Apakah ada yang rusak?"
+  ]
+}

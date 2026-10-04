@@ -1,0 +1,80 @@
+{
+  "id": "support-04",
+  "order": 4,
+  "title": "Update Day",
+  "durationGameMinutes": 120,
+  "realSecondsPerGameMinute": 3,
+  "unlocksChapters": ["ch-os"],
+  "introDialogue": "support-04-intro",
+  "outroDialogue": "support-04-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s04-ticket-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s04-diag-001",
+      "arriveAt": 8
+    },
+    {
+      "caseId": "s04-ticket-002",
+      "arriveAt": 16
+    },
+    {
+      "caseId": "s04-diag-002",
+      "arriveAt": 24
+    },
+    {
+      "caseId": "s04-hw-001",
+      "arriveAt": 32
+    },
+    {
+      "caseId": "s04-ticket-003",
+      "arriveAt": 40
+    },
+    {
+      "caseId": "s04-diag-003",
+      "arriveAt": 48
+    },
+    {
+      "caseId": "s04-ticket-004",
+      "arriveAt": 56
+    },
+    {
+      "caseId": "s04-diag-004",
+      "arriveAt": 64
+    },
+    {
+      "caseId": "s04-ticket-005",
+      "arriveAt": 72
+    },
+    {
+      "caseId": "s04-diag-005",
+      "arriveAt": 80
+    }
+  ],
+  "review": {
+    "count": 4,
+    "conceptIds": ["os-maintenance", "network-basics", "hardware-basics"]
+  },
+  "pay": {
+    "base": 50,
+    "perCase": 12
+  },
+  "newspaper": {
+    "headline": "Update Season Arrives",
+    "lead": "Many security updates were released this month. The IT Workshop reminds employees not to put off updates and to install apps only from the company App Portal.",
+    "impact": {
+      "good": "Yesterday, network complaints at Nusa Digital were handled correctly. The floor 4 outage was quickly passed to the network team.",
+      "mixed": "Yesterday, most network complaints were solved, but some were misdiagnosed. A few employees still can't open work sites.",
+      "bad": "Yesterday, many network complaints were handled wrongly. Several teams had to work without internet until the afternoon."
+    },
+    "tip": {
+      "title": "Tip: Updates Are Patches",
+      "text": "Security updates close holes that attackers already know about. Save your work, install the update, then restart."
+    },
+    "classified": "FREE: Plenty of disk space for anyone willing to empty their Downloads folder.",
+    "sources": ["NIST SP 800-40 Rev. 4", "CompTIA A+ Core 2: Software Troubleshooting"]
+  }
+}

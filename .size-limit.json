@@ -27,6 +27,27 @@
     "gzip": true
   },
   {
+    "name": "Chunk mode Bengkel IT, Bahasa Indonesia: meja + konten (gzip)",
+    "path": [
+      "dist/assets/SupportDesk-*.js",
+      "dist/assets/support-content-*.js",
+      "dist/assets/support-data-id-*.js"
+    ],
+    "limit": "150 KB",
+    "gzip": true
+  },
+  {
+    "name": "Chunk mode Bengkel IT, English: meja + konten + kamus UI (gzip)",
+    "path": [
+      "dist/assets/SupportDesk-*.js",
+      "dist/assets/support-content-*.js",
+      "dist/assets/support-data-en-*.js",
+      "dist/assets/en-*.js"
+    ],
+    "limit": "150 KB",
+    "gzip": true
+  },
+  {
     "name": "Kantor Phaser (dimuat lazy, hanya bila kantor dijelajahi)",
     "path": "dist/assets/createGame-*.js",
     "limit": "380 KB",

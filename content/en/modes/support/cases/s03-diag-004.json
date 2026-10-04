@@ -1,0 +1,61 @@
+{
+  "id": "s03-diag-004",
+  "type": "diagnostic",
+  "conceptIds": ["network-basics", "user-guidance"],
+  "difficulty": 3,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "device": {
+      "name": "Office laptop NB-0833",
+      "owner": "Maya Lestari"
+    },
+    "readings": [
+      {
+        "label": "IP address",
+        "value": "10.20.3.64 (automatic)",
+        "evidenceId": "r-ip"
+      },
+      {
+        "label": "Wi-Fi signal strength",
+        "value": "Excellent (4/4)",
+        "evidenceId": "r-signal"
+      },
+      {
+        "label": "Upload usage",
+        "value": "100% used by an 8 GB video upload to NusaDrive",
+        "evidenceId": "r-upload"
+      },
+      {
+        "label": "Active apps",
+        "value": "NusaMeet video meeting",
+        "evidenceId": "r-meet"
+      }
+    ],
+    "console": [
+      {
+        "text": "> ping 10.20.3.1  →  Reply from 10.20.3.1: time=3ms, 0% lost",
+        "evidenceId": "con-gw"
+      },
+      {
+        "text": "> ping 203.0.113.10  →  Reply from 203.0.113.10: time=21ms, 0% lost",
+        "evidenceId": "con-internet"
+      }
+    ],
+    "note": {
+      "text": "Maya: my meeting audio keeps breaking up, a friend says the office network is under attack!",
+      "evidenceId": "note"
+    }
+  },
+  "evidence": {
+    "required": ["r-upload"],
+    "supporting": ["con-gw", "con-internet", "r-signal", "r-meet"]
+  },
+  "explanation": "Pings to the router and the internet are fast with no lost packets, but the upload path is fully used by an 8 GB video upload during the video meeting. Guide Maya to pause the upload until the meeting ends.",
+  "ruleRefs": ["r-guide-1", "r-ts-3"],
+  "hints": [
+    "Trust numbers, not rumors. Do the ping results show a network problem?",
+    "Look at what is using the upload path during the meeting. Does anything need fixing?"
+  ]
+}

@@ -1,22 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { t as id } from '../../i18n/index.ts';
-import { modes } from '../../modes/registry.ts';
 import { newModeProgress } from '../../persistence/saveSchema.ts';
 import { useAppStore } from '../store.ts';
+import { useMenuMode } from '../useMenuMode.ts';
+import { ModeTabs } from '../ui/ModeTabs.tsx';
 import { btnPrimary, btnSecondary, panel } from '../ui/styles.ts';
 
 export function ShopScreen() {
-  const content = useAppStore((s) => s.content);
   const save = useAppStore((s) => s.save);
   const buyTool = useAppStore((s) => s.buyTool);
   const back = useAppStore((s) => s.back);
-  const preloadContent = useAppStore((s) => s.preloadContent);
   const [message, setMessage] = useState<string | null>(null);
-  const modeId = modes[0]?.id ?? 'soc';
-
-  useEffect(() => {
-    if (!content) void preloadContent(modeId);
-  }, [content, modeId, preloadContent]);
+  const { modeId, content, inSession } = useMenuMode();
 
   const progress = save?.modes[modeId] ?? newModeProgress();
   return (
@@ -28,6 +23,7 @@ export function ShopScreen() {
         </button>
         <h1 className="font-display text-2xl text-accent">{id.shop.heading}</h1>
       </div>
+      <ModeTabs current={modeId} hidden={inSession} />
       <p className="text-ink-muted">{id.shop.intro}</p>
       <p className="font-display" data-testid="wallet">
         {id.shop.wallet(progress.wallet)}

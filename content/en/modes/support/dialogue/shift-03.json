@@ -1,0 +1,30 @@
+{
+  "dialogues": [
+    {
+      "id": "support-03-intro",
+      "lines": [
+        {
+          "speaker": "joko",
+          "text": "New routers went in last weekend, and internet complaints came straight in."
+        },
+        {
+          "speaker": "joko",
+          "text": "The Networking chapter is open. Remember the order: cable or Wi-Fi, IP address, router, internet, then DNS."
+        },
+        {
+          "speaker": "joko",
+          "text": "If a whole floor drops at once, don't get stuck on one laptop. That's the network team's job."
+        }
+      ]
+    },
+    {
+      "id": "support-03-outro",
+      "lines": [
+        {
+          "speaker": "joko",
+          "text": "Networks are confusing at first. Once you know the order, everything starts to make sense."
+        }
+      ]
+    }
+  ]
+}

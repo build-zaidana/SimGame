@@ -1,0 +1,62 @@
+{
+  "id": "s05-hw-001",
+  "type": "hardware",
+  "conceptIds": ["escalation-safety", "hardware-basics"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "replace",
+  "severity": 3,
+  "data": {
+    "device": {
+      "name": "Laptop power adapter NB-0533",
+      "owner": "Bayu Saputra (Sales)"
+    },
+    "checks": [
+      {
+        "part": "Adapter box (charger)",
+        "observation": "Black burn marks and the plastic is slightly melted near the cable end",
+        "evidenceId": "chk-charger"
+      },
+      {
+        "part": "Smell",
+        "observation": "A smell of burning plastic comes from the adapter while plugged in",
+        "evidenceId": "chk-smell"
+      },
+      {
+        "part": "Wall plug cable",
+        "observation": "Intact, no tears",
+        "evidenceId": "chk-cable"
+      },
+      {
+        "part": "Laptop NB-0533",
+        "observation": "Turns on normally on battery, charging port is clean",
+        "evidenceId": "chk-laptop"
+      }
+    ],
+    "note": {
+      "text": "Bayu unplugged the adapter from the wall socket right away before bringing it to the workshop.",
+      "evidenceId": "note-unplug"
+    }
+  },
+  "evidence": {
+    "required": ["chk-charger", "chk-smell"],
+    "supporting": ["chk-laptop", "note-unplug", "scan-adapter"]
+  },
+  "explanation": "A burning smell and melted, scorched plastic are dangerous physical damage, so the adapter must be replaced and never used again. The laptop itself is healthy; only the adapter is broken.",
+  "ruleRefs": ["r-esc-4", "r-hw-1"],
+  "hints": [
+    "Start with safety: what danger signs can you see and smell?",
+    "Melted, scorched plastic cannot be cleaned or reseated."
+  ],
+  "intel": {
+    "scan": [
+      {
+        "text": "Power adapter: unstable output, temperature too high",
+        "evidenceId": "scan-adapter"
+      },
+      {
+        "text": "Laptop battery: health 88%, normal"
+      }
+    ]
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "items": [
+    {
+      "id": "rv-guide-1",
+      "type": "mcq",
+      "conceptId": "user-guidance",
+      "difficulty": 1,
+      "prompt": "Mr Andi says his password is always \"wrong\", even though he's sure it's right. The Caps Lock light is on. What is the decision?",
+      "choices": [
+        "Replace the keyboard",
+        "Escalate to the SOC team",
+        "Guide the User: turn off Caps Lock and try again",
+        "Ask for his password to try it yourself"
+      ],
+      "answerIndex": 2,
+      "explanation": "The device is healthy, only Caps Lock is on. Teach the user so they can solve it on their own next time."
+    },
+    {
+      "id": "rv-guide-2",
+      "type": "mcq",
+      "conceptId": "user-guidance",
+      "difficulty": 1,
+      "prompt": "Someone claiming to be a Nusa Digital technician asks for your password over the phone. What is right?",
+      "choices": [
+        "Just give it, they're a technician",
+        "Refuse and be suspicious, because technicians never ask for passwords",
+        "Give only half of it",
+        "Send it by email so it's safe"
+      ],
+      "answerIndex": 1,
+      "explanation": "Technicians never ask for passwords. Anyone who asks for one should be treated as suspicious."
+    },
+    {
+      "id": "rv-guide-3",
+      "type": "tap-evidence",
+      "conceptId": "user-guidance",
+      "difficulty": 2,
+      "prompt": "Tap the parts of the ticket that show the problem is just a simple setting.",
+      "parts": [
+        { "text": "Complaint: the laptop makes no sound at all.", "evidenceId": "g1" },
+        { "text": "The speaker icon in the corner of the screen is on mute.", "evidenceId": "g2" },
+        { "text": "Speaker test with a tool: sound comes out normally.", "evidenceId": "g3" },
+        { "text": "The laptop has been in use for two years.", "evidenceId": "g4" }
+      ],
+      "answer": ["g2", "g3"],
+      "explanation": "The speaker is proven healthy and the sound is only muted. Just guide the user to turn the sound back on."
+    },
+    {
+      "id": "rv-guide-4",
+      "type": "order-steps",
+      "conceptId": "user-guidance",
+      "difficulty": 2,
+      "prompt": "Put in order how to guide a user whose monitor looks \"dead\" because the wrong input source is selected.",
+      "steps": [
+        "Make sure the device is healthy",
+        "Explain how to pick the right input in simple words",
+        "Ask the user to try it themselves",
+        "Write the cause and fix in the ticket history"
+      ],
+      "explanation": "First make sure nothing is broken, then teach the user and let them try. The ticket note helps if the same problem comes back."
+    },
+    {
+      "id": "rv-guide-5",
+      "type": "mcq",
+      "conceptId": "user-guidance",
+      "difficulty": 1,
+      "prompt": "Mrs Rina forgot her account password. What do you do?",
+      "choices": [
+        "Send her to the office's official password reset page",
+        "Ask for her old password",
+        "Make a new password and write it on paper",
+        "Take her laptop apart"
+      ],
+      "answerIndex": 0,
+      "explanation": "A forgotten password is solved through the official reset page. A technician doesn't need, and must not know, a user's password."
+    }
+  ]
+}

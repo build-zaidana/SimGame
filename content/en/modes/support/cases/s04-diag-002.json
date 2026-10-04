@@ -1,0 +1,70 @@
+{
+  "id": "s04-diag-002",
+  "type": "diagnostic",
+  "conceptIds": ["os-maintenance", "user-guidance"],
+  "difficulty": 2,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "device": {
+      "name": "Office laptop NB-0609",
+      "owner": "Andi Kurniawan (Sales)"
+    },
+    "readings": [
+      {
+        "label": "Last update",
+        "value": "Finished installing at 08.10",
+        "evidenceId": "r-update"
+      },
+      {
+        "label": "CPU",
+        "value": "9% now (was 95% from 08.10–08.20)",
+        "evidenceId": "r-cpu"
+      },
+      {
+        "label": "RAM",
+        "value": "38% of 8 GB",
+        "evidenceId": "r-ram"
+      },
+      {
+        "label": "Disk used",
+        "value": "52%",
+        "evidenceId": "r-disk"
+      },
+      {
+        "label": "SSD health",
+        "value": "97% (good)",
+        "evidenceId": "r-ssd"
+      }
+    ],
+    "console": [
+      {
+        "text": "> heavy-processes  →  No process is using more than 5% CPU",
+        "evidenceId": "c-proc"
+      }
+    ],
+    "note": {
+      "text": "Andi: 'After the update the laptop was super slow for ten minutes. Please replace my laptop!'",
+      "evidenceId": "note-user"
+    }
+  },
+  "intel": {
+    "scan": [
+      {
+        "text": "All components: passed tests, temperature 48°C",
+        "evidenceId": "scan-health"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["r-cpu"],
+    "supporting": ["r-update", "r-ram", "r-disk", "r-ssd", "c-proc", "scan-health"]
+  },
+  "explanation": "After an update the system needs a few minutes to finish installing, so a short slowdown is normal; now the CPU, RAM, disk and SSD are all fine. Guide Andi that this is normal and his laptop does not need replacing.",
+  "ruleRefs": ["r-guide-1", "r-ts-3"],
+  "hints": [
+    "When was the laptop slow, and what do the numbers say now?",
+    "The CPU was high only briefly right after the update finished. Is any component faulty now?"
+  ]
+}

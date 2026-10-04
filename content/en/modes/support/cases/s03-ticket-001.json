@@ -1,0 +1,65 @@
+{
+  "id": "s03-ticket-001",
+  "type": "ticket",
+  "conceptIds": ["network-basics", "user-guidance"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Wulan Sari",
+      "department": "Marketing"
+    },
+    "device": {
+      "text": "Office laptop NB-0527",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Wi-Fi is totally gone, no signal!",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Since I came back from a business trip, my laptop cannot connect to Wi-Fi.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "There is a small airplane icon in the corner of the screen, and the Wi-Fi list is empty.",
+        "evidenceId": "desc-plane"
+      },
+      {
+        "text": "The laptop of my coworker next to me gets online just fine.",
+        "evidenceId": "desc-neighbor"
+      },
+      {
+        "text": "Is the Wi-Fi card broken? I am panicking because I have a presentation this afternoon.",
+        "evidenceId": "desc-panic"
+      }
+    ],
+    "history": [
+      {
+        "text": "Two weeks ago: routine check, Wi-Fi card and antenna healthy.",
+        "evidenceId": "hist-check"
+      }
+    ]
+  },
+  "intel": {
+    "ping": [
+      {
+        "text": "Floor 2 router (10.20.2.1): replies in 2 ms to Wulan's coworker's laptop",
+        "evidenceId": "ping-router"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-plane"],
+    "supporting": ["desc-neighbor", "hist-check", "ping-router"]
+  },
+  "explanation": "The airplane icon means airplane mode is on, which turns off all wireless signals, probably left on since the trip. The laptop and network are healthy, so just guide Wulan to turn airplane mode off.",
+  "ruleRefs": ["r-guide-1", "r-net-1"],
+  "hints": [
+    "What changed since the trip? Look at the icon in the corner of the screen.",
+    "The airplane icon means all wireless signals were turned off on purpose. Is anything actually broken?"
+  ]
+}

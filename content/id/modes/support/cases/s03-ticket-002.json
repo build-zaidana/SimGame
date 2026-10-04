@@ -1,0 +1,73 @@
+{
+  "id": "s03-ticket-002",
+  "type": "ticket",
+  "conceptIds": ["network-basics", "troubleshooting"],
+  "difficulty": 2,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "severity": 3,
+  "data": {
+    "requester": {
+      "name": "Hendra Wijaya",
+      "department": "Penjualan"
+    },
+    "device": {
+      "text": "PC meja PC-0412",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Internet mati di lantai 4",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Sejak 09.10 saya tidak bisa membuka NusaMail maupun internet.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "Satu ruangan Penjualan di lantai 4 mengalami hal yang sama.",
+        "evidenceId": "desc-room"
+      },
+      {
+        "text": "Saya sudah restart PC dan mencabut-pasang kabel, tetap mati.",
+        "evidenceId": "desc-tried"
+      }
+    ],
+    "history": [
+      {
+        "text": "09.12: tiket \"Tidak bisa internet\" dari Desain, lantai 4.",
+        "evidenceId": "hist-design"
+      },
+      {
+        "text": "09.13: tiket \"NusaMail putus\" dari Legal, lantai 4.",
+        "evidenceId": "hist-legal"
+      },
+      {
+        "text": "09.15: 6 tiket serupa lain, semuanya dari lantai 4.",
+        "evidenceId": "hist-more"
+      }
+    ]
+  },
+  "intel": {
+    "ping": [
+      {
+        "text": "Router lantai 4 (10.20.4.1): waktu habis, tidak ada balasan",
+        "evidenceId": "ping-r4"
+      },
+      {
+        "text": "Router lantai 3 (10.20.3.1): balas 2 ms",
+        "evidenceId": "ping-r3"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-room", "hist-more"],
+    "supporting": ["hist-design", "hist-legal", "desc-tried", "ping-r4"]
+  },
+  "explanation": "Banyak pengguna dari berbagai bagian di lantai 4 putus pada waktu yang sama, jadi masalahnya ada di jaringan pusat lantai itu, bukan di PC Hendra. Eskalasi ke tim jaringan beserta daftar tiket dan jam mulainya.",
+  "ruleRefs": ["r-net-4", "r-ts-2"],
+  "hints": [
+    "Jangan hanya melihat satu PC. Siapa lagi yang mengeluh, dan kapan?",
+    "Satu lantai putus bersamaan berarti masalahnya di luar meja pengguna. Siapa yang memegang jaringan pusat?"
+  ]
+}

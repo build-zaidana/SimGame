@@ -1,0 +1,57 @@
+{
+  "id": "s04-ticket-004",
+  "type": "ticket",
+  "conceptIds": ["troubleshooting", "os-maintenance"],
+  "difficulty": 2,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Dimas Saputra",
+      "department": "Design"
+    },
+    "device": {
+      "text": "Six Design team laptops",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "The whole team cannot open the design app",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Since the 1st, the DesainPro app refuses to open on every laptop in our team.",
+        "evidenceId": "desc-team"
+      },
+      {
+        "text": "The message says: 'Team license has expired. Contact the license administrator.'",
+        "evidenceId": "desc-license"
+      },
+      {
+        "text": "Other apps and the internet work normally.",
+        "evidenceId": "desc-normal"
+      },
+      {
+        "text": "A friend offered a free activation code from a forum, can we use it?",
+        "evidenceId": "desc-forum"
+      }
+    ],
+    "history": [
+      {
+        "text": "The DesainPro license was bought by Procurement, valid until 30 September.",
+        "evidenceId": "hist-procure"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-license", "hist-procure"],
+    "supporting": ["desc-team", "desc-normal"]
+  },
+  "explanation": "The error message shows the team license has expired, and renewing it needs the license admin and Procurement, not a desk technician. Escalate the ticket, and do not use an unofficial activation code from a forum.",
+  "ruleRefs": ["r-ts-5", "r-os-4"],
+  "hints": [
+    "Read the error message carefully. Who usually handles licenses?",
+    "A technician cannot buy a license alone. Official licenses are handled by the license admin and Procurement."
+  ]
+}

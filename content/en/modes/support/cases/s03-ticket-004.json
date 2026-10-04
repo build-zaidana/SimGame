@@ -1,0 +1,57 @@
+{
+  "id": "s03-ticket-004",
+  "type": "ticket",
+  "conceptIds": ["network-basics", "troubleshooting"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Yoga Permana",
+      "department": "HR"
+    },
+    "device": {
+      "text": "Office laptop NB-0590",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Wi-Fi icon gone after the IT Workshop visit",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Yesterday my laptop was tested with a LAN cable at the IT Workshop. Since then the Wi-Fi icon is gone.",
+        "evidenceId": "desc-change"
+      },
+      {
+        "text": "Airplane mode is off.",
+        "evidenceId": "desc-plane"
+      },
+      {
+        "text": "In Network Settings, the Wi-Fi adapter says \"Disabled\".",
+        "evidenceId": "desc-disabled"
+      },
+      {
+        "text": "My roommates' laptops can use Wi-Fi.",
+        "evidenceId": "desc-neighbor"
+      }
+    ],
+    "history": [
+      {
+        "text": "Yesterday, IT Workshop: Wi-Fi adapter turned off temporarily for a LAN cable test. Final status not recorded.",
+        "evidenceId": "hist-test"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-disabled", "hist-test"],
+    "supporting": ["desc-change", "desc-plane", "desc-neighbor"]
+  },
+  "explanation": "The Wi-Fi adapter was disabled during the cable test at the IT Workshop and never turned back on, so the card is healthy but the setting is wrong. Fix it by enabling the Wi-Fi adapter again, then note it in the ticket.",
+  "ruleRefs": ["r-ts-4", "r-ts-2", "r-guide-4"],
+  "hints": [
+    "What happened to this laptop yesterday, right before the Wi-Fi disappeared?",
+    "Airplane mode is off, but the adapter was disabled by our own team. Does it need a new part?"
+  ]
+}

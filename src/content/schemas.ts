@@ -118,7 +118,7 @@ export const reviewItemSchema = z.discriminatedUnion('type', [
 ]);
 export const reviewFileSchema = z.strictObject({ items: z.array(reviewItemSchema).min(1) });
 
-export const speakerSchema = z.enum(['rani', 'kelabu', 'narrator']);
+export const speakerSchema = z.enum(['rani', 'kelabu', 'joko', 'narrator']);
 export const dialogueSchema = z.strictObject({
   id: idSchema,
   lines: z.array(z.strictObject({ speaker: speakerSchema, text })).min(1),
@@ -174,7 +174,7 @@ export const baseCaseSchema = z.strictObject({
   type: idSchema,
   conceptIds: z.array(idSchema).min(1),
   difficulty: level,
-  verdict: z.enum(['safe', 'malicious', 'suspicious']),
+  verdict: z.enum(['safe', 'malicious', 'suspicious', 'no-fault', 'fault', 'specialist']),
   correctDecision: idSchema,
   acceptableDecisions: z.record(idSchema, z.number().min(0).max(1)).default({}),
   severity: level,
@@ -197,6 +197,9 @@ export const baseCaseSchema = z.strictObject({
         .array(z.strictObject({ domain: text, registered: text, evidenceId: idSchema.optional() }))
         .optional(),
       sandbox: z.array(z.strictObject({ text, evidenceId: idSchema.optional() })).optional(),
+      /** Bengkel IT (ADR 025): hasil Alat Ping dan Pemindai Perangkat Keras. */
+      ping: z.array(z.strictObject({ text, evidenceId: idSchema.optional() })).optional(),
+      scan: z.array(z.strictObject({ text, evidenceId: idSchema.optional() })).optional(),
     })
     .optional(),
 });

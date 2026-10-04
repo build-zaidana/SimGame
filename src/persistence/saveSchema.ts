@@ -3,7 +3,7 @@ import type { ShiftSession } from '../engine/types.ts';
 import { BASELINE_TRUST } from '../engine/economy.ts';
 
 /** Naikkan + tambah migrasi di migrations.ts + test setiap kali bentuk save berubah. */
-export const SAVE_SCHEMA_VERSION = 7;
+export const SAVE_SCHEMA_VERSION = 8;
 
 const level = z.literal([1, 2, 3]);
 const score01 = z.number().min(0).max(1);
@@ -11,7 +11,7 @@ const score01 = z.number().min(0).max(1);
 const caseOutcomeSchema = z.object({
   caseId: z.string(),
   decision: z.string(),
-  verdict: z.enum(['safe', 'malicious', 'suspicious']),
+  verdict: z.enum(['safe', 'malicious', 'suspicious', 'no-fault', 'fault', 'specialist']),
   severity: level,
   impact: z.enum([
     'correct',

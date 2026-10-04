@@ -1,0 +1,57 @@
+{
+  "id": "s01-ticket-001",
+  "type": "ticket",
+  "conceptIds": ["user-guidance", "troubleshooting"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Sari Puspita",
+      "department": "Finance"
+    },
+    "device": {
+      "text": "Office laptop NB-0412",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "My password is suddenly always wrong",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "This morning I couldn't log in to my laptop. It says my password is wrong, but it worked yesterday.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "I didn't change any password.",
+        "evidenceId": "desc-nochange"
+      },
+      {
+        "text": "A small light marked A on the keyboard stays on.",
+        "evidenceId": "desc-capslock"
+      },
+      {
+        "text": "I've tried five times already. Is the laptop broken?",
+        "evidenceId": "desc-question"
+      }
+    ],
+    "history": [
+      {
+        "text": "Last month: this laptop passed the routine check, all components healthy.",
+        "evidenceId": "hist-check"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-capslock"],
+    "supporting": ["desc-nochange", "hist-check"]
+  },
+  "explanation": "The A light means Caps Lock is on, so every letter typed becomes a capital. The laptop is healthy; just guide Sari to turn off Caps Lock and type again.",
+  "ruleRefs": ["r-guide-1", "r-ts-3"],
+  "hints": [
+    "What changed since yesterday? Look at the lights on the keyboard.",
+    "The light marked A is Caps Lock. What does it do to a password?"
+  ]
+}

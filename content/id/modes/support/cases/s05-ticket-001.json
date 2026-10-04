@@ -1,0 +1,57 @@
+{
+  "id": "s05-ticket-001",
+  "type": "ticket",
+  "conceptIds": ["escalation-safety", "user-guidance"],
+  "difficulty": 2,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Wulan Anggraini",
+      "department": "Resepsionis"
+    },
+    "device": {
+      "text": "Komputer meja resepsionis PC-0207",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Ada yang menelepon minta password saya",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Tadi pagi ada penelepon mengaku dari Bengkel IT. Katanya akun saya bermasalah dan dia butuh password saya untuk memperbaikinya.",
+        "evidenceId": "desc-caller"
+      },
+      {
+        "text": "Saya menolak dan langsung menutup telepon. Password tidak saya berikan.",
+        "evidenceId": "desc-refused"
+      },
+      {
+        "text": "Komputer saya berjalan normal seperti biasa.",
+        "evidenceId": "desc-normal"
+      },
+      {
+        "text": "Apa yang saya lakukan sudah benar? Apa yang harus saya lakukan kalau dia menelepon lagi?",
+        "evidenceId": "desc-question"
+      }
+    ],
+    "history": [
+      {
+        "text": "Minggu lalu: PC-0207 lolos pemeriksaan rutin, antivirus aktif.",
+        "evidenceId": "hist-check"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-refused"],
+    "supporting": ["desc-caller", "hist-check"]
+  },
+  "explanation": "Teknisi asli tidak pernah meminta password, jadi Wulan sudah benar menolak dan tidak ada yang bocor. Arahkan Wulan untuk selalu menolak permintaan password dan melaporkan telepon serupa ke Bengkel IT.",
+  "ruleRefs": ["r-guide-3", "r-guide-1"],
+  "hints": [
+    "Apakah ada yang benar-benar bocor? Perhatikan apa yang Wulan lakukan setelah ditelepon.",
+    "Password tidak diberikan dan komputernya normal, jadi yang dibutuhkan Wulan adalah arahan, bukan perbaikan."
+  ]
+}

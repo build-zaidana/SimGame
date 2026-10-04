@@ -1,0 +1,73 @@
+{
+  "id": "s03-diag-002",
+  "type": "diagnostic",
+  "conceptIds": ["network-basics"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "Office laptop NB-0644",
+      "owner": "Fitri Handayani"
+    },
+    "readings": [
+      {
+        "label": "IP address",
+        "value": "10.20.2.58",
+        "evidenceId": "r-ip"
+      },
+      {
+        "label": "Gateway (router)",
+        "value": "10.20.2.1",
+        "evidenceId": "r-gw"
+      },
+      {
+        "label": "DNS server",
+        "value": "10.99.99.99 (set manually)",
+        "evidenceId": "r-dns"
+      },
+      {
+        "label": "Office DNS server",
+        "value": "Automatic from the router",
+        "evidenceId": "r-dns-office"
+      }
+    ],
+    "console": [
+      {
+        "text": "> ping 10.20.2.1  →  Reply from 10.20.2.1: time=2ms",
+        "evidenceId": "con-ping-gw"
+      },
+      {
+        "text": "> ping 203.0.113.10  →  Reply from 203.0.113.10: time=18ms",
+        "evidenceId": "con-ping-ip"
+      },
+      {
+        "text": "> ping portal.nusadigital.test  →  Failed: name not found",
+        "evidenceId": "con-ping-name"
+      }
+    ],
+    "note": {
+      "text": "Fitri: yesterday I followed an internet tutorial to \"speed up the internet\".",
+      "evidenceId": "note"
+    }
+  },
+  "intel": {
+    "ping": [
+      {
+        "text": "DNS server 10.99.99.99: no reply (address unknown on the office network)",
+        "evidenceId": "ping-dns"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["r-dns", "con-ping-name"],
+    "supporting": ["con-ping-ip", "note", "ping-dns"]
+  },
+  "explanation": "Pinging an IP address works, but site names cannot be found because the DNS server was set manually to a wrong address. Fix it by setting DNS back to automatic.",
+  "ruleRefs": ["r-net-3", "r-ts-4"],
+  "hints": [
+    "Compare the ping to an IP address with the ping to a site name.",
+    "IP works, names fail: look at what translates names, and whether its setting was changed manually."
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "items": [
+    {
+      "id": "rv-os-1",
+      "type": "mcq",
+      "conceptId": "os-maintenance",
+      "difficulty": 1,
+      "prompt": "Disk laptop terisi 97% dan komputer terasa sangat lambat. Langkah yang tepat adalah…",
+      "choices": [
+        "Ganti laptop baru",
+        "Hapus file sementara, kosongkan Recycle Bin, dan pindahkan file besar",
+        "Pasang aplikasi pembersih dari situs tak dikenal",
+        "Matikan update keamanan"
+      ],
+      "answerIndex": 1,
+      "explanation": "Disk di atas 90% membuat komputer kehabisan ruang kerja. Bersihkan file yang tidak perlu dan pindahkan file besar ke penyimpanan kantor."
+    },
+    {
+      "id": "rv-os-2",
+      "type": "mcq",
+      "conceptId": "os-maintenance",
+      "difficulty": 2,
+      "prompt": "Printer berhenti bekerja tepat setelah driver-nya diperbarui kemarin. Apa yang dilakukan?",
+      "choices": [
+        "Ganti printernya",
+        "Hapus sistem operasi",
+        "Biarkan saja, nanti normal sendiri",
+        "Kembalikan (rollback) driver ke versi sebelumnya"
+      ],
+      "answerIndex": 3,
+      "explanation": "Masalah yang muncul tepat setelah update driver kemungkinan besar disebabkan driver baru. Rollback mengembalikan versi yang sebelumnya berjalan baik."
+    },
+    {
+      "id": "rv-os-3",
+      "type": "tap-evidence",
+      "conceptId": "os-maintenance",
+      "difficulty": 2,
+      "prompt": "Ketuk temuan yang perlu diperbaiki demi keamanan laptop.",
+      "parts": [
+        { "text": "Update keamanan terakhir dipasang 8 bulan lalu.", "evidenceId": "o1" },
+        { "text": "Wallpaper bergambar pemandangan pantai.", "evidenceId": "o2" },
+        {
+          "text": "Ada aplikasi bajakan yang dipasang dari file kiriman teman.",
+          "evidenceId": "o3"
+        },
+        { "text": "Disk terisi 45%.", "evidenceId": "o4" }
+      ],
+      "answer": ["o1", "o3"],
+      "explanation": "Update yang tertunda berbulan-bulan adalah celah, dan aplikasi bajakan bisa membawa malware. Wallpaper dan disk 45% tidak bermasalah."
+    },
+    {
+      "id": "rv-os-4",
+      "type": "order-steps",
+      "conceptId": "os-maintenance",
+      "difficulty": 1,
+      "prompt": "Urutkan langkah memasang update keamanan.",
+      "steps": [
+        "Simpan pekerjaan yang sedang dibuka",
+        "Pasang update resmi",
+        "Restart komputer",
+        "Pastikan komputer berjalan normal"
+      ],
+      "explanation": "Simpan pekerjaan dulu karena update biasanya meminta restart. Setelah restart, cek bahwa semuanya berjalan normal."
+    },
+    {
+      "id": "rv-os-5",
+      "type": "mcq",
+      "conceptId": "os-maintenance",
+      "difficulty": 1,
+      "prompt": "Dari mana sebaiknya karyawan PT Nusa Digital memasang aplikasi?",
+      "choices": [
+        "Dari Portal Aplikasi kantor",
+        "Dari tautan yang dikirim di grup chat",
+        "Dari situs unduhan gratis mana pun",
+        "Dari flashdisk teman"
+      ],
+      "answerIndex": 0,
+      "explanation": "Portal Aplikasi kantor hanya berisi aplikasi resmi yang sudah diperiksa. Aplikasi dari sumber lain bisa membawa malware."
+    }
+  ]
+}

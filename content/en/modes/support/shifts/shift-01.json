@@ -1,0 +1,63 @@
+{
+  "id": "support-01",
+  "order": 1,
+  "title": "First Day at the Workshop",
+  "durationGameMinutes": 120,
+  "realSecondsPerGameMinute": 3,
+  "unlocksChapters": ["ch-trouble", "ch-guide"],
+  "introDialogue": "support-01-intro",
+  "outroDialogue": "support-01-outro",
+  "tutorial": true,
+  "queue": [
+    {
+      "caseId": "s01-ticket-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s01-ticket-002",
+      "arriveAt": 10
+    },
+    {
+      "caseId": "s01-diag-001",
+      "arriveAt": 20
+    },
+    {
+      "caseId": "s01-ticket-003",
+      "arriveAt": 30
+    },
+    {
+      "caseId": "s01-ticket-004",
+      "arriveAt": 40
+    },
+    {
+      "caseId": "s01-diag-002",
+      "arriveAt": 50
+    },
+    {
+      "caseId": "s01-ticket-005",
+      "arriveAt": 60
+    },
+    {
+      "caseId": "s01-ticket-006",
+      "arriveAt": 70
+    }
+  ],
+  "review": {
+    "count": 3,
+    "conceptIds": ["troubleshooting", "user-guidance"]
+  },
+  "pay": {
+    "base": 40,
+    "perCase": 12
+  },
+  "newspaper": {
+    "headline": "Nusa Digital IT Workshop Reopens",
+    "lead": "After a long staff shortage, the Nusa Digital IT Workshop is open again on floor 2. A new technician will take help tickets and diagnostic reports from every employee.",
+    "tip": {
+      "title": "Tip: Check the Simple Things First",
+      "text": "Before taking anything apart, check power, cables, and buttons, then try a restart. Many complaints end at this step."
+    },
+    "classified": "WANTED: A patient technician who doesn't panic at blinking lights. See Pak Joko at the IT Workshop, floor 2.",
+    "sources": ["CompTIA A+ Core 2: Troubleshooting Methodology", "ITIL 4: Service Desk practice"]
+  }
+}

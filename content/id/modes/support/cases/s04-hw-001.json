@@ -1,0 +1,69 @@
+{
+  "id": "s04-hw-001",
+  "type": "hardware",
+  "conceptIds": ["hardware-basics", "os-maintenance"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "replace",
+  "severity": 3,
+  "data": {
+    "device": {
+      "name": "Laptop kantor NB-0150",
+      "owner": "Hendra Gunawan (Gudang)"
+    },
+    "checks": [
+      {
+        "part": "SSD (uji kesehatan)",
+        "observation": "Kesehatan 4%, status KRITIS",
+        "evidenceId": "chk-health"
+      },
+      {
+        "part": "SSD (sektor)",
+        "observation": "1.912 sektor rusak sudah dipindahkan (reallocated) dan terus bertambah",
+        "evidenceId": "chk-sectors"
+      },
+      {
+        "part": "Cadangan data",
+        "observation": "Semua data tersalin ke server kantor kemarin, sudah diverifikasi",
+        "evidenceId": "chk-backup"
+      },
+      {
+        "part": "Baterai",
+        "observation": "Kesehatan 88%, bentuk normal",
+        "evidenceId": "chk-battery"
+      },
+      {
+        "part": "Kipas",
+        "observation": "Sedikit berdebu, putaran normal",
+        "evidenceId": "chk-fan"
+      },
+      {
+        "part": "Layar dan engsel",
+        "observation": "Normal",
+        "evidenceId": "chk-screen"
+      }
+    ],
+    "note": {
+      "text": "Hendra: 'Laptop sering macet saat buka file, kadang muncul pesan disk error.'",
+      "evidenceId": "note-user"
+    }
+  },
+  "intel": {
+    "scan": [
+      {
+        "text": "SSD: perkiraan sisa umur kurang dari 1 minggu",
+        "evidenceId": "scan-ssd"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["chk-health", "chk-sectors"],
+    "supporting": ["chk-backup", "note-user", "scan-ssd"]
+  },
+  "explanation": "Kesehatan SSD tinggal 4% dan sektor rusaknya terus bertambah, artinya disk rusak fisik dan tidak bisa dibenahi. Datanya sudah aman di server, jadi SSD bisa langsung diganti.",
+  "ruleRefs": ["r-hw-1", "r-ts-3"],
+  "hints": [
+    "Lihat angka kesehatan setiap komponen. Mana yang paling mengkhawatirkan?",
+    "SSD 4% dengan sektor rusak yang terus bertambah tidak bisa dibersihkan. Datanya juga sudah dicadangkan."
+  ]
+}

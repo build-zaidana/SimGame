@@ -1,0 +1,34 @@
+{
+  "dialogues": [
+    {
+      "id": "support-04-intro",
+      "lines": [
+        {
+          "speaker": "joko",
+          "text": "Musim update tiba. Hari ini banyak laptop lambat dan aplikasi bermasalah."
+        },
+        {
+          "speaker": "joko",
+          "text": "Bab Perawatan Sistem terbuka: disk penuh, update tertunda, dan driver yang rewel."
+        },
+        {
+          "speaker": "joko",
+          "text": "Kalau masalah muncul tepat setelah sesuatu berubah, curigai perubahan itu dulu."
+        }
+      ]
+    },
+    {
+      "id": "support-04-outro",
+      "lines": [
+        {
+          "speaker": "joko",
+          "text": "Laptop-laptop kantor kembali segar. Besok hari terakhirmu sebagai teknisi baru. Siapkan dirimu."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "Bengkel IT, ya? Tempat yang bagus untuk menitipkan sesuatu..."
+        }
+      ]
+    }
+  ]
+}

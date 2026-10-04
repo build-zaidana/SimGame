@@ -2,7 +2,7 @@ import { expect, test, type Page } from '@playwright/test';
 import { answerReview, decideAll } from './helpers.ts';
 
 async function openBriefing(page: Page, button: string) {
-  await page.getByRole('button', { name: button }).click();
+  await page.getByRole('button', { name: button, exact: true }).click();
   const paper = page.getByTestId('newspaper');
   await expect(paper).toBeVisible();
   return paper;

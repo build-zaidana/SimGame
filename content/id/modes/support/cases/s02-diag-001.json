@@ -1,0 +1,76 @@
+{
+  "id": "s02-diag-001",
+  "type": "diagnostic",
+  "conceptIds": ["hardware-basics"],
+  "difficulty": 3,
+  "verdict": "fault",
+  "correctDecision": "replace",
+  "acceptableDecisions": {
+    "escalate": 0.25
+  },
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "Laptop kantor NB-0450",
+      "owner": "Hendra Gunawan (Legal)"
+    },
+    "readings": [
+      {
+        "label": "Status kesehatan disk",
+        "value": "GAGAL (prediksi rusak)",
+        "evidenceId": "r-health"
+      },
+      {
+        "label": "Sektor rusak (bad sector)",
+        "value": "1284 dan terus bertambah",
+        "evidenceId": "r-badsector"
+      },
+      {
+        "label": "Suhu disk",
+        "value": "38°C (normal)",
+        "evidenceId": "r-temp"
+      },
+      {
+        "label": "Backup terakhir",
+        "value": "Kemarin 17.00, lengkap, tersimpan di server kantor",
+        "evidenceId": "r-backup"
+      },
+      {
+        "label": "Baterai",
+        "value": "Kesehatan 88%",
+        "evidenceId": "r-battery"
+      }
+    ],
+    "console": [
+      {
+        "text": "> cek-disk C:  →  Gagal membaca 37 blok, mencoba ulang...",
+        "evidenceId": "con-readerr"
+      }
+    ],
+    "note": {
+      "text": "Hendra: dari kemarin ada bunyi klik-klik berulang dari dalam laptop, dan membuka file jadi lambat sekali.",
+      "evidenceId": "note-click"
+    }
+  },
+  "evidence": {
+    "required": ["r-health", "note-click"],
+    "supporting": ["r-badsector", "con-readerr", "r-backup", "scan-disk"]
+  },
+  "explanation": "Bunyi klik berulang, sektor rusak yang terus bertambah, dan status GAGAL menandakan disknya sekarat secara fisik. Semua file sudah ada di backup kemarin, jadi disk bisa langsung diganti lalu datanya dipulihkan dari backup.",
+  "ruleRefs": ["r-hw-1", "r-ts-3"],
+  "hints": [
+    "Bunyi apa yang didengar Hendra, dan apa kata status kesehatan disk?",
+    "Disk sekarat perlu diganti; cek juga apakah datanya sudah aman di backup."
+  ],
+  "intel": {
+    "scan": [
+      {
+        "text": "Disk: kepala baca berbunyi klik, tes permukaan gagal",
+        "evidenceId": "scan-disk"
+      },
+      {
+        "text": "RAM: tes memori lulus"
+      }
+    ]
+  }
+}

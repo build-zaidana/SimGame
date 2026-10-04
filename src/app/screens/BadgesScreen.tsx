@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
 import { intlLocale, t as id } from '../../i18n/index.ts';
-import { modes } from '../../modes/registry.ts';
 import { useAppStore } from '../store.ts';
+import { useMenuMode } from '../useMenuMode.ts';
+import { ModeTabs } from '../ui/ModeTabs.tsx';
 import { Medal } from '../ui/Medal.tsx';
 import { btnSecondary, panel } from '../ui/styles.ts';
 
@@ -14,14 +14,9 @@ const dateFmt = () =>
 
 /** Koleksi lencana (PRD C3): yang sudah didapat dan yang belum, dengan cara mendapatkannya. */
 export function BadgesScreen() {
-  const content = useAppStore((s) => s.content);
   const save = useAppStore((s) => s.save);
   const back = useAppStore((s) => s.back);
-  const preloadContent = useAppStore((s) => s.preloadContent);
-  const modeId = modes[0]?.id ?? 'soc';
-  useEffect(() => {
-    if (!content) void preloadContent(modeId);
-  }, [content, modeId, preloadContent]);
+  const { modeId, content, inSession } = useMenuMode();
 
   const badges = content?.badges ?? [];
   const earned = save?.modes[modeId]?.badges ?? {};
@@ -36,6 +31,7 @@ export function BadgesScreen() {
         </button>
         <h1 className="font-display text-2xl text-accent">{id.badges.heading}</h1>
       </div>
+      <ModeTabs current={modeId} hidden={inSession} />
       <p className="text-ink-muted">{id.badges.intro}</p>
       <p className="font-display" data-testid="badge-count">
         {id.badges.count(count, badges.length)}

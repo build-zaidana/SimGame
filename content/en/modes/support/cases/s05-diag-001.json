@@ -1,0 +1,77 @@
+{
+  "id": "s05-diag-001",
+  "type": "diagnostic",
+  "conceptIds": ["os-maintenance"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 1,
+  "data": {
+    "device": {
+      "name": "Office laptop NB-0618",
+      "owner": "Fitri Handayani (Marketing)"
+    },
+    "readings": [
+      {
+        "label": "Disk storage",
+        "value": "97% used (7 GB left of 256 GB)",
+        "evidenceId": "r-disk"
+      },
+      {
+        "label": "Temporary files",
+        "value": "38 GB",
+        "evidenceId": "r-temp"
+      },
+      {
+        "label": "RAM",
+        "value": "8 GB, 45% used",
+        "evidenceId": "r-ram"
+      },
+      {
+        "label": "Antivirus",
+        "value": "Active, latest definitions",
+        "evidenceId": "r-av"
+      },
+      {
+        "label": "System updates",
+        "value": "All installed",
+        "evidenceId": "r-update"
+      }
+    ],
+    "console": [
+      {
+        "text": "> open Attendance app  →  takes 3 minutes to open",
+        "evidenceId": "con-slow"
+      },
+      {
+        "text": "> save promo video  →  Failed: not enough storage space",
+        "evidenceId": "con-save"
+      }
+    ],
+    "note": {
+      "text": "Fitri says the laptop has been getting slower since she saved lots of promo videos this month.",
+      "evidenceId": "note-video"
+    }
+  },
+  "evidence": {
+    "required": ["r-disk"],
+    "supporting": ["r-temp", "con-slow", "scan-disk"]
+  },
+  "explanation": "A disk that is 97% full with 38 GB of temporary files makes the laptop slow and unable to save. Fix it by clearing temporary files and moving big videos to shared storage, no new parts needed.",
+  "ruleRefs": ["r-os-1", "r-ts-4"],
+  "hints": [
+    "Look for a number far beyond the normal limit in the report.",
+    "A disk above 90% slows a computer down, and the disk itself is healthy."
+  ],
+  "intel": {
+    "scan": [
+      {
+        "text": "Disk: healthy, no bad sectors",
+        "evidenceId": "scan-disk"
+      },
+      {
+        "text": "RAM: passed test"
+      }
+    ]
+  }
+}

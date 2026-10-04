@@ -1,0 +1,57 @@
+{
+  "id": "s05-ticket-004",
+  "type": "ticket",
+  "conceptIds": ["user-guidance", "troubleshooting"],
+  "difficulty": 2,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Agus Setiawan",
+      "department": "Penjualan"
+    },
+    "device": {
+      "text": "Laptop kantor NB-0389 dan proyektor ruang rapat lantai 3",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Proyektor tidak menampilkan layar laptop saya",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Kabel proyektor sudah saya colok kencang, dan lampu proyektor menyala biru.",
+        "evidenceId": "desc-cable"
+      },
+      {
+        "text": "Di laptop, mode tampilan tertulis \"Hanya layar laptop\".",
+        "evidenceId": "desc-mode"
+      },
+      {
+        "text": "Proyektor cuma menampilkan tulisan \"Tidak ada sinyal\".",
+        "evidenceId": "desc-nosignal"
+      },
+      {
+        "text": "Oh ya, ada laptop tanpa label tertinggal di pojok ruangan. Bukan punya saya.",
+        "evidenceId": "desc-strange"
+      }
+    ],
+    "history": [
+      {
+        "text": "Tadi pagi: proyektor lantai 3 dipakai rapat lain tanpa masalah.",
+        "evidenceId": "hist-projector"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-mode"],
+    "supporting": ["desc-cable", "hist-projector"]
+  },
+  "explanation": "Kabel terpasang dan proyektor sehat, tetapi laptop diatur ke mode \"Hanya layar laptop\" sehingga gambar tidak dikirim. Arahkan Agus mengganti mode tampilan ke \"Duplikat\" lewat pengaturan layar.",
+  "ruleRefs": ["r-guide-1", "r-guide-2"],
+  "hints": [
+    "Kabel dan proyektor tampak beres, jadi lihat pengaturan di laptop.",
+    "Mode tampilan menentukan ke mana gambar dikirim."
+  ]
+}

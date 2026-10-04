@@ -1,0 +1,62 @@
+{
+  "id": "s01-diag-001",
+  "type": "diagnostic",
+  "conceptIds": ["user-guidance", "troubleshooting"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "device": {
+      "name": "Office laptop NB-0233",
+      "owner": "Wulan Sari (Marketing)"
+    },
+    "readings": [
+      {
+        "label": "Audio device",
+        "value": "Detected, normal",
+        "evidenceId": "r-audio"
+      },
+      {
+        "label": "Audio driver",
+        "value": "Installed, latest version",
+        "evidenceId": "r-driver"
+      },
+      {
+        "label": "System volume",
+        "value": "0% (Mute on)",
+        "evidenceId": "r-volume"
+      },
+      {
+        "label": "CPU usage",
+        "value": "12%",
+        "evidenceId": "r-cpu"
+      },
+      {
+        "label": "Temperature",
+        "value": "45°C (normal)",
+        "evidenceId": "r-temp"
+      }
+    ],
+    "console": [
+      {
+        "text": "> test-speaker  →  Left speaker: OK, Right speaker: OK",
+        "evidenceId": "c-speaker"
+      }
+    ],
+    "note": {
+      "text": "User says: \"The speakers must be broken! The meeting video has no sound at all.\"",
+      "evidenceId": "note-user"
+    }
+  },
+  "evidence": {
+    "required": ["r-volume"],
+    "supporting": ["c-speaker", "r-driver"]
+  },
+  "explanation": "The speakers pass the test and the driver is normal, but the system volume is 0% with mute turned on. The device is healthy, so guide Wulan to turn the sound back on with the speaker icon.",
+  "ruleRefs": ["r-guide-1", "r-ts-3"],
+  "hints": [
+    "The user is sure the speakers are broken. Does the test result agree?",
+    "Everything is normal except one setting. Look for the line about volume."
+  ]
+}

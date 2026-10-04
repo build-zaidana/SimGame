@@ -1,0 +1,34 @@
+{
+  "dialogues": [
+    {
+      "id": "support-01-intro",
+      "lines": [
+        {
+          "speaker": "joko",
+          "text": "Selamat datang di Bengkel IT! Saya Joko, teknisi paling senior di sini. Panggil saja Pak Joko."
+        },
+        {
+          "speaker": "joko",
+          "text": "Tugasmu: baca tiket keluhan dan laporan diagnostik, tandai buktinya, lalu putuskan."
+        },
+        {
+          "speaker": "joko",
+          "text": "ARAHKAN PENGGUNA kalau perangkatnya sehat dan cukup diajari. PERBAIKI kalau ada yang salah tapi bisa dibenahi."
+        },
+        {
+          "speaker": "joko",
+          "text": "Kalau butuh akses atau keahlian khusus, ESKALASI. Bingung? Buka Buku Panduan Bengkel."
+        }
+      ]
+    },
+    {
+      "id": "support-01-outro",
+      "lines": [
+        {
+          "speaker": "joko",
+          "text": "Hari pertama selesai. Ingat, separuh keluhan selesai hanya dengan mengecek hal sederhana."
+        }
+      ]
+    }
+  ]
+}

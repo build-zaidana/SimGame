@@ -1,0 +1,62 @@
+{
+  "id": "s03-hw-001",
+  "type": "hardware",
+  "conceptIds": ["hardware-basics", "network-basics"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "replace",
+  "severity": 2,
+  "acceptableDecisions": {
+    "fix": 0.3
+  },
+  "data": {
+    "device": {
+      "name": "Kabel LAN meja Resepsionis",
+      "owner": "Ratna Kusuma"
+    },
+    "checks": [
+      {
+        "part": "Kepala kabel (konektor)",
+        "observation": "Pengunci plastik patah, kepala kabel lepas sendiri dari port",
+        "evidenceId": "chk-clip"
+      },
+      {
+        "part": "Badan kabel",
+        "observation": "Sobek dekat kaki kursi, kawat tembaga di dalamnya terlihat",
+        "evidenceId": "chk-torn"
+      },
+      {
+        "part": "Port LAN di laptop",
+        "observation": "Bersih, tidak bengkok",
+        "evidenceId": "chk-port"
+      },
+      {
+        "part": "Uji dengan kabel cadangan",
+        "observation": "Langsung tersambung stabil",
+        "evidenceId": "chk-spare"
+      }
+    ],
+    "note": {
+      "text": "Ratna: koneksi putus-sambung setiap kali kursi saya bergeser.",
+      "evidenceId": "note"
+    }
+  },
+  "intel": {
+    "scan": [
+      {
+        "text": "Port LAN: tautan putus-sambung 23 kali dalam 1 jam dengan kabel lama",
+        "evidenceId": "scan-link"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["chk-clip", "chk-torn"],
+    "supporting": ["chk-spare", "note", "scan-link"]
+  },
+  "explanation": "Kabel LAN rusak secara fisik: pengunci patah dan badannya sobek sampai kawatnya terlihat, sedangkan kabel cadangan langsung stabil. Ganti kabelnya, lalu rapikan jalurnya agar tidak terlindas kursi.",
+  "ruleRefs": ["r-hw-1", "r-net-1"],
+  "hints": [
+    "Periksa dari yang terdekat: bagaimana kondisi fisik kabelnya?",
+    "Pengunci patah dan kabel sobek tidak bisa dibersihkan atau dipasang ulang. Bandingkan dengan hasil kabel cadangan."
+  ]
+}

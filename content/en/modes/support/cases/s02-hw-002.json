@@ -1,0 +1,70 @@
+{
+  "id": "s02-hw-002",
+  "type": "hardware",
+  "conceptIds": ["hardware-basics", "troubleshooting"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "acceptableDecisions": {
+    "replace": 0.5
+  },
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "Desktop PC KS-0214",
+      "owner": "Andi Wijaya (Sales)"
+    },
+    "checks": [
+      {
+        "part": "Sound at power-on",
+        "observation": "Long repeating beeps, screen stays black",
+        "evidenceId": "chk-beep"
+      },
+      {
+        "part": "RAM slot 1",
+        "observation": "Seated firmly, left and right clips locked",
+        "evidenceId": "chk-ram1"
+      },
+      {
+        "part": "RAM slot 2",
+        "observation": "Tilted, one of the clips is open",
+        "evidenceId": "chk-ram2"
+      },
+      {
+        "part": "RAM stick",
+        "observation": "Intact, no burn marks or cracks",
+        "evidenceId": "chk-ramchip"
+      },
+      {
+        "part": "Power cable",
+        "observation": "Connected, power light on",
+        "evidenceId": "chk-power"
+      }
+    ],
+    "note": {
+      "text": "Andi: yesterday this PC was moved to a new desk and got bumped.",
+      "evidenceId": "note-moved"
+    }
+  },
+  "evidence": {
+    "required": ["chk-ram2", "chk-beep"],
+    "supporting": ["note-moved", "chk-ramchip", "scan-ram"]
+  },
+  "explanation": "The bump during the move tilted the RAM in slot 2, so the PC beeps and shows nothing. The stick is intact, so just reseat the RAM until it locks and test again.",
+  "ruleRefs": ["r-hw-2", "r-ts-4"],
+  "hints": [
+    "Beeps at power-on are often related to the computer's working memory.",
+    "Compare the two RAM slots: which one is not seated firmly, and is the stick itself damaged?"
+  ],
+  "intel": {
+    "scan": [
+      {
+        "text": "RAM slot 2: poor contact detected",
+        "evidenceId": "scan-ram"
+      },
+      {
+        "text": "Memory test on both sticks: passed"
+      }
+    ]
+  }
+}

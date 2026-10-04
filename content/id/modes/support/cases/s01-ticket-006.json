@@ -1,0 +1,57 @@
+{
+  "id": "s01-ticket-006",
+  "type": "ticket",
+  "conceptIds": ["troubleshooting"],
+  "difficulty": 1,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Yoga Prasetyo",
+      "department": "Legal"
+    },
+    "device": {
+      "text": "Mouse kabel MS-0377 di PC-0421",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Kursor mouse melompat-lompat sendiri",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Saat mouse digeser, kursor tersendat lalu melompat ke pojok layar.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "Kabel mouse terpasang kencang dan lampu sensornya menyala merah.",
+        "evidenceId": "desc-cable"
+      },
+      {
+        "text": "Waktu saya balik mouse-nya, lubang sensor di bawah tertutup gumpalan debu dan rambut.",
+        "evidenceId": "desc-dust"
+      },
+      {
+        "text": "Apakah komputer saya kena virus?",
+        "evidenceId": "desc-virus"
+      }
+    ],
+    "history": [
+      {
+        "text": "Minggu lalu: mouse ini bekerja normal di tes rutin.",
+        "evidenceId": "hist-ok"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-dust"],
+    "supporting": ["desc-cable", "hist-ok"]
+  },
+  "explanation": "Gumpalan debu dan rambut menutupi lubang sensor, jadi mouse salah membaca gerakan; ini bukan virus. Perbaiki dengan membersihkan sensornya, lalu uji lagi.",
+  "ruleRefs": ["r-ts-4", "r-ts-3"],
+  "hints": [
+    "Jangan langsung percaya dugaan virus. Lihat bukti fisik pada mouse-nya.",
+    "Sensor mouse membaca permukaan meja. Apa yang menghalanginya?"
+  ]
+}

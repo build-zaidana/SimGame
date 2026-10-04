@@ -1,0 +1,56 @@
+{
+  "id": "s02-hw-004",
+  "type": "hardware",
+  "conceptIds": ["hardware-basics", "troubleshooting"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "replace",
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "Laptop kantor NB-0175",
+      "owner": "Dimas Saputra (Penjualan)"
+    },
+    "checks": [
+      {
+        "part": "Layar laptop",
+        "observation": "Retak berbentuk jaring di pojok kanan bawah",
+        "evidenceId": "chk-crack"
+      },
+      {
+        "part": "Tampilan layar",
+        "observation": "Garis-garis warna vertikal dan bercak hitam yang makin melebar",
+        "evidenceId": "chk-lines"
+      },
+      {
+        "part": "Monitor eksternal",
+        "observation": "Gambar tampil jernih tanpa garis saat dicolok ke laptop yang sama",
+        "evidenceId": "chk-external"
+      },
+      {
+        "part": "Kabel layar di engsel",
+        "observation": "Terpasang rapat, tidak longgar",
+        "evidenceId": "chk-cable"
+      },
+      {
+        "part": "Keyboard dan touchpad",
+        "observation": "Berfungsi normal",
+        "evidenceId": "chk-input"
+      }
+    ],
+    "note": {
+      "text": "Dimas: tas laptop saya tertindih kardus waktu di mobil.",
+      "evidenceId": "note-crushed"
+    }
+  },
+  "evidence": {
+    "required": ["chk-crack", "chk-lines"],
+    "supporting": ["chk-external", "chk-cable", "note-crushed"]
+  },
+  "explanation": "Panel layar retak dan menampilkan garis serta bercak, padahal monitor eksternal jernih dan kabel layar rapat. Kerusakannya fisik di panel, jadi layarnya harus diganti.",
+  "ruleRefs": ["r-hw-1", "r-ts-3"],
+  "hints": [
+    "Pisahkan dulu: masalahnya di panel layar, kabel, atau bagian dalam laptop?",
+    "Monitor eksternal jernih dan kabel rapat, jadi lihat kondisi fisik panelnya."
+  ]
+}

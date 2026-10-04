@@ -1,0 +1,76 @@
+{
+  "id": "support-02",
+  "order": 2,
+  "title": "Screwdriver Day",
+  "durationGameMinutes": 120,
+  "realSecondsPerGameMinute": 3,
+  "unlocksChapters": ["ch-hw"],
+  "introDialogue": "support-02-intro",
+  "outroDialogue": "support-02-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s02-ticket-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s02-hw-001",
+      "arriveAt": 9
+    },
+    {
+      "caseId": "s02-hw-002",
+      "arriveAt": 18
+    },
+    {
+      "caseId": "s02-ticket-002",
+      "arriveAt": 27
+    },
+    {
+      "caseId": "s02-diag-001",
+      "arriveAt": 36
+    },
+    {
+      "caseId": "s02-hw-003",
+      "arriveAt": 45
+    },
+    {
+      "caseId": "s02-ticket-003",
+      "arriveAt": 54
+    },
+    {
+      "caseId": "s02-hw-004",
+      "arriveAt": 63
+    },
+    {
+      "caseId": "s02-ticket-004",
+      "arriveAt": 72
+    },
+    {
+      "caseId": "s02-hw-005",
+      "arriveAt": 81
+    }
+  ],
+  "review": {
+    "count": 3,
+    "conceptIds": ["hardware-basics", "troubleshooting"]
+  },
+  "pay": {
+    "base": 40,
+    "perCase": 12
+  },
+  "newspaper": {
+    "headline": "Old Laptops, New Problems",
+    "lead": "Many office laptops are now more than four years old. Dusty fans, weak batteries, and loose RAM are becoming routine complaints at the IT Workshop.",
+    "impact": {
+      "good": "Yesterday, the IT Workshop's new technician handled every ticket correctly. Employees were happy not to wait long.",
+      "mixed": "Yesterday, most tickets at the IT Workshop were solved, though some were handled wrongly. Pak Joko asked the new technician to read symptoms more carefully.",
+      "bad": "Yesterday, several complaints at the IT Workshop went unsolved and users came back with the same problem. The ticket queue is piling up."
+    },
+    "tip": {
+      "title": "Tip: Swollen Batteries",
+      "text": "Laptop case lifting or touchpad hard to press? The battery may be swollen. Don't charge it; take it to a technician right away."
+    },
+    "classified": "FOR SALE: Thermal paste, mini screwdrivers, and endless patience. Contact the spare parts store.",
+    "sources": ["CompTIA A+ Core 1: Hardware", "US CPSC: lithium-ion battery warnings"]
+  }
+}

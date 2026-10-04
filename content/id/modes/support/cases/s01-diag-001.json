@@ -1,0 +1,62 @@
+{
+  "id": "s01-diag-001",
+  "type": "diagnostic",
+  "conceptIds": ["user-guidance", "troubleshooting"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "device": {
+      "name": "Laptop kantor NB-0233",
+      "owner": "Wulan Sari (Pemasaran)"
+    },
+    "readings": [
+      {
+        "label": "Perangkat audio",
+        "value": "Terdeteksi, normal",
+        "evidenceId": "r-audio"
+      },
+      {
+        "label": "Driver audio",
+        "value": "Terpasang, versi terbaru",
+        "evidenceId": "r-driver"
+      },
+      {
+        "label": "Volume sistem",
+        "value": "0% (Senyap/mute aktif)",
+        "evidenceId": "r-volume"
+      },
+      {
+        "label": "Pemakaian CPU",
+        "value": "12%",
+        "evidenceId": "r-cpu"
+      },
+      {
+        "label": "Suhu",
+        "value": "45°C (normal)",
+        "evidenceId": "r-temp"
+      }
+    ],
+    "console": [
+      {
+        "text": "> tes-speaker  →  Speaker kiri: OK, Speaker kanan: OK",
+        "evidenceId": "c-speaker"
+      }
+    ],
+    "note": {
+      "text": "Kata pengguna: \"Speakernya pasti rusak! Video rapat tidak ada suaranya sama sekali.\"",
+      "evidenceId": "note-user"
+    }
+  },
+  "evidence": {
+    "required": ["r-volume"],
+    "supporting": ["c-speaker", "r-driver"]
+  },
+  "explanation": "Speaker lolos tes dan driver normal, tapi volume sistem 0% dengan mode senyap (mute) aktif. Perangkatnya sehat, jadi arahkan Wulan menyalakan suara lewat ikon speaker.",
+  "ruleRefs": ["r-guide-1", "r-ts-3"],
+  "hints": [
+    "Pengguna yakin speakernya rusak. Apakah hasil tes setuju dengannya?",
+    "Semua angka normal kecuali satu pengaturan. Cari baris tentang volume."
+  ]
+}

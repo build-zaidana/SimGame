@@ -1,0 +1,57 @@
+{
+  "id": "s04-ticket-001",
+  "type": "ticket",
+  "conceptIds": ["os-maintenance", "user-guidance"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Bayu Pratama",
+      "department": "Pemasaran"
+    },
+    "device": {
+      "text": "Laptop kantor NB-0527",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Laptop terus minta restart, apa kena virus?",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Sejak kemarin muncul pesan: 'Update siap dipasang. Restart untuk menyelesaikan.'",
+        "evidenceId": "desc-msg"
+      },
+      {
+        "text": "Pesannya muncul lagi tiap satu jam dan saya selalu klik 'Nanti'.",
+        "evidenceId": "desc-later"
+      },
+      {
+        "text": "Saya takut restart karena banyak file presentasi masih terbuka.",
+        "evidenceId": "desc-files"
+      },
+      {
+        "text": "Selain itu laptop normal, tidak lambat dan tidak ada error.",
+        "evidenceId": "desc-normal"
+      }
+    ],
+    "history": [
+      {
+        "text": "Senin: tim IT mengirim update keamanan resmi ke semua laptop kantor.",
+        "evidenceId": "hist-official"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-msg"],
+    "supporting": ["desc-later", "desc-normal", "hist-official"]
+  },
+  "explanation": "Pesan itu dari update resmi yang tinggal butuh restart, bukan virus dan bukan kerusakan. Arahkan Bayu menyimpan semua file dulu, lalu restart supaya update selesai terpasang.",
+  "ruleRefs": ["r-os-2", "r-guide-2"],
+  "hints": [
+    "Baca isi pesan yang muncul. Siapa yang mengirim update itu?",
+    "Update resmi yang sudah siap hanya perlu restart. Apa yang harus Bayu lakukan sebelum restart?"
+  ]
+}

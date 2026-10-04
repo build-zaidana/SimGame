@@ -4,6 +4,12 @@ import { Avatar } from '../app/ui/Avatar.tsx';
 import { btnPrimary } from '../app/ui/styles.ts';
 import type { HubHandle } from './hubTypes.ts';
 
+/** Ucapan NPC kantor (mentor) setelah diajak ngobrol. */
+export interface HubSpeech {
+  speaker: 'rani' | 'joko';
+  text: string;
+}
+
 export interface HotspotInfo {
   /** Nama tempat/orang, mis. "Meja SOC". */
   label: string;
@@ -14,8 +20,8 @@ export interface HotspotInfo {
 interface PhaserHubProps {
   activeModes: string[];
   describe(hotspotId: string): HotspotInfo;
-  /** Dipanggil saat pemain berinteraksi; mengembalikan ucapan Mbak Rani bila ada. */
-  onInteract(hotspotId: string): string | void;
+  /** Dipanggil saat pemain berinteraksi; mengembalikan ucapan mentor bila ada. */
+  onInteract(hotspotId: string): HubSpeech | void;
   /** Ditampilkan selama Phaser dimuat atau bila gagal (ilustrasi statis). */
   fallback: ReactNode;
 }
@@ -30,7 +36,7 @@ export function PhaserHub({ activeModes, describe, onInteract, fallback }: Phase
   const handle = useRef<HubHandle | null>(null);
   const [status, setStatus] = useState<'loading' | 'ready' | 'failed'>('loading');
   const [near, setNear] = useState<string | null>(null);
-  const [speech, setSpeech] = useState<string | null>(null);
+  const [speech, setSpeech] = useState<HubSpeech | null>(null);
   const interactRef = useRef(onInteract);
   useEffect(() => {
     interactRef.current = onInteract;
@@ -53,7 +59,7 @@ export function PhaserHub({ activeModes, describe, onInteract, fallback }: Phase
             },
             onInteract: (hotspotId) => {
               const said = interactRef.current(hotspotId);
-              if (typeof said === 'string') setSpeech(said);
+              if (said) setSpeech(said);
             },
           },
         });
@@ -98,10 +104,12 @@ export function PhaserHub({ activeModes, describe, onInteract, fallback }: Phase
           >
             {speech ? (
               <>
-                <Avatar kind="rani" className="size-10" />
+                <Avatar kind={speech.speaker} className="size-10" />
                 <p className="flex-1 text-sm">
-                  <strong className="font-display text-accent">{id.speakers['rani']}: </strong>
-                  {speech}
+                  <strong className="font-display text-accent">
+                    {id.speakers[speech.speaker]}:{' '}
+                  </strong>
+                  {speech.text}
                 </p>
               </>
             ) : info ? (

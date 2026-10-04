@@ -1,0 +1,70 @@
+{
+  "id": "s05-diag-002",
+  "type": "diagnostic",
+  "conceptIds": ["os-maintenance", "escalation-safety"],
+  "difficulty": 3,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "device": {
+      "name": "Laptop kantor NB-0346",
+      "owner": "Yoga Pratama (Gudang)"
+    },
+    "readings": [
+      {
+        "label": "Jendela yang muncul",
+        "value": "\"Pembaruan dari Bengkel IT: restart diperlukan\"",
+        "evidenceId": "r-popup"
+      },
+      {
+        "label": "Penerbit program pembaruan",
+        "value": "Bengkel IT PT Nusa Digital (terverifikasi)",
+        "evidenceId": "r-publisher"
+      },
+      {
+        "label": "Sumber unduhan",
+        "value": "portal.nusadigital.test",
+        "evidenceId": "r-source"
+      },
+      {
+        "label": "Antivirus",
+        "value": "Aktif, tidak ada temuan",
+        "evidenceId": "r-av"
+      },
+      {
+        "label": "Update tertunda",
+        "value": "Update keamanan bulan ini, 1 buah",
+        "evidenceId": "r-pending"
+      }
+    ],
+    "console": [
+      {
+        "text": "> daftar program saat startup  →  hanya program bawaan kantor",
+        "evidenceId": "con-startup"
+      }
+    ],
+    "note": {
+      "text": "Yoga takut pop-up ini virus karena muncul tiba-tiba dan memaksa restart.",
+      "evidenceId": "note-fear"
+    }
+  },
+  "evidence": {
+    "required": ["r-publisher", "r-source"],
+    "supporting": ["r-av", "ping-portal"]
+  },
+  "explanation": "Pop-up ini berasal dari agen pembaruan resmi Bengkel IT yang terverifikasi dan mengunduh dari portal kantor, jadi laptopnya sehat. Arahkan Yoga menyimpan pekerjaan lalu restart agar update keamanan terpasang.",
+  "ruleRefs": ["r-os-2", "r-guide-1"],
+  "hints": [
+    "Pop-up yang mengagetkan belum tentu berbahaya, jadi cek siapa pengirimnya.",
+    "Lihat penerbit dan sumber unduhan: apakah keduanya milik kantor sendiri?"
+  ],
+  "intel": {
+    "ping": [
+      {
+        "text": "portal.nusadigital.test (10.20.0.15): balas 3 ms",
+        "evidenceId": "ping-portal"
+      }
+    ]
+  }
+}

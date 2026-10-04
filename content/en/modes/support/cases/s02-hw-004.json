@@ -1,0 +1,56 @@
+{
+  "id": "s02-hw-004",
+  "type": "hardware",
+  "conceptIds": ["hardware-basics", "troubleshooting"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "replace",
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "Office laptop NB-0175",
+      "owner": "Dimas Saputra (Sales)"
+    },
+    "checks": [
+      {
+        "part": "Laptop screen",
+        "observation": "Spiderweb crack in the bottom right corner",
+        "evidenceId": "chk-crack"
+      },
+      {
+        "part": "Screen display",
+        "observation": "Vertical colored lines and black blotches that keep spreading",
+        "evidenceId": "chk-lines"
+      },
+      {
+        "part": "External monitor",
+        "observation": "Clear picture with no lines when plugged into the same laptop",
+        "evidenceId": "chk-external"
+      },
+      {
+        "part": "Screen cable at the hinge",
+        "observation": "Seated firmly, not loose",
+        "evidenceId": "chk-cable"
+      },
+      {
+        "part": "Keyboard and touchpad",
+        "observation": "Working normally",
+        "evidenceId": "chk-input"
+      }
+    ],
+    "note": {
+      "text": "Dimas: my laptop bag got crushed under a cardboard box in the car.",
+      "evidenceId": "note-crushed"
+    }
+  },
+  "evidence": {
+    "required": ["chk-crack", "chk-lines"],
+    "supporting": ["chk-external", "chk-cable", "note-crushed"]
+  },
+  "explanation": "The screen panel is cracked and shows lines and blotches, while the external monitor is clear and the screen cable is firm. The damage is physical in the panel, so the screen must be replaced.",
+  "ruleRefs": ["r-hw-1", "r-ts-3"],
+  "hints": [
+    "First narrow it down: is the problem in the screen panel, the cable, or inside the laptop?",
+    "The external monitor is clear and the cable is firm, so look at the panel's physical condition."
+  ]
+}

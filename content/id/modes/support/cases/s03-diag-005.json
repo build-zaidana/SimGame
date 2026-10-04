@@ -1,0 +1,68 @@
+{
+  "id": "s03-diag-005",
+  "type": "diagnostic",
+  "conceptIds": ["network-basics", "troubleshooting"],
+  "difficulty": 3,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "severity": 3,
+  "data": {
+    "device": {
+      "name": "Laptop kantor NB-0476",
+      "owner": "Agus Setiawan"
+    },
+    "readings": [
+      {
+        "label": "Alamat IP",
+        "value": "10.20.2.71 (otomatis)",
+        "evidenceId": "r-ip"
+      },
+      {
+        "label": "Server DNS",
+        "value": "Otomatis dari router",
+        "evidenceId": "r-dns"
+      },
+      {
+        "label": "Tiket \"Portal tidak bisa dibuka\"",
+        "value": "14 tiket dari 5 lantai dalam 20 menit",
+        "evidenceId": "r-tickets"
+      }
+    ],
+    "console": [
+      {
+        "text": "> ping 10.20.2.1  →  Balasan dari 10.20.2.1: waktu=2ms",
+        "evidenceId": "con-gw"
+      },
+      {
+        "text": "> ping 203.0.113.10  →  Balasan dari 203.0.113.10: waktu=17ms",
+        "evidenceId": "con-internet"
+      },
+      {
+        "text": "> ping portal.nusadigital.test [10.20.1.15]  →  Waktu habis, tidak ada balasan",
+        "evidenceId": "con-portal"
+      }
+    ],
+    "note": {
+      "text": "Agus: saya perlu Portal Aplikasi untuk memasang aplikasi Absensi hari ini.",
+      "evidenceId": "note"
+    }
+  },
+  "intel": {
+    "ping": [
+      {
+        "text": "Dari meja Bengkel IT: 10.20.1.15 (server portal) juga waktu habis",
+        "evidenceId": "ping-it"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["con-portal", "r-tickets"],
+    "supporting": ["con-gw", "con-internet", "r-dns", "ping-it"]
+  },
+  "explanation": "Laptop Agus sehat karena router dan internet membalas, dan nama portal sudah diterjemahkan ke alamatnya, tetapi server portal sendiri diam dan pengguna dari lima lantai mengeluh bersamaan. Eskalasi ke tim server dengan hasil ping dan jumlah tiketnya.",
+  "ruleRefs": ["r-ts-5", "r-net-1"],
+  "hints": [
+    "Ikuti urutan dari dekat ke jauh: router, internet, DNS, lalu server tujuan. Di mana jalurnya berhenti?",
+    "Laptop ini sehat, dan banyak orang mengeluh hal yang sama. Siapa yang memegang server portal?"
+  ]
+}

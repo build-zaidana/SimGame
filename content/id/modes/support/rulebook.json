@@ -1,0 +1,177 @@
+{
+  "chapters": [
+    {
+      "id": "ch-trouble",
+      "title": "Bab 1 · Troubleshooting",
+      "conceptId": "troubleshooting",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-ts-1",
+          "text": "Cek yang paling sederhana dulu: daya, kabel, tombol, lalu restart. Jangan langsung membongkar.",
+          "evidenceTags": ["power", "cable"]
+        },
+        {
+          "id": "r-ts-2",
+          "text": "Kumpulkan gejala: kapan mulai, apa yang berubah sebelumnya, dan apakah bisa diulang.",
+          "evidenceTags": ["symptom", "change"]
+        },
+        {
+          "id": "r-ts-3",
+          "text": "Percaya bukti (pesan error, lampu indikator, angka sistem), bukan tebakan atau rumor.",
+          "evidenceTags": ["error", "indicator"]
+        },
+        {
+          "id": "r-ts-4",
+          "text": "PERBAIKI bila ada yang salah atau rusak tapi bisa dibenahi tanpa suku cadang baru: pasang ulang, bersihkan, atau setel ulang.",
+          "evidenceTags": ["fixable"]
+        },
+        {
+          "id": "r-ts-5",
+          "text": "ESKALASI bila butuh izin atau akses yang tidak dimiliki teknisi Bengkel (folder terbatas, server, lisensi). Jangan mencari jalan pintas.",
+          "evidenceTags": ["access"]
+        }
+      ]
+    },
+    {
+      "id": "ch-guide",
+      "title": "Bab 2 · Melayani Pengguna",
+      "conceptId": "user-guidance",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-guide-1",
+          "text": "Bila perangkatnya sehat dan masalahnya cara pakai atau pengaturan sederhana, ARAHKAN PENGGUNA. Jangan bongkar apa pun.",
+          "evidenceTags": ["user-setting"]
+        },
+        {
+          "id": "r-guide-2",
+          "text": "Jelaskan langkahnya satu per satu dengan bahasa sederhana, lalu pastikan pengguna bisa mengulanginya sendiri.",
+          "evidenceTags": ["steps"]
+        },
+        {
+          "id": "r-guide-3",
+          "text": "Teknisi tidak pernah meminta password pengguna. Lupa password? Arahkan ke halaman reset resmi.",
+          "evidenceTags": ["password"]
+        },
+        {
+          "id": "r-guide-4",
+          "text": "Catat penyebab dan solusinya di tiket, supaya masalah serupa lebih cepat selesai.",
+          "evidenceTags": ["history"]
+        }
+      ]
+    },
+    {
+      "id": "ch-hw",
+      "title": "Bab 3 · Perangkat Keras",
+      "conceptId": "hardware-basics",
+      "unlockAtShift": 2,
+      "rules": [
+        {
+          "id": "r-hw-1",
+          "text": "GANTI KOMPONEN hanya bila buktinya menunjukkan kerusakan fisik: retak, gosong, menggembung, bunyi klik, atau gagal tes.",
+          "evidenceTags": ["damage"]
+        },
+        {
+          "id": "r-hw-2",
+          "text": "Komponen yang longgar, kotor, atau berdebu cukup DIPERBAIKI: pasang ulang atau bersihkan, lalu uji lagi.",
+          "evidenceTags": ["loose", "dust"]
+        },
+        {
+          "id": "r-hw-3",
+          "text": "Baterai menggembung bisa terbakar: jangan dicas, jangan ditekan, segera ganti.",
+          "evidenceTags": ["battery"]
+        },
+        {
+          "id": "r-hw-4",
+          "text": "Matikan dan cabut daya sebelum membuka casing. Sentuh logam atau pakai gelang antistatis.",
+          "evidenceTags": ["safety"]
+        }
+      ]
+    },
+    {
+      "id": "ch-net",
+      "title": "Bab 4 · Jaringan",
+      "conceptId": "network-basics",
+      "unlockAtShift": 3,
+      "rules": [
+        {
+          "id": "r-net-1",
+          "text": "Periksa dari yang terdekat ke terjauh: kabel atau Wi-Fi, alamat IP, router (gateway), internet, lalu DNS.",
+          "evidenceTags": ["layer"]
+        },
+        {
+          "id": "r-net-2",
+          "text": "Alamat IP 169.254.x.x artinya perangkat tidak mendapat alamat dari router (DHCP gagal).",
+          "evidenceTags": ["ip"]
+        },
+        {
+          "id": "r-net-3",
+          "text": "Bisa ping alamat IP tapi nama situs tidak terbuka? Itu masalah DNS, bukan internet mati.",
+          "evidenceTags": ["dns"]
+        },
+        {
+          "id": "r-net-4",
+          "text": "Bila banyak orang atau satu lantai putus bersamaan, masalahnya di jaringan pusat: ESKALASI ke tim jaringan.",
+          "evidenceTags": ["outage"]
+        }
+      ]
+    },
+    {
+      "id": "ch-os",
+      "title": "Bab 5 · Perawatan Sistem",
+      "conceptId": "os-maintenance",
+      "unlockAtShift": 4,
+      "rules": [
+        {
+          "id": "r-os-1",
+          "text": "Disk yang hampir penuh (di atas 90%) membuat komputer lambat. Bersihkan file sementara dan pindahkan file besar.",
+          "evidenceTags": ["disk"]
+        },
+        {
+          "id": "r-os-2",
+          "text": "Pasang update keamanan resmi secara rutin. Update yang tertunda berbulan-bulan adalah celah.",
+          "evidenceTags": ["update"]
+        },
+        {
+          "id": "r-os-3",
+          "text": "Masalah muncul tepat setelah update driver? Kembalikan (rollback) driver ke versi sebelumnya.",
+          "evidenceTags": ["driver"]
+        },
+        {
+          "id": "r-os-4",
+          "text": "Pasang aplikasi hanya dari Portal Aplikasi kantor, bukan dari situs atau file kiriman orang.",
+          "evidenceTags": ["software"]
+        }
+      ]
+    },
+    {
+      "id": "ch-esc",
+      "title": "Bab 6 · Eskalasi & Keselamatan",
+      "conceptId": "escalation-safety",
+      "unlockAtShift": 5,
+      "rules": [
+        {
+          "id": "r-esc-1",
+          "text": "ESKALASI bila butuh akses atau keahlian khusus (server, lisensi, pemulihan data). Tulis apa yang sudah dicoba.",
+          "evidenceTags": ["access"]
+        },
+        {
+          "id": "r-esc-2",
+          "text": "Tanda serangan (program asing, antivirus mati sendiri, file terkunci, kursor bergerak sendiri): putuskan jaringan dan eskalasi ke tim SOC.",
+          "evidenceTags": ["security"]
+        },
+        {
+          "id": "r-esc-3",
+          "text": "Data penting di disk yang sekarat jangan dicoba-coba. Eskalasi ke tim pemulihan data sebelum apa pun diganti.",
+          "evidenceTags": ["data"]
+        },
+        {
+          "id": "r-esc-4",
+          "text": "Bau terbakar, asap, atau cairan tumpah: cabut daya dulu, jangan dinyalakan lagi.",
+          "evidenceTags": ["hazard"]
+        }
+      ]
+    }
+  ]
+}

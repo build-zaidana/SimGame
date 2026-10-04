@@ -1,0 +1,66 @@
+{
+  "id": "s01-diag-002",
+  "type": "diagnostic",
+  "conceptIds": ["troubleshooting"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "Office PC PC-0310",
+      "owner": "Hendra Wijaya (HR)"
+    },
+    "readings": [
+      {
+        "label": "CPU usage",
+        "value": "9%",
+        "evidenceId": "r-cpu"
+      },
+      {
+        "label": "Memory (RAM) usage",
+        "value": "41%",
+        "evidenceId": "r-ram"
+      },
+      {
+        "label": "Disk space used",
+        "value": "55%",
+        "evidenceId": "r-disk"
+      },
+      {
+        "label": "Network",
+        "value": "Connected",
+        "evidenceId": "r-net"
+      },
+      {
+        "label": "Absensi app files",
+        "value": "3 files damaged (corrupt)",
+        "evidenceId": "r-appfiles"
+      }
+    ],
+    "console": [
+      {
+        "text": "> open Absensi  →  App stopped suddenly (crash) on opening",
+        "evidenceId": "c-crash"
+      },
+      {
+        "text": "> check-app Absensi  →  FAILED: core files damaged, needs reinstalling",
+        "evidenceId": "c-check"
+      }
+    ],
+    "note": {
+      "text": "Yesterday afternoon this PC shut down suddenly during a power cut, while the Absensi app was saving data.",
+      "evidenceId": "note-power"
+    }
+  },
+  "evidence": {
+    "required": ["r-appfiles", "c-check"],
+    "supporting": ["note-power"]
+  },
+  "explanation": "The PC itself is healthy, but the Absensi app files got damaged (corrupt) when the PC shut down suddenly, so the app crashes. Fix it by reinstalling Absensi from the App Portal; no new parts are needed.",
+  "ruleRefs": ["r-ts-4", "r-ts-2"],
+  "hints": [
+    "CPU, memory, disk, and network are normal. The problem is only in one app.",
+    "Read the app check result and the note about the power cut. What happened to the app files?"
+  ]
+}

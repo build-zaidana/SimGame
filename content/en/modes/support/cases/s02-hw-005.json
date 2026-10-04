@@ -1,0 +1,62 @@
+{
+  "id": "s02-hw-005",
+  "type": "hardware",
+  "conceptIds": ["hardware-basics", "user-guidance"],
+  "difficulty": 2,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "device": {
+      "name": "Design laptop NB-0640",
+      "owner": "Yoga Permana (Design)"
+    },
+    "checks": [
+      {
+        "part": "Fan noise",
+        "observation": "Loud humming while exporting video, quiet again afterward",
+        "evidenceId": "chk-noise"
+      },
+      {
+        "part": "CPU temperature",
+        "observation": "78°C while exporting, 45°C at idle (safe limit is below 90°C)",
+        "evidenceId": "chk-temp"
+      },
+      {
+        "part": "Fan and air vents",
+        "observation": "Clean, blades intact, no scraping sound",
+        "evidenceId": "chk-fan"
+      },
+      {
+        "part": "Performance",
+        "observation": "Never shuts down by itself, exports finish normally",
+        "evidenceId": "chk-perf"
+      }
+    ],
+    "note": {
+      "text": "Yoga: the fan gets super loud every time I export a video, I'm scared the laptop will explode.",
+      "evidenceId": "note-worry"
+    }
+  },
+  "evidence": {
+    "required": ["chk-temp"],
+    "supporting": ["chk-fan", "chk-noise", "chk-perf", "scan-temp"]
+  },
+  "explanation": "A fan really does spin fast during heavy work like video export, and the temperature stays safe with a clean, intact fan. The laptop is healthy, so guide Yoga that the noise is normal and suggest using it on a flat surface.",
+  "ruleRefs": ["r-guide-1", "r-ts-3"],
+  "hints": [
+    "A loud noise does not always mean something is broken. Look at the numbers, not the worry.",
+    "Compare the export temperature with the safe limit, then check the fan's condition."
+  ],
+  "intel": {
+    "scan": [
+      {
+        "text": "Cooling: temperature within safe limits, fan normal",
+        "evidenceId": "scan-temp"
+      },
+      {
+        "text": "Battery: health 91%"
+      }
+    ]
+  }
+}

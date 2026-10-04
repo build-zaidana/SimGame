@@ -1,0 +1,57 @@
+{
+  "id": "s02-ticket-003",
+  "type": "ticket",
+  "conceptIds": ["user-guidance"],
+  "difficulty": 2,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Rudi Hartono",
+      "department": "Finance"
+    },
+    "device": {
+      "text": "Office laptop NB-0299",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "F5 key is broken, it turns the volume down instead",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "I usually use F5 to reload the App Portal page.",
+        "evidenceId": "desc-usual"
+      },
+      {
+        "text": "Since a while ago, F5 turns the volume down and F2 dims the screen.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "I accidentally pressed Fn and Esc together while cleaning the keyboard.",
+        "evidenceId": "desc-fnesc"
+      },
+      {
+        "text": "The small light on the Fn key is now on. All other letters and numbers work normally.",
+        "evidenceId": "desc-fnlamp"
+      }
+    ],
+    "history": [
+      {
+        "text": "Three months ago: this laptop's keyboard was replaced after a coffee spill.",
+        "evidenceId": "hist-keyboard"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-fnlamp"],
+    "supporting": ["desc-fnesc", "desc-symptom"]
+  },
+  "explanation": "Pressing Fn and Esc together turns on Fn Lock, so keys F1 to F12 run special functions like volume and brightness. The keyboard is healthy, so just guide Rudi to press Fn and Esc again to turn it off.",
+  "ruleRefs": ["r-guide-1", "r-guide-2"],
+  "hints": [
+    "All other keys are normal, only the F row changed. What did Rudi press before?",
+    "The light on the Fn key means Fn Lock is on."
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "id": "s05-ticket-003",
+  "type": "ticket",
+  "conceptIds": ["os-maintenance", "troubleshooting"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Maya Kusuma",
+      "department": "Desain"
+    },
+    "device": {
+      "text": "Laptop desain NB-0904",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Layar berkedip-kedip sejak kemarin sore",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Layar laptop saya berkedip terus, terutama saat membuka aplikasi gambar.",
+        "evidenceId": "desc-flicker"
+      },
+      {
+        "text": "Kedipannya mulai tepat setelah laptop restart untuk update kemarin sore.",
+        "evidenceId": "desc-after"
+      },
+      {
+        "text": "Saat saya colok ke monitor luar, monitor itu juga ikut berkedip.",
+        "evidenceId": "desc-external"
+      },
+      {
+        "text": "Laptop tidak pernah jatuh atau terbentur.",
+        "evidenceId": "desc-safe"
+      }
+    ],
+    "history": [
+      {
+        "text": "Kemarin 16.30: driver kartu grafis NB-0904 diperbarui ke versi 31.2 lewat update otomatis.",
+        "evidenceId": "hist-driver"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-after", "hist-driver"],
+    "supporting": ["desc-external", "desc-safe"]
+  },
+  "explanation": "Kedipan muncul tepat setelah driver kartu grafis diperbarui dan ikut terjadi di monitor luar, jadi penyebabnya driver, bukan layar. Perbaiki dengan rollback driver ke versi sebelumnya.",
+  "ruleRefs": ["r-os-3", "r-ts-2"],
+  "hints": [
+    "Apa yang berubah tepat sebelum masalah muncul?",
+    "Kalau monitor luar ikut berkedip, panel layarnya kemungkinan tidak rusak, jadi lihat riwayat driver."
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "id": "s01-ticket-003",
+  "type": "ticket",
+  "conceptIds": ["troubleshooting", "user-guidance"],
+  "difficulty": 2,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Dimas Pratama",
+      "department": "Sales"
+    },
+    "device": {
+      "text": "Office laptop NB-0518",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Can't open the Board-Reports folder",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "My manager asked me to help prepare a report in the shared folder Board-Reports.",
+        "evidenceId": "desc-new-access"
+      },
+      {
+        "text": "When I open it, a message appears: \"Access denied. You do not have permission to this folder on server fs01.nusadigital.test.\"",
+        "evidenceId": "desc-denied"
+      },
+      {
+        "text": "I can open the Sales folder on the same server as usual.",
+        "evidenceId": "desc-other-ok"
+      },
+      {
+        "text": "My internet and email work fine.",
+        "evidenceId": "desc-net"
+      }
+    ],
+    "history": [
+      {
+        "text": "Last year: this laptop was reinstalled, everything normal.",
+        "evidenceId": "hist-reinstall"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-denied", "desc-new-access"],
+    "supporting": ["desc-other-ok"]
+  },
+  "explanation": "The laptop and network are healthy; the \"Access denied\" message means Dimas's account has not been given permission to a restricted server folder. Only the server admin can grant that, after the folder owner approves, so escalate.",
+  "ruleRefs": ["r-ts-5", "r-ts-3"],
+  "hints": [
+    "Another folder on the same server opens fine. So what is different about this folder?",
+    "Read the error message. Who has the authority to grant permission to a server folder?"
+  ]
+}

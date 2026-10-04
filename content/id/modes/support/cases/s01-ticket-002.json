@@ -1,0 +1,57 @@
+{
+  "id": "s01-ticket-002",
+  "type": "ticket",
+  "conceptIds": ["troubleshooting"],
+  "difficulty": 1,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Bayu Saputra",
+      "department": "Gudang"
+    },
+    "device": {
+      "text": "Printer lantai 2 (PR-0207)",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Printer tidak mau mencetak sejak pagi",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Saya kirim laporan stok ke printer, tapi tidak ada yang keluar.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "Kertas penuh, tinta (toner) masih 70%, dan lampu printer hijau.",
+        "evidenceId": "desc-paper"
+      },
+      {
+        "text": "Di layar antrean cetak (print queue), dokumen paling atas berstatus \"Error – Tertahan\" dan 12 dokumen lain menunggu di belakangnya.",
+        "evidenceId": "desc-queue"
+      },
+      {
+        "text": "Rekan satu lantai juga mengeluh cetakan mereka tidak keluar.",
+        "evidenceId": "desc-others"
+      }
+    ],
+    "history": [
+      {
+        "text": "Dua minggu lalu: printer ini diservis dan dinyatakan normal.",
+        "evidenceId": "hist-service"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-queue"],
+    "supporting": ["desc-others", "desc-paper"]
+  },
+  "explanation": "Satu dokumen yang macet berstatus error menahan seluruh antrean cetak, padahal kertas, toner, dan printernya sehat. Perbaiki dengan menghapus dokumen macet itu dan memulai ulang layanan cetak.",
+  "ruleRefs": ["r-ts-4", "r-ts-3"],
+  "hints": [
+    "Kertas, toner, dan lampu sudah dicek. Bagian mana lagi yang menunjukkan error?",
+    "Lihat dokumen paling atas di antrean cetak. Apa yang terjadi pada dokumen di belakangnya?"
+  ]
+}

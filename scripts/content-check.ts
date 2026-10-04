@@ -12,6 +12,8 @@ import type { CaseGenerator } from '../src/modes/contract.ts';
 import { socCaseSchemas } from '../src/modes/soc/caseTypes/schemas.ts';
 import { socGenerators } from '../src/modes/soc/generators/index.ts';
 import { SOC_TOOL_IDS } from '../src/modes/soc/tools.ts';
+import { supportCaseSchemas } from '../src/modes/support/caseTypes/schemas.ts';
+import { SUPPORT_TOOL_IDS } from '../src/modes/support/tools.ts';
 
 const ROOT = join(import.meta.dirname, '..');
 const LOCALES_DIR = join(ROOT, 'content');
@@ -22,6 +24,7 @@ const MODES: Record<
   { schemas: CaseSchemas; generators: Record<string, CaseGenerator>; tools: string[] }
 > = {
   soc: { schemas: socCaseSchemas, generators: socGenerators, tools: SOC_TOOL_IDS },
+  support: { schemas: supportCaseSchemas, generators: {}, tools: SUPPORT_TOOL_IDS },
 };
 /** Jumlah seed yang dicoba untuk tiap entri generator di antrian shift. */
 const GENERATOR_SAMPLES = 20;

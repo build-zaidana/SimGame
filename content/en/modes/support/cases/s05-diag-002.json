@@ -1,0 +1,70 @@
+{
+  "id": "s05-diag-002",
+  "type": "diagnostic",
+  "conceptIds": ["os-maintenance", "escalation-safety"],
+  "difficulty": 3,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "device": {
+      "name": "Office laptop NB-0346",
+      "owner": "Yoga Pratama (Warehouse)"
+    },
+    "readings": [
+      {
+        "label": "Window that appeared",
+        "value": "\"Update from the IT Workshop: restart required\"",
+        "evidenceId": "r-popup"
+      },
+      {
+        "label": "Update program publisher",
+        "value": "IT Workshop Nusa Digital (verified)",
+        "evidenceId": "r-publisher"
+      },
+      {
+        "label": "Download source",
+        "value": "portal.nusadigital.test",
+        "evidenceId": "r-source"
+      },
+      {
+        "label": "Antivirus",
+        "value": "Active, nothing found",
+        "evidenceId": "r-av"
+      },
+      {
+        "label": "Pending updates",
+        "value": "This month's security update, 1 item",
+        "evidenceId": "r-pending"
+      }
+    ],
+    "console": [
+      {
+        "text": "> list startup programs  →  only standard office programs",
+        "evidenceId": "con-startup"
+      }
+    ],
+    "note": {
+      "text": "Yoga is afraid this pop-up is a virus because it appeared suddenly and forces a restart.",
+      "evidenceId": "note-fear"
+    }
+  },
+  "evidence": {
+    "required": ["r-publisher", "r-source"],
+    "supporting": ["r-av", "ping-portal"]
+  },
+  "explanation": "This pop-up comes from the IT Workshop's verified official update agent and downloads from the office portal, so the laptop is healthy. Guide Yoga to save his work and restart so the security update gets installed.",
+  "ruleRefs": ["r-os-2", "r-guide-1"],
+  "hints": [
+    "A startling pop-up is not always dangerous, so check who sent it.",
+    "Look at the publisher and download source: do both belong to the office itself?"
+  ],
+  "intel": {
+    "ping": [
+      {
+        "text": "portal.nusadigital.test (10.20.0.15): reply 3 ms",
+        "evidenceId": "ping-portal"
+      }
+    ]
+  }
+}

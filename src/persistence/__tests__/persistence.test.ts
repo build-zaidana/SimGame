@@ -250,9 +250,18 @@ describe('migration v6 → v7 (explorable office setting)', () => {
     const save = JSON.parse(JSON.stringify(createNewSave({ installId: INSTALL_ID, now: NOW })));
     delete save.profile.settings.exploreOffice;
     const migrated = migrate({ ...save, schemaVersion: 6 });
-    expect(SAVE_SCHEMA_VERSION).toBe(7);
-    expect(migrated.schemaVersion).toBe(7);
+    expect(migrated.schemaVersion).toBe(SAVE_SCHEMA_VERSION);
     expect(migrated.profile.settings.exploreOffice).toBe(true);
+  });
+});
+
+describe('migration v7 → v8 (wider verdicts for IT Support)', () => {
+  it('keeps old sessions as they are and accepts the new verdicts', () => {
+    const v7 = { ...JSON.parse(JSON.stringify(saveWithSession())), schemaVersion: 7 };
+    const migrated = migrate(v7);
+    expect(SAVE_SCHEMA_VERSION).toBe(8);
+    expect(migrated.schemaVersion).toBe(8);
+    expect(migrated.modes['soc']?.activeSession?.shiftId).toBe('soc-01');
   });
 });
 

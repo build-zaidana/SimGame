@@ -1,0 +1,83 @@
+{
+  "id": "s05-diag-004",
+  "type": "diagnostic",
+  "conceptIds": ["escalation-safety", "network-basics"],
+  "difficulty": 3,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "acceptableDecisions": {},
+  "severity": 3,
+  "data": {
+    "device": {
+      "name": "Unlabeled laptop (found in the 3rd floor meeting room)",
+      "owner": "Unknown"
+    },
+    "readings": [
+      {
+        "label": "Antivirus",
+        "value": "Off, turned off at 02.14 without any user command",
+        "evidenceId": "r-av"
+      },
+      {
+        "label": "Startup programs",
+        "value": "PembaruSistem (unknown publisher, not in the App Portal)",
+        "evidenceId": "r-startup"
+      },
+      {
+        "label": "Files in Documents folder",
+        "value": "214 files renamed to random letters",
+        "evidenceId": "r-files"
+      },
+      {
+        "label": "Disk storage",
+        "value": "41% used",
+        "evidenceId": "r-disk"
+      },
+      {
+        "label": "Processor temperature",
+        "value": "52°C, normal",
+        "evidenceId": "r-temp"
+      }
+    ],
+    "console": [
+      {
+        "text": "> list connections  →  connects to sinkron-kelabu.example every 60 seconds",
+        "evidenceId": "con-conn"
+      },
+      {
+        "text": "> list accounts  →  one local account named \"K\"",
+        "evidenceId": "con-user"
+      }
+    ],
+    "note": {
+      "text": "This laptop was plugged into the network cable port under the meeting table. Nobody claims to own it.",
+      "evidenceId": "note-found"
+    }
+  },
+  "evidence": {
+    "required": ["r-av", "r-startup", "con-conn"],
+    "supporting": ["r-files", "note-found", "ping-unknown"]
+  },
+  "explanation": "An antivirus that switched itself off, an unknown program running at startup, and constant connections to an unknown domain are signs of an attack. Disconnect it from the network, do not delete or fix anything so the evidence stays intact, then escalate to the SOC team.",
+  "ruleRefs": ["r-esc-2", "r-esc-1"],
+  "hints": [
+    "The hardware is healthy, so look at what is running inside it.",
+    "A self-disabled antivirus and an unknown program are not a regular technician's job, especially with connections to an unknown domain."
+  ],
+  "intel": {
+    "ping": [
+      {
+        "text": "sinkron-kelabu.example (203.0.113.77): reply 180 ms, not a Nusa Digital server",
+        "evidenceId": "ping-unknown"
+      }
+    ],
+    "scan": [
+      {
+        "text": "Disk: healthy"
+      },
+      {
+        "text": "RAM: passed test"
+      }
+    ]
+  }
+}

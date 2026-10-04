@@ -1,0 +1,78 @@
+{
+  "items": [
+    {
+      "id": "rv-guide-1",
+      "type": "mcq",
+      "conceptId": "user-guidance",
+      "difficulty": 1,
+      "prompt": "Pak Andi bilang password-nya selalu \"salah\", padahal ia yakin benar. Lampu Caps Lock menyala. Apa keputusannya?",
+      "choices": [
+        "Ganti Komponen keyboard",
+        "Eskalasi ke tim SOC",
+        "Arahkan Pengguna: matikan Caps Lock lalu coba lagi",
+        "Minta password-nya untuk dicoba sendiri"
+      ],
+      "answerIndex": 2,
+      "explanation": "Perangkatnya sehat, hanya Caps Lock yang menyala. Ajari pengguna supaya lain kali bisa menyelesaikannya sendiri."
+    },
+    {
+      "id": "rv-guide-2",
+      "type": "mcq",
+      "conceptId": "user-guidance",
+      "difficulty": 1,
+      "prompt": "Seseorang mengaku teknisi PT Nusa Digital dan meminta password-mu lewat telepon. Apa yang benar?",
+      "choices": [
+        "Berikan saja, dia kan teknisi",
+        "Tolak dan curigai, karena teknisi tidak pernah meminta password",
+        "Berikan setengahnya saja",
+        "Kirim lewat email supaya aman"
+      ],
+      "answerIndex": 1,
+      "explanation": "Teknisi tidak pernah meminta password. Siapa pun yang memintanya patut dicurigai."
+    },
+    {
+      "id": "rv-guide-3",
+      "type": "tap-evidence",
+      "conceptId": "user-guidance",
+      "difficulty": 2,
+      "prompt": "Ketuk bagian tiket yang menunjukkan masalahnya hanya pengaturan sederhana.",
+      "parts": [
+        { "text": "Keluhan: laptop tidak mengeluarkan suara sama sekali.", "evidenceId": "g1" },
+        { "text": "Ikon speaker di pojok layar dalam keadaan mute.", "evidenceId": "g2" },
+        { "text": "Tes speaker dengan alat: suara keluar normal.", "evidenceId": "g3" },
+        { "text": "Laptop dipakai sejak dua tahun lalu.", "evidenceId": "g4" }
+      ],
+      "answer": ["g2", "g3"],
+      "explanation": "Speaker terbukti sehat dan suaranya hanya di-mute. Cukup arahkan pengguna untuk menyalakan suaranya lagi."
+    },
+    {
+      "id": "rv-guide-4",
+      "type": "order-steps",
+      "conceptId": "user-guidance",
+      "difficulty": 2,
+      "prompt": "Urutkan cara mengarahkan pengguna yang monitornya \"mati\" karena sumber input salah.",
+      "steps": [
+        "Pastikan perangkatnya sehat",
+        "Jelaskan langkah memilih input yang benar dengan bahasa sederhana",
+        "Minta pengguna mencobanya sendiri",
+        "Catat penyebab dan solusinya di riwayat tiket"
+      ],
+      "explanation": "Pastikan dulu tidak ada yang rusak, lalu ajari dan biarkan pengguna mencoba. Catatan tiket membantu kalau masalah serupa muncul lagi."
+    },
+    {
+      "id": "rv-guide-5",
+      "type": "mcq",
+      "conceptId": "user-guidance",
+      "difficulty": 1,
+      "prompt": "Bu Rina lupa password akunnya. Apa yang kamu lakukan?",
+      "choices": [
+        "Arahkan ke halaman reset password resmi kantor",
+        "Tanyakan password lamanya",
+        "Buatkan password baru lalu tulis di kertas",
+        "Bongkar laptopnya"
+      ],
+      "answerIndex": 0,
+      "explanation": "Lupa password diselesaikan lewat halaman reset resmi. Teknisi tidak perlu dan tidak boleh tahu password pengguna."
+    }
+  ]
+}

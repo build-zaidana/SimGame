@@ -1,0 +1,61 @@
+{
+  "id": "s01-ticket-005",
+  "type": "ticket",
+  "conceptIds": ["troubleshooting"],
+  "difficulty": 1,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Fitri Handayani",
+      "department": "Resepsionis"
+    },
+    "device": {
+      "text": "PC meja resepsionis PC-0102",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Keyboard tidak bisa mengetik sama sekali",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Sejak pagi tidak ada huruf yang muncul saat saya mengetik.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "Lampu Num Lock di keyboard juga tidak menyala sama sekali.",
+        "evidenceId": "desc-light"
+      },
+      {
+        "text": "Mouse yang dicolok di sebelahnya bekerja normal.",
+        "evidenceId": "desc-mouse"
+      },
+      {
+        "text": "Kemarin sore meja resepsionis digeser untuk dibersihkan.",
+        "evidenceId": "desc-moved"
+      },
+      {
+        "text": "Di belakang PC, colokan USB keyboard terlihat setengah keluar dari portnya.",
+        "evidenceId": "desc-plug"
+      }
+    ],
+    "history": [
+      {
+        "text": "Bulan lalu: keyboard ini lolos tes semua tombol.",
+        "evidenceId": "hist-test"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-plug"],
+    "supporting": ["desc-moved", "desc-mouse"]
+  },
+  "explanation": "Colokan keyboard setengah keluar setelah meja digeser, jadi keyboard tidak mendapat daya dan lampunya mati. Perbaiki dengan memasang ulang colokannya dengan benar, lalu uji mengetik.",
+  "ruleRefs": ["r-ts-1", "r-ts-4"],
+  "hints": [
+    "Ingat aturan: cek daya dan kabel dulu. Apa yang berubah kemarin?",
+    "Lihat bagian belakang PC. Bagaimana keadaan colokan keyboard?"
+  ]
+}

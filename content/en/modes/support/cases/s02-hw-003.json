@@ -1,0 +1,67 @@
+{
+  "id": "s02-hw-003",
+  "type": "hardware",
+  "conceptIds": ["hardware-basics"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "Design laptop NB-0613",
+      "owner": "Maya Kartika (Design)"
+    },
+    "checks": [
+      {
+        "part": "Air vents",
+        "observation": "Blocked by thick clumps of grey dust",
+        "evidenceId": "chk-vent"
+      },
+      {
+        "part": "Fan",
+        "observation": "Blades intact, spins smoothly by hand, but full of dust",
+        "evidenceId": "chk-fan"
+      },
+      {
+        "part": "CPU temperature",
+        "observation": "97°C after 10 minutes of use, then the laptop shuts down by itself",
+        "evidenceId": "chk-temp"
+      },
+      {
+        "part": "Battery",
+        "observation": "Normal shape, health 85%",
+        "evidenceId": "chk-battery"
+      },
+      {
+        "part": "Case",
+        "observation": "No cracks or burn marks",
+        "evidenceId": "chk-casing"
+      }
+    ],
+    "note": {
+      "text": "Maya: I often use the laptop on my bed or a pillow when working late at home.",
+      "evidenceId": "note-bed"
+    }
+  },
+  "evidence": {
+    "required": ["chk-vent", "chk-temp"],
+    "supporting": ["chk-fan", "note-bed", "chk-casing", "scan-fan"]
+  },
+  "explanation": "Thick dust is clogging the vents and fan, so heat cannot escape and the laptop shuts itself down. The fan is still intact, so cleaning it and testing again is enough.",
+  "ruleRefs": ["r-hw-2", "r-hw-4"],
+  "hints": [
+    "The laptop shuts down after a few minutes of use. What makes it too hot?",
+    "Is the fan physically broken, or just dirty?"
+  ],
+  "intel": {
+    "scan": [
+      {
+        "text": "Fan: spinning at 2100 RPM, airflow blocked",
+        "evidenceId": "scan-fan"
+      },
+      {
+        "text": "Battery: health 85%, normal shape"
+      }
+    ]
+  }
+}

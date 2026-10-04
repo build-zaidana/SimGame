@@ -1,0 +1,66 @@
+{
+  "id": "s01-diag-002",
+  "type": "diagnostic",
+  "conceptIds": ["troubleshooting"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "PC kantor PC-0310",
+      "owner": "Hendra Wijaya (HR)"
+    },
+    "readings": [
+      {
+        "label": "Pemakaian CPU",
+        "value": "9%",
+        "evidenceId": "r-cpu"
+      },
+      {
+        "label": "Pemakaian memori (RAM)",
+        "value": "41%",
+        "evidenceId": "r-ram"
+      },
+      {
+        "label": "Ruang disk terpakai",
+        "value": "55%",
+        "evidenceId": "r-disk"
+      },
+      {
+        "label": "Jaringan",
+        "value": "Terhubung",
+        "evidenceId": "r-net"
+      },
+      {
+        "label": "File aplikasi Absensi",
+        "value": "3 file rusak (corrupt)",
+        "evidenceId": "r-appfiles"
+      }
+    ],
+    "console": [
+      {
+        "text": "> buka Absensi  →  Aplikasi berhenti tiba-tiba (crash) saat dibuka",
+        "evidenceId": "c-crash"
+      },
+      {
+        "text": "> cek-aplikasi Absensi  →  GAGAL: file inti rusak, perlu dipasang ulang",
+        "evidenceId": "c-check"
+      }
+    ],
+    "note": {
+      "text": "Kemarin sore PC ini mati mendadak saat listrik padam, ketika aplikasi Absensi sedang menyimpan data.",
+      "evidenceId": "note-power"
+    }
+  },
+  "evidence": {
+    "required": ["r-appfiles", "c-check"],
+    "supporting": ["note-power"]
+  },
+  "explanation": "Kondisi PC sehat, tapi file aplikasi Absensi rusak (corrupt) sejak PC mati mendadak, sehingga aplikasinya crash. Perbaiki dengan memasang ulang Absensi dari Portal Aplikasi; tidak perlu suku cadang baru.",
+  "ruleRefs": ["r-ts-4", "r-ts-2"],
+  "hints": [
+    "CPU, memori, disk, dan jaringan normal. Masalahnya hanya di satu aplikasi.",
+    "Baca hasil cek aplikasi dan catatan soal listrik padam. Apa yang terjadi pada file aplikasinya?"
+  ]
+}

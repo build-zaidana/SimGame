@@ -1,0 +1,75 @@
+{
+  "id": "s04-diag-004",
+  "type": "diagnostic",
+  "conceptIds": ["os-maintenance", "troubleshooting"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 1,
+  "data": {
+    "device": {
+      "name": "Laptop kantor NB-0481",
+      "owner": "Agus Setiawan (Penjualan)"
+    },
+    "readings": [
+      {
+        "label": "Waktu menyala sampai siap",
+        "value": "6 menit 30 detik",
+        "evidenceId": "r-boot"
+      },
+      {
+        "label": "Program startup aktif",
+        "value": "23 program",
+        "evidenceId": "r-startup"
+      },
+      {
+        "label": "RAM saat baru menyala",
+        "value": "91% dari 8 GB",
+        "evidenceId": "r-ram"
+      },
+      {
+        "label": "Disk terpakai",
+        "value": "48%",
+        "evidenceId": "r-disk"
+      },
+      {
+        "label": "Kesehatan SSD",
+        "value": "95% (baik)",
+        "evidenceId": "r-ssd"
+      },
+      {
+        "label": "Update",
+        "value": "Semua terpasang",
+        "evidenceId": "r-update"
+      }
+    ],
+    "console": [
+      {
+        "text": "> daftar-startup  →  Pemutar musik, 3 aplikasi chat, 4 toolbar peramban, 2 pengunduh, dan 13 lainnya",
+        "evidenceId": "c-list"
+      }
+    ],
+    "note": {
+      "text": "Agus: 'Kalau sudah menyala lama, laptop lancar. Lambatnya hanya waktu baru dinyalakan.'",
+      "evidenceId": "note-user"
+    }
+  },
+  "intel": {
+    "scan": [
+      {
+        "text": "Semua komponen: lolos uji",
+        "evidenceId": "scan-health"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["r-startup", "r-boot"],
+    "supporting": ["c-list", "r-ram", "note-user", "r-ssd", "scan-health"]
+  },
+  "explanation": "Ada 23 program yang ikut menyala saat startup, sehingga laptop lama siap padahal disk, SSD, dan update-nya sehat. Perbaiki dengan mematikan program startup yang tidak perlu.",
+  "ruleRefs": ["r-ts-4", "r-ts-2"],
+  "hints": [
+    "Laptop hanya lambat saat baru dinyalakan. Apa saja yang ikut berjalan saat itu?",
+    "Puluhan program startup berebut RAM saat menyala. Komponennya sendiri sehat."
+  ]
+}

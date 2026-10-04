@@ -6,7 +6,7 @@ import { buyTool, type BuyResult } from '../engine/economy.ts';
 import { shiftReducer, startShift, summarizeShift, type ShiftAction } from '../engine/shift.ts';
 import type { ShiftSession } from '../engine/types.ts';
 import type { CareerMode } from '../modes/contract.ts';
-import { getMode } from '../modes/registry.ts';
+import { getMode, modes } from '../modes/registry.ts';
 import { createLocalSaveRepository } from '../persistence/LocalSaveRepository.ts';
 import type { SaveRepository, StorageKind } from '../persistence/SaveRepository.ts';
 import {
@@ -59,6 +59,11 @@ interface AppState {
   /** true = sesi Mode Latihan: hasilnya tidak disimpan ke progres utama. */
   practice: boolean;
   content: ModeContent | null;
+  /** Konten setiap mode yang sudah dimuat (HUB menampilkan semua meja sekaligus). */
+  contents: Record<string, ModeContent>;
+  /** Mode yang dilihat di layar Toko / Buku Panduan / Lencana di luar shift. */
+  menuMode: string;
+  setMenuMode(modeId: string): void;
   /** Layar asal untuk tombol Kembali di layar menu. */
   returnTo: Screen;
   rulebookFocus: string | null;
@@ -80,7 +85,7 @@ interface AppState {
   enterPractice(modeId: string, shiftId?: string): Promise<void>;
   cancelPractice(modeId: string): void;
   dispatch(action: ShiftAction): void;
-  openMenu(screen: MenuScreen): void;
+  openMenu(screen: MenuScreen, modeId?: string): void;
   openRulebook(focusChapterId: string | null): void;
   openAssessment(kind: AssessmentKind): void;
   back(): void;
@@ -152,6 +157,8 @@ export const useAppStore = create<AppState>()((set, get) => ({
   session: null,
   practice: false,
   content: null,
+  contents: {},
+  menuMode: modes[0]?.id ?? 'soc',
   returnTo: 'hub',
   rulebookFocus: null,
   assessmentKind: 'pre',
@@ -195,7 +202,13 @@ export const useAppStore = create<AppState>()((set, get) => ({
 
   async preloadContent(modeId) {
     const content = await loadContent(modeId);
-    if (!get().session) set({ content });
+    set({ contents: { ...get().contents, [modeId]: content } });
+    if (!get().session && get().menuMode === modeId) set({ content });
+  },
+
+  setMenuMode(modeId) {
+    set({ menuMode: modeId });
+    void get().preloadContent(modeId);
   },
 
   enterMode(modeId) {
@@ -263,7 +276,8 @@ export const useAppStore = create<AppState>()((set, get) => ({
     });
   },
 
-  openMenu(screen) {
+  openMenu(screen, modeId) {
+    if (modeId) get().setMenuMode(modeId);
     const from = get().screen;
     const menus: Screen[] = [
       'rulebook',
@@ -334,7 +348,10 @@ export const useAppStore = create<AppState>()((set, get) => ({
     await setLocale(next);
     get().updateSettings({ language: next });
     // Konten ikut berganti; kasus prosedural sesi yang sedang berjalan tetap dalam bahasa awalnya.
-    const { content, session } = get();
+    const { content, session, contents } = get();
+    const reloaded: Record<string, ModeContent> = {};
+    for (const id of Object.keys(contents)) reloaded[id] = await loadContent(id);
+    set({ contents: reloaded });
     const modeId = session?.modeId ?? content?.meta.id;
     const mode = modeId ? getMode(modeId) : undefined;
     if (content && mode) {
@@ -447,6 +464,7 @@ async function openSession(modeId: string, practice: boolean, practiceShiftId?: 
   const next = withSession(save, session, modeId, slot);
   write(next);
   useAppStore.setState({
+    contents: { ...useAppStore.getState().contents, [modeId]: content },
     content: withGeneratedCases(content, session, schemasOf(mode)),
     session,
     practice,

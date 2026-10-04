@@ -1,0 +1,57 @@
+{
+  "id": "s03-ticket-004",
+  "type": "ticket",
+  "conceptIds": ["network-basics", "troubleshooting"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Yoga Permana",
+      "department": "HR"
+    },
+    "device": {
+      "text": "Laptop kantor NB-0590",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Ikon Wi-Fi hilang setelah dari Bengkel IT",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Kemarin laptop saya dites kabel LAN di Bengkel IT. Sejak itu ikon Wi-Fi hilang.",
+        "evidenceId": "desc-change"
+      },
+      {
+        "text": "Mode pesawat tidak aktif.",
+        "evidenceId": "desc-plane"
+      },
+      {
+        "text": "Di Pengaturan Jaringan, adaptor Wi-Fi tertulis \"Dinonaktifkan\" (disabled).",
+        "evidenceId": "desc-disabled"
+      },
+      {
+        "text": "Laptop rekan satu ruangan bisa memakai Wi-Fi.",
+        "evidenceId": "desc-neighbor"
+      }
+    ],
+    "history": [
+      {
+        "text": "Kemarin, Bengkel IT: adaptor Wi-Fi dimatikan sementara untuk uji kabel LAN. Status akhir tidak dicatat.",
+        "evidenceId": "hist-test"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-disabled", "hist-test"],
+    "supporting": ["desc-change", "desc-plane", "desc-neighbor"]
+  },
+  "explanation": "Adaptor Wi-Fi dinonaktifkan saat uji kabel di Bengkel IT dan lupa dinyalakan lagi, jadi kartunya sehat tetapi pengaturannya salah. Perbaiki dengan mengaktifkan kembali adaptor Wi-Fi, lalu catat di tiket.",
+  "ruleRefs": ["r-ts-4", "r-ts-2", "r-guide-4"],
+  "hints": [
+    "Apa yang terjadi pada laptop ini kemarin, tepat sebelum Wi-Fi hilang?",
+    "Mode pesawat mati, tapi adaptornya dinonaktifkan oleh tim kita sendiri. Butuh suku cadang baru?"
+  ]
+}
