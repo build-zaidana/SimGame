@@ -11,6 +11,9 @@ interface FeedbackDialogProps {
   sessionCase: SessionCase;
   rules: Rule[];
   decisionLabel(id: string): string;
+  deskTitle: string;
+  /** Catatan per dampak dari mode (ADR 025); tanpa ini teks SOC. */
+  citations?: Partial<Record<string, string>> | undefined;
   onContinue(): void;
 }
 
@@ -20,6 +23,8 @@ export function FeedbackDialog({
   sessionCase,
   rules,
   decisionLabel,
+  deskTitle,
+  citations,
   onContinue,
 }: FeedbackDialogProps) {
   const o = sessionCase.outcome;
@@ -34,7 +39,7 @@ export function FeedbackDialog({
   return (
     <Dialog labelledBy="feedback-title" onClose={onContinue} initialFocus="content" variant="paper">
       <p className="mb-2 border-b-2 border-dashed border-ink/50 pb-1 font-mono text-xs tracking-widest text-ink-muted">
-        {id.feedback.slipHeader(caseData.id)}
+        {id.feedback.slipHeader(deskTitle, caseData.id)}
       </p>
       <p className="float-right ml-2" aria-hidden="true">
         <span className={`stamp border-4 px-2 py-1 font-stamp text-lg ${color} border-current`}>
@@ -49,7 +54,7 @@ export function FeedbackDialog({
         {id.feedback.score(sessionCase.score ?? 0)}
         {delta !== 0 && ` · ${id.feedback.trustChange(delta)}`}
       </p>
-      {(id.feedback.citations as Partial<Record<string, string>>)[o.impact] && (
+      {(citations ?? (id.feedback.citations as Partial<Record<string, string>>))[o.impact] && (
         <p
           className={
             'mt-3 border-2 border-dashed px-2 py-1 font-display text-sm ' +
@@ -58,7 +63,7 @@ export function FeedbackDialog({
           data-testid="citation"
         >
           <span aria-hidden="true">{o.impact === 'threat-allowed' ? '⚠ ' : '✎ '}</span>
-          {(id.feedback.citations as Partial<Record<string, string>>)[o.impact]}
+          {(citations ?? (id.feedback.citations as Partial<Record<string, string>>))[o.impact]}
         </p>
       )}
       <p className="mt-3">{id.feedback.yourDecision(decisionLabel(o.decision))}</p>

@@ -3,7 +3,13 @@ import type { RngState } from './rng.ts';
 /** Keputusan pemain; tiap mode mendefinisikan daftarnya sendiri. */
 export type DecisionId = string;
 export type EvidenceId = string;
-export type Verdict = 'safe' | 'malicious' | 'suspicious';
+/**
+ * Verdict kasus. SOC: aman / berbahaya / mencurigakan. IT Support (ADR 025): tidak ada kerusakan
+ * (cukup diarahkan) / ada kerusakan / perlu spesialis. `safe` dan `no-fault` dihitung sebagai
+ * kasus "tidak perlu tindakan" (rasio 30–40% per shift).
+ */
+export type Verdict = 'safe' | 'malicious' | 'suspicious' | 'no-fault' | 'fault' | 'specialist';
+export const NO_ACTION_VERDICTS: readonly Verdict[] = ['safe', 'no-fault'];
 export type PlayMode = 'relaxed' | 'normal';
 export type Severity = 1 | 2 | 3;
 

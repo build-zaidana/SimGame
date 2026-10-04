@@ -6,7 +6,10 @@ import { btnPrimary, panel } from '../ui/styles.ts';
 
 /** Tes awal/akhir (PRD §5.3). Tidak memengaruhi skor atau Leitner. */
 export function AssessmentScreen() {
-  const content = useAppStore((s) => s.content);
+  // Tes awal/akhir hanya ada di mode yang punya assessment.json (saat ini Meja SOC).
+  const content = useAppStore(
+    (s) => Object.values(s.contents).find((c) => c.assessment) ?? s.content,
+  );
   const kind = useAppStore((s) => s.assessmentKind);
   const saveAssessment = useAppStore((s) => s.saveAssessment);
   const back = useAppStore((s) => s.back);

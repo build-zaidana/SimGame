@@ -15,6 +15,12 @@ export const upcomingModes: UpcomingMode[] = (['support', 'dev', 'data'] as cons
   status: 'coming-soon',
 }));
 
+/** Judul buku panduan sebuah mode (ikut bahasa aktif). */
+export function rulebookTitle(modeId: string): string {
+  const m = (id.modes as Record<string, { rulebook: string } | undefined>)[modeId];
+  return m?.rulebook ?? id.rulebook.heading;
+}
+
 export function getMode(modeId: string): CareerMode | undefined {
   return modes.find((m) => m.id === modeId);
 }

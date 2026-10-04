@@ -8,11 +8,16 @@ const ICON: Record<string, string> = {
   escalate: '⬆',
   'reset-password': '🔁',
   quarantine: '🛡',
+  guide: '💬',
+  fix: '🔧',
+  replace: '🔩',
 };
 const COLOR: Record<string, string> = {
   allow: 'bg-safe text-bg',
   block: 'bg-danger text-bg',
   escalate: 'bg-accent text-bg',
+  guide: 'bg-safe text-bg',
+  replace: 'bg-danger text-bg',
 };
 
 interface ActionBarProps {

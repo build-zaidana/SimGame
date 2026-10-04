@@ -16,6 +16,7 @@ export const socMode: CareerMode = {
     return id.modes.soc.deskTitle;
   },
   status: 'available',
+  mentor: 'rani',
   get decisions() {
     return [
       { id: 'allow', label: id.decisions['allow'] ?? 'allow', unlockedAtShift: 1 },

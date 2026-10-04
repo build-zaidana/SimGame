@@ -4,7 +4,10 @@ import { Avatar } from '../Avatar.tsx';
 
 export function DialogueLine({ line }: { line: Dialogue['lines'][number] }) {
   const speaker = id.speakers[line.speaker];
-  const portrait = line.speaker === 'rani' || line.speaker === 'kelabu' ? line.speaker : null;
+  const portrait =
+    line.speaker === 'rani' || line.speaker === 'kelabu' || line.speaker === 'joko'
+      ? line.speaker
+      : null;
   return (
     <div className="flex items-start gap-3">
       {portrait && <Avatar kind={portrait} className="size-14 sm:size-16" />}

@@ -2,6 +2,7 @@ import { t as id } from '../../../i18n/index.ts';
 import { btnSecondary } from '../styles.ts';
 
 interface MentorHintsProps {
+  mentorName: string;
   hints: readonly string[];
   used: number;
   disabled: boolean;
@@ -9,11 +10,11 @@ interface MentorHintsProps {
 }
 
 /** Petunjuk bertingkat: pertama gratis, berikutnya −10 skor kasus (lihat engine/scoring). */
-export function MentorHints({ hints, used, disabled, onAsk }: MentorHintsProps) {
+export function MentorHints({ mentorName, hints, used, disabled, onAsk }: MentorHintsProps) {
   const shown = hints.slice(0, used);
   const more = used < hints.length;
   return (
-    <section aria-label={id.mentor.heading} className="mb-3 flex flex-col gap-2">
+    <section aria-label={id.mentor.heading(mentorName)} className="mb-3 flex flex-col gap-2">
       {shown.length > 0 && (
         <ol
           className="flex flex-col gap-1 border-2 border-accent/60 bg-accent/10 p-2 text-sm"

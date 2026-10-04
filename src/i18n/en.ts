@@ -81,6 +81,7 @@ export const en: Strings = {
     newBadges: 'New badge!',
     viewBadges: 'View badges',
     dismissBadges: 'Close',
+    deskPicker: 'Choose a desk',
   },
   explore: {
     canvasLabel: 'Explorable office',
@@ -106,10 +107,14 @@ export const en: Strings = {
     tier: { bronze: 'Bronze', silver: 'Silver', gold: 'Gold' },
   },
   modes: {
-    soc: { title: 'Security Analyst (SOC)', deskTitle: 'SOC Desk' },
-    support: { title: 'IT Support Technician', deskTitle: 'IT Workshop' },
-    dev: { title: 'Software Engineer', deskTitle: 'Developer Desk' },
-    data: { title: 'Data / AI Analyst', deskTitle: 'Data Desk' },
+    soc: { title: 'Security Analyst (SOC)', deskTitle: 'SOC Desk', rulebook: 'SOC Handbook' },
+    support: {
+      title: 'IT Support Technician',
+      deskTitle: 'IT Workshop',
+      rulebook: 'Workshop Handbook',
+    },
+    dev: { title: 'Software Engineer', deskTitle: 'Developer Desk', rulebook: 'Handbook' },
+    data: { title: 'Data / AI Analyst', deskTitle: 'Data Desk', rulebook: 'Handbook' },
   },
   decisions: {
     allow: 'Allow',
@@ -117,6 +122,9 @@ export const en: Strings = {
     escalate: 'Escalate',
     'reset-password': 'Reset Password',
     quarantine: 'Quarantine',
+    guide: 'Guide User',
+    fix: 'Fix',
+    replace: 'Replace Part',
   },
   desk: {
     visitorLabel: 'Reported by',
@@ -215,7 +223,7 @@ export const en: Strings = {
   mentor: {
     ask: 'Ask Mentor',
     askAgain: 'Another hint',
-    heading: "Rani's hints",
+    heading: (mentor) => `${mentor}'s hints`,
     free: 'The first hint is free.',
     costs: 'Each extra hint takes 10 points off the case score.',
     noMore: 'That is every hint for this case.',
@@ -247,6 +255,7 @@ export const en: Strings = {
   speakers: {
     rani: 'Rani',
     kelabu: 'Kelabu',
+    joko: 'Joko',
     narrator: '',
   },
   stamps: {
@@ -255,6 +264,9 @@ export const en: Strings = {
     escalate: 'ESCALATED',
     'reset-password': 'RESET',
     quarantine: 'QUARANTINED',
+    guide: 'GUIDED',
+    fix: 'FIXED',
+    replace: 'REPLACED',
   },
   language: {
     label: 'Language',
@@ -293,7 +305,7 @@ export const en: Strings = {
     rules: 'Related rules:',
     continue: 'Continue',
     trustChange: (delta) => `Trust ${delta > 0 ? '+' : ''}${delta}`,
-    slipHeader: (caseId) => `SOC SLIP · ${caseId.toUpperCase()}`,
+    slipHeader: (desk, caseId) => `${desk.toUpperCase()} SLIP · ${caseId.toUpperCase()}`,
     citations: {
       'threat-allowed': 'WARNING: a threat got through to the client. Trust dropped a lot.',
       'legit-blocked': 'NOTE: something legitimate was blocked, so the client could not work.',

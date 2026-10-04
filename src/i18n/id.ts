@@ -80,6 +80,7 @@ export const id = {
     newBadges: 'Lencana baru!',
     viewBadges: 'Lihat lencana',
     dismissBadges: 'Tutup',
+    deskPicker: 'Pilih meja',
   },
   explore: {
     canvasLabel: 'Kantor yang bisa dijelajahi',
@@ -105,10 +106,14 @@ export const id = {
     tier: { bronze: 'Perunggu', silver: 'Perak', gold: 'Emas' } as Record<string, string>,
   },
   modes: {
-    soc: { title: 'Analis Keamanan (SOC)', deskTitle: 'Meja SOC' },
-    support: { title: 'Teknisi IT Support', deskTitle: 'Bengkel IT' },
-    dev: { title: 'Software Engineer', deskTitle: 'Meja Developer' },
-    data: { title: 'Analis Data / AI', deskTitle: 'Meja Data' },
+    soc: { title: 'Analis Keamanan (SOC)', deskTitle: 'Meja SOC', rulebook: 'Buku Panduan SOC' },
+    support: {
+      title: 'Teknisi IT Support',
+      deskTitle: 'Bengkel IT',
+      rulebook: 'Buku Panduan Bengkel',
+    },
+    dev: { title: 'Software Engineer', deskTitle: 'Meja Developer', rulebook: 'Buku Panduan' },
+    data: { title: 'Analis Data / AI', deskTitle: 'Meja Data', rulebook: 'Buku Panduan' },
   },
   decisions: {
     allow: 'Izinkan',
@@ -116,6 +121,9 @@ export const id = {
     escalate: 'Eskalasi',
     'reset-password': 'Reset Password',
     quarantine: 'Karantina',
+    guide: 'Arahkan Pengguna',
+    fix: 'Perbaiki',
+    replace: 'Ganti Komponen',
   } as Record<string, string>,
   desk: {
     visitorLabel: 'Dilaporkan oleh',
@@ -215,7 +223,7 @@ export const id = {
   mentor: {
     ask: 'Tanya Mentor',
     askAgain: 'Petunjuk lagi',
-    heading: 'Petunjuk Mbak Rani',
+    heading: (mentor: string) => `Petunjuk ${mentor}`,
     free: 'Petunjuk pertama gratis.',
     costs: 'Petunjuk berikutnya mengurangi skor kasus 10 poin.',
     noMore: 'Itu semua petunjuk untuk kasus ini.',
@@ -247,6 +255,7 @@ export const id = {
   speakers: {
     rani: 'Mbak Rani',
     kelabu: 'Kelabu',
+    joko: 'Pak Joko',
     narrator: '',
   } as Record<string, string>,
   stamps: {
@@ -255,6 +264,9 @@ export const id = {
     escalate: 'DIESKALASI',
     'reset-password': 'DIRESET',
     quarantine: 'DIKARANTINA',
+    guide: 'DIARAHKAN',
+    fix: 'DIPERBAIKI',
+    replace: 'DIGANTI',
   } as Record<string, string>,
   language: {
     label: 'Bahasa',
@@ -296,7 +308,8 @@ export const id = {
     rules: 'Aturan terkait:',
     continue: 'Lanjut',
     trustChange: (delta: number) => `Kepercayaan ${delta > 0 ? '+' : ''}${delta}`,
-    slipHeader: (caseId: string) => `SLIP SOC · ${caseId.toUpperCase()}`,
+    slipHeader: (desk: string, caseId: string) =>
+      `SLIP ${desk.toUpperCase()} · ${caseId.toUpperCase()}`,
     citations: {
       'threat-allowed': 'PERINGATAN: ancaman lolos ke klien. Kepercayaan turun banyak.',
       'legit-blocked': 'CATATAN: yang sah ikut diblokir, pekerjaan klien jadi terganggu.',

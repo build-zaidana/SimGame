@@ -1,6 +1,7 @@
 /** Pemeriksaan silang & kebijakan konten (ARCHITECTURE §5.6). Fungsi murni; dipakai content-check. */
 import type { ContentError, ModeContent } from './loader.ts';
 import type { BaseCase } from './schemas.ts';
+import { NO_ACTION_VERDICTS, type Verdict } from '../engine/types.ts';
 
 export interface BrandTerm {
   term: string;
@@ -182,7 +183,7 @@ export function checkModeContent(content: ModeContent, policy: CheckPolicy): Con
     }
     const overlap = c.evidence.required.filter((id) => c.evidence.supporting.includes(id));
     if (overlap.length) err(file, `evidence ada di required & supporting: ${overlap.join(', ')}`);
-    if (c.verdict !== 'safe' && c.evidence.required.length === 0) {
+    if (!NO_ACTION_VERDICTS.includes(c.verdict) && c.evidence.required.length === 0) {
       err(file, 'kasus berbahaya/mencurigakan wajib punya evidence.required');
     }
     if (c.correctDecision in c.acceptableDecisions) {
@@ -221,11 +222,11 @@ export function checkModeContent(content: ModeContent, policy: CheckPolicy): Con
       if ('caseId' in q) {
         const c = content.cases[q.caseId];
         if (!c) err(file, `kasus tidak ada: ${q.caseId}`);
-        else if (c.verdict === 'safe') safe++;
+        else if (NO_ACTION_VERDICTS.includes(c.verdict)) safe++;
       } else {
         if (!policy.knownGenerators.includes(q.generator))
           err(file, `generator tidak dikenal: ${q.generator}`);
-        if (q.params['verdict'] === 'safe') safe++;
+        if (NO_ACTION_VERDICTS.includes(q.params['verdict'] as Verdict)) safe++;
       }
     }
     const ratio = safe / s.queue.length;

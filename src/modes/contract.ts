@@ -4,6 +4,7 @@ import type { ModeContent } from '../content/loader.ts';
 import type { BaseCase } from '../content/schemas.ts';
 import type { ShiftAction } from '../engine/shift.ts';
 import type {
+  CaseImpact,
   CaseOutcome,
   DecisionId,
   EvidenceId,
@@ -84,6 +85,13 @@ export interface CareerMode {
   decisions: { id: DecisionId; label: string; unlockedAtShift: number }[];
   caseTypes: CaseTypeDef[];
   generators?: Record<string, CaseGenerator>;
+  /** ID pembicara mentor meja ini (untuk judul petunjuk), mis. 'rani' atau 'joko'. */
+  mentor: string;
+  /**
+   * Catatan pada slip umpan balik per dampak keputusan (ADR 025). Tanpa ini dipakai teks SOC.
+   * Getter, agar ikut bahasa aktif.
+   */
+  citations?: Partial<Record<CaseImpact, string>>;
   /** Komponen meja; menerima session dari engine & dispatch. Di-lazy-load. */
   Desk: LazyExoticComponent<ComponentType<DeskProps>>;
   contentRoot: string;

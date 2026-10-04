@@ -59,6 +59,8 @@ export const MIGRATIONS: Record<number, Migration> = {
     const settings = (profile['settings'] ?? {}) as Record<string, unknown>;
     return { ...d, profile: { ...profile, settings: { exploreOffice: true, ...settings } } };
   },
+  /** v7 → v8: verdict kasus diperluas untuk mode IT Support; data lama tetap valid. */
+  7: (d) => d,
 };
 
 export function runMigrations(

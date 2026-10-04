@@ -12,7 +12,8 @@ import { btnPrimary, btnSecondary, panel } from '../ui/styles.ts';
 /** HUB versi menu (v1.0). Ilustrasi kantor pixel menyusul di M4. */
 export function HubScreen() {
   const save = useAppStore((s) => s.save);
-  const content = useAppStore((s) => s.content);
+  const contents = useAppStore((s) => s.contents);
+  const content = contents[modes[0]?.id ?? 'soc'] ?? null;
   const enterMode = useAppStore((s) => s.enterMode);
   const enterPractice = useAppStore((s) => s.enterPractice);
   const cancelPractice = useAppStore((s) => s.cancelPractice);
@@ -94,7 +95,7 @@ export function HubScreen() {
     <main className="mx-auto flex min-h-dvh max-w-3xl flex-col gap-4 p-4">
       <h1 className="font-display text-2xl text-accent">{id.hub.heading}</h1>
       <p className="text-ink-muted">{id.hub.intro}</p>
-      {newBadges.length > 0 && content && (
+      {newBadges.length > 0 && (
         <section
           role="status"
           className="flex flex-wrap items-center gap-3 border-4 border-accent bg-panel p-3 pixel-shadow"
@@ -103,7 +104,9 @@ export function HubScreen() {
           <p className="font-display text-accent">{id.hub.newBadges}</p>
           <ul className="flex flex-1 flex-wrap gap-3">
             {newBadges.map((bid) => {
-              const b = content.badges.find((x) => x.id === bid);
+              const b = Object.values(contents)
+                .flatMap((c) => c.badges)
+                .find((x) => x.id === bid);
               return b ? (
                 <li key={bid} className="stamp flex items-center gap-2">
                   <Medal tier={b.tier} icon={b.icon} locked={false} className="w-9 text-lg" />
@@ -141,7 +144,10 @@ export function HubScreen() {
         </button>
         <button type="button" className={btnSecondary} onClick={() => openMenu('badges')}>
           <span aria-hidden="true">🏅 </span>
-          {id.hub.badges(Object.keys(socProgress.badges ?? {}).length, content?.badges.length ?? 0)}
+          {id.hub.badges(
+            modes.reduce((n, m) => n + Object.keys(save?.modes[m.id]?.badges ?? {}).length, 0),
+            Object.values(contents).reduce((n, c) => n + c.badges.length, 0),
+          )}
         </button>
         <button type="button" className={btnSecondary} onClick={() => openMenu('settings')}>
           <span aria-hidden="true">⚙ </span>
@@ -174,7 +180,7 @@ export function HubScreen() {
           const progress = save?.modes[m.id] ?? newModeProgress();
           const active = progress.activeSession;
           const practiceRun = progress.practiceSession;
-          const ownContent = content && content.meta.id === m.id ? content : null;
+          const ownContent = contents[m.id] ?? null;
           const shift = ownContent ? nextShift(ownContent, progress) : undefined;
           const practiceList = ownContent ? practiceShifts(ownContent, progress) : [];
           const done = Object.keys(progress.shifts).length;
