@@ -25,6 +25,8 @@ const STAMP_COLOR: Record<string, string> = {
   escalate: 'text-accent',
   guide: 'text-safe',
   replace: 'text-danger',
+  approve: 'text-safe',
+  rollback: 'text-danger',
 };
 
 type Tab = 'queue' | 'document' | 'rulebook';
