@@ -1,0 +1,49 @@
+{
+  "badges": [
+    {
+      "id": "hello-world",
+      "title": "Hello, World!",
+      "description": "Menyelesaikan Shift 1 di Meja Developer.",
+      "icon": "👋",
+      "tier": "bronze",
+      "rule": {
+        "type": "shift-complete",
+        "shiftId": "dev-01"
+      }
+    },
+    {
+      "id": "semua-hijau",
+      "title": "Semua Hijau",
+      "description": "Lima tugas berturut-turut tepat tanpa salah tandai.",
+      "icon": "✅",
+      "tier": "silver",
+      "rule": {
+        "type": "evidence-streak",
+        "count": 5
+      }
+    },
+    {
+      "id": "ngoding-mandiri",
+      "title": "Ngoding Mandiri",
+      "description": "Satu shift tanpa petunjuk Kak Dimas, dengan minimal ★★.",
+      "icon": "🧠",
+      "tier": "silver",
+      "rule": {
+        "type": "no-hints",
+        "minCases": 7,
+        "minStars": 2
+      }
+    },
+    {
+      "id": "developer-bintang",
+      "title": "Developer Bintang",
+      "description": "Meraih ★★★ di sebuah shift Meja Developer.",
+      "icon": "⭐",
+      "tier": "gold",
+      "rule": {
+        "type": "shift-stars",
+        "stars": 3
+      }
+    }
+  ]
+}

@@ -27,6 +27,9 @@ export type ShiftAction =
   | { type: 'OPEN_CASE'; caseId: string }
   | { type: 'TOGGLE_MARK'; evidenceId: EvidenceId }
   | { type: 'USE_HINT' }
+  /** Meja Developer (ADR 026): draf jawaban & hasil menjalankan tes. */
+  | { type: 'SET_ANSWER'; text: string }
+  | { type: 'RECORD_RUN'; passed: number; total: number }
   /** `outcome` berasal dari `CaseTypeDef.evaluate()` milik mode. */
   | { type: 'DECIDE'; outcome: CaseOutcome }
   | { type: 'CLOSE_FEEDBACK' }
@@ -175,6 +178,23 @@ export function shiftReducer(s: ShiftSession, a: ShiftAction): ShiftSession {
     case 'USE_HINT':
       if (s.phase !== 'inspecting' || !s.activeCaseId) return s;
       return updateCase(s, s.activeCaseId, (c) => ({ ...c, hintsUsed: c.hintsUsed + 1 }));
+    case 'SET_ANSWER':
+      if (s.phase !== 'inspecting' || !s.activeCaseId) return s;
+      return updateCase(s, s.activeCaseId, (c) => ({
+        ...c,
+        answer: { text: a.text, runs: c.answer?.runs ?? 0 },
+      }));
+    case 'RECORD_RUN':
+      if (s.phase !== 'inspecting' || !s.activeCaseId) return s;
+      return updateCase(s, s.activeCaseId, (c) => ({
+        ...c,
+        answer: {
+          text: c.answer?.text ?? '',
+          runs: (c.answer?.runs ?? 0) + 1,
+          passed: a.passed,
+          total: a.total,
+        },
+      }));
     case 'DECIDE':
       return decide(s, a.outcome);
     case 'CLOSE_FEEDBACK':

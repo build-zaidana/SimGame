@@ -1,0 +1,49 @@
+{
+  "badges": [
+    {
+      "id": "hello-world",
+      "title": "Hello, World!",
+      "description": "Finished Shift 1 at the Developer Desk.",
+      "icon": "👋",
+      "tier": "bronze",
+      "rule": {
+        "type": "shift-complete",
+        "shiftId": "dev-01"
+      }
+    },
+    {
+      "id": "semua-hijau",
+      "title": "All Green",
+      "description": "Five tasks in a row done right with no wrong marks.",
+      "icon": "✅",
+      "tier": "silver",
+      "rule": {
+        "type": "evidence-streak",
+        "count": 5
+      }
+    },
+    {
+      "id": "ngoding-mandiri",
+      "title": "Solo Coder",
+      "description": "A shift without Dimas's hints, with at least ★★.",
+      "icon": "🧠",
+      "tier": "silver",
+      "rule": {
+        "type": "no-hints",
+        "minCases": 7,
+        "minStars": 2
+      }
+    },
+    {
+      "id": "developer-bintang",
+      "title": "Star Developer",
+      "description": "Earned ★★★ in a Developer Desk shift.",
+      "icon": "⭐",
+      "tier": "gold",
+      "rule": {
+        "type": "shift-stars",
+        "stars": 3
+      }
+    }
+  ]
+}

@@ -6,7 +6,7 @@ test('finishing Shift 1 earns badges, shown in the office and the badge screen',
 }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'Main' }).click();
-  await expect(page.getByRole('button', { name: 'Lencana (0/20)' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Lencana (0/24)' })).toBeVisible();
 
   await startShift(page, 'Mulai Shift 1: Hari Pertama', 'Shift 1 · Hari Pertama');
   await decideAll(page, 8);
@@ -31,5 +31,5 @@ test('finishing Shift 1 earns badges, shown in the office and the badge screen',
   await page.getByRole('button', { name: 'Kembali' }).click();
   await page.getByTestId('new-badges').getByRole('button', { name: 'Tutup' }).click();
   await expect(page.getByTestId('new-badges')).toHaveCount(0);
-  await expect(page.getByRole('button', { name: 'Lencana (2/20)' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Lencana (2/24)' })).toBeVisible();
 });

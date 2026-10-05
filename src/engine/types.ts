@@ -6,9 +6,11 @@ export type EvidenceId = string;
 /**
  * Verdict kasus. SOC: aman / berbahaya / mencurigakan. IT Support (ADR 025): tidak ada kerusakan
  * (cukup diarahkan) / ada kerusakan / perlu spesialis. `safe` dan `no-fault` dihitung sebagai
- * kasus "tidak perlu tindakan" (rasio 30–40% per shift).
+ * kasus "tidak perlu tindakan" (rasio 30–40% per shift). `task` (ADR 026): tugas coding/CTF di
+ * Meja Developer; bukan keputusan aman/tidak, jadi tidak ikut dihitung dalam rasio itu.
  */
-export type Verdict = 'safe' | 'malicious' | 'suspicious' | 'no-fault' | 'fault' | 'specialist';
+export type Verdict =
+  'safe' | 'malicious' | 'suspicious' | 'no-fault' | 'fault' | 'specialist' | 'task';
 export const NO_ACTION_VERDICTS: readonly Verdict[] = ['safe', 'no-fault'];
 export type PlayMode = 'relaxed' | 'normal';
 export type Severity = 1 | 2 | 3;
@@ -30,9 +32,21 @@ export interface CaseCore {
   evidence: { required: EvidenceId[]; supporting: EvidenceId[] };
 }
 
+/**
+ * Jawaban yang diketik pemain (kode Python atau bendera CTF, ADR 026). `passed`/`total` = hasil
+ * tes terakhir untuk teks ini; hilang begitu teks diubah. `runs` = berapa kali tes dijalankan.
+ */
+export interface CaseAnswer {
+  text: string;
+  runs: number;
+  passed?: number | undefined;
+  total?: number | undefined;
+}
+
 export interface PlayerInput {
   decision: DecisionId;
   marks: EvidenceId[];
+  answer?: CaseAnswer | undefined;
 }
 
 export interface CaseOutcome {
@@ -71,6 +85,8 @@ export interface SessionCase {
   openedAtMs: number | null;
   outcome: CaseOutcome | null;
   score: number | null;
+  /** v9: jawaban ketikan pemain (Meja Developer). */
+  answer?: CaseAnswer | undefined;
 }
 
 /** Seluruh state shift. Data biasa: bisa diserialisasi dan dilanjutkan. */

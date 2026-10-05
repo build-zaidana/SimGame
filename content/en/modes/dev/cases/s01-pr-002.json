@@ -1,0 +1,72 @@
+{
+  "id": "s01-pr-002",
+  "type": "pull-request",
+  "conceptIds": ["code-review", "python-basics"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Andi Saputra",
+      "team": "Sign-up Team"
+    },
+    "title": "Age check for competition sign-up",
+    "description": [
+      {
+        "text": "Competition rule: participants aged 17 and over may register.",
+        "evidenceId": "desc-rule"
+      },
+      {
+        "text": "I tried ages 20 and 15, and the results were right.",
+        "evidenceId": "desc-tested"
+      }
+    ],
+    "file": "contest/signup.py",
+    "diff": [
+      {
+        "code": "def can_register(age):",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "if age > 17:",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-if"
+      },
+      {
+        "code": "return True",
+        "indent": 2,
+        "kind": "add",
+        "evidenceId": "line-true"
+      },
+      {
+        "code": "return False",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-false"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Automatic tests: no test yet for exactly 17",
+        "evidenceId": "check-missing"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-rule", "line-if"],
+    "supporting": ["check-missing", "desc-tested"]
+  },
+  "explanation": "The rule says \"17 and over\", but age > 17 rejects someone who is exactly 17. Request changes to age >= 17 and add a test for age 17.",
+  "ruleRefs": ["r-py-4", "r-rev-2"],
+  "hints": [
+    "Compare the competition rule with the comparison sign in the code.",
+    "What happens for someone who is exactly 17?"
+  ]
+}

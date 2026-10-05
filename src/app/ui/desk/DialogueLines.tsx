@@ -6,7 +6,12 @@ import { useTypewriter } from '../useTypewriter.ts';
 type Line = Dialogue['lines'][number];
 
 /** Nada suara "bicara" tiap tokoh. */
-const VOICE: Partial<Record<Line['speaker'], number>> = { rani: 1.25, joko: 0.8, kelabu: 0.55 };
+const VOICE: Partial<Record<Line['speaker'], number>> = {
+  rani: 1.25,
+  joko: 0.8,
+  dimas: 1.05,
+  kelabu: 0.55,
+};
 
 /** Teks mengetik; pembaca layar langsung menerima teks utuh. Ketuk teks untuk melewati. */
 function TypedText({ text, pitch }: { text: string; pitch: number }) {
@@ -24,10 +29,7 @@ function TypedText({ text, pitch }: { text: string; pitch: number }) {
 
 export function DialogueLine({ line, typewriter = false }: { line: Line; typewriter?: boolean }) {
   const speaker = id.speakers[line.speaker];
-  const portrait =
-    line.speaker === 'rani' || line.speaker === 'kelabu' || line.speaker === 'joko'
-      ? line.speaker
-      : null;
+  const portrait = line.speaker === 'narrator' ? null : line.speaker;
   return (
     <div className="flex items-start gap-3">
       {portrait && <Avatar kind={portrait} className="size-14 sm:size-16" />}

@@ -45,6 +45,7 @@ describe('office map', () => {
         'menu:badges',
         'menu:rulebook',
         'menu:shop',
+        'npc:dimas',
         'npc:joko',
         'npc:rani',
       ].sort(),

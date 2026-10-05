@@ -3,7 +3,7 @@ import type { ShiftSession } from '../engine/types.ts';
 import { BASELINE_TRUST } from '../engine/economy.ts';
 
 /** Naikkan + tambah migrasi di migrations.ts + test setiap kali bentuk save berubah. */
-export const SAVE_SCHEMA_VERSION = 8;
+export const SAVE_SCHEMA_VERSION = 9;
 
 const level = z.literal([1, 2, 3]);
 const score01 = z.number().min(0).max(1);
@@ -11,7 +11,7 @@ const score01 = z.number().min(0).max(1);
 const caseOutcomeSchema = z.object({
   caseId: z.string(),
   decision: z.string(),
-  verdict: z.enum(['safe', 'malicious', 'suspicious', 'no-fault', 'fault', 'specialist']),
+  verdict: z.enum(['safe', 'malicious', 'suspicious', 'no-fault', 'fault', 'specialist', 'task']),
   severity: level,
   impact: z.enum([
     'correct',
@@ -37,6 +37,15 @@ const sessionCaseSchema = z.object({
   openedAtMs: z.number().nonnegative().nullable(),
   outcome: caseOutcomeSchema.nullable(),
   score: z.number().min(0).max(100).nullable(),
+  /** v9: jawaban ketikan pemain (Meja Developer, ADR 026). */
+  answer: z
+    .object({
+      text: z.string().max(20_000),
+      runs: z.number().int().nonnegative(),
+      passed: z.number().int().nonnegative().optional(),
+      total: z.number().int().nonnegative().optional(),
+    })
+    .optional(),
 });
 
 export const shiftSessionSchema: z.ZodType<ShiftSession> = z.object({

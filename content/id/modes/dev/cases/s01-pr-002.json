@@ -1,0 +1,72 @@
+{
+  "id": "s01-pr-002",
+  "type": "pull-request",
+  "conceptIds": ["code-review", "python-basics"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Andi Saputra",
+      "team": "Tim Pendaftaran"
+    },
+    "title": "Cek umur pendaftaran lomba",
+    "description": [
+      {
+        "text": "Aturan lomba: peserta berumur 17 tahun ke atas boleh mendaftar.",
+        "evidenceId": "desc-rule"
+      },
+      {
+        "text": "Saya sudah mencoba umur 20 dan 15, hasilnya benar.",
+        "evidenceId": "desc-tested"
+      }
+    ],
+    "file": "lomba/daftar.py",
+    "diff": [
+      {
+        "code": "def boleh_daftar(umur):",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "if umur > 17:",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-if"
+      },
+      {
+        "code": "return True",
+        "indent": 2,
+        "kind": "add",
+        "evidenceId": "line-true"
+      },
+      {
+        "code": "return False",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-false"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Tes otomatis: belum ada tes untuk umur tepat 17",
+        "evidenceId": "check-missing"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-rule", "line-if"],
+    "supporting": ["check-missing", "desc-tested"]
+  },
+  "explanation": "Aturannya \"17 tahun ke atas\", tapi umur > 17 menolak peserta yang tepat berumur 17. Minta revisi menjadi umur >= 17 dan tambahkan tes untuk umur 17.",
+  "ruleRefs": ["r-py-4", "r-rev-2"],
+  "hints": [
+    "Bandingkan aturan lomba dengan tanda perbandingan di kode.",
+    "Apa hasilnya untuk peserta yang tepat berumur 17?"
+  ]
+}

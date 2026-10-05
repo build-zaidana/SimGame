@@ -1,0 +1,83 @@
+{
+  "chapters": [
+    {
+      "id": "ch-py",
+      "title": "Bab 1 · Dasar Python",
+      "conceptId": "python-basics",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-py-1",
+          "text": "Isi blok (setelah if, for, def) harus menjorok 4 spasi. Python membaca indentasi sebagai bagian dari kode.",
+          "evidenceTags": ["indent"]
+        },
+        {
+          "id": "r-py-2",
+          "text": "Angka dan teks berbeda tipe. Ubah angka jadi teks dengan str() sebelum digabung dengan +.",
+          "evidenceTags": ["type"]
+        },
+        {
+          "id": "r-py-3",
+          "text": "Rata-rata = jumlah dibagi BANYAK data, yaitu len(daftar), bukan angka tetap.",
+          "evidenceTags": ["logic"]
+        },
+        {
+          "id": "r-py-4",
+          "text": "Perhatikan batas: > berarti 'lebih dari', >= berarti 'lebih dari atau sama dengan'.",
+          "evidenceTags": ["boundary"]
+        }
+      ]
+    },
+    {
+      "id": "ch-err",
+      "title": "Bab 2 · Tes & Pesan Error",
+      "conceptId": "reading-errors",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-err-1",
+          "text": "Baca baris TERAKHIR pesan error dulu: jenis error dan penjelasannya ada di situ.",
+          "evidenceTags": ["error"]
+        },
+        {
+          "id": "r-err-2",
+          "text": "Tes (assert) adalah janji perilaku kode. Kode selesai bila semua tes lulus, termasuk kasus tepi.",
+          "evidenceTags": ["test"]
+        },
+        {
+          "id": "r-err-3",
+          "text": "Ubah satu hal, jalankan tes lagi. Tebak-tebakan banyak perubahan sekaligus bikin bingung.",
+          "evidenceTags": ["iterate"]
+        }
+      ]
+    },
+    {
+      "id": "ch-review",
+      "title": "Bab 3 · Review Kode",
+      "conceptId": "code-review",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-rev-1",
+          "text": "SETUJUI bila kodenya benar, terbaca, dan tesnya lulus. Jangan menahan pekerjaan yang sudah baik.",
+          "evidenceTags": ["approve"]
+        },
+        {
+          "id": "r-rev-2",
+          "text": "REVISI bila ada bug, kasus tepi terlewat, atau kebiasaan berbahaya. Tunjuk baris masalahnya.",
+          "evidenceTags": ["revise"]
+        },
+        {
+          "id": "r-rev-3",
+          "text": "Kata sandi dan kunci rahasia tidak boleh ditulis di kode. Simpan di pengaturan rahasia (environment variable).",
+          "evidenceTags": ["secret"]
+        },
+        {
+          "id": "r-rev-4",
+          "text": "ESKALASI ke developer senior bila perubahan butuh izin atau keahlian khusus (server produksi, data pelanggan).",
+          "evidenceTags": ["escalate"]
+        }
+      ]
+    }
+  ]
+}

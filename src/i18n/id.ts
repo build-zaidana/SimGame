@@ -85,7 +85,7 @@ export const id = {
   explore: {
     canvasLabel: 'Kantor yang bisa dijelajahi',
     help: 'Klik atau sentuh peta, lalu jalan dengan tombol panah/WASD atau ketuk tujuan. Tekan E, Enter, atau Spasi untuk berinteraksi. Semua tujuan juga ada sebagai tombol di bawah.',
-    idle: 'Jalan ke meja, rak buku, toko, papan lencana, Mbak Rani, atau Pak Joko.',
+    idle: 'Jalan ke meja, rak buku, toko, papan lencana, atau ngobrol dengan para mentor.',
     enter: 'Masuk',
     open: 'Buka',
     talk: 'Ngobrol',
@@ -94,6 +94,7 @@ export const id = {
     badgesLabel: 'Papan Lencana',
     raniLabel: 'Mbak Rani',
     jokoLabel: 'Pak Joko',
+    dimasLabel: 'Kak Dimas',
     raniTip: (rule: string) => `Tips hari ini: ${rule}`,
     setting: 'Kantor yang bisa dijelajahi (jalan dengan panah atau ketuk)',
   },
@@ -113,7 +114,11 @@ export const id = {
       deskTitle: 'Bengkel IT',
       rulebook: 'Buku Panduan Bengkel',
     },
-    dev: { title: 'Software Engineer', deskTitle: 'Meja Developer', rulebook: 'Buku Panduan' },
+    dev: {
+      title: 'Software Engineer',
+      deskTitle: 'Meja Developer',
+      rulebook: 'Buku Panduan Developer',
+    },
     data: { title: 'Analis Data / AI', deskTitle: 'Meja Data', rulebook: 'Buku Panduan' },
   },
   decisions: {
@@ -125,6 +130,10 @@ export const id = {
     guide: 'Arahkan Pengguna',
     fix: 'Perbaiki',
     replace: 'Ganti Komponen',
+    approve: 'Setujui',
+    revise: 'Revisi',
+    rollback: 'Rollback',
+    submit: 'Kirim Solusi',
   } as Record<string, string>,
   desk: {
     visitorLabel: 'Dilaporkan oleh',
@@ -271,6 +280,7 @@ export const id = {
     rani: 'Mbak Rani',
     kelabu: 'Kelabu',
     joko: 'Pak Joko',
+    dimas: 'Kak Dimas',
     narrator: '',
   } as Record<string, string>,
   stamps: {
@@ -282,6 +292,10 @@ export const id = {
     guide: 'DIARAHKAN',
     fix: 'DIPERBAIKI',
     replace: 'DIGANTI',
+    approve: 'DISETUJUI',
+    revise: 'REVISI',
+    rollback: 'ROLLBACK',
+    submit: 'TERKIRIM',
   } as Record<string, string>,
   language: {
     label: 'Bahasa',
@@ -312,6 +326,7 @@ export const id = {
       'Yang dikirim hanya kode acak perangkat ini dan hasil belajar (misalnya kasus mana yang benar atau salah), tanpa nama atau data pribadi. Bisa dimatikan kapan saja. Kalau umurmu di bawah 18 tahun, minta izin orang tua atau guru dulu.',
   },
   feedback: {
+    testsPassed: (p: number, t: number) => `Tes lulus: ${p} dari ${t}`,
     correct: 'Tepat!',
     partial: 'Sebagian benar',
     wrong: 'Kurang tepat',
@@ -370,6 +385,91 @@ export const id = {
     finishPractice: 'Selesai latihan & kembali ke kantor',
     practiceNote: 'Jawaban di latihan tidak memengaruhi jadwal review.',
     empty: 'Tidak ada soal review untuk shift ini.',
+  },
+  dev: {
+    editor: {
+      keysLabel: 'Tombol bantu mengetik kode',
+      indentKey: 'Indentasi (4 spasi)',
+      help: 'Tab = 4 spasi, Enter mengikuti indentasi. Tekan Esc lalu Tab untuk keluar dari editor.',
+      codeLabel: (file: string) => `Kode ${file}`,
+      reset: 'Kembalikan kode awal',
+    },
+    run: {
+      button: 'Jalankan Tes',
+      scratch: 'Jalankan',
+      running: 'Menjalankan…',
+      timeout:
+        'Kode berjalan lebih dari 4 detik dan dihentikan. Mungkin ada loop yang tidak pernah berhenti.',
+      failed: 'Python gagal dimuat. Coba jalankan lagi.',
+      summary: (p: number, t: number) => `${p} dari ${t} tes lulus`,
+      allPassed: 'SEMUA TES LULUS!',
+      hiddenTest: (n: number) => `Tes tersembunyi #${n}`,
+      hiddenCount: (n: number) => `+${n} tes tersembunyi (kasus tepi)`,
+      gotExpected: (got: string, expected: string) =>
+        `hasil kodemu: ${got} · seharusnya: ${expected}`,
+      output: 'Keluaran (print)',
+      noOutput: '(tidak ada keluaran)',
+      truncated: '… keluaran dipotong',
+      errorAt: (line: number) => `Error di baris ${line}`,
+      error: 'Error',
+      notRunYet: 'Jalankan tes dulu, baru kirim solusi.',
+      hints: {
+        'slice-step':
+          'Python di game ini belum mendukung slice berlangkah seperti teks[::-1]. Coba "".join(reversed(teks)).',
+        'missing-method':
+          'Fungsi itu tidak ada untuk tipe data ini (atau belum didukung di Python game ini). Cek ejaannya, atau tulis sendiri dengan loop.',
+        indent:
+          'Cek indentasi: isi blok (setelah tanda :) harus menjorok 4 spasi, dan sejajar satu sama lain.',
+      } as Record<string, string>,
+    },
+    coding: {
+      fixHeading: 'Perbaiki bug',
+      buildHeading: 'Tulis fungsi',
+      requester: 'Diminta oleh',
+      file: 'Berkas',
+      tests: 'Tes',
+      queueTitle: (title: string) => title,
+    },
+    ctf: {
+      heading: 'Tantangan CTF',
+      artifacts: 'Barang bukti',
+      scratch: 'Konsol Python (untuk coba-coba)',
+      flagLabel: 'Bendera yang ditemukan',
+      check: 'Periksa bendera',
+      right: 'Bendera benar! Tekan Kirim Solusi untuk mengunci jawaban.',
+      wrong: 'Belum tepat. Coba lagi.',
+      queueTitle: (title: string) => `CTF: ${title}`,
+    },
+    pr: {
+      heading: 'Pull request',
+      author: 'Penulis',
+      file: 'Berkas',
+      diff: 'Perubahan kode',
+      checks: 'Pemeriksaan otomatis',
+      added: 'baris ditambah',
+      removed: 'baris dihapus',
+      queueTitle: (title: string) => `PR: ${title}`,
+    },
+    tools: {
+      testsHeading: 'Test Runner: hasil tes otomatis',
+      lintHeading: 'Linter: catatan gaya & potensi bug',
+      testsName: 'Test Runner',
+      lintName: 'Linter',
+    },
+    citations: {
+      'threat-allowed': 'PERINGATAN: kode bermasalah disetujui. Bug ikut rilis ke pengguna.',
+      'legit-blocked': 'CATATAN: kodenya sudah benar. Pekerjaan baik jadi tertahan.',
+      'needless-escalation': 'CATATAN: cukup disetujui; developer senior jadi repot tanpa perlu.',
+    } as Record<string, string>,
+    visitors: {
+      prLines: ['Tolong review PR saya, ya.', 'Sudah saya tes di laptop. Aman, kan?'],
+      taskLines: [
+        'Ada bug yang bikin pusing. Bisa dibantu?',
+        'Butuh fungsi ini sebelum sore. Semangat!',
+      ],
+      ctf: { name: 'Papan CTF', role: 'Latihan tim keamanan' },
+      ctfLines: ['Bendera tersembunyi menunggu ditemukan.', 'Tantangan baru di papan CTF!'],
+    },
   },
   support: {
     ticket: {

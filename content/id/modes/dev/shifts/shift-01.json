@@ -1,0 +1,62 @@
+{
+  "id": "dev-01",
+  "order": 1,
+  "title": "Hari Pertama Ngoding",
+  "durationGameMinutes": 150,
+  "realSecondsPerGameMinute": 4,
+  "unlocksChapters": ["ch-py", "ch-err", "ch-review"],
+  "introDialogue": "dev-01-intro",
+  "outroDialogue": "dev-01-outro",
+  "tutorial": true,
+  "queue": [
+    {
+      "caseId": "s01-pr-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s01-fix-001",
+      "arriveAt": 6
+    },
+    {
+      "caseId": "s01-pr-002",
+      "arriveAt": 18
+    },
+    {
+      "caseId": "s01-build-001",
+      "arriveAt": 30
+    },
+    {
+      "caseId": "s01-ctf-001",
+      "arriveAt": 48
+    },
+    {
+      "caseId": "s01-fix-002",
+      "arriveAt": 62
+    },
+    {
+      "caseId": "s01-pr-003",
+      "arriveAt": 80
+    }
+  ],
+  "review": {
+    "count": 3,
+    "conceptIds": ["python-basics", "reading-errors", "code-review"]
+  },
+  "pay": {
+    "base": 50,
+    "perCase": 14
+  },
+  "newspaper": {
+    "headline": "Tim Developer PT Nusa Digital Terima Anggota Baru",
+    "lead": "Tim developer PT Nusa Digital menambah anggota baru. Tugas pertamanya: memperbaiki bug, menulis fungsi Python, dan me-review kode rekan setim.",
+    "tip": {
+      "title": "Tips: Baca Error dari Bawah",
+      "text": "Pesan error Python paling penting ada di baris terakhir: jenis error dan penjelasannya. Nomor baris menunjukkan letak masalahnya."
+    },
+    "classified": "DICARI: Developer yang tidak takut tulisan merah. Hubungi Kak Dimas, lantai 4.",
+    "sources": [
+      "Python Software Foundation: The Python Tutorial",
+      "OWASP: Secrets Management Cheat Sheet"
+    ]
+  }
+}

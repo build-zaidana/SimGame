@@ -1,0 +1,49 @@
+{
+  "id": "s01-fix-001",
+  "type": "coding",
+  "conceptIds": ["python-basics", "reading-errors"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Bayu Pratama",
+      "team": "School Report Team"
+    },
+    "title": "Report card averages are wrong",
+    "story": [
+      "This average function is used for student report cards. For the three scores 80, 90, 100 it gives 135!",
+      "Fix the function so it works for any number of scores."
+    ],
+    "file": "report/scores.py",
+    "starter": "def average(scores):\n    total = 0\n    for n in scores:\n        total = total + n\n    return total / 2\n",
+    "tests": [
+      {
+        "name": "three scores",
+        "code": "assert average([80, 90, 100]) == 90"
+      },
+      {
+        "name": "two scores",
+        "code": "assert average([70, 80]) == 75"
+      },
+      {
+        "name": "one score",
+        "code": "assert average([100]) == 100",
+        "hidden": true
+      }
+    ],
+    "solution": "def average(scores):\n    total = 0\n    for n in scores:\n        total = total + n\n    return total / len(scores)\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "An average is the total divided by how many items there are, so the divisor must be len(list), not the number 2. That way the function works for any number of scores.",
+  "ruleRefs": ["r-py-3", "r-err-2"],
+  "hints": [
+    "Look at the return line. Why divide by 2?",
+    "You can get how many items a list has with len(...)."
+  ]
+}

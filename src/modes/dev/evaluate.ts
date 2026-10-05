@@ -33,3 +33,41 @@ export function evaluateDevCase(c: CaseCore, input: PlayerInput): CaseOutcome {
     wrongMarks: evidence.wrong,
   };
 }
+
+/** Efisiensi: 1–2 kali menjalankan tes = penuh; tiap percobaan berikutnya −0,1 (min 0,5). */
+function efficiency(runs: number): number {
+  return Math.max(0.5, Math.min(1, 1 - (runs - 2) * 0.1));
+}
+
+function taskOutcome(c: CaseCore, input: PlayerInput, score: number, runs: number): CaseOutcome {
+  const correct = score === 1;
+  return {
+    caseId: c.id,
+    decision: input.decision,
+    verdict: c.verdict,
+    severity: c.severity,
+    impact: correct ? 'correct' : score > 0 ? 'partial' : 'wrong',
+    correct,
+    decisionScore: score,
+    evidenceScore: efficiency(runs),
+    missedEvidence: [],
+    wrongMarks: [],
+  };
+}
+
+/**
+ * Tugas coding (perbaiki bug / tulis fungsi, ADR 026): nilai = bagian tes yang lulus pada kode
+ * yang dikirim; "bukti" diganti efisiensi (sedikit percobaan). Hasil tes dari worker MicroPython.
+ */
+export function evaluateCodingCase(c: CaseCore, input: PlayerInput): CaseOutcome {
+  const a = input.answer;
+  const score = a?.total ? (a.passed ?? 0) / a.total : 0;
+  return taskOutcome(c, input, score, a?.runs ?? 0);
+}
+
+/** CTF: bendera yang diketik harus sama persis (spasi di tepi diabaikan). */
+export function evaluateFlag(c: CaseCore, flag: string, input: PlayerInput): CaseOutcome {
+  const a = input.answer;
+  const ok = (a?.text ?? '').trim() === flag;
+  return taskOutcome(c, input, ok ? 1 : 0, a?.runs ?? 0);
+}

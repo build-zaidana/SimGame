@@ -1,0 +1,38 @@
+{
+  "items": [
+    {
+      "id": "rv-rev-1",
+      "type": "mcq",
+      "conceptId": "code-review",
+      "difficulty": 1,
+      "prompt": "A PR is correct, tidy, and all its tests pass. Your decision?",
+      "choices": ["Revise", "Approve", "Escalate"],
+      "answerIndex": 1,
+      "explanation": "Good code should be approved so the team isn't held up."
+    },
+    {
+      "id": "rv-rev-2",
+      "type": "mcq",
+      "conceptId": "code-review",
+      "difficulty": 2,
+      "prompt": "Where should a database password be kept?",
+      "choices": [
+        "Written straight in the code",
+        "In secret settings (an environment variable)",
+        "In the pull request description"
+      ],
+      "answerIndex": 1,
+      "explanation": "Secrets in code get saved in the repository where many people can read them."
+    },
+    {
+      "id": "rv-rev-3",
+      "type": "mcq",
+      "conceptId": "code-review",
+      "difficulty": 1,
+      "prompt": "In a diff, a line starting with + means…",
+      "choices": ["The line was removed", "The line was added", "The line has an error"],
+      "answerIndex": 1,
+      "explanation": "A + marks a new line, a − marks a removed line."
+    }
+  ]
+}

@@ -242,6 +242,14 @@ export const JOKO_LOOK: CharacterLook = {
   pants: '#3a3226',
 };
 
+/** Kak Dimas: rambut hitam, hoodie biru tua. */
+export const DIMAS_LOOK: CharacterLook = {
+  skin: '#dcab80',
+  hair: '#1b1b22',
+  shirt: '#2d3a4a',
+  pants: '#3a3226',
+};
+
 /** Karakter 16×16 dilihat dari atas-depan; `frame` 0/1 = langkah kaki. */
 export function drawCharacter(look: CharacterLook, facing: Facing, frame: 0 | 1): PixelCanvas {
   const p = new PixelCanvas(16, 16);

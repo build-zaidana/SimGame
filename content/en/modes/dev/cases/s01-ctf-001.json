@@ -1,0 +1,41 @@
+{
+  "id": "s01-ctf-001",
+  "type": "ctf",
+  "conceptIds": ["python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 1,
+  "data": {
+    "title": "Shifted by three",
+    "story": [
+      "The security team hid a practice flag with a Caesar cipher: every letter is shifted 3 places forward (A becomes D, B becomes E).",
+      "Use the Python console to shift every letter 3 places back, then type the flag."
+    ],
+    "artifacts": [
+      {
+        "label": "Note on the CTF board",
+        "kind": "text",
+        "content": "IODJ{NHHS_OHDUQLQJ}"
+      },
+      {
+        "label": "Python tip",
+        "kind": "code",
+        "content": "ord(\"D\") - 3   # 65\nchr(65)        # \"A\""
+      }
+    ],
+    "scratch": "message = \"IODJ{NHHS_OHDUQLQJ}\"\nresult = \"\"\nfor letter in message:\n    result = result + letter\nprint(result)\n",
+    "flag": "FLAG{KEEP_LEARNING}",
+    "solution": "message = \"IODJ{NHHS_OHDUQLQJ}\"\nresult = \"\"\nfor letter in message:\n    if \"A\" <= letter <= \"Z\":\n        result = result + chr((ord(letter) - ord(\"A\") - 3) % 26 + ord(\"A\"))\n    else:\n        result = result + letter\nprint(result)\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "A Caesar cipher is undone by shifting each letter back: ord() turns a letter into a number, subtract 3, then chr() turns it back into a letter. A cipher like this is easy to crack, so it is never used to protect real data.",
+  "ruleRefs": ["r-py-1", "r-err-3"],
+  "hints": [
+    "First try ord(\"I\") - 3 in the console. Which letter does chr() give?",
+    "Only the letters A to Z are shifted; the { } and _ signs stay the same."
+  ]
+}

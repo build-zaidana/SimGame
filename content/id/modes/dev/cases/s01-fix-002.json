@@ -1,0 +1,44 @@
+{
+  "id": "s01-fix-002",
+  "type": "coding",
+  "conceptIds": ["reading-errors", "python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 1,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Rudi Hartono",
+      "team": "Tim Toko Online"
+    },
+    "title": "Label harga bikin aplikasi crash",
+    "story": [
+      "Setiap kali halaman produk dibuka, aplikasinya error. Jalankan tesnya dan baca baris terakhir pesan error."
+    ],
+    "file": "toko/label.py",
+    "starter": "def label_harga(harga):\n    return \"Rp \" + harga\n",
+    "tests": [
+      {
+        "name": "harga biasa",
+        "code": "assert label_harga(5000) == \"Rp 5000\""
+      },
+      {
+        "name": "harga nol",
+        "code": "assert label_harga(0) == \"Rp 0\"",
+        "hidden": true
+      }
+    ],
+    "solution": "def label_harga(harga):\n    return \"Rp \" + str(harga)\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "TypeError muncul karena teks \"Rp \" digabung dengan angka. Ubah angkanya jadi teks dengan str(harga) sebelum digabung.",
+  "ruleRefs": ["r-py-2", "r-err-1"],
+  "hints": [
+    "Jalankan tes, lalu baca baris terakhir error-nya.",
+    "Teks hanya bisa digabung dengan teks. Fungsi apa yang mengubah angka jadi teks?"
+  ]
+}

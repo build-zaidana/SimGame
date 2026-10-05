@@ -3,7 +3,7 @@ import { PixelCanvas } from './canvas.ts';
 
 /** Potret 32×32. Cahaya dari kiri atas; outline gelap seperti sprite game. */
 export const PORTRAIT_SIZE = 32;
-export type PortraitKind = 'person' | 'system' | 'rani' | 'kelabu' | 'joko';
+export type PortraitKind = 'person' | 'system' | 'rani' | 'kelabu' | 'joko' | 'dimas';
 /** Ekspresi wajah: reaksi pengunjung setelah keputusan pemain. */
 export type Mood = 'neutral' | 'happy' | 'upset';
 
@@ -180,6 +180,36 @@ function joko(mood: Mood): PixelCanvas {
   return p.outline(OUTLINE);
 }
 
+/** Kak Dimas: developer muda Meja Developer. Rambut jabrik, hoodie, headphone di leher. */
+function dimas(mood: Mood): PixelCanvas {
+  const p = new PixelCanvas(32, 32);
+  const skin = '#dcab80';
+  const hoodie = '#2d3a4a';
+  shoulders(p, hoodie);
+  // Tali hoodie + logo kurung kurawal kecil di dada.
+  p.line(14, 26, 14, 30, '#c9ccd6').line(18, 26, 18, 30, '#c9ccd6');
+  p.set(15, 29, '#74cf92').set(17, 29, '#74cf92').set(16, 28, '#74cf92').set(16, 30, '#74cf92');
+  neckAndHead(p, skin);
+  // Headphone melingkar di leher.
+  p.line(9, 23, 23, 23, '#1b1b22').rect(8, 22, 3, 3, '#f07a6a').rect(21, 22, 3, 3, '#f07a6a');
+  // Rambut jabrik.
+  const hair = '#1b1b22';
+  p.ellipse(16, 9.5, 8.4, 5, hair, {
+    shade: '#111116',
+    clip: (x, y) => y <= 11 || x < 9 || x > 22,
+  });
+  for (const [x, y] of [
+    [10, 4],
+    [13, 3],
+    [16, 2],
+    [19, 3],
+    [22, 5],
+  ] as const)
+    p.rect(x, y, 2, 3, hair);
+  faceFeatures(p, skin, hair, 4, mood);
+  return p.outline(OUTLINE);
+}
+
 function kelabu(): PixelCanvas {
   const p = new PixelCanvas(32, 32);
   const hood = '#5b6070';
@@ -243,11 +273,13 @@ export function portraitPaths(
         ? system(mood)
         : kind === 'joko'
           ? joko(mood)
-          : kind === 'rani'
-            ? rani(mood)
-            : kind === 'kelabu'
-              ? kelabu()
-              : person(seed, mood);
+          : kind === 'dimas'
+            ? dimas(mood)
+            : kind === 'rani'
+              ? rani(mood)
+              : kind === 'kelabu'
+                ? kelabu()
+                : person(seed, mood);
     paths = canvas.toPaths();
     cache.set(key, paths);
   }

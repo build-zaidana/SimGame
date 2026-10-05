@@ -1,0 +1,38 @@
+{
+  "items": [
+    {
+      "id": "rv-err-1",
+      "type": "mcq",
+      "conceptId": "reading-errors",
+      "difficulty": 1,
+      "prompt": "Bagian mana dari pesan error yang dibaca pertama kali?",
+      "choices": ["Baris pertama", "Baris terakhir", "Tidak perlu dibaca"],
+      "answerIndex": 1,
+      "explanation": "Baris terakhir berisi jenis error dan penjelasannya."
+    },
+    {
+      "id": "rv-err-2",
+      "type": "mcq",
+      "conceptId": "reading-errors",
+      "difficulty": 1,
+      "prompt": "\"Rp \" + 5000 menghasilkan error jenis apa?",
+      "choices": ["NameError", "TypeError", "IndentationError"],
+      "answerIndex": 1,
+      "explanation": "Teks dan angka adalah tipe berbeda, jadi Python melempar TypeError."
+    },
+    {
+      "id": "rv-err-3",
+      "type": "order-steps",
+      "conceptId": "reading-errors",
+      "difficulty": 2,
+      "prompt": "Urutkan cara kerja developer saat tes gagal.",
+      "steps": [
+        "Jalankan tes",
+        "Baca tes yang gagal dan pesan error-nya",
+        "Perbaiki satu hal",
+        "Jalankan tes lagi"
+      ],
+      "explanation": "Mengubah satu hal lalu menguji lagi membuat kita tahu persis perubahan mana yang berhasil."
+    }
+  ]
+}

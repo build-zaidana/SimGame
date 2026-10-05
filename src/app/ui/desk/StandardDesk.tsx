@@ -85,8 +85,17 @@ export function StandardDesk({
     tools,
     locked: session.phase !== 'inspecting',
     onToggleMark: (evidenceId) => dispatch({ type: 'TOGGLE_MARK', evidenceId }),
+    answer: active?.answer,
+    onAnswer: (text) => dispatch({ type: 'SET_ANSWER', text }),
+    onRun: (passed, total) => dispatch({ type: 'RECORD_RUN', passed, total }),
   };
-  const decisions = mode.decisions.filter((d) => d.unlockedAtShift <= session.shiftOrder);
+  const decisions = mode.decisions.filter(
+    (d) =>
+      d.unlockedAtShift <= session.shiftOrder &&
+      (!activeType?.decisions || activeType.decisions.includes(d.id)),
+  );
+  const answerReady =
+    !activeType?.ready || (activeCase ? activeType.ready(activeCase, active?.answer) : false);
   const decisionLabel = (d: string) => mode.decisions.find((x) => x.id === d)?.label ?? d;
 
   // Stempel dulu, baru slip umpan balik (langsung bila animasi dikurangi).
@@ -210,10 +219,12 @@ export function StandardDesk({
           <div className="mx-auto max-w-2xl p-3">
             {active && activeCase && activeType ? (
               <>
-                <p className="mb-2 text-sm text-ink-muted">
-                  {id.desk.markHint} ·{' '}
-                  <span data-testid="marks-count">{id.desk.marksCount(marks.size)}</span>
-                </p>
+                {!activeType.ready && (
+                  <p className="mb-2 text-sm text-ink-muted">
+                    {id.desk.markHint} ·{' '}
+                    <span data-testid="marks-count">{id.desk.marksCount(marks.size)}</span>
+                  </p>
+                )}
                 {visitor && <VisitorCard visitor={visitor} mood={visitorMood} />}
                 <div
                   key={active.caseId}
@@ -272,13 +283,17 @@ export function StandardDesk({
       </main>
       <ActionBar
         decisions={decisions}
-        disabled={session.phase !== 'inspecting' || !activeCase}
+        disabled={session.phase !== 'inspecting' || !activeCase || !answerReady}
         onDecide={(decision) => {
           if (!active || !activeCase || !activeType) return;
           setTab('document');
           dispatch({
             type: 'DECIDE',
-            outcome: activeType.evaluate(activeCase, { decision, marks: active.marks }),
+            outcome: activeType.evaluate(activeCase, {
+              decision,
+              marks: active.marks,
+              answer: active.answer,
+            }),
           });
         }}
       />

@@ -259,9 +259,28 @@ describe('migration v7 → v8 (wider verdicts for IT Support)', () => {
   it('keeps old sessions as they are and accepts the new verdicts', () => {
     const v7 = { ...JSON.parse(JSON.stringify(saveWithSession())), schemaVersion: 7 };
     const migrated = migrate(v7);
-    expect(SAVE_SCHEMA_VERSION).toBe(8);
-    expect(migrated.schemaVersion).toBe(8);
+    expect(migrated.schemaVersion).toBe(SAVE_SCHEMA_VERSION);
     expect(migrated.modes['soc']?.activeSession?.shiftId).toBe('soc-01');
+  });
+});
+
+describe('migration v8 → v9 (player answers for the Developer desk)', () => {
+  it('keeps old sessions valid; cases may now carry an answer', () => {
+    const v8 = { ...JSON.parse(JSON.stringify(saveWithSession())), schemaVersion: 8 };
+    const migrated = migrate(v8);
+    expect(SAVE_SCHEMA_VERSION).toBe(9);
+    expect(migrated.schemaVersion).toBe(9);
+    const session = migrated.modes['soc']?.activeSession;
+    expect(session?.cases[0]?.answer).toBeUndefined();
+
+    const withAnswer = JSON.parse(JSON.stringify(migrated));
+    withAnswer.modes.soc.activeSession.cases[0].answer = {
+      text: 'print(1)',
+      runs: 2,
+      passed: 1,
+      total: 2,
+    };
+    expect(migrate(withAnswer).modes['soc']?.activeSession?.cases[0]?.answer?.runs).toBe(2);
   });
 });
 

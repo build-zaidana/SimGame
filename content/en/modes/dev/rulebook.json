@@ -1,0 +1,83 @@
+{
+  "chapters": [
+    {
+      "id": "ch-py",
+      "title": "Chapter 1 · Python Basics",
+      "conceptId": "python-basics",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-py-1",
+          "text": "A block's body (after if, for, def) must be indented 4 spaces. Python reads indentation as part of the code.",
+          "evidenceTags": ["indent"]
+        },
+        {
+          "id": "r-py-2",
+          "text": "Numbers and text are different types. Turn a number into text with str() before joining with +.",
+          "evidenceTags": ["type"]
+        },
+        {
+          "id": "r-py-3",
+          "text": "Average = total divided by HOW MANY items, i.e. len(list), not a fixed number.",
+          "evidenceTags": ["logic"]
+        },
+        {
+          "id": "r-py-4",
+          "text": "Watch the boundary: > means 'greater than', >= means 'greater than or equal to'.",
+          "evidenceTags": ["boundary"]
+        }
+      ]
+    },
+    {
+      "id": "ch-err",
+      "title": "Chapter 2 · Tests & Error Messages",
+      "conceptId": "reading-errors",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-err-1",
+          "text": "Read the LAST line of an error first: the error type and explanation are there.",
+          "evidenceTags": ["error"]
+        },
+        {
+          "id": "r-err-2",
+          "text": "A test (assert) is a promise about how code behaves. Code is done when every test passes, edge cases included.",
+          "evidenceTags": ["test"]
+        },
+        {
+          "id": "r-err-3",
+          "text": "Change one thing, run the tests again. Guessing with many changes at once gets confusing.",
+          "evidenceTags": ["iterate"]
+        }
+      ]
+    },
+    {
+      "id": "ch-review",
+      "title": "Chapter 3 · Code Review",
+      "conceptId": "code-review",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-rev-1",
+          "text": "APPROVE when the code is correct, readable, and its tests pass. Don't hold back good work.",
+          "evidenceTags": ["approve"]
+        },
+        {
+          "id": "r-rev-2",
+          "text": "REVISE when there is a bug, a missed edge case, or a risky habit. Point to the problem line.",
+          "evidenceTags": ["revise"]
+        },
+        {
+          "id": "r-rev-3",
+          "text": "Passwords and secret keys must never be written in code. Keep them in secret settings (environment variables).",
+          "evidenceTags": ["secret"]
+        },
+        {
+          "id": "r-rev-4",
+          "text": "ESCALATE to a senior developer when a change needs special permission or expertise (production servers, customer data).",
+          "evidenceTags": ["escalate"]
+        }
+      ]
+    }
+  ]
+}

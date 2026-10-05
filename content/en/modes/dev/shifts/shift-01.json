@@ -1,0 +1,62 @@
+{
+  "id": "dev-01",
+  "order": 1,
+  "title": "First Day of Coding",
+  "durationGameMinutes": 150,
+  "realSecondsPerGameMinute": 4,
+  "unlocksChapters": ["ch-py", "ch-err", "ch-review"],
+  "introDialogue": "dev-01-intro",
+  "outroDialogue": "dev-01-outro",
+  "tutorial": true,
+  "queue": [
+    {
+      "caseId": "s01-pr-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s01-fix-001",
+      "arriveAt": 6
+    },
+    {
+      "caseId": "s01-pr-002",
+      "arriveAt": 18
+    },
+    {
+      "caseId": "s01-build-001",
+      "arriveAt": 30
+    },
+    {
+      "caseId": "s01-ctf-001",
+      "arriveAt": 48
+    },
+    {
+      "caseId": "s01-fix-002",
+      "arriveAt": 62
+    },
+    {
+      "caseId": "s01-pr-003",
+      "arriveAt": 80
+    }
+  ],
+  "review": {
+    "count": 3,
+    "conceptIds": ["python-basics", "reading-errors", "code-review"]
+  },
+  "pay": {
+    "base": 50,
+    "perCase": 14
+  },
+  "newspaper": {
+    "headline": "Nusa Digital Developer Team Welcomes a New Member",
+    "lead": "The Nusa Digital developer team has a new member. First tasks: fixing bugs, writing Python functions, and reviewing teammates' code.",
+    "tip": {
+      "title": "Tip: Read Errors from the Bottom",
+      "text": "The most important part of a Python error is the last line: the error type and explanation. The line number shows where the problem is."
+    },
+    "classified": "WANTED: A developer who isn't scared of red text. Contact Dimas, floor 4.",
+    "sources": [
+      "Python Software Foundation: The Python Tutorial",
+      "OWASP: Secrets Management Cheat Sheet"
+    ]
+  }
+}

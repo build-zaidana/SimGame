@@ -118,7 +118,7 @@ export const reviewItemSchema = z.discriminatedUnion('type', [
 ]);
 export const reviewFileSchema = z.strictObject({ items: z.array(reviewItemSchema).min(1) });
 
-export const speakerSchema = z.enum(['rani', 'kelabu', 'joko', 'narrator']);
+export const speakerSchema = z.enum(['rani', 'kelabu', 'joko', 'dimas', 'narrator']);
 export const dialogueSchema = z.strictObject({
   id: idSchema,
   lines: z.array(z.strictObject({ speaker: speakerSchema, text })).min(1),
@@ -174,7 +174,7 @@ export const baseCaseSchema = z.strictObject({
   type: idSchema,
   conceptIds: z.array(idSchema).min(1),
   difficulty: level,
-  verdict: z.enum(['safe', 'malicious', 'suspicious', 'no-fault', 'fault', 'specialist']),
+  verdict: z.enum(['safe', 'malicious', 'suspicious', 'no-fault', 'fault', 'specialist', 'task']),
   correctDecision: idSchema,
   acceptableDecisions: z.record(idSchema, z.number().min(0).max(1)).default({}),
   severity: level,
