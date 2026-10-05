@@ -1,0 +1,94 @@
+{
+  "id": "s02-pr-002",
+  "type": "pull-request",
+  "conceptIds": ["code-review", "debugging"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Rina Kusuma",
+      "team": "Tim Toko Online"
+    },
+    "title": "Hitung total keranjang belanja",
+    "description": [
+      {
+        "text": "Fungsi ini menjumlah harga semua barang di keranjang sebelum bayar.",
+        "evidenceId": "desc"
+      },
+      {
+        "text": "Saya pakai range supaya indeksnya tidak kebablasan.",
+        "evidenceId": "desc-range"
+      }
+    ],
+    "file": "toko/keranjang.py",
+    "diff": [
+      {
+        "code": "def total_harga(keranjang):",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "total = 0",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-zero"
+      },
+      {
+        "code": "for i in range(len(keranjang) - 1):",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-range"
+      },
+      {
+        "code": "total = total + keranjang[i]",
+        "indent": 2,
+        "kind": "add",
+        "evidenceId": "line-add"
+      },
+      {
+        "code": "return total",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-return"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Tes otomatis: 1 dari 2 lulus",
+        "evidenceId": "check-tests"
+      },
+      {
+        "text": "Laporan pengguna: total di halaman bayar selalu lebih kecil dari isi keranjang",
+        "evidenceId": "check-user"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["line-range"],
+    "supporting": ["check-user", "test-fail", "check-tests"]
+  },
+  "explanation": "range(len(keranjang) - 1) berhenti satu langkah terlalu cepat, jadi barang terakhir tidak ikut dijumlah. Minta revisi menjadi range(len(keranjang)).",
+  "ruleRefs": ["r-dbg-2", "r-rev-2"],
+  "hints": [
+    "Bayangkan keranjang berisi 2 barang. Angka berapa saja yang dihasilkan range di kode ini?",
+    "range(n) sudah berhenti di n - 1. Perlukah dikurangi 1 lagi?"
+  ],
+  "intel": {
+    "tests": [
+      {
+        "text": "LULUS: total_harga([]) hasilnya 0",
+        "evidenceId": "test-empty"
+      },
+      {
+        "text": "GAGAL: total_harga([5000, 3000]) hasilnya 5000, seharusnya 8000",
+        "evidenceId": "test-fail"
+      }
+    ]
+  }
+}

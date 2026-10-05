@@ -1,0 +1,65 @@
+{
+  "id": "s04-build-003",
+  "type": "coding",
+  "conceptIds": ["testing", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Maya Lestari",
+      "team": "School Report Team"
+    },
+    "title": "Speed challenge: an average that never crashes",
+    "story": [
+      "Write a function safe_average(scores) that returns the average of the list.",
+      "If the list is empty, return 0 instead of crashing. Hidden tests also use zero and negative numbers."
+    ],
+    "file": "report/average.py",
+    "starter": "def safe_average(scores):\n    # Write your code here\n    return 0\n",
+    "tests": [
+      {
+        "name": "three scores",
+        "code": "assert safe_average([80, 90, 100]) == 90"
+      },
+      {
+        "name": "two scores",
+        "code": "assert safe_average([70, 80]) == 75"
+      },
+      {
+        "name": "empty list",
+        "code": "assert safe_average([]) == 0",
+        "hidden": true
+      },
+      {
+        "name": "negative and positive",
+        "code": "assert safe_average([-4, 4]) == 0",
+        "hidden": true
+      },
+      {
+        "name": "a single zero",
+        "code": "assert safe_average([0]) == 0",
+        "hidden": true
+      },
+      {
+        "name": "all negative",
+        "code": "assert safe_average([-2, -4]) == -3",
+        "hidden": true
+      }
+    ],
+    "solution": "def safe_average(scores):\n    if len(scores) == 0:\n        return 0\n    return sum(scores) / len(scores)\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "First check whether the list is empty and return 0, then compute sum(scores) / len(scores). This guard at the start prevents a ZeroDivisionError without changing the result for normal lists.",
+  "ruleRefs": ["r-tst-1", "r-py-3"],
+  "hints": [
+    "Average = total divided by how many items.",
+    "sum(list) adds up the list, len(list) counts its items.",
+    "Before dividing, check if len(scores) == 0: return 0."
+  ]
+}

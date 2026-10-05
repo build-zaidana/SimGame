@@ -44,6 +44,40 @@
         "type": "shift-stars",
         "stars": 3
       }
+    },
+    {
+      "id": "perkakas-developer",
+      "title": "Perkakas Developer",
+      "description": "Memiliki Test Runner dan Linter.",
+      "icon": "🧰",
+      "tier": "silver",
+      "rule": {
+        "type": "tools-owned",
+        "count": 2
+      }
+    },
+    {
+      "id": "anti-bug",
+      "title": "Anti Bug",
+      "description": "Satu shift tanpa menyetujui kode bermasalah, dengan minimal ★★.",
+      "icon": "🐛",
+      "tier": "silver",
+      "rule": {
+        "type": "no-threat-allowed",
+        "minCases": 8,
+        "minStars": 2
+      }
+    },
+    {
+      "id": "penjaga-repositori",
+      "title": "Penjaga Repositori",
+      "description": "Menyelesaikan Shift 5 dan menghentikan PR misterius Kelabu.",
+      "icon": "🛡",
+      "tier": "gold",
+      "rule": {
+        "type": "shift-complete",
+        "shiftId": "dev-05"
+      }
     }
   ]
 }

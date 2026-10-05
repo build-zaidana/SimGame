@@ -1,0 +1,87 @@
+{
+  "id": "s04-pr-004",
+  "type": "pull-request",
+  "conceptIds": ["testing", "code-review"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Lestari Wahyuni",
+      "team": "Warehouse Team"
+    },
+    "title": "Average stock per shelf",
+    "description": [
+      {
+        "text": "Calculates the average stock per shelf for the warehouse report.",
+        "evidenceId": "desc"
+      },
+      {
+        "text": "Next week this function will also be used by the new Bandung warehouse, whose shelves are still empty.",
+        "evidenceId": "desc-new"
+      }
+    ],
+    "file": "warehouse/stock.py",
+    "diff": [
+      {
+        "code": "def average_stock(stock_list):",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "return sum(stock_list) / len(stock_list)",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-div"
+      },
+      {
+        "code": "# tests",
+        "indent": 0,
+        "kind": "add"
+      },
+      {
+        "code": "assert average_stock([10, 20, 30]) == 20",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "test-normal"
+      },
+      {
+        "code": "assert average_stock([5]) == 5",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "test-one"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Automated tests: 2 of 2 passed",
+        "evidenceId": "check-tests"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["line-div", "desc-new"],
+    "supporting": ["test-normal", "test-one", "check-tests"]
+  },
+  "explanation": "For a warehouse with empty shelves, len([]) is 0 so the division raises a ZeroDivisionError, and there is no test for an empty list. Ask for a revision: add a guard for the empty list plus its test.",
+  "ruleRefs": ["r-tst-1", "r-tst-4"],
+  "hints": [
+    "The tests pass. Which case has not been tested yet?",
+    "Read the description again: what kind of data will come from the new warehouse?",
+    "What is len([]), and what happens when something is divided by it?"
+  ],
+  "intel": {
+    "tests": [
+      {
+        "text": "Test Runner: 2 tests passed",
+        "evidenceId": "intel-pass"
+      },
+      {
+        "text": "No test for an empty list [] yet",
+        "evidenceId": "intel-missing"
+      }
+    ]
+  }
+}

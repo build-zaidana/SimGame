@@ -1,0 +1,55 @@
+{
+  "id": "s02-build-001",
+  "type": "coding",
+  "conceptIds": ["python-basics", "debugging"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Galih Prasetyo",
+      "team": "Attendance Team"
+    },
+    "title": "Speed challenge: find the largest number",
+    "story": [
+      "Write a function largest(numbers) that returns the biggest number in the list, without using max().",
+      "If the list is empty, return None. Watch out: there is a hidden test with negative numbers!"
+    ],
+    "file": "attendance/largest.py",
+    "starter": "def largest(numbers):\n    # Write your code here\n    return None\n",
+    "tests": [
+      {
+        "name": "random numbers",
+        "code": "assert largest([3, 9, 4]) == 9"
+      },
+      {
+        "name": "one number",
+        "code": "assert largest([7]) == 7"
+      },
+      {
+        "name": "all negative",
+        "code": "assert largest([-5, -2, -8]) == -2",
+        "hidden": true
+      },
+      {
+        "name": "empty list",
+        "code": "assert largest([]) == None",
+        "hidden": true
+      }
+    ],
+    "solution": "def largest(numbers):\n    if len(numbers) == 0:\n        return None\n    best = numbers[0]\n    for n in numbers:\n        if n > best:\n            best = n\n    return best\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Keep the first number as the current champion, then replace it whenever a bigger number shows up. Starting from 0 fails for a list of only negative numbers, and an empty list must be checked first.",
+  "ruleRefs": ["r-dbg-3", "r-err-2", "r-py-4"],
+  "hints": [
+    "Keep one number as the current champion, then compare it with the others one by one.",
+    "If the champion starts at 0, what do you get for [-5, -2, -8]? Starting from numbers[0] is safer.",
+    "An empty list has no numbers[0]. Check it first with len(numbers) == 0."
+  ]
+}

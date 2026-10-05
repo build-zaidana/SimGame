@@ -1,0 +1,60 @@
+{
+  "id": "s04-build-002",
+  "type": "coding",
+  "conceptIds": ["testing", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Putri Handayani",
+      "team": "Tim Aplikasi Belajar"
+    },
+    "title": "Lomba kilat: rapikan nama pengguna",
+    "story": [
+      "Tulis fungsi buat_username(nama): buang spasi di pinggir, ubah jadi huruf kecil, dan ganti spasi di tengah dengan _.",
+      "Contoh: \" Budi Santoso \" menjadi \"budi_santoso\". Tes tersembunyi mencoba huruf kapital dan teks yang isinya hanya spasi."
+    ],
+    "file": "belajar/username.py",
+    "starter": "def buat_username(nama):\n    # Tulis kodemu di sini\n    return nama\n",
+    "tests": [
+      {
+        "name": "dua kata",
+        "code": "assert buat_username(\"Budi Santoso\") == \"budi_santoso\""
+      },
+      {
+        "name": "spasi di pinggir",
+        "code": "assert buat_username(\"  Siti  \") == \"siti\""
+      },
+      {
+        "name": "huruf kapital semua",
+        "code": "assert buat_username(\"ANDI\") == \"andi\"",
+        "hidden": true
+      },
+      {
+        "name": "hanya spasi",
+        "code": "assert buat_username(\"   \") == \"\"",
+        "hidden": true
+      },
+      {
+        "name": "tiga kata",
+        "code": "assert buat_username(\"Rina Ayu Lestari \") == \"rina_ayu_lestari\"",
+        "hidden": true
+      }
+    ],
+    "solution": "def buat_username(nama):\n    hasil = nama.strip().lower()\n    return hasil.replace(\" \", \"_\")\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Urutannya penting: .strip() dulu agar spasi pinggir tidak berubah jadi _, lalu .lower() dan .replace(\" \", \"_\"). Teks yang isinya hanya spasi otomatis menjadi teks kosong.",
+  "ruleRefs": ["r-tst-1", "r-err-2"],
+  "hints": [
+    "Ada tiga langkah: buang spasi pinggir, huruf kecil, ganti spasi tengah.",
+    "Kalau .replace dijalankan sebelum .strip(), spasi pinggir ikut jadi _.",
+    "Coba nama.strip().lower(), lalu .replace(\" \", \"_\")."
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "id": "s05-fix-002",
+  "type": "coding",
+  "conceptIds": ["secure-coding", "debugging"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Fajar Nugroho",
+      "team": "Tim Akun"
+    },
+    "title": "Username aneh lolos pendaftaran",
+    "story": [
+      "Username hanya boleh berisi huruf dan angka, dan tidak boleh kosong. Tapi username seperti \"budi 123\" dan \"a<b>\" ternyata diterima.",
+      "Perbaiki fungsi username_valid supaya SEMUA karakternya diperiksa."
+    ],
+    "file": "akun/daftar.py",
+    "starter": "def username_valid(nama):\n    for huruf in nama:\n        if huruf.isalpha() or huruf.isdigit():\n            return True\n    return False\n",
+    "tests": [
+      {
+        "name": "huruf dan angka",
+        "code": "assert username_valid(\"budi123\") == True"
+      },
+      {
+        "name": "ada spasi",
+        "code": "assert username_valid(\"budi 123\") == False"
+      },
+      {
+        "name": "ada simbol",
+        "code": "assert username_valid(\"a<b>\") == False"
+      },
+      {
+        "name": "huruf kapital",
+        "code": "assert username_valid(\"ANDI\") == True",
+        "hidden": true
+      },
+      {
+        "name": "teks kosong",
+        "code": "assert username_valid(\"\") == False",
+        "hidden": true
+      }
+    ],
+    "solution": "def username_valid(nama):\n    if len(nama) == 0:\n        return False\n    for huruf in nama:\n        if not (huruf.isalpha() or huruf.isdigit()):\n            return False\n    return True\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Kode lama langsung menjawab True begitu menemukan satu huruf yang sah, jadi sisa karakternya tidak pernah dicek. Yang benar: tolak begitu ada satu karakter yang tidak sah, dan jawab True hanya setelah semua karakter lolos.",
+  "ruleRefs": ["r-sec-1", "r-dbg-4"],
+  "hints": [
+    "Coba username_valid(\"b!!\") dan cetak hasilnya. Berapa karakter yang sebenarnya diperiksa?",
+    "Balik logikanya: return False saat menemukan karakter yang BUKAN huruf atau angka.",
+    "Jangan lupa teks kosong: cek len(nama) == 0 di awal."
+  ]
+}

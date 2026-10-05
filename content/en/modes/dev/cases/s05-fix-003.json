@@ -1,0 +1,58 @@
+{
+  "id": "s05-fix-003",
+  "type": "coding",
+  "conceptIds": ["secure-coding", "testing"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Dewi Anggraini",
+      "team": "Digital Wallet Team"
+    },
+    "title": "PINs with letters get accepted",
+    "story": [
+      "A digital wallet PIN must be exactly 6 characters, all digits. But the PIN \"12ab56\" is accepted!",
+      "Fix the function valid_pin so it checks the PIN's content too, not just its length."
+    ],
+    "file": "wallet/pin.py",
+    "starter": "def valid_pin(pin):\n    return len(pin) == 6\n",
+    "tests": [
+      {
+        "name": "correct PIN",
+        "code": "assert valid_pin(\"123456\") == True"
+      },
+      {
+        "name": "has letters",
+        "code": "assert valid_pin(\"12ab56\") == False"
+      },
+      {
+        "name": "too short",
+        "code": "assert valid_pin(\"12345\") == False"
+      },
+      {
+        "name": "too long",
+        "code": "assert valid_pin(\"1234567\") == False",
+        "hidden": true
+      },
+      {
+        "name": "empty text",
+        "code": "assert valid_pin(\"\") == False",
+        "hidden": true
+      }
+    ],
+    "solution": "def valid_pin(pin):\n    return len(pin) == 6 and pin.isdigit()\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Checking only the length is not enough, because letters and symbols get through. Add pin.isdigit() so a PIN is accepted only when it has 6 characters and all of them are digits.",
+  "ruleRefs": ["r-sec-1", "r-tst-1"],
+  "hints": [
+    "The code checks only one thing. What else does the PIN rule mention?",
+    "Strings have an .isdigit() method that is True when every character is a digit."
+  ]
+}

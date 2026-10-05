@@ -1,0 +1,41 @@
+{
+  "id": "s02-ctf-001",
+  "type": "ctf",
+  "conceptIds": ["debugging", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "title": "Jejak print() di log",
+    "story": [
+      "Seorang developer lupa menghapus print() percobaan, dan isinya ikut tercatat di log aplikasi kasir.",
+      "Isinya disandikan dengan Base64, cara menulis data sebagai huruf dan angka biasa. Base64 bukan pengaman: siapa pun bisa membukanya. Buka sandinya dan temukan benderanya."
+    ],
+    "artifacts": [
+      {
+        "label": "Potongan log aplikasi kasir",
+        "kind": "text",
+        "content": "08.14 INFO  aplikasi kasir dimulai\n08.15 DEBUG cek_koneksi ok\n08.15 DEBUG kode_latihan=RkxBR3tKQU5HQU5fTFVQQV9IQVBVU19QUklOVH0=\n08.16 INFO  transaksi pertama tersimpan"
+      },
+      {
+        "label": "Petunjuk Python",
+        "kind": "code",
+        "content": "import binascii\nbinascii.a2b_base64(b\"SGFsbw==\")   # b'Halo'\nb'Halo'.decode()                   # \"Halo\""
+      }
+    ],
+    "scratch": "import binascii\ndata = b\"RkxBR3tKQU5HQU5fTFVQQV9IQVBVU19QUklOVH0=\"\nprint(data)\n",
+    "flag": "FLAG{JANGAN_LUPA_HAPUS_PRINT}",
+    "solution": "import binascii\ndata = b\"RkxBR3tKQU5HQU5fTFVQQV9IQVBVU19QUklOVH0=\"\nprint(binascii.a2b_base64(data).decode())\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "binascii.a2b_base64() mengubah teks Base64 kembali menjadi data asli, lalu .decode() menjadikannya teks yang bisa dibaca. Base64 bukan pengaman, jadi print() percobaan yang berisi data penting harus dihapus sebelum kode dikirim.",
+  "ruleRefs": ["r-dbg-1", "r-err-3"],
+  "hints": [
+    "Cari baris log yang isinya terlihat seperti huruf acak dan diakhiri tanda =.",
+    "Masukkan teks itu ke binascii.a2b_base64(b\"...\"), lalu panggil .decode() pada hasilnya."
+  ]
+}

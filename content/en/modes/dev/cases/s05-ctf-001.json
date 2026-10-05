@@ -1,0 +1,41 @@
+{
+  "id": "s05-ctf-001",
+  "type": "ctf",
+  "conceptIds": ["secure-coding", "python-basics"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "title": "A trail in the midnight log",
+    "story": [
+      "The SOC team found odd lines in the server log: an \"auto backup\" job owned by the account helper-kode ran at midnight and left a random-looking note.",
+      "The note is Base64 (a way of writing data as letters and digits). Inside it is a Caesar cipher shifted by 3. Undo both to find the flag."
+    ],
+    "artifacts": [
+      {
+        "label": "Server log excerpt",
+        "kind": "text",
+        "content": "2026-10-04 23:58:12 INFO  job=auto_backup account=helper-kode\n2026-10-04 23:58:13 DEBUG note=SU9ESntOSE9ERVhfV1VETE99\n2026-10-04 23:58:14 INFO  done. -- K."
+      },
+      {
+        "label": "Python hint: reading Base64",
+        "kind": "code",
+        "content": "import binascii\ntext = binascii.a2b_base64(b\"SGVsbG8=\").decode()\nprint(text)   # Hello"
+      }
+    ],
+    "scratch": "import binascii\nnote = b\"SU9ESntOSE9ERVhfV1VETE99\"\ntext = binascii.a2b_base64(note).decode()\nprint(text)\n",
+    "flag": "FLAG{KELABU_TRAIL}",
+    "solution": "import binascii\nnote = b\"SU9ESntOSE9ERVhfV1VETE99\"\ntext = binascii.a2b_base64(note).decode()\nprint(text)\nresult = \"\"\nfor ch in text:\n    if \"A\" <= ch <= \"Z\":\n        result = result + chr((ord(ch) - ord(\"A\") - 3) % 26 + ord(\"A\"))\n    else:\n        result = result + ch\nprint(result)\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Base64 is not protection, only a way to rewrite data, so a2b_base64() opens it straight away; the result is then shifted back 3 letters. Disguised data like this in a log is a warning sign to report to the SOC.",
+  "ruleRefs": ["r-sec-3", "r-dbg-1"],
+  "hints": [
+    "Run the console first. The Base64 result looks like a Caesar cipher, right?",
+    "Shift every letter A to Z back by 3 with ord() and chr(), like the shift 1 exercise."
+  ]
+}

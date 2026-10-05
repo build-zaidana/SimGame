@@ -1,0 +1,54 @@
+{
+  "id": "s03-fix-002",
+  "type": "coding",
+  "conceptIds": ["debugging", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Maya Lestari",
+      "team": "Learning App Team"
+    },
+    "title": "The leaderboard shows the lowest scores",
+    "story": [
+      "The function top_three(scores) must return the three HIGHEST scores, biggest first.",
+      "Right now it shows the three lowest. Try print() on the sorted() result to see the order."
+    ],
+    "file": "learning/leaderboard.py",
+    "starter": "def top_three(scores):\n    ordered = sorted(scores)\n    return ordered[:3]\n",
+    "tests": [
+      {
+        "name": "five scores",
+        "code": "assert top_three([70, 95, 80, 60, 88]) == [95, 88, 80]"
+      },
+      {
+        "name": "tied scores",
+        "code": "assert top_three([50, 90, 90, 40]) == [90, 90, 50]"
+      },
+      {
+        "name": "fewer than three",
+        "code": "assert top_three([65]) == [65]",
+        "hidden": true
+      },
+      {
+        "name": "empty list",
+        "code": "assert top_three([]) == []",
+        "hidden": true
+      }
+    ],
+    "solution": "def top_three(scores):\n    ordered = sorted(scores, reverse=True)\n    return ordered[:3]\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "sorted() orders from small to big, so the first three are the lowest scores. Add reverse=True to order from big to small, then take the first three.",
+  "ruleRefs": ["r-dbg-1", "r-err-3"],
+  "hints": [
+    "Add print(ordered) before return. Is it small to big or big to small?",
+    "sorted() has an option reverse=True to flip the order."
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "id": "s04-fix-001",
+  "type": "coding",
+  "conceptIds": ["testing", "debugging"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Dewi Anggraini",
+      "team": "Attendance Team"
+    },
+    "title": "New classes crash the attendance page",
+    "story": [
+      "The function attendance_percent(records) takes a list of True (present) and False (absent), then works out the attendance percentage.",
+      "Normal classes are fine, but a new class with no attendance data yet crashes the page. For an empty list, the result must be 0."
+    ],
+    "file": "attendance/presence.py",
+    "starter": "def attendance_percent(records):\n    present = 0\n    for r in records:\n        if r:\n            present = present + 1\n    return present * 100 // len(records)\n",
+    "tests": [
+      {
+        "name": "four meetings",
+        "code": "assert attendance_percent([True, True, False, True]) == 75"
+      },
+      {
+        "name": "new class (empty)",
+        "code": "assert attendance_percent([]) == 0"
+      },
+      {
+        "name": "everyone present",
+        "code": "assert attendance_percent([True, True]) == 100",
+        "hidden": true
+      },
+      {
+        "name": "nobody present",
+        "code": "assert attendance_percent([False]) == 0",
+        "hidden": true
+      }
+    ],
+    "solution": "def attendance_percent(records):\n    if len(records) == 0:\n        return 0\n    present = 0\n    for r in records:\n        if r:\n            present = present + 1\n    return present * 100 // len(records)\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Dividing by len([]), which is 0, raises a ZeroDivisionError. Add a guard at the start: if the list is empty, return 0 right away.",
+  "ruleRefs": ["r-tst-1", "r-err-1"],
+  "hints": [
+    "Run the tests, then read the last line of the error for the empty list.",
+    "What is len(records) when the list is empty? What happens when you divide by it?",
+    "Add if len(records) == 0: return 0 before the division."
+  ]
+}

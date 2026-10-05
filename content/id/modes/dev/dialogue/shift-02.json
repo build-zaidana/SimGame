@@ -1,0 +1,30 @@
+{
+  "dialogues": [
+    {
+      "id": "dev-02-intro",
+      "lines": [
+        {
+          "speaker": "dimas",
+          "text": "Kemarin kamu sudah memperbaiki bug pertama. Hari ini laporan bug lebih banyak!"
+        },
+        {
+          "speaker": "dimas",
+          "text": "Bab baru: Debugging. Kalau bingung, cetak isi variabel dengan print()."
+        },
+        {
+          "speaker": "dimas",
+          "text": "Test Runner sudah ada di Toko Alat. Alat itu menjalankan tes PR untukmu."
+        }
+      ]
+    },
+    {
+      "id": "dev-02-outro",
+      "lines": [
+        {
+          "speaker": "dimas",
+          "text": "Bug-bug hari ini rapi kamu bereskan. Ingat: bug paling suka bersembunyi di batas perulangan."
+        }
+      ]
+    }
+  ]
+}

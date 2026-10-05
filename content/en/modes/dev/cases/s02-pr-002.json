@@ -1,0 +1,94 @@
+{
+  "id": "s02-pr-002",
+  "type": "pull-request",
+  "conceptIds": ["code-review", "debugging"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Rina Kusuma",
+      "team": "Online Shop Team"
+    },
+    "title": "Calculate the shopping cart total",
+    "description": [
+      {
+        "text": "This function adds up the prices of every item in the cart before checkout.",
+        "evidenceId": "desc"
+      },
+      {
+        "text": "I used range so the index doesn't go too far.",
+        "evidenceId": "desc-range"
+      }
+    ],
+    "file": "shop/cart.py",
+    "diff": [
+      {
+        "code": "def cart_total(cart):",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "total = 0",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-zero"
+      },
+      {
+        "code": "for i in range(len(cart) - 1):",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-range"
+      },
+      {
+        "code": "total = total + cart[i]",
+        "indent": 2,
+        "kind": "add",
+        "evidenceId": "line-add"
+      },
+      {
+        "code": "return total",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-return"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Automatic tests: 1 of 2 passed",
+        "evidenceId": "check-tests"
+      },
+      {
+        "text": "User report: the checkout total is always smaller than what is in the cart",
+        "evidenceId": "check-user"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["line-range"],
+    "supporting": ["check-user", "test-fail", "check-tests"]
+  },
+  "explanation": "range(len(cart) - 1) stops one step too early, so the last item is never added. Request changes to range(len(cart)).",
+  "ruleRefs": ["r-dbg-2", "r-rev-2"],
+  "hints": [
+    "Picture a cart with 2 items. Which numbers does the range in this code produce?",
+    "range(n) already stops at n - 1. Does it need another minus 1?"
+  ],
+  "intel": {
+    "tests": [
+      {
+        "text": "PASS: cart_total([]) returns 0",
+        "evidenceId": "test-empty"
+      },
+      {
+        "text": "FAIL: cart_total([5000, 3000]) returns 5000, expected 8000",
+        "evidenceId": "test-fail"
+      }
+    ]
+  }
+}

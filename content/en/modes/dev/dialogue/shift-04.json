@@ -1,0 +1,34 @@
+{
+  "dialogues": [
+    {
+      "id": "dev-04-intro",
+      "lines": [
+        {
+          "speaker": "dimas",
+          "text": "Because of yesterday's release, from today every new piece of logic must have tests."
+        },
+        {
+          "speaker": "dimas",
+          "text": "New chapter: Writing Tests. Think of edge cases: empty, zero, negative, capitals."
+        },
+        {
+          "speaker": "dimas",
+          "text": "There are more hidden tests today. You got this!"
+        }
+      ]
+    },
+    {
+      "id": "dev-04-outro",
+      "lines": [
+        {
+          "speaker": "dimas",
+          "text": "Your tests are getting sharp. Tomorrow is your last day as the new developer."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "Tests, tests... but do you also check who wrote the code?"
+        }
+      ]
+    }
+  ]
+}

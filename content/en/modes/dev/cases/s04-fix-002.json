@@ -1,0 +1,55 @@
+{
+  "id": "s04-fix-002",
+  "type": "coding",
+  "conceptIds": ["testing", "debugging"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Agus Setiawan",
+      "team": "Warehouse Team"
+    },
+    "title": "Highest freezer temperature is always 0",
+    "story": [
+      "The function highest_temp(readings) finds the highest temperature from the sensor readings. For normal rooms the result is right.",
+      "But in the freezer, where every temperature is negative, the result is always 0 °C. Fix it so it works for negative numbers too."
+    ],
+    "file": "warehouse/temperature.py",
+    "starter": "def highest_temp(readings):\n    highest = 0\n    for t in readings:\n        if t > highest:\n            highest = t\n    return highest\n",
+    "tests": [
+      {
+        "name": "normal room",
+        "code": "assert highest_temp([24, 27, 25]) == 27"
+      },
+      {
+        "name": "freezer (negative)",
+        "code": "assert highest_temp([-18, -20, -15]) == -15"
+      },
+      {
+        "name": "one reading",
+        "code": "assert highest_temp([-5]) == -5",
+        "hidden": true
+      },
+      {
+        "name": "negatives and zero",
+        "code": "assert highest_temp([-3, 0, -1]) == 0",
+        "hidden": true
+      }
+    ],
+    "solution": "def highest_temp(readings):\n    highest = readings[0]\n    for t in readings:\n        if t > highest:\n            highest = t\n    return highest\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "A starting value of highest = 0 is already bigger than every negative temperature, so it never gets replaced. Start from the first item in the list, readings[0], so negative numbers are compared correctly.",
+  "ruleRefs": ["r-tst-1", "r-dbg-1"],
+  "hints": [
+    "Print highest inside the loop with print() for the freezer data.",
+    "Is -15 > 0? If not, when does highest ever change?",
+    "Replace the starting value 0 with readings[0]."
+  ]
+}

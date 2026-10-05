@@ -1,0 +1,101 @@
+{
+  "id": "s04-pr-003",
+  "type": "pull-request",
+  "conceptIds": ["release-rollback", "testing"],
+  "difficulty": 3,
+  "verdict": "fault",
+  "correctDecision": "rollback",
+  "acceptableDecisions": {
+    "revise": 0.3
+  },
+  "severity": 3,
+  "data": {
+    "author": {
+      "name": "Yoga Firmansyah",
+      "team": "Online Shop Team"
+    },
+    "title": "Free shipping for orders of 100k and up",
+    "description": [
+      {
+        "text": "Already merged and released to production at 14:05.",
+        "evidenceId": "desc-released"
+      },
+      {
+        "text": "Shipping cost is now calculated per city.",
+        "evidenceId": "desc-change"
+      }
+    ],
+    "file": "shop/shipping.py",
+    "diff": [
+      {
+        "code": "def shipping(city, spent):",
+        "indent": 0,
+        "kind": "ctx",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "return 10000",
+        "indent": 1,
+        "kind": "del",
+        "evidenceId": "line-old"
+      },
+      {
+        "code": "if spent >= 100000:",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-free"
+      },
+      {
+        "code": "return 0",
+        "indent": 2,
+        "kind": "add",
+        "evidenceId": "line-zero"
+      },
+      {
+        "code": "return RATES[city]",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-lookup"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Checkout errors: 0.3% before the 14:05 release → 21% after",
+        "evidenceId": "check-errors"
+      },
+      {
+        "text": "Customer complaints: 2 before the release, 87 in the 30 minutes after",
+        "evidenceId": "check-complaints"
+      },
+      {
+        "text": "Automated tests: 2 of 2 passed (only the cities Bandung and Medan)",
+        "evidenceId": "check-tests"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-released", "check-errors"],
+    "supporting": ["check-complaints", "line-lookup", "check-tests"]
+  },
+  "explanation": "The 14:05 release is in production and checkout errors jumped from 0.3% to 21% right after it, so roll back to the healthy version first. The fix for RATES[city] with unlisted cities, plus its tests, comes after.",
+  "ruleRefs": ["r-rel-2", "r-rel-3", "r-tst-3"],
+  "hints": [
+    "This code is already used by real users. Look at the numbers before and after the release.",
+    "Errors jumped right after 14:05. What is the first step for a release that causes errors?",
+    "Revising alone is too slow; users are failing to pay right now."
+  ],
+  "intel": {
+    "tests": [
+      {
+        "text": "No tests for cities outside the RATES list",
+        "evidenceId": "intel-no-test"
+      }
+    ],
+    "lint": [
+      {
+        "text": "Warning: RATES[city] can raise KeyError if the city is not in the list",
+        "evidenceId": "intel-keyerror"
+      }
+    ]
+  }
+}

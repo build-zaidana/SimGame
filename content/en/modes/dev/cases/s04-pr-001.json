@@ -1,0 +1,102 @@
+{
+  "id": "s04-pr-001",
+  "type": "pull-request",
+  "conceptIds": ["testing", "code-review"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "severity": 1,
+  "data": {
+    "author": {
+      "name": "Wulan Sari",
+      "team": "Cashier Team"
+    },
+    "title": "Shopping total function + tests",
+    "description": [
+      {
+        "text": "A function that adds up the prices in the cashier's cart.",
+        "evidenceId": "desc"
+      },
+      {
+        "text": "I added tests for an empty cart and a free item (price 0).",
+        "evidenceId": "desc-tests"
+      }
+    ],
+    "file": "cashier/cart.py",
+    "diff": [
+      {
+        "code": "def cart_total(prices):",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "total = 0",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-start"
+      },
+      {
+        "code": "for price in prices:",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-for"
+      },
+      {
+        "code": "total = total + price",
+        "indent": 2,
+        "kind": "add",
+        "evidenceId": "line-add"
+      },
+      {
+        "code": "return total",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-return"
+      },
+      {
+        "code": "# tests",
+        "indent": 0,
+        "kind": "add"
+      },
+      {
+        "code": "assert cart_total([5000, 2000]) == 7000",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "test-normal"
+      },
+      {
+        "code": "assert cart_total([]) == 0",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "test-empty"
+      },
+      {
+        "code": "assert cart_total([0, 3000]) == 3000",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "test-zero"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Automated tests: 3 of 3 passed",
+        "evidenceId": "check-tests"
+      },
+      {
+        "text": "Other reviewers: no notes yet",
+        "evidenceId": "check-notes"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["test-empty", "test-zero", "check-tests"]
+  },
+  "explanation": "The code is correct and the tests cover the normal case plus edge cases (an empty cart and a price of 0). A PR like this deserves approval.",
+  "ruleRefs": ["r-rev-1", "r-tst-1"],
+  "hints": [
+    "First check: do the tests really test something?",
+    "There are tests for an empty list and for zero. Is there still a reason to hold this PR?"
+  ]
+}

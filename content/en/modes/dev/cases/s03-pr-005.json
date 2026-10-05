@@ -1,0 +1,94 @@
+{
+  "id": "s03-pr-005",
+  "type": "pull-request",
+  "conceptIds": ["release-rollback", "debugging", "code-review"],
+  "difficulty": 3,
+  "verdict": "fault",
+  "correctDecision": "rollback",
+  "acceptableDecisions": {
+    "revise": 0.3
+  },
+  "severity": 3,
+  "data": {
+    "author": {
+      "name": "Rudi Hartono",
+      "team": "Online Shop Team"
+    },
+    "title": "Read shipping cost from a city rate table",
+    "description": [
+      {
+        "text": "Shipping cost now comes from a city table. Other cities aren't in the table yet, I'll add them later.",
+        "evidenceId": "desc-later"
+      },
+      {
+        "text": "Released at 15:30 straight to all users.",
+        "evidenceId": "desc-released"
+      }
+    ],
+    "file": "shop/shipping.py",
+    "diff": [
+      {
+        "code": "RATES = {\"Jakarta\": 9000, \"Bandung\": 12000}",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-table"
+      },
+      {
+        "code": "def shipping(city):",
+        "indent": 0,
+        "kind": "ctx",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "return 20000",
+        "indent": 1,
+        "kind": "del",
+        "evidenceId": "line-old"
+      },
+      {
+        "code": "return RATES[city]",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-lookup"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Failed orders: 0.5% at 15:00 → 0.4% at 15:25 → 22% at 15:40",
+        "evidenceId": "check-orders"
+      },
+      {
+        "text": "Production log: KeyError: 'Kupang', KeyError: 'Medan' (still growing)",
+        "evidenceId": "check-log"
+      },
+      {
+        "text": "Automatic tests: 2 of 2 passed",
+        "evidenceId": "check-tests"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["check-orders"],
+    "supporting": ["check-log", "line-lookup", "desc-later", "intel-lint-get", "intel-cities"]
+  },
+  "explanation": "Failed orders jumped from 0.4% to 22% after the 15:30 release, because RATES[city] raises a KeyError for cities not in the table. Roll back first so customers can shop again, then fix it with RATES.get(city, 20000) and release gradually.",
+  "ruleRefs": ["r-rel-2", "r-rel-4", "r-dbg-3"],
+  "hints": [
+    "Look at the failed order numbers before and after 15:30.",
+    "Customers in Kupang can't shop right now. Wait for a revision, or go back to the healthy version first?"
+  ],
+  "intel": {
+    "tests": [
+      {
+        "text": "Tests only use the cities Jakarta and Bandung",
+        "evidenceId": "intel-cities"
+      }
+    ],
+    "lint": [
+      {
+        "text": "Warning: RATES[city] can raise KeyError; consider RATES.get(city, 20000)",
+        "evidenceId": "intel-lint-get"
+      }
+    ]
+  }
+}

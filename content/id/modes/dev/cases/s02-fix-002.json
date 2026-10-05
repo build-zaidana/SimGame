@@ -1,0 +1,50 @@
+{
+  "id": "s02-fix-002",
+  "type": "coding",
+  "conceptIds": ["debugging", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Dewi Anggraini",
+      "team": "Tim Aplikasi Belajar"
+    },
+    "title": "Total poin siswa cuma angka terakhir",
+    "story": [
+      "Siswa yang mengumpulkan poin 10, 20, dan 30 hanya tercatat punya 30 poin.",
+      "Tambahkan print(total) di dalam perulangan untuk melihat apa yang terjadi, lalu perbaiki."
+    ],
+    "file": "belajar/poin.py",
+    "starter": "def total_poin(poin):\n    for p in poin:\n        total = 0\n        total = total + p\n    return total\n",
+    "tests": [
+      {
+        "name": "tiga kuis",
+        "code": "assert total_poin([10, 20, 30]) == 60"
+      },
+      {
+        "name": "dua kuis",
+        "code": "assert total_poin([5, 5]) == 10"
+      },
+      {
+        "name": "belum ada kuis",
+        "code": "assert total_poin([]) == 0",
+        "hidden": true
+      }
+    ],
+    "solution": "def total_poin(poin):\n    total = 0\n    for p in poin:\n        total = total + p\n    return total\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Baris total = 0 ada di dalam for, jadi total kembali ke nol di setiap putaran dan hanya poin terakhir yang tersisa. Pindahkan total = 0 ke atas, sebelum perulangan dimulai.",
+  "ruleRefs": ["r-dbg-1", "r-dbg-4", "r-py-1"],
+  "hints": [
+    "Cetak total di setiap putaran. Apakah angkanya bertambah terus?",
+    "Baris mana yang membuat total kembali ke 0? Seharusnya baris itu dijalankan berapa kali?",
+    "Pindahkan total = 0 ke luar for, dengan indentasi yang sama seperti for."
+  ]
+}

@@ -1,6 +1,6 @@
 # ADR 026 — Meja Developer: coding sungguhan dengan MicroPython di browser
 
-- Status: diterima · 5 Oktober 2026 (shift 1 contoh; shift 2–5 menyusul setelah dicoba pemilik)
+- Status: diterima · 5 Oktober 2026 (5 shift: 50 kasus campuran review, coding, CTF)
 
 ## Konteks
 

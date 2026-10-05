@@ -1,0 +1,54 @@
+{
+  "id": "s03-fix-001",
+  "type": "coding",
+  "conceptIds": ["debugging", "python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Dewi Anggraini",
+      "team": "Tim Toko Online"
+    },
+    "title": "Total keranjang bikin KeyError",
+    "story": [
+      "Setiap barang di keranjang adalah kamus (dict) berisi \"nama\", \"harga\", dan \"jumlah\".",
+      "Fungsi total_keranjang selalu error. Jalankan tes, baca KeyError-nya, lalu perbaiki."
+    ],
+    "file": "toko/keranjang.py",
+    "starter": "def total_keranjang(keranjang):\n    total = 0\n    for barang in keranjang:\n        total = total + barang[\"Harga\"] * barang[\"jumlah\"]\n    return total\n",
+    "tests": [
+      {
+        "name": "dua barang",
+        "code": "assert total_keranjang([{\"nama\": \"pensil\", \"harga\": 3000, \"jumlah\": 2}, {\"nama\": \"buku\", \"harga\": 5000, \"jumlah\": 1}]) == 11000"
+      },
+      {
+        "name": "satu barang",
+        "code": "assert total_keranjang([{\"nama\": \"tas\", \"harga\": 80000, \"jumlah\": 1}]) == 80000"
+      },
+      {
+        "name": "keranjang kosong",
+        "code": "assert total_keranjang([]) == 0",
+        "hidden": true
+      },
+      {
+        "name": "jumlah nol",
+        "code": "assert total_keranjang([{\"nama\": \"penghapus\", \"harga\": 2000, \"jumlah\": 0}]) == 0",
+        "hidden": true
+      }
+    ],
+    "solution": "def total_keranjang(keranjang):\n    total = 0\n    for barang in keranjang:\n        total = total + barang[\"harga\"] * barang[\"jumlah\"]\n    return total\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "KeyError: 'Harga' artinya kunci itu tidak ada di kamus; kuncinya ditulis huruf kecil, \"harga\". Python membedakan huruf besar dan kecil, jadi nama kunci harus sama persis.",
+  "ruleRefs": ["r-dbg-3", "r-err-1"],
+  "hints": [
+    "Jalankan tes dan baca baris terakhir error-nya. Kunci apa yang dicari?",
+    "Bandingkan nama kunci di kode dengan kunci di data barang. Huruf besar dan kecil itu berbeda!"
+  ]
+}

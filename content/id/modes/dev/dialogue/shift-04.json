@@ -1,0 +1,34 @@
+{
+  "dialogues": [
+    {
+      "id": "dev-04-intro",
+      "lines": [
+        {
+          "speaker": "dimas",
+          "text": "Gara-gara rilis kemarin, mulai hari ini setiap logika baru wajib punya tes."
+        },
+        {
+          "speaker": "dimas",
+          "text": "Bab baru: Menulis Tes. Pikirkan kasus tepi: kosong, nol, negatif, huruf kapital."
+        },
+        {
+          "speaker": "dimas",
+          "text": "Tes tersembunyi hari ini lebih banyak. Semangat!"
+        }
+      ]
+    },
+    {
+      "id": "dev-04-outro",
+      "lines": [
+        {
+          "speaker": "dimas",
+          "text": "Tesmu makin tajam. Besok hari terakhirmu sebagai developer baru."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "Tes, tes... tapi apakah kamu juga membaca siapa penulis kodenya?"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "items": [
+    {
+      "id": "rv-rel-1",
+      "type": "mcq",
+      "conceptId": "release-rollback",
+      "difficulty": 1,
+      "prompt": "Error aplikasi 0,3% sebelum rilis pukul 10.00, lalu 20% sesudahnya. Langkah pertama yang tepat?",
+      "choices": [
+        "Rollback ke versi sehat terakhir",
+        "Tunggu besok, siapa tahu turun sendiri",
+        "Langsung tulis fitur baru"
+      ],
+      "answerIndex": 0,
+      "explanation": "Rilis baru membuat error melonjak, jadi kembalikan dulu versi sehat agar pengguna tidak terganggu, lalu perbaiki kemudian."
+    },
+    {
+      "id": "rv-rel-2",
+      "type": "mcq",
+      "conceptId": "release-rollback",
+      "difficulty": 2,
+      "prompt": "Error sudah 9% sejak pukul 12.40. Rilis pukul 13.00, dan error tetap 9%. Perlu rollback?",
+      "choices": [
+        "Ya, setiap ada error harus rollback",
+        "Tidak, error sudah ada sebelum rilis dan tidak bertambah",
+        "Ya, rilis selalu penyebab error"
+      ],
+      "answerIndex": 1,
+      "explanation": "Bandingkan angka sebelum dan sesudah rilis. Rollback rilis yang sehat hanya membatalkan pekerjaan yang baik."
+    },
+    {
+      "id": "rv-rel-3",
+      "type": "mcq",
+      "conceptId": "release-rollback",
+      "difficulty": 1,
+      "prompt": "Pesan commit mana yang paling baik?",
+      "choices": [
+        "\"update\"",
+        "\"fix lagi\"",
+        "\"Perbaiki KeyError ongkir untuk kota yang belum ada di tabel\""
+      ],
+      "answerIndex": 2,
+      "explanation": "Pesan commit yang baik menjelaskan apa yang diubah dan kenapa, supaya riwayatnya mudah dibaca tim."
+    },
+    {
+      "id": "rv-rel-4",
+      "type": "order-steps",
+      "conceptId": "release-rollback",
+      "difficulty": 2,
+      "prompt": "Urutkan langkah saat rilis baru membuat error melonjak.",
+      "steps": [
+        "Bandingkan angka error sebelum dan sesudah rilis",
+        "Rollback ke versi sehat terakhir",
+        "Cari bug-nya, perbaiki, dan tambahkan tes",
+        "Rilis ulang bertahap sambil diawasi"
+      ],
+      "explanation": "Pengguna diselamatkan dulu dengan rollback; perbaikan dikerjakan dengan tenang lalu dirilis bertahap."
+    }
+  ]
+}

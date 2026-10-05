@@ -1,0 +1,49 @@
+{
+  "id": "s05-fix-001",
+  "type": "coding",
+  "conceptIds": ["secure-coding", "debugging"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Sari Kusuma",
+      "team": "Tim Kasir"
+    },
+    "title": "Nomor HP di log masih bocor",
+    "story": [
+      "Log kasir tidak boleh menampilkan nomor HP pembeli utuh. Bentuk yang diminta: 4 digit depan, ****, lalu 2 digit terakhir, misalnya 0812****89.",
+      "Fungsinya sudah ada, tapi hasilnya aneh. Perbaiki ya!"
+    ],
+    "file": "kasir/log.py",
+    "starter": "def samarkan_hp(nomor):\n    return nomor[:4] + \"****\" + nomor[2:]\n",
+    "tests": [
+      {
+        "name": "nomor 12 digit",
+        "code": "assert samarkan_hp(\"081234567889\") == \"0812****89\""
+      },
+      {
+        "name": "nomor lain",
+        "code": "assert samarkan_hp(\"085711112222\") == \"0857****22\""
+      },
+      {
+        "name": "nomor 13 digit",
+        "code": "assert samarkan_hp(\"0812345678901\") == \"0812****01\"",
+        "hidden": true
+      }
+    ],
+    "solution": "def samarkan_hp(nomor):\n    return nomor[:4] + \"****\" + nomor[-2:]\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "nomor[2:] mengambil hampir seluruh nomor mulai indeks 2, sehingga nomor HP tetap bocor. nomor[-2:] mengambil 2 digit terakhir saja, berapa pun panjang nomornya.",
+  "ruleRefs": ["r-sec-2", "r-dbg-1"],
+  "hints": [
+    "Cetak nomor[2:] di konsol. Apa isinya?",
+    "Indeks negatif dihitung dari belakang: nomor[-2:] berarti 2 karakter terakhir."
+  ]
+}

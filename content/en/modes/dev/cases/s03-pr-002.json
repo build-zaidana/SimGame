@@ -1,0 +1,97 @@
+{
+  "id": "s03-pr-002",
+  "type": "pull-request",
+  "conceptIds": ["code-review", "python-basics"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "severity": 1,
+  "data": {
+    "author": {
+      "name": "Sinta Maharani",
+      "team": "Attendance Team"
+    },
+    "title": "Count students who are present",
+    "description": [
+      {
+        "text": "Commit message: \"Add count_present function for the daily attendance summary\"",
+        "evidenceId": "desc-commit"
+      },
+      {
+        "text": "This is my first PR, sorry if it's a bit messy.",
+        "evidenceId": "desc-nervous"
+      }
+    ],
+    "file": "attendance/summary.py",
+    "diff": [
+      {
+        "code": "def count_present(attendance):",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "present = 0",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-init"
+      },
+      {
+        "code": "for name, status in attendance.items():",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-loop"
+      },
+      {
+        "code": "if status == \"present\":",
+        "indent": 2,
+        "kind": "add",
+        "evidenceId": "line-if"
+      },
+      {
+        "code": "present = present + 1",
+        "indent": 3,
+        "kind": "add",
+        "evidenceId": "line-count"
+      },
+      {
+        "code": "return present",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-return"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Automatic tests: 5 of 5 passed",
+        "evidenceId": "check-tests"
+      },
+      {
+        "text": "Release status: not released yet, waiting for review",
+        "evidenceId": "check-release"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["check-tests", "desc-commit"]
+  },
+  "explanation": "The code is correct, the commit message is clear, and all tests pass, including an empty class. It isn't released yet, so there is nothing to roll back: just approve it.",
+  "ruleRefs": ["r-rev-1", "r-rel-1"],
+  "hints": [
+    "Imagine the attendance dict with two students. What is the result?",
+    "Rollback is only for a change that is already released and causing trouble. Is this PR like that?"
+  ],
+  "intel": {
+    "tests": [
+      {
+        "text": "Passed: two present, one sick → 2",
+        "evidenceId": "intel-normal"
+      },
+      {
+        "text": "Passed: empty dict (holiday) → 0",
+        "evidenceId": "intel-empty"
+      }
+    ]
+  }
+}

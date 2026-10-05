@@ -1,0 +1,50 @@
+{
+  "id": "s02-fix-003",
+  "type": "coding",
+  "conceptIds": ["debugging", "reading-errors"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Yoga Permana",
+      "team": "School App Team"
+    },
+    "title": "Class captain vote count hits a KeyError",
+    "story": [
+      "The class captain election app counts votes in a dictionary (dict). As soon as the first vote arrives, a KeyError appears.",
+      "Read the error: which key is not in the dictionary yet?"
+    ],
+    "file": "school/votes.py",
+    "starter": "def count_votes(choices):\n    result = {}\n    for name in choices:\n        result[name] = result[name] + 1\n    return result\n",
+    "tests": [
+      {
+        "name": "three votes",
+        "code": "assert count_votes([\"Ani\", \"Budi\", \"Ani\"]) == {\"Ani\": 2, \"Budi\": 1}"
+      },
+      {
+        "name": "one vote",
+        "code": "assert count_votes([\"Cici\"]) == {\"Cici\": 1}"
+      },
+      {
+        "name": "no votes yet",
+        "code": "assert count_votes([]) == {}",
+        "hidden": true
+      }
+    ],
+    "solution": "def count_votes(choices):\n    result = {}\n    for name in choices:\n        result[name] = result.get(name, 0) + 1\n    return result\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "result[name] fails with a KeyError when that name has not been counted yet. result.get(name, 0) returns 0 for a missing key, so the count can be increased right away.",
+  "ruleRefs": ["r-dbg-3", "r-err-1"],
+  "hints": [
+    "Read the last line of the error: a KeyError names the key that was not found.",
+    "When the first vote for \"Ani\" arrives, is \"Ani\" already in the result dictionary?",
+    "Try result.get(name, 0): it gives 0 when the key is not there yet."
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "id": "s05-ctf-001",
+  "type": "ctf",
+  "conceptIds": ["secure-coding", "python-basics"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "title": "Jejak di log tengah malam",
+    "story": [
+      "Tim SOC menemukan baris aneh di log server: job \"cadangan otomatis\" milik akun helper-kode berjalan tengah malam dan meninggalkan catatan acak.",
+      "Catatan itu berupa Base64 (cara menulis data sebagai huruf dan angka). Isinya ternyata sandi Caesar geser 3. Buka keduanya untuk menemukan benderanya."
+    ],
+    "artifacts": [
+      {
+        "label": "Potongan log server",
+        "kind": "text",
+        "content": "2026-10-04 23:58:12 INFO  job=cadangan_otomatis akun=helper-kode\n2026-10-04 23:58:13 DEBUG catatan=SU9ESntNSE1ETl9OSE9ERVh9\n2026-10-04 23:58:14 INFO  selesai. -- K."
+      },
+      {
+        "label": "Petunjuk Python: membaca Base64",
+        "kind": "code",
+        "content": "import binascii\nteks = binascii.a2b_base64(b\"SGFsbw==\").decode()\nprint(teks)   # Halo"
+      }
+    ],
+    "scratch": "import binascii\ncatatan = b\"SU9ESntNSE1ETl9OSE9ERVh9\"\nteks = binascii.a2b_base64(catatan).decode()\nprint(teks)\n",
+    "flag": "FLAG{JEJAK_KELABU}",
+    "solution": "import binascii\ncatatan = b\"SU9ESntNSE1ETl9OSE9ERVh9\"\nteks = binascii.a2b_base64(catatan).decode()\nprint(teks)\nhasil = \"\"\nfor huruf in teks:\n    if \"A\" <= huruf <= \"Z\":\n        hasil = hasil + chr((ord(huruf) - ord(\"A\") - 3) % 26 + ord(\"A\"))\n    else:\n        hasil = hasil + huruf\nprint(hasil)\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Base64 bukan pengaman, hanya cara menulis ulang data, jadi a2b_base64() langsung membukanya; hasilnya lalu digeser balik 3 huruf. Data yang disamarkan seperti ini di log adalah tanda bahaya yang perlu dilaporkan ke SOC.",
+  "ruleRefs": ["r-sec-3", "r-dbg-1"],
+  "hints": [
+    "Jalankan dulu konsolnya. Teks hasil Base64 terlihat seperti sandi Caesar, kan?",
+    "Geser setiap huruf A sampai Z 3 ke belakang dengan ord() dan chr(), seperti latihan shift 1."
+  ]
+}

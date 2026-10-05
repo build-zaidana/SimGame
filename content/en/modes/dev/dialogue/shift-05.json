@@ -1,0 +1,38 @@
+{
+  "dialogues": [
+    {
+      "id": "dev-05-intro",
+      "lines": [
+        {
+          "speaker": "dimas",
+          "text": "Lots of new accounts sent PRs this week. Read every change carefully."
+        },
+        {
+          "speaker": "dimas",
+          "text": "Final chapter: Secure Code. If code sends data to an unknown address, don't approve it. Escalate to Rani's SOC team."
+        },
+        {
+          "speaker": "dimas",
+          "text": "There's also a flag trail in the logs. Follow it to the end."
+        }
+      ]
+    },
+    {
+      "id": "dev-05-outro",
+      "lines": [
+        {
+          "speaker": "dimas",
+          "text": "The SOC team has blocked the 'helper-kode' account. Its code never got into our apps, thanks to your review."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "...Our code got rejected again. What an annoying developer."
+        },
+        {
+          "speaker": "dimas",
+          "text": "You're a real developer now. Drop by the Developer Desk again sometime!"
+        }
+      ]
+    }
+  ]
+}

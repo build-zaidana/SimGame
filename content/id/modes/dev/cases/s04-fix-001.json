@@ -1,0 +1,55 @@
+{
+  "id": "s04-fix-001",
+  "type": "coding",
+  "conceptIds": ["testing", "debugging"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Dewi Anggraini",
+      "team": "Tim Absensi"
+    },
+    "title": "Kelas baru bikin halaman absen crash",
+    "story": [
+      "Fungsi persen_hadir(absen) menerima daftar True (hadir) dan False (tidak hadir), lalu menghitung persen kehadiran.",
+      "Kelas biasa aman, tapi kelas baru yang belum punya data absen membuat halaman crash. Untuk daftar kosong, hasilnya harus 0."
+    ],
+    "file": "absensi/kehadiran.py",
+    "starter": "def persen_hadir(absen):\n    hadir = 0\n    for a in absen:\n        if a:\n            hadir = hadir + 1\n    return hadir * 100 // len(absen)\n",
+    "tests": [
+      {
+        "name": "empat pertemuan",
+        "code": "assert persen_hadir([True, True, False, True]) == 75"
+      },
+      {
+        "name": "kelas baru (kosong)",
+        "code": "assert persen_hadir([]) == 0"
+      },
+      {
+        "name": "semua hadir",
+        "code": "assert persen_hadir([True, True]) == 100",
+        "hidden": true
+      },
+      {
+        "name": "tidak ada yang hadir",
+        "code": "assert persen_hadir([False]) == 0",
+        "hidden": true
+      }
+    ],
+    "solution": "def persen_hadir(absen):\n    if len(absen) == 0:\n        return 0\n    hadir = 0\n    for a in absen:\n        if a:\n            hadir = hadir + 1\n    return hadir * 100 // len(absen)\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Membagi dengan len([]) yang bernilai 0 memicu ZeroDivisionError. Tambahkan penjaga di awal: bila daftarnya kosong, langsung kembalikan 0.",
+  "ruleRefs": ["r-tst-1", "r-err-1"],
+  "hints": [
+    "Jalankan tes, lalu baca baris terakhir error untuk daftar kosong.",
+    "Berapa nilai len(absen) kalau daftarnya kosong? Apa yang terjadi bila dibagi dengan itu?",
+    "Tambahkan if len(absen) == 0: return 0 sebelum pembagian."
+  ]
+}

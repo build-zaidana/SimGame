@@ -1,0 +1,41 @@
+{
+  "id": "s04-ctf-001",
+  "type": "ctf",
+  "conceptIds": ["testing", "debugging"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 1,
+  "data": {
+    "title": "The flag that is one word short",
+    "story": [
+      "Kak Dimas wrote a function that builds a practice flag from a list of word pieces. Its printed result looks convincing, but the test fails.",
+      "Trace the code, fix one obvious bug in the console, run it, then type the flag."
+    ],
+    "artifacts": [
+      {
+        "label": "flag.py",
+        "kind": "code",
+        "content": "pieces = [\"TEST\", \"EDGE\", \"CASES\", \"FIRST\"]\n\ndef make_flag(items):\n    body = \"\"\n    for i in range(1, len(items)):\n        body = body + items[i]\n        if i < len(items) - 1:\n            body = body + \"_\"\n    return \"FLAG{\" + body + \"}\"\n\nprint(make_flag(pieces))\n"
+      },
+      {
+        "label": "Test from Kak Dimas",
+        "kind": "text",
+        "content": "The flag must use ALL the pieces, in order, separated by _. Number of words in the flag = number of pieces (4)."
+      }
+    ],
+    "scratch": "pieces = [\"TEST\", \"EDGE\", \"CASES\", \"FIRST\"]\n\ndef make_flag(items):\n    body = \"\"\n    for i in range(1, len(items)):\n        body = body + items[i]\n        if i < len(items) - 1:\n            body = body + \"_\"\n    return \"FLAG{\" + body + \"}\"\n\nprint(make_flag(pieces))\n",
+    "flag": "FLAG{TEST_EDGE_CASES_FIRST}",
+    "solution": "pieces = [\"TEST\", \"EDGE\", \"CASES\", \"FIRST\"]\n\ndef make_flag(items):\n    body = \"\"\n    for i in range(len(items)):\n        body = body + items[i]\n        if i < len(items) - 1:\n            body = body + \"_\"\n    return \"FLAG{\" + body + \"}\"\n\nprint(make_flag(pieces))\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "range(1, len(items)) starts at index 1, so the first piece (index 0) is skipped. With range(len(items)) all four words are included, and the word-count test helps catch a bug whose output looks reasonable.",
+  "ruleRefs": ["r-dbg-2", "r-tst-1"],
+  "hints": [
+    "Count the words in the printed result. Are there 4?",
+    "List indexes start at 0. Which number does the loop start from?"
+  ]
+}

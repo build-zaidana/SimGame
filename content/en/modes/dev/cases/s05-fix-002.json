@@ -1,0 +1,59 @@
+{
+  "id": "s05-fix-002",
+  "type": "coding",
+  "conceptIds": ["secure-coding", "debugging"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Fajar Nugroho",
+      "team": "Accounts Team"
+    },
+    "title": "Odd usernames get through sign-up",
+    "story": [
+      "A username may only contain letters and digits, and must not be empty. But usernames like \"budi 123\" and \"a<b>\" are accepted.",
+      "Fix the function valid_username so it checks EVERY character."
+    ],
+    "file": "accounts/signup.py",
+    "starter": "def valid_username(name):\n    for ch in name:\n        if ch.isalpha() or ch.isdigit():\n            return True\n    return False\n",
+    "tests": [
+      {
+        "name": "letters and digits",
+        "code": "assert valid_username(\"budi123\") == True"
+      },
+      {
+        "name": "has a space",
+        "code": "assert valid_username(\"budi 123\") == False"
+      },
+      {
+        "name": "has symbols",
+        "code": "assert valid_username(\"a<b>\") == False"
+      },
+      {
+        "name": "capital letters",
+        "code": "assert valid_username(\"ANDI\") == True",
+        "hidden": true
+      },
+      {
+        "name": "empty text",
+        "code": "assert valid_username(\"\") == False",
+        "hidden": true
+      }
+    ],
+    "solution": "def valid_username(name):\n    if len(name) == 0:\n        return False\n    for ch in name:\n        if not (ch.isalpha() or ch.isdigit()):\n            return False\n    return True\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "The old code answers True as soon as it finds one valid character, so the rest is never checked. The right way: reject as soon as one character is invalid, and answer True only after every character passes.",
+  "ruleRefs": ["r-sec-1", "r-dbg-4"],
+  "hints": [
+    "Try valid_username(\"b!!\") and print the result. How many characters are really checked?",
+    "Flip the logic: return False when you find a character that is NOT a letter or digit.",
+    "Do not forget empty text: check len(name) == 0 at the start."
+  ]
+}

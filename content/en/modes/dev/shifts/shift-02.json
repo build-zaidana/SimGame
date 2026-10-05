@@ -1,0 +1,72 @@
+{
+  "id": "dev-02",
+  "order": 2,
+  "title": "Debugging Day",
+  "durationGameMinutes": 150,
+  "realSecondsPerGameMinute": 4,
+  "unlocksChapters": ["ch-debug"],
+  "introDialogue": "dev-02-intro",
+  "outroDialogue": "dev-02-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s02-fix-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s02-pr-001",
+      "arriveAt": 10
+    },
+    {
+      "caseId": "s02-fix-002",
+      "arriveAt": 20
+    },
+    {
+      "caseId": "s02-ctf-001",
+      "arriveAt": 30
+    },
+    {
+      "caseId": "s02-pr-002",
+      "arriveAt": 40
+    },
+    {
+      "caseId": "s02-build-001",
+      "arriveAt": 50
+    },
+    {
+      "caseId": "s02-fix-003",
+      "arriveAt": 60
+    },
+    {
+      "caseId": "s02-pr-003",
+      "arriveAt": 70
+    },
+    {
+      "caseId": "s02-build-002",
+      "arriveAt": 80
+    }
+  ],
+  "review": {
+    "count": 3,
+    "conceptIds": ["debugging", "python-basics"]
+  },
+  "pay": {
+    "base": 50,
+    "perCase": 14
+  },
+  "newspaper": {
+    "headline": "Report Card App Back to Normal",
+    "lead": "After fixes from the new developer, averages in the report card app are correct again. Today the team received more bug reports from users.",
+    "impact": {
+      "good": "Yesterday, Nusa Digital's new developer finished every task neatly. No bugs slipped through to users.",
+      "mixed": "Yesterday, most of the new developer's tasks were done, though some tests were still red. Dimas asked for more careful error reading.",
+      "bad": "Yesterday, several bugs still reached users. The developer team got many complaints and the task queue piled up."
+    },
+    "tip": {
+      "title": "Tip: print() Is a Flashlight",
+      "text": "Not sure why the result is wrong? Print the variable inside the loop. It's like switching on a flashlight in a dark room."
+    },
+    "classified": "WANTED: A rubber duck to talk to while debugging. Contact Dimas.",
+    "sources": ["Python Software Foundation: Errors and Exceptions"]
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "id": "s02-build-001",
+  "type": "coding",
+  "conceptIds": ["python-basics", "debugging"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Galih Prasetyo",
+      "team": "Tim Absensi"
+    },
+    "title": "Lomba kilat: cari angka terbesar",
+    "story": [
+      "Tulis fungsi terbesar(angka) yang mengembalikan angka paling besar di daftar, tanpa memakai max().",
+      "Bila daftarnya kosong, kembalikan None. Awas: ada tes tersembunyi dengan angka negatif!"
+    ],
+    "file": "absensi/terbesar.py",
+    "starter": "def terbesar(angka):\n    # Tulis kodemu di sini\n    return None\n",
+    "tests": [
+      {
+        "name": "angka acak",
+        "code": "assert terbesar([3, 9, 4]) == 9"
+      },
+      {
+        "name": "satu angka",
+        "code": "assert terbesar([7]) == 7"
+      },
+      {
+        "name": "semua negatif",
+        "code": "assert terbesar([-5, -2, -8]) == -2",
+        "hidden": true
+      },
+      {
+        "name": "daftar kosong",
+        "code": "assert terbesar([]) == None",
+        "hidden": true
+      }
+    ],
+    "solution": "def terbesar(angka):\n    if len(angka) == 0:\n        return None\n    juara = angka[0]\n    for a in angka:\n        if a > juara:\n            juara = a\n    return juara\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Simpan angka pertama sebagai juara sementara, lalu ganti juara setiap kali ada angka yang lebih besar. Memulai dari 0 akan salah untuk daftar yang semuanya negatif, dan daftar kosong perlu dicek dulu.",
+  "ruleRefs": ["r-dbg-3", "r-err-2", "r-py-4"],
+  "hints": [
+    "Simpan satu angka sebagai juara sementara, lalu bandingkan dengan angka lain satu per satu.",
+    "Kalau juara dimulai dari 0, apa hasilnya untuk [-5, -2, -8]? Lebih aman mulai dari angka[0].",
+    "Daftar kosong tidak punya angka[0]. Cek dulu dengan len(angka) == 0."
+  ]
+}

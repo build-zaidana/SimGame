@@ -1,0 +1,97 @@
+{
+  "id": "s03-pr-002",
+  "type": "pull-request",
+  "conceptIds": ["code-review", "python-basics"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "severity": 1,
+  "data": {
+    "author": {
+      "name": "Sinta Maharani",
+      "team": "Tim Absensi"
+    },
+    "title": "Hitung jumlah siswa yang hadir",
+    "description": [
+      {
+        "text": "Pesan commit: \"Tambah fungsi jumlah_hadir untuk rekap absensi harian\"",
+        "evidenceId": "desc-commit"
+      },
+      {
+        "text": "Ini PR pertama saya, maaf kalau kurang rapi.",
+        "evidenceId": "desc-nervous"
+      }
+    ],
+    "file": "absensi/rekap.py",
+    "diff": [
+      {
+        "code": "def jumlah_hadir(absen):",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "hadir = 0",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-init"
+      },
+      {
+        "code": "for nama, status in absen.items():",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-loop"
+      },
+      {
+        "code": "if status == \"hadir\":",
+        "indent": 2,
+        "kind": "add",
+        "evidenceId": "line-if"
+      },
+      {
+        "code": "hadir = hadir + 1",
+        "indent": 3,
+        "kind": "add",
+        "evidenceId": "line-count"
+      },
+      {
+        "code": "return hadir",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-return"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Tes otomatis: 5 dari 5 lulus",
+        "evidenceId": "check-tests"
+      },
+      {
+        "text": "Status rilis: belum dirilis, menunggu review",
+        "evidenceId": "check-release"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["check-tests", "desc-commit"]
+  },
+  "explanation": "Kodenya benar, pesan commit-nya jelas, dan semua tes lulus termasuk kelas kosong. Belum dirilis, jadi tidak ada yang perlu di-rollback: setujui saja.",
+  "ruleRefs": ["r-rev-1", "r-rel-1"],
+  "hints": [
+    "Coba bayangkan isi kamus absen dengan dua siswa. Berapa hasilnya?",
+    "Rollback hanya untuk perubahan yang sudah dirilis dan bermasalah. Apakah PR ini begitu?"
+  ],
+  "intel": {
+    "tests": [
+      {
+        "text": "Lulus: dua siswa hadir, satu sakit → 2",
+        "evidenceId": "intel-normal"
+      },
+      {
+        "text": "Lulus: kamus kosong (hari libur) → 0",
+        "evidenceId": "intel-empty"
+      }
+    ]
+  }
+}

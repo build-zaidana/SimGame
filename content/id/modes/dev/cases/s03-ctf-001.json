@@ -1,0 +1,41 @@
+{
+  "id": "s03-ctf-001",
+  "type": "ctf",
+  "conceptIds": ["release-rollback", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 1,
+  "data": {
+    "title": "Commit yang aneh",
+    "story": [
+      "Saat membaca riwayat commit, Kak Dimas menemukan satu pesan berisi deretan angka dan huruf a sampai f. Itu heksadesimal (hex): setiap dua karakter mewakili satu huruf.",
+      "Pakai konsol Python untuk mengubah hex itu kembali jadi teks, lalu ketik benderanya."
+    ],
+    "artifacts": [
+      {
+        "label": "Riwayat commit (git log)",
+        "kind": "text",
+        "content": "a3f91c2  Perbaiki KeyError ongkir untuk kota baru\n7be0d45  Kembalikan (rollback) rilis 2.3 karena error checkout\n19c4e88  latihan: 464c41477b524f4c4c4241434b5f44554c557d\nc02a7f1  Tambah label Tuntas di rapor"
+      },
+      {
+        "label": "Petunjuk Python",
+        "kind": "code",
+        "content": "bytes.fromhex(\"4869\").decode()   # \"Hi\""
+      }
+    ],
+    "scratch": "pesan = \"464c41477b524f4c4c4241434b5f44554c557d\"\nprint(pesan)\nprint(len(pesan))\n",
+    "flag": "FLAG{ROLLBACK_DULU}",
+    "solution": "pesan = \"464c41477b524f4c4c4241434b5f44554c557d\"\nprint(bytes.fromhex(pesan).decode())\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Hex hanyalah cara lain menulis byte: \"46\" adalah huruf F, \"4c\" huruf L, dan seterusnya, jadi bytes.fromhex() bisa membukanya tanpa kunci. Karena itu hex tidak pernah dipakai untuk menyembunyikan rahasia, dan pesan commit seharusnya menjelaskan perubahan dengan kata-kata jelas.",
+  "ruleRefs": ["r-rel-1", "r-dbg-1"],
+  "hints": [
+    "Cari pesan commit yang isinya tidak bisa dibaca seperti kalimat.",
+    "Salin deretan hex itu ke variabel pesan, lalu cetak bytes.fromhex(pesan).decode()."
+  ]
+}

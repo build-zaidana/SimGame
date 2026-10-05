@@ -1,0 +1,82 @@
+{
+  "id": "s02-pr-003",
+  "type": "pull-request",
+  "conceptIds": ["code-review", "debugging"],
+  "difficulty": 3,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Teguh Santoso",
+      "team": "Cashier Team"
+    },
+    "title": "Member price discount",
+    "description": [
+      {
+        "text": "Members get a discount based on the discount data on their card.",
+        "evidenceId": "desc"
+      },
+      {
+        "text": "Note: new members don't have any discount data yet.",
+        "evidenceId": "desc-new"
+      }
+    ],
+    "file": "cashier/member.py",
+    "diff": [
+      {
+        "code": "def final_price(price, member):",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "discount = member[\"discount\"]",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-key"
+      },
+      {
+        "code": "return price - price * discount // 100",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-return"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Automatic tests: 3 of 3 passed (all use existing members)",
+        "evidenceId": "check-tests"
+      },
+      {
+        "text": "Code style: tidy",
+        "evidenceId": "check-style"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-new", "line-key"],
+    "supporting": ["check-tests", "test-missing"]
+  },
+  "explanation": "New members have no \"discount\" key, so member[\"discount\"] will raise a KeyError and stop the cashier. Request changes to use member.get(\"discount\", 0) plus a test for new members.",
+  "ruleRefs": ["r-dbg-3", "r-rev-2"],
+  "hints": [
+    "All tests pass, but which kind of member do they test?",
+    "What happens when the member dictionary has no \"discount\" key?"
+  ],
+  "intel": {
+    "tests": [
+      {
+        "text": "PASS: final_price(10000, {\"discount\": 10}) returns 9000",
+        "evidenceId": "test-old"
+      },
+      {
+        "text": "No test yet for a member without a \"discount\" key",
+        "evidenceId": "test-missing"
+      }
+    ]
+  }
+}

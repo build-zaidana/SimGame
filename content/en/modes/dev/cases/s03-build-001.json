@@ -1,0 +1,59 @@
+{
+  "id": "s03-build-001",
+  "type": "coding",
+  "conceptIds": ["release-rollback", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Dimas Prakoso",
+      "team": "Release Team"
+    },
+    "title": "Speed challenge: which version is newer?",
+    "story": [
+      "Release versions are written like \"1.9\" and \"1.10\". Compared as text, \"1.9\" looks bigger. But 1.10 is newer!",
+      "Write a function is_newer(a, b) that returns True if version a is newer than b. Break it up with split(\".\") and turn each part into a number with int()."
+    ],
+    "file": "release/version.py",
+    "starter": "def is_newer(a, b):\n    # Write your code here\n    return False\n",
+    "tests": [
+      {
+        "name": "1.10 vs 1.9",
+        "code": "assert is_newer(\"1.10\", \"1.9\") == True"
+      },
+      {
+        "name": "2.0 vs 1.9",
+        "code": "assert is_newer(\"2.0\", \"1.9\") == True"
+      },
+      {
+        "name": "1.2 vs 1.10",
+        "code": "assert is_newer(\"1.2\", \"1.10\") == False"
+      },
+      {
+        "name": "same version",
+        "code": "assert is_newer(\"1.4\", \"1.4\") == False",
+        "hidden": true
+      },
+      {
+        "name": "three parts",
+        "code": "assert is_newer(\"1.10.1\", \"1.10.0\") == True",
+        "hidden": true
+      }
+    ],
+    "solution": "def is_newer(a, b):\n    nums_a = []\n    for part in a.split(\".\"):\n        nums_a.append(int(part))\n    nums_b = []\n    for part in b.split(\".\"):\n        nums_b.append(int(part))\n    return nums_a > nums_b\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Text is compared character by character, so \"1.9\" > \"1.10\" because \"9\" > \"1\". Once split and turned into lists of numbers, [1, 10] > [1, 9] gives the right answer.",
+  "ruleRefs": ["r-py-2", "r-rel-1"],
+  "hints": [
+    "Try it in the console: what does \"1.10\".split(\".\") give?",
+    "Turn each part into a number with int() and keep them in a new list.",
+    "Two lists of numbers can be compared directly: [1, 10] > [1, 9] is True."
+  ]
+}

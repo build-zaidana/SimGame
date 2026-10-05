@@ -1,0 +1,113 @@
+{
+  "id": "s04-pr-005",
+  "type": "pull-request",
+  "conceptIds": ["release-rollback", "testing"],
+  "difficulty": 3,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Rina Kartika",
+      "team": "Tim Aplikasi Belajar"
+    },
+    "title": "Nama tampilan: rapikan spasi, kosong jadi \"Tamu\"",
+    "description": [
+      {
+        "text": "Sudah dirilis bertahap ke 10% pengguna sejak 10.30. Minta persetujuan untuk lanjut ke semua pengguna.",
+        "evidenceId": "desc-staged"
+      },
+      {
+        "text": "Ada yang panik karena dasbor error berwarna merah sejak pagi.",
+        "evidenceId": "desc-panic"
+      }
+    ],
+    "file": "belajar/profil.py",
+    "diff": [
+      {
+        "code": "def nama_tampilan(nama):",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "nama = nama.strip()",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-strip"
+      },
+      {
+        "code": "if nama == \"\":",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-if"
+      },
+      {
+        "code": "return \"Tamu\"",
+        "indent": 2,
+        "kind": "add",
+        "evidenceId": "line-guest"
+      },
+      {
+        "code": "return nama",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-return"
+      },
+      {
+        "code": "# tes kasus tepi",
+        "indent": 0,
+        "kind": "add"
+      },
+      {
+        "code": "assert nama_tampilan(\"Rina\") == \"Rina\"",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "test-normal"
+      },
+      {
+        "code": "assert nama_tampilan(\"  Rina \") == \"Rina\"",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "test-spaces"
+      },
+      {
+        "code": "assert nama_tampilan(\"\") == \"Tamu\"",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "test-empty"
+      },
+      {
+        "code": "assert nama_tampilan(\"   \") == \"Tamu\"",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "test-blank"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Error halaman profil: 0,8% sebelum rilis 10.30 → 0,8% sesudah",
+        "evidenceId": "check-errors"
+      },
+      {
+        "text": "Dasbor merah sejak 07.00 karena server foto, bukan halaman profil",
+        "evidenceId": "check-dashboard"
+      },
+      {
+        "text": "Tes otomatis: 4 dari 4 lulus",
+        "evidenceId": "check-tests"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["check-errors", "check-dashboard", "test-empty", "test-blank"]
+  },
+  "explanation": "Angka error sama sebelum dan sesudah 10.30, dan dasbor merah sudah muncul sejak 07.00 karena hal lain. Kodenya benar dengan tes kasus tepi yang lengkap, jadi rilis boleh dilanjutkan.",
+  "ruleRefs": ["r-rel-3", "r-rev-1", "r-tst-1"],
+  "hints": [
+    "Jangan panik dulu. Bandingkan angka error sebelum dan sesudah rilis.",
+    "Dasbor merah sejak jam berapa, dan rilisnya jam berapa?",
+    "Tesnya mencakup teks kosong dan teks berisi spasi saja. Masih ada yang kurang?"
+  ]
+}

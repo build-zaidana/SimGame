@@ -1,0 +1,53 @@
+{
+  "items": [
+    {
+      "id": "rv-dbg-1",
+      "type": "mcq",
+      "conceptId": "debugging",
+      "difficulty": 1,
+      "prompt": "Which numbers does range(4) produce?",
+      "choices": ["0, 1, 2, 3", "1, 2, 3, 4", "0, 1, 2, 3, 4"],
+      "answerIndex": 0,
+      "explanation": "range(4) starts at 0 and stops before 4, so it gives 0, 1, 2, 3."
+    },
+    {
+      "id": "rv-dbg-2",
+      "type": "mcq",
+      "conceptId": "debugging",
+      "difficulty": 1,
+      "prompt": "With score = {\"Ani\": 5}, what error does score[\"Budi\"] cause?",
+      "choices": ["IndexError", "TypeError", "KeyError"],
+      "answerIndex": 2,
+      "explanation": "The key \"Budi\" is not in the dictionary, so Python raises a KeyError. score.get(\"Budi\", 0) is safer."
+    },
+    {
+      "id": "rv-dbg-3",
+      "type": "mcq",
+      "conceptId": "debugging",
+      "difficulty": 2,
+      "prompt": "The total from your loop is wrong. What is the most helpful first step?",
+      "choices": [
+        "Rewrite the whole function",
+        "Print total on every round with print()",
+        "Delete the failing test"
+      ],
+      "answerIndex": 1,
+      "explanation": "print() shows the variable at every step, so you can see on which round the result starts going wrong."
+    },
+    {
+      "id": "rv-dbg-4",
+      "type": "order-steps",
+      "conceptId": "debugging",
+      "difficulty": 2,
+      "prompt": "Put the bug-hunting steps in order.",
+      "steps": [
+        "Reproduce the bug with a small example",
+        "Print the variables with print()",
+        "Fix one thing",
+        "Run the tests again",
+        "Remove the test prints"
+      ],
+      "explanation": "A bug you can repeat is easier to see, and test prints must be removed before the code is sent."
+    }
+  ]
+}

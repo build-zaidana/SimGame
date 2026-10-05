@@ -1,0 +1,54 @@
+{
+  "id": "s03-fix-002",
+  "type": "coding",
+  "conceptIds": ["debugging", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Maya Lestari",
+      "team": "Tim Aplikasi Belajar"
+    },
+    "title": "Papan juara malah menampilkan skor terendah",
+    "story": [
+      "Fungsi tiga_teratas(skor) harus mengembalikan tiga skor TERTINGGI, dari yang paling besar.",
+      "Sekarang yang muncul malah tiga skor terendah. Coba print() hasil sorted() untuk melihat urutannya."
+    ],
+    "file": "belajar/juara.py",
+    "starter": "def tiga_teratas(skor):\n    urut = sorted(skor)\n    return urut[:3]\n",
+    "tests": [
+      {
+        "name": "lima skor",
+        "code": "assert tiga_teratas([70, 95, 80, 60, 88]) == [95, 88, 80]"
+      },
+      {
+        "name": "skor kembar",
+        "code": "assert tiga_teratas([50, 90, 90, 40]) == [90, 90, 50]"
+      },
+      {
+        "name": "kurang dari tiga",
+        "code": "assert tiga_teratas([65]) == [65]",
+        "hidden": true
+      },
+      {
+        "name": "daftar kosong",
+        "code": "assert tiga_teratas([]) == []",
+        "hidden": true
+      }
+    ],
+    "solution": "def tiga_teratas(skor):\n    urut = sorted(skor, reverse=True)\n    return urut[:3]\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "sorted() mengurutkan dari kecil ke besar, jadi tiga isi pertama adalah skor terendah. Tambahkan reverse=True agar urutannya dari besar ke kecil, lalu ambil tiga pertama.",
+  "ruleRefs": ["r-dbg-1", "r-err-3"],
+  "hints": [
+    "Tambahkan print(urut) sebelum return. Urutannya dari kecil atau dari besar?",
+    "sorted() punya pilihan reverse=True untuk membalik urutan."
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "id": "s03-build-002",
+  "type": "coding",
+  "conceptIds": ["release-rollback", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Wulan Sari",
+      "team": "Tim Rilis"
+    },
+    "title": "Lomba kilat: hitung rilis yang sukses",
+    "story": [
+      "Riwayat rilis disimpan sebagai daftar kamus, misalnya {\"versi\": \"1.4\", \"status\": \"sukses\"}. Status lainnya \"gagal\" dan \"rollback\".",
+      "Tulis fungsi hitung_sukses(riwayat) yang menghitung rilis berstatus sukses. Hati-hati: ada tes tersembunyi, dan status kadang ditulis dengan huruf kapital!"
+    ],
+    "file": "rilis/riwayat.py",
+    "starter": "def hitung_sukses(riwayat):\n    # Tulis kodemu di sini\n    return 0\n",
+    "tests": [
+      {
+        "name": "tiga rilis",
+        "code": "assert hitung_sukses([{\"versi\": \"1.1\", \"status\": \"sukses\"}, {\"versi\": \"1.2\", \"status\": \"rollback\"}, {\"versi\": \"1.3\", \"status\": \"sukses\"}]) == 2"
+      },
+      {
+        "name": "semua gagal",
+        "code": "assert hitung_sukses([{\"versi\": \"2.0\", \"status\": \"gagal\"}]) == 0"
+      },
+      {
+        "name": "riwayat kosong",
+        "code": "assert hitung_sukses([]) == 0",
+        "hidden": true
+      },
+      {
+        "name": "huruf kapital",
+        "code": "assert hitung_sukses([{\"versi\": \"2.1\", \"status\": \"Sukses\"}, {\"versi\": \"2.2\", \"status\": \"SUKSES\"}]) == 2",
+        "hidden": true
+      }
+    ],
+    "solution": "def hitung_sukses(riwayat):\n    jumlah = 0\n    for rilis in riwayat:\n        if rilis[\"status\"].lower() == \"sukses\":\n            jumlah = jumlah + 1\n    return jumlah\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Periksa setiap kamus dengan for, ambil nilai rilis[\"status\"], lalu tambah hitungan bila isinya \"sukses\". Memakai .lower() dulu membuat \"Sukses\" dan \"SUKSES\" ikut terhitung.",
+  "ruleRefs": ["r-rel-3", "r-err-2"],
+  "hints": [
+    "Mulai dengan jumlah = 0, lalu periksa setiap rilis dengan for.",
+    "Isi status satu rilis bisa diambil dengan rilis[\"status\"].",
+    "Huruf kapital? Ubah dulu statusnya dengan .lower() sebelum dibandingkan."
+  ]
+}

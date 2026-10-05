@@ -1,0 +1,41 @@
+{
+  "id": "s02-ctf-001",
+  "type": "ctf",
+  "conceptIds": ["debugging", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "title": "print() traces in the log",
+    "story": [
+      "A developer forgot to remove a test print(), and its output ended up in the cashier app's log.",
+      "It is encoded with Base64, a way of writing data as plain letters and numbers. Base64 is not protection: anyone can open it. Decode it and find the flag."
+    ],
+    "artifacts": [
+      {
+        "label": "Cashier app log excerpt",
+        "kind": "text",
+        "content": "08.14 INFO  cashier app started\n08.15 DEBUG check_connection ok\n08.15 DEBUG practice_code=RkxBR3tSRU1PVkVfREVCVUdfUFJJTlRTfQ==\n08.16 INFO  first transaction saved"
+      },
+      {
+        "label": "Python hint",
+        "kind": "code",
+        "content": "import binascii\nbinascii.a2b_base64(b\"SGVsbG8=\")   # b'Hello'\nb'Hello'.decode()                 # \"Hello\""
+      }
+    ],
+    "scratch": "import binascii\ndata = b\"RkxBR3tSRU1PVkVfREVCVUdfUFJJTlRTfQ==\"\nprint(data)\n",
+    "flag": "FLAG{REMOVE_DEBUG_PRINTS}",
+    "solution": "import binascii\ndata = b\"RkxBR3tSRU1PVkVfREVCVUdfUFJJTlRTfQ==\"\nprint(binascii.a2b_base64(data).decode())\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "binascii.a2b_base64() turns Base64 text back into the original data, and .decode() makes it readable text. Base64 is not protection, so test prints that contain important data must be removed before the code is sent.",
+  "ruleRefs": ["r-dbg-1", "r-err-3"],
+  "hints": [
+    "Look for the log line that looks like random letters ending in =.",
+    "Put that text into binascii.a2b_base64(b\"...\"), then call .decode() on the result."
+  ]
+}

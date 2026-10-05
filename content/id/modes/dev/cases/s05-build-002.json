@@ -1,0 +1,54 @@
+{
+  "id": "s05-build-002",
+  "type": "coding",
+  "conceptIds": ["secure-coding", "python-basics"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Fajar Nugroho",
+      "team": "Tim Akun"
+    },
+    "title": "Lomba kilat: sensor kata sandi sebelum dicatat",
+    "story": [
+      "Tulis fungsi sensor_data(data) yang menerima kamus (dict) dan mengembalikan kamus BARU. Bila ada kunci \"password\", nilainya diganti \"***\". Kunci lain disalin apa adanya.",
+      "Tes tersembunyi memastikan kamus aslinya tidak ikut berubah!"
+    ],
+    "file": "akun/catat.py",
+    "starter": "def sensor_data(data):\n    # Tulis kodemu di sini\n    return data\n",
+    "tests": [
+      {
+        "name": "ada password",
+        "code": "assert sensor_data({\"user\": \"rani\", \"password\": \"rahasia\"}) == {\"user\": \"rani\", \"password\": \"***\"}"
+      },
+      {
+        "name": "tanpa password",
+        "code": "assert sensor_data({\"user\": \"budi\"}) == {\"user\": \"budi\"}"
+      },
+      {
+        "name": "kamus asli utuh",
+        "code": "d = {\"password\": \"rahasia\"}; s = sensor_data(d); assert d[\"password\"] == \"rahasia\" and s[\"password\"] == \"***\"",
+        "hidden": true
+      },
+      {
+        "name": "kamus kosong",
+        "code": "assert sensor_data({}) == {}",
+        "hidden": true
+      }
+    ],
+    "solution": "def sensor_data(data):\n    hasil = {}\n    for kunci in data:\n        if kunci == \"password\":\n            hasil[kunci] = \"***\"\n        else:\n            hasil[kunci] = data[kunci]\n    return hasil\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Buat kamus baru, salin setiap kunci, dan ganti nilai \"password\" dengan \"***\". Dengan begitu yang masuk log aman, sementara data aslinya tetap bisa dipakai untuk login.",
+  "ruleRefs": ["r-sec-2", "r-tst-1"],
+  "hints": [
+    "Mulai dengan hasil = {}, lalu ulangi setiap kunci dengan for kunci in data.",
+    "Di dalam for: bila kunci == \"password\", isi \"***\". Selain itu salin data[kunci]."
+  ]
+}

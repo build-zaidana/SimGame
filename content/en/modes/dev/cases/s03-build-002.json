@@ -1,0 +1,55 @@
+{
+  "id": "s03-build-002",
+  "type": "coding",
+  "conceptIds": ["release-rollback", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Wulan Sari",
+      "team": "Release Team"
+    },
+    "title": "Speed challenge: count successful releases",
+    "story": [
+      "The release history is a list of dictionaries, for example {\"version\": \"1.4\", \"status\": \"success\"}. Other statuses are \"failed\" and \"rollback\".",
+      "Write a function count_success(history) that counts releases with status success. Careful: there are hidden tests, and the status is sometimes written in capitals!"
+    ],
+    "file": "release/history.py",
+    "starter": "def count_success(history):\n    # Write your code here\n    return 0\n",
+    "tests": [
+      {
+        "name": "three releases",
+        "code": "assert count_success([{\"version\": \"1.1\", \"status\": \"success\"}, {\"version\": \"1.2\", \"status\": \"rollback\"}, {\"version\": \"1.3\", \"status\": \"success\"}]) == 2"
+      },
+      {
+        "name": "all failed",
+        "code": "assert count_success([{\"version\": \"2.0\", \"status\": \"failed\"}]) == 0"
+      },
+      {
+        "name": "empty history",
+        "code": "assert count_success([]) == 0",
+        "hidden": true
+      },
+      {
+        "name": "capital letters",
+        "code": "assert count_success([{\"version\": \"2.1\", \"status\": \"Success\"}, {\"version\": \"2.2\", \"status\": \"SUCCESS\"}]) == 2",
+        "hidden": true
+      }
+    ],
+    "solution": "def count_success(history):\n    count = 0\n    for release in history:\n        if release[\"status\"].lower() == \"success\":\n            count = count + 1\n    return count\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Check each dictionary with for, read release[\"status\"], and add to the count when it says \"success\". Using .lower() first makes \"Success\" and \"SUCCESS\" count too.",
+  "ruleRefs": ["r-rel-3", "r-err-2"],
+  "hints": [
+    "Start with count = 0, then check every release with for.",
+    "You can read one release's status with release[\"status\"].",
+    "Capital letters? Turn the status lowercase with .lower() before comparing."
+  ]
+}

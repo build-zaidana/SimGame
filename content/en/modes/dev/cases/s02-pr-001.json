@@ -1,0 +1,85 @@
+{
+  "id": "s02-pr-001",
+  "type": "pull-request",
+  "conceptIds": ["code-review", "debugging"],
+  "difficulty": 2,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "severity": 1,
+  "data": {
+    "author": {
+      "name": "Fajar Nugroho",
+      "team": "School Report Team"
+    },
+    "title": "Show the latest exam score",
+    "description": [
+      {
+        "text": "Report cards now show the student's latest exam score.",
+        "evidenceId": "desc"
+      },
+      {
+        "text": "If a student has no scores yet, the function returns None so nothing crashes.",
+        "evidenceId": "desc-empty"
+      }
+    ],
+    "file": "report/latest.py",
+    "diff": [
+      {
+        "code": "def latest_score(scores):",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "if len(scores) == 0:",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-guard"
+      },
+      {
+        "code": "return None",
+        "indent": 2,
+        "kind": "add",
+        "evidenceId": "line-none"
+      },
+      {
+        "code": "return scores[len(scores) - 1]",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-return"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Automatic tests: 4 of 4 passed",
+        "evidenceId": "check-tests"
+      },
+      {
+        "text": "Another reviewer's comment: \"Why the - 1? Isn't that one short?\"",
+        "evidenceId": "check-question"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["line-return", "line-guard", "test-empty"]
+  },
+  "explanation": "The last index of a list really is len(scores) - 1 because indexes start at 0, and the empty list is already guarded with an if. The code is correct and the tests pass, so approve it.",
+  "ruleRefs": ["r-rev-1", "r-dbg-2"],
+  "hints": [
+    "List indexes start at 0. For a list of 3 scores, what is the last index?",
+    "The empty list is handled and every test passes. Is there still a reason to hold this PR?"
+  ],
+  "intel": {
+    "tests": [
+      {
+        "text": "PASS: latest_score([70, 85, 90]) returns 90",
+        "evidenceId": "test-last"
+      },
+      {
+        "text": "PASS: latest_score([]) returns None",
+        "evidenceId": "test-empty"
+      }
+    ]
+  }
+}

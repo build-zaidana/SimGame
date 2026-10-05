@@ -1,0 +1,59 @@
+{
+  "id": "s03-build-001",
+  "type": "coding",
+  "conceptIds": ["release-rollback", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Dimas Prakoso",
+      "team": "Tim Rilis"
+    },
+    "title": "Lomba kilat: versi mana yang lebih baru?",
+    "story": [
+      "Nomor versi rilis ditulis seperti \"1.9\" dan \"1.10\". Kalau dibandingkan sebagai teks, \"1.9\" dianggap lebih besar. Padahal 1.10 lebih baru!",
+      "Tulis fungsi lebih_baru(a, b) yang mengembalikan True bila versi a lebih baru daripada b. Pecah dengan split(\".\") lalu ubah tiap bagian jadi angka dengan int()."
+    ],
+    "file": "rilis/versi.py",
+    "starter": "def lebih_baru(a, b):\n    # Tulis kodemu di sini\n    return False\n",
+    "tests": [
+      {
+        "name": "1.10 lawan 1.9",
+        "code": "assert lebih_baru(\"1.10\", \"1.9\") == True"
+      },
+      {
+        "name": "2.0 lawan 1.9",
+        "code": "assert lebih_baru(\"2.0\", \"1.9\") == True"
+      },
+      {
+        "name": "1.2 lawan 1.10",
+        "code": "assert lebih_baru(\"1.2\", \"1.10\") == False"
+      },
+      {
+        "name": "versi sama",
+        "code": "assert lebih_baru(\"1.4\", \"1.4\") == False",
+        "hidden": true
+      },
+      {
+        "name": "tiga bagian",
+        "code": "assert lebih_baru(\"1.10.1\", \"1.10.0\") == True",
+        "hidden": true
+      }
+    ],
+    "solution": "def lebih_baru(a, b):\n    angka_a = []\n    for bagian in a.split(\".\"):\n        angka_a.append(int(bagian))\n    angka_b = []\n    for bagian in b.split(\".\"):\n        angka_b.append(int(bagian))\n    return angka_a > angka_b\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Teks dibandingkan huruf per huruf, jadi \"1.9\" > \"1.10\" karena \"9\" > \"1\". Setelah dipecah dan diubah jadi daftar angka, [1, 10] > [1, 9] memberi jawaban yang benar.",
+  "ruleRefs": ["r-py-2", "r-rel-1"],
+  "hints": [
+    "Coba di konsol: \"1.10\".split(\".\") hasilnya apa?",
+    "Ubah tiap bagian jadi angka dengan int(), simpan di daftar baru.",
+    "Dua daftar angka bisa langsung dibandingkan: [1, 10] > [1, 9] bernilai True."
+  ]
+}

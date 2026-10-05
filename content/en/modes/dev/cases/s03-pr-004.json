@@ -1,0 +1,81 @@
+{
+  "id": "s03-pr-004",
+  "type": "pull-request",
+  "conceptIds": ["release-rollback", "code-review"],
+  "difficulty": 3,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Bayu Pratama",
+      "team": "School Report Team"
+    },
+    "title": "Add a Passed label to report cards",
+    "description": [
+      {
+        "text": "The school's passing mark is 75: a score of 75 and above counts as passed.",
+        "evidenceId": "desc-rule"
+      },
+      {
+        "text": "Released to production at 13:00. Someone reported slow report cards, is it my release?",
+        "evidenceId": "desc-worry"
+      }
+    ],
+    "file": "report/label.py",
+    "diff": [
+      {
+        "code": "def score_label(score):",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "if score >= 75:",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-if"
+      },
+      {
+        "code": "return \"Passed\"",
+        "indent": 2,
+        "kind": "add",
+        "evidenceId": "line-pass"
+      },
+      {
+        "code": "return \"Not yet passed\"",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-fail"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Report page errors: 1% until 12:35, then up to 9% from 12:40 (before the 13:00 release)",
+        "evidenceId": "check-before"
+      },
+      {
+        "text": "Errors after the 13:00 release: still 9%, no increase",
+        "evidenceId": "check-after"
+      },
+      {
+        "text": "Infrastructure Team note: the database server has been slow since 12:35, being handled",
+        "evidenceId": "check-infra"
+      },
+      {
+        "text": "Automatic tests: 4 of 4 passed, including a score of exactly 75",
+        "evidenceId": "check-tests"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["check-before", "check-after", "check-infra", "line-if"]
+  },
+  "explanation": "Errors rose at 12:40, before the 13:00 release, and didn't grow afterwards; the cause is the database server. The code is also correct (>= 75), so a rollback would only undo good work.",
+  "ruleRefs": ["r-rel-3", "r-rev-1"],
+  "hints": [
+    "When exactly did the errors start rising? Compare that with the release time.",
+    "If the errors were there before the release and didn't grow, is this release the cause?"
+  ]
+}

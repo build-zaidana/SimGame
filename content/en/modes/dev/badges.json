@@ -44,6 +44,40 @@
         "type": "shift-stars",
         "stars": 3
       }
+    },
+    {
+      "id": "perkakas-developer",
+      "title": "Developer Toolkit",
+      "description": "Own both the Test Runner and the Linter.",
+      "icon": "🧰",
+      "tier": "silver",
+      "rule": {
+        "type": "tools-owned",
+        "count": 2
+      }
+    },
+    {
+      "id": "anti-bug",
+      "title": "Anti Bug",
+      "description": "A shift without approving faulty code, with at least ★★.",
+      "icon": "🐛",
+      "tier": "silver",
+      "rule": {
+        "type": "no-threat-allowed",
+        "minCases": 8,
+        "minStars": 2
+      }
+    },
+    {
+      "id": "penjaga-repositori",
+      "title": "Repository Guardian",
+      "description": "Finished Shift 5 and stopped Kelabu's mysterious PR.",
+      "icon": "🛡",
+      "tier": "gold",
+      "rule": {
+        "type": "shift-complete",
+        "shiftId": "dev-05"
+      }
     }
   ]
 }

@@ -1,0 +1,63 @@
+{
+  "id": "s05-build-001",
+  "type": "coding",
+  "conceptIds": ["secure-coding", "testing"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Rina Wulandari",
+      "team": "Online Shop Team"
+    },
+    "title": "Speed round: a safe item quantity",
+    "story": [
+      "Write a function safe_qty(qty). If qty is less than 1, return 1. If it is more than 100, return 100. Otherwise, return qty as it is.",
+      "There are hidden tests for negative numbers and very large numbers!"
+    ],
+    "file": "shop/qty.py",
+    "starter": "def safe_qty(qty):\n    # Write your code here\n    return 0\n",
+    "tests": [
+      {
+        "name": "normal quantity",
+        "code": "assert safe_qty(5) == 5"
+      },
+      {
+        "name": "zero",
+        "code": "assert safe_qty(0) == 1"
+      },
+      {
+        "name": "too large",
+        "code": "assert safe_qty(250) == 100"
+      },
+      {
+        "name": "negative",
+        "code": "assert safe_qty(-7) == 1",
+        "hidden": true
+      },
+      {
+        "name": "exactly 100",
+        "code": "assert safe_qty(100) == 100",
+        "hidden": true
+      },
+      {
+        "name": "exactly 1",
+        "code": "assert safe_qty(1) == 1",
+        "hidden": true
+      }
+    ],
+    "solution": "def safe_qty(qty):\n    if qty < 1:\n        return 1\n    if qty > 100:\n        return 100\n    return qty\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Two ifs guard the lower and upper limits, and everything else is returned as it is. Limiting a range like this (clamping) stops buyers from typing negative or huge quantities.",
+  "ruleRefs": ["r-sec-1", "r-tst-1"],
+  "hints": [
+    "Start with the lower limit: what is returned when qty < 1?",
+    "Add a second if for qty > 100, then return qty at the end."
+  ]
+}

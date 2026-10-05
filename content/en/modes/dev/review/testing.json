@@ -1,0 +1,52 @@
+{
+  "items": [
+    {
+      "id": "rv-tst-1",
+      "type": "mcq",
+      "conceptId": "testing",
+      "difficulty": 1,
+      "prompt": "Which test does NOT test anything?",
+      "choices": ["assert total([]) == 0", "assert result == result", "assert total([5]) == 5"],
+      "answerIndex": 1,
+      "explanation": "Comparing a value with itself always passes, even if the function is wrong."
+    },
+    {
+      "id": "rv-tst-2",
+      "type": "mcq",
+      "conceptId": "testing",
+      "difficulty": 1,
+      "prompt": "A new average function was only tested with [10, 20]. Which extra test matters most?",
+      "choices": ["[30, 40]", "An empty list []", "[10, 20] once more"],
+      "answerIndex": 1,
+      "explanation": "An empty list is an edge case that often crashes with a division by zero."
+    },
+    {
+      "id": "rv-tst-3",
+      "type": "mcq",
+      "conceptId": "testing",
+      "difficulty": 2,
+      "prompt": "After fixing a bug, why does a developer add a new test for that bug?",
+      "choices": [
+        "So the number of tests looks bigger",
+        "So the team finds out quickly if the same bug comes back",
+        "So the code runs faster"
+      ],
+      "answerIndex": 1,
+      "explanation": "A regression test fails if the old bug returns, so the team knows right away."
+    },
+    {
+      "id": "rv-tst-4",
+      "type": "order-steps",
+      "conceptId": "testing",
+      "difficulty": 2,
+      "prompt": "Put the steps for fixing a bug with the help of tests in order.",
+      "steps": [
+        "Write a small test that reproduces the bug (it fails)",
+        "Fix the code",
+        "Run all tests until they pass",
+        "Send a pull request together with the new test"
+      ],
+      "explanation": "A failing test first proves the bug is real, and the same test proves the fix works."
+    }
+  ]
+}

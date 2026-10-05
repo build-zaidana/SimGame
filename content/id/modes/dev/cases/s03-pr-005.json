@@ -1,0 +1,94 @@
+{
+  "id": "s03-pr-005",
+  "type": "pull-request",
+  "conceptIds": ["release-rollback", "debugging", "code-review"],
+  "difficulty": 3,
+  "verdict": "fault",
+  "correctDecision": "rollback",
+  "acceptableDecisions": {
+    "revise": 0.3
+  },
+  "severity": 3,
+  "data": {
+    "author": {
+      "name": "Rudi Hartono",
+      "team": "Tim Toko Online"
+    },
+    "title": "Ongkir dibaca dari tabel tarif kota",
+    "description": [
+      {
+        "text": "Tarif ongkir sekarang diambil dari tabel kota. Kota lain belum ada di tabel, nanti saya tambahkan.",
+        "evidenceId": "desc-later"
+      },
+      {
+        "text": "Dirilis pukul 15.30 langsung ke semua pengguna.",
+        "evidenceId": "desc-released"
+      }
+    ],
+    "file": "toko/ongkir.py",
+    "diff": [
+      {
+        "code": "TARIF = {\"Jakarta\": 9000, \"Bandung\": 12000}",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-table"
+      },
+      {
+        "code": "def ongkir(kota):",
+        "indent": 0,
+        "kind": "ctx",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "return 20000",
+        "indent": 1,
+        "kind": "del",
+        "evidenceId": "line-old"
+      },
+      {
+        "code": "return TARIF[kota]",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-lookup"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Pesanan gagal: 0,5% pukul 15.00 → 0,4% pukul 15.25 → 22% pukul 15.40",
+        "evidenceId": "check-orders"
+      },
+      {
+        "text": "Log produksi: KeyError: 'Kupang', KeyError: 'Medan' (terus bertambah)",
+        "evidenceId": "check-log"
+      },
+      {
+        "text": "Tes otomatis: 2 dari 2 lulus",
+        "evidenceId": "check-tests"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["check-orders"],
+    "supporting": ["check-log", "line-lookup", "desc-later", "intel-lint-get", "intel-cities"]
+  },
+  "explanation": "Pesanan gagal melonjak dari 0,4% ke 22% setelah rilis 15.30, karena TARIF[kota] melempar KeyError untuk kota yang belum ada di tabel. Rollback dulu supaya pembeli bisa belanja lagi, lalu perbaiki dengan TARIF.get(kota, 20000) dan rilis bertahap.",
+  "ruleRefs": ["r-rel-2", "r-rel-4", "r-dbg-3"],
+  "hints": [
+    "Lihat angka pesanan gagal sebelum dan sesudah pukul 15.30.",
+    "Pembeli dari Kupang sedang tidak bisa belanja sekarang. Menunggu revisi, atau kembali ke versi sehat dulu?"
+  ],
+  "intel": {
+    "tests": [
+      {
+        "text": "Tes hanya memakai kota Jakarta dan Bandung",
+        "evidenceId": "intel-cities"
+      }
+    ],
+    "lint": [
+      {
+        "text": "Peringatan: TARIF[kota] bisa KeyError; pertimbangkan TARIF.get(kota, 20000)",
+        "evidenceId": "intel-lint-get"
+      }
+    ]
+  }
+}

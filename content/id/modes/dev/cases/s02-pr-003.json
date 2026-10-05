@@ -1,0 +1,82 @@
+{
+  "id": "s02-pr-003",
+  "type": "pull-request",
+  "conceptIds": ["code-review", "debugging"],
+  "difficulty": 3,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Teguh Santoso",
+      "team": "Tim Kasir"
+    },
+    "title": "Potong harga untuk member",
+    "description": [
+      {
+        "text": "Member mendapat potongan sesuai data diskon di kartunya.",
+        "evidenceId": "desc"
+      },
+      {
+        "text": "Catatan: member baru belum punya data diskon sama sekali.",
+        "evidenceId": "desc-new"
+      }
+    ],
+    "file": "kasir/member.py",
+    "diff": [
+      {
+        "code": "def harga_akhir(harga, member):",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "diskon = member[\"diskon\"]",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-key"
+      },
+      {
+        "code": "return harga - harga * diskon // 100",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-return"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Tes otomatis: 3 dari 3 lulus (semua memakai member lama)",
+        "evidenceId": "check-tests"
+      },
+      {
+        "text": "Gaya penulisan: rapi",
+        "evidenceId": "check-style"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-new", "line-key"],
+    "supporting": ["check-tests", "test-missing"]
+  },
+  "explanation": "Member baru tidak punya kunci \"diskon\", jadi member[\"diskon\"] akan memicu KeyError dan kasir berhenti. Minta revisi memakai member.get(\"diskon\", 0) serta tes untuk member baru.",
+  "ruleRefs": ["r-dbg-3", "r-rev-2"],
+  "hints": [
+    "Tes lulus semua, tapi member jenis apa yang diuji?",
+    "Apa yang terjadi bila kamus member tidak punya kunci \"diskon\"?"
+  ],
+  "intel": {
+    "tests": [
+      {
+        "text": "LULUS: harga_akhir(10000, {\"diskon\": 10}) hasilnya 9000",
+        "evidenceId": "test-old"
+      },
+      {
+        "text": "Belum ada tes untuk member tanpa kunci \"diskon\"",
+        "evidenceId": "test-missing"
+      }
+    ]
+  }
+}
