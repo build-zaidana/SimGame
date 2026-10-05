@@ -2,7 +2,8 @@
  * Efek suara sederhana lewat WebAudio (tanpa file audio). Hanya berbunyi bila pengaturan
  * "Efek suara" menyala; AudioContext dibuat saat pertama dipakai (setelah interaksi pemain).
  */
-type Sfx = 'correct' | 'wrong' | 'stamp' | 'arrive' | 'bell';
+export type Sfx =
+  'correct' | 'wrong' | 'stamp' | 'arrive' | 'bell' | 'blip' | 'tick' | 'coin' | 'star' | 'combo';
 
 /** [frekuensi Hz, durasi detik, bentuk gelombang]. */
 const NOTES: Record<Exclude<Sfx, 'stamp'>, [number, number, OscillatorType][]> = {
@@ -23,7 +24,29 @@ const NOTES: Record<Exclude<Sfx, 'stamp'>, [number, number, OscillatorType][]> =
     [659, 0.18, 'triangle'],
     [523, 0.4, 'triangle'],
   ],
+  /** Suara "bicara" per beberapa huruf saat teks dialog mengetik. */
+  blip: [[440, 0.03, 'square']],
+  /** Menandai bukti. */
+  tick: [[1760, 0.025, 'square']],
+  coin: [
+    [988, 0.05, 'square'],
+    [1319, 0.12, 'square'],
+  ],
+  star: [
+    [659, 0.06, 'triangle'],
+    [988, 0.06, 'triangle'],
+    [1319, 0.16, 'triangle'],
+  ],
+  /** Keputusan tepat beruntun: arpeggio naik. */
+  combo: [
+    [784, 0.05, 'square'],
+    [988, 0.05, 'square'],
+    [1175, 0.05, 'square'],
+    [1568, 0.12, 'square'],
+  ],
 };
+/** Volume per efek; yang sering berbunyi dibuat lebih pelan. */
+const GAIN: Partial<Record<Sfx, number>> = { blip: 0.02, tick: 0.03 };
 
 let ctx: AudioContext | null = null;
 
@@ -52,7 +75,8 @@ function stamp(ac: AudioContext, t: number) {
   noise.start(t);
 }
 
-export function playSfx(kind: Sfx, delaySec = 0) {
+/** `pitch`: pengali frekuensi (mis. 1.06 ≈ naik satu semitone). */
+export function playSfx(kind: Sfx, delaySec = 0, pitch = 1) {
   try {
     ctx ??= new AudioContext();
     let t = ctx.currentTime + delaySec;
@@ -64,8 +88,8 @@ export function playSfx(kind: Sfx, delaySec = 0) {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       osc.type = type;
-      osc.frequency.value = freq;
-      gain.gain.setValueAtTime(0.05, t);
+      osc.frequency.value = freq * pitch;
+      gain.gain.setValueAtTime(GAIN[kind] ?? 0.05, t);
       gain.gain.exponentialRampToValueAtTime(0.0001, t + dur);
       osc.connect(gain).connect(ctx.destination);
       osc.start(t);

@@ -30,7 +30,7 @@ export function BriefingDialog({ heading, dialogue, newspaper, onStart }: Briefi
         {index < 0 && newspaper ? (
           <Newspaper {...newspaper} />
         ) : (
-          line && <DialogueLine line={line} />
+          line && <DialogueLine key={index} line={line} typewriter />
         )}
       </div>
       <div className="mt-4 flex justify-end">

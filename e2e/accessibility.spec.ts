@@ -4,6 +4,12 @@ import { openNextCase, startShift } from './helpers.ts';
 
 /** WCAG 2.1 AA (PRD §9) diperiksa otomatis di layar-layar utama, di HP dan desktop. */
 async function expectNoViolations(page: Page, label: string) {
+  // Tunggu animasi masuk (pudar layar, pop) selesai: axe mengukur kontras termasuk opacity.
+  await page.evaluate(
+    `Promise.all(document.getAnimations()
+      .filter((a) => a.effect?.getTiming().iterations !== Infinity)
+      .map((a) => a.finished.catch(() => undefined)))`,
+  );
   const { violations } = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
     .analyze();

@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { badgeEarned, newBadges, type BadgeContext, type BadgeRule } from '../badges.ts';
+import {
+  badgeEarned,
+  currentStreak,
+  newBadges,
+  type BadgeContext,
+  type BadgeRule,
+} from '../badges.ts';
 import type { CaseImpact, CaseOutcome, SessionCase } from '../types.ts';
 
 let opened = 0;
@@ -149,5 +155,25 @@ describe('minStars (no badges for careless play)', () => {
       expect(badgeEarned(rule, ctx(good(), { stars: 1 }))).toBe(false);
       expect(badgeEarned(rule, ctx(good(), { stars: 2 }))).toBe(true);
     }
+  });
+});
+
+describe('currentStreak (combo counter on the desk)', () => {
+  it('counts trailing correct decisions in the order cases were opened', () => {
+    const a = decided('correct');
+    const b = decided('threat-allowed');
+    const c = decided('correct');
+    const d = decided('correct', { missedEvidence: ['x'] });
+    expect(currentStreak([d, a, c, b])).toBe(2);
+  });
+
+  it('is zero with no decisions or after a wrong one', () => {
+    expect(currentStreak([])).toBe(0);
+    expect(currentStreak([decided('correct'), decided('legit-blocked')])).toBe(0);
+  });
+
+  it('ignores cases that are still open or missed', () => {
+    const open = decided('correct', {}, { status: 'arrived', outcome: null });
+    expect(currentStreak([decided('correct'), open])).toBe(1);
   });
 });

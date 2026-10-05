@@ -129,6 +129,20 @@ export const en: Strings = {
   },
   desk: {
     visitorLabel: 'Reported by',
+    reactions: {
+      person: {
+        happy: ['Oh, thank you so much!', 'Great, all sorted!', 'That was quick. Thanks!'],
+        neutral: ['Okay... hope that works.', "Alright, I'll go with that."],
+        upset: ['Wait, really?', "Hmm, I'm not so sure...", "Well... I'll check again later."],
+      },
+      system: {
+        happy: ['BEEP! Decision logged. ✓', 'BEEP-BEEP! Status: safe.'],
+        neutral: ['BEEP. Logged.'],
+        upset: ['BZZT! Logged... with a note.', 'BZZT. Warning recorded.'],
+      },
+    },
+    streak: (n: number) => `Streak ×${n}`,
+    timeLow: 'Time is almost up!',
     waiting: (n) => `${n} waiting`,
     tabs: { queue: 'Queue', document: 'Document', rulebook: 'Handbook' },
     tabsLabel: 'Desk panels',

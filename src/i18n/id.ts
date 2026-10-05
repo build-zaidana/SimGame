@@ -128,6 +128,20 @@ export const id = {
   } as Record<string, string>,
   desk: {
     visitorLabel: 'Dilaporkan oleh',
+    reactions: {
+      person: {
+        happy: ['Wah, terima kasih banyak!', 'Mantap, beres!', 'Cepat sekali. Makasih, ya!'],
+        neutral: ['Oke... semoga aman.', 'Baik, saya ikuti.'],
+        upset: ['Lho, kok begitu?', 'Hmm, saya kurang yakin...', 'Yah... nanti saya cek lagi.'],
+      },
+      system: {
+        happy: ['BIP! Keputusan tercatat. ✓', 'BIP-BIP! Status: aman.'],
+        neutral: ['BIP. Tercatat.'],
+        upset: ['BZZT! Tercatat... dengan catatan.', 'BZZT. Peringatan dicatat.'],
+      },
+    },
+    streak: (n: number) => `Beruntun ×${n}`,
+    timeLow: 'Waktu hampir habis!',
     waiting: (n: number) => `${n} menunggu`,
     tabs: { queue: 'Antrian', document: 'Dokumen', rulebook: 'Panduan' },
     tabsLabel: 'Panel meja',

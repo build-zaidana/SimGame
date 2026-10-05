@@ -35,7 +35,7 @@ export function Evidence({
         (inline ? 'inline-block break-all ' : 'block w-full ') +
         'min-h-11 px-1 py-2 text-left underline decoration-dashed decoration-ink-muted ' +
         'underline-offset-4 focus-visible:outline-4 focus-visible:outline-focus disabled:cursor-default ' +
-        (marked ? 'bg-accent/25 decoration-accent decoration-solid' : 'hover:bg-ink/5')
+        (marked ? 'mark-pop bg-accent/25 decoration-accent decoration-solid' : 'hover:bg-ink/5')
       }
     >
       {marked && (
