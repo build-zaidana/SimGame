@@ -14,28 +14,36 @@
       "arriveAt": 0
     },
     {
+      "caseId": "s01-robot-001",
+      "arriveAt": 5
+    },
+    {
       "caseId": "s01-fix-001",
-      "arriveAt": 6
+      "arriveAt": 14
     },
     {
       "caseId": "s01-pr-002",
-      "arriveAt": 18
+      "arriveAt": 24
     },
     {
       "caseId": "s01-build-001",
-      "arriveAt": 30
+      "arriveAt": 34
+    },
+    {
+      "caseId": "s01-robot-002",
+      "arriveAt": 46
     },
     {
       "caseId": "s01-ctf-001",
-      "arriveAt": 48
+      "arriveAt": 60
     },
     {
       "caseId": "s01-fix-002",
-      "arriveAt": 62
+      "arriveAt": 72
     },
     {
       "caseId": "s01-pr-003",
-      "arriveAt": 80
+      "arriveAt": 86
     }
   ],
   "review": {

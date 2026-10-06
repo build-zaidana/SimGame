@@ -49,3 +49,19 @@ Pilihan yang dibandingkan (ukuran gzip diukur dari paket npm terbaru, Oktober 20
 - JS awal naik ±6 KB (editor & panel tes); runtime Python 227 KB gzip hanya saat Meja Developer
   dipakai (anggaran size-limit 300 KB).
 - Mode lain bisa memakai mekanik jawaban ketik yang sama (mis. analisis data di Meja Data nanti).
+
+## Tambahan: "game feel" tahap 1 (6 Oktober 2026)
+
+Masukan pemilik: Meja Developer masih terasa seperti latihan coding biasa. Tahap 1:
+
+- **Tes sebagai pelanggan** (`ui/CustomerScene.tsx`): setiap tes tugas coding adalah pelanggan pixel
+  di loket aplikasi. Lulus = senang & membayar; gagal = kecewa dengan protes "hasil kodemu vs
+  seharusnya"; crash = aplikasi meledak dan pelanggan kabur. Hanya hiasan: daftar tes tetap ada untuk
+  pembaca layar.
+- **Robot kurir** (tipe kasus `robot`): program Python memakai `maju()`, `belok_kiri()`,
+  `belok_kanan()`, `ambil()`, `antar()` dan sensor `depan_kosong()`, `ada_paket()`, `di_tujuan()`
+  (alias Inggris tersedia). Dunia disimulasikan di Python (`runner/robot.ts`), jadi sensor bisa dipakai
+  di `if`/`while`; jejak langkah dianimasikan di peta pixel (`replay()`). Program yang sama diuji di
+  1–3 peta, sehingga menghafal langkah tidak cukup. Batas 300 langkah per peta. `content:check`
+  memvalidasi peta dan menjalankan solusi acuan di semua peta.
+- Tahap 2 (direncanakan): insiden "server terbakar" dengan tekanan waktu.

@@ -1,0 +1,42 @@
+{
+  "id": "s01-robot-001",
+  "type": "robot",
+  "conceptIds": ["python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Yoga Saputra",
+      "team": "Warehouse Team"
+    },
+    "title": "First delivery",
+    "story": [
+      "The warehouse courier robot needs a program! Pick up the package 📦 and deliver it to the flag 🏁.",
+      "Commands run in order from top to bottom. Tap a command button to insert it."
+    ],
+    "maps": [
+      {
+        "grid": ["#######", "#..P..#", "#####.#", "#####T#", "#######"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      }
+    ],
+    "starter": "# The robot faces right. Finish the program!\nforward()\nforward()\n",
+    "solution": "forward()\nforward()\npick_up()\nforward()\nforward()\nturn_right()\nforward()\nforward()\ndeliver()\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "The program runs line by line: move to the package, pick it up, go to the end of the corridor, turn right, then move to the flag and deliver. The order of commands decides the result.",
+  "ruleRefs": ["r-py-1", "r-err-3"],
+  "hints": [
+    "Count the tiles: the package is 2 steps ahead of the robot.",
+    "At the end of the corridor, the robot must turn right (downwards) before moving again."
+  ]
+}

@@ -80,7 +80,17 @@ export function documentText(data: unknown): string {
   walkStrings(
     data,
     (k) =>
-      !['evidenceId', 'href', 'id', 'solution', 'tests', 'starter', 'scratch', 'flag'].includes(k),
+      ![
+        'evidenceId',
+        'href',
+        'id',
+        'solution',
+        'tests',
+        'starter',
+        'scratch',
+        'flag',
+        'maps',
+      ].includes(k),
     out,
   );
   return out.join(' ');

@@ -1,0 +1,42 @@
+{
+  "id": "s01-robot-001",
+  "type": "robot",
+  "conceptIds": ["python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Yoga Saputra",
+      "team": "Tim Gudang"
+    },
+    "title": "Kurir pertama",
+    "story": [
+      "Robot kurir gudang butuh program! Ambil paket 📦 lalu antar ke bendera 🏁.",
+      "Setiap perintah dijalankan berurutan dari atas ke bawah. Ketuk tombol perintah untuk menyisipkannya."
+    ],
+    "maps": [
+      {
+        "grid": ["#######", "#..P..#", "#####.#", "#####T#", "#######"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      }
+    ],
+    "starter": "# Robot menghadap ke kanan. Lanjutkan programnya!\nmaju()\nmaju()\n",
+    "solution": "maju()\nmaju()\nambil()\nmaju()\nmaju()\nbelok_kanan()\nmaju()\nmaju()\nantar()\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Program dijalankan baris demi baris: maju ke paket, ambil, lanjut ke ujung lorong, belok kanan, lalu maju ke bendera dan antar. Urutan perintah menentukan hasilnya.",
+  "ruleRefs": ["r-py-1", "r-err-3"],
+  "hints": [
+    "Hitung kotak: paket ada 2 langkah di depan robot.",
+    "Di ujung lorong, robot harus belok kanan (ke bawah) sebelum maju lagi."
+  ]
+}

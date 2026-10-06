@@ -325,6 +325,42 @@ svg.sprite {
   animation: screen-in 180ms ease-out;
 }
 
+/* Robot kurir: meluncur antar-tile. */
+.robot-step {
+  transition: transform 180ms linear;
+}
+/* Pelanggan datang ke loket satu per satu. */
+@keyframes walk-in {
+  from {
+    transform: translateX(1.5rem);
+    opacity: 0;
+  }
+}
+.walk-in {
+  animation: walk-in 260ms ease-out both;
+}
+@keyframes crash-shake {
+  0%,
+  100% {
+    transform: none;
+  }
+  20% {
+    transform: translate(-4px, 2px) rotate(-1deg);
+  }
+  40% {
+    transform: translate(4px, -2px) rotate(1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px);
+  }
+  80% {
+    transform: translate(2px, -1px);
+  }
+}
+.crash-shake {
+  animation: crash-shake 400ms linear both;
+}
+
 /* "Kurangi animasi": dari pengaturan game atau dari sistem operasi. */
 :root[data-reduce-motion='true'] *,
 :root[data-reduce-motion='true'] *::before,

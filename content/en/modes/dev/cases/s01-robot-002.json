@@ -1,0 +1,59 @@
+{
+  "id": "s01-robot-002",
+  "type": "robot",
+  "conceptIds": ["python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Yoga Saputra",
+      "team": "Warehouse Team"
+    },
+    "title": "Warehouses of every size",
+    "story": [
+      "Now there are 3 warehouses with corridors of different lengths. The SAME program must work on every map!",
+      "Use a while loop and sensors: at_target() is True when the robot is on the flag, has_package() is True when a package is under the robot."
+    ],
+    "maps": [
+      {
+        "grid": ["########", "#..P..T#", "########"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      },
+      {
+        "grid": ["###########", "#.P......T#", "###########"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      },
+      {
+        "grid": ["######", "#P..T#", "######"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      }
+    ],
+    "starter": "# Memorised steps only fit one map.\nforward()\nforward()\nforward()\npick_up()\n",
+    "solution": "while not at_target():\n    if has_package():\n        pick_up()\n    forward()\ndeliver()\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "The while loop keeps moving while the robot is not at the target, and the if picks up the package as the robot passes it. Because it uses sensors, the same program works on maps of any length.",
+  "ruleRefs": ["r-py-1", "r-err-2"],
+  "hints": [
+    "Start with: while not at_target():",
+    "Inside the loop, first check if has_package(): then pick up, then move. Remember the 4-space indentation.",
+    "After the loop ends (at the target), call deliver() without indentation."
+  ]
+}
