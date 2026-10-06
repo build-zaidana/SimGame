@@ -28,6 +28,7 @@ export function DeskScreen() {
         wallet={wallet}
         mastery={save?.mastery ?? {}}
         toolsOwned={save?.modes[mode.id]?.toolsOwned ?? []}
+        upgrades={content.upgrades.filter((u) => progress?.upgradesOwned.includes(u.id))}
         practice={practice}
         newsTier={tier}
         dispatch={dispatch}

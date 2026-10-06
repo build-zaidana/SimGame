@@ -5,12 +5,22 @@ interface MentorHintsProps {
   mentorName: string;
   hints: readonly string[];
   used: number;
+  /** Petunjuk yang tidak mengurangi skor (bawaan 1; Mesin kopi: 2). */
+  freeHints?: number;
   disabled: boolean;
   onAsk(): void;
 }
 
 /** Petunjuk bertingkat: pertama gratis, berikutnya −10 skor kasus (lihat engine/scoring). */
-export function MentorHints({ mentorName, hints, used, disabled, onAsk }: MentorHintsProps) {
+export function MentorHints({
+  mentorName,
+  hints,
+  used,
+  freeHints = 1,
+  disabled,
+  onAsk,
+}: MentorHintsProps) {
+  const freeLeft = freeHints - used;
   const shown = hints.slice(0, used);
   const more = used < hints.length;
   return (
@@ -42,7 +52,13 @@ export function MentorHints({ mentorName, hints, used, disabled, onAsk }: Mentor
           {used === 0 ? id.mentor.ask : id.mentor.askAgain}
         </button>
         <span className="text-xs text-ink-muted">
-          {!more ? id.mentor.noMore : used === 0 ? id.mentor.free : id.mentor.costs}
+          {!more
+            ? id.mentor.noMore
+            : freeLeft <= 0
+              ? id.mentor.costs
+              : freeHints === 1
+                ? id.mentor.free
+                : id.mentor.freeLeft(freeLeft)}
         </span>
       </div>
     </section>

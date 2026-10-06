@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import type { ModeContent } from '../content/loader.ts';
 import type { CaseSchemas } from '../content/loader.ts';
 import { locale, setLocale, type Locale } from '../i18n/index.ts';
-import { buyTool, type BuyResult } from '../engine/economy.ts';
+import { buyTool, buyUpgrade, type BuyResult, type BuyUpgradeResult } from '../engine/economy.ts';
 import { shiftReducer, startShift, summarizeShift, type ShiftAction } from '../engine/shift.ts';
 import type { ShiftSession } from '../engine/types.ts';
 import type { CareerMode } from '../modes/contract.ts';
@@ -19,6 +19,8 @@ import { encodeSave } from '../persistence/transfer.ts';
 import {
   awardBadges,
   buildShift,
+  perksFor,
+  rankOf,
   commitShift,
   nextShift,
   practiceShifts,
@@ -91,6 +93,7 @@ interface AppState {
   openAssessment(kind: AssessmentKind): void;
   back(): void;
   buyTool(modeId: string, toolId: string): BuyResult | null;
+  buyUpgrade(modeId: string, upgradeId: string): BuyUpgradeResult | null;
   exportCode(): Promise<string>;
   /** Mengganti save di perangkat ini (save lama menjadi cadangan). */
   importSave(data: SaveData): void;
@@ -316,7 +319,9 @@ export const useAppStore = create<AppState>()((set, get) => ({
   },
 
   buyTool(modeId, toolId) {
-    const { save, content } = get();
+    const { save } = get();
+    // Konten mode yang dibeli (tab Toko bisa berbeda dari mode yang terakhir dimainkan).
+    const content = get().contents[modeId] ?? get().content;
     const tool = content?.tools.find((t) => t.id === toolId);
     if (!save || !tool) return null;
     const progress = save.modes[modeId] ?? newModeProgress();
@@ -335,6 +340,28 @@ export const useAppStore = create<AppState>()((set, get) => ({
       };
       write(next);
       set({ save: next, newBadges: [...get().newBadges, ...earned] });
+    }
+    return result;
+  },
+
+  buyUpgrade(modeId, upgradeId) {
+    const { save } = get();
+    const content = get().contents[modeId] ?? get().content;
+    const item = content?.upgrades.find((u) => u.id === upgradeId);
+    if (!save || !content || !item) return null;
+    const progress = save.modes[modeId] ?? newModeProgress();
+    const result = buyUpgrade(progress, item, rankOf(progress, content));
+    if (result.ok) {
+      const next: SaveData = {
+        ...save,
+        updatedAt: nowIso(),
+        modes: {
+          ...save.modes,
+          [modeId]: { ...progress, wallet: result.wallet, upgradesOwned: result.upgradesOwned },
+        },
+      };
+      write(next);
+      set({ save: next });
     }
     return result;
   },
@@ -462,6 +489,7 @@ async function openSession(modeId: string, practice: boolean, practiceShiftId?: 
       playMode: save.profile.settings.playMode,
       trust: progress.trust,
       generatedCases,
+      perks: perksFor(progress, content),
     });
     telemetry.track({
       name: 'shift_started',

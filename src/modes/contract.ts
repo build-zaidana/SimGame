@@ -84,6 +84,8 @@ export interface DeskProps {
   wallet: number;
   mastery: MasteryMap;
   toolsOwned: readonly string[];
+  /** Upgrade meja yang dimiliki (ADR 027): dipajang di meja. */
+  upgrades?: readonly { id: string; icon: string; name: string }[];
   /** Mode Latihan (PRD S5): meja menampilkan penanda bahwa hasil tidak disimpan. */
   practice: boolean;
   /** Nada berita dampak di koran pagi (dari shift sebelumnya); null = tanpa berita dampak. */

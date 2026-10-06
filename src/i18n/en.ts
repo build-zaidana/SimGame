@@ -66,7 +66,7 @@ export const en: Strings = {
     moreShiftsSoon: 'More shifts coming soon.',
     rulebook: 'Handbook',
     settings: 'Settings',
-    shop: 'Tool Shop',
+    shop: 'Shop & Upgrades',
     transfer: 'Move Save',
     preTest: 'Starting Test (optional)',
     postTest: 'Final Test',
@@ -90,7 +90,7 @@ export const en: Strings = {
     enter: 'Enter',
     open: 'Open',
     talk: 'Talk',
-    shopLabel: 'Tool Shop',
+    shopLabel: 'Shop & Upgrades',
     rulebookLabel: 'Handbook shelf',
     badgesLabel: 'Badge board',
     raniLabel: 'Rani',
@@ -183,7 +183,8 @@ export const en: Strings = {
   tools: {
     activeLabel: (name) => `Tool: ${name}`,
     owner: 'Domain owner:',
-    lockedHint: (name) => `🔒 ${name} can give extra info for this case. Buy it in the Tool Shop.`,
+    lockedHint: (name) =>
+      `🔒 ${name} can give extra info for this case. Buy it in Shop & Upgrades.`,
     whoisHeading: 'WHOIS Check: domain age',
     whoisRow: (domain, registered) => `${domain} · registered ${registered}`,
     sandboxHeading: 'Sandbox: what the file does when run',
@@ -191,7 +192,7 @@ export const en: Strings = {
     logFilterRow: (failed, success) => `${failed} failed · ${success} succeeded`,
   },
   shop: {
-    heading: 'Tool Shop',
+    heading: 'Shop & Upgrades',
     intro: 'Tools unlock new ways to check cases. Paid from your shift pay.',
     wallet: (n) => `Your pay: Rp ${n}`,
     price: (n) => `Rp ${n}`,
@@ -201,6 +202,23 @@ export const en: Strings = {
     lockedUntil: (order) => `Available from Shift ${order}`,
     bought: (name) => `${name} is ready to use at the desk!`,
     concept: (title) => `Related: ${title}`,
+    toolsHeading: 'Work tools',
+    upgradesHeading: 'Desk upgrades',
+    upgradesIntro: 'Decorations and comforts for your desk. Some unlock once you get promoted.',
+    cosmetic: 'Decoration',
+    perk: 'Perk',
+    rankLocked: (rank) => `Unlocks at rank ${rank}`,
+    installed: (name) => `${name} is now on your desk!`,
+  },
+  rank: {
+    current: (title) => `Rank: ${title}`,
+    nextShifts: (n, title) => `${n} more ${n === 1 ? 'shift' : 'shifts'} to ${title}`,
+    top: 'Top rank. Amazing!',
+    allowance: (n) => `Rank allowance: Rp ${n} per shift`,
+    promoted: (title) => `Promoted! You are now ${title}`,
+    promotedDetail: (n) =>
+      `Your allowance is now Rp ${n} per shift, and new desk upgrades are in the shop.`,
+    deskLabel: 'Items on your desk',
   },
   transfer: {
     heading: 'Move Save',
@@ -249,6 +267,7 @@ export const en: Strings = {
     askAgain: 'Another hint',
     heading: (mentor) => `${mentor}'s hints`,
     free: 'The first hint is free.',
+    freeLeft: (n) => `${n} more free ${n === 1 ? 'hint' : 'hints'} (☕ coffee machine).`,
     costs: 'Each extra hint takes 10 points off the case score.',
     noMore: 'That is every hint for this case.',
     level: (n, total) => `Hint ${n} of ${total}`,
@@ -349,8 +368,9 @@ export const en: Strings = {
     correct: (n, total) => `Correct decisions: ${n} of ${total}`,
     trust: (n) => `Client trust: ${n}`,
     trustRecovery: (n) => `The client gives you another chance: next shift, trust starts at ${n}.`,
-    pay: (n, base) =>
-      `Pay this shift: +Rp ${n} (base Rp ${base} + Rp ${n - base} from case scores)`,
+    pay: (n, base, bonus) =>
+      `Pay this shift: +Rp ${n} (base Rp ${base} + Rp ${n - base - bonus} from case scores` +
+      (bonus > 0 ? ` + rank allowance Rp ${bonus})` : ')'),
     casesHeading: 'Case breakdown',
     caseScore: (n) => `score ${n}`,
     missed: 'missed',

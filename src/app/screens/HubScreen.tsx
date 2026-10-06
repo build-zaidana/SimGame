@@ -7,6 +7,7 @@ import { useAppStore } from '../store.ts';
 import { PhaserHub, type HotspotInfo, type HubSpeech } from '../../hub/PhaserHub.tsx';
 import { OfficeIllustration } from '../ui/hub/OfficeIllustration.tsx';
 import { Medal } from '../ui/Medal.tsx';
+import { RankLine } from '../ui/RankLine.tsx';
 import { btnPrimary, btnSecondary, panel } from '../ui/styles.ts';
 
 /** HUB versi menu (v1.0). Ilustrasi kantor pixel menyusul di M4. */
@@ -207,6 +208,7 @@ export function HubScreen() {
             <li key={m.id} className={`${panel} flex flex-col gap-2 p-4`}>
               <h2 className="font-display text-lg">{m.deskTitle}</h2>
               <p className="text-sm text-ink-muted">{m.title}</p>
+              {ownContent && <RankLine progress={progress} content={ownContent} />}
               <p className="text-sm">
                 {id.hub.progress(done)} · {id.hub.wallet(progress.wallet)} ·{' '}
                 {id.hub.trust(progress.trust)}

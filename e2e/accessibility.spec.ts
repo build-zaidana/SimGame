@@ -30,7 +30,7 @@ test('main screens have no WCAG 2.1 AA violations', async ({ page }) => {
 
   for (const [button, heading] of [
     ['Pengaturan', 'Pengaturan'],
-    ['Toko Alat', 'Toko Alat'],
+    ['Toko & Upgrade', 'Toko & Upgrade'],
     ['Pindah Save', 'Pindah Save'],
     ['Buku Panduan', 'Buku Panduan SOC'],
   ] as const) {
