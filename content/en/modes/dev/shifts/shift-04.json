@@ -1,0 +1,80 @@
+{
+  "id": "dev-04",
+  "order": 4,
+  "title": "Test First, Then Release",
+  "durationGameMinutes": 150,
+  "realSecondsPerGameMinute": 4,
+  "unlocksChapters": ["ch-test"],
+  "introDialogue": "dev-04-intro",
+  "outroDialogue": "dev-04-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s04-build-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s04-pr-001",
+      "arriveAt": 8
+    },
+    {
+      "caseId": "s04-fix-001",
+      "arriveAt": 16
+    },
+    {
+      "caseId": "s04-pr-002",
+      "arriveAt": 25
+    },
+    {
+      "caseId": "s04-build-002",
+      "arriveAt": 33
+    },
+    {
+      "caseId": "s04-ctf-001",
+      "arriveAt": 41
+    },
+    {
+      "caseId": "s04-pr-003",
+      "arriveAt": 49
+    },
+    {
+      "caseId": "s04-fix-002",
+      "arriveAt": 57
+    },
+    {
+      "caseId": "s04-pr-004",
+      "arriveAt": 65
+    },
+    {
+      "caseId": "s04-build-003",
+      "arriveAt": 74
+    },
+    {
+      "caseId": "s04-pr-005",
+      "arriveAt": 82
+    }
+  ],
+  "review": {
+    "count": 4,
+    "conceptIds": ["testing", "release-rollback", "debugging"]
+  },
+  "pay": {
+    "base": 60,
+    "perCase": 14
+  },
+  "newspaper": {
+    "headline": "Shop App Hit Errors After Release",
+    "lead": "Last Thursday's release briefly broke the shop app's payment page. The developer team now requires tests for every new piece of logic before release.",
+    "impact": {
+      "good": "Yesterday, the faulty release was rolled back quickly and users were barely affected. Healthy releases kept running.",
+      "mixed": "Yesterday, some release problems were handled, but one rollback was late or unnecessary. The team is reviewing how it reads error numbers.",
+      "bad": "Yesterday, the faulty release stayed live too long. Many users couldn't pay in the shop app."
+    },
+    "tip": {
+      "title": "Tip: Think of the Weird Cases",
+      "text": "Before submitting, imagine strange input: an empty list, zero, capital letters. Edge-case tests catch bugs before users do."
+    },
+    "classified": "LOST: One test for an empty list. Last seen before Thursday's release.",
+    "sources": ["Martin Fowler: Test Pyramid"]
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "id": "s03-pr-004",
+  "type": "pull-request",
+  "conceptIds": ["release-rollback", "code-review"],
+  "difficulty": 3,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Bayu Pratama",
+      "team": "Tim Rapor Sekolah"
+    },
+    "title": "Tambah label Tuntas di rapor",
+    "description": [
+      {
+        "text": "Batas tuntas (KKM) sekolah adalah 75: nilai 75 ke atas dianggap tuntas.",
+        "evidenceId": "desc-rule"
+      },
+      {
+        "text": "Sudah dirilis ke produksi pukul 13.00. Ada yang lapor rapor lambat, apa gara-gara rilis saya?",
+        "evidenceId": "desc-worry"
+      }
+    ],
+    "file": "rapor/label.py",
+    "diff": [
+      {
+        "code": "def label_nilai(nilai):",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "if nilai >= 75:",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-if"
+      },
+      {
+        "code": "return \"Tuntas\"",
+        "indent": 2,
+        "kind": "add",
+        "evidenceId": "line-pass"
+      },
+      {
+        "code": "return \"Belum tuntas\"",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-fail"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Error halaman rapor: 1% sampai 12.35, lalu naik ke 9% mulai 12.40 (sebelum rilis 13.00)",
+        "evidenceId": "check-before"
+      },
+      {
+        "text": "Error sesudah rilis 13.00: tetap 9%, tidak bertambah",
+        "evidenceId": "check-after"
+      },
+      {
+        "text": "Info Tim Infrastruktur: server database lambat sejak 12.35, sedang ditangani",
+        "evidenceId": "check-infra"
+      },
+      {
+        "text": "Tes otomatis: 4 dari 4 lulus, termasuk nilai tepat 75",
+        "evidenceId": "check-tests"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["check-before", "check-after", "check-infra", "line-if"]
+  },
+  "explanation": "Error sudah naik pukul 12.40, sebelum rilis 13.00, dan tidak bertambah sesudahnya; penyebabnya server database. Kodenya juga benar (>= 75), jadi rollback hanya membatalkan pekerjaan yang baik.",
+  "ruleRefs": ["r-rel-3", "r-rev-1"],
+  "hints": [
+    "Kapan tepatnya error mulai naik? Bandingkan dengan jam rilis.",
+    "Kalau error sudah ada sebelum rilis dan tidak bertambah, apakah rilis ini penyebabnya?"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "tools": [
+    {
+      "id": "test-runner",
+      "name": "Test Runner",
+      "icon": "🧪",
+      "description": "Runs automatic tests on pull requests and shows the results, so you are not just guessing from reading the code.",
+      "price": 70,
+      "conceptId": "reading-errors",
+      "unlockAtShift": 2
+    },
+    {
+      "id": "linter",
+      "name": "Linter",
+      "icon": "🧹",
+      "description": "Automatically checks code style and common possible bugs (unused variables, odd comparisons).",
+      "price": 90,
+      "conceptId": "code-review",
+      "unlockAtShift": 3
+    }
+  ]
+}

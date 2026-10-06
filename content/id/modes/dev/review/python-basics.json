@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "id": "rv-py-1",
+      "type": "mcq",
+      "conceptId": "python-basics",
+      "difficulty": 1,
+      "prompt": "Apa hasil \"Rp \" + str(500)?",
+      "choices": ["\"Rp 500\"", "Error", "500"],
+      "answerIndex": 0,
+      "explanation": "str() mengubah angka jadi teks, jadi keduanya bisa digabung."
+    },
+    {
+      "id": "rv-py-2",
+      "type": "mcq",
+      "conceptId": "python-basics",
+      "difficulty": 1,
+      "prompt": "Aturan: umur 17 tahun ke atas boleh ikut. Tanda mana yang tepat?",
+      "choices": ["umur > 17", "umur >= 17", "umur < 17"],
+      "answerIndex": 1,
+      "explanation": ">= memasukkan angka 17 itu sendiri, sedangkan > tidak."
+    },
+    {
+      "id": "rv-py-3",
+      "type": "mcq",
+      "conceptId": "python-basics",
+      "difficulty": 2,
+      "prompt": "Untuk rata-rata daftar nilai, total dibagi apa?",
+      "choices": ["2", "len(nilai)", "total"],
+      "answerIndex": 1,
+      "explanation": "len() memberi tahu banyaknya isi daftar, jadi rumusnya benar untuk daftar sepanjang apa pun."
+    }
+  ]
+}

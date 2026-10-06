@@ -1,0 +1,60 @@
+{
+  "id": "s04-build-001",
+  "type": "coding",
+  "conceptIds": ["testing", "python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Fajar Nugroho",
+      "team": "Tim Akun Pengguna"
+    },
+    "title": "Lomba kilat: sandi cukup panjang?",
+    "story": [
+      "Tulis fungsi sandi_cukup_panjang(sandi) yang mengembalikan True bila sandi minimal 8 karakter.",
+      "Spasi di awal dan akhir tidak dihitung. Ada tes tersembunyi untuk teks kosong, tepat 8 karakter, dan sandi berspasi!"
+    ],
+    "file": "akun/sandi.py",
+    "starter": "def sandi_cukup_panjang(sandi):\n    # Tulis kodemu di sini\n    return False\n",
+    "tests": [
+      {
+        "name": "sandi panjang",
+        "code": "assert sandi_cukup_panjang(\"nusadigital\") == True"
+      },
+      {
+        "name": "sandi pendek",
+        "code": "assert sandi_cukup_panjang(\"abc\") == False"
+      },
+      {
+        "name": "tepat 8 karakter",
+        "code": "assert sandi_cukup_panjang(\"12345678\") == True",
+        "hidden": true
+      },
+      {
+        "name": "teks kosong",
+        "code": "assert sandi_cukup_panjang(\"\") == False",
+        "hidden": true
+      },
+      {
+        "name": "spasi di pinggir",
+        "code": "assert sandi_cukup_panjang(\"   abc12   \") == False",
+        "hidden": true
+      }
+    ],
+    "solution": "def sandi_cukup_panjang(sandi):\n    bersih = sandi.strip()\n    return len(bersih) >= 8\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Buang spasi di pinggir dengan .strip(), lalu bandingkan panjangnya dengan len(...) >= 8. Tanda >= penting agar sandi yang tepat 8 karakter ikut diterima.",
+  "ruleRefs": ["r-tst-1", "r-py-4"],
+  "hints": [
+    "Panjang teks bisa didapat dengan len(...).",
+    "\"Minimal 8\" berarti 8 juga boleh. Pakai > atau >=?",
+    "Spasi di awal dan akhir bisa dibuang dengan .strip() sebelum dihitung."
+  ]
+}

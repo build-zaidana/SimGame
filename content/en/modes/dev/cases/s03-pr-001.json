@@ -1,0 +1,89 @@
+{
+  "id": "s03-pr-001",
+  "type": "pull-request",
+  "conceptIds": ["release-rollback", "debugging"],
+  "difficulty": 1,
+  "verdict": "fault",
+  "correctDecision": "rollback",
+  "acceptableDecisions": {
+    "revise": 0.3
+  },
+  "severity": 3,
+  "data": {
+    "author": {
+      "name": "Wulan Sari",
+      "team": "Cashier Team"
+    },
+    "title": "Tidy up shopping data key names",
+    "description": [
+      {
+        "text": "I renamed the keys in the shopping data so they all match.",
+        "evidenceId": "desc-rename"
+      },
+      {
+        "text": "Already released to production (the app real users use) at 14:05.",
+        "evidenceId": "desc-released"
+      }
+    ],
+    "file": "cashier/total.py",
+    "diff": [
+      {
+        "code": "def cart_total(cart):",
+        "indent": 0,
+        "kind": "ctx",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "total = 0",
+        "indent": 1,
+        "kind": "ctx"
+      },
+      {
+        "code": "for item in cart:",
+        "indent": 1,
+        "kind": "ctx"
+      },
+      {
+        "code": "total = total + item[\"cost\"]",
+        "indent": 2,
+        "kind": "del",
+        "evidenceId": "line-old"
+      },
+      {
+        "code": "total = total + item[\"price\"]",
+        "indent": 2,
+        "kind": "add",
+        "evidenceId": "line-key"
+      },
+      {
+        "code": "return total",
+        "indent": 1,
+        "kind": "ctx"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Automatic tests: 3 of 3 passed (tests use the new sample data)",
+        "evidenceId": "check-tests"
+      },
+      {
+        "text": "Cashier errors: 0.2% before the 14:05 release → 18% after",
+        "evidenceId": "check-error"
+      },
+      {
+        "text": "Production log: KeyError: 'price' appeared 1,240 times since 14:06",
+        "evidenceId": "check-log"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["check-error"],
+    "supporting": ["check-log", "line-key", "desc-released"]
+  },
+  "explanation": "Errors jumped from 0.2% to 18% right after the 14:05 release, because production data still uses the key \"cost\", not \"price\". Roll back to the healthy version first so the cashier app works again, then fix it calmly.",
+  "ruleRefs": ["r-rel-2", "r-rel-3", "r-dbg-3"],
+  "hints": [
+    "Compare the error numbers before and after the release time.",
+    "The change is already live and errors jumped. What comes first: fixing it slowly, or going back to the healthy version?"
+  ]
+}

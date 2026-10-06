@@ -1,0 +1,54 @@
+{
+  "id": "s05-build-002",
+  "type": "coding",
+  "conceptIds": ["secure-coding", "python-basics"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Fajar Nugroho",
+      "team": "Accounts Team"
+    },
+    "title": "Speed round: hide the password before logging",
+    "story": [
+      "Write a function redact(data) that takes a dictionary (dict) and returns a NEW dictionary. If there is a \"password\" key, its value becomes \"***\". Other keys are copied as they are.",
+      "A hidden test makes sure the original dictionary does not change!"
+    ],
+    "file": "accounts/logging.py",
+    "starter": "def redact(data):\n    # Write your code here\n    return data\n",
+    "tests": [
+      {
+        "name": "has password",
+        "code": "assert redact({\"user\": \"rani\", \"password\": \"secret\"}) == {\"user\": \"rani\", \"password\": \"***\"}"
+      },
+      {
+        "name": "no password",
+        "code": "assert redact({\"user\": \"budi\"}) == {\"user\": \"budi\"}"
+      },
+      {
+        "name": "original untouched",
+        "code": "d = {\"password\": \"secret\"}; s = redact(d); assert d[\"password\"] == \"secret\" and s[\"password\"] == \"***\"",
+        "hidden": true
+      },
+      {
+        "name": "empty dict",
+        "code": "assert redact({}) == {}",
+        "hidden": true
+      }
+    ],
+    "solution": "def redact(data):\n    result = {}\n    for key in data:\n        if key == \"password\":\n            result[key] = \"***\"\n        else:\n            result[key] = data[key]\n    return result\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Make a new dictionary, copy every key, and replace the \"password\" value with \"***\". That way the log stays safe, while the original data can still be used to log in.",
+  "ruleRefs": ["r-sec-2", "r-tst-1"],
+  "hints": [
+    "Start with result = {}, then loop over every key with for key in data.",
+    "Inside the loop: if key == \"password\", store \"***\". Otherwise copy data[key]."
+  ]
+}

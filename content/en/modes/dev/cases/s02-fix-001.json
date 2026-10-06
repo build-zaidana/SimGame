@@ -1,0 +1,49 @@
+{
+  "id": "s02-fix-001",
+  "type": "coding",
+  "conceptIds": ["debugging", "reading-errors"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Sinta Maharani",
+      "team": "Warehouse Team"
+    },
+    "title": "Warehouse stock count always crashes",
+    "story": [
+      "The total_stock function adds up the stock on every warehouse shelf, but every call ends in an IndexError.",
+      "Run the tests, read the last line of the error, then check the loop's limit."
+    ],
+    "file": "warehouse/stock.py",
+    "starter": "def total_stock(stock):\n    total = 0\n    for i in range(len(stock) + 1):\n        total = total + stock[i]\n    return total\n",
+    "tests": [
+      {
+        "name": "three shelves",
+        "code": "assert total_stock([5, 3, 2]) == 10"
+      },
+      {
+        "name": "one shelf",
+        "code": "assert total_stock([7]) == 7"
+      },
+      {
+        "name": "empty warehouse",
+        "code": "assert total_stock([]) == 0",
+        "hidden": true
+      }
+    ],
+    "solution": "def total_stock(stock):\n    total = 0\n    for i in range(len(stock)):\n        total = total + stock[i]\n    return total\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "List indexes run from 0 to len(stock) - 1, so range(len(stock) + 1) tries to read one item that does not exist and raises an IndexError. Just use range(len(stock)).",
+  "ruleRefs": ["r-dbg-2", "r-dbg-3", "r-err-1"],
+  "hints": [
+    "An IndexError means the code asked for a position that is not in the list.",
+    "The list [5, 3, 2] has indexes 0, 1, 2. Which numbers does range(len(stock) + 1) produce?"
+  ]
+}

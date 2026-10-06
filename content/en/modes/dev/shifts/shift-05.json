@@ -1,0 +1,84 @@
+{
+  "id": "dev-05",
+  "order": 5,
+  "title": "The Mysterious PR",
+  "durationGameMinutes": 150,
+  "realSecondsPerGameMinute": 4,
+  "unlocksChapters": ["ch-secure"],
+  "introDialogue": "dev-05-intro",
+  "outroDialogue": "dev-05-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s05-pr-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s05-fix-001",
+      "arriveAt": 8
+    },
+    {
+      "caseId": "s05-pr-002",
+      "arriveAt": 15
+    },
+    {
+      "caseId": "s05-build-001",
+      "arriveAt": 22
+    },
+    {
+      "caseId": "s05-pr-003",
+      "arriveAt": 30
+    },
+    {
+      "caseId": "s05-fix-002",
+      "arriveAt": 38
+    },
+    {
+      "caseId": "s05-pr-004",
+      "arriveAt": 45
+    },
+    {
+      "caseId": "s05-build-002",
+      "arriveAt": 52
+    },
+    {
+      "caseId": "s05-pr-005",
+      "arriveAt": 60
+    },
+    {
+      "caseId": "s05-fix-003",
+      "arriveAt": 68
+    },
+    {
+      "caseId": "s05-ctf-001",
+      "arriveAt": 75
+    },
+    {
+      "caseId": "s05-pr-006",
+      "arriveAt": 82
+    }
+  ],
+  "review": {
+    "count": 5,
+    "conceptIds": ["secure-coding", "testing", "release-rollback"]
+  },
+  "pay": {
+    "base": 70,
+    "perCase": 14
+  },
+  "newspaper": {
+    "headline": "New Contributors Popping Up in the Repository",
+    "lead": "Many new accounts sent pull requests to Nusa Digital's repository this week. The security team reminds developers to read every change carefully.",
+    "impact": {
+      "good": "Yesterday, all new logic was released with edge-case tests. No new bugs in the apps.",
+      "mixed": "Yesterday, some PRs had good tests, but a few slipped through without edge-case tests. Dimas asked for a recheck.",
+      "bad": "Yesterday, some PRs without tests were released and old bugs came back. Users complained."
+    },
+    "tip": {
+      "title": "Tip: Know the Author",
+      "text": "Before approving a PR, check who wrote it and where the code sends data. Unknown account + unknown address = escalate."
+    },
+    "classified": "WANTED: The owner of the 'helper-kode' account that keeps sending PRs at midnight. — K.",
+    "sources": ["OWASP Top 10", "OWASP Input Validation Cheat Sheet"]
+  }
+}

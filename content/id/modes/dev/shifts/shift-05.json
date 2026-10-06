@@ -1,0 +1,84 @@
+{
+  "id": "dev-05",
+  "order": 5,
+  "title": "PR Misterius",
+  "durationGameMinutes": 150,
+  "realSecondsPerGameMinute": 4,
+  "unlocksChapters": ["ch-secure"],
+  "introDialogue": "dev-05-intro",
+  "outroDialogue": "dev-05-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s05-pr-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s05-fix-001",
+      "arriveAt": 8
+    },
+    {
+      "caseId": "s05-pr-002",
+      "arriveAt": 15
+    },
+    {
+      "caseId": "s05-build-001",
+      "arriveAt": 22
+    },
+    {
+      "caseId": "s05-pr-003",
+      "arriveAt": 30
+    },
+    {
+      "caseId": "s05-fix-002",
+      "arriveAt": 38
+    },
+    {
+      "caseId": "s05-pr-004",
+      "arriveAt": 45
+    },
+    {
+      "caseId": "s05-build-002",
+      "arriveAt": 52
+    },
+    {
+      "caseId": "s05-pr-005",
+      "arriveAt": 60
+    },
+    {
+      "caseId": "s05-fix-003",
+      "arriveAt": 68
+    },
+    {
+      "caseId": "s05-ctf-001",
+      "arriveAt": 75
+    },
+    {
+      "caseId": "s05-pr-006",
+      "arriveAt": 82
+    }
+  ],
+  "review": {
+    "count": 5,
+    "conceptIds": ["secure-coding", "testing", "release-rollback"]
+  },
+  "pay": {
+    "base": 70,
+    "perCase": 14
+  },
+  "newspaper": {
+    "headline": "Kontributor Baru Bermunculan di Repositori",
+    "lead": "Banyak akun baru mengirim pull request ke repositori PT Nusa Digital minggu ini. Tim keamanan mengingatkan developer untuk teliti membaca setiap perubahan.",
+    "impact": {
+      "good": "Kemarin, semua logika baru dirilis lengkap dengan tes kasus tepi. Tidak ada bug baru di aplikasi.",
+      "mixed": "Kemarin, sebagian PR sudah punya tes yang baik, tapi beberapa lolos tanpa tes kasus tepi. Kak Dimas meminta pemeriksaan ulang.",
+      "bad": "Kemarin, beberapa PR tanpa tes ikut dirilis dan bug lama muncul kembali. Pengguna mengeluh."
+    },
+    "tip": {
+      "title": "Tips: Kenali Penulisnya",
+      "text": "Sebelum menyetujui PR, cek siapa penulisnya dan ke mana kodenya mengirim data. Akun asing + alamat asing = eskalasi."
+    },
+    "classified": "DICARI: Pemilik akun 'helper-kode' yang rajin mengirim PR tengah malam. — K.",
+    "sources": ["OWASP Top 10", "OWASP Input Validation Cheat Sheet"]
+  }
+}

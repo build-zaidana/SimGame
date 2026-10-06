@@ -1,0 +1,79 @@
+{
+  "id": "dev-03",
+  "order": 3,
+  "title": "Rilis & Rollback",
+  "durationGameMinutes": 150,
+  "realSecondsPerGameMinute": 4,
+  "unlocksChapters": ["ch-release"],
+  "introDialogue": "dev-03-intro",
+  "outroDialogue": "dev-03-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s03-pr-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s03-fix-001",
+      "arriveAt": 9
+    },
+    {
+      "caseId": "s03-pr-002",
+      "arriveAt": 18
+    },
+    {
+      "caseId": "s03-build-001",
+      "arriveAt": 27
+    },
+    {
+      "caseId": "s03-pr-003",
+      "arriveAt": 36
+    },
+    {
+      "caseId": "s03-ctf-001",
+      "arriveAt": 45
+    },
+    {
+      "caseId": "s03-fix-002",
+      "arriveAt": 54
+    },
+    {
+      "caseId": "s03-pr-004",
+      "arriveAt": 63
+    },
+    {
+      "caseId": "s03-build-002",
+      "arriveAt": 72
+    },
+    {
+      "caseId": "s03-pr-005",
+      "arriveAt": 81
+    }
+  ],
+  "review": {
+    "count": 4,
+    "conceptIds": ["release-rollback", "debugging"]
+  },
+  "pay": {
+    "base": 60,
+    "perCase": 14
+  },
+  "newspaper": {
+    "headline": "Rilis Mingguan Dimulai",
+    "lead": "Mulai minggu ini tim developer PT Nusa Digital merilis pembaruan aplikasi setiap Kamis. Developer baru kini ikut memantau rilis dan boleh memutuskan rollback.",
+    "impact": {
+      "good": "Kemarin, semua bug yang dilaporkan pengguna berhasil diperbaiki dengan tes hijau. Pengguna aplikasi rapor dan toko memuji perbaikannya.",
+      "mixed": "Kemarin, sebagian bug sudah diperbaiki, tapi ada yang masih muncul lagi. Tim diminta lebih teliti memakai print() saat debugging.",
+      "bad": "Kemarin, banyak perbaikan bug yang belum tuntas. Beberapa pengguna masih menemui error yang sama."
+    },
+    "tip": {
+      "title": "Tips: Rollback Dulu, Perbaiki Kemudian",
+      "text": "Kalau rilis baru membuat error melonjak, kembalikan dulu ke versi sehat. Pengguna tidak perlu menunggu perbaikan selesai."
+    },
+    "classified": "DIJUAL: Mesin waktu bekas, hanya bisa kembali ke commit sebelumnya. — Tim Rilis",
+    "sources": [
+      "Git Documentation: git-revert",
+      "Site Reliability Engineering (O’Reilly): Release Engineering"
+    ]
+  }
+}

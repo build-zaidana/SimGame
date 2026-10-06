@@ -1,0 +1,79 @@
+{
+  "id": "dev-03",
+  "order": 3,
+  "title": "Release & Rollback",
+  "durationGameMinutes": 150,
+  "realSecondsPerGameMinute": 4,
+  "unlocksChapters": ["ch-release"],
+  "introDialogue": "dev-03-intro",
+  "outroDialogue": "dev-03-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s03-pr-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s03-fix-001",
+      "arriveAt": 9
+    },
+    {
+      "caseId": "s03-pr-002",
+      "arriveAt": 18
+    },
+    {
+      "caseId": "s03-build-001",
+      "arriveAt": 27
+    },
+    {
+      "caseId": "s03-pr-003",
+      "arriveAt": 36
+    },
+    {
+      "caseId": "s03-ctf-001",
+      "arriveAt": 45
+    },
+    {
+      "caseId": "s03-fix-002",
+      "arriveAt": 54
+    },
+    {
+      "caseId": "s03-pr-004",
+      "arriveAt": 63
+    },
+    {
+      "caseId": "s03-build-002",
+      "arriveAt": 72
+    },
+    {
+      "caseId": "s03-pr-005",
+      "arriveAt": 81
+    }
+  ],
+  "review": {
+    "count": 4,
+    "conceptIds": ["release-rollback", "debugging"]
+  },
+  "pay": {
+    "base": 60,
+    "perCase": 14
+  },
+  "newspaper": {
+    "headline": "Weekly Releases Begin",
+    "lead": "Starting this week, the Nusa Digital developer team releases app updates every Thursday. The new developer now helps watch releases and may decide to roll back.",
+    "impact": {
+      "good": "Yesterday, every bug users reported was fixed with green tests. Users of the report card and shop apps praised the fixes.",
+      "mixed": "Yesterday, some bugs were fixed, but a few came back. The team was asked to use print() more carefully when debugging.",
+      "bad": "Yesterday, many bug fixes were left unfinished. Some users still hit the same errors."
+    },
+    "tip": {
+      "title": "Tip: Roll Back First, Fix Later",
+      "text": "If a new release makes errors jump, go back to the healthy version first. Users don't have to wait for the fix."
+    },
+    "classified": "FOR SALE: Used time machine, only goes back to the previous commit. — Release Team",
+    "sources": [
+      "Git Documentation: git-revert",
+      "Site Reliability Engineering (O’Reilly): Release Engineering"
+    ]
+  }
+}

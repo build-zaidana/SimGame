@@ -118,7 +118,7 @@ export const reviewItemSchema = z.discriminatedUnion('type', [
 ]);
 export const reviewFileSchema = z.strictObject({ items: z.array(reviewItemSchema).min(1) });
 
-export const speakerSchema = z.enum(['rani', 'kelabu', 'joko', 'narrator']);
+export const speakerSchema = z.enum(['rani', 'kelabu', 'joko', 'dimas', 'narrator']);
 export const dialogueSchema = z.strictObject({
   id: idSchema,
   lines: z.array(z.strictObject({ speaker: speakerSchema, text })).min(1),
@@ -174,7 +174,7 @@ export const baseCaseSchema = z.strictObject({
   type: idSchema,
   conceptIds: z.array(idSchema).min(1),
   difficulty: level,
-  verdict: z.enum(['safe', 'malicious', 'suspicious', 'no-fault', 'fault', 'specialist']),
+  verdict: z.enum(['safe', 'malicious', 'suspicious', 'no-fault', 'fault', 'specialist', 'task']),
   correctDecision: idSchema,
   acceptableDecisions: z.record(idSchema, z.number().min(0).max(1)).default({}),
   severity: level,
@@ -200,12 +200,27 @@ export const baseCaseSchema = z.strictObject({
       /** Bengkel IT (ADR 025): hasil Alat Ping dan Pemindai Perangkat Keras. */
       ping: z.array(z.strictObject({ text, evidenceId: idSchema.optional() })).optional(),
       scan: z.array(z.strictObject({ text, evidenceId: idSchema.optional() })).optional(),
+      /** Meja Developer (ADR 026): hasil Test Runner dan Linter. */
+      tests: z.array(z.strictObject({ text, evidenceId: idSchema.optional() })).optional(),
+      lint: z.array(z.strictObject({ text, evidenceId: idSchema.optional() })).optional(),
     })
     .optional(),
 });
 
 /** Bagian dokumen yang bisa ditandai sebagai bukti. */
 export const markableTextSchema = z.strictObject({ text, evidenceId: idSchema.optional() });
+
+/**
+ * Satu baris kode (Meja Developer). `code` tidak di-trim; indentasi Python ditulis sebagai
+ * `indent` (kelipatan 4 spasi) agar JSON tetap rapi. `kind` untuk diff pull request.
+ */
+export const codeLineSchema = z.strictObject({
+  code: z.string().min(1),
+  indent: z.number().int().min(0).max(6).default(0),
+  kind: z.enum(['add', 'del', 'ctx']).default('ctx'),
+  evidenceId: idSchema.optional(),
+});
+export type CodeLine = z.infer<typeof codeLineSchema>;
 
 export type ModeMeta = z.infer<typeof modeMetaSchema>;
 export type ConceptFrontmatter = z.infer<typeof conceptFrontmatterSchema>;

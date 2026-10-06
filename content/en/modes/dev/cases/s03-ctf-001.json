@@ -1,0 +1,41 @@
+{
+  "id": "s03-ctf-001",
+  "type": "ctf",
+  "conceptIds": ["release-rollback", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 1,
+  "data": {
+    "title": "A strange commit",
+    "story": [
+      "Reading the commit history, Dimas found one message full of digits and the letters a to f. That's hexadecimal (hex): every two characters stand for one letter.",
+      "Use the Python console to turn the hex back into text, then type the flag."
+    ],
+    "artifacts": [
+      {
+        "label": "Commit history (git log)",
+        "kind": "text",
+        "content": "a3f91c2  Fix shipping KeyError for new cities\n7be0d45  Roll back release 2.3 because of checkout errors\n19c4e88  practice: 464c41477b524f4c4c4241434b5f46495253547d\nc02a7f1  Add Passed label to report cards"
+      },
+      {
+        "label": "Python hint",
+        "kind": "code",
+        "content": "bytes.fromhex(\"4869\").decode()   # \"Hi\""
+      }
+    ],
+    "scratch": "message = \"464c41477b524f4c4c4241434b5f46495253547d\"\nprint(message)\nprint(len(message))\n",
+    "flag": "FLAG{ROLLBACK_FIRST}",
+    "solution": "message = \"464c41477b524f4c4c4241434b5f46495253547d\"\nprint(bytes.fromhex(message).decode())\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Hex is just another way to write bytes: \"46\" is F, \"4c\" is L, and so on, so bytes.fromhex() opens it without any key. That's why hex is never used to hide secrets, and a commit message should describe the change in plain words.",
+  "ruleRefs": ["r-rel-1", "r-dbg-1"],
+  "hints": [
+    "Look for the commit message that doesn't read like a sentence.",
+    "Copy that hex string into the message variable, then print bytes.fromhex(message).decode()."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "dialogues": [
+    {
+      "id": "dev-05-intro",
+      "lines": [
+        {
+          "speaker": "dimas",
+          "text": "Banyak akun baru mengirim PR minggu ini. Baca setiap perubahan dengan teliti."
+        },
+        {
+          "speaker": "dimas",
+          "text": "Bab terakhir: Kode Aman. Kalau ada kode yang mengirim data ke alamat asing, jangan disetujui. Eskalasi ke tim SOC Mbak Rani."
+        },
+        {
+          "speaker": "dimas",
+          "text": "Ada juga jejak bendera di log. Ikuti sampai ketemu."
+        }
+      ]
+    },
+    {
+      "id": "dev-05-outro",
+      "lines": [
+        {
+          "speaker": "dimas",
+          "text": "Tim SOC sudah memblokir akun 'helper-kode'. Kodenya tidak pernah masuk ke aplikasi kita, berkat review-mu."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "...Kode kami ditolak lagi. Developer yang menyebalkan."
+        },
+        {
+          "speaker": "dimas",
+          "text": "Kamu sudah jadi developer sungguhan. Kapan-kapan mampir ke Meja Developer lagi, ya!"
+        }
+      ]
+    }
+  ]
+}

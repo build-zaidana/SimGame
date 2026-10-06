@@ -1,0 +1,58 @@
+{
+  "id": "s05-fix-003",
+  "type": "coding",
+  "conceptIds": ["secure-coding", "testing"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Dewi Anggraini",
+      "team": "Tim Dompet Digital"
+    },
+    "title": "PIN berisi huruf ikut diterima",
+    "story": [
+      "PIN dompet digital harus tepat 6 karakter dan semuanya angka. Ternyata PIN \"12ab56\" diterima!",
+      "Perbaiki fungsi pin_valid supaya isi PIN juga dicek, bukan cuma panjangnya."
+    ],
+    "file": "dompet/pin.py",
+    "starter": "def pin_valid(pin):\n    return len(pin) == 6\n",
+    "tests": [
+      {
+        "name": "PIN benar",
+        "code": "assert pin_valid(\"123456\") == True"
+      },
+      {
+        "name": "ada huruf",
+        "code": "assert pin_valid(\"12ab56\") == False"
+      },
+      {
+        "name": "terlalu pendek",
+        "code": "assert pin_valid(\"12345\") == False"
+      },
+      {
+        "name": "terlalu panjang",
+        "code": "assert pin_valid(\"1234567\") == False",
+        "hidden": true
+      },
+      {
+        "name": "teks kosong",
+        "code": "assert pin_valid(\"\") == False",
+        "hidden": true
+      }
+    ],
+    "solution": "def pin_valid(pin):\n    return len(pin) == 6 and pin.isdigit()\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Memeriksa panjang saja tidak cukup, karena huruf dan simbol ikut lolos. Tambahkan pin.isdigit() agar PIN hanya diterima bila panjangnya 6 dan semuanya angka.",
+  "ruleRefs": ["r-sec-1", "r-tst-1"],
+  "hints": [
+    "Kode sekarang hanya mengecek satu hal. Hal apa lagi yang disebut di aturan PIN?",
+    "Teks punya metode .isdigit() yang bernilai True bila semua karakternya angka."
+  ]
+}

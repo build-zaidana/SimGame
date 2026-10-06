@@ -5,6 +5,8 @@ import tailwindcss from '@tailwindcss/vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
+  // Worker MicroPython (ADR 026) memakai top-level await: perlu worker berformat modul ES.
+  worker: { format: 'es' },
   plugins: [
     react(),
     tailwindcss(),
@@ -37,7 +39,7 @@ export default defineConfig({
       },
       workbox: {
         // Shell, font, ikon, dan chunk mode (konten SOC ada di dalamnya) di-precache: bisa main offline.
-        globPatterns: ['**/*.{js,css,html,woff2,svg,png,webmanifest}'],
+        globPatterns: ['**/*.{js,css,html,woff2,svg,png,webmanifest,wasm}'],
         navigateFallback: '/index.html',
         cleanupOutdatedCaches: true,
       },

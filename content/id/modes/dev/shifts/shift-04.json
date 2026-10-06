@@ -1,0 +1,80 @@
+{
+  "id": "dev-04",
+  "order": 4,
+  "title": "Tes Dulu, Baru Rilis",
+  "durationGameMinutes": 150,
+  "realSecondsPerGameMinute": 4,
+  "unlocksChapters": ["ch-test"],
+  "introDialogue": "dev-04-intro",
+  "outroDialogue": "dev-04-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s04-build-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s04-pr-001",
+      "arriveAt": 8
+    },
+    {
+      "caseId": "s04-fix-001",
+      "arriveAt": 16
+    },
+    {
+      "caseId": "s04-pr-002",
+      "arriveAt": 25
+    },
+    {
+      "caseId": "s04-build-002",
+      "arriveAt": 33
+    },
+    {
+      "caseId": "s04-ctf-001",
+      "arriveAt": 41
+    },
+    {
+      "caseId": "s04-pr-003",
+      "arriveAt": 49
+    },
+    {
+      "caseId": "s04-fix-002",
+      "arriveAt": 57
+    },
+    {
+      "caseId": "s04-pr-004",
+      "arriveAt": 65
+    },
+    {
+      "caseId": "s04-build-003",
+      "arriveAt": 74
+    },
+    {
+      "caseId": "s04-pr-005",
+      "arriveAt": 82
+    }
+  ],
+  "review": {
+    "count": 4,
+    "conceptIds": ["testing", "release-rollback", "debugging"]
+  },
+  "pay": {
+    "base": 60,
+    "perCase": 14
+  },
+  "newspaper": {
+    "headline": "Aplikasi Toko Sempat Error Setelah Rilis",
+    "lead": "Rilis Kamis lalu sempat membuat halaman pembayaran aplikasi toko error. Tim developer kini mewajibkan tes untuk setiap logika baru sebelum dirilis.",
+    "impact": {
+      "good": "Kemarin, rilis yang bermasalah cepat di-rollback dan pengguna hampir tidak terganggu. Rilis yang sehat tetap berjalan.",
+      "mixed": "Kemarin, sebagian masalah rilis tertangani, tapi ada rollback yang terlambat atau tidak perlu. Tim mengevaluasi cara membaca angka error.",
+      "bad": "Kemarin, rilis yang bermasalah dibiarkan terlalu lama. Banyak pengguna tidak bisa membayar di aplikasi toko."
+    },
+    "tip": {
+      "title": "Tips: Pikirkan yang Aneh-Aneh",
+      "text": "Sebelum mengirim kode, coba bayangkan input aneh: daftar kosong, angka nol, huruf kapital. Tes kasus tepi menangkap bug sebelum pengguna."
+    },
+    "classified": "HILANG: Satu tes untuk daftar kosong. Terakhir terlihat sebelum rilis Kamis.",
+    "sources": ["Martin Fowler: Test Pyramid"]
+  }
+}

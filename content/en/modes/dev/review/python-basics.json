@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "id": "rv-py-1",
+      "type": "mcq",
+      "conceptId": "python-basics",
+      "difficulty": 1,
+      "prompt": "What is \"Rp \" + str(500)?",
+      "choices": ["\"Rp 500\"", "Error", "500"],
+      "answerIndex": 0,
+      "explanation": "str() turns the number into text, so the two can be joined."
+    },
+    {
+      "id": "rv-py-2",
+      "type": "mcq",
+      "conceptId": "python-basics",
+      "difficulty": 1,
+      "prompt": "Rule: age 17 and over may join. Which sign is right?",
+      "choices": ["age > 17", "age >= 17", "age < 17"],
+      "answerIndex": 1,
+      "explanation": ">= includes 17 itself, while > does not."
+    },
+    {
+      "id": "rv-py-3",
+      "type": "mcq",
+      "conceptId": "python-basics",
+      "difficulty": 2,
+      "prompt": "For the average of a list of scores, the total is divided by what?",
+      "choices": ["2", "len(scores)", "total"],
+      "answerIndex": 1,
+      "explanation": "len() tells how many items the list has, so the formula works for a list of any length."
+    }
+  ]
+}

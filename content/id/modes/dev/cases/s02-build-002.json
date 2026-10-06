@@ -1,0 +1,60 @@
+{
+  "id": "s02-build-002",
+  "type": "coding",
+  "conceptIds": ["python-basics", "debugging"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Putri Ramadhani",
+      "team": "Tim Aplikasi Belajar"
+    },
+    "title": "Lomba kilat: hitung kata",
+    "story": [
+      "Tulis fungsi frekuensi_kata(kalimat) yang mengembalikan kamus berisi setiap kata dan berapa kali kata itu muncul.",
+      "Huruf kapital dianggap sama dengan huruf kecil. Ada tes tersembunyi untuk spasi berlebih dan kalimat kosong!"
+    ],
+    "file": "belajar/kata.py",
+    "starter": "def frekuensi_kata(kalimat):\n    # Tulis kodemu di sini\n    return {}\n",
+    "tests": [
+      {
+        "name": "kata berbeda",
+        "code": "assert frekuensi_kata(\"aku suka kode\") == {\"aku\": 1, \"suka\": 1, \"kode\": 1}"
+      },
+      {
+        "name": "kata berulang",
+        "code": "assert frekuensi_kata(\"kode kode lagi\") == {\"kode\": 2, \"lagi\": 1}"
+      },
+      {
+        "name": "huruf kapital",
+        "code": "assert frekuensi_kata(\"Kode kode\") == {\"kode\": 2}",
+        "hidden": true
+      },
+      {
+        "name": "spasi berlebih",
+        "code": "assert frekuensi_kata(\"  halo   dunia \") == {\"halo\": 1, \"dunia\": 1}",
+        "hidden": true
+      },
+      {
+        "name": "kalimat kosong",
+        "code": "assert frekuensi_kata(\"\") == {}",
+        "hidden": true
+      }
+    ],
+    "solution": "def frekuensi_kata(kalimat):\n    hasil = {}\n    for kata in kalimat.lower().split():\n        hasil[kata] = hasil.get(kata, 0) + 1\n    return hasil\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "kalimat.lower().split() memecah kalimat menjadi daftar kata huruf kecil dan otomatis membuang spasi berlebih. Lalu hitung setiap kata dengan hasil.get(kata, 0) + 1 supaya tidak terkena KeyError.",
+  "ruleRefs": ["r-dbg-3", "r-err-2"],
+  "hints": [
+    "Coba di konsol: \"aku suka kode\".split(). Hasilnya daftar kata.",
+    "Untuk menghitung, pakai kamus dan hasil.get(kata, 0) + 1 supaya kata baru tidak memicu KeyError.",
+    "Pakai .lower() sebelum .split() supaya huruf kapital ikut sama, dan split() tanpa argumen juga membuang spasi berlebih."
+  ]
+}

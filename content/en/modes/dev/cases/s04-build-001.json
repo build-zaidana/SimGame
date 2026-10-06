@@ -1,0 +1,60 @@
+{
+  "id": "s04-build-001",
+  "type": "coding",
+  "conceptIds": ["testing", "python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Fajar Nugroho",
+      "team": "User Accounts Team"
+    },
+    "title": "Speed challenge: is the password long enough?",
+    "story": [
+      "Write a function long_enough(password) that returns True if the password has at least 8 characters.",
+      "Spaces at the start and end do not count. There are hidden tests for empty text, exactly 8 characters, and passwords with spaces!"
+    ],
+    "file": "accounts/password.py",
+    "starter": "def long_enough(password):\n    # Write your code here\n    return False\n",
+    "tests": [
+      {
+        "name": "long password",
+        "code": "assert long_enough(\"nusadigital\") == True"
+      },
+      {
+        "name": "short password",
+        "code": "assert long_enough(\"abc\") == False"
+      },
+      {
+        "name": "exactly 8 characters",
+        "code": "assert long_enough(\"12345678\") == True",
+        "hidden": true
+      },
+      {
+        "name": "empty text",
+        "code": "assert long_enough(\"\") == False",
+        "hidden": true
+      },
+      {
+        "name": "spaces around it",
+        "code": "assert long_enough(\"   abc12   \") == False",
+        "hidden": true
+      }
+    ],
+    "solution": "def long_enough(password):\n    clean = password.strip()\n    return len(clean) >= 8\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Remove the spaces around it with .strip(), then compare its length using len(...) >= 8. The >= sign matters so a password of exactly 8 characters is accepted too.",
+  "ruleRefs": ["r-tst-1", "r-py-4"],
+  "hints": [
+    "You can get the length of a text with len(...).",
+    "\"At least 8\" means 8 is fine too. Do you use > or >=?",
+    "Spaces at the start and end can be removed with .strip() before counting."
+  ]
+}

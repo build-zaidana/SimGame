@@ -1,0 +1,90 @@
+{
+  "id": "s05-pr-004",
+  "type": "pull-request",
+  "conceptIds": ["secure-coding", "release-rollback"],
+  "difficulty": 3,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "severity": 1,
+  "data": {
+    "author": {
+      "name": "Sari Kusuma",
+      "team": "Tim Kasir"
+    },
+    "title": "Samarkan nomor HP di log transaksi",
+    "description": [
+      {
+        "text": "Log kasir dulu mencetak nomor HP pembeli utuh. Sekarang hanya 0812****89.",
+        "evidenceId": "desc-why"
+      },
+      {
+        "text": "Sudah dirilis ke produksi pukul 10.00.",
+        "evidenceId": "desc-release"
+      }
+    ],
+    "file": "kasir/transaksi.py",
+    "diff": [
+      {
+        "code": "def samarkan_hp(nomor):",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-mask-def"
+      },
+      {
+        "code": "return nomor[:4] + \"****\" + nomor[-2:]",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-mask"
+      },
+      {
+        "code": "def catat_transaksi(nomor_hp, total):",
+        "indent": 0,
+        "kind": "ctx"
+      },
+      {
+        "code": "print(f\"Transaksi {nomor_hp}: {total}\")",
+        "indent": 1,
+        "kind": "del",
+        "evidenceId": "line-old"
+      },
+      {
+        "code": "print(f\"Transaksi {samarkan_hp(nomor_hp)}: {total}\")",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-new"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Error aplikasi kasir: 0,4% sebelum rilis 10.00 → 0,4% sesudah",
+        "evidenceId": "check-errors"
+      },
+      {
+        "text": "3 laporan printer struk macet, semuanya sejak pukul 08.15 (sebelum rilis)",
+        "evidenceId": "check-printer"
+      },
+      {
+        "text": "Tes otomatis: 5/5 lulus",
+        "evidenceId": "check-tests"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["check-errors", "check-printer", "line-mask", "line-new"]
+  },
+  "explanation": "Angka error sama sebelum dan sesudah rilis, dan laporan printer macet sudah ada sebelum rilis, jadi rilis ini sehat. Perubahannya juga menutup kebocoran nomor HP di log, jadi setujui tanpa rollback.",
+  "ruleRefs": ["r-rel-3", "r-sec-2", "r-rev-1"],
+  "hints": [
+    "Ada laporan masalah. Tapi kapan masalah itu mulai muncul?",
+    "Bandingkan angka error sebelum dan sesudah pukul 10.00."
+  ],
+  "intel": {
+    "lint": [
+      {
+        "text": "Tidak ada peringatan.",
+        "evidenceId": "lint-ok"
+      }
+    ]
+  }
+}

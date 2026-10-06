@@ -1,0 +1,38 @@
+{
+  "items": [
+    {
+      "id": "rv-rev-1",
+      "type": "mcq",
+      "conceptId": "code-review",
+      "difficulty": 1,
+      "prompt": "Sebuah PR benar, rapi, dan semua tesnya lulus. Keputusanmu?",
+      "choices": ["Revisi", "Setujui", "Eskalasi"],
+      "answerIndex": 1,
+      "explanation": "Kode yang sudah baik sebaiknya disetujui agar tim tidak tertahan."
+    },
+    {
+      "id": "rv-rev-2",
+      "type": "mcq",
+      "conceptId": "code-review",
+      "difficulty": 2,
+      "prompt": "Di mana sebaiknya kata sandi database disimpan?",
+      "choices": [
+        "Ditulis langsung di kode",
+        "Di pengaturan rahasia (environment variable)",
+        "Di deskripsi pull request"
+      ],
+      "answerIndex": 1,
+      "explanation": "Rahasia di kode ikut tersimpan di repositori dan bisa dibaca banyak orang."
+    },
+    {
+      "id": "rv-rev-3",
+      "type": "mcq",
+      "conceptId": "code-review",
+      "difficulty": 1,
+      "prompt": "Pada diff, baris berawalan + artinya…",
+      "choices": ["Baris dihapus", "Baris ditambahkan", "Baris error"],
+      "answerIndex": 1,
+      "explanation": "Tanda + menandai baris baru, tanda − menandai baris yang dihapus."
+    }
+  ]
+}

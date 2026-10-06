@@ -1,0 +1,41 @@
+{
+  "id": "s04-ctf-001",
+  "type": "ctf",
+  "conceptIds": ["testing", "debugging"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 1,
+  "data": {
+    "title": "Bendera yang kurang satu kata",
+    "story": [
+      "Kak Dimas menulis fungsi yang menyusun bendera latihan dari daftar potongan kata. Hasil print-nya terlihat meyakinkan, tapi tesnya gagal.",
+      "Telusuri kodenya, perbaiki satu bug yang jelas di konsol, jalankan, lalu ketik benderanya."
+    ],
+    "artifacts": [
+      {
+        "label": "bendera.py",
+        "kind": "code",
+        "content": "potongan = [\"UJI\", \"KASUS\", \"TEPI\", \"DULU\"]\n\ndef buat_bendera(daftar):\n    isi = \"\"\n    for i in range(1, len(daftar)):\n        isi = isi + daftar[i]\n        if i < len(daftar) - 1:\n            isi = isi + \"_\"\n    return \"FLAG{\" + isi + \"}\"\n\nprint(buat_bendera(potongan))\n"
+      },
+      {
+        "label": "Tes dari Kak Dimas",
+        "kind": "text",
+        "content": "Bendera harus memakai SEMUA potongan, berurutan, dipisah tanda _. Jumlah kata di bendera = jumlah potongan (4)."
+      }
+    ],
+    "scratch": "potongan = [\"UJI\", \"KASUS\", \"TEPI\", \"DULU\"]\n\ndef buat_bendera(daftar):\n    isi = \"\"\n    for i in range(1, len(daftar)):\n        isi = isi + daftar[i]\n        if i < len(daftar) - 1:\n            isi = isi + \"_\"\n    return \"FLAG{\" + isi + \"}\"\n\nprint(buat_bendera(potongan))\n",
+    "flag": "FLAG{UJI_KASUS_TEPI_DULU}",
+    "solution": "potongan = [\"UJI\", \"KASUS\", \"TEPI\", \"DULU\"]\n\ndef buat_bendera(daftar):\n    isi = \"\"\n    for i in range(len(daftar)):\n        isi = isi + daftar[i]\n        if i < len(daftar) - 1:\n            isi = isi + \"_\"\n    return \"FLAG{\" + isi + \"}\"\n\nprint(buat_bendera(potongan))\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "range(1, len(daftar)) mulai dari indeks 1, jadi potongan pertama (indeks 0) terlewat. Dengan range(len(daftar)) keempat kata ikut, dan tes jumlah kata membantu menangkap bug yang hasilnya terlihat wajar.",
+  "ruleRefs": ["r-dbg-2", "r-tst-1"],
+  "hints": [
+    "Hitung kata di hasil print. Apakah ada 4?",
+    "Indeks daftar dimulai dari 0. Dari angka berapa perulangannya mulai?"
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "id": "s02-build-002",
+  "type": "coding",
+  "conceptIds": ["python-basics", "debugging"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Putri Ramadhani",
+      "team": "Learning App Team"
+    },
+    "title": "Speed challenge: count the words",
+    "story": [
+      "Write a function word_count(sentence) that returns a dictionary of every word and how many times it appears.",
+      "Capital letters count the same as lowercase. There are hidden tests for extra spaces and an empty sentence!"
+    ],
+    "file": "learning/words.py",
+    "starter": "def word_count(sentence):\n    # Write your code here\n    return {}\n",
+    "tests": [
+      {
+        "name": "different words",
+        "code": "assert word_count(\"i like code\") == {\"i\": 1, \"like\": 1, \"code\": 1}"
+      },
+      {
+        "name": "repeated words",
+        "code": "assert word_count(\"code code again\") == {\"code\": 2, \"again\": 1}"
+      },
+      {
+        "name": "capital letters",
+        "code": "assert word_count(\"Code code\") == {\"code\": 2}",
+        "hidden": true
+      },
+      {
+        "name": "extra spaces",
+        "code": "assert word_count(\"  hello   world \") == {\"hello\": 1, \"world\": 1}",
+        "hidden": true
+      },
+      {
+        "name": "empty sentence",
+        "code": "assert word_count(\"\") == {}",
+        "hidden": true
+      }
+    ],
+    "solution": "def word_count(sentence):\n    result = {}\n    for word in sentence.lower().split():\n        result[word] = result.get(word, 0) + 1\n    return result\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "sentence.lower().split() breaks the sentence into a list of lowercase words and drops extra spaces automatically. Then count each word with result.get(word, 0) + 1 so you never hit a KeyError.",
+  "ruleRefs": ["r-dbg-3", "r-err-2"],
+  "hints": [
+    "Try in the console: \"i like code\".split(). You get a list of words.",
+    "To count, use a dictionary and result.get(word, 0) + 1 so a new word doesn't cause a KeyError.",
+    "Use .lower() before .split() so capital letters match, and split() with no argument also drops extra spaces."
+  ]
+}

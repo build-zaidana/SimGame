@@ -1,0 +1,54 @@
+{
+  "id": "s03-fix-001",
+  "type": "coding",
+  "conceptIds": ["debugging", "python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Dewi Anggraini",
+      "team": "Online Shop Team"
+    },
+    "title": "Cart total causes a KeyError",
+    "story": [
+      "Each item in the cart is a dictionary (dict) with \"name\", \"price\", and \"qty\".",
+      "The cart_total function always crashes. Run the tests, read the KeyError, then fix it."
+    ],
+    "file": "shop/cart.py",
+    "starter": "def cart_total(cart):\n    total = 0\n    for item in cart:\n        total = total + item[\"Price\"] * item[\"qty\"]\n    return total\n",
+    "tests": [
+      {
+        "name": "two items",
+        "code": "assert cart_total([{\"name\": \"pencil\", \"price\": 3000, \"qty\": 2}, {\"name\": \"book\", \"price\": 5000, \"qty\": 1}]) == 11000"
+      },
+      {
+        "name": "one item",
+        "code": "assert cart_total([{\"name\": \"bag\", \"price\": 80000, \"qty\": 1}]) == 80000"
+      },
+      {
+        "name": "empty cart",
+        "code": "assert cart_total([]) == 0",
+        "hidden": true
+      },
+      {
+        "name": "zero quantity",
+        "code": "assert cart_total([{\"name\": \"eraser\", \"price\": 2000, \"qty\": 0}]) == 0",
+        "hidden": true
+      }
+    ],
+    "solution": "def cart_total(cart):\n    total = 0\n    for item in cart:\n        total = total + item[\"price\"] * item[\"qty\"]\n    return total\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "KeyError: 'Price' means that key isn't in the dictionary; the key is written in lowercase, \"price\". Python treats capital and small letters as different, so key names must match exactly.",
+  "ruleRefs": ["r-dbg-3", "r-err-1"],
+  "hints": [
+    "Run the tests and read the last line of the error. Which key is it looking for?",
+    "Compare the key name in the code with the keys in the item data. Capital and small letters are different!"
+  ]
+}

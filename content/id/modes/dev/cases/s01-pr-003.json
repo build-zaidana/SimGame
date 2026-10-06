@@ -1,0 +1,71 @@
+{
+  "id": "s01-pr-003",
+  "type": "pull-request",
+  "conceptIds": ["code-review"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.5
+  },
+  "severity": 3,
+  "data": {
+    "author": {
+      "name": "Hendra Wijaya",
+      "team": "Tim Laporan"
+    },
+    "title": "Sambungkan laporan ke database",
+    "description": [
+      {
+        "text": "Biar cepat, kata sandi database saya tulis langsung di kode. Nanti saja dirapikan.",
+        "evidenceId": "desc-later"
+      },
+      {
+        "text": "Laporannya sudah muncul di laptop saya.",
+        "evidenceId": "desc-works"
+      }
+    ],
+    "file": "laporan/db.py",
+    "diff": [
+      {
+        "code": "import db",
+        "indent": 0,
+        "kind": "ctx"
+      },
+      {
+        "code": "SANDI_DB = \"Nusa#2026rahasia\"",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-secret"
+      },
+      {
+        "code": "def koneksi():",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "return db.connect(\"laporan\", SANDI_DB)",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-connect"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Tes otomatis: 2 dari 2 lulus",
+        "evidenceId": "check-tests"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["line-secret"],
+    "supporting": ["desc-later"]
+  },
+  "explanation": "Kata sandi yang ditulis di kode ikut tersimpan di repositori dan bisa dibaca siapa pun yang punya akses. Minta revisi agar sandinya diambil dari pengaturan rahasia, walaupun tesnya lulus.",
+  "ruleRefs": ["r-rev-3", "r-rev-2"],
+  "hints": [
+    "Tes lulus belum tentu berarti aman. Ada yang tidak boleh ditulis di kode?",
+    "Lihat baris yang berisi kata sandi."
+  ]
+}

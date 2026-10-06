@@ -1,0 +1,50 @@
+{
+  "id": "s02-fix-003",
+  "type": "coding",
+  "conceptIds": ["debugging", "reading-errors"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Yoga Permana",
+      "team": "Tim Aplikasi Sekolah"
+    },
+    "title": "Hitung suara ketua kelas kena KeyError",
+    "story": [
+      "Aplikasi pemilihan ketua kelas menghitung suara dengan kamus (dict). Begitu suara pertama masuk, muncul KeyError.",
+      "Baca error-nya: kunci apa yang belum ada di kamus?"
+    ],
+    "file": "sekolah/suara.py",
+    "starter": "def hitung_suara(pilihan):\n    hasil = {}\n    for nama in pilihan:\n        hasil[nama] = hasil[nama] + 1\n    return hasil\n",
+    "tests": [
+      {
+        "name": "tiga suara",
+        "code": "assert hitung_suara([\"Ani\", \"Budi\", \"Ani\"]) == {\"Ani\": 2, \"Budi\": 1}"
+      },
+      {
+        "name": "satu suara",
+        "code": "assert hitung_suara([\"Cici\"]) == {\"Cici\": 1}"
+      },
+      {
+        "name": "belum ada suara",
+        "code": "assert hitung_suara([]) == {}",
+        "hidden": true
+      }
+    ],
+    "solution": "def hitung_suara(pilihan):\n    hasil = {}\n    for nama in pilihan:\n        hasil[nama] = hasil.get(nama, 0) + 1\n    return hasil\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "hasil[nama] gagal dengan KeyError saat nama itu belum pernah dihitung. hasil.get(nama, 0) mengembalikan 0 untuk kunci yang belum ada, jadi hitungan bisa langsung ditambah.",
+  "ruleRefs": ["r-dbg-3", "r-err-1"],
+  "hints": [
+    "Baca baris terakhir error: KeyError menyebut kunci yang tidak ditemukan.",
+    "Saat suara pertama untuk \"Ani\" masuk, apakah \"Ani\" sudah ada di kamus hasil?",
+    "Coba hasil.get(nama, 0): hasilnya 0 bila kuncinya belum ada."
+  ]
+}

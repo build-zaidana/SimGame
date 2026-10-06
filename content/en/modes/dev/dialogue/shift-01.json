@@ -1,0 +1,38 @@
+{
+  "dialogues": [
+    {
+      "id": "dev-01-intro",
+      "lines": [
+        {
+          "speaker": "dimas",
+          "text": "Hi! I'm Dimas, a developer at Nusa Digital. Just call me Dimas."
+        },
+        {
+          "speaker": "dimas",
+          "text": "At this desk you really code in Python. Edit the code, press Run Tests, until every test is green."
+        },
+        {
+          "speaker": "dimas",
+          "text": "There are also pull requests to review: APPROVE, REVISE, or ESCALATE. And now and then a CTF challenge: find the flag!"
+        },
+        {
+          "speaker": "dimas",
+          "text": "The fewer tries, the higher your score. But relax, mistakes are part of coding."
+        }
+      ]
+    },
+    {
+      "id": "dev-01-outro",
+      "lines": [
+        {
+          "speaker": "dimas",
+          "text": "First shift done! You fixed bugs, wrote a function, and cracked a cipher. Nice."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "A new developer, hm... Let's hope you read pull requests carefully too."
+        }
+      ]
+    }
+  ]
+}

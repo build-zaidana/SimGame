@@ -1,0 +1,195 @@
+{
+  "chapters": [
+    {
+      "id": "ch-py",
+      "title": "Chapter 1 · Python Basics",
+      "conceptId": "python-basics",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-py-1",
+          "text": "A block's body (after if, for, def) must be indented 4 spaces. Python reads indentation as part of the code.",
+          "evidenceTags": ["indent"]
+        },
+        {
+          "id": "r-py-2",
+          "text": "Numbers and text are different types. Turn a number into text with str() before joining with +.",
+          "evidenceTags": ["type"]
+        },
+        {
+          "id": "r-py-3",
+          "text": "Average = total divided by HOW MANY items, i.e. len(list), not a fixed number.",
+          "evidenceTags": ["logic"]
+        },
+        {
+          "id": "r-py-4",
+          "text": "Watch the boundary: > means 'greater than', >= means 'greater than or equal to'.",
+          "evidenceTags": ["boundary"]
+        }
+      ]
+    },
+    {
+      "id": "ch-err",
+      "title": "Chapter 2 · Tests & Error Messages",
+      "conceptId": "reading-errors",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-err-1",
+          "text": "Read the LAST line of an error first: the error type and explanation are there.",
+          "evidenceTags": ["error"]
+        },
+        {
+          "id": "r-err-2",
+          "text": "A test (assert) is a promise about how code behaves. Code is done when every test passes, edge cases included.",
+          "evidenceTags": ["test"]
+        },
+        {
+          "id": "r-err-3",
+          "text": "Change one thing, run the tests again. Guessing with many changes at once gets confusing.",
+          "evidenceTags": ["iterate"]
+        }
+      ]
+    },
+    {
+      "id": "ch-review",
+      "title": "Chapter 3 · Code Review",
+      "conceptId": "code-review",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-rev-1",
+          "text": "APPROVE when the code is correct, readable, and its tests pass. Don't hold back good work.",
+          "evidenceTags": ["approve"]
+        },
+        {
+          "id": "r-rev-2",
+          "text": "REVISE when there is a bug, a missed edge case, or a risky habit. Point to the problem line.",
+          "evidenceTags": ["revise"]
+        },
+        {
+          "id": "r-rev-3",
+          "text": "Passwords and secret keys must never be written in code. Keep them in secret settings (environment variables).",
+          "evidenceTags": ["secret"]
+        },
+        {
+          "id": "r-rev-4",
+          "text": "ESCALATE to a senior developer when a change needs special permission or expertise (production servers, customer data).",
+          "evidenceTags": ["escalate"]
+        }
+      ]
+    },
+    {
+      "id": "ch-debug",
+      "title": "Chapter 4 · Debugging",
+      "conceptId": "debugging",
+      "unlockAtShift": 2,
+      "rules": [
+        {
+          "id": "r-dbg-1",
+          "text": "Unsure what a variable holds? Print it with print() at a few points, then compare with what you expect.",
+          "evidenceTags": ["print"]
+        },
+        {
+          "id": "r-dbg-2",
+          "text": "range(n) stops at n-1. Many off-by-one bugs come from loop boundaries.",
+          "evidenceTags": ["range"]
+        },
+        {
+          "id": "r-dbg-3",
+          "text": "IndexError/KeyError means reading something that isn't there. Check the list length or dictionary key first.",
+          "evidenceTags": ["lookup"]
+        },
+        {
+          "id": "r-dbg-4",
+          "text": "Reproduce the bug with the smallest example you can before fixing it.",
+          "evidenceTags": ["reproduce"]
+        }
+      ]
+    },
+    {
+      "id": "ch-release",
+      "title": "Chapter 5 · Releases & Rollback",
+      "conceptId": "release-rollback",
+      "unlockAtShift": 3,
+      "rules": [
+        {
+          "id": "r-rel-1",
+          "text": "Every change is saved as a commit with a message explaining what changed and why.",
+          "evidenceTags": ["commit"]
+        },
+        {
+          "id": "r-rel-2",
+          "text": "New release causing errors in production? ROLL BACK to the last healthy version first, fix it afterwards.",
+          "evidenceTags": ["rollback"]
+        },
+        {
+          "id": "r-rel-3",
+          "text": "Compare the numbers before and after a release. Don't roll back a healthy release: choose APPROVE to keep it running.",
+          "evidenceTags": ["metrics"]
+        },
+        {
+          "id": "r-rel-4",
+          "text": "Big changes are released gradually and watched, not to every user at once.",
+          "evidenceTags": ["gradual"]
+        }
+      ]
+    },
+    {
+      "id": "ch-test",
+      "title": "Chapter 6 · Writing Tests",
+      "conceptId": "testing",
+      "unlockAtShift": 4,
+      "rules": [
+        {
+          "id": "r-tst-1",
+          "text": "Test the edge cases: empty lists, zero, negative numbers, capital letters, text with spaces.",
+          "evidenceTags": ["edge"]
+        },
+        {
+          "id": "r-tst-2",
+          "text": "A test that always passes (like assert True) tests nothing.",
+          "evidenceTags": ["fake-test"]
+        },
+        {
+          "id": "r-tst-3",
+          "text": "Every fixed bug gets a new test, so that bug never comes back.",
+          "evidenceTags": ["regression"]
+        },
+        {
+          "id": "r-tst-4",
+          "text": "New logic without tests = REVISE. Ask the author to add relevant tests.",
+          "evidenceTags": ["missing-test"]
+        }
+      ]
+    },
+    {
+      "id": "ch-secure",
+      "title": "Chapter 7 · Secure Code",
+      "conceptId": "secure-coding",
+      "unlockAtShift": 5,
+      "rules": [
+        {
+          "id": "r-sec-1",
+          "text": "Don't trust user input: check its type and range before using it.",
+          "evidenceTags": ["input"]
+        },
+        {
+          "id": "r-sec-2",
+          "text": "Never print or store passwords and personal data in logs.",
+          "evidenceTags": ["log"]
+        },
+        {
+          "id": "r-sec-3",
+          "text": "Code that sends data to an unknown address, or comes from an unknown account, must be ESCALATED to the SOC team.",
+          "evidenceTags": ["exfil"]
+        },
+        {
+          "id": "r-sec-4",
+          "text": "Use libraries from the company's official sources, not random code copied from forums.",
+          "evidenceTags": ["dependency"]
+        }
+      ]
+    }
+  ]
+}

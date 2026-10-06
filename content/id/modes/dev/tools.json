@@ -1,0 +1,22 @@
+{
+  "tools": [
+    {
+      "id": "test-runner",
+      "name": "Test Runner",
+      "icon": "🧪",
+      "description": "Menjalankan tes otomatis pada pull request dan menampilkan hasilnya, jadi kamu tidak hanya menebak dari membaca kode.",
+      "price": 70,
+      "conceptId": "reading-errors",
+      "unlockAtShift": 2
+    },
+    {
+      "id": "linter",
+      "name": "Linter",
+      "icon": "🧹",
+      "description": "Memeriksa gaya kode dan potensi bug umum (variabel tak terpakai, perbandingan janggal) secara otomatis.",
+      "price": 90,
+      "conceptId": "code-review",
+      "unlockAtShift": 3
+    }
+  ]
+}

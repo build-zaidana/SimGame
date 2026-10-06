@@ -1,0 +1,90 @@
+{
+  "id": "s05-pr-004",
+  "type": "pull-request",
+  "conceptIds": ["secure-coding", "release-rollback"],
+  "difficulty": 3,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "severity": 1,
+  "data": {
+    "author": {
+      "name": "Sari Kusuma",
+      "team": "Cashier Team"
+    },
+    "title": "Mask phone numbers in the transaction log",
+    "description": [
+      {
+        "text": "The cashier log used to print the buyer's full phone number. Now it only shows 0812****89.",
+        "evidenceId": "desc-why"
+      },
+      {
+        "text": "Already released to production at 10.00.",
+        "evidenceId": "desc-release"
+      }
+    ],
+    "file": "cashier/transaction.py",
+    "diff": [
+      {
+        "code": "def mask_phone(number):",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-mask-def"
+      },
+      {
+        "code": "return number[:4] + \"****\" + number[-2:]",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-mask"
+      },
+      {
+        "code": "def log_transaction(phone, total):",
+        "indent": 0,
+        "kind": "ctx"
+      },
+      {
+        "code": "print(f\"Transaction {phone}: {total}\")",
+        "indent": 1,
+        "kind": "del",
+        "evidenceId": "line-old"
+      },
+      {
+        "code": "print(f\"Transaction {mask_phone(phone)}: {total}\")",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-new"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Cashier app errors: 0.4% before the 10.00 release → 0.4% after",
+        "evidenceId": "check-errors"
+      },
+      {
+        "text": "3 reports of jammed receipt printers, all since 08.15 (before the release)",
+        "evidenceId": "check-printer"
+      },
+      {
+        "text": "Automated tests: 5/5 passed",
+        "evidenceId": "check-tests"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["check-errors", "check-printer", "line-mask", "line-new"]
+  },
+  "explanation": "The error rate is the same before and after the release, and the printer reports started before it, so this release is healthy. The change also stops phone numbers leaking into the log, so approve it without a rollback.",
+  "ruleRefs": ["r-rel-3", "r-sec-2", "r-rev-1"],
+  "hints": [
+    "There are problem reports. But when did those problems start?",
+    "Compare the error rate before and after 10.00."
+  ],
+  "intel": {
+    "lint": [
+      {
+        "text": "No warnings.",
+        "evidenceId": "lint-ok"
+      }
+    ]
+  }
+}

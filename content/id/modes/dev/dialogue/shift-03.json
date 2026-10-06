@@ -1,0 +1,30 @@
+{
+  "dialogues": [
+    {
+      "id": "dev-03-intro",
+      "lines": [
+        {
+          "speaker": "dimas",
+          "text": "Hari ini hari rilis. Kamu ikut memantau aplikasi yang sudah dipakai pengguna."
+        },
+        {
+          "speaker": "dimas",
+          "text": "Keputusan baru: ROLLBACK. Pakai kalau rilis baru membuat error melonjak."
+        },
+        {
+          "speaker": "dimas",
+          "text": "Tapi baca angkanya dulu. Jangan rollback rilis yang sehat."
+        }
+      ]
+    },
+    {
+      "id": "dev-03-outro",
+      "lines": [
+        {
+          "speaker": "dimas",
+          "text": "Rilis pertamamu selamat. Tenang saat ada error itu kemampuan developer yang mahal."
+        }
+      ]
+    }
+  ]
+}

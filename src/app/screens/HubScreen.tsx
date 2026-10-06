@@ -57,6 +57,7 @@ export function HubScreen() {
     }
     if (hotspotId === 'npc:rani') return { label: id.explore.raniLabel, action: id.explore.talk };
     if (hotspotId === 'npc:joko') return { label: id.explore.jokoLabel, action: id.explore.talk };
+    if (hotspotId === 'npc:dimas') return { label: id.explore.dimasLabel, action: id.explore.talk };
     if (hotspotId === 'menu:shop') return { label: id.explore.shopLabel, action: id.explore.open };
     if (hotspotId === 'menu:rulebook')
       return { label: id.explore.rulebookLabel, action: id.explore.open };
@@ -73,13 +74,15 @@ export function HubScreen() {
     if (hotspotId === 'menu:badges') return openMenu('badges');
     // Mentor (Mbak Rani: SOC, Pak Joko: Bengkel IT): satu aturan acak dari bab yang sudah terbuka.
     const mentor = modes.find((m) => `npc:${m.mentor}` === hotspotId);
-    if (!mentor || (mentor.mentor !== 'rani' && mentor.mentor !== 'joko')) return;
+    if (!mentor || !['rani', 'joko', 'dimas'].includes(mentor.mentor)) return;
     const unlocked = Math.max(1, save?.modes[mentor.id]?.unlockedShift ?? 1);
     const rules = (contents[mentor.id]?.rulebook.chapters ?? [])
       .filter((ch) => ch.unlockAtShift <= unlocked)
       .flatMap((ch) => ch.rules);
     const rule = rules[Math.floor(Math.random() * rules.length)];
-    return rule ? { speaker: mentor.mentor, text: id.explore.raniTip(rule.text) } : undefined;
+    return rule
+      ? { speaker: mentor.mentor as HubSpeech['speaker'], text: id.explore.raniTip(rule.text) }
+      : undefined;
   };
 
   useEffect(() => {

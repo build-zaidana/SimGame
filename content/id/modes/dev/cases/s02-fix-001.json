@@ -1,0 +1,49 @@
+{
+  "id": "s02-fix-001",
+  "type": "coding",
+  "conceptIds": ["debugging", "reading-errors"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Sinta Maharani",
+      "team": "Tim Gudang"
+    },
+    "title": "Hitung stok gudang selalu error",
+    "story": [
+      "Fungsi jumlah_stok menjumlah stok semua rak di gudang, tapi setiap dipanggil muncul IndexError.",
+      "Jalankan tesnya, baca baris terakhir error, lalu cek batas perulangannya."
+    ],
+    "file": "gudang/stok.py",
+    "starter": "def jumlah_stok(stok):\n    total = 0\n    for i in range(len(stok) + 1):\n        total = total + stok[i]\n    return total\n",
+    "tests": [
+      {
+        "name": "tiga rak",
+        "code": "assert jumlah_stok([5, 3, 2]) == 10"
+      },
+      {
+        "name": "satu rak",
+        "code": "assert jumlah_stok([7]) == 7"
+      },
+      {
+        "name": "gudang kosong",
+        "code": "assert jumlah_stok([]) == 0",
+        "hidden": true
+      }
+    ],
+    "solution": "def jumlah_stok(stok):\n    total = 0\n    for i in range(len(stok)):\n        total = total + stok[i]\n    return total\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Indeks daftar berjalan dari 0 sampai len(stok) - 1, jadi range(len(stok) + 1) mencoba mengambil satu isi yang tidak ada dan memicu IndexError. Cukup pakai range(len(stok)).",
+  "ruleRefs": ["r-dbg-2", "r-dbg-3", "r-err-1"],
+  "hints": [
+    "IndexError berarti kode mengambil urutan yang tidak ada di daftar.",
+    "Daftar [5, 3, 2] punya indeks 0, 1, 2. Angka berapa saja yang dihasilkan range(len(stok) + 1)?"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "id": "s04-pr-002",
+  "type": "pull-request",
+  "conceptIds": ["testing", "code-review"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Rizky Ramadhan",
+      "team": "School Report Team"
+    },
+    "title": "Passing grade check + test",
+    "description": [
+      {
+        "text": "A student passes if their score is 75 or higher (the minimum passing score).",
+        "evidenceId": "desc-rule"
+      },
+      {
+        "text": "There's already a test and it passes, so it's safe!",
+        "evidenceId": "desc-safe"
+      }
+    ],
+    "file": "report/passing.py",
+    "diff": [
+      {
+        "code": "def passes(score):",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "return score >= 75",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-logic"
+      },
+      {
+        "code": "# test",
+        "indent": 0,
+        "kind": "add"
+      },
+      {
+        "code": "result = passes(80)",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-call"
+      },
+      {
+        "code": "assert result == result",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-fake"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Automated tests: 1 of 1 passed",
+        "evidenceId": "check-tests"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["line-fake"],
+    "supporting": ["desc-safe", "check-tests", "line-logic"]
+  },
+  "explanation": "assert result == result compares a value with itself, so it always passes even if the function is wrong. Ask for a revision with real tests, for example scores 75, 74, and 80.",
+  "ruleRefs": ["r-tst-2", "r-tst-4"],
+  "hints": [
+    "The test passes, but what is it actually comparing?",
+    "If the function body were changed to return False, would this test fail?",
+    "Look at the assert line: what is result compared with?"
+  ],
+  "intel": {
+    "tests": [
+      {
+        "text": "Test Runner: 1 test passed",
+        "evidenceId": "intel-pass"
+      },
+      {
+        "text": "This test still passes no matter how passes() is changed",
+        "evidenceId": "intel-mutation"
+      }
+    ]
+  }
+}

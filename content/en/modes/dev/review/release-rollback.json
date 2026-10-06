@@ -1,0 +1,60 @@
+{
+  "items": [
+    {
+      "id": "rv-rel-1",
+      "type": "mcq",
+      "conceptId": "release-rollback",
+      "difficulty": 1,
+      "prompt": "App errors were 0.3% before the 10:00 release, then 20% after. What's the right first step?",
+      "choices": [
+        "Roll back to the last healthy version",
+        "Wait until tomorrow, maybe it drops by itself",
+        "Start writing a new feature"
+      ],
+      "answerIndex": 0,
+      "explanation": "The new release made errors jump, so restore the healthy version first so users aren't affected, then fix it later."
+    },
+    {
+      "id": "rv-rel-2",
+      "type": "mcq",
+      "conceptId": "release-rollback",
+      "difficulty": 2,
+      "prompt": "Errors have been 9% since 12:40. A release went out at 13:00, and errors stayed at 9%. Roll back?",
+      "choices": [
+        "Yes, every error means a rollback",
+        "No, the errors were there before the release and didn't grow",
+        "Yes, releases always cause errors"
+      ],
+      "answerIndex": 1,
+      "explanation": "Compare the numbers before and after the release. Rolling back a healthy release only undoes good work."
+    },
+    {
+      "id": "rv-rel-3",
+      "type": "mcq",
+      "conceptId": "release-rollback",
+      "difficulty": 1,
+      "prompt": "Which commit message is best?",
+      "choices": [
+        "\"update\"",
+        "\"fix again\"",
+        "\"Fix shipping KeyError for cities not in the rate table\""
+      ],
+      "answerIndex": 2,
+      "explanation": "A good commit message says what changed and why, so the team can read the history easily."
+    },
+    {
+      "id": "rv-rel-4",
+      "type": "order-steps",
+      "conceptId": "release-rollback",
+      "difficulty": 2,
+      "prompt": "Put the steps in order when a new release makes errors jump.",
+      "steps": [
+        "Compare error numbers before and after the release",
+        "Roll back to the last healthy version",
+        "Find the bug, fix it, and add a test",
+        "Release again gradually while watching"
+      ],
+      "explanation": "Users are protected first with a rollback; the fix is done calmly and then released gradually."
+    }
+  ]
+}

@@ -66,8 +66,21 @@ export function FeedbackDialog({
           {(citations ?? (id.feedback.citations as Partial<Record<string, string>>))[o.impact]}
         </p>
       )}
-      <p className="mt-3">{id.feedback.yourDecision(decisionLabel(o.decision))}</p>
-      {!o.correct && <p>{id.feedback.correctDecision(decisionLabel(caseData.correctDecision))}</p>}
+      {o.verdict === 'task' ? (
+        // Tugas coding/CTF (ADR 026): yang penting hasil tes, bukan pilihan tombol.
+        sessionCase.answer?.total ? (
+          <p className="mt-3" data-testid="tests-passed">
+            {id.feedback.testsPassed(sessionCase.answer.passed ?? 0, sessionCase.answer.total)}
+          </p>
+        ) : null
+      ) : (
+        <>
+          <p className="mt-3">{id.feedback.yourDecision(decisionLabel(o.decision))}</p>
+          {!o.correct && (
+            <p>{id.feedback.correctDecision(decisionLabel(caseData.correctDecision))}</p>
+          )}
+        </>
+      )}
       <p className="mt-3">{caseData.explanation}</p>
       {o.missedEvidence.length > 0 && (
         <div className="mt-3">

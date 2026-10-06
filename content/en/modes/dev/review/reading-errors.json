@@ -1,0 +1,38 @@
+{
+  "items": [
+    {
+      "id": "rv-err-1",
+      "type": "mcq",
+      "conceptId": "reading-errors",
+      "difficulty": 1,
+      "prompt": "Which part of an error message should you read first?",
+      "choices": ["The first line", "The last line", "No need to read it"],
+      "answerIndex": 1,
+      "explanation": "The last line holds the error type and its explanation."
+    },
+    {
+      "id": "rv-err-2",
+      "type": "mcq",
+      "conceptId": "reading-errors",
+      "difficulty": 1,
+      "prompt": "\"Rp \" + 5000 causes which type of error?",
+      "choices": ["NameError", "TypeError", "IndentationError"],
+      "answerIndex": 1,
+      "explanation": "Text and numbers are different types, so Python raises a TypeError."
+    },
+    {
+      "id": "rv-err-3",
+      "type": "order-steps",
+      "conceptId": "reading-errors",
+      "difficulty": 2,
+      "prompt": "Put the developer's steps in order when a test fails.",
+      "steps": [
+        "Run the tests",
+        "Read the failing test and its error",
+        "Fix one thing",
+        "Run the tests again"
+      ],
+      "explanation": "Changing one thing and testing again tells you exactly which change worked."
+    }
+  ]
+}

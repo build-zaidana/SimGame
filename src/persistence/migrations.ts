@@ -61,6 +61,8 @@ export const MIGRATIONS: Record<number, Migration> = {
   },
   /** v7 → v8: verdict kasus diperluas untuk mode IT Support; data lama tetap valid. */
   7: (d) => d,
+  /** v8 → v9: kasus boleh menyimpan jawaban ketikan (Meja Developer); data lama tetap valid. */
+  8: (d) => d,
 };
 
 export function runMigrations(

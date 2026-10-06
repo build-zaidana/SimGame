@@ -1,0 +1,38 @@
+{
+  "dialogues": [
+    {
+      "id": "dev-01-intro",
+      "lines": [
+        {
+          "speaker": "dimas",
+          "text": "Halo! Aku Dimas, developer di PT Nusa Digital. Panggil Kak Dimas aja."
+        },
+        {
+          "speaker": "dimas",
+          "text": "Di meja ini kamu benar-benar ngoding pakai Python. Edit kodenya, tekan Jalankan Tes, sampai semua tes hijau."
+        },
+        {
+          "speaker": "dimas",
+          "text": "Ada juga pull request untuk di-review: SETUJUI, REVISI, atau ESKALASI. Dan sesekali tantangan CTF, cari benderanya!"
+        },
+        {
+          "speaker": "dimas",
+          "text": "Makin sedikit percobaan, makin tinggi skormu. Tapi tenang, salah itu bagian dari ngoding."
+        }
+      ]
+    },
+    {
+      "id": "dev-01-outro",
+      "lines": [
+        {
+          "speaker": "dimas",
+          "text": "Shift pertama beres! Tadi kamu sudah memperbaiki bug, menulis fungsi, dan membuka sandi. Keren."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "Developer baru, ya... Semoga kamu juga teliti membaca pull request."
+        }
+      ]
+    }
+  ]
+}

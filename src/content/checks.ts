@@ -76,7 +76,13 @@ const allStrings = (v: unknown) => {
 /** Teks yang dibaca pemain di dokumen (bukan ID atau href tersembunyi). */
 export function documentText(data: unknown): string {
   const out: string[] = [];
-  walkStrings(data, (k) => !['evidenceId', 'href', 'id'].includes(k), out);
+  // Kode acuan, tes, dan kode awal editor (Meja Developer) bukan teks bacaan dokumen.
+  walkStrings(
+    data,
+    (k) =>
+      !['evidenceId', 'href', 'id', 'solution', 'tests', 'starter', 'scratch', 'flag'].includes(k),
+    out,
+  );
   return out.join(' ');
 }
 
@@ -183,7 +189,11 @@ export function checkModeContent(content: ModeContent, policy: CheckPolicy): Con
     }
     const overlap = c.evidence.required.filter((id) => c.evidence.supporting.includes(id));
     if (overlap.length) err(file, `evidence ada di required & supporting: ${overlap.join(', ')}`);
-    if (!NO_ACTION_VERDICTS.includes(c.verdict) && c.evidence.required.length === 0) {
+    if (
+      c.verdict !== 'task' &&
+      !NO_ACTION_VERDICTS.includes(c.verdict) &&
+      c.evidence.required.length === 0
+    ) {
       err(file, 'kasus berbahaya/mencurigakan wajib punya evidence.required');
     }
     if (c.correctDecision in c.acceptableDecisions) {
@@ -218,18 +228,22 @@ export function checkModeContent(content: ModeContent, policy: CheckPolicy): Con
   for (const s of content.shifts) {
     const file = `shifts/${s.id}.json`;
     let safe = 0;
+    // Tugas coding/CTF (verdict `task`, ADR 026) bukan keputusan aman/tidak: tidak ikut rasio.
+    let decisions = 0;
     for (const q of s.queue) {
       if ('caseId' in q) {
         const c = content.cases[q.caseId];
         if (!c) err(file, `kasus tidak ada: ${q.caseId}`);
-        else if (NO_ACTION_VERDICTS.includes(c.verdict)) safe++;
+        else if (c.verdict !== 'task') decisions++;
+        if (c && NO_ACTION_VERDICTS.includes(c.verdict)) safe++;
       } else {
         if (!policy.knownGenerators.includes(q.generator))
           err(file, `generator tidak dikenal: ${q.generator}`);
+        decisions++;
         if (NO_ACTION_VERDICTS.includes(q.params['verdict'] as Verdict)) safe++;
       }
     }
-    const ratio = safe / s.queue.length;
+    const ratio = decisions === 0 ? policy.safeRatio.min : safe / decisions;
     if (ratio < policy.safeRatio.min || ratio > policy.safeRatio.max) {
       err(
         file,

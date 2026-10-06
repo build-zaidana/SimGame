@@ -4,6 +4,7 @@ import type { ModeContent } from '../content/loader.ts';
 import type { BaseCase } from '../content/schemas.ts';
 import type { ShiftAction } from '../engine/shift.ts';
 import type {
+  CaseAnswer,
   CaseImpact,
   CaseOutcome,
   DecisionId,
@@ -24,6 +25,11 @@ export interface DocumentProps<TCase extends BaseCase = BaseCase> {
   locked: boolean;
   /** ID alat yang dimiliki pemain; Document memakai ini untuk mekanik alat. */
   tools: ReadonlySet<string>;
+  /** Jawaban ketikan pemain (kode/bendera, ADR 026); hanya tipe kasus yang memakainya. */
+  answer?: CaseAnswer | undefined;
+  onAnswer?(text: string): void;
+  /** Mencatat satu kali menjalankan tes (jumlah lulus / total). */
+  onRun?(passed: number, total: number): void;
 }
 
 export interface CaseTypeDef<TCase extends BaseCase = BaseCase> {
@@ -37,6 +43,10 @@ export interface CaseTypeDef<TCase extends BaseCase = BaseCase> {
   queueLabel(c: TCase): { icon: string; title: string };
   /** Siapa yang membawa kasus ini ke meja (potret + satu kalimat). Tidak boleh membocorkan jawaban. */
   visitor?(c: TCase): Visitor;
+  /** Keputusan yang berlaku untuk tipe ini (subset keputusan mode); tanpa ini semuanya. */
+  decisions?: readonly DecisionId[];
+  /** Tugas ketik (ADR 026): tombol keputusan aktif hanya bila jawaban siap dikirim. */
+  ready?(c: TCase, answer: CaseAnswer | undefined): boolean;
 }
 
 export interface Visitor {

@@ -1,0 +1,101 @@
+{
+  "id": "s04-pr-003",
+  "type": "pull-request",
+  "conceptIds": ["release-rollback", "testing"],
+  "difficulty": 3,
+  "verdict": "fault",
+  "correctDecision": "rollback",
+  "acceptableDecisions": {
+    "revise": 0.3
+  },
+  "severity": 3,
+  "data": {
+    "author": {
+      "name": "Yoga Firmansyah",
+      "team": "Tim Toko Online"
+    },
+    "title": "Gratis ongkir untuk belanja 100 ribu ke atas",
+    "description": [
+      {
+        "text": "Sudah digabung dan dirilis ke produksi pukul 14.05.",
+        "evidenceId": "desc-released"
+      },
+      {
+        "text": "Ongkir (ongkos kirim) sekarang dihitung per kota.",
+        "evidenceId": "desc-change"
+      }
+    ],
+    "file": "toko/ongkir.py",
+    "diff": [
+      {
+        "code": "def ongkir(kota, belanja):",
+        "indent": 0,
+        "kind": "ctx",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "return 10000",
+        "indent": 1,
+        "kind": "del",
+        "evidenceId": "line-old"
+      },
+      {
+        "code": "if belanja >= 100000:",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-free"
+      },
+      {
+        "code": "return 0",
+        "indent": 2,
+        "kind": "add",
+        "evidenceId": "line-zero"
+      },
+      {
+        "code": "return TARIF[kota]",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-lookup"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Error checkout: 0,3% sebelum rilis 14.05 → 21% sesudah",
+        "evidenceId": "check-errors"
+      },
+      {
+        "text": "Keluhan pelanggan: 2 sebelum rilis, 87 dalam 30 menit sesudahnya",
+        "evidenceId": "check-complaints"
+      },
+      {
+        "text": "Tes otomatis: 2 dari 2 lulus (hanya kota Bandung dan Medan)",
+        "evidenceId": "check-tests"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-released", "check-errors"],
+    "supporting": ["check-complaints", "line-lookup", "check-tests"]
+  },
+  "explanation": "Rilis 14.05 sudah di produksi dan error checkout melonjak dari 0,3% ke 21% tepat sesudahnya, jadi rollback dulu ke versi sehat. Perbaikan TARIF[kota] untuk kota yang tidak terdaftar, beserta tesnya, menyusul.",
+  "ruleRefs": ["r-rel-2", "r-rel-3", "r-tst-3"],
+  "hints": [
+    "Kodenya sudah dipakai pengguna sungguhan. Lihat angka sebelum dan sesudah rilis.",
+    "Error melonjak tepat setelah 14.05. Apa langkah pertama untuk rilis yang membuat error?",
+    "Revisi saja terlalu lambat; pengguna sedang gagal membayar sekarang."
+  ],
+  "intel": {
+    "tests": [
+      {
+        "text": "Tidak ada tes untuk kota di luar daftar TARIF",
+        "evidenceId": "intel-no-test"
+      }
+    ],
+    "lint": [
+      {
+        "text": "Peringatan: TARIF[kota] bisa KeyError bila kota tidak ada di daftar",
+        "evidenceId": "intel-keyerror"
+      }
+    ]
+  }
+}

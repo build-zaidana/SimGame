@@ -1,0 +1,90 @@
+{
+  "id": "s05-pr-002",
+  "type": "pull-request",
+  "conceptIds": ["secure-coding", "code-review"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 3,
+  "data": {
+    "author": {
+      "name": "Fajar Nugroho",
+      "team": "Tim Akun"
+    },
+    "title": "Tambah log untuk melacak login gagal",
+    "description": [
+      {
+        "text": "Banyak pengguna lapor tidak bisa login. Saya tambah log supaya mudah dilacak.",
+        "evidenceId": "desc-why"
+      },
+      {
+        "text": "Log server ini dibaca bersama oleh beberapa tim.",
+        "evidenceId": "desc-shared"
+      }
+    ],
+    "file": "akun/login.py",
+    "diff": [
+      {
+        "code": "def login(username, password):",
+        "indent": 0,
+        "kind": "ctx",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "print(f\"Login: {username} / {password}\")",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-print"
+      },
+      {
+        "code": "user = cari_user(username)",
+        "indent": 1,
+        "kind": "ctx",
+        "evidenceId": "line-find"
+      },
+      {
+        "code": "if user is None:",
+        "indent": 1,
+        "kind": "ctx"
+      },
+      {
+        "code": "return False",
+        "indent": 2,
+        "kind": "ctx"
+      },
+      {
+        "code": "return cek_sandi(user, password)",
+        "indent": 1,
+        "kind": "ctx",
+        "evidenceId": "line-check"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Tes otomatis: 4/4 lulus",
+        "evidenceId": "check-tests"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["line-print"],
+    "supporting": ["desc-shared", "lint-pass"]
+  },
+  "explanation": "Log baru ini mencetak kata sandi pengguna, padahal log dibaca banyak orang. Minta revisi: cukup catat username dan hasil login, tanpa kata sandi.",
+  "ruleRefs": ["r-sec-2", "r-rev-2"],
+  "hints": [
+    "Tesnya lulus, tapi apa saja yang ikut tertulis ke log?",
+    "Lihat baris print. Variabel mana yang seharusnya tidak pernah dicetak?"
+  ],
+  "intel": {
+    "lint": [
+      {
+        "text": "Baris 2: variabel 'password' dicetak dengan print()",
+        "evidenceId": "lint-pass"
+      }
+    ]
+  }
+}

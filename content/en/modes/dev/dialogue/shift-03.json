@@ -1,0 +1,30 @@
+{
+  "dialogues": [
+    {
+      "id": "dev-03-intro",
+      "lines": [
+        {
+          "speaker": "dimas",
+          "text": "Today is release day. You'll help watch the apps real users are using."
+        },
+        {
+          "speaker": "dimas",
+          "text": "New decision: ROLL BACK. Use it when a new release makes errors jump."
+        },
+        {
+          "speaker": "dimas",
+          "text": "But read the numbers first. Don't roll back a healthy release."
+        }
+      ]
+    },
+    {
+      "id": "dev-03-outro",
+      "lines": [
+        {
+          "speaker": "dimas",
+          "text": "Your first release day went fine. Staying calm during errors is a valuable developer skill."
+        }
+      ]
+    }
+  ]
+}

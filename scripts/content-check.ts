@@ -14,6 +14,10 @@ import { socGenerators } from '../src/modes/soc/generators/index.ts';
 import { SOC_TOOL_IDS } from '../src/modes/soc/tools.ts';
 import { supportCaseSchemas } from '../src/modes/support/caseTypes/schemas.ts';
 import { SUPPORT_TOOL_IDS } from '../src/modes/support/tools.ts';
+import { loadMicroPython } from '@micropython/micropython-webassembly-pyscript';
+import { devCaseSchemas } from '../src/modes/dev/caseTypes/schemas.ts';
+import { DEV_TOOL_IDS } from '../src/modes/dev/tools.ts';
+import { verifyDevCase } from '../src/modes/dev/verify.ts';
 
 const ROOT = join(import.meta.dirname, '..');
 const LOCALES_DIR = join(ROOT, 'content');
@@ -21,10 +25,22 @@ const LOCALES_DIR = join(ROOT, 'content');
 /** Registri per mode (skema tipe kasus, generator, alat). Mode baru wajib didaftarkan di sini. */
 const MODES: Record<
   string,
-  { schemas: CaseSchemas; generators: Record<string, CaseGenerator>; tools: string[] }
+  {
+    schemas: CaseSchemas;
+    generators: Record<string, CaseGenerator>;
+    tools: string[];
+    /** Pemeriksaan tambahan per kasus yang butuh menjalankan sesuatu (mis. kode Python). */
+    verify?: (c: { id: string; type: string; data: unknown }) => Promise<string[]>;
+  }
 > = {
   soc: { schemas: socCaseSchemas, generators: socGenerators, tools: SOC_TOOL_IDS },
   support: { schemas: supportCaseSchemas, generators: {}, tools: SUPPORT_TOOL_IDS },
+  dev: {
+    schemas: devCaseSchemas,
+    generators: {},
+    tools: DEV_TOOL_IDS,
+    verify: (c) => verifyDevCase(loadMicroPython, c),
+  },
 };
 /** Jumlah seed yang dicoba untuk tiap entri generator di antrian shift. */
 const GENERATOR_SAMPLES = 20;
@@ -128,6 +144,12 @@ for (const locale of readdirSync(LOCALES_DIR)) {
       knownTools: tools,
     };
     const all = [...parseErrors, ...checkModeContent(content, policy)];
+    if (registry.verify) {
+      for (const c of Object.values(content.cases)) {
+        for (const message of await registry.verify(c))
+          all.push({ file: `cases/${c.id}.json`, message });
+      }
+    }
     errors.push(...all.map((e) => ({ ...e, file: prefix + e.file })));
   }
 }

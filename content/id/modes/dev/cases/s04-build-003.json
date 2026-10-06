@@ -1,0 +1,65 @@
+{
+  "id": "s04-build-003",
+  "type": "coding",
+  "conceptIds": ["testing", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Maya Lestari",
+      "team": "Tim Rapor Sekolah"
+    },
+    "title": "Lomba kilat: rata-rata yang tidak crash",
+    "story": [
+      "Tulis fungsi rata_rata_aman(nilai) yang mengembalikan rata-rata isi daftar.",
+      "Kalau daftarnya kosong, kembalikan 0, jangan sampai crash. Tes tersembunyi juga memakai angka nol dan negatif."
+    ],
+    "file": "rapor/rata.py",
+    "starter": "def rata_rata_aman(nilai):\n    # Tulis kodemu di sini\n    return 0\n",
+    "tests": [
+      {
+        "name": "tiga nilai",
+        "code": "assert rata_rata_aman([80, 90, 100]) == 90"
+      },
+      {
+        "name": "dua nilai",
+        "code": "assert rata_rata_aman([70, 80]) == 75"
+      },
+      {
+        "name": "daftar kosong",
+        "code": "assert rata_rata_aman([]) == 0",
+        "hidden": true
+      },
+      {
+        "name": "negatif dan positif",
+        "code": "assert rata_rata_aman([-4, 4]) == 0",
+        "hidden": true
+      },
+      {
+        "name": "satu nilai nol",
+        "code": "assert rata_rata_aman([0]) == 0",
+        "hidden": true
+      },
+      {
+        "name": "semua negatif",
+        "code": "assert rata_rata_aman([-2, -4]) == -3",
+        "hidden": true
+      }
+    ],
+    "solution": "def rata_rata_aman(nilai):\n    if len(nilai) == 0:\n        return 0\n    return sum(nilai) / len(nilai)\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Periksa dulu apakah daftarnya kosong dan kembalikan 0, baru hitung sum(nilai) / len(nilai). Penjaga di awal ini mencegah ZeroDivisionError tanpa mengubah hasil untuk daftar biasa.",
+  "ruleRefs": ["r-tst-1", "r-py-3"],
+  "hints": [
+    "Rata-rata = jumlah dibagi banyak data.",
+    "sum(daftar) menjumlahkan isi daftar, len(daftar) menghitung banyaknya.",
+    "Sebelum membagi, cek if len(nilai) == 0: return 0."
+  ]
+}

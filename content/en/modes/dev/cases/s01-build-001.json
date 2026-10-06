@@ -1,0 +1,55 @@
+{
+  "id": "s01-build-001",
+  "type": "coding",
+  "conceptIds": ["python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Maya Lestari",
+      "team": "Learning App Team"
+    },
+    "title": "Speed challenge: count the vowels",
+    "story": [
+      "Write a function count_vowels(text) that counts the vowels (a, i, u, e, o) in a text.",
+      "Careful: there are hidden tests for capital letters and empty text!"
+    ],
+    "file": "learning/vowels.py",
+    "starter": "def count_vowels(text):\n    # Write your code here\n    return 0\n",
+    "tests": [
+      {
+        "name": "plain word",
+        "code": "assert count_vowels(\"nusa\") == 2"
+      },
+      {
+        "name": "sentence",
+        "code": "assert count_vowels(\"aku suka kode\") == 6"
+      },
+      {
+        "name": "capital letters",
+        "code": "assert count_vowels(\"ANDI\") == 2",
+        "hidden": true
+      },
+      {
+        "name": "empty text",
+        "code": "assert count_vowels(\"\") == 0",
+        "hidden": true
+      }
+    ],
+    "solution": "def count_vowels(text):\n    jumlah = 0\n    for huruf in text.lower():\n        if huruf in \"aiueo\":\n            jumlah = jumlah + 1\n    return jumlah\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Check every letter with for, and add to the count when the letter is in \"aiueo\". Turning the text to lowercase first with .lower() makes capital letters count too.",
+  "ruleRefs": ["r-err-2", "r-py-1"],
+  "hints": [
+    "Start with count = 0, then check each letter with for.",
+    "The expression letter in \"aiueo\" is True when the letter is a lowercase vowel.",
+    "Capital letters? Convert the text first with .lower()."
+  ]
+}

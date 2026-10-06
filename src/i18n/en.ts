@@ -86,7 +86,7 @@ export const en: Strings = {
   explore: {
     canvasLabel: 'Explorable office',
     help: 'Click or touch the map, then walk with the arrow keys/WASD or tap where to go. Press E, Enter or Space to interact. Every destination is also a button below.',
-    idle: 'Walk to a desk, the bookshelf, the shop, the badge board, or Rani.',
+    idle: 'Walk to a desk, the bookshelf, the shop, the badge board, or chat with the mentors.',
     enter: 'Enter',
     open: 'Open',
     talk: 'Talk',
@@ -95,6 +95,7 @@ export const en: Strings = {
     badgesLabel: 'Badge board',
     raniLabel: 'Rani',
     jokoLabel: 'Pak Joko',
+    dimasLabel: 'Dimas',
     raniTip: (rule) => `Tip of the day: ${rule}`,
     setting: 'Explorable office (walk with the arrow keys or tap)',
   },
@@ -114,7 +115,11 @@ export const en: Strings = {
       deskTitle: 'IT Workshop',
       rulebook: 'Workshop Handbook',
     },
-    dev: { title: 'Software Engineer', deskTitle: 'Developer Desk', rulebook: 'Handbook' },
+    dev: {
+      title: 'Software Engineer',
+      deskTitle: 'Developer Desk',
+      rulebook: 'Developer Handbook',
+    },
     data: { title: 'Data / AI Analyst', deskTitle: 'Data Desk', rulebook: 'Handbook' },
   },
   decisions: {
@@ -126,6 +131,10 @@ export const en: Strings = {
     guide: 'Guide User',
     fix: 'Fix',
     replace: 'Replace Part',
+    approve: 'Approve',
+    revise: 'Revise',
+    rollback: 'Roll Back',
+    submit: 'Submit Solution',
   },
   desk: {
     visitorLabel: 'Reported by',
@@ -271,6 +280,7 @@ export const en: Strings = {
     rani: 'Rani',
     kelabu: 'Kelabu',
     joko: 'Joko',
+    dimas: 'Dimas',
     narrator: '',
   },
   stamps: {
@@ -282,6 +292,10 @@ export const en: Strings = {
     guide: 'GUIDED',
     fix: 'FIXED',
     replace: 'REPLACED',
+    approve: 'APPROVED',
+    revise: 'CHANGES',
+    rollback: 'ROLLED BACK',
+    submit: 'SUBMITTED',
   },
   language: {
     label: 'Language',
@@ -309,6 +323,7 @@ export const en: Strings = {
       'Only a random code for this device and your learning results (for example which cases were right or wrong) are sent, with no name or personal data. You can turn it off at any time. If you are under 18, ask a parent or teacher first.',
   },
   feedback: {
+    testsPassed: (p, t) => `Tests passed: ${p} of ${t}`,
     correct: 'Correct!',
     partial: 'Partly right',
     wrong: 'Not quite',
@@ -366,6 +381,90 @@ export const en: Strings = {
     finishPractice: 'Finish practice & back to the office',
     practiceNote: 'Answers in practice do not change your review schedule.',
     empty: 'There are no review questions for this shift.',
+  },
+  dev: {
+    editor: {
+      keysLabel: 'Code typing helper keys',
+      indentKey: 'Indent (4 spaces)',
+      help: 'Tab = 4 spaces, Enter keeps the indentation. Press Esc then Tab to leave the editor.',
+      codeLabel: (file) => `Code for ${file}`,
+      reset: 'Restore starting code',
+    },
+    run: {
+      button: 'Run Tests',
+      scratch: 'Run',
+      running: 'Running…',
+      timeout: 'The code ran for more than 4 seconds and was stopped. Maybe a loop never ends.',
+      failed: 'Python failed to load. Try running again.',
+      summary: (p, t) => `${p} of ${t} tests passed`,
+      allPassed: 'ALL TESTS PASSED!',
+      hiddenTest: (n) => `Hidden test #${n}`,
+      hiddenCount: (n) => `+${n} hidden tests (edge cases)`,
+      gotExpected: (got, expected) => `your code gave: ${got} · expected: ${expected}`,
+      output: 'Output (print)',
+      noOutput: '(no output)',
+      truncated: '… output cut off',
+      errorAt: (line) => `Error on line ${line}`,
+      error: 'Error',
+      notRunYet: 'Run the tests first, then submit.',
+      hints: {
+        'slice-step':
+          'Python in this game does not support stepped slices like text[::-1] yet. Try "".join(reversed(text)).',
+        'missing-method':
+          "That function does not exist for this data type (or is not supported in this game's Python). Check the spelling, or write it yourself with a loop.",
+        indent:
+          'Check the indentation: a block (after a :) must be indented 4 spaces, and its lines must line up.',
+      },
+    },
+    coding: {
+      fixHeading: 'Fix the bug',
+      buildHeading: 'Write the function',
+      requester: 'Requested by',
+      file: 'File',
+      tests: 'Tests',
+      queueTitle: (title) => title,
+    },
+    ctf: {
+      heading: 'CTF challenge',
+      artifacts: 'Evidence',
+      scratch: 'Python console (for trying things)',
+      flagLabel: 'Flag you found',
+      check: 'Check flag',
+      right: 'Correct flag! Press Submit Solution to lock in your answer.',
+      wrong: 'Not quite. Try again.',
+      queueTitle: (title) => `CTF: ${title}`,
+    },
+    pr: {
+      heading: 'Pull request',
+      author: 'Author',
+      file: 'File',
+      diff: 'Code changes',
+      checks: 'Automatic checks',
+      added: 'lines added',
+      removed: 'lines removed',
+      queueTitle: (title) => `PR: ${title}`,
+    },
+    tools: {
+      testsHeading: 'Test Runner: automatic test results',
+      lintHeading: 'Linter: style notes & possible bugs',
+      testsName: 'Test Runner',
+      lintName: 'Linter',
+    },
+    citations: {
+      'threat-allowed': 'WARNING: buggy code was approved. The bug shipped to users.',
+      'legit-blocked': 'NOTE: the code was already correct. Good work got held up.',
+      'needless-escalation':
+        'NOTE: approving was enough; the senior developers were bothered for nothing.',
+    },
+    visitors: {
+      prLines: ['Please review my PR.', 'I tested it on my laptop. It is fine, right?'],
+      taskLines: [
+        'There is a bug driving me crazy. Can you help?',
+        'I need this function by this afternoon. You got this!',
+      ],
+      ctf: { name: 'CTF Board', role: 'Security team practice' },
+      ctfLines: ['A hidden flag is waiting to be found.', 'New challenge on the CTF board!'],
+    },
   },
   support: {
     ticket: {

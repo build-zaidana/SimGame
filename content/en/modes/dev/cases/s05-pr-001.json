@@ -1,0 +1,102 @@
+{
+  "id": "s05-pr-001",
+  "type": "pull-request",
+  "conceptIds": ["secure-coding", "testing"],
+  "difficulty": 2,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "severity": 1,
+  "data": {
+    "author": {
+      "name": "Rina Wulandari",
+      "team": "Online Shop Team"
+    },
+    "title": "Validate item quantity in the cart",
+    "description": [
+      {
+        "text": "Buyers can type the item quantity themselves. Now the quantity is checked before it goes into the cart.",
+        "evidenceId": "desc-why"
+      },
+      {
+        "text": "The limit is 1 to 100 items, following the shop rules.",
+        "evidenceId": "desc-rule"
+      }
+    ],
+    "file": "shop/cart.py",
+    "diff": [
+      {
+        "code": "def add_item(cart, code, qty):",
+        "indent": 0,
+        "kind": "ctx",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "if not isinstance(qty, int):",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-type"
+      },
+      {
+        "code": "return \"Quantity must be a whole number\"",
+        "indent": 2,
+        "kind": "add"
+      },
+      {
+        "code": "if qty < 1 or qty > 100:",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-range"
+      },
+      {
+        "code": "return \"Quantity must be 1 to 100\"",
+        "indent": 2,
+        "kind": "add"
+      },
+      {
+        "code": "cart[code] = qty",
+        "indent": 1,
+        "kind": "ctx",
+        "evidenceId": "line-save"
+      },
+      {
+        "code": "return \"OK\"",
+        "indent": 1,
+        "kind": "ctx"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Automated tests: 6/6 passed (including quantity 0, -5, 101, and the text \"3\")",
+        "evidenceId": "check-tests"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["line-type", "line-range", "check-tests"]
+  },
+  "explanation": "This PR actually makes the code safer: the type and range of the quantity are checked before use, and the edge cases are tested. The code is correct and tidy, so approve it.",
+  "ruleRefs": ["r-sec-1", "r-rev-1"],
+  "hints": [
+    "Does this PR add a problem, or close one?",
+    "Check whether the limits 1 and 100 are right and tested."
+  ],
+  "intel": {
+    "tests": [
+      {
+        "text": "add_item(c, \"A1\", 0) → \"Quantity must be 1 to 100\" ✓",
+        "evidenceId": "test-zero"
+      },
+      {
+        "text": "add_item(c, \"A1\", 100) → \"OK\" ✓",
+        "evidenceId": "test-max"
+      }
+    ],
+    "lint": [
+      {
+        "text": "No warnings.",
+        "evidenceId": "lint-ok"
+      }
+    ]
+  }
+}

@@ -132,6 +132,35 @@ describe('case flow', () => {
     expect(s.cases[0]?.marks).toEqual(['y']);
   });
 
+  it('SET_ANSWER stores the draft answer and RECORD_RUN counts test runs (Meja Developer)', () => {
+    let s = run(
+      working(),
+      { type: 'OPEN_CASE', caseId: 'a' },
+      { type: 'SET_ANSWER', text: 'def f():\n    return 1' },
+    );
+    expect(s.cases[0]?.answer).toEqual({ text: 'def f():\n    return 1', runs: 0 });
+    s = run(
+      s,
+      { type: 'RECORD_RUN', passed: 1, total: 3 },
+      { type: 'RECORD_RUN', passed: 3, total: 3 },
+    );
+    expect(s.cases[0]?.answer).toEqual({
+      text: 'def f():\n    return 1',
+      runs: 2,
+      passed: 3,
+      total: 3,
+    });
+    // Mengubah teks membuat hasil tes lama tidak berlaku lagi, tapi jumlah percobaan tetap.
+    s = run(s, { type: 'SET_ANSWER', text: 'x' });
+    expect(s.cases[0]?.answer).toEqual({ text: 'x', runs: 2 });
+  });
+
+  it('SET_ANSWER and RECORD_RUN are ignored without an active case', () => {
+    const s = working();
+    expect(run(s, { type: 'SET_ANSWER', text: 'x' })).toBe(s);
+    expect(run(s, { type: 'RECORD_RUN', passed: 1, total: 1 })).toBe(s);
+  });
+
   it('TOGGLE_MARK and USE_HINT are ignored without an active case', () => {
     const s = working();
     expect(run(s, { type: 'TOGGLE_MARK', evidenceId: 'x' })).toBe(s);

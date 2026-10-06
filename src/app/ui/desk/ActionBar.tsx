@@ -11,6 +11,10 @@ const ICON: Record<string, string> = {
   guide: '💬',
   fix: '🔧',
   replace: '🔩',
+  approve: '✓',
+  revise: '✏',
+  rollback: '⏪',
+  submit: '🚀',
 };
 const COLOR: Record<string, string> = {
   allow: 'bg-safe text-bg',
@@ -18,6 +22,8 @@ const COLOR: Record<string, string> = {
   escalate: 'bg-accent text-bg',
   guide: 'bg-safe text-bg',
   replace: 'bg-danger text-bg',
+  approve: 'bg-safe text-bg',
+  rollback: 'bg-danger text-bg',
 };
 
 interface ActionBarProps {

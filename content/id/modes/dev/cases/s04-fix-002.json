@@ -1,0 +1,55 @@
+{
+  "id": "s04-fix-002",
+  "type": "coding",
+  "conceptIds": ["testing", "debugging"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Agus Setiawan",
+      "team": "Tim Gudang"
+    },
+    "title": "Suhu freezer tertinggi selalu 0",
+    "story": [
+      "Fungsi suhu_tertinggi(catatan) mencari suhu paling tinggi dari catatan sensor. Untuk ruang biasa hasilnya benar.",
+      "Tapi di freezer yang semua suhunya negatif, hasilnya selalu 0 °C. Perbaiki supaya benar untuk angka negatif juga."
+    ],
+    "file": "gudang/suhu.py",
+    "starter": "def suhu_tertinggi(catatan):\n    tertinggi = 0\n    for s in catatan:\n        if s > tertinggi:\n            tertinggi = s\n    return tertinggi\n",
+    "tests": [
+      {
+        "name": "ruang biasa",
+        "code": "assert suhu_tertinggi([24, 27, 25]) == 27"
+      },
+      {
+        "name": "freezer (negatif)",
+        "code": "assert suhu_tertinggi([-18, -20, -15]) == -15"
+      },
+      {
+        "name": "satu catatan",
+        "code": "assert suhu_tertinggi([-5]) == -5",
+        "hidden": true
+      },
+      {
+        "name": "negatif dan nol",
+        "code": "assert suhu_tertinggi([-3, 0, -1]) == 0",
+        "hidden": true
+      }
+    ],
+    "solution": "def suhu_tertinggi(catatan):\n    tertinggi = catatan[0]\n    for s in catatan:\n        if s > tertinggi:\n            tertinggi = s\n    return tertinggi\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Nilai awal tertinggi = 0 sudah lebih besar dari semua suhu negatif, jadi tidak pernah tergantikan. Mulailah dari isi pertama daftar, catatan[0], agar angka negatif ikut dibandingkan dengan benar.",
+  "ruleRefs": ["r-tst-1", "r-dbg-1"],
+  "hints": [
+    "Cetak tertinggi di dalam perulangan dengan print() untuk data freezer.",
+    "Apakah -15 > 0? Kalau tidak, kapan tertinggi pernah berubah?",
+    "Ganti nilai awal 0 dengan catatan[0]."
+  ]
+}

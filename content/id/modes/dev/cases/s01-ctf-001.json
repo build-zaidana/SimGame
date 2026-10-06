@@ -1,0 +1,41 @@
+{
+  "id": "s01-ctf-001",
+  "type": "ctf",
+  "conceptIds": ["python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 1,
+  "data": {
+    "title": "Pesan bergeser tiga",
+    "story": [
+      "Tim keamanan menyembunyikan bendera latihan dengan sandi Caesar: setiap huruf digeser 3 ke depan (A jadi D, B jadi E).",
+      "Pakai konsol Python untuk menggeser setiap huruf 3 ke belakang, lalu ketik benderanya."
+    ],
+    "artifacts": [
+      {
+        "label": "Catatan di papan CTF",
+        "kind": "text",
+        "content": "IODJ{VHPDQJDW_EHODMDU}"
+      },
+      {
+        "label": "Petunjuk Python",
+        "kind": "code",
+        "content": "ord(\"D\") - 3   # 65\nchr(65)        # \"A\""
+      }
+    ],
+    "scratch": "pesan = \"IODJ{VHPDQJDW_EHODMDU}\"\nhasil = \"\"\nfor huruf in pesan:\n    hasil = hasil + huruf\nprint(hasil)\n",
+    "flag": "FLAG{SEMANGAT_BELAJAR}",
+    "solution": "pesan = \"IODJ{VHPDQJDW_EHODMDU}\"\nhasil = \"\"\nfor huruf in pesan:\n    if \"A\" <= huruf <= \"Z\":\n        hasil = hasil + chr((ord(huruf) - ord(\"A\") - 3) % 26 + ord(\"A\"))\n    else:\n        hasil = hasil + huruf\nprint(hasil)\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Sandi Caesar dibuka dengan menggeser balik setiap huruf: ord() mengubah huruf jadi angka, dikurangi 3, lalu chr() mengubahnya kembali jadi huruf. Sandi seperti ini mudah dibuka, jadi tidak pernah dipakai untuk melindungi data sungguhan.",
+  "ruleRefs": ["r-py-1", "r-err-3"],
+  "hints": [
+    "Coba dulu ord(\"I\") - 3 di konsol. Huruf apa yang didapat dengan chr()?",
+    "Hanya huruf A sampai Z yang digeser; tanda { } dan _ dibiarkan."
+  ]
+}

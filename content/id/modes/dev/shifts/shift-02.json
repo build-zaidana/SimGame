@@ -1,0 +1,72 @@
+{
+  "id": "dev-02",
+  "order": 2,
+  "title": "Hari Debugging",
+  "durationGameMinutes": 150,
+  "realSecondsPerGameMinute": 4,
+  "unlocksChapters": ["ch-debug"],
+  "introDialogue": "dev-02-intro",
+  "outroDialogue": "dev-02-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s02-fix-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s02-pr-001",
+      "arriveAt": 10
+    },
+    {
+      "caseId": "s02-fix-002",
+      "arriveAt": 20
+    },
+    {
+      "caseId": "s02-ctf-001",
+      "arriveAt": 30
+    },
+    {
+      "caseId": "s02-pr-002",
+      "arriveAt": 40
+    },
+    {
+      "caseId": "s02-build-001",
+      "arriveAt": 50
+    },
+    {
+      "caseId": "s02-fix-003",
+      "arriveAt": 60
+    },
+    {
+      "caseId": "s02-pr-003",
+      "arriveAt": 70
+    },
+    {
+      "caseId": "s02-build-002",
+      "arriveAt": 80
+    }
+  ],
+  "review": {
+    "count": 3,
+    "conceptIds": ["debugging", "python-basics"]
+  },
+  "pay": {
+    "base": 50,
+    "perCase": 14
+  },
+  "newspaper": {
+    "headline": "Aplikasi Rapor Kembali Normal",
+    "lead": "Setelah perbaikan dari tim developer baru, nilai rata-rata di aplikasi rapor kembali benar. Hari ini tim menerima lebih banyak laporan bug dari pengguna.",
+    "impact": {
+      "good": "Kemarin, developer baru PT Nusa Digital menyelesaikan semua tugas dengan rapi. Tidak ada bug yang lolos ke pengguna.",
+      "mixed": "Kemarin, sebagian besar tugas developer baru selesai, walau ada tes yang masih merah. Kak Dimas meminta lebih teliti membaca error.",
+      "bad": "Kemarin, beberapa bug masih lolos ke pengguna. Tim developer menerima banyak keluhan dan antrean tugas menumpuk."
+    },
+    "tip": {
+      "title": "Tips: print() Itu Senter",
+      "text": "Bingung kenapa hasilnya salah? Cetak isi variabel di tengah perulangan. Seperti menyalakan senter di ruangan gelap."
+    },
+    "classified": "DICARI: Bebek karet untuk diajak bicara saat debugging. Hubungi Kak Dimas.",
+    "sources": ["Python Software Foundation: Errors and Exceptions"]
+  }
+}

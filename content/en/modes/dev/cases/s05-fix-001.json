@@ -1,0 +1,49 @@
+{
+  "id": "s05-fix-001",
+  "type": "coding",
+  "conceptIds": ["secure-coding", "debugging"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Sari Kusuma",
+      "team": "Cashier Team"
+    },
+    "title": "Phone numbers still leak in the log",
+    "story": [
+      "The cashier log must not show a buyer's full phone number. The requested form: first 4 digits, ****, then the last 2 digits, for example 0812****89.",
+      "The function exists, but the result looks odd. Please fix it!"
+    ],
+    "file": "cashier/log.py",
+    "starter": "def mask_phone(number):\n    return number[:4] + \"****\" + number[2:]\n",
+    "tests": [
+      {
+        "name": "12-digit number",
+        "code": "assert mask_phone(\"081234567889\") == \"0812****89\""
+      },
+      {
+        "name": "another number",
+        "code": "assert mask_phone(\"085711112222\") == \"0857****22\""
+      },
+      {
+        "name": "13-digit number",
+        "code": "assert mask_phone(\"0812345678901\") == \"0812****01\"",
+        "hidden": true
+      }
+    ],
+    "solution": "def mask_phone(number):\n    return number[:4] + \"****\" + number[-2:]\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "number[2:] takes almost the whole number from index 2, so the phone number still leaks. number[-2:] takes only the last 2 digits, whatever the length.",
+  "ruleRefs": ["r-sec-2", "r-dbg-1"],
+  "hints": [
+    "Print number[2:] in the console. What does it contain?",
+    "Negative indexes count from the end: number[-2:] means the last 2 characters."
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "id": "s05-pr-002",
+  "type": "pull-request",
+  "conceptIds": ["secure-coding", "code-review"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 3,
+  "data": {
+    "author": {
+      "name": "Fajar Nugroho",
+      "team": "Accounts Team"
+    },
+    "title": "Add a log to track failed logins",
+    "description": [
+      {
+        "text": "Many users report they cannot log in. I added a log so it is easier to track.",
+        "evidenceId": "desc-why"
+      },
+      {
+        "text": "This server log is shared and read by several teams.",
+        "evidenceId": "desc-shared"
+      }
+    ],
+    "file": "accounts/login.py",
+    "diff": [
+      {
+        "code": "def login(username, password):",
+        "indent": 0,
+        "kind": "ctx",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "print(f\"Login: {username} / {password}\")",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-print"
+      },
+      {
+        "code": "user = find_user(username)",
+        "indent": 1,
+        "kind": "ctx",
+        "evidenceId": "line-find"
+      },
+      {
+        "code": "if user is None:",
+        "indent": 1,
+        "kind": "ctx"
+      },
+      {
+        "code": "return False",
+        "indent": 2,
+        "kind": "ctx"
+      },
+      {
+        "code": "return check_password(user, password)",
+        "indent": 1,
+        "kind": "ctx",
+        "evidenceId": "line-check"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Automated tests: 4/4 passed",
+        "evidenceId": "check-tests"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["line-print"],
+    "supporting": ["desc-shared", "lint-pass"]
+  },
+  "explanation": "The new log prints the user's password, even though many people read the log. Ask for a revision: log only the username and the login result, without the password.",
+  "ruleRefs": ["r-sec-2", "r-rev-2"],
+  "hints": [
+    "The tests pass, but what gets written to the log?",
+    "Look at the print line. Which variable should never be printed?"
+  ],
+  "intel": {
+    "lint": [
+      {
+        "text": "Line 2: variable 'password' is printed with print()",
+        "evidenceId": "lint-pass"
+      }
+    ]
+  }
+}

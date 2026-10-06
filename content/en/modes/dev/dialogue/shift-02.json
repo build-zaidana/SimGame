@@ -1,0 +1,30 @@
+{
+  "dialogues": [
+    {
+      "id": "dev-02-intro",
+      "lines": [
+        {
+          "speaker": "dimas",
+          "text": "You fixed your first bugs yesterday. Today there are even more bug reports!"
+        },
+        {
+          "speaker": "dimas",
+          "text": "New chapter: Debugging. When in doubt, print the variable with print()."
+        },
+        {
+          "speaker": "dimas",
+          "text": "The Test Runner is in the Tool Shop now. It runs PR tests for you."
+        }
+      ]
+    },
+    {
+      "id": "dev-02-outro",
+      "lines": [
+        {
+          "speaker": "dimas",
+          "text": "You cleaned up today's bugs nicely. Remember: bugs love hiding at loop boundaries."
+        }
+      ]
+    }
+  ]
+}

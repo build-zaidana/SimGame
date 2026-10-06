@@ -14,6 +14,9 @@ importers:
       '@fontsource/pixelify-sans':
         specifier: ^5.3.0
         version: 5.3.0
+      '@micropython/micropython-webassembly-pyscript':
+        specifier: 1.29.0-6
+        version: 1.29.0-6
       idb-keyval:
         specifier: ^6.3.0
         version: 6.3.0
@@ -722,6 +725,9 @@ packages:
 
   '@keyv/serialize@1.1.1':
     resolution: {integrity: sha512-dXn3FZhPv0US+7dtJsIi2R+c7qWYiReoEh5zUntWCf4oSpMNib8FDhSoed6m3QyZdx5hK7iLFkYk3rNxwt8vTA==}
+
+  '@micropython/micropython-webassembly-pyscript@1.29.0-6':
+    resolution: {integrity: sha512-kLwGPJFsLY/2aUPmzZxpvauFSmKc0SlJWVvvEttULR0poVQ6W9HV//1fUJyxrGWAxCVDw9aYqJ0LAog0ZLjYVA==}
 
   '@napi-rs/lzma-linux-x64-gnu@1.5.1':
     resolution: {integrity: sha512-oTXEIha4SsuXdTA4Iyskj0kpdx2yVXdhd75c2v3xGrHFfVMsbhTPZU/nMPL4sWKo4pBHm3aucLaqGlF696dTyQ==}
@@ -3533,6 +3539,8 @@ snapshots:
       keyv: 5.6.0
 
   '@keyv/serialize@1.1.1': {}
+
+  '@micropython/micropython-webassembly-pyscript@1.29.0-6': {}
 
   '@napi-rs/lzma-linux-x64-gnu@1.5.1':
     optional: true

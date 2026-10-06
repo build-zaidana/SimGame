@@ -1,0 +1,63 @@
+{
+  "id": "s05-build-001",
+  "type": "coding",
+  "conceptIds": ["secure-coding", "testing"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Rina Wulandari",
+      "team": "Tim Toko Online"
+    },
+    "title": "Lomba kilat: jumlah barang yang aman",
+    "story": [
+      "Tulis fungsi jumlah_aman(jumlah). Bila jumlah kurang dari 1, kembalikan 1. Bila lebih dari 100, kembalikan 100. Selain itu, kembalikan jumlah apa adanya.",
+      "Ada tes tersembunyi untuk angka negatif dan angka yang sangat besar!"
+    ],
+    "file": "toko/jumlah.py",
+    "starter": "def jumlah_aman(jumlah):\n    # Tulis kodemu di sini\n    return 0\n",
+    "tests": [
+      {
+        "name": "jumlah normal",
+        "code": "assert jumlah_aman(5) == 5"
+      },
+      {
+        "name": "nol",
+        "code": "assert jumlah_aman(0) == 1"
+      },
+      {
+        "name": "terlalu besar",
+        "code": "assert jumlah_aman(250) == 100"
+      },
+      {
+        "name": "negatif",
+        "code": "assert jumlah_aman(-7) == 1",
+        "hidden": true
+      },
+      {
+        "name": "tepat 100",
+        "code": "assert jumlah_aman(100) == 100",
+        "hidden": true
+      },
+      {
+        "name": "tepat 1",
+        "code": "assert jumlah_aman(1) == 1",
+        "hidden": true
+      }
+    ],
+    "solution": "def jumlah_aman(jumlah):\n    if jumlah < 1:\n        return 1\n    if jumlah > 100:\n        return 100\n    return jumlah\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Dua if menjaga batas bawah dan batas atas, sisanya dikembalikan apa adanya. Membatasi rentang seperti ini (clamp) mencegah pembeli mengetik jumlah negatif atau jutaan barang.",
+  "ruleRefs": ["r-sec-1", "r-tst-1"],
+  "hints": [
+    "Mulai dari batas bawah: apa yang dikembalikan bila jumlah < 1?",
+    "Tambahkan if kedua untuk jumlah > 100, lalu return jumlah di akhir."
+  ]
+}

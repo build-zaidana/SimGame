@@ -1,0 +1,83 @@
+{
+  "badges": [
+    {
+      "id": "hello-world",
+      "title": "Hello, World!",
+      "description": "Finished Shift 1 at the Developer Desk.",
+      "icon": "👋",
+      "tier": "bronze",
+      "rule": {
+        "type": "shift-complete",
+        "shiftId": "dev-01"
+      }
+    },
+    {
+      "id": "semua-hijau",
+      "title": "All Green",
+      "description": "Five tasks in a row done right with no wrong marks.",
+      "icon": "✅",
+      "tier": "silver",
+      "rule": {
+        "type": "evidence-streak",
+        "count": 5
+      }
+    },
+    {
+      "id": "ngoding-mandiri",
+      "title": "Solo Coder",
+      "description": "A shift without Dimas's hints, with at least ★★.",
+      "icon": "🧠",
+      "tier": "silver",
+      "rule": {
+        "type": "no-hints",
+        "minCases": 7,
+        "minStars": 2
+      }
+    },
+    {
+      "id": "developer-bintang",
+      "title": "Star Developer",
+      "description": "Earned ★★★ in a Developer Desk shift.",
+      "icon": "⭐",
+      "tier": "gold",
+      "rule": {
+        "type": "shift-stars",
+        "stars": 3
+      }
+    },
+    {
+      "id": "perkakas-developer",
+      "title": "Developer Toolkit",
+      "description": "Own both the Test Runner and the Linter.",
+      "icon": "🧰",
+      "tier": "silver",
+      "rule": {
+        "type": "tools-owned",
+        "count": 2
+      }
+    },
+    {
+      "id": "anti-bug",
+      "title": "Anti Bug",
+      "description": "A shift without approving faulty code, with at least ★★.",
+      "icon": "🐛",
+      "tier": "silver",
+      "rule": {
+        "type": "no-threat-allowed",
+        "minCases": 8,
+        "minStars": 2
+      }
+    },
+    {
+      "id": "penjaga-repositori",
+      "title": "Repository Guardian",
+      "description": "Finished Shift 5 and stopped Kelabu's mysterious PR.",
+      "icon": "🛡",
+      "tier": "gold",
+      "rule": {
+        "type": "shift-complete",
+        "shiftId": "dev-05"
+      }
+    }
+  ]
+}

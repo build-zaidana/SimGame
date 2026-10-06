@@ -116,6 +116,19 @@ describe('content validation', () => {
     expect(errorsFor(f)).toEqual([]);
   });
 
+  it('leaves coding/CTF tasks out of the safe-case ratio and the evidence rule (ADR 026)', () => {
+    const f = fixture();
+    const task = { ...emailCase('c-4', 'safe'), verdict: 'task', correctDecision: 'submit' };
+    f['cases/c-4.json'] = task;
+    f['cases/c-5.json'] = { ...task, id: 'c-5' };
+    (f['shifts/s-1.json'] as { queue: object[] }).queue.push(
+      { caseId: 'c-4', arriveAt: 3 },
+      { caseId: 'c-5', arriveAt: 4 },
+    );
+    // 1 aman dari 3 kasus keputusan = 33% (tugas tidak dihitung, jadi bukan 1 dari 5 = 20%).
+    expect(errorsFor(f)).toEqual([]);
+  });
+
   const cases: [string, (f: Record<string, unknown>) => void, RegExp][] = [
     [
       'schema mismatch',

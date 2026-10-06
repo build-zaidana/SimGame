@@ -13,7 +13,7 @@
 │  app/  (React)  ── layar: Title · Hub · Desk · Report · Review · Settings      │
 │     │                                                                          │
 │     ├── modes/soc/   ← paket mode: CaseType (schema + evaluator + renderer)     │
-│     ├── modes/support ← Bengkel IT (ADR 025); dev, data menyusul, kontrak sama │
+│     ├── modes/support ← Bengkel IT (ADR 025); modes/dev ← Meja Developer (ADR 026) │
 │     │                                                                          │
 │     ├── engine/      ← TS murni: shift reducer, scoring, mastery, RNG, clock   │
 │     │                  (tanpa React, tanpa DOM, tanpa Phaser → mudah dites)     │
@@ -499,7 +499,7 @@ Rencana mode berikutnya:
 | Mode | Tipe kasus contoh | Meja |
 |---|---|---|
 | IT Support (✅ ADR 025) | `ticket`, `diagnostic`, `hardware` | Bengkel: Pemindai Perangkat Keras, Alat Ping |
-| Software Engineer | `bug-ticket` (baca kode & log), `code-review`, `git-conflict` | Editor kode mini (CodeMirror, lazy) |
+| Software Engineer (✅ ADR 026) | `coding` (fix/build), `pull-request`, `ctf` | Editor kode mini buatan sendiri + MicroPython (WASM, worker, lazy) |
 | Data / AI | `data-cleaning`, `chart-misleading`, `model-eval` | Tabel & grafik |
 
 ## 14. Urutan implementasi (milestone untuk Claude Code)

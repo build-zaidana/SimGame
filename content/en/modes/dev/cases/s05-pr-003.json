@@ -1,0 +1,83 @@
+{
+  "id": "s05-pr-003",
+  "type": "pull-request",
+  "conceptIds": ["secure-coding", "testing"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.2
+  },
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Yoga Pramudya",
+      "team": "Online Shop Team"
+    },
+    "title": "Compute the total from the buyer's form",
+    "description": [
+      {
+        "text": "The item quantity is taken directly from the buyer's form field.",
+        "evidenceId": "desc-input"
+      },
+      {
+        "text": "I tried quantities 2 and 5, and the results were right.",
+        "evidenceId": "desc-tested"
+      }
+    ],
+    "file": "shop/pay.py",
+    "diff": [
+      {
+        "code": "def total_price(price, qty_text):",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "qty = int(qty_text)",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-int"
+      },
+      {
+        "code": "total = price * qty",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-total"
+      },
+      {
+        "code": "return total",
+        "indent": 1,
+        "kind": "add"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Automated tests: 2/2 passed (quantities 2 and 5)",
+        "evidenceId": "check-tests"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["line-int"],
+    "supporting": ["desc-input", "desc-tested", "check-tests", "test-neg", "test-huge"]
+  },
+  "explanation": "The buyer's quantity is used directly without a range check, so negative or huge quantities are counted too. Ask for a revision: reject quantities outside 1 to 100 and add tests for those edge cases.",
+  "ruleRefs": ["r-sec-1", "r-tst-1", "r-rev-2"],
+  "hints": [
+    "Input from a buyer can contain anything. What happens when the quantity is -3?",
+    "After int(...), is there any line that checks the quantity's range?"
+  ],
+  "intel": {
+    "tests": [
+      {
+        "text": "total_price(50000, \"-3\") → -150000 (the buyer gets money back)",
+        "evidenceId": "test-neg"
+      },
+      {
+        "text": "total_price(50000, \"99999\") → 4999950000, not rejected",
+        "evidenceId": "test-huge"
+      }
+    ]
+  }
+}

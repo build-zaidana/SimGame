@@ -1,0 +1,87 @@
+{
+  "id": "s04-pr-002",
+  "type": "pull-request",
+  "conceptIds": ["testing", "code-review"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Rizky Ramadhan",
+      "team": "Tim Rapor Sekolah"
+    },
+    "title": "Cek lulus KKM + tes",
+    "description": [
+      {
+        "text": "Siswa lulus bila nilainya 75 ke atas (KKM, nilai minimal kelulusan).",
+        "evidenceId": "desc-rule"
+      },
+      {
+        "text": "Sudah ada tesnya dan lulus, jadi aman!",
+        "evidenceId": "desc-safe"
+      }
+    ],
+    "file": "rapor/kkm.py",
+    "diff": [
+      {
+        "code": "def lulus_kkm(nilai):",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "return nilai >= 75",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-logic"
+      },
+      {
+        "code": "# tes",
+        "indent": 0,
+        "kind": "add"
+      },
+      {
+        "code": "hasil = lulus_kkm(80)",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-call"
+      },
+      {
+        "code": "assert hasil == hasil",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-fake"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Tes otomatis: 1 dari 1 lulus",
+        "evidenceId": "check-tests"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["line-fake"],
+    "supporting": ["desc-safe", "check-tests", "line-logic"]
+  },
+  "explanation": "assert hasil == hasil membandingkan nilai dengan dirinya sendiri, jadi selalu lulus walaupun fungsinya salah. Minta revisi dengan tes sungguhan, misalnya nilai 75, 74, dan 80.",
+  "ruleRefs": ["r-tst-2", "r-tst-4"],
+  "hints": [
+    "Tesnya lulus, tapi apa yang sebenarnya dibandingkan?",
+    "Kalau isi fungsi diganti return False, apakah tes ini akan gagal?",
+    "Lihat baris assert: hasil dibandingkan dengan apa?"
+  ],
+  "intel": {
+    "tests": [
+      {
+        "text": "Test Runner: 1 tes lulus",
+        "evidenceId": "intel-pass"
+      },
+      {
+        "text": "Tes ini tetap lulus walaupun isi lulus_kkm diubah apa pun",
+        "evidenceId": "intel-mutation"
+      }
+    ]
+  }
+}

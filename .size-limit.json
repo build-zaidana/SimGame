@@ -48,6 +48,33 @@
     "gzip": true
   },
   {
+    "name": "Chunk mode Developer, Bahasa Indonesia: meja + konten (gzip)",
+    "path": [
+      "dist/assets/DevDesk-*.js",
+      "dist/assets/dev-content-*.js",
+      "dist/assets/dev-data-id-*.js"
+    ],
+    "limit": "150 KB",
+    "gzip": true
+  },
+  {
+    "name": "Chunk mode Developer, English: meja + konten + kamus UI (gzip)",
+    "path": [
+      "dist/assets/DevDesk-*.js",
+      "dist/assets/dev-content-*.js",
+      "dist/assets/dev-data-en-*.js",
+      "dist/assets/en-*.js"
+    ],
+    "limit": "150 KB",
+    "gzip": true
+  },
+  {
+    "name": "Python di browser (MicroPython worker + wasm, dimuat saat Meja Developer dipakai)",
+    "path": ["dist/assets/py.worker-*.js", "dist/assets/micropython-*.wasm"],
+    "limit": "300 KB",
+    "gzip": true
+  },
+  {
     "name": "Kantor Phaser (dimuat lazy, hanya bila kantor dijelajahi)",
     "path": "dist/assets/createGame-*.js",
     "limit": "380 KB",

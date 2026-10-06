@@ -1,0 +1,44 @@
+{
+  "id": "s01-fix-002",
+  "type": "coding",
+  "conceptIds": ["reading-errors", "python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 1,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Rudi Hartono",
+      "team": "Online Shop Team"
+    },
+    "title": "Price label crashes the app",
+    "story": [
+      "Every time a product page opens, the app crashes. Run the tests and read the last line of the error."
+    ],
+    "file": "shop/label.py",
+    "starter": "def price_label(price):\n    return \"Rp \" + price\n",
+    "tests": [
+      {
+        "name": "normal price",
+        "code": "assert price_label(5000) == \"Rp 5000\""
+      },
+      {
+        "name": "zero price",
+        "code": "assert price_label(0) == \"Rp 0\"",
+        "hidden": true
+      }
+    ],
+    "solution": "def price_label(price):\n    return \"Rp \" + str(price)\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "The TypeError happens because the text \"Rp \" is joined with a number. Turn the number into text with str(price) before joining.",
+  "ruleRefs": ["r-py-2", "r-err-1"],
+  "hints": [
+    "Run the tests, then read the last line of the error.",
+    "Text can only be joined with text. Which function turns a number into text?"
+  ]
+}

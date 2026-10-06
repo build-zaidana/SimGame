@@ -1,0 +1,73 @@
+{
+  "items": [
+    {
+      "id": "rv-sec-1",
+      "type": "mcq",
+      "conceptId": "secure-coding",
+      "difficulty": 1,
+      "prompt": "Buyers can type the item quantity themselves. What should the code do?",
+      "choices": [
+        "Use it directly, buyers are always right",
+        "Check its type and range first, for example 1 to 100",
+        "Just turn it into text"
+      ],
+      "answerIndex": 1,
+      "explanation": "User input can be mistyped or deliberately odd, like a negative number. Check it before using it."
+    },
+    {
+      "id": "rv-sec-2",
+      "type": "mcq",
+      "conceptId": "secure-coding",
+      "difficulty": 1,
+      "prompt": "Which is SAFE to write to the login log?",
+      "choices": [
+        "Username and password",
+        "Username and the login result (success/fail)",
+        "The user's full phone number"
+      ],
+      "answerIndex": 1,
+      "explanation": "Many people read logs, so passwords and personal data must never be printed there."
+    },
+    {
+      "id": "rv-sec-3",
+      "type": "mcq",
+      "conceptId": "secure-coding",
+      "difficulty": 2,
+      "prompt": "A brand-new unknown account sends a PR that quietly sends users' emails to an outside address. Your decision?",
+      "choices": [
+        "Approve, the tests pass",
+        "Revise: ask them to change the address",
+        "Escalate to the SOC team"
+      ],
+      "answerIndex": 2,
+      "explanation": "Code from an unknown account that sends data to a foreign address could be an attack. The SOC team is the one authorised to investigate."
+    },
+    {
+      "id": "rv-sec-4",
+      "type": "tap-evidence",
+      "conceptId": "secure-coding",
+      "difficulty": 2,
+      "prompt": "Tap the line that leaks a secret into the log.",
+      "parts": [
+        {
+          "text": "def login(username, password):",
+          "evidenceId": "p-def"
+        },
+        {
+          "text": "    print(f\"Login: {username} / {password}\")",
+          "evidenceId": "p-print"
+        },
+        {
+          "text": "    user = find_user(username)",
+          "evidenceId": "p-find"
+        },
+        {
+          "text": "    return check_password(user, password)",
+          "evidenceId": "p-check"
+        }
+      ],
+      "answer": ["p-print"],
+      "explanation": "The print line writes the password to the log. Using the password to check the login is still fine."
+    }
+  ]
+}

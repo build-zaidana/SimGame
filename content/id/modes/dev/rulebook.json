@@ -1,0 +1,195 @@
+{
+  "chapters": [
+    {
+      "id": "ch-py",
+      "title": "Bab 1 · Dasar Python",
+      "conceptId": "python-basics",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-py-1",
+          "text": "Isi blok (setelah if, for, def) harus menjorok 4 spasi. Python membaca indentasi sebagai bagian dari kode.",
+          "evidenceTags": ["indent"]
+        },
+        {
+          "id": "r-py-2",
+          "text": "Angka dan teks berbeda tipe. Ubah angka jadi teks dengan str() sebelum digabung dengan +.",
+          "evidenceTags": ["type"]
+        },
+        {
+          "id": "r-py-3",
+          "text": "Rata-rata = jumlah dibagi BANYAK data, yaitu len(daftar), bukan angka tetap.",
+          "evidenceTags": ["logic"]
+        },
+        {
+          "id": "r-py-4",
+          "text": "Perhatikan batas: > berarti 'lebih dari', >= berarti 'lebih dari atau sama dengan'.",
+          "evidenceTags": ["boundary"]
+        }
+      ]
+    },
+    {
+      "id": "ch-err",
+      "title": "Bab 2 · Tes & Pesan Error",
+      "conceptId": "reading-errors",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-err-1",
+          "text": "Baca baris TERAKHIR pesan error dulu: jenis error dan penjelasannya ada di situ.",
+          "evidenceTags": ["error"]
+        },
+        {
+          "id": "r-err-2",
+          "text": "Tes (assert) adalah janji perilaku kode. Kode selesai bila semua tes lulus, termasuk kasus tepi.",
+          "evidenceTags": ["test"]
+        },
+        {
+          "id": "r-err-3",
+          "text": "Ubah satu hal, jalankan tes lagi. Tebak-tebakan banyak perubahan sekaligus bikin bingung.",
+          "evidenceTags": ["iterate"]
+        }
+      ]
+    },
+    {
+      "id": "ch-review",
+      "title": "Bab 3 · Review Kode",
+      "conceptId": "code-review",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-rev-1",
+          "text": "SETUJUI bila kodenya benar, terbaca, dan tesnya lulus. Jangan menahan pekerjaan yang sudah baik.",
+          "evidenceTags": ["approve"]
+        },
+        {
+          "id": "r-rev-2",
+          "text": "REVISI bila ada bug, kasus tepi terlewat, atau kebiasaan berbahaya. Tunjuk baris masalahnya.",
+          "evidenceTags": ["revise"]
+        },
+        {
+          "id": "r-rev-3",
+          "text": "Kata sandi dan kunci rahasia tidak boleh ditulis di kode. Simpan di pengaturan rahasia (environment variable).",
+          "evidenceTags": ["secret"]
+        },
+        {
+          "id": "r-rev-4",
+          "text": "ESKALASI ke developer senior bila perubahan butuh izin atau keahlian khusus (server produksi, data pelanggan).",
+          "evidenceTags": ["escalate"]
+        }
+      ]
+    },
+    {
+      "id": "ch-debug",
+      "title": "Bab 4 · Debugging",
+      "conceptId": "debugging",
+      "unlockAtShift": 2,
+      "rules": [
+        {
+          "id": "r-dbg-1",
+          "text": "Bingung isi variabel? Cetak dengan print() di beberapa titik, lalu bandingkan dengan yang kamu harapkan.",
+          "evidenceTags": ["print"]
+        },
+        {
+          "id": "r-dbg-2",
+          "text": "range(n) berhenti di n-1. Banyak bug 'kurang satu' (off-by-one) berasal dari batas perulangan.",
+          "evidenceTags": ["range"]
+        },
+        {
+          "id": "r-dbg-3",
+          "text": "IndexError/KeyError berarti mengambil isi yang tidak ada. Cek panjang daftar atau kunci kamus dulu.",
+          "evidenceTags": ["lookup"]
+        },
+        {
+          "id": "r-dbg-4",
+          "text": "Ulangi bug dengan contoh sekecil mungkin sebelum memperbaikinya.",
+          "evidenceTags": ["reproduce"]
+        }
+      ]
+    },
+    {
+      "id": "ch-release",
+      "title": "Bab 5 · Rilis & Rollback",
+      "conceptId": "release-rollback",
+      "unlockAtShift": 3,
+      "rules": [
+        {
+          "id": "r-rel-1",
+          "text": "Setiap perubahan disimpan sebagai commit dengan pesan yang menjelaskan apa yang diubah dan kenapa.",
+          "evidenceTags": ["commit"]
+        },
+        {
+          "id": "r-rel-2",
+          "text": "Rilis baru membuat error di produksi? ROLLBACK dulu ke versi sehat terakhir, perbaiki kemudian.",
+          "evidenceTags": ["rollback"]
+        },
+        {
+          "id": "r-rel-3",
+          "text": "Bandingkan angka sebelum dan sesudah rilis. Rilis yang sehat jangan di-rollback: pilih SETUJUI untuk membiarkannya tetap berjalan.",
+          "evidenceTags": ["metrics"]
+        },
+        {
+          "id": "r-rel-4",
+          "text": "Perubahan besar dirilis bertahap dan diawasi, bukan sekaligus ke semua pengguna.",
+          "evidenceTags": ["gradual"]
+        }
+      ]
+    },
+    {
+      "id": "ch-test",
+      "title": "Bab 6 · Menulis Tes",
+      "conceptId": "testing",
+      "unlockAtShift": 4,
+      "rules": [
+        {
+          "id": "r-tst-1",
+          "text": "Uji kasus tepi: daftar kosong, nol, angka negatif, huruf kapital, teks berspasi.",
+          "evidenceTags": ["edge"]
+        },
+        {
+          "id": "r-tst-2",
+          "text": "Tes yang pasti lulus (misalnya assert True) tidak menguji apa pun.",
+          "evidenceTags": ["fake-test"]
+        },
+        {
+          "id": "r-tst-3",
+          "text": "Setiap bug yang diperbaiki diberi tes baru, supaya bug itu tidak kembali.",
+          "evidenceTags": ["regression"]
+        },
+        {
+          "id": "r-tst-4",
+          "text": "Logika baru tanpa tes = REVISI. Minta penulis menambahkan tes yang relevan.",
+          "evidenceTags": ["missing-test"]
+        }
+      ]
+    },
+    {
+      "id": "ch-secure",
+      "title": "Bab 7 · Kode Aman",
+      "conceptId": "secure-coding",
+      "unlockAtShift": 5,
+      "rules": [
+        {
+          "id": "r-sec-1",
+          "text": "Jangan percaya input pengguna: periksa tipe dan rentangnya sebelum dipakai.",
+          "evidenceTags": ["input"]
+        },
+        {
+          "id": "r-sec-2",
+          "text": "Jangan mencetak atau menyimpan kata sandi dan data pribadi di log.",
+          "evidenceTags": ["log"]
+        },
+        {
+          "id": "r-sec-3",
+          "text": "Kode yang mengirim data ke alamat asing, atau datang dari akun tak dikenal, harus diESKALASI ke tim SOC.",
+          "evidenceTags": ["exfil"]
+        },
+        {
+          "id": "r-sec-4",
+          "text": "Pakai pustaka dari sumber resmi kantor, bukan salinan kode acak dari forum.",
+          "evidenceTags": ["dependency"]
+        }
+      ]
+    }
+  ]
+}

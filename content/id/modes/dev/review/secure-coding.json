@@ -1,0 +1,73 @@
+{
+  "items": [
+    {
+      "id": "rv-sec-1",
+      "type": "mcq",
+      "conceptId": "secure-coding",
+      "difficulty": 1,
+      "prompt": "Pembeli bisa mengetik jumlah barang sendiri. Apa yang sebaiknya dilakukan kode?",
+      "choices": [
+        "Langsung dipakai, pembeli pasti benar",
+        "Cek tipe dan rentangnya dulu, misalnya 1 sampai 100",
+        "Ubah jadi teks saja"
+      ],
+      "answerIndex": 1,
+      "explanation": "Input pengguna bisa salah ketik atau sengaja aneh, misalnya angka negatif. Periksa dulu sebelum dipakai."
+    },
+    {
+      "id": "rv-sec-2",
+      "type": "mcq",
+      "conceptId": "secure-coding",
+      "difficulty": 1,
+      "prompt": "Mana yang AMAN ditulis ke log login?",
+      "choices": [
+        "Username dan kata sandi",
+        "Username dan hasil login (berhasil/gagal)",
+        "Nomor HP lengkap pengguna"
+      ],
+      "answerIndex": 1,
+      "explanation": "Log dibaca banyak orang, jadi kata sandi dan data pribadi tidak boleh ikut dicetak."
+    },
+    {
+      "id": "rv-sec-3",
+      "type": "mcq",
+      "conceptId": "secure-coding",
+      "difficulty": 2,
+      "prompt": "Akun baru yang tidak dikenal mengirim PR yang diam-diam mengirim email pengguna ke alamat luar. Keputusanmu?",
+      "choices": [
+        "Setujui, tesnya lulus",
+        "Revisi: minta alamatnya diganti",
+        "Eskalasi ke tim SOC"
+      ],
+      "answerIndex": 2,
+      "explanation": "Kode yang mengirim data ke alamat asing dari akun tak dikenal bisa jadi serangan. Tim SOC yang berwenang memeriksanya."
+    },
+    {
+      "id": "rv-sec-4",
+      "type": "tap-evidence",
+      "conceptId": "secure-coding",
+      "difficulty": 2,
+      "prompt": "Ketuk baris yang membocorkan rahasia ke log.",
+      "parts": [
+        {
+          "text": "def login(username, password):",
+          "evidenceId": "p-def"
+        },
+        {
+          "text": "    print(f\"Login: {username} / {password}\")",
+          "evidenceId": "p-print"
+        },
+        {
+          "text": "    user = cari_user(username)",
+          "evidenceId": "p-find"
+        },
+        {
+          "text": "    return cek_sandi(user, password)",
+          "evidenceId": "p-check"
+        }
+      ],
+      "answer": ["p-print"],
+      "explanation": "Baris print mencetak kata sandi ke log. Memakai password untuk mengecek login tetap boleh."
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "items": [
+    {
+      "id": "rv-dbg-1",
+      "type": "mcq",
+      "conceptId": "debugging",
+      "difficulty": 1,
+      "prompt": "Angka berapa saja yang dihasilkan range(4)?",
+      "choices": ["0, 1, 2, 3", "1, 2, 3, 4", "0, 1, 2, 3, 4"],
+      "answerIndex": 0,
+      "explanation": "range(4) mulai dari 0 dan berhenti sebelum 4, jadi isinya 0, 1, 2, 3."
+    },
+    {
+      "id": "rv-dbg-2",
+      "type": "mcq",
+      "conceptId": "debugging",
+      "difficulty": 1,
+      "prompt": "Kode skor = {\"Ani\": 5} lalu skor[\"Budi\"] menghasilkan error apa?",
+      "choices": ["IndexError", "TypeError", "KeyError"],
+      "answerIndex": 2,
+      "explanation": "Kunci \"Budi\" tidak ada di kamus, jadi Python melempar KeyError. skor.get(\"Budi\", 0) lebih aman."
+    },
+    {
+      "id": "rv-dbg-3",
+      "type": "mcq",
+      "conceptId": "debugging",
+      "difficulty": 2,
+      "prompt": "Total di perulanganmu hasilnya salah. Langkah pertama yang paling membantu?",
+      "choices": [
+        "Menulis ulang seluruh fungsi",
+        "Mencetak isi total di setiap putaran dengan print()",
+        "Menghapus tes yang gagal"
+      ],
+      "answerIndex": 1,
+      "explanation": "print() menunjukkan isi variabel di setiap langkah, jadi kamu bisa melihat di putaran mana hasilnya mulai salah."
+    },
+    {
+      "id": "rv-dbg-4",
+      "type": "order-steps",
+      "conceptId": "debugging",
+      "difficulty": 2,
+      "prompt": "Urutkan langkah memburu bug.",
+      "steps": [
+        "Ulangi bug dengan contoh kecil",
+        "Cetak isi variabel dengan print()",
+        "Perbaiki satu hal",
+        "Jalankan tes lagi",
+        "Hapus print() percobaan"
+      ],
+      "explanation": "Bug yang bisa diulang lebih mudah dilihat, dan print() percobaan harus dihapus sebelum kode dikirim."
+    }
+  ]
+}

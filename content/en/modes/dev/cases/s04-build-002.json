@@ -1,0 +1,60 @@
+{
+  "id": "s04-build-002",
+  "type": "coding",
+  "conceptIds": ["testing", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Putri Handayani",
+      "team": "Learning App Team"
+    },
+    "title": "Speed challenge: tidy up usernames",
+    "story": [
+      "Write a function make_username(name): remove spaces at the edges, make it lowercase, and replace the spaces in the middle with _.",
+      "Example: \" Budi Santoso \" becomes \"budi_santoso\". Hidden tests try capital letters and text that is only spaces."
+    ],
+    "file": "learning/username.py",
+    "starter": "def make_username(name):\n    # Write your code here\n    return name\n",
+    "tests": [
+      {
+        "name": "two words",
+        "code": "assert make_username(\"Budi Santoso\") == \"budi_santoso\""
+      },
+      {
+        "name": "spaces at the edges",
+        "code": "assert make_username(\"  Siti  \") == \"siti\""
+      },
+      {
+        "name": "all capitals",
+        "code": "assert make_username(\"ANDI\") == \"andi\"",
+        "hidden": true
+      },
+      {
+        "name": "only spaces",
+        "code": "assert make_username(\"   \") == \"\"",
+        "hidden": true
+      },
+      {
+        "name": "three words",
+        "code": "assert make_username(\"Rina Ayu Lestari \") == \"rina_ayu_lestari\"",
+        "hidden": true
+      }
+    ],
+    "solution": "def make_username(name):\n    result = name.strip().lower()\n    return result.replace(\" \", \"_\")\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Order matters: .strip() first so edge spaces do not turn into _, then .lower() and .replace(\" \", \"_\"). Text that is only spaces automatically becomes empty text.",
+  "ruleRefs": ["r-tst-1", "r-err-2"],
+  "hints": [
+    "There are three steps: remove edge spaces, lowercase, replace middle spaces.",
+    "If .replace runs before .strip(), the edge spaces turn into _ too.",
+    "Try name.strip().lower(), then .replace(\" \", \"_\")."
+  ]
+}

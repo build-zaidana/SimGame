@@ -1,0 +1,109 @@
+{
+  "id": "s05-pr-005",
+  "type": "pull-request",
+  "conceptIds": ["release-rollback", "secure-coding"],
+  "difficulty": 3,
+  "verdict": "fault",
+  "correctDecision": "rollback",
+  "acceptableDecisions": {
+    "revise": 0.3
+  },
+  "severity": 3,
+  "data": {
+    "author": {
+      "name": "Dedi Kurniawan",
+      "team": "Tim Akun"
+    },
+    "title": "Rapikan username sebelum dicek",
+    "description": [
+      {
+        "text": "Username dirapikan dulu supaya spasi di awal dan akhir tidak bikin gagal login.",
+        "evidenceId": "desc-why"
+      },
+      {
+        "text": "Sudah dirilis ke produksi pukul 14.05.",
+        "evidenceId": "desc-release"
+      },
+      {
+        "text": "Catatan: semua username di database disimpan dengan huruf kecil.",
+        "evidenceId": "desc-db"
+      }
+    ],
+    "file": "akun/login.py",
+    "diff": [
+      {
+        "code": "def cari_akun(username):",
+        "indent": 0,
+        "kind": "ctx",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "nama = username.strip().lower()",
+        "indent": 1,
+        "kind": "del",
+        "evidenceId": "line-old"
+      },
+      {
+        "code": "nama = username.strip().upper()",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-upper"
+      },
+      {
+        "code": "akun = data_akun.get(nama)",
+        "indent": 1,
+        "kind": "ctx",
+        "evidenceId": "line-get"
+      },
+      {
+        "code": "if akun is None:",
+        "indent": 1,
+        "kind": "ctx"
+      },
+      {
+        "code": "return \"Akun tidak ditemukan\"",
+        "indent": 2,
+        "kind": "ctx"
+      },
+      {
+        "code": "return akun",
+        "indent": 1,
+        "kind": "ctx"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Login gagal: 1% sebelum rilis 14.05 → 64% sesudah",
+        "evidenceId": "check-errors"
+      },
+      {
+        "text": "Laporan \"akun tidak ditemukan\": 2 → 310 dalam 30 menit setelah rilis",
+        "evidenceId": "check-reports"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["check-errors"],
+    "supporting": ["check-reports", "desc-release", "line-upper", "desc-db"]
+  },
+  "explanation": "Login gagal melonjak dari 1% ke 64% tepat setelah rilis 14.05, karena username diubah ke huruf besar padahal database memakai huruf kecil. Rollback dulu ke versi sehat agar pengguna bisa login, baru perbaiki kodenya.",
+  "ruleRefs": ["r-rel-2", "r-rel-3"],
+  "hints": [
+    "Perubahan ini sudah dipakai pengguna. Lihat angka sebelum dan sesudah rilis.",
+    "Kalau rilis membuat error melonjak, mana yang lebih dulu: memulihkan pengguna atau memperbaiki kode?"
+  ],
+  "intel": {
+    "lint": [
+      {
+        "text": "Tidak ada peringatan gaya penulisan.",
+        "evidenceId": "lint-ok"
+      }
+    ],
+    "tests": [
+      {
+        "text": "cari_akun(\"rani\") → \"Akun tidak ditemukan\" (seharusnya akun rani)",
+        "evidenceId": "test-rani"
+      }
+    ]
+  }
+}

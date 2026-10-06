@@ -1,0 +1,52 @@
+{
+  "items": [
+    {
+      "id": "rv-tst-1",
+      "type": "mcq",
+      "conceptId": "testing",
+      "difficulty": 1,
+      "prompt": "Tes mana yang TIDAK menguji apa pun?",
+      "choices": ["assert total([]) == 0", "assert hasil == hasil", "assert total([5]) == 5"],
+      "answerIndex": 1,
+      "explanation": "Membandingkan nilai dengan dirinya sendiri pasti lulus, walaupun fungsinya salah."
+    },
+    {
+      "id": "rv-tst-2",
+      "type": "mcq",
+      "conceptId": "testing",
+      "difficulty": 1,
+      "prompt": "Fungsi rata-rata baru hanya diuji dengan [10, 20]. Tes tambahan mana yang paling penting?",
+      "choices": ["[30, 40]", "Daftar kosong []", "[10, 20] sekali lagi"],
+      "answerIndex": 1,
+      "explanation": "Daftar kosong adalah kasus tepi yang sering membuat pembagian dengan nol crash."
+    },
+    {
+      "id": "rv-tst-3",
+      "type": "mcq",
+      "conceptId": "testing",
+      "difficulty": 2,
+      "prompt": "Setelah memperbaiki bug, kenapa developer menambah tes baru untuk bug itu?",
+      "choices": [
+        "Supaya jumlah tes terlihat banyak",
+        "Supaya ketahuan cepat kalau bug yang sama muncul lagi",
+        "Supaya kodenya berjalan lebih cepat"
+      ],
+      "answerIndex": 1,
+      "explanation": "Tes regresi akan gagal bila bug lama kembali, jadi tim langsung tahu."
+    },
+    {
+      "id": "rv-tst-4",
+      "type": "order-steps",
+      "conceptId": "testing",
+      "difficulty": 2,
+      "prompt": "Urutkan langkah memperbaiki bug dengan bantuan tes.",
+      "steps": [
+        "Tulis tes kecil yang mengulang bug (tesnya gagal)",
+        "Perbaiki kodenya",
+        "Jalankan semua tes sampai lulus",
+        "Kirim pull request beserta tes barunya"
+      ],
+      "explanation": "Tes yang gagal dulu membuktikan bug-nya nyata, dan tes yang sama membuktikan perbaikannya berhasil."
+    }
+  ]
+}

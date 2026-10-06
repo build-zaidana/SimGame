@@ -1,0 +1,55 @@
+{
+  "id": "s01-build-001",
+  "type": "coding",
+  "conceptIds": ["python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Maya Lestari",
+      "team": "Tim Aplikasi Belajar"
+    },
+    "title": "Lomba kilat: hitung huruf vokal",
+    "story": [
+      "Tulis fungsi hitung_vokal(teks) yang menghitung huruf vokal (a, i, u, e, o) dalam sebuah teks.",
+      "Hati-hati: ada tes tersembunyi untuk huruf kapital dan teks kosong!"
+    ],
+    "file": "belajar/vokal.py",
+    "starter": "def hitung_vokal(teks):\n    # Tulis kodemu di sini\n    return 0\n",
+    "tests": [
+      {
+        "name": "kata biasa",
+        "code": "assert hitung_vokal(\"nusa\") == 2"
+      },
+      {
+        "name": "kalimat",
+        "code": "assert hitung_vokal(\"aku suka kode\") == 6"
+      },
+      {
+        "name": "huruf kapital",
+        "code": "assert hitung_vokal(\"ANDI\") == 2",
+        "hidden": true
+      },
+      {
+        "name": "teks kosong",
+        "code": "assert hitung_vokal(\"\") == 0",
+        "hidden": true
+      }
+    ],
+    "solution": "def hitung_vokal(teks):\n    jumlah = 0\n    for huruf in teks.lower():\n        if huruf in \"aiueo\":\n            jumlah = jumlah + 1\n    return jumlah\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Periksa setiap huruf dengan for, lalu tambah hitungan bila hurufnya ada di \"aiueo\". Mengubah teks ke huruf kecil dulu dengan .lower() membuat huruf kapital ikut terhitung.",
+  "ruleRefs": ["r-err-2", "r-py-1"],
+  "hints": [
+    "Mulai dengan jumlah = 0, lalu periksa setiap huruf dengan for.",
+    "Kalimat huruf in \"aiueo\" bernilai True bila huruf itu vokal kecil.",
+    "Huruf kapital? Ubah dulu teksnya dengan .lower()."
+  ]
+}

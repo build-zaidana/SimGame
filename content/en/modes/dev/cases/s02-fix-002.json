@@ -1,0 +1,50 @@
+{
+  "id": "s02-fix-002",
+  "type": "coding",
+  "conceptIds": ["debugging", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Dewi Anggraini",
+      "team": "Learning App Team"
+    },
+    "title": "Student points only show the last number",
+    "story": [
+      "A student who earned 10, 20, and 30 points is recorded with only 30 points.",
+      "Add print(total) inside the loop to see what happens, then fix it."
+    ],
+    "file": "learning/points.py",
+    "starter": "def total_points(points):\n    for p in points:\n        total = 0\n        total = total + p\n    return total\n",
+    "tests": [
+      {
+        "name": "three quizzes",
+        "code": "assert total_points([10, 20, 30]) == 60"
+      },
+      {
+        "name": "two quizzes",
+        "code": "assert total_points([5, 5]) == 10"
+      },
+      {
+        "name": "no quizzes yet",
+        "code": "assert total_points([]) == 0",
+        "hidden": true
+      }
+    ],
+    "solution": "def total_points(points):\n    total = 0\n    for p in points:\n        total = total + p\n    return total\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "The line total = 0 sits inside the for loop, so total goes back to zero on every round and only the last score survives. Move total = 0 above the loop, before it starts.",
+  "ruleRefs": ["r-dbg-1", "r-dbg-4", "r-py-1"],
+  "hints": [
+    "Print total on every round. Does the number keep growing?",
+    "Which line sends total back to 0? How many times should that line run?",
+    "Move total = 0 outside the for loop, at the same indentation as the for."
+  ]
+}

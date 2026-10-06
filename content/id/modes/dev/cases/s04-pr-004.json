@@ -1,0 +1,87 @@
+{
+  "id": "s04-pr-004",
+  "type": "pull-request",
+  "conceptIds": ["testing", "code-review"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Lestari Wahyuni",
+      "team": "Tim Gudang"
+    },
+    "title": "Rata-rata stok per rak",
+    "description": [
+      {
+        "text": "Menghitung rata-rata stok barang per rak untuk laporan gudang.",
+        "evidenceId": "desc"
+      },
+      {
+        "text": "Minggu depan fungsi ini juga dipakai gudang baru di Bandung yang raknya masih kosong.",
+        "evidenceId": "desc-new"
+      }
+    ],
+    "file": "gudang/stok.py",
+    "diff": [
+      {
+        "code": "def rata_stok(daftar_stok):",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "return sum(daftar_stok) / len(daftar_stok)",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-div"
+      },
+      {
+        "code": "# tes",
+        "indent": 0,
+        "kind": "add"
+      },
+      {
+        "code": "assert rata_stok([10, 20, 30]) == 20",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "test-normal"
+      },
+      {
+        "code": "assert rata_stok([5]) == 5",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "test-one"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Tes otomatis: 2 dari 2 lulus",
+        "evidenceId": "check-tests"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["line-div", "desc-new"],
+    "supporting": ["test-normal", "test-one", "check-tests"]
+  },
+  "explanation": "Untuk gudang yang raknya kosong, len([]) bernilai 0 sehingga pembagian memicu ZeroDivisionError, dan tidak ada tes untuk daftar kosong. Minta revisi: tambahkan penjaga untuk daftar kosong beserta tesnya.",
+  "ruleRefs": ["r-tst-1", "r-tst-4"],
+  "hints": [
+    "Tesnya lulus. Kasus apa yang belum diuji?",
+    "Baca deskripsinya lagi: data seperti apa yang akan datang dari gudang baru?",
+    "Apa hasil len([]), dan apa yang terjadi bila sesuatu dibagi dengan itu?"
+  ],
+  "intel": {
+    "tests": [
+      {
+        "text": "Test Runner: 2 tes lulus",
+        "evidenceId": "intel-pass"
+      },
+      {
+        "text": "Belum ada tes untuk daftar kosong []",
+        "evidenceId": "intel-missing"
+      }
+    ]
+  }
+}

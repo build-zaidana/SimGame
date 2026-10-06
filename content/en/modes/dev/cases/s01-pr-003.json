@@ -1,0 +1,71 @@
+{
+  "id": "s01-pr-003",
+  "type": "pull-request",
+  "conceptIds": ["code-review"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.5
+  },
+  "severity": 3,
+  "data": {
+    "author": {
+      "name": "Hendra Wijaya",
+      "team": "Reports Team"
+    },
+    "title": "Connect reports to the database",
+    "description": [
+      {
+        "text": "To save time, I wrote the database password right in the code. I'll tidy it up later.",
+        "evidenceId": "desc-later"
+      },
+      {
+        "text": "The reports already show up on my laptop.",
+        "evidenceId": "desc-works"
+      }
+    ],
+    "file": "reports/db.py",
+    "diff": [
+      {
+        "code": "import db",
+        "indent": 0,
+        "kind": "ctx"
+      },
+      {
+        "code": "DB_PASSWORD = \"Nusa#2026secret\"",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-secret"
+      },
+      {
+        "code": "def connect():",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-def"
+      },
+      {
+        "code": "return db.connect(\"reports\", DB_PASSWORD)",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-connect"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Automatic tests: 2 of 2 passed",
+        "evidenceId": "check-tests"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["line-secret"],
+    "supporting": ["desc-later"]
+  },
+  "explanation": "A password written in code is saved in the repository and can be read by anyone with access. Request changes so the password comes from secret settings, even though the tests pass.",
+  "ruleRefs": ["r-rev-3", "r-rev-2"],
+  "hints": [
+    "Passing tests doesn't always mean safe. Is there something that must not be written in code?",
+    "Look at the line with the password."
+  ]
+}
