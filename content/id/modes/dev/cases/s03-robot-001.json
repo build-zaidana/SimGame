@@ -1,0 +1,59 @@
+{
+  "id": "s03-robot-001",
+  "type": "robot",
+  "conceptIds": ["python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Yoga Saputra",
+      "team": "Tim Gudang"
+    },
+    "title": "Lorong yang berbelok",
+    "story": [
+      "Gudang baru dibuka dan lorongnya berbelok ke kanan. Program lama terus maju sampai menabrak dinding.",
+      "Sensor baru: depan_kosong() bernilai True kalau petak di depan robot bukan dinding. Pakai if/else: kalau depan kosong maju, kalau tidak belok kanan."
+    ],
+    "maps": [
+      {
+        "grid": ["######", "#P..##", "###.##", "###T##", "######"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      },
+      {
+        "grid": ["########", "#.P...##", "#####.##", "#####.##", "#####T##", "########"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      },
+      {
+        "grid": ["#######", "#..P..#", "#####.#", "#T....#", "#######"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      }
+    ],
+    "starter": "# Program lama hanya bisa lurus. Lorong baru berbelok!\nwhile not di_tujuan():\n    if ada_paket():\n        ambil()\n    maju()\nantar()\n",
+    "solution": "while not di_tujuan():\n    if ada_paket():\n        ambil()\n    if depan_kosong():\n        maju()\n    else:\n        belok_kanan()\nantar()\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "if/else memilih satu dari dua jalan: maju kalau depan kosong, belok kanan kalau ada dinding. Karena keputusan diambil di setiap langkah, program yang sama bisa melewati satu atau dua belokan.",
+  "ruleRefs": ["r-py-1", "r-err-2"],
+  "hints": [
+    "Robot menabrak karena selalu maju(). Kapan ia seharusnya belok?",
+    "Di dalam while: if depan_kosong(): maju() lalu else: belok_kanan().",
+    "else harus sejajar dengan if-nya, dan isinya menjorok 4 spasi lagi."
+  ]
+}

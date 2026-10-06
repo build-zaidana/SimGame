@@ -54,6 +54,10 @@
       "arriveAt": 75
     },
     {
+      "caseId": "s05-robot-001",
+      "arriveAt": 79
+    },
+    {
       "caseId": "s05-pr-006",
       "arriveAt": 82
     }

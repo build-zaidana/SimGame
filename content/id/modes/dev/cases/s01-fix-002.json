@@ -32,7 +32,7 @@
     "solution": "def label_harga(harga):\n    return \"Rp \" + str(harga)\n",
     "incident": {
       "service": "Toko Online · halaman produk",
-      "drainPerSecond": 0.8
+      "drainPerSecond": 0.5
     }
   },
   "evidence": {

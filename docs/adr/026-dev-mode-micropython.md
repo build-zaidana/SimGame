@@ -75,3 +75,12 @@ Masukan pemilik: Meja Developer masih terasa seperti latihan coding biasa. Tahap
   engine `ROLLBACK_INCIDENT` → `answer.rolledBackAtMs` (save v10 + migrasi identitas).
 - Skor: tes lulus semua dan server tidak down = tepat; server down (0%) = `threat-allowed`.
   Kesehatan tersisa menjadi skor bukti (min 0,3).
+
+## Addendum — poles tahap 1–2
+
+- Kecepatan kerusakan insiden diturunkan untuk pemula yang mengetik di HP: shift 1 0,5 %/detik
+  (down ±200 detik), shift 2 0,6, shift 3 0,8, shift 4 1,0, shift 5 1,2. Rollback tersedia sejak shift 3.
+- Di HP, ruang server dan peta robot tergulir keluar layar saat mengetik: ditambah indikator
+  ringkas `ServerHealthChip` di atas editor, dan peta robot digulir ke layar saat program dijalankan.
+- Kasus robot ada di setiap shift dengan materi yang naik: urutan cek (debug), if/else + sensor depan,
+  `def` + uji semua peta (kasus tepi), lalu aturan tangan kanan di labirin.

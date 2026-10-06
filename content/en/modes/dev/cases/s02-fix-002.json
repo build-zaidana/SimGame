@@ -14,7 +14,7 @@
     },
     "title": "Student points only show the last number",
     "story": [
-      "A student who earned 10, 20, and 30 points is recorded with only 30 points.",
+      "🔥 PRODUCTION INCIDENT: A student who earned 10, 20, and 30 points is recorded with only 30 points.",
       "Add print(total) inside the loop to see what happens, then fix it."
     ],
     "file": "learning/points.py",
@@ -34,7 +34,11 @@
         "hidden": true
       }
     ],
-    "solution": "def total_points(points):\n    total = 0\n    for p in points:\n        total = total + p\n    return total\n"
+    "solution": "def total_points(points):\n    total = 0\n    for p in points:\n        total = total + p\n    return total\n",
+    "incident": {
+      "service": "Learning App · points board",
+      "drainPerSecond": 0.6
+    }
   },
   "evidence": {
     "required": [],

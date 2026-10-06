@@ -32,7 +32,7 @@
     "solution": "def price_label(price):\n    return \"Rp \" + str(price)\n",
     "incident": {
       "service": "Online Shop · product page",
-      "drainPerSecond": 0.8
+      "drainPerSecond": 0.5
     }
   },
   "evidence": {

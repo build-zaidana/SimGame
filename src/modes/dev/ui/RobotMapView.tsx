@@ -22,7 +22,7 @@ export function RobotMapView({ map, frame, label }: RobotMapViewProps) {
   return (
     <svg
       viewBox={`0 0 ${w * TILE} ${h * TILE}`}
-      className="sprite w-full max-w-md border-2 border-ink/60 bg-[#1e2129]"
+      className="sprite max-h-[45vh] w-full max-w-md border-2 border-ink/60 bg-[#1e2129]"
       role="img"
       aria-label={label}
       data-testid="robot-map"

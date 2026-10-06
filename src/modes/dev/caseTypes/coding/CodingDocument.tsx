@@ -4,7 +4,7 @@ import { t as id } from '../../../../i18n/index.ts';
 import type { DocumentProps } from '../../../contract.ts';
 import { CodeEditor } from '../../ui/CodeEditor.tsx';
 import { RunPanel } from '../../ui/RunPanel.tsx';
-import { ServerRoom, serverState } from '../../ui/ServerRoom.tsx';
+import { ServerHealthChip, ServerRoom, serverState } from '../../ui/ServerRoom.tsx';
 import { serverHealth } from '../../incident.ts';
 import type { CodingCase } from './schema.ts';
 
@@ -60,6 +60,7 @@ export function CodingDocument({
         })
       : 100;
   const fixed = !!answer?.total && answer.passed === answer.total;
+  const state = serverState(health, answer?.rolledBackAtMs !== undefined, fixed);
   return (
     <article aria-labelledby="doc-title" className="border-2 border-ink/40 bg-bg p-3">
       <p className="font-display text-accent">
@@ -73,7 +74,7 @@ export function CodingDocument({
         <ServerRoom
           service={incident.service}
           health={health}
-          state={serverState(health, answer?.rolledBackAtMs !== undefined, fixed)}
+          state={state}
           canRollback={!locked && (clock?.shiftOrder ?? 1) >= 3}
           onRollback={() => onRollback?.()}
         />
@@ -97,10 +98,11 @@ export function CodingDocument({
           <li className="font-sans">{id.dev.run.hiddenCount(d.tests.length - visible.length)}</li>
         )}
       </ul>
-      <div className="mb-1 flex items-center justify-between gap-2">
+      <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
         <p className="font-mono text-sm">
           {t.file}: <strong>{d.file}</strong>
         </p>
+        {incident && <ServerHealthChip health={health} state={state} />}
         {!locked && code !== d.starter && (
           <button
             type="button"

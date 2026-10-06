@@ -42,7 +42,7 @@
     "solution": "def persen_hadir(absen):\n    if len(absen) == 0:\n        return 0\n    hadir = 0\n    for a in absen:\n        if a:\n            hadir = hadir + 1\n    return hadir * 100 // len(absen)\n",
     "incident": {
       "service": "Absensi · persentase hadir",
-      "drainPerSecond": 1.2
+      "drainPerSecond": 1.0
     }
   },
   "evidence": {

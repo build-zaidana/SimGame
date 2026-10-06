@@ -1,0 +1,59 @@
+{
+  "id": "s02-robot-001",
+  "type": "robot",
+  "conceptIds": ["debugging", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Yoga Saputra",
+      "team": "Tim Gudang"
+    },
+    "title": "Paket di titik awal tertinggal",
+    "story": [
+      "Laporan gudang: robot kadang sampai di tujuan dengan tangan kosong. Anehnya, di peta tengah programnya lancar.",
+      "Bandingkan peta yang berhasil dan yang gagal. Paket mana yang tidak pernah diambil robot?"
+    ],
+    "maps": [
+      {
+        "grid": ["######", "#P..T#", "######"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      },
+      {
+        "grid": ["########", "#.P...T#", "########"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      },
+      {
+        "grid": ["########", "#P.P..T#", "########"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      }
+    ],
+    "starter": "while not di_tujuan():\n    maju()\n    if ada_paket():\n        ambil()\nantar()\n",
+    "solution": "while not di_tujuan():\n    if ada_paket():\n        ambil()\n    maju()\nantar()\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Program lama maju dulu baru memeriksa paket, jadi paket di petak awal tidak pernah diperiksa. Periksa ada_paket() sebelum maju() supaya setiap petak dicek, termasuk petak pertama.",
+  "ruleRefs": ["r-dbg-4", "r-dbg-1", "r-py-1"],
+  "hints": [
+    "Jalankan dan lihat peta yang gagal: di mana letak paket yang tertinggal?",
+    "Urutan di dalam while menentukan petak mana yang dicek. Petak pertama dicek atau tidak?",
+    "Tukar urutannya: if ada_paket(): ambil() dulu, baru maju()."
+  ]
+}

@@ -30,6 +30,10 @@
       "arriveAt": 40
     },
     {
+      "caseId": "s02-robot-001",
+      "arriveAt": 45
+    },
+    {
       "caseId": "s02-build-001",
       "arriveAt": 50
     },

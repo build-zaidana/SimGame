@@ -451,6 +451,7 @@ export const en: Strings = {
       label: (service) => `Server room: ${service}`,
       health: 'Server health',
       healthValue: (n) => `${n}%`,
+      chip: (n) => `Server ${n}%`,
       status: {
         ok: 'Normal',
         smoke: 'Smoking! Users are starting to complain',
@@ -508,10 +509,19 @@ export const en: Strings = {
     },
     visitors: {
       prLines: ['Please review my PR.', 'I tested it on my laptop. It is fine, right?'],
-      taskLines: [
+      fixLines: [
         'There is a bug driving me crazy. Can you help?',
-        'I need this function by this afternoon. You got this!',
+        'Users keep complaining. Please take a look.',
       ],
+      buildLines: [
+        'I need this function by this afternoon. You got this!',
+        'There is a new feature to build.',
+      ],
+      robotLines: [
+        'The warehouse robot needs a new program!',
+        'Packages are piling up. Can the robot move again?',
+      ],
+      incidentLines: ['The server is smoking! Hurry, please!', 'Users cannot get in. Emergency!'],
       ctf: { name: 'CTF Board', role: 'Security team practice' },
       ctfLines: ['A hidden flag is waiting to be found.', 'New challenge on the CTF board!'],
     },

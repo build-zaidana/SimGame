@@ -37,7 +37,7 @@
     "solution": "def samarkan_hp(nomor):\n    return nomor[:4] + \"****\" + nomor[-2:]\n",
     "incident": {
       "service": "Layanan Pelanggan · log",
-      "drainPerSecond": 1.5
+      "drainPerSecond": 1.2
     }
   },
   "evidence": {

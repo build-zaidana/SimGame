@@ -144,3 +144,32 @@ export function ServerRoom({ service, health, state, canRollback, onRollback }: 
     </section>
   );
 }
+
+const CHIP_ICON: Record<ServerState, string> = {
+  ok: '🖥',
+  smoke: '💨',
+  fire: '🔥',
+  down: '⛔',
+  stable: '🧊',
+  fixed: '✅',
+};
+
+/** Indikator ringkas di dekat editor: di HP ruang server tergulir keluar layar saat mengetik. */
+export function ServerHealthChip({ health, state }: { health: number; state: ServerState }) {
+  const hot = state === 'fire' || state === 'down';
+  return (
+    <p
+      className={
+        'inline-flex items-center gap-2 border-2 bg-[#161a24] px-2 py-1 font-display text-sm text-[#e6e1d6] ' +
+        (hot ? 'border-[#f07a6a] alarm-pulse' : 'border-ink/60')
+      }
+      data-testid="server-chip"
+    >
+      <span aria-hidden="true">{CHIP_ICON[state]}</span>
+      {id.dev.incident.chip(health)}
+      <span aria-hidden="true" className="inline-block h-2 w-12 bg-[#0d1017]">
+        <span className="block h-full" style={{ width: `${health}%`, background: LED[state] }} />
+      </span>
+    </p>
+  );
+}

@@ -1,0 +1,59 @@
+{
+  "id": "s02-robot-001",
+  "type": "robot",
+  "conceptIds": ["debugging", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Yoga Saputra",
+      "team": "Warehouse Team"
+    },
+    "title": "The package at the start gets left behind",
+    "story": [
+      "Warehouse report: the robot sometimes reaches the flag empty-handed. Strangely, the program works fine on the middle map.",
+      "Compare the maps that pass and the ones that fail. Which package does the robot never pick up?"
+    ],
+    "maps": [
+      {
+        "grid": ["######", "#P..T#", "######"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      },
+      {
+        "grid": ["########", "#.P...T#", "########"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      },
+      {
+        "grid": ["########", "#P.P..T#", "########"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      }
+    ],
+    "starter": "while not at_target():\n    forward()\n    if has_package():\n        pick_up()\ndeliver()\n",
+    "solution": "while not at_target():\n    if has_package():\n        pick_up()\n    forward()\ndeliver()\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "The old program moves first and checks for a package afterwards, so the package on the starting tile is never checked. Check has_package() before forward() so every tile is checked, including the first one.",
+  "ruleRefs": ["r-dbg-4", "r-dbg-1", "r-py-1"],
+  "hints": [
+    "Run it and look at the failing map: where is the package that got left behind?",
+    "The order inside the while decides which tiles get checked. Is the first tile checked?",
+    "Swap the order: if has_package(): pick_up() first, then forward()."
+  ]
+}

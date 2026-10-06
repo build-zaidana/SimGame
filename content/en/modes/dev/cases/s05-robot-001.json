@@ -1,0 +1,59 @@
+{
+  "id": "s05-robot-001",
+  "type": "robot",
+  "conceptIds": ["python-basics", "testing"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Yoga Saputra",
+      "team": "Warehouse Team"
+    },
+    "title": "The old warehouse maze",
+    "story": [
+      "Final challenge: the old warehouse is full of branching corridors and dead ends. The corridor-finder program gets lost at the branches.",
+      "Use the right-hand rule: at every step, turn right first. While there is still a wall in front, turn left. Then move forward. The robot will follow the wall all the way to the flag."
+    ],
+    "maps": [
+      {
+        "grid": ["########", "#P.#..T#", "#..#.###", "#......#", "########"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      },
+      {
+        "grid": ["#########", "#.P#....#", "#.##.##.#", "#....#T.#", "#########"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "N"
+        }
+      },
+      {
+        "grid": ["#########", "#P....#T#", "####.##.#", "#..P....#", "#########"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      }
+    ],
+    "starter": "def find_corridor():\n    turn_left()\n    if not front_clear():\n        turn_right()\n        turn_right()\n\nwhile not at_target():\n    if has_package():\n        pick_up()\n    if front_clear():\n        forward()\n    else:\n        find_corridor()\ndeliver()\n",
+    "solution": "while not at_target():\n    if has_package():\n        pick_up()\n    turn_right()\n    while not front_clear():\n        turn_left()\n    forward()\ndeliver()\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "The right-hand rule follows the wall on the right, so the robot always reaches the flag in a maze whose walls are connected. The while loop inside the while finds the first open direction.",
+  "ruleRefs": ["r-tst-1", "r-py-1"],
+  "hints": [
+    "The old program only turns when it hits a wall, so side branches get skipped. The right-hand rule always tries right first.",
+    "The order: pick up a package if there is one, turn_right(), then while not front_clear(): turn_left(), then forward().",
+    "The inner while is indented 4 more spaces. deliver() goes at the very bottom with no indentation."
+  ]
+}

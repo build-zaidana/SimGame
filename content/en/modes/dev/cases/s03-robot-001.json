@@ -1,0 +1,59 @@
+{
+  "id": "s03-robot-001",
+  "type": "robot",
+  "conceptIds": ["python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Yoga Saputra",
+      "team": "Warehouse Team"
+    },
+    "title": "Corridors with corners",
+    "story": [
+      "A new warehouse just opened and its corridors turn right. The old program keeps moving until it hits a wall.",
+      "New sensor: front_clear() is True when the tile in front of the robot is not a wall. Use if/else: if the front is clear move forward, otherwise turn right."
+    ],
+    "maps": [
+      {
+        "grid": ["######", "#P..##", "###.##", "###T##", "######"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      },
+      {
+        "grid": ["########", "#.P...##", "#####.##", "#####.##", "#####T##", "########"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      },
+      {
+        "grid": ["#######", "#..P..#", "#####.#", "#T....#", "#######"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      }
+    ],
+    "starter": "# The old program only goes straight. The new corridors turn!\nwhile not at_target():\n    if has_package():\n        pick_up()\n    forward()\ndeliver()\n",
+    "solution": "while not at_target():\n    if has_package():\n        pick_up()\n    if front_clear():\n        forward()\n    else:\n        turn_right()\ndeliver()\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "if/else picks one of two paths: move forward if the front is clear, turn right if there is a wall. Because the decision is made at every step, the same program can handle one or two corners.",
+  "ruleRefs": ["r-py-1", "r-err-2"],
+  "hints": [
+    "The robot crashes because it always calls forward(). When should it turn instead?",
+    "Inside the while: if front_clear(): forward() and else: turn_right().",
+    "else must line up with its if, and its body is indented 4 more spaces."
+  ]
+}
