@@ -42,7 +42,7 @@
     "solution": "def attendance_percent(records):\n    if len(records) == 0:\n        return 0\n    present = 0\n    for r in records:\n        if r:\n            present = present + 1\n    return present * 100 // len(records)\n",
     "incident": {
       "service": "Attendance · presence rate",
-      "drainPerSecond": 1.2
+      "drainPerSecond": 1.0
     }
   },
   "evidence": {

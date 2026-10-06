@@ -42,7 +42,7 @@
     "solution": "def total_keranjang(keranjang):\n    total = 0\n    for barang in keranjang:\n        total = total + barang[\"harga\"] * barang[\"jumlah\"]\n    return total\n",
     "incident": {
       "service": "Kasir · total keranjang",
-      "drainPerSecond": 1.2
+      "drainPerSecond": 0.8
     }
   },
   "evidence": {

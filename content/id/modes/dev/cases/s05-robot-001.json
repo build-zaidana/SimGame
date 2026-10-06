@@ -1,0 +1,59 @@
+{
+  "id": "s05-robot-001",
+  "type": "robot",
+  "conceptIds": ["python-basics", "testing"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Yoga Saputra",
+      "team": "Tim Gudang"
+    },
+    "title": "Labirin gudang lama",
+    "story": [
+      "Tantangan terakhir: gudang lama penuh lorong bercabang dan jalan buntu. Program pencari lorong tersesat di cabang.",
+      "Pakai aturan tangan kanan: di setiap langkah, belok kanan dulu. Selama depan masih dinding, belok kiri. Lalu maju. Robot akan menyusuri dinding sampai ke tujuan."
+    ],
+    "maps": [
+      {
+        "grid": ["########", "#P.#..T#", "#..#.###", "#......#", "########"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      },
+      {
+        "grid": ["#########", "#.P#....#", "#.##.##.#", "#....#T.#", "#########"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "N"
+        }
+      },
+      {
+        "grid": ["#########", "#P....#T#", "####.##.#", "#..P....#", "#########"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      }
+    ],
+    "starter": "def cari_lorong():\n    belok_kiri()\n    if not depan_kosong():\n        belok_kanan()\n        belok_kanan()\n\nwhile not di_tujuan():\n    if ada_paket():\n        ambil()\n    if depan_kosong():\n        maju()\n    else:\n        cari_lorong()\nantar()\n",
+    "solution": "while not di_tujuan():\n    if ada_paket():\n        ambil()\n    belok_kanan()\n    while not depan_kosong():\n        belok_kiri()\n    maju()\nantar()\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Aturan tangan kanan menyusuri dinding sebelah kanan, jadi robot pasti sampai ke tujuan di labirin yang dindingnya tersambung. Perulangan while di dalam while mencari arah pertama yang kosong.",
+  "ruleRefs": ["r-tst-1", "r-py-1"],
+  "hints": [
+    "Program lama hanya belok saat menabrak, jadi cabang di samping terlewat. Aturan tangan kanan selalu mencoba kanan dulu.",
+    "Urutannya: ambil paket kalau ada, belok_kanan(), lalu while not depan_kosong(): belok_kiri(), lalu maju().",
+    "while di dalam while menjorok 4 spasi lagi. antar() ditaruh paling bawah tanpa indentasi."
+  ]
+}

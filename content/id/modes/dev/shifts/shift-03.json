@@ -34,6 +34,10 @@
       "arriveAt": 45
     },
     {
+      "caseId": "s03-robot-001",
+      "arriveAt": 50
+    },
+    {
       "caseId": "s03-fix-002",
       "arriveAt": 54
     },

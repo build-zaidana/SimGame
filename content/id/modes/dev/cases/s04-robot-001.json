@@ -1,0 +1,59 @@
+{
+  "id": "s04-robot-001",
+  "type": "robot",
+  "conceptIds": ["testing", "python-basics"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Rina Hartono",
+      "team": "Tim QA"
+    },
+    "title": "Lulus di satu peta belum tentu benar",
+    "story": [
+      "Program belok-kanan dari kemarin lulus di peta 1, lalu langsung dipakai di semua gudang. Hasilnya, robot berputar-putar di lorong yang belok ke kiri.",
+      "Buat fungsi cari_lorong() dengan def: coba belok kiri dulu, kalau depan masih dinding putar ke kanan dua kali. Uji di ketiga peta!"
+    ],
+    "maps": [
+      {
+        "grid": ["######", "#P..##", "###.##", "###T##", "######"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      },
+      {
+        "grid": ["######", "###T##", "###.##", "#P..##", "######"],
+        "start": {
+          "x": 1,
+          "y": 3,
+          "dir": "E"
+        }
+      },
+      {
+        "grid": ["########", "#####.T#", "#####.##", "#.P...##", "########"],
+        "start": {
+          "x": 1,
+          "y": 3,
+          "dir": "E"
+        }
+      }
+    ],
+    "starter": "# Lulus di peta 1... tapi apakah sudah diuji di semua peta?\nwhile not di_tujuan():\n    if ada_paket():\n        ambil()\n    if depan_kosong():\n        maju()\n    else:\n        belok_kanan()\nantar()\n",
+    "solution": "def cari_lorong():\n    belok_kiri()\n    if not depan_kosong():\n        belok_kanan()\n        belok_kanan()\n\nwhile not di_tujuan():\n    if ada_paket():\n        ambil()\n    if depan_kosong():\n        maju()\n    else:\n        cari_lorong()\nantar()\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Peta 2 dan 3 adalah kasus tepi yang tidak pernah diuji, yaitu belokan ke kiri. Fungsi cari_lorong() mencoba kiri dulu lalu kanan, dan menguji program di semua peta membuktikan perbaikannya.",
+  "ruleRefs": ["r-tst-1", "r-tst-3", "r-py-1"],
+  "hints": [
+    "Lihat peta 2: ke mana arah belokannya? Apa yang dilakukan program lama di sana?",
+    "def cari_lorong(): lalu isinya menjorok: belok_kiri(), kemudian if not depan_kosong(): belok_kanan() dua kali.",
+    "Ganti belok_kanan() di bagian else dengan cari_lorong()."
+  ]
+}

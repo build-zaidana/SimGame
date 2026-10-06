@@ -1,0 +1,59 @@
+{
+  "id": "s04-robot-001",
+  "type": "robot",
+  "conceptIds": ["testing", "python-basics"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Rina Hartono",
+      "team": "QA Team"
+    },
+    "title": "Passing one map doesn't make it right",
+    "story": [
+      "Yesterday's turn-right program passed on map 1 and went straight to every warehouse. Now the robot spins around in corridors that turn left.",
+      "Write a find_corridor() function with def: try turning left first, and if there is still a wall in front, turn right twice. Test it on all three maps!"
+    ],
+    "maps": [
+      {
+        "grid": ["######", "#P..##", "###.##", "###T##", "######"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      },
+      {
+        "grid": ["######", "###T##", "###.##", "#P..##", "######"],
+        "start": {
+          "x": 1,
+          "y": 3,
+          "dir": "E"
+        }
+      },
+      {
+        "grid": ["########", "#####.T#", "#####.##", "#.P...##", "########"],
+        "start": {
+          "x": 1,
+          "y": 3,
+          "dir": "E"
+        }
+      }
+    ],
+    "starter": "# Passes map 1... but was it tested on every map?\nwhile not at_target():\n    if has_package():\n        pick_up()\n    if front_clear():\n        forward()\n    else:\n        turn_right()\ndeliver()\n",
+    "solution": "def find_corridor():\n    turn_left()\n    if not front_clear():\n        turn_right()\n        turn_right()\n\nwhile not at_target():\n    if has_package():\n        pick_up()\n    if front_clear():\n        forward()\n    else:\n        find_corridor()\ndeliver()\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Maps 2 and 3 are edge cases that were never tested: left turns. find_corridor() tries left first and then right, and testing the program on every map proves the fix.",
+  "ruleRefs": ["r-tst-1", "r-tst-3", "r-py-1"],
+  "hints": [
+    "Look at map 2: which way does the corridor turn? What does the old program do there?",
+    "def find_corridor(): then an indented body: turn_left(), then if not front_clear(): turn_right() twice.",
+    "Replace turn_right() in the else branch with find_corridor()."
+  ]
+}

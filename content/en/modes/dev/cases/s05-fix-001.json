@@ -37,7 +37,7 @@
     "solution": "def mask_phone(number):\n    return number[:4] + \"****\" + number[-2:]\n",
     "incident": {
       "service": "Customer Service · logs",
-      "drainPerSecond": 1.5
+      "drainPerSecond": 1.2
     }
   },
   "evidence": {
