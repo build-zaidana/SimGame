@@ -23,6 +23,14 @@ export const codingCaseSchema = baseCaseSchema.extend({
     tests: z.array(pyTestSchema).min(1).max(6),
     /** Solusi acuan: tidak ditampilkan; content:check memastikan lulus semua tes. */
     solution: z.string().min(1),
+    /** Insiden produksi "server terbakar": kesehatan server turun sampai diperbaiki/rollback. */
+    incident: z
+      .strictObject({
+        service: z.string().trim().min(1),
+        /** Persen kesehatan hilang per detik jam shift. */
+        drainPerSecond: z.number().positive().max(10).default(2),
+      })
+      .optional(),
   }),
 });
 export type CodingCase = z.infer<typeof codingCaseSchema>;

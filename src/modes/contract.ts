@@ -30,6 +30,10 @@ export interface DocumentProps<TCase extends BaseCase = BaseCase> {
   onAnswer?(text: string): void;
   /** Mencatat satu kali menjalankan tes (jumlah lulus / total). */
   onRun?(passed: number, total: number): void;
+  /** Jam shift untuk kasus yang memburuk seiring waktu (insiden produksi). */
+  clock?: { nowMs: number; openedAtMs: number | null; shiftOrder: number } | undefined;
+  /** Rollback darurat insiden produksi. */
+  onRollback?(): void;
 }
 
 export interface CaseTypeDef<TCase extends BaseCase = BaseCase> {

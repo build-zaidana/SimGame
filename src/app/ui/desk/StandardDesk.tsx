@@ -90,6 +90,12 @@ export function StandardDesk({
     answer: active?.answer,
     onAnswer: (text) => dispatch({ type: 'SET_ANSWER', text }),
     onRun: (passed, total) => dispatch({ type: 'RECORD_RUN', passed, total }),
+    clock: {
+      nowMs: session.elapsedMs,
+      openedAtMs: active?.openedAtMs ?? null,
+      shiftOrder: session.shiftOrder,
+    },
+    onRollback: () => dispatch({ type: 'ROLLBACK_INCIDENT' }),
   };
   const decisions = mode.decisions.filter(
     (d) =>
@@ -295,6 +301,10 @@ export function StandardDesk({
               decision,
               marks: active.marks,
               answer: active.answer,
+              timing: {
+                openedAtMs: active.openedAtMs ?? session.elapsedMs,
+                nowMs: session.elapsedMs,
+              },
             }),
           });
         }}

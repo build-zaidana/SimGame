@@ -4,6 +4,8 @@ import { t as id } from '../../../../i18n/index.ts';
 import type { DocumentProps } from '../../../contract.ts';
 import { CodeEditor } from '../../ui/CodeEditor.tsx';
 import { RunPanel } from '../../ui/RunPanel.tsx';
+import { ServerRoom, serverState } from '../../ui/ServerRoom.tsx';
+import { serverHealth } from '../../incident.ts';
 import type { CodingCase } from './schema.ts';
 
 /** Jeda menyimpan draf kode ke sesi (setiap aksi menulis save). */
@@ -15,6 +17,8 @@ export function CodingDocument({
   answer,
   onAnswer,
   onRun,
+  clock,
+  onRollback,
 }: DocumentProps<CodingCase>) {
   const d = data.data;
   const t = id.dev.coding;
@@ -45,6 +49,17 @@ export function CodingDocument({
     if (answer?.total !== undefined) flush(text);
   };
   const visible = d.tests.filter((x) => !x.hidden);
+  const incident = d.incident;
+  const health =
+    incident && clock
+      ? serverHealth({
+          openedAtMs: clock.openedAtMs ?? clock.nowMs,
+          nowMs: clock.nowMs,
+          rolledBackAtMs: answer?.rolledBackAtMs,
+          drainPerSecond: incident.drainPerSecond,
+        })
+      : 100;
+  const fixed = !!answer?.total && answer.passed === answer.total;
   return (
     <article aria-labelledby="doc-title" className="border-2 border-ink/40 bg-bg p-3">
       <p className="font-display text-accent">
@@ -54,6 +69,15 @@ export function CodingDocument({
       <h2 id="doc-title" className="text-lg font-bold">
         {d.title}
       </h2>
+      {incident && (
+        <ServerRoom
+          service={incident.service}
+          health={health}
+          state={serverState(health, answer?.rolledBackAtMs !== undefined, fixed)}
+          canRollback={!locked && (clock?.shiftOrder ?? 1) >= 3}
+          onRollback={() => onRollback?.()}
+        />
+      )}
       <p className="text-sm text-ink-muted">
         {t.requester}: {d.requester.name} · {d.requester.team}
       </p>

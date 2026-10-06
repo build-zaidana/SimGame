@@ -14,7 +14,7 @@
     },
     "title": "Kelas baru bikin halaman absen crash",
     "story": [
-      "Fungsi persen_hadir(absen) menerima daftar True (hadir) dan False (tidak hadir), lalu menghitung persen kehadiran.",
+      "🔥 INSIDEN PRODUKSI: Fungsi persen_hadir(absen) menerima daftar True (hadir) dan False (tidak hadir), lalu menghitung persen kehadiran.",
       "Kelas biasa aman, tapi kelas baru yang belum punya data absen membuat halaman crash. Untuk daftar kosong, hasilnya harus 0."
     ],
     "file": "absensi/kehadiran.py",
@@ -39,7 +39,11 @@
         "hidden": true
       }
     ],
-    "solution": "def persen_hadir(absen):\n    if len(absen) == 0:\n        return 0\n    hadir = 0\n    for a in absen:\n        if a:\n            hadir = hadir + 1\n    return hadir * 100 // len(absen)\n"
+    "solution": "def persen_hadir(absen):\n    if len(absen) == 0:\n        return 0\n    hadir = 0\n    for a in absen:\n        if a:\n            hadir = hadir + 1\n    return hadir * 100 // len(absen)\n",
+    "incident": {
+      "service": "Absensi · persentase hadir",
+      "drainPerSecond": 1.2
+    }
   },
   "evidence": {
     "required": [],

@@ -361,6 +361,46 @@ svg.sprite {
   animation: crash-shake 400ms linear both;
 }
 
+/* Insiden server: LED berkedip, asap naik, api berkobar, bingkai alarm. */
+@keyframes blink-led {
+  50% {
+    opacity: 0.2;
+  }
+}
+.blink-led {
+  animation: blink-led 0.8s steps(2) infinite;
+}
+@keyframes smoke-rise {
+  from {
+    transform: translateY(4px);
+    opacity: 0.9;
+  }
+  to {
+    transform: translateY(-4px);
+    opacity: 0;
+  }
+}
+.smoke-rise {
+  animation: smoke-rise 1.4s ease-out infinite;
+}
+@keyframes flame-flicker {
+  50% {
+    transform: translateY(-1px) scaleY(1.15);
+  }
+}
+.flame-flicker {
+  transform-origin: bottom;
+  animation: flame-flicker 0.3s steps(2) infinite;
+}
+@keyframes alarm-pulse {
+  50% {
+    box-shadow: 0 0 0 3px rgb(240 122 106 / 0.6);
+  }
+}
+.alarm-pulse {
+  animation: alarm-pulse 1s steps(2) infinite;
+}
+
 /* "Kurangi animasi": dari pengaturan game atau dari sistem operasi. */
 :root[data-reduce-motion='true'] *,
 :root[data-reduce-motion='true'] *::before,

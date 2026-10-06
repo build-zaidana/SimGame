@@ -14,7 +14,7 @@
     },
     "title": "Total keranjang bikin KeyError",
     "story": [
-      "Setiap barang di keranjang adalah kamus (dict) berisi \"nama\", \"harga\", dan \"jumlah\".",
+      "🔥 INSIDEN PRODUKSI: Setiap barang di keranjang adalah kamus (dict) berisi \"nama\", \"harga\", dan \"jumlah\".",
       "Fungsi total_keranjang selalu error. Jalankan tes, baca KeyError-nya, lalu perbaiki."
     ],
     "file": "toko/keranjang.py",
@@ -39,7 +39,11 @@
         "hidden": true
       }
     ],
-    "solution": "def total_keranjang(keranjang):\n    total = 0\n    for barang in keranjang:\n        total = total + barang[\"harga\"] * barang[\"jumlah\"]\n    return total\n"
+    "solution": "def total_keranjang(keranjang):\n    total = 0\n    for barang in keranjang:\n        total = total + barang[\"harga\"] * barang[\"jumlah\"]\n    return total\n",
+    "incident": {
+      "service": "Kasir · total keranjang",
+      "drainPerSecond": 1.2
+    }
   },
   "evidence": {
     "required": [],

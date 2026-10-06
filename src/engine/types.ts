@@ -41,12 +41,16 @@ export interface CaseAnswer {
   runs: number;
   passed?: number | undefined;
   total?: number | undefined;
+  /** Waktu (ms jam shift) rollback darurat pada insiden produksi; menghentikan kerusakan. */
+  rolledBackAtMs?: number | undefined;
 }
 
 export interface PlayerInput {
   decision: DecisionId;
   marks: EvidenceId[];
   answer?: CaseAnswer | undefined;
+  /** Waktu jam shift saat kasus dibuka & saat diputuskan (untuk insiden yang memburuk seiring waktu). */
+  timing?: { openedAtMs: number; nowMs: number } | undefined;
 }
 
 export interface CaseOutcome {
