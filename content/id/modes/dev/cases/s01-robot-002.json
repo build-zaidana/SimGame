@@ -1,0 +1,59 @@
+{
+  "id": "s01-robot-002",
+  "type": "robot",
+  "conceptIds": ["python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "requester": {
+      "name": "Yoga Saputra",
+      "team": "Tim Gudang"
+    },
+    "title": "Gudang yang beda-beda",
+    "story": [
+      "Sekarang ada 3 gudang dengan lorong yang panjangnya berbeda. Program yang SAMA harus berhasil di semua peta!",
+      "Pakai perulangan while dan sensor: di_tujuan() bernilai True kalau robot sudah di bendera, ada_paket() bernilai True kalau ada paket di bawah robot."
+    ],
+    "maps": [
+      {
+        "grid": ["########", "#..P..T#", "########"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      },
+      {
+        "grid": ["###########", "#.P......T#", "###########"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      },
+      {
+        "grid": ["######", "#P..T#", "######"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      }
+    ],
+    "starter": "# Langkah yang dihafal hanya cocok untuk satu peta.\nmaju()\nmaju()\nmaju()\nambil()\n",
+    "solution": "while not di_tujuan():\n    if ada_paket():\n        ambil()\n    maju()\nantar()\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Perulangan while terus maju selama robot belum di tujuan, dan if mengambil paket saat robot melewatinya. Karena memakai sensor, program yang sama berhasil di peta sepanjang apa pun.",
+  "ruleRefs": ["r-py-1", "r-err-2"],
+  "hints": [
+    "Mulai dengan: while not di_tujuan():",
+    "Di dalam perulangan, cek dulu if ada_paket(): lalu ambil, baru maju. Jangan lupa indentasi 4 spasi.",
+    "Setelah perulangan selesai (sudah di tujuan), panggil antar() tanpa indentasi."
+  ]
+}

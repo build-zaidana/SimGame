@@ -4,6 +4,7 @@ import type { CareerMode } from '../contract.ts';
 import { codingCaseType } from './caseTypes/coding/index.ts';
 import { ctfCaseType } from './caseTypes/ctf/index.ts';
 import { pullRequestCaseType } from './caseTypes/pull-request/index.ts';
+import { robotCaseType } from './caseTypes/robot/index.ts';
 
 export const devMode: CareerMode = {
   id: 'dev',
@@ -28,7 +29,7 @@ export const devMode: CareerMode = {
   get citations() {
     return id.dev.citations;
   },
-  caseTypes: [codingCaseType, pullRequestCaseType, ctfCaseType],
+  caseTypes: [codingCaseType, pullRequestCaseType, ctfCaseType, robotCaseType],
   Desk: lazy(() => import('./desk/DevDesk.tsx')),
   contentRoot: 'modes/dev',
   loadContent: (locale) => import('./dev-content.ts').then((m) => m.loadDevContent(locale)),

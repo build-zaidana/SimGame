@@ -5,6 +5,7 @@ import { btnPrimary } from '../../../app/ui/styles.ts';
 import { t as id } from '../../../i18n/index.ts';
 import type { PyTest, RunResult } from '../runner/harness.ts';
 import { runPython, warmUpPython, type RunOutcome } from '../runner/runPython.ts';
+import { CustomerScene } from './CustomerScene.tsx';
 
 interface RunPanelProps {
   code: string;
@@ -17,6 +18,8 @@ interface RunPanelProps {
   /** Baris error kode pemain, untuk ditandai di editor. */
   onErrorLine?(line: number | undefined): void;
   label?: string;
+  /** Tampilkan tes sebagai antrean pelanggan aplikasi (tugas coding). */
+  scene?: { file: string; seed: string } | undefined;
 }
 
 /** Tombol Jalankan + hasil tiap tes, keluaran print, dan error yang mudah dipahami. */
@@ -28,6 +31,7 @@ export function RunPanel({
   onResult,
   onErrorLine,
   label = id.dev.run.button,
+  scene,
 }: RunPanelProps) {
   const [busy, setBusy] = useState(false);
   const [outcome, setOutcome] = useState<RunOutcome | null>(null);
@@ -55,6 +59,9 @@ export function RunPanel({
   let hidden = 0;
   return (
     <section className="mt-3 flex flex-col gap-2" data-testid="run-panel">
+      {scene && tests.length > 0 && (
+        <CustomerScene file={scene.file} seed={scene.seed} tests={tests} result={result} />
+      )}
       <button
         type="button"
         className={`${btnPrimary} self-start`}

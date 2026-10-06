@@ -22,6 +22,9 @@ interface CodeEditorProps {
   /** Baris yang ditandai error (1-based). */
   errorLine?: number | undefined;
   testId?: string;
+  /** Baris perintah siap pakai (mis. perintah robot); disisipkan sebagai baris utuh. */
+  commands?: readonly string[];
+  commandsLabel?: string;
 }
 
 /**
@@ -35,6 +38,8 @@ export function CodeEditor({
   readOnly,
   errorLine,
   testId,
+  commands,
+  commandsLabel,
 }: CodeEditorProps) {
   const area = useRef<HTMLTextAreaElement>(null);
   const layer = useRef<HTMLPreElement>(null);
@@ -54,6 +59,20 @@ export function CodeEditor({
     const el = area.current;
     if (!el || readOnly) return;
     replace(el.selectionStart, el.selectionEnd, text);
+    el.focus();
+  };
+
+  /** Sisipkan satu baris perintah di baris kursor, mengikuti indentasinya, lalu pindah ke baris baru. */
+  const insertLine = (cmd: string) => {
+    const el = area.current;
+    if (!el || readOnly) return;
+    const s = el.selectionStart;
+    const lineStart = value.lastIndexOf('\n', s - 1) + 1;
+    const before = value.slice(lineStart, s);
+    const indent = /^\s*/.exec(before)?.[0] ?? '';
+    const onEmptyLine = before.trim() === '';
+    const text = (onEmptyLine ? '' : '\n' + indent) + cmd + '\n' + nextIndent(indent + cmd);
+    replace(s, el.selectionEnd, text);
     el.focus();
   };
 
@@ -146,6 +165,22 @@ export function CodeEditor({
           />
         </div>
       </div>
+      {!readOnly && commands && commands.length > 0 && (
+        <div className="flex flex-wrap gap-1" aria-label={commandsLabel} role="group">
+          {commands.map((c) => (
+            <button
+              key={c}
+              type="button"
+              className="min-h-11 border-2 border-accent bg-panel px-2 font-mono text-sm focus-visible:outline-4 focus-visible:outline-focus"
+              onMouseDown={(e) => e.preventDefault()}
+              onClick={() => insertLine(c)}
+              data-command={c}
+            >
+              {c}
+            </button>
+          ))}
+        </div>
+      )}
       {!readOnly && (
         <div className="flex flex-wrap gap-1" aria-label={id.dev.editor.keysLabel} role="group">
           {KEYS.map((k) => (

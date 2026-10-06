@@ -49,3 +49,26 @@ describe('verifyDevCase (content:check runs the reference code)', () => {
     );
   });
 });
+
+describe('verifyDevCase (robot)', () => {
+  const map = { grid: ['#####', '#.PT#', '#####'], start: { x: 1, y: 1, dir: 'E' as const } };
+  const robot = (starter: string, solution: string, maps = [map]) => ({
+    id: 'r-1',
+    type: 'robot',
+    data: { maps, starter, solution },
+  });
+  it('accepts a solution that delivers on every map', async () => {
+    expect(
+      await verifyDevCase(loadMicroPython, robot('maju()', 'maju()\nambil()\nmaju()\nantar()')),
+    ).toEqual([]);
+  });
+  it('rejects a broken map or a failing solution', async () => {
+    const bad = { ...map, grid: ['#####', '#..T#', '#####'] };
+    expect((await verifyDevCase(loadMicroPython, robot('maju()', 'maju()', [bad]))).join()).toMatch(
+      /belum ada paket/,
+    );
+    expect((await verifyDevCase(loadMicroPython, robot('maju()', 'maju()'))).join()).toMatch(
+      /solusi acuan gagal di peta 1/,
+    );
+  });
+});

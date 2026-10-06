@@ -1,11 +1,20 @@
 import type { PyTest, RunResult } from './harness.ts';
 import type { RunRequest } from './py.worker.ts';
+import type { RobotMap, RobotResult } from './robot.ts';
 
 /** Batas waktu satu kali "Jalankan" (ms); lewat dari ini dianggap loop tak berujung. */
 export const RUN_TIMEOUT_MS = 4000;
 
-export type RunOutcome =
-  { kind: 'done'; result: RunResult } | { kind: 'timeout' } | { kind: 'failed'; message: string };
+export type Outcome<T> =
+  { kind: 'done'; result: T } | { kind: 'timeout' } | { kind: 'failed'; message: string };
+export type RunOutcome = Outcome<RunResult>;
+export type RobotOutcome = Outcome<RobotResult>;
+/** Isi permintaan tanpa id (per varian union). */
+type RequestBody = RunRequest extends infer R
+  ? R extends RunRequest
+    ? Omit<R, 'id'>
+    : never
+  : never;
 
 let worker: Worker | null = null;
 let seq = 0;
@@ -20,12 +29,8 @@ export function warmUpPython(): void {
   void runPython('pass', [], RUN_TIMEOUT_MS * 3);
 }
 
-/** Menjalankan kode + tes di worker. Satu permintaan pada satu waktu (tombol dikunci UI). */
-export function runPython(
-  code: string,
-  tests: readonly PyTest[],
-  timeoutMs = RUN_TIMEOUT_MS,
-): Promise<RunOutcome> {
+/** Mengirim satu permintaan ke worker; lewat batas waktu worker dimatikan & dibuat ulang nanti. */
+function request<T>(body: RequestBody, timeoutMs: number): Promise<Outcome<T>> {
   const w = getWorker();
   const id = ++seq;
   return new Promise((resolve) => {
@@ -36,18 +41,35 @@ export function runPython(
       if (worker === w) worker = null;
       resolve({ kind: 'timeout' });
     }, timeoutMs);
-    function onMessage(e: MessageEvent<{ id: number; result?: RunResult; fatal?: string }>) {
+    function onMessage(e: MessageEvent<{ id: number; result?: T; fatal?: string }>) {
       if (e.data.id !== id) return;
       window.clearTimeout(timer);
       w.removeEventListener('message', onMessage);
       resolve(
-        e.data.result
+        e.data.result !== undefined
           ? { kind: 'done', result: e.data.result }
           : { kind: 'failed', message: e.data.fatal ?? 'unknown' },
       );
     }
     w.addEventListener('message', onMessage);
-    const request: RunRequest = { id, code, tests: [...tests] };
-    w.postMessage(request);
+    w.postMessage({ ...body, id } as RunRequest);
   });
+}
+
+/** Menjalankan kode + tes di worker. Satu permintaan pada satu waktu (tombol dikunci UI). */
+export function runPython(
+  code: string,
+  tests: readonly PyTest[],
+  timeoutMs = RUN_TIMEOUT_MS,
+): Promise<RunOutcome> {
+  return request<RunResult>({ kind: 'tests', code, tests: [...tests] }, timeoutMs);
+}
+
+/** Menjalankan program robot di setiap peta. */
+export function runRobotProgram(
+  code: string,
+  maps: readonly RobotMap[],
+  timeoutMs = RUN_TIMEOUT_MS,
+): Promise<RobotOutcome> {
+  return request<RobotResult>({ kind: 'robot', code, maps: [...maps] }, timeoutMs);
 }

@@ -102,6 +102,7 @@ export function CodingDocument({
         beforeRun={() => flush()}
         onResult={(passed, total) => onRun?.(passed, total)}
         onErrorLine={setErrorLine}
+        scene={{ file: d.file, seed: data.id }}
       />
       {!locked && answer?.total === undefined && (
         <p className="mt-2 text-sm text-ink-muted">{id.dev.run.notRunYet}</p>

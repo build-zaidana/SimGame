@@ -29,6 +29,33 @@ test('Developer desk: fix a real bug in Python until every test passes', async (
   await startDevShift(page);
   await approveFirstPr(page);
 
+  // Robot kurir: susun program dengan tombol perintah, jalankan, lihat robot mengantar paket.
+  await openNextCase(page);
+  await expect(page.getByTestId('document')).toHaveAttribute('data-case-id', 's01-robot-001');
+  await page.getByTestId('code-editor').fill('');
+  for (const cmd of [
+    'maju()',
+    'maju()',
+    'ambil()',
+    'maju()',
+    'maju()',
+    'belok_kanan()',
+    'maju()',
+    'maju()',
+    'antar()',
+  ])
+    await page.locator(`[data-command="${cmd}"]`).click();
+  await page.getByTestId('run-code').click();
+  await expect(page.getByTestId('run-summary')).toContainText('SEMUA PAKET TERANTAR', {
+    timeout: 15_000,
+  });
+  await expect(page.getByTestId('robot-map')).toHaveAttribute('data-delivered', '1', {
+    timeout: 10_000,
+  });
+  await page.locator('[data-decision="submit"]').click();
+  await expect(page.getByRole('dialog').getByRole('heading', { name: 'Tepat!' })).toBeVisible();
+  await page.getByRole('dialog').getByRole('button', { name: 'Lanjut' }).click();
+
   await openNextCase(page);
   await expect(page.getByTestId('document')).toHaveAttribute('data-case-id', 's01-fix-001');
   const submit = page.locator('[data-decision="submit"]');
@@ -39,6 +66,9 @@ test('Developer desk: fix a real bug in Python until every test passes', async (
   await expect(page.getByTestId('run-summary')).toHaveText('1 dari 3 tes lulus', {
     timeout: 15_000,
   });
+  // Tes tampil sebagai pelanggan: yang gagal kecewa dan protes hasilnya.
+  await expect(page.getByTestId('customer-scene').locator('li[data-mood="upset"]')).toHaveCount(2);
+  await expect(page.getByTestId('customer-scene')).toContainText('hasil kodemu: 135.0');
 
   // Loop tak berujung dihentikan, game tetap jalan.
   const editor = page.getByTestId('code-editor');
@@ -79,8 +109,9 @@ test('Python runs under the production Content-Security-Policy', async ({ page }
   await startDevShift(page);
   await approveFirstPr(page);
   await openNextCase(page);
+  // Kode awal robot belum mengantar paket: 0 dari 1 peta.
   await page.getByTestId('run-code').click();
-  await expect(page.getByTestId('run-summary')).toHaveText('1 dari 3 tes lulus', {
+  await expect(page.getByTestId('run-summary')).toHaveText('0 dari 1 peta berhasil', {
     timeout: 15_000,
   });
   expect(await page.evaluate<string[]>('window.__csp')).toEqual([]);
