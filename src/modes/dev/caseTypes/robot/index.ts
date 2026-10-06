@@ -15,5 +15,5 @@ export const robotCaseType = defineCaseType({
   ready: (_c, answer) => answer?.total !== undefined,
   queueLabel: (c) => ({ icon: '🤖', title: id.dev.robot.queueTitle(c.data.title) }),
   visitor: (c) =>
-    personVisitor(c.id, c.data.requester.name, c.data.requester.team, id.dev.visitors.taskLines),
+    personVisitor(c.id, c.data.requester.name, c.data.requester.team, id.dev.visitors.robotLines),
 });

@@ -24,6 +24,7 @@ export function RobotDocument({ data, locked, answer, onAnswer, onRun }: Documen
   const [step, setStep] = useState(0);
   const sound = useAppStore((s) => s.save?.profile.settings.sound ?? false);
   const saved = useRef(answer?.text ?? d.starter);
+  const stage = useRef<HTMLDivElement>(null);
   useEffect(() => warmUpPython(), []);
 
   const flush = (text = code) => {
@@ -71,6 +72,8 @@ export function RobotDocument({ data, locked, answer, onAnswer, onRun }: Documen
       setBusy(false);
       setOutcome(o);
       if (o.kind !== 'done') return;
+      // Di HP peta ada jauh di atas tombol Jalankan: gulir ke peta supaya robotnya terlihat bergerak.
+      stage.current?.scrollIntoView({ block: 'center', behavior: instant ? 'auto' : 'smooth' });
       const passed = o.result.maps.filter((m) => m.passed).length;
       onRun?.(passed, d.maps.length);
       // Tampilkan peta pertama yang gagal (atau tetap di peta ini bila semua berhasil).
@@ -107,39 +110,41 @@ export function RobotDocument({ data, locked, answer, onAnswer, onRun }: Documen
           <p key={i}>{s}</p>
         ))}
       </div>
-      {d.maps.length > 1 && (
-        <div role="tablist" aria-label={t.mapsLabel} className="mb-1 flex gap-1">
-          {d.maps.map((_, i) => {
-            const r = result?.maps[i];
-            return (
-              <button
-                key={i}
-                type="button"
-                role="tab"
-                aria-selected={i === mapIndex}
-                className={`${btnSecondary} text-sm ${i === mapIndex ? 'border-accent' : ''}`}
-                onClick={() => {
-                  setStep(0);
-                  setMapIndex(i);
-                }}
-                data-map-tab={i}
-              >
-                {r ? (r.passed ? '✓ ' : '✗ ') : ''}
-                {t.mapTab(i + 1)}
-              </button>
-            );
-          })}
-        </div>
-      )}
-      <RobotMapView
-        map={map}
-        frame={frame}
-        label={t.mapAlt(mapIndex + 1, frame.delivered, frames[0]!.packages.length)}
-      />
-      <p className="mt-1 text-xs text-ink-muted">{t.legend}</p>
-      <p className="text-sm font-display" aria-hidden="true">
-        📦 {t.delivered(frame.delivered, frames[0]!.packages.length)}
-      </p>
+      <div ref={stage}>
+        {d.maps.length > 1 && (
+          <div role="tablist" aria-label={t.mapsLabel} className="mb-1 flex gap-1">
+            {d.maps.map((_, i) => {
+              const r = result?.maps[i];
+              return (
+                <button
+                  key={i}
+                  type="button"
+                  role="tab"
+                  aria-selected={i === mapIndex}
+                  className={`${btnSecondary} text-sm ${i === mapIndex ? 'border-accent' : ''}`}
+                  onClick={() => {
+                    setStep(0);
+                    setMapIndex(i);
+                  }}
+                  data-map-tab={i}
+                >
+                  {r ? (r.passed ? '✓ ' : '✗ ') : ''}
+                  {t.mapTab(i + 1)}
+                </button>
+              );
+            })}
+          </div>
+        )}
+        <RobotMapView
+          map={map}
+          frame={frame}
+          label={t.mapAlt(mapIndex + 1, frame.delivered, frames[0]!.packages.length)}
+        />
+        <p className="mt-1 text-xs text-ink-muted">{t.legend}</p>
+        <p className="text-sm font-display" aria-hidden="true">
+          📦 {t.delivered(frame.delivered, frames[0]!.packages.length)}
+        </p>
+      </div>
       {mapResult?.error && (instant || step >= frames.length - 1) && (
         <p className="mt-1 border-2 border-danger p-2 text-sm" data-testid="robot-error">
           <span aria-hidden="true">⚠ </span>

@@ -18,9 +18,18 @@ export const codingCaseType = defineCaseType({
   // Kirim hanya setelah tes dijalankan untuk kode yang sekarang ada di editor.
   ready: (_c, answer) => answer?.total !== undefined,
   queueLabel: (c) => ({
-    icon: c.data.task === 'fix' ? '🐞' : '🧩',
+    icon: c.data.incident ? '🔥' : c.data.task === 'fix' ? '🐞' : '🧩',
     title: id.dev.coding.queueTitle(c.data.title),
   }),
   visitor: (c) =>
-    personVisitor(c.id, c.data.requester.name, c.data.requester.team, id.dev.visitors.taskLines),
+    personVisitor(
+      c.id,
+      c.data.requester.name,
+      c.data.requester.team,
+      c.data.incident
+        ? id.dev.visitors.incidentLines
+        : c.data.task === 'fix'
+          ? id.dev.visitors.fixLines
+          : id.dev.visitors.buildLines,
+    ),
 });

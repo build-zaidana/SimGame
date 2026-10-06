@@ -100,6 +100,8 @@ test('Developer desk: fix a real bug in Python until every test passes', async (
   await expect
     .poll(async () => Number(await server.getAttribute('data-health')), { timeout: 10_000 })
     .toBeLessThan(100);
+  // Indikator ringkas di dekat editor tetap terlihat saat pemain menggulir untuk mengetik.
+  await expect(page.getByTestId('server-chip')).toContainText(/Server \d+%/);
   await page
     .getByTestId('code-editor')
     .fill('def label_harga(harga):\n    return "Rp " + str(harga)\n');

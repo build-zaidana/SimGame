@@ -457,6 +457,7 @@ export const id = {
       label: (service: string) => `Ruang server: ${service}`,
       health: 'Kesehatan server',
       healthValue: (n: number) => `${n}%`,
+      chip: (n: number) => `Server ${n}%`,
       status: {
         ok: 'Normal',
         smoke: 'Berasap! Pengguna mulai mengeluh',
@@ -513,10 +514,16 @@ export const id = {
     } as Record<string, string>,
     visitors: {
       prLines: ['Tolong review PR saya, ya.', 'Sudah saya tes di laptop. Aman, kan?'],
-      taskLines: [
+      fixLines: [
         'Ada bug yang bikin pusing. Bisa dibantu?',
-        'Butuh fungsi ini sebelum sore. Semangat!',
+        'Pengguna mengeluh terus. Tolong dicek, ya.',
       ],
+      buildLines: [
+        'Butuh fungsi ini sebelum sore. Semangat!',
+        'Ada fitur baru yang perlu dibuat, nih.',
+      ],
+      robotLines: ['Robot gudang butuh program baru!', 'Paket menumpuk. Robotnya bisa jalan lagi?'],
+      incidentLines: ['Server-nya berasap! Tolong cepat!', 'Pengguna tidak bisa masuk. Darurat!'],
       ctf: { name: 'Papan CTF', role: 'Latihan tim keamanan' },
       ctfLines: ['Bendera tersembunyi menunggu ditemukan.', 'Tantangan baru di papan CTF!'],
     },
