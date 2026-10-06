@@ -1,5 +1,12 @@
 {
   "id": "support",
   "title": "IT Support Technician (IT Workshop)",
-  "description": "Handle help tickets, diagnostic reports, and broken devices that arrive at the Nusa Digital IT Workshop."
+  "description": "Handle help tickets, diagnostic reports, and broken devices that arrive at the Nusa Digital IT Workshop.",
+  "ranks": [
+    "IT Technician Intern",
+    "Junior IT Technician",
+    "IT Technician",
+    "Senior IT Technician",
+    "IT Workshop Lead"
+  ]
 }

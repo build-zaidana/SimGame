@@ -3,6 +3,8 @@ import {
   applyTrust,
   BASELINE_TRUST,
   buyTool,
+  buyUpgrade,
+  upgradePerks,
   carryTrust,
   shiftPay,
   trustDelta,
@@ -79,5 +81,48 @@ describe('buyTool', () => {
       ok: false,
       reason: 'already-owned',
     });
+  });
+});
+
+describe('buyUpgrade', () => {
+  const lamp = { id: 'lamp', price: 60, requiresRank: 1 };
+  it('deducts the price and adds the upgrade', () => {
+    expect(buyUpgrade({ wallet: 100, upgradesOwned: [] }, lamp, 1)).toEqual({
+      ok: true,
+      wallet: 40,
+      upgradesOwned: ['lamp'],
+    });
+  });
+  it('refuses below the required rank', () => {
+    expect(buyUpgrade({ wallet: 100, upgradesOwned: [] }, lamp, 0)).toEqual({
+      ok: false,
+      reason: 'rank-locked',
+    });
+  });
+  it('refuses when owned or too expensive', () => {
+    expect(buyUpgrade({ wallet: 100, upgradesOwned: ['lamp'] }, lamp, 4)).toEqual({
+      ok: false,
+      reason: 'already-owned',
+    });
+    expect(buyUpgrade({ wallet: 59, upgradesOwned: [] }, lamp, 4)).toEqual({
+      ok: false,
+      reason: 'insufficient-funds',
+    });
+  });
+});
+
+describe('upgradePerks', () => {
+  it('defaults to one free hint and no extra time', () => {
+    expect(upgradePerks([])).toEqual({ freeHints: 1, shiftTimePercent: 0 });
+  });
+  it('takes the best free-hint upgrade and adds shift time', () => {
+    expect(
+      upgradePerks([
+        { kind: 'cosmetic' },
+        { kind: 'free-hints', value: 2 },
+        { kind: 'shift-time', percent: 15 },
+        { kind: 'shift-time', percent: 5 },
+      ]),
+    ).toEqual({ freeHints: 2, shiftTimePercent: 20 });
   });
 });

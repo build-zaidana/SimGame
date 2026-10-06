@@ -41,6 +41,7 @@ function saveWithSession(): SaveData {
         wallet: 0,
         trust: 75,
         toolsOwned: [],
+        upgradesOwned: [],
         chaptersUnlocked: [],
         badges: {},
         activeSession: session,
@@ -288,11 +289,34 @@ describe('migration v9 → v10 (emergency rollback time on incident cases)', () 
     const v9 = { ...JSON.parse(JSON.stringify(saveWithSession())), schemaVersion: 9 };
     v9.modes.soc.activeSession.cases[0].answer = { text: 'x', runs: 1 };
     const migrated = migrate(v9);
-    expect(SAVE_SCHEMA_VERSION).toBe(10);
     expect(migrated.modes['soc']?.activeSession?.cases[0]?.answer).toEqual({ text: 'x', runs: 1 });
     const later = JSON.parse(JSON.stringify(migrated));
     later.modes.soc.activeSession.cases[0].answer.rolledBackAtMs = 4000;
     expect(migrate(later).modes['soc']?.activeSession?.cases[0]?.answer?.rolledBackAtMs).toBe(4000);
+  });
+});
+
+describe('migration v10 → v11 (desk upgrades and session perks)', () => {
+  it('gives every mode an empty upgrade list and keeps sessions without perks', () => {
+    const v10 = { ...JSON.parse(JSON.stringify(saveWithSession())), schemaVersion: 10 };
+    delete v10.modes.soc.upgradesOwned;
+    const migrated = migrate(v10);
+    expect(SAVE_SCHEMA_VERSION).toBe(11);
+    expect(migrated.modes['soc']?.upgradesOwned).toEqual([]);
+    expect(migrated.modes['soc']?.activeSession?.perks).toBeUndefined();
+  });
+
+  it('keeps perks recorded in a session', () => {
+    const later = JSON.parse(JSON.stringify(migrate(saveWithSession())));
+    later.modes.soc.activeSession.perks = { freeHints: 2, payBonus: 10, shiftTimePercent: 15 };
+    later.modes.soc.upgradesOwned = ['coffee'];
+    const loaded = migrate(later);
+    expect(loaded.modes['soc']?.activeSession?.perks).toEqual({
+      freeHints: 2,
+      payBonus: 10,
+      shiftTimePercent: 15,
+    });
+    expect(loaded.modes['soc']?.upgradesOwned).toEqual(['coffee']);
   });
 });
 

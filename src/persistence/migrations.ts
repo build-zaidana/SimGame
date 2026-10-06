@@ -65,6 +65,14 @@ export const MIGRATIONS: Record<number, Migration> = {
   8: (d) => d,
   /** v9 → v10: jawaban boleh menyimpan waktu rollback darurat; data lama tetap valid. */
   9: (d) => d,
+  /** v10 → v11: setiap progres mode mendapat daftar upgrade meja kosong (ADR 027). */
+  10: (d) => {
+    const modes = (d['modes'] ?? {}) as Record<string, Record<string, unknown>>;
+    const next: Record<string, unknown> = {};
+    for (const [id, progress] of Object.entries(modes))
+      next[id] = { upgradesOwned: [], ...progress };
+    return { ...d, modes: next };
+  },
 };
 
 export function runMigrations(

@@ -41,7 +41,12 @@ const emailCase = (id: string, verdict: 'safe' | 'malicious', over: object = {})
 
 function fixture(): Record<string, unknown> {
   return {
-    'mode.json': { id: 'soc', title: 'SOC', description: 'Meja SOC' },
+    'mode.json': {
+      id: 'soc',
+      title: 'SOC',
+      description: 'Meja SOC',
+      ranks: ['Magang', 'Junior', 'Analis', 'Senior', 'Lead'],
+    },
     'concepts/url.md':
       '---\nid: url\ntitle: URL\nmode: soc\norder: 1\nsources: [BSSN]\n---\nIsi materi.',
     'rulebook.json': {
@@ -224,6 +229,45 @@ describe('content validation', () => {
     ],
     ['bad frontmatter', (f) => (f['concepts/url.md'] = 'tanpa frontmatter'), /frontmatter/],
     ['missing mode.json', (f) => delete f['mode.json'], /mode.json: file wajib tidak ada/],
+    [
+      'wrong number of ranks',
+      (f) => ((f['mode.json'] as { ranks: string[] }).ranks = ['Magang', 'Junior']),
+      /mode.json: ranks/,
+    ],
+    [
+      'duplicate upgrade',
+      (f) => {
+        const lamp = {
+          id: 'lamp',
+          name: 'Lampu',
+          icon: '💡',
+          description: 'Hiasan meja.',
+          price: 60,
+          requiresRank: 1,
+          effect: { kind: 'cosmetic' },
+        };
+        f['upgrades.json'] = { upgrades: [lamp, lamp] };
+      },
+      /upgrade ganda: lamp|lamp/,
+    ],
+    [
+      'upgrade rank out of range',
+      (f) =>
+        (f['upgrades.json'] = {
+          upgrades: [
+            {
+              id: 'lamp',
+              name: 'Lampu',
+              icon: '💡',
+              description: 'Hiasan meja.',
+              price: 60,
+              requiresRank: 5,
+              effect: { kind: 'cosmetic' },
+            },
+          ],
+        }),
+      /upgrades.json: upgrades.0.requiresRank/,
+    ],
     [
       'hint too long',
       (f) => (f['cases/c-2.json'] = emailCase('c-2', 'malicious', { hints: ['Satu. Dua. Tiga.'] })),

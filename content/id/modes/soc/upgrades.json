@@ -1,0 +1,72 @@
+{
+  "upgrades": [
+    {
+      "id": "plant",
+      "name": "Tanaman meja",
+      "icon": "🪴",
+      "description": "Tanaman kecil yang tahan banting, seperti kamu saat menghadapi bug. Hiasan meja.",
+      "price": 30,
+      "requiresRank": 0,
+      "effect": {
+        "kind": "cosmetic"
+      }
+    },
+    {
+      "id": "lamp",
+      "name": "Lampu meja",
+      "icon": "💡",
+      "description": "Cahaya hangat untuk lembur yang nyaman. Hiasan meja.",
+      "price": 60,
+      "requiresRank": 1,
+      "effect": {
+        "kind": "cosmetic"
+      }
+    },
+    {
+      "id": "coffee",
+      "name": "Mesin kopi",
+      "icon": "☕",
+      "description": "Pikiran lebih segar: 2 petunjuk mentor pertama di setiap kasus jadi gratis.",
+      "price": 120,
+      "requiresRank": 1,
+      "effect": {
+        "kind": "free-hints",
+        "value": 2
+      }
+    },
+    {
+      "id": "cat",
+      "name": "Figurin kucing",
+      "icon": "🐈",
+      "description": "Kucing pixel mungil yang menemanimu bekerja. Hiasan meja.",
+      "price": 80,
+      "requiresRank": 2,
+      "effect": {
+        "kind": "cosmetic"
+      }
+    },
+    {
+      "id": "monitor",
+      "name": "Monitor kedua",
+      "icon": "🖥️",
+      "description": "Dokumen dan panduan terbuka berdampingan: waktu shift bertambah 15%.",
+      "price": 160,
+      "requiresRank": 2,
+      "effect": {
+        "kind": "shift-time",
+        "percent": 15
+      }
+    },
+    {
+      "id": "trophy",
+      "name": "Rak piala",
+      "icon": "🏆",
+      "description": "Tempat memajang lencana yang sudah kamu kumpulkan. Hiasan meja untuk senior.",
+      "price": 150,
+      "requiresRank": 3,
+      "effect": {
+        "kind": "cosmetic"
+      }
+    }
+  ]
+}

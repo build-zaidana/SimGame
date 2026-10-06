@@ -327,6 +327,13 @@ export function checkModeContent(content: ModeContent, policy: CheckPolicy): Con
     }
   }
 
+  const seenUpgrades = new Set<string>();
+  for (const u of content.upgrades) {
+    dupCheck(seenUpgrades, u.id, 'upgrades.json', 'upgrade');
+    const brands = findBrands(allStrings(u).join(' '), policy.brandDenylist);
+    if (brands.length) err('upgrades.json', `${u.id}: merek nyata: ${brands.join(', ')}`);
+  }
+
   const seenBadges = new Set<string>();
   const shiftIds = new Set(content.shifts.map((s) => s.id));
   for (const b of content.badges) {

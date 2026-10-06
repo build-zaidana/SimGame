@@ -345,7 +345,7 @@ Kepercayaan klien (`economy.ts`):
 
 Antar-shift, kepercayaan di bawah 75 pulih separuh selisihnya (`carryTrust`, dibulatkan ke atas), supaya satu shift buruk tidak menyeret pemula sampai akhir (ADR 017).
 
-Gaji shift (`shiftPay`) = `pay.base + round(pay.perCase × Σ caseScore / 100)`: tiap kasus dibayar sebanding skornya, jadi bukti yang lengkap ikut menaikkan gaji. Angka gaji & harga alat disetel dengan `pnpm sim:economy` (ADR 017).
+Gaji shift (`shiftPay`) = `pay.base + round(pay.perCase × Σ caseScore / 100)`: tiap kasus dibayar sebanding skornya, jadi bukti yang lengkap ikut menaikkan gaji. Angka gaji & harga alat disetel dengan `pnpm sim:economy` (ADR 017). Tunjangan pangkat (`rank.ts`, Rp 0–40 per shift) ditambahkan ke gaji; pangkat & upgrade meja dijelaskan di ADR 027.
 
 Bintang shift: ★ ≥ 50 rata-rata, ★★ ≥ 70, ★★★ ≥ 85 dengan kepercayaan ≥ 70.
 
@@ -374,9 +374,9 @@ Saat pertama kali menyimpan: panggil `navigator.storage.persist()` (abaikan jika
 ### 7.2 Bentuk save
 ```ts
 // src/persistence/saveSchema.ts
-export const SAVE_SCHEMA_VERSION = 7;
+export const SAVE_SCHEMA_VERSION = 11;
 SaveData = {
-  schemaVersion: 7,
+  schemaVersion: 11,
   createdAt: string, updatedAt: string,
   installId: string,                  // UUID acak; tidak terkait identitas
   profile: { nickname: string, settings: { textScale: 1|1.15|1.3, playMode: 'relaxed'|'normal', reduceMotion: boolean, sound: boolean, music: boolean /* v5 */, language: 'id'|'en' /* v6, ADR 023 */, exploreOffice: boolean /* v7, ADR 024 */ } },
@@ -386,7 +386,8 @@ SaveData = {
       shifts: Record<shiftId, { bestScore: number, stars: 0|1|2|3, completedAt?: string }>,
       wallet: number, trust: number,
       toolsOwned: string[], chaptersUnlocked: string[],
-      activeSession?: ShiftSession,   // untuk lanjut di tengah shift
+      upgradesOwned: string[],         // v11: upgrade meja (ADR 027)
+      activeSession?: ShiftSession,   // untuk lanjut di tengah shift; v11: perks? (ADR 027)
       practiceSession?: ShiftSession, // v3: Mode Latihan (ADR 014)
       badges: Record<badgeId, string>, // v4: lencana → waktu didapat (ADR 021)
     }

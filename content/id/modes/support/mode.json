@@ -1,5 +1,6 @@
 {
   "id": "support",
   "title": "Teknisi IT Support (Bengkel IT)",
-  "description": "Tangani tiket keluhan, laporan diagnostik, dan perangkat rusak yang masuk ke Bengkel IT PT Nusa Digital."
+  "description": "Tangani tiket keluhan, laporan diagnostik, dan perangkat rusak yang masuk ke Bengkel IT PT Nusa Digital.",
+  "ranks": ["Teknisi Magang", "Teknisi Junior", "Teknisi IT", "Teknisi Senior", "Kepala Bengkel IT"]
 }

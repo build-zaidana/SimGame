@@ -35,20 +35,23 @@ export interface CaseScoreInput {
   evidenceScore: number;
   hintsUsed: number;
   timeBonus: number;
+  /** Petunjuk gratis per kasus (bawaan 1; Mesin kopi menambahnya). */
+  freeHints?: number;
 }
 
-/** Skor kasus 0–100. Petunjuk pertama gratis; ke-2 dst. −10. */
+/** Skor kasus 0–100. Petunjuk pertama gratis (atau sebanyak `freeHints`); berikutnya −10. */
 export function caseScore({
   decisionScore,
   evidenceScore,
   hintsUsed,
   timeBonus,
+  freeHints = 1,
 }: CaseScoreInput): number {
   const evidenceWeight = decisionScore > 0 ? 1 : 0.5;
   const raw =
     60 * decisionScore +
     40 * evidenceScore * evidenceWeight -
-    10 * Math.max(0, hintsUsed - 1) +
+    10 * Math.max(0, hintsUsed - freeHints) +
     timeBonus;
   return clamp(Math.round(raw), 0, 100);
 }

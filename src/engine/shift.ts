@@ -7,6 +7,7 @@ import type {
   EvidenceId,
   PlayMode,
   SessionCase,
+  SessionPerks,
   ShiftPlan,
   ShiftSession,
 } from './types.ts';
@@ -17,6 +18,7 @@ export interface StartShiftParams {
   playMode: PlayMode;
   trust: number;
   generatedCases?: Record<string, unknown>;
+  perks?: SessionPerks;
 }
 
 export type ShiftAction =
@@ -44,6 +46,7 @@ export function startShift({
   playMode,
   trust,
   generatedCases = {},
+  perks,
 }: StartShiftParams): ShiftSession {
   const msPerGameMinute = plan.realSecondsPerGameMinute * 1000;
   const cases: SessionCase[] = [...plan.cases]
@@ -68,13 +71,16 @@ export function startShift({
     phase: 'briefing',
     paused: false,
     elapsedMs: 0,
-    durationMs: plan.durationGameMinutes * msPerGameMinute,
+    durationMs: Math.round(
+      plan.durationGameMinutes * msPerGameMinute * (1 + (perks?.shiftTimePercent ?? 0) / 100),
+    ),
     msPerGameMinute,
     cases,
     activeCaseId: null,
     feedbackCaseId: null,
     trust,
     generatedCases,
+    ...(perks ? { perks } : {}),
   });
 }
 
@@ -133,6 +139,7 @@ function decide(s: ShiftSession, outcome: CaseOutcome): ShiftSession {
     decisionScore: outcome.decisionScore,
     evidenceScore: outcome.evidenceScore,
     hintsUsed: active.hintsUsed,
+    freeHints: s.perks?.freeHints ?? 1,
     timeBonus: timeBonus(
       s.playMode,
       outcome.decisionScore,
@@ -257,10 +264,11 @@ export function summarizeShift(s: ShiftSession, pay: PayRule): ShiftSummary {
     correctCount,
     decidedCount: s.cases.filter((c) => c.status === 'decided').length,
     totalCount: total,
-    pay: shiftPay(
-      pay,
-      s.cases.map((c) => c.score ?? 0),
-    ),
+    pay:
+      shiftPay(
+        pay,
+        s.cases.map((c) => c.score ?? 0),
+      ) + (s.perks?.payBonus ?? 0),
     stars: shiftStars(averageScore, s.trust),
     trust: s.trust,
   };

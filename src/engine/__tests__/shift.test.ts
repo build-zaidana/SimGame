@@ -289,3 +289,37 @@ describe('summarizeShift', () => {
     });
   });
 });
+
+describe('desk perks', () => {
+  const withPerks = (perks: { freeHints: number; payBonus: number; shiftTimePercent: number }) =>
+    run(startShift({ plan, seed: 42, playMode: 'relaxed', trust: 75, perks }), {
+      type: 'DISMISS_BRIEFING',
+    });
+
+  it('extends the shift by the extra-time percentage', () => {
+    expect(withPerks({ freeHints: 1, payBonus: 0, shiftTimePercent: 15 }).durationMs).toBe(11_500);
+  });
+
+  it('lets more hints be free', () => {
+    const s = run(
+      withPerks({ freeHints: 2, payBonus: 0, shiftTimePercent: 0 }),
+      { type: 'OPEN_CASE', caseId: 'a' },
+      { type: 'USE_HINT' },
+      { type: 'USE_HINT' },
+      { type: 'DECIDE', outcome: outcome('a') },
+    );
+    expect(s.cases[0]?.score).toBe(100);
+  });
+
+  it('adds the rank allowance to shift pay', () => {
+    const base = summarizeShift(working(), { base: 50, perCase: 10 }).pay;
+    const s = withPerks({ freeHints: 1, payBonus: 20, shiftTimePercent: 0 });
+    expect(summarizeShift(s, { base: 50, perCase: 10 }).pay).toBe(base + 20);
+  });
+
+  it('keeps the old defaults for sessions saved without perks', () => {
+    const s = working();
+    expect(s.perks).toBeUndefined();
+    expect(s.durationMs).toBe(10_000);
+  });
+});
