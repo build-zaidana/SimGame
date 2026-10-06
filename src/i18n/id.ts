@@ -453,6 +453,22 @@ export const id = {
       delivered: (d: number, t: number) => `Paket terantar: ${d}/${t}`,
       queueTitle: (title: string) => `Robot: ${title}`,
     },
+    incident: {
+      label: (service: string) => `Ruang server: ${service}`,
+      health: 'Kesehatan server',
+      healthValue: (n: number) => `${n}%`,
+      status: {
+        ok: 'Normal',
+        smoke: 'Berasap! Pengguna mulai mengeluh',
+        fire: 'TERBAKAR! Pengguna kabur',
+        down: 'SERVER DOWN — pengguna tidak bisa memakai aplikasi',
+        stable: 'Stabil — rollback aktif, perbaiki dengan tenang',
+      },
+      rollback: 'Rollback darurat',
+      rollbackHint: 'Kembalikan versi sehat dulu: kerusakan berhenti, lalu perbaiki bugnya.',
+      lockedHint: 'Perbaiki bugnya secepat mungkin sebelum server down!',
+      fixed: 'Perbaikan siap! Tekan Kirim Solusi untuk memasangnya sekarang.',
+    },
     customers: {
       label: 'Antrean pelanggan aplikasi',
       app: (file: string) => `Aplikasi ${file}`,

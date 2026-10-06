@@ -268,8 +268,7 @@ describe('migration v8 → v9 (player answers for the Developer desk)', () => {
   it('keeps old sessions valid; cases may now carry an answer', () => {
     const v8 = { ...JSON.parse(JSON.stringify(saveWithSession())), schemaVersion: 8 };
     const migrated = migrate(v8);
-    expect(SAVE_SCHEMA_VERSION).toBe(9);
-    expect(migrated.schemaVersion).toBe(9);
+    expect(migrated.schemaVersion).toBe(SAVE_SCHEMA_VERSION);
     const session = migrated.modes['soc']?.activeSession;
     expect(session?.cases[0]?.answer).toBeUndefined();
 
@@ -281,6 +280,19 @@ describe('migration v8 → v9 (player answers for the Developer desk)', () => {
       total: 2,
     };
     expect(migrate(withAnswer).modes['soc']?.activeSession?.cases[0]?.answer?.runs).toBe(2);
+  });
+});
+
+describe('migration v9 → v10 (emergency rollback time on incident cases)', () => {
+  it('keeps old answers and accepts rolledBackAtMs', () => {
+    const v9 = { ...JSON.parse(JSON.stringify(saveWithSession())), schemaVersion: 9 };
+    v9.modes.soc.activeSession.cases[0].answer = { text: 'x', runs: 1 };
+    const migrated = migrate(v9);
+    expect(SAVE_SCHEMA_VERSION).toBe(10);
+    expect(migrated.modes['soc']?.activeSession?.cases[0]?.answer).toEqual({ text: 'x', runs: 1 });
+    const later = JSON.parse(JSON.stringify(migrated));
+    later.modes.soc.activeSession.cases[0].answer.rolledBackAtMs = 4000;
+    expect(migrate(later).modes['soc']?.activeSession?.cases[0]?.answer?.rolledBackAtMs).toBe(4000);
   });
 });
 

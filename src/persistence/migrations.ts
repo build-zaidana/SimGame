@@ -63,6 +63,8 @@ export const MIGRATIONS: Record<number, Migration> = {
   7: (d) => d,
   /** v8 → v9: kasus boleh menyimpan jawaban ketikan (Meja Developer); data lama tetap valid. */
   8: (d) => d,
+  /** v9 → v10: jawaban boleh menyimpan waktu rollback darurat; data lama tetap valid. */
+  9: (d) => d,
 };
 
 export function runMigrations(

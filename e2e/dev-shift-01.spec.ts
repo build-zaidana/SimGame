@@ -25,7 +25,7 @@ async function approveFirstPr(page: Page) {
 }
 
 test('Developer desk: fix a real bug in Python until every test passes', async ({ page }) => {
-  test.setTimeout(60_000);
+  test.setTimeout(90_000);
   await startDevShift(page);
   await approveFirstPr(page);
 
@@ -88,6 +88,28 @@ test('Developer desk: fix a real bug in Python until every test passes', async (
   const feedback = page.getByRole('dialog');
   await expect(feedback.getByRole('heading', { name: 'Tepat!' })).toBeVisible();
   await expect(feedback.getByTestId('tests-passed')).toHaveText('Tes lulus: 3 dari 3');
+  await feedback.getByRole('button', { name: 'Lanjut' }).click();
+
+  // Insiden produksi: server terbakar, kesehatan turun sampai bug diperbaiki.
+  await openNextCase(page);
+  await expect(page.getByTestId('document')).toHaveAttribute('data-case-id', 's01-fix-002');
+  const server = page.getByTestId('server-room');
+  await expect(server).toBeVisible();
+  // Rollback darurat baru terbuka di shift 3.
+  await expect(page.getByTestId('incident-rollback')).toHaveCount(0);
+  await expect
+    .poll(async () => Number(await server.getAttribute('data-health')), { timeout: 10_000 })
+    .toBeLessThan(100);
+  await page
+    .getByTestId('code-editor')
+    .fill('def label_harga(harga):\n    return "Rp " + str(harga)\n');
+  await page.getByTestId('run-code').click();
+  await expect(page.getByTestId('run-summary')).toContainText('SEMUA TES LULUS', {
+    timeout: 15_000,
+  });
+  await expect(server).toHaveAttribute('data-state', 'fixed');
+  await page.locator('[data-decision="submit"]').click();
+  await expect(page.getByRole('dialog').getByRole('heading', { name: 'Tepat!' })).toBeVisible();
 });
 
 test('Python runs under the production Content-Security-Policy', async ({ page }) => {

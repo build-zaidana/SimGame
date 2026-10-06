@@ -14,7 +14,7 @@
     },
     "title": "Phone numbers still leak in the log",
     "story": [
-      "The cashier log must not show a buyer's full phone number. The requested form: first 4 digits, ****, then the last 2 digits, for example 0812****89.",
+      "🔥 PRODUCTION INCIDENT: The cashier log must not show a buyer's full phone number. The requested form: first 4 digits, ****, then the last 2 digits, for example 0812****89.",
       "The function exists, but the result looks odd. Please fix it!"
     ],
     "file": "cashier/log.py",
@@ -34,7 +34,11 @@
         "hidden": true
       }
     ],
-    "solution": "def mask_phone(number):\n    return number[:4] + \"****\" + number[-2:]\n"
+    "solution": "def mask_phone(number):\n    return number[:4] + \"****\" + number[-2:]\n",
+    "incident": {
+      "service": "Customer Service · logs",
+      "drainPerSecond": 1.5
+    }
   },
   "evidence": {
     "required": [],

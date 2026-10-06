@@ -14,7 +14,7 @@
     },
     "title": "New classes crash the attendance page",
     "story": [
-      "The function attendance_percent(records) takes a list of True (present) and False (absent), then works out the attendance percentage.",
+      "🔥 PRODUCTION INCIDENT: The function attendance_percent(records) takes a list of True (present) and False (absent), then works out the attendance percentage.",
       "Normal classes are fine, but a new class with no attendance data yet crashes the page. For an empty list, the result must be 0."
     ],
     "file": "attendance/presence.py",
@@ -39,7 +39,11 @@
         "hidden": true
       }
     ],
-    "solution": "def attendance_percent(records):\n    if len(records) == 0:\n        return 0\n    present = 0\n    for r in records:\n        if r:\n            present = present + 1\n    return present * 100 // len(records)\n"
+    "solution": "def attendance_percent(records):\n    if len(records) == 0:\n        return 0\n    present = 0\n    for r in records:\n        if r:\n            present = present + 1\n    return present * 100 // len(records)\n",
+    "incident": {
+      "service": "Attendance · presence rate",
+      "drainPerSecond": 1.2
+    }
   },
   "evidence": {
     "required": [],

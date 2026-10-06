@@ -155,6 +155,22 @@ describe('case flow', () => {
     expect(s.cases[0]?.answer).toEqual({ text: 'x', runs: 2 });
   });
 
+  it('ROLLBACK_INCIDENT records when the emergency rollback happened, once', () => {
+    let s = run(working(), { type: 'OPEN_CASE', caseId: 'a' }, { type: 'TICK', dtMs: 3000 });
+    s = run(s, { type: 'ROLLBACK_INCIDENT' });
+    expect(s.cases[0]?.answer).toEqual({ text: '', runs: 0, rolledBackAtMs: 3000 });
+    // Rollback kedua tidak menggeser waktu; mengubah kode tetap menyimpan catatan rollback.
+    s = run(
+      s,
+      { type: 'TICK', dtMs: 1000 },
+      { type: 'ROLLBACK_INCIDENT' },
+      { type: 'SET_ANSWER', text: 'x' },
+    );
+    expect(s.cases[0]?.answer).toEqual({ text: 'x', runs: 0, rolledBackAtMs: 3000 });
+    s = run(s, { type: 'RECORD_RUN', passed: 1, total: 1 });
+    expect(s.cases[0]?.answer?.rolledBackAtMs).toBe(3000);
+  });
+
   it('SET_ANSWER and RECORD_RUN are ignored without an active case', () => {
     const s = working();
     expect(run(s, { type: 'SET_ANSWER', text: 'x' })).toBe(s);

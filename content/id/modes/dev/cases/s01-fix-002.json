@@ -14,7 +14,7 @@
     },
     "title": "Label harga bikin aplikasi crash",
     "story": [
-      "Setiap kali halaman produk dibuka, aplikasinya error. Jalankan tesnya dan baca baris terakhir pesan error."
+      "🔥 INSIDEN PRODUKSI: Setiap kali halaman produk dibuka, aplikasinya error. Jalankan tesnya dan baca baris terakhir pesan error."
     ],
     "file": "toko/label.py",
     "starter": "def label_harga(harga):\n    return \"Rp \" + harga\n",
@@ -29,7 +29,11 @@
         "hidden": true
       }
     ],
-    "solution": "def label_harga(harga):\n    return \"Rp \" + str(harga)\n"
+    "solution": "def label_harga(harga):\n    return \"Rp \" + str(harga)\n",
+    "incident": {
+      "service": "Toko Online · halaman produk",
+      "drainPerSecond": 0.8
+    }
   },
   "evidence": {
     "required": [],

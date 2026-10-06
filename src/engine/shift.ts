@@ -2,6 +2,7 @@ import { applyTrust, shiftPay, trustDelta, type PayRule } from './economy.ts';
 import { createRng } from './rng.ts';
 import { caseScore, shiftStars, timeBonus } from './scoring.ts';
 import type {
+  CaseAnswer,
   CaseOutcome,
   EvidenceId,
   PlayMode,
@@ -30,6 +31,8 @@ export type ShiftAction =
   /** Meja Developer (ADR 026): draf jawaban & hasil menjalankan tes. */
   | { type: 'SET_ANSWER'; text: string }
   | { type: 'RECORD_RUN'; passed: number; total: number }
+  /** Insiden produksi: rollback darurat (dicatat sekali). */
+  | { type: 'ROLLBACK_INCIDENT' }
   /** `outcome` berasal dari `CaseTypeDef.evaluate()` milik mode. */
   | { type: 'DECIDE'; outcome: CaseOutcome }
   | { type: 'CLOSE_FEEDBACK' }
@@ -182,7 +185,13 @@ export function shiftReducer(s: ShiftSession, a: ShiftAction): ShiftSession {
       if (s.phase !== 'inspecting' || !s.activeCaseId) return s;
       return updateCase(s, s.activeCaseId, (c) => ({
         ...c,
-        answer: { text: a.text, runs: c.answer?.runs ?? 0 },
+        answer: {
+          text: a.text,
+          runs: c.answer?.runs ?? 0,
+          ...(c.answer?.rolledBackAtMs !== undefined
+            ? { rolledBackAtMs: c.answer.rolledBackAtMs }
+            : {}),
+        },
       }));
     case 'RECORD_RUN':
       if (s.phase !== 'inspecting' || !s.activeCaseId) return s;
@@ -193,8 +202,26 @@ export function shiftReducer(s: ShiftSession, a: ShiftAction): ShiftSession {
           runs: (c.answer?.runs ?? 0) + 1,
           passed: a.passed,
           total: a.total,
+          ...(c.answer?.rolledBackAtMs !== undefined
+            ? { rolledBackAtMs: c.answer.rolledBackAtMs }
+            : {}),
         },
       }));
+    case 'ROLLBACK_INCIDENT':
+      if (s.phase !== 'inspecting' || !s.activeCaseId) return s;
+      return updateCase(s, s.activeCaseId, (c) =>
+        c.answer?.rolledBackAtMs !== undefined
+          ? c
+          : {
+              ...c,
+              answer: {
+                text: c.answer?.text ?? '',
+                runs: c.answer?.runs ?? 0,
+                ...pick(c.answer),
+                rolledBackAtMs: s.elapsedMs,
+              },
+            },
+      );
     case 'DECIDE':
       return decide(s, a.outcome);
     case 'CLOSE_FEEDBACK':
@@ -203,6 +230,11 @@ export function shiftReducer(s: ShiftSession, a: ShiftAction): ShiftSession {
     case 'END_SHIFT':
       return end(s);
   }
+}
+
+/** Hasil tes terakhir (bila ada) dipertahankan saat rollback dicatat. */
+function pick(a: CaseAnswer | undefined): Partial<CaseAnswer> {
+  return a?.total !== undefined ? { passed: a.passed, total: a.total } : {};
 }
 
 export interface ShiftSummary {

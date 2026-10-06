@@ -1,6 +1,7 @@
 import { t as id } from '../../../../i18n/index.ts';
 import { defineCaseType } from '../../../contract.ts';
 import { evaluateCodingCase } from '../../evaluate.ts';
+import { evaluateIncident } from '../../incident.ts';
 import { personVisitor } from '../../visitors.ts';
 import { CodingDocument } from './CodingDocument.tsx';
 import { codingCaseSchema } from './schema.ts';
@@ -8,7 +9,10 @@ import { codingCaseSchema } from './schema.ts';
 export const codingCaseType = defineCaseType({
   type: 'coding',
   schema: codingCaseSchema,
-  evaluate: evaluateCodingCase,
+  evaluate: (c, input) =>
+    c.data.incident
+      ? evaluateIncident(c, c.data.incident.drainPerSecond, input)
+      : evaluateCodingCase(c, input),
   Document: CodingDocument,
   decisions: ['submit'],
   // Kirim hanya setelah tes dijalankan untuk kode yang sekarang ada di editor.

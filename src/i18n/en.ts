@@ -447,6 +447,22 @@ export const en: Strings = {
       delivered: (d, t) => `Packages delivered: ${d}/${t}`,
       queueTitle: (title) => `Robot: ${title}`,
     },
+    incident: {
+      label: (service) => `Server room: ${service}`,
+      health: 'Server health',
+      healthValue: (n) => `${n}%`,
+      status: {
+        ok: 'Normal',
+        smoke: 'Smoking! Users are starting to complain',
+        fire: 'ON FIRE! Users are leaving',
+        down: 'SERVER DOWN — users cannot use the app',
+        stable: 'Stable — rollback active, fix it calmly',
+      },
+      rollback: 'Emergency rollback',
+      rollbackHint: 'Restore the healthy version first: the damage stops, then fix the bug.',
+      lockedHint: 'Fix the bug as fast as you can before the server goes down!',
+      fixed: 'Fix ready! Press Submit Solution to deploy it now.',
+    },
     customers: {
       label: 'App customer queue',
       app: (file) => `App ${file}`,

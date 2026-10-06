@@ -65,3 +65,13 @@ Masukan pemilik: Meja Developer masih terasa seperti latihan coding biasa. Tahap
   1–3 peta, sehingga menghafal langkah tidak cukup. Batas 300 langkah per peta. `content:check`
   memvalidasi peta dan menjalankan solusi acuan di semua peta.
 - Tahap 2 (direncanakan): insiden "server terbakar" dengan tekanan waktu.
+
+## Addendum — tahap 2: server terbakar (insiden produksi)
+
+- Kasus `coding` boleh punya `incident: { service, drainPerSecond }`. Kesehatan server berkurang
+  seiring jam shift (pause-aware, tersimpan), dihitung murni di `modes/dev/incident.ts`.
+- Rollback darurat = tombol di dokumen (mulai shift 3), bukan keputusan: membekukan kesehatan,
+  pemain tetap harus memperbaiki bug ("rollback dulu, perbaiki kemudian"). Dicatat lewat aksi
+  engine `ROLLBACK_INCIDENT` → `answer.rolledBackAtMs` (save v10 + migrasi identitas).
+- Skor: tes lulus semua dan server tidak down = tepat; server down (0%) = `threat-allowed`.
+  Kesehatan tersisa menjadi skor bukti (min 0,3).

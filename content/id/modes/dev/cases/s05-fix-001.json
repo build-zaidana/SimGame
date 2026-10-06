@@ -14,7 +14,7 @@
     },
     "title": "Nomor HP di log masih bocor",
     "story": [
-      "Log kasir tidak boleh menampilkan nomor HP pembeli utuh. Bentuk yang diminta: 4 digit depan, ****, lalu 2 digit terakhir, misalnya 0812****89.",
+      "🔥 INSIDEN PRODUKSI: Log kasir tidak boleh menampilkan nomor HP pembeli utuh. Bentuk yang diminta: 4 digit depan, ****, lalu 2 digit terakhir, misalnya 0812****89.",
       "Fungsinya sudah ada, tapi hasilnya aneh. Perbaiki ya!"
     ],
     "file": "kasir/log.py",
@@ -34,7 +34,11 @@
         "hidden": true
       }
     ],
-    "solution": "def samarkan_hp(nomor):\n    return nomor[:4] + \"****\" + nomor[-2:]\n"
+    "solution": "def samarkan_hp(nomor):\n    return nomor[:4] + \"****\" + nomor[-2:]\n",
+    "incident": {
+      "service": "Layanan Pelanggan · log",
+      "drainPerSecond": 1.5
+    }
   },
   "evidence": {
     "required": [],

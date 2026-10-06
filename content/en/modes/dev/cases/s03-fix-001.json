@@ -14,7 +14,7 @@
     },
     "title": "Cart total causes a KeyError",
     "story": [
-      "Each item in the cart is a dictionary (dict) with \"name\", \"price\", and \"qty\".",
+      "🔥 PRODUCTION INCIDENT: Each item in the cart is a dictionary (dict) with \"name\", \"price\", and \"qty\".",
       "The cart_total function always crashes. Run the tests, read the KeyError, then fix it."
     ],
     "file": "shop/cart.py",
@@ -39,7 +39,11 @@
         "hidden": true
       }
     ],
-    "solution": "def cart_total(cart):\n    total = 0\n    for item in cart:\n        total = total + item[\"price\"] * item[\"qty\"]\n    return total\n"
+    "solution": "def cart_total(cart):\n    total = 0\n    for item in cart:\n        total = total + item[\"price\"] * item[\"qty\"]\n    return total\n",
+    "incident": {
+      "service": "Checkout · cart total",
+      "drainPerSecond": 1.2
+    }
   },
   "evidence": {
     "required": [],
