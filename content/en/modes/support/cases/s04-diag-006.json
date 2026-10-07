@@ -1,0 +1,66 @@
+{
+  "id": "s04-diag-006",
+  "type": "diagnostic",
+  "conceptIds": ["os-maintenance", "troubleshooting"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "Office laptop NB-0458",
+      "owner": "Lestari Utami (HR)"
+    },
+    "readings": [
+      {
+        "label": "Laptop date",
+        "value": "1 January 2020, 08:03",
+        "evidenceId": "r-date"
+      },
+      {
+        "label": "Office server time",
+        "value": "Today, 09:15",
+        "evidenceId": "r-server"
+      },
+      {
+        "label": "Set time automatically",
+        "value": "Off (changed manually yesterday)",
+        "evidenceId": "r-auto"
+      },
+      {
+        "label": "Security updates",
+        "value": "All installed",
+        "evidenceId": "r-update"
+      },
+      {
+        "label": "Disk storage",
+        "value": "48% used",
+        "evidenceId": "r-disk"
+      }
+    ],
+    "console": [
+      {
+        "text": "> open portal.nusadigital.test  →  Error: site security certificate is not yet valid (computer clock mismatch)",
+        "evidenceId": "con-cert"
+      },
+      {
+        "text": "> ping portal.nusadigital.test  →  Reply from 10.20.0.15: time=4ms",
+        "evidenceId": "con-ping"
+      }
+    ],
+    "note": {
+      "text": "Lestari: yesterday I changed the laptop date to test a meeting reminder, then forgot to change it back. Now every office site refuses to open.",
+      "evidenceId": "note"
+    }
+  },
+  "evidence": {
+    "required": ["r-date", "con-cert"],
+    "supporting": ["r-auto", "con-ping", "note"]
+  },
+  "explanation": "A site's security certificate (a digital ID card with a validity period) is checked against the laptop clock, so a date set back to 2020 makes sites get rejected even though the network is fine. Fix it by turning automatic time setting back on.",
+  "ruleRefs": ["r-ts-4", "r-ts-2"],
+  "hints": [
+    "The portal replies to ping. So why is the site still rejected?",
+    "Compare the laptop date with the office server time."
+  ]
+}

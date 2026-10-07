@@ -1,0 +1,68 @@
+{
+  "id": "s02-hw-006",
+  "type": "hardware",
+  "conceptIds": ["hardware-basics", "troubleshooting"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "replace",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "device": {
+      "name": "Mouse kabel MS-0412 (dari PC-0207)",
+      "owner": "Sari Puspita (HR)"
+    },
+    "checks": [
+      {
+        "part": "Tombol kiri",
+        "observation": "Satu kali tekan sering terbaca dua kali (klik ganda)",
+        "evidenceId": "chk-left"
+      },
+      {
+        "part": "Tes klik",
+        "observation": "Dari 20 klik tunggal, 7 terbaca sebagai klik ganda",
+        "evidenceId": "chk-test"
+      },
+      {
+        "part": "Mouse cadangan",
+        "observation": "Di PC yang sama, mouse lain lolos tes: 20 dari 20 klik normal",
+        "evidenceId": "chk-spare"
+      },
+      {
+        "part": "Pengaturan kecepatan klik ganda",
+        "observation": "Masih bawaan pabrik, tidak pernah diubah",
+        "evidenceId": "chk-setting"
+      },
+      {
+        "part": "Kabel dan colokan USB",
+        "observation": "Utuh dan terpasang kencang",
+        "evidenceId": "chk-cable"
+      }
+    ],
+    "note": {
+      "text": "Sari: mouse ini sudah empat tahun dipakai tiap hari. File sering terbuka sendiri padahal saya cuma mau memilihnya.",
+      "evidenceId": "note-user"
+    }
+  },
+  "evidence": {
+    "required": ["chk-test", "chk-spare"],
+    "supporting": ["chk-left", "chk-setting", "chk-cable", "scan-mouse"]
+  },
+  "explanation": "Tombol kiri mengirim klik ganda padahal pengaturannya bawaan dan mouse lain normal di PC yang sama, jadi sakelar (switch) di dalam tombolnya sudah aus. Kerusakan fisik seperti ini tidak bisa disetel ulang, jadi ganti mousenya.",
+  "ruleRefs": ["r-hw-1", "r-ts-3"],
+  "hints": [
+    "Masalahnya ikut pengaturan, PC, atau mousenya sendiri?",
+    "Mouse lain normal di PC yang sama dan pengaturannya bawaan. Lihat hasil tes kliknya."
+  ],
+  "intel": {
+    "scan": [
+      {
+        "text": "Mouse: sakelar tombol kiri aus, gagal tes klik",
+        "evidenceId": "scan-mouse"
+      },
+      {
+        "text": "Port USB: normal"
+      }
+    ]
+  }
+}

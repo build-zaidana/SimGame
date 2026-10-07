@@ -1,0 +1,57 @@
+{
+  "id": "s05-ticket-005",
+  "type": "ticket",
+  "conceptIds": ["user-guidance", "troubleshooting"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Wulan Anggraini",
+      "department": "Penjualan"
+    },
+    "device": {
+      "text": "Laptop kantor NB-0561 dan headset kabel HS-0109",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Mikrofon headset rusak, suara saya tidak terdengar",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Di rapat NusaMeet, saya bisa mendengar rekan, tapi mereka tidak bisa mendengar saya.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "Di kabel headset ada tombol geser kecil. Sekarang terlihat titik merah di sebelah gambar mikrofon dicoret.",
+        "evidenceId": "desc-switch"
+      },
+      {
+        "text": "Di pengaturan suara laptop, mikrofon headset sudah terpilih dan tidak di-mute, tapi bilah suaranya diam saat saya bicara.",
+        "evidenceId": "desc-settings"
+      },
+      {
+        "text": "Sepertinya harus ganti headset baru?",
+        "evidenceId": "desc-request"
+      }
+    ],
+    "history": [
+      {
+        "text": "Minggu lalu: headset ini dites di Bengkel IT, mikrofon dan speakernya normal.",
+        "evidenceId": "hist-test"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-switch"],
+    "supporting": ["desc-settings", "hist-test"]
+  },
+  "explanation": "Tombol geser di kabel headset berada di posisi senyap (mute), jadi mikrofon dimatikan langsung dari headsetnya walau pengaturan laptop sudah benar. Headsetnya sehat, jadi arahkan Wulan menggeser tombol itu sampai titik merahnya tidak terlihat.",
+  "ruleRefs": ["r-guide-1", "r-guide-2"],
+  "hints": [
+    "Pengaturan laptop sudah benar. Di mana lagi mikrofon bisa dimatikan?",
+    "Lihat tombol kecil di kabel headset. Apa arti titik merah dan gambar mikrofon dicoret?"
+  ]
+}

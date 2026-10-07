@@ -1,0 +1,74 @@
+{
+  "id": "s03-diag-006",
+  "type": "diagnostic",
+  "conceptIds": ["network-basics", "user-guidance"],
+  "difficulty": 2,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "device": {
+      "name": "Office laptop NB-0742",
+      "owner": "Dimas Prakoso (Legal)"
+    },
+    "readings": [
+      {
+        "label": "Connected Wi-Fi",
+        "value": "NusaKantor-5G (5 GHz band)",
+        "evidenceId": "r-ssid"
+      },
+      {
+        "label": "Signal strength",
+        "value": "Very weak: 1 of 5 bars",
+        "evidenceId": "r-signal"
+      },
+      {
+        "label": "Laptop location",
+        "value": "Archive room at the end of floor 3, two walls away from the router",
+        "evidenceId": "r-loc"
+      },
+      {
+        "label": "Other Wi-Fi in range",
+        "value": "NusaKantor (2.4 GHz band): 4 of 5 bars",
+        "evidenceId": "r-24"
+      },
+      {
+        "label": "Wi-Fi card",
+        "value": "Detected, driver normal",
+        "evidenceId": "r-card"
+      }
+    ],
+    "console": [
+      {
+        "text": "> ping 10.20.3.1 (in the archive room)  →  6 of 10 packets lost, time 120–300ms",
+        "evidenceId": "con-ping-far"
+      },
+      {
+        "text": "> ping 10.20.3.1 (at a desk near the router)  →  10 of 10 replied, time 3ms",
+        "evidenceId": "con-ping-near"
+      }
+    ],
+    "note": {
+      "text": "Dimas: it works fine at my desk, but in the archive room the Wi-Fi keeps dropping. Is the Wi-Fi card broken?",
+      "evidenceId": "note-user"
+    }
+  },
+  "intel": {
+    "ping": [
+      {
+        "text": "Floor 3 router (10.20.3.1): replies in 2ms to another laptop nearby",
+        "evidenceId": "ping-router"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["r-signal", "r-24"],
+    "supporting": ["con-ping-near", "r-loc", "r-card", "ping-router"]
+  },
+  "explanation": "5 GHz Wi-Fi is faster but has a shorter range and is easily blocked by walls, while Dimas's laptop works fine near the router. The device is healthy, so guide Dimas to use NusaKantor (2.4 GHz), which has a strong signal in the archive room.",
+  "ruleRefs": ["r-guide-1", "r-net-1"],
+  "hints": [
+    "Near the router it works, in the archive room it drops. What is different between the two places?",
+    "Compare the signal strength of the two Wi-Fi networks visible in the archive room."
+  ]
+}

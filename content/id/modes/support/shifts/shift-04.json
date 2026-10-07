@@ -38,6 +38,10 @@
       "arriveAt": 48
     },
     {
+      "caseId": "s04-diag-006",
+      "arriveAt": 52
+    },
+    {
       "caseId": "s04-ticket-004",
       "arriveAt": 56
     },

@@ -1,0 +1,57 @@
+{
+  "id": "s05-ticket-005",
+  "type": "ticket",
+  "conceptIds": ["user-guidance", "troubleshooting"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Wulan Anggraini",
+      "department": "Sales"
+    },
+    "device": {
+      "text": "Office laptop NB-0561 and wired headset HS-0109",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Headset microphone is broken, nobody can hear me",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "In NusaMeet meetings, I can hear my colleagues, but they cannot hear me.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "There is a small slide switch on the headset cable. A red dot is now showing next to a crossed-out microphone icon.",
+        "evidenceId": "desc-switch"
+      },
+      {
+        "text": "In the laptop sound settings, the headset microphone is selected and not muted, but its level bar stays still when I talk.",
+        "evidenceId": "desc-settings"
+      },
+      {
+        "text": "I think I need a new headset?",
+        "evidenceId": "desc-request"
+      }
+    ],
+    "history": [
+      {
+        "text": "Last week: this headset was tested at the IT Workshop, the microphone and speakers were normal.",
+        "evidenceId": "hist-test"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-switch"],
+    "supporting": ["desc-settings", "hist-test"]
+  },
+  "explanation": "The slide switch on the headset cable is in the mute position, so the microphone is turned off right at the headset even though the laptop settings are correct. The headset is healthy, so guide Wulan to slide the switch until the red dot is no longer showing.",
+  "ruleRefs": ["r-guide-1", "r-guide-2"],
+  "hints": [
+    "The laptop settings are correct. Where else can the microphone be turned off?",
+    "Look at the small switch on the headset cable. What do the red dot and crossed-out microphone mean?"
+  ]
+}
