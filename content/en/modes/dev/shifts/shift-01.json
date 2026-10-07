@@ -26,8 +26,16 @@
       "arriveAt": 24
     },
     {
+      "caseId": "s01-fix-003",
+      "arriveAt": 28
+    },
+    {
       "caseId": "s01-pr-002",
       "arriveAt": 34
+    },
+    {
+      "caseId": "s01-build-002",
+      "arriveAt": 40
     },
     {
       "caseId": "s01-build-001",

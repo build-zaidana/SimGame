@@ -1,0 +1,55 @@
+{
+  "id": "s03-build-003",
+  "type": "coding",
+  "conceptIds": ["release-rollback", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Wulan Sari",
+      "team": "Release Team"
+    },
+    "title": "Speed challenge: readable release duration",
+    "story": [
+      "The release dashboard shows durations in seconds only, for example 125. The team wants \"2m 5s\".",
+      "Write format_duration(seconds). Use // for minutes (whole division) and % for the leftover seconds, then turn numbers into text with str()."
+    ],
+    "file": "release/duration.py",
+    "starter": "def format_duration(seconds):\n    # Write your code here\n    return \"\"\n",
+    "tests": [
+      {
+        "name": "two minutes and a bit",
+        "code": "assert format_duration(125) == \"2m 5s\""
+      },
+      {
+        "name": "exactly one minute",
+        "code": "assert format_duration(60) == \"1m 0s\""
+      },
+      {
+        "name": "under a minute",
+        "code": "assert format_duration(59) == \"0m 59s\"",
+        "hidden": true
+      },
+      {
+        "name": "zero seconds",
+        "code": "assert format_duration(0) == \"0m 0s\"",
+        "hidden": true
+      }
+    ],
+    "solution": "def format_duration(seconds):\n    minutes = seconds // 60\n    rest = seconds % 60\n    return str(minutes) + \"m \" + str(rest) + \"s\"\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "seconds // 60 gives the whole minutes and seconds % 60 gives the leftover seconds. Numbers must be turned into text with str() before joining them with +.",
+  "ruleRefs": ["r-py-2", "r-err-2"],
+  "hints": [
+    "Try print(125 // 60) and print(125 % 60).",
+    "Store the results in minutes and rest.",
+    "Join them: str(minutes) + \"m \" + str(rest) + \"s\"."
+  ]
+}

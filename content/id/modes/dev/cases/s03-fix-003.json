@@ -1,0 +1,50 @@
+{
+  "id": "s03-fix-003",
+  "type": "coding",
+  "conceptIds": ["python-basics", "debugging"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Rina Wulandari",
+      "team": "Tim Toko Online"
+    },
+    "title": "Voucher tidak berlaku tepat di batas",
+    "story": [
+      "Promo baru: belanja minimal Rp100.000 dapat voucher. Pelanggan yang belanja tepat Rp100.000 protes karena tidak dapat.",
+      "Perhatikan tanda perbandingannya. \"Minimal\" berarti angka batas itu sendiri ikut dihitung."
+    ],
+    "file": "toko/voucher.py",
+    "starter": "def dapat_voucher(total_belanja):\n    return total_belanja > 100000\n",
+    "tests": [
+      {
+        "name": "belanja banyak",
+        "code": "assert dapat_voucher(150000) == True"
+      },
+      {
+        "name": "tepat di batas",
+        "code": "assert dapat_voucher(100000) == True"
+      },
+      {
+        "name": "kurang sedikit",
+        "code": "assert dapat_voucher(99999) == False",
+        "hidden": true
+      }
+    ],
+    "solution": "def dapat_voucher(total_belanja):\n    return total_belanja >= 100000\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Tanda > berarti \"lebih dari\", jadi tepat Rp100.000 tidak lolos. \"Minimal\" artinya lebih dari atau sama dengan, yaitu >=.",
+  "ruleRefs": ["r-py-4", "r-err-2"],
+  "hints": [
+    "Jalankan tes. Tes mana yang gagal, dan berapa angkanya?",
+    "Apakah 100000 > 100000 bernilai True?",
+    "Ganti > menjadi >=."
+  ]
+}

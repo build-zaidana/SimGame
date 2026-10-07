@@ -1,0 +1,50 @@
+{
+  "id": "s04-fix-003",
+  "type": "coding",
+  "conceptIds": ["testing", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Fajar Nugroho",
+      "team": "Tim Akun"
+    },
+    "title": "Nama kosong bikin halaman profil crash",
+    "story": [
+      "Foto profil diganti huruf pertama nama pengguna. Pengguna yang belum mengisi nama membuat halaman profil error.",
+      "Ada tes tersembunyi untuk kasus tepi itu. Pikirkan: teks kosong punya huruf pertama atau tidak?"
+    ],
+    "file": "akun/inisial.py",
+    "starter": "def inisial(nama):\n    return nama[0].upper()\n",
+    "tests": [
+      {
+        "name": "huruf kecil",
+        "code": "assert inisial(\"budi\") == \"B\""
+      },
+      {
+        "name": "huruf kapital",
+        "code": "assert inisial(\"Sari\") == \"S\""
+      },
+      {
+        "name": "nama kosong",
+        "code": "assert inisial(\"\") == \"?\"",
+        "hidden": true
+      }
+    ],
+    "solution": "def inisial(nama):\n    if len(nama) == 0:\n        return \"?\"\n    return nama[0].upper()\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Teks kosong tidak punya huruf pertama, jadi nama[0] membuat IndexError. Cek dulu panjangnya dan kembalikan \"?\" untuk kasus tepi itu.",
+  "ruleRefs": ["r-tst-1", "r-dbg-3"],
+  "hints": [
+    "Apa yang terjadi kalau kamu menjalankan \"\"[0] di Python?",
+    "Periksa dulu: if len(nama) == 0:",
+    "Untuk nama kosong, kembalikan \"?\" sebelum mengambil nama[0]."
+  ]
+}

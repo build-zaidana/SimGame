@@ -1,0 +1,55 @@
+{
+  "id": "s03-build-003",
+  "type": "coding",
+  "conceptIds": ["release-rollback", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Wulan Sari",
+      "team": "Tim Rilis"
+    },
+    "title": "Lomba kilat: durasi rilis yang mudah dibaca",
+    "story": [
+      "Dasbor rilis menampilkan durasi dalam detik saja, misalnya 125. Tim ingin tampilan \"2m 5s\".",
+      "Tulis format_durasi(detik). Gunakan // untuk menit (bagi bulat) dan % untuk sisa detik, lalu ubah angka jadi teks dengan str()."
+    ],
+    "file": "rilis/durasi.py",
+    "starter": "def format_durasi(detik):\n    # Tulis kodemu di sini\n    return \"\"\n",
+    "tests": [
+      {
+        "name": "dua menit lebih",
+        "code": "assert format_durasi(125) == \"2m 5s\""
+      },
+      {
+        "name": "tepat satu menit",
+        "code": "assert format_durasi(60) == \"1m 0s\""
+      },
+      {
+        "name": "kurang dari semenit",
+        "code": "assert format_durasi(59) == \"0m 59s\"",
+        "hidden": true
+      },
+      {
+        "name": "nol detik",
+        "code": "assert format_durasi(0) == \"0m 0s\"",
+        "hidden": true
+      }
+    ],
+    "solution": "def format_durasi(detik):\n    menit = detik // 60\n    sisa = detik % 60\n    return str(menit) + \"m \" + str(sisa) + \"s\"\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "detik // 60 menghasilkan menit penuh dan detik % 60 sisa detiknya. Angka harus diubah dengan str() sebelum digabung dengan teks memakai +.",
+  "ruleRefs": ["r-py-2", "r-err-2"],
+  "hints": [
+    "Coba print(125 // 60) dan print(125 % 60).",
+    "Simpan hasilnya di variabel menit dan sisa.",
+    "Gabungkan: str(menit) + \"m \" + str(sisa) + \"s\"."
+  ]
+}

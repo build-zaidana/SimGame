@@ -1,0 +1,55 @@
+{
+  "id": "s02-fix-004",
+  "type": "coding",
+  "conceptIds": ["debugging", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Galih Prasetyo",
+      "team": "Tim Absensi"
+    },
+    "title": "Siswa pertama tidak pernah tercatat hadir",
+    "story": [
+      "Rekap kehadiran selalu kurang satu kalau siswa pertama di daftar hadir. \"H\" artinya hadir, \"A\" artinya absen.",
+      "Tambahkan print(i) di dalam perulangan untuk melihat urutan mana saja yang diperiksa."
+    ],
+    "file": "absensi/rekap.py",
+    "starter": "def hitung_hadir(absen):\n    jumlah = 0\n    for i in range(1, len(absen)):\n        if absen[i] == \"H\":\n            jumlah = jumlah + 1\n    return jumlah\n",
+    "tests": [
+      {
+        "name": "tiga siswa",
+        "code": "assert hitung_hadir([\"H\", \"A\", \"H\"]) == 2"
+      },
+      {
+        "name": "siswa pertama absen",
+        "code": "assert hitung_hadir([\"A\", \"H\"]) == 1"
+      },
+      {
+        "name": "hanya satu siswa",
+        "code": "assert hitung_hadir([\"H\"]) == 1",
+        "hidden": true
+      },
+      {
+        "name": "kelas kosong",
+        "code": "assert hitung_hadir([]) == 0",
+        "hidden": true
+      }
+    ],
+    "solution": "def hitung_hadir(absen):\n    jumlah = 0\n    for i in range(len(absen)):\n        if absen[i] == \"H\":\n            jumlah = jumlah + 1\n    return jumlah\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "range(1, len(absen)) mulai dari urutan 1, padahal siswa pertama ada di urutan 0, jadi ia tidak pernah diperiksa. range(len(absen)) mulai dari 0 dan memeriksa semua siswa.",
+  "ruleRefs": ["r-dbg-2", "r-dbg-1"],
+  "hints": [
+    "Cetak i di setiap putaran. Angka berapa yang muncul pertama kali?",
+    "Daftar di Python mulai dari urutan 0. Apakah urutan 0 ikut diperiksa?",
+    "Ganti range(1, len(absen)) menjadi range(len(absen))."
+  ]
+}

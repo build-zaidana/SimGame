@@ -1,0 +1,50 @@
+{
+  "id": "s01-fix-003",
+  "type": "coding",
+  "conceptIds": ["reading-errors", "python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Sari Kusuma",
+      "team": "Cashier Team"
+    },
+    "title": "Receipt crashes with NameError",
+    "story": [
+      "Every time a cashier presses Print Receipt, the app crashes.",
+      "Run the tests and read the last line of the error. NameError means Python met a name that was never created."
+    ],
+    "file": "cashier/receipt.py",
+    "starter": "def receipt_total(prices):\n    total = 0\n    for p in prices:\n        total = total + p\n    return totl\n",
+    "tests": [
+      {
+        "name": "three items",
+        "code": "assert receipt_total([10000, 20000, 5000]) == 35000"
+      },
+      {
+        "name": "one item",
+        "code": "assert receipt_total([7500]) == 7500"
+      },
+      {
+        "name": "empty receipt",
+        "code": "assert receipt_total([]) == 0",
+        "hidden": true
+      }
+    ],
+    "solution": "def receipt_total(prices):\n    total = 0\n    for p in prices:\n        total = total + p\n    return total\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "The error NameError: name 'totl' isn't defined points to a typo, because the variable that was created is called total. The last line of an error always tells you the kind of problem and the name involved.",
+  "ruleRefs": ["r-err-1", "r-err-3"],
+  "hints": [
+    "Run the tests, then read the very last line of the error.",
+    "Which name does the error mention? Was that name ever created in this function?",
+    "Change return totl to return total."
+  ]
+}

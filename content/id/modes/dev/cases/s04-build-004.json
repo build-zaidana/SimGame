@@ -1,0 +1,65 @@
+{
+  "id": "s04-build-004",
+  "type": "coding",
+  "conceptIds": ["testing", "python-basics"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Maya Lestari",
+      "team": "Tim Rapor Sekolah"
+    },
+    "title": "Lomba kilat: nilai huruf",
+    "story": [
+      "Tulis nilai_huruf(skor): 85 ke atas \"A\", 70 ke atas \"B\", 55 ke atas \"C\", selain itu \"D\".",
+      "Tes tersembunyi memeriksa angka tepat di setiap batas. Uji batasnya, bukan cuma angka di tengah!"
+    ],
+    "file": "rapor/huruf.py",
+    "starter": "def nilai_huruf(skor):\n    # Tulis kodemu di sini\n    return \"D\"\n",
+    "tests": [
+      {
+        "name": "nilai tinggi",
+        "code": "assert nilai_huruf(90) == \"A\""
+      },
+      {
+        "name": "nilai tengah",
+        "code": "assert nilai_huruf(60) == \"C\""
+      },
+      {
+        "name": "batas A",
+        "code": "assert nilai_huruf(85) == \"A\"",
+        "hidden": true
+      },
+      {
+        "name": "batas B",
+        "code": "assert nilai_huruf(70) == \"B\"",
+        "hidden": true
+      },
+      {
+        "name": "batas C",
+        "code": "assert nilai_huruf(55) == \"C\"",
+        "hidden": true
+      },
+      {
+        "name": "di bawah C",
+        "code": "assert nilai_huruf(54) == \"D\"",
+        "hidden": true
+      }
+    ],
+    "solution": "def nilai_huruf(skor):\n    if skor >= 85:\n        return \"A\"\n    if skor >= 70:\n        return \"B\"\n    if skor >= 55:\n        return \"C\"\n    return \"D\"\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Periksa dari nilai tertinggi ke terendah dengan >=, supaya angka tepat di batas masuk ke huruf yang benar. Kasus tepi seperti 85, 70, dan 55 adalah tempat bug paling sering bersembunyi.",
+  "ruleRefs": ["r-tst-1", "r-py-4"],
+  "hints": [
+    "Mulai dari batas tertinggi: if skor >= 85: return \"A\".",
+    "Lanjutkan untuk 70 dan 55 dengan >=.",
+    "Kalau tidak ada yang cocok, return \"D\" di baris terakhir."
+  ]
+}

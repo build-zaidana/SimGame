@@ -1,0 +1,55 @@
+{
+  "id": "s01-build-002",
+  "type": "coding",
+  "conceptIds": ["python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Bayu Pratama",
+      "team": "School Report Team"
+    },
+    "title": "Speed challenge: even or odd?",
+    "story": [
+      "Write a function number_kind(n) that returns the text \"even\" or \"odd\".",
+      "Hint: the % operator gives the remainder of a division. There are hidden tests for 0 and negative numbers!"
+    ],
+    "file": "report/numbers.py",
+    "starter": "def number_kind(n):\n    # Write your code here\n    return None\n",
+    "tests": [
+      {
+        "name": "four",
+        "code": "assert number_kind(4) == \"even\""
+      },
+      {
+        "name": "seven",
+        "code": "assert number_kind(7) == \"odd\""
+      },
+      {
+        "name": "zero",
+        "code": "assert number_kind(0) == \"even\"",
+        "hidden": true
+      },
+      {
+        "name": "negative",
+        "code": "assert number_kind(-3) == \"odd\"",
+        "hidden": true
+      }
+    ],
+    "solution": "def number_kind(n):\n    if n % 2 == 0:\n        return \"even\"\n    return \"odd\"\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "An even number divides by 2 with nothing left, so its remainder n % 2 is 0. Zero is even too, and -3 leaves a remainder of 1, so it is still odd.",
+  "ruleRefs": ["r-py-1", "r-err-2"],
+  "hints": [
+    "Try print(7 % 2) and print(4 % 2). What is different?",
+    "Use if n % 2 == 0: and then return \"even\".",
+    "Outside the if, return \"odd\". Remember the 4-space indentation."
+  ]
+}

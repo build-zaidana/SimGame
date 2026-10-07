@@ -1,0 +1,55 @@
+{
+  "id": "s02-build-003",
+  "type": "coding",
+  "conceptIds": ["python-basics", "debugging"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Putri Handayani",
+      "team": "Tim Aplikasi Belajar"
+    },
+    "title": "Lomba kilat: hitung huruf kapital",
+    "story": [
+      "Tulis fungsi hitung_kapital(teks) yang menghitung berapa huruf kapital di dalam teks.",
+      "Perulangan for bisa membaca teks huruf demi huruf, dan h.isupper() bernilai True kalau h huruf kapital."
+    ],
+    "file": "belajar/kapital.py",
+    "starter": "def hitung_kapital(teks):\n    # Tulis kodemu di sini\n    return 0\n",
+    "tests": [
+      {
+        "name": "dua kata",
+        "code": "assert hitung_kapital(\"Halo Dunia\") == 2"
+      },
+      {
+        "name": "huruf kecil semua",
+        "code": "assert hitung_kapital(\"abc\") == 0"
+      },
+      {
+        "name": "singkatan",
+        "code": "assert hitung_kapital(\"SMK\") == 3",
+        "hidden": true
+      },
+      {
+        "name": "ada angka",
+        "code": "assert hitung_kapital(\"Kelas 10A\") == 2",
+        "hidden": true
+      }
+    ],
+    "solution": "def hitung_kapital(teks):\n    jumlah = 0\n    for h in teks:\n        if h.isupper():\n            jumlah = jumlah + 1\n    return jumlah\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "for h in teks mengambil satu huruf setiap putaran, lalu h.isupper() memeriksa apakah huruf itu kapital. Angka dan spasi bukan huruf kapital, jadi tidak ikut terhitung.",
+  "ruleRefs": ["r-err-2", "r-dbg-4"],
+  "hints": [
+    "Mulai dengan jumlah = 0, lalu for h in teks:",
+    "Di dalam perulangan: if h.isupper(): tambah jumlah dengan 1.",
+    "Jangan lupa return jumlah di luar perulangan."
+  ]
+}
