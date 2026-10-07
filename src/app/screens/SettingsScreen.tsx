@@ -1,6 +1,7 @@
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { LOCALES, t as id } from '../../i18n/index.ts';
 import type { Settings } from '../../persistence/saveSchema.ts';
+import { resetTips } from '../onboarding.ts';
 import { useAppStore } from '../store.ts';
 import { ANALYTICS_OPT_IN, analyticsAvailable, telemetry } from '../telemetry.ts';
 import { btnSecondary, panel } from '../ui/styles.ts';
@@ -27,6 +28,8 @@ export function SettingsScreen() {
   const setLanguage = useAppStore((s) => s.setLanguage);
   const analyticsOn = useAppStore((s) => s.save?.flags[ANALYTICS_OPT_IN] === true);
   const setFlag = useAppStore((s) => s.setFlag);
+  const updateSave = useAppStore((s) => s.updateSave);
+  const [tipsReset, setTipsReset] = useState(false);
   if (!settings) return null;
 
   return (
@@ -97,6 +100,23 @@ export function SettingsScreen() {
           />
           {id.explore.setting}
         </label>
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            className={btnSecondary}
+            onClick={() => {
+              updateSave(resetTips);
+              setTipsReset(true);
+            }}
+          >
+            {id.tips.reset}
+          </button>
+          {tipsReset && (
+            <p role="status" className="text-sm text-safe">
+              {id.tips.resetDone}
+            </p>
+          )}
+        </div>
       </Fieldset>
 
       <Fieldset legend={id.settings.reduceMotion}>

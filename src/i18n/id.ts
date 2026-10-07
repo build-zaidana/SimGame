@@ -256,6 +256,33 @@ export const id = {
       `Latihan: putuskan ${n} kasus boss dengan benar untuk mengalahkannya (tanpa bonus gaji).`,
     defeatedPractice: (title: string) => `Boss ${title} kalah! (latihan, tanpa bonus gaji)`,
   },
+  tips: {
+    label: 'Tips',
+    gotIt: 'Mengerti',
+    skipAll: 'Lewati semua tips',
+    reset: 'Tampilkan tips lagi',
+    resetDone: 'Tips akan muncul lagi di kantor.',
+    welcome: {
+      title: 'Selamat datang di kantor!',
+      body: 'Pilih salah satu meja di bawah untuk mulai shift pertamamu. Setiap meja adalah satu karier IT, lengkap dengan gaji, pangkat, dan tantangannya sendiri. Mode Santai (bawaan) tidak memakai batas waktu; ubah di Pengaturan kalau mau lebih menantang.',
+    },
+    rank: {
+      title: 'Pangkatmu naik dengan setiap shift',
+      body: 'Pangkat terlihat di kartu meja. Setiap kenaikan menambah tunjangan gaji per shift dan membuka upgrade meja baru di toko.',
+    },
+    daily: {
+      title: 'Tantangan harian sudah terbuka',
+      body: 'Setiap hari ada 3 kasus pilihan di meja yang shiftnya sudah kamu selesaikan. Kerjakan tiap hari untuk menjaga 🔥 beruntun dan dapat bonus koin.',
+    },
+    shop: {
+      title: 'Gajimu bisa dipakai',
+      body: 'Di Toko & Upgrade, alat kerja membuka info tambahan di meja, sedangkan upgrade meja memberi hiasan dan keuntungan kecil seperti petunjuk gratis.',
+    },
+    practice: {
+      title: 'Mau mengulang shift?',
+      body: 'Pakai Mode Latihan di kartu meja. Hasilnya tidak mengubah skor terbaik, gaji, atau pangkatmu, jadi aman untuk mencoba lagi.',
+    },
+  },
   rank: {
     current: (title: string) => `Pangkat: ${title}`,
     nextShifts: (n: number, title: string) => `${n} shift lagi menuju ${title}`,

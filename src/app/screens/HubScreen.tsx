@@ -9,6 +9,7 @@ import { PhaserHub, type HotspotInfo, type HubSpeech } from '../../hub/PhaserHub
 import { OfficeIllustration } from '../ui/hub/OfficeIllustration.tsx';
 import { Medal } from '../ui/Medal.tsx';
 import { RankLine } from '../ui/RankLine.tsx';
+import { TipCard } from '../ui/hub/TipCard.tsx';
 import { btnPrimary, btnSecondary, panel } from '../ui/styles.ts';
 
 /** HUB versi menu (v1.0). Ilustrasi kantor pixel menyusul di M4. */
@@ -111,6 +112,7 @@ export function HubScreen() {
     <main className="mx-auto flex min-h-dvh max-w-3xl flex-col gap-4 p-4">
       <h1 className="font-display text-2xl text-accent">{id.hub.heading}</h1>
       <p className="text-ink-muted">{id.hub.intro}</p>
+      <TipCard />
       {newBadges.length > 0 && (
         <section
           role="status"
