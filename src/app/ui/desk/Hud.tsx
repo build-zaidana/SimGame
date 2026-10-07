@@ -61,16 +61,28 @@ export function Hud({ deskTitle, session, wallet, practice, streak, onTogglePaus
   return (
     <header className="flex items-center gap-3 border-b-2 border-ink/40 bg-panel px-3 py-1 text-sm">
       <h1 className="hidden font-display text-accent sm:block">{deskTitle}</h1>
-      {practice && (
+      {session.daily ? (
         <span
-          className="border-2 border-focus px-1 font-display text-xs text-focus"
-          title={id.desk.practiceLabel}
-          data-testid="practice-badge"
+          className="border-2 border-accent px-1 font-display text-xs text-accent"
+          title={id.daily.badgeLabel}
+          data-testid="daily-badge"
         >
-          <span aria-hidden="true">🎯 </span>
-          {id.desk.practiceBadge}
-          <span className="sr-only">: {id.desk.practiceLabel}</span>
+          <span aria-hidden="true">📅 </span>
+          {id.daily.badge}
+          <span className="sr-only">: {id.daily.badgeLabel}</span>
         </span>
+      ) : (
+        practice && (
+          <span
+            className="border-2 border-focus px-1 font-display text-xs text-focus"
+            title={id.desk.practiceLabel}
+            data-testid="practice-badge"
+          >
+            <span aria-hidden="true">🎯 </span>
+            {id.desk.practiceBadge}
+            <span className="sr-only">: {id.desk.practiceLabel}</span>
+          </span>
+        )
       )}
       <p className="flex flex-1 flex-wrap items-center gap-x-4 gap-y-1 font-display">
         <span className="flex items-center gap-2">
