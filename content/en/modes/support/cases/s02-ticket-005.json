@@ -1,0 +1,57 @@
+{
+  "id": "s02-ticket-005",
+  "type": "ticket",
+  "conceptIds": ["hardware-basics", "troubleshooting"],
+  "difficulty": 1,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Rudi Hartono",
+      "department": "Warehouse"
+    },
+    "device": {
+      "text": "Office PC PC-0221 and desk speakers",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Speakers crackle and sound only comes from the left",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Since my desk was moved yesterday, the speakers crackle and sound only comes out of the left side.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "If I touch the speaker cable behind the PC, the sound is sometimes normal for a moment.",
+        "evidenceId": "desc-touch"
+      },
+      {
+        "text": "The audio plug (jack) behind the PC is not pushed all the way in: its metal tip is still visible.",
+        "evidenceId": "desc-jack"
+      },
+      {
+        "text": "When I use a headset in the front port, the sound is clear on both left and right.",
+        "evidenceId": "desc-headset"
+      }
+    ],
+    "history": [
+      {
+        "text": "Last month: these speakers were tested at the IT Workshop and found normal.",
+        "evidenceId": "hist-test"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-jack"],
+    "supporting": ["desc-touch", "desc-headset"]
+  },
+  "explanation": "The audio plug that is not fully inserted after the desk was moved makes the connection cut in and out, while sound through the headset is clear. Fix it by reseating the audio jack until it is fully in, then test again.",
+  "ruleRefs": ["r-hw-2", "r-ts-1"],
+  "hints": [
+    "What changed right before the sound went bad?",
+    "The sound is clear through the headset. So check the speaker cable connection behind the PC."
+  ]
+}

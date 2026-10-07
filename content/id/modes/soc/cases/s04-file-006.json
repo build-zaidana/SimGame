@@ -1,0 +1,49 @@
+{
+  "id": "s04-file-006",
+  "type": "file",
+  "conceptIds": ["malware-files"],
+  "difficulty": 2,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "fileName": {
+      "text": "NusaRapat_Setup_4.2.exe",
+      "evidenceId": "file-name"
+    },
+    "fileType": {
+      "text": "Program pemasang Windows (.exe), bertanda tangan digital PT Nusa Digital",
+      "evidenceId": "file-type"
+    },
+    "size": {
+      "text": "68 MB",
+      "evidenceId": "file-size"
+    },
+    "source": {
+      "text": "Diunduh sendiri oleh Bayu dari portal resmi software.nusadigital.test, sesuai tiket IT #3105.",
+      "evidenceId": "source"
+    },
+    "message": {
+      "text": "Tim IT: aplikasi rapat versi baru sudah tersedia. Silakan pasang dari portal software kantor.",
+      "evidenceId": "message"
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["source", "file-type", "sb-clean"]
+  },
+  "explanation": "File .exe memang program, tapi ini pemasang yang diminta lewat tiket IT dan diunduh sendiri dari portal milik kantor (nusadigital.test). Yang patut dicurigai adalah program yang menyamar jadi dokumen atau datang tanpa diminta.",
+  "ruleRefs": ["r-mal-2", "r-url-1"],
+  "hints": [
+    "Program belum tentu berbahaya. Dari mana asalnya?",
+    "Baca domain portalnya dari kanan. Apakah file ini memang diminta?"
+  ],
+  "intel": {
+    "sandbox": [
+      {
+        "text": "Memasang aplikasi rapat. Tidak menghubungi server asing dan tidak membaca file pribadi.",
+        "evidenceId": "sb-clean"
+      }
+    ]
+  }
+}

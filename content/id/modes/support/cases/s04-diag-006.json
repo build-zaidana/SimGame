@@ -1,0 +1,66 @@
+{
+  "id": "s04-diag-006",
+  "type": "diagnostic",
+  "conceptIds": ["os-maintenance", "troubleshooting"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 2,
+  "data": {
+    "device": {
+      "name": "Laptop kantor NB-0458",
+      "owner": "Lestari Utami (HR)"
+    },
+    "readings": [
+      {
+        "label": "Tanggal di laptop",
+        "value": "1 Januari 2020, pukul 08.03",
+        "evidenceId": "r-date"
+      },
+      {
+        "label": "Waktu server kantor",
+        "value": "Hari ini, pukul 09.15",
+        "evidenceId": "r-server"
+      },
+      {
+        "label": "Atur waktu otomatis",
+        "value": "Mati (diubah manual kemarin)",
+        "evidenceId": "r-auto"
+      },
+      {
+        "label": "Update keamanan",
+        "value": "Semua terpasang",
+        "evidenceId": "r-update"
+      },
+      {
+        "label": "Penyimpanan disk",
+        "value": "48% terpakai",
+        "evidenceId": "r-disk"
+      }
+    ],
+    "console": [
+      {
+        "text": "> buka portal.nusadigital.test  →  Galat: sertifikat keamanan situs belum berlaku (jam komputer tidak cocok)",
+        "evidenceId": "con-cert"
+      },
+      {
+        "text": "> ping portal.nusadigital.test  →  Balasan dari 10.20.0.15: waktu=4ms",
+        "evidenceId": "con-ping"
+      }
+    ],
+    "note": {
+      "text": "Lestari: kemarin saya mengganti tanggal laptop untuk mengetes pengingat rapat, lalu lupa mengembalikannya. Sekarang semua situs kantor menolak dibuka.",
+      "evidenceId": "note"
+    }
+  },
+  "evidence": {
+    "required": ["r-date", "con-cert"],
+    "supporting": ["r-auto", "con-ping", "note"]
+  },
+  "explanation": "Sertifikat keamanan situs (tanda pengenal digital yang punya masa berlaku) dicocokkan dengan jam laptop, jadi tanggal yang mundur ke 2020 membuat situs ditolak padahal jaringannya lancar. Perbaiki dengan menyalakan lagi pengaturan waktu otomatis.",
+  "ruleRefs": ["r-ts-4", "r-ts-2"],
+  "hints": [
+    "Portalnya membalas ping. Jadi kenapa situsnya tetap ditolak?",
+    "Bandingkan tanggal di laptop dengan waktu server kantor."
+  ]
+}

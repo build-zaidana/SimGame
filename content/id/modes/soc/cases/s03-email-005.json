@@ -1,0 +1,55 @@
+{
+  "id": "s03-email-005",
+  "type": "email",
+  "conceptIds": ["phishing-signs", "passwords-mfa"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "from": {
+      "name": "Tim Keamanan IT",
+      "address": "keamanan@nusadigital-mfa.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Wajib: daftar ulang MFA hari ini",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "09:20",
+    "body": [
+      {
+        "text": "Yth. Karyawan,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "Sistem MFA kantor diperbarui. Pindai kode QR di bawah dengan kamera HP, lalu masukkan password dan kode OTP-mu.",
+        "evidenceId": "request"
+      },
+      {
+        "link": {
+          "label": "[Gambar kode QR]",
+          "href": "https://nusadigital-mfa.test/daftar-ulang"
+        },
+        "evidenceId": "qr-link"
+      },
+      {
+        "text": "Akun yang belum daftar ulang akan dikunci pukul 17.00.",
+        "evidenceId": "urgency"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["sender", "qr-link"],
+    "supporting": ["request", "urgency", "greeting"]
+  },
+  "explanation": "Kode QR (gambar kotak-kotak yang dipindai kamera HP) hanyalah tautan berbentuk gambar, dan tujuannya nusadigital-mfa.test, bukan domain kantor. Tim IT asli tidak pernah meminta password dan OTP lewat email.",
+  "ruleRefs": ["r-phish-1", "r-phish-2", "r-pass-1"],
+  "hints": [
+    "Gambar pun bisa menyembunyikan tautan. Ke mana arahnya?",
+    "Bandingkan domain pengirim dan tujuan kode QR dengan nusadigital.test."
+  ]
+}

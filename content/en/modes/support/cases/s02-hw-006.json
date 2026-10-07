@@ -1,0 +1,68 @@
+{
+  "id": "s02-hw-006",
+  "type": "hardware",
+  "conceptIds": ["hardware-basics", "troubleshooting"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "replace",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "device": {
+      "name": "Wired mouse MS-0412 (from PC-0207)",
+      "owner": "Sari Puspita (HR)"
+    },
+    "checks": [
+      {
+        "part": "Left button",
+        "observation": "A single press is often read as two clicks (double-click)",
+        "evidenceId": "chk-left"
+      },
+      {
+        "part": "Click test",
+        "observation": "Out of 20 single clicks, 7 were read as double-clicks",
+        "evidenceId": "chk-test"
+      },
+      {
+        "part": "Spare mouse",
+        "observation": "On the same PC, another mouse passes the test: 20 of 20 clicks normal",
+        "evidenceId": "chk-spare"
+      },
+      {
+        "part": "Double-click speed setting",
+        "observation": "Still the factory default, never changed",
+        "evidenceId": "chk-setting"
+      },
+      {
+        "part": "Cable and USB plug",
+        "observation": "Intact and firmly connected",
+        "evidenceId": "chk-cable"
+      }
+    ],
+    "note": {
+      "text": "Sari: I have used this mouse every day for four years. Files often open by themselves when I only want to select them.",
+      "evidenceId": "note-user"
+    }
+  },
+  "evidence": {
+    "required": ["chk-test", "chk-spare"],
+    "supporting": ["chk-left", "chk-setting", "chk-cable", "scan-mouse"]
+  },
+  "explanation": "The left button sends double-clicks even though the settings are default and another mouse works on the same PC, so the switch inside the button is worn out. Physical damage like this cannot be reset, so replace the mouse.",
+  "ruleRefs": ["r-hw-1", "r-ts-3"],
+  "hints": [
+    "Does the problem follow the settings, the PC, or the mouse itself?",
+    "Another mouse is fine on the same PC and the settings are default. Look at the click test result."
+  ],
+  "intel": {
+    "scan": [
+      {
+        "text": "Mouse: left button switch worn out, failed click test",
+        "evidenceId": "scan-mouse"
+      },
+      {
+        "text": "USB port: normal"
+      }
+    ]
+  }
+}

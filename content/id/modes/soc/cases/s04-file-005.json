@@ -1,0 +1,57 @@
+{
+  "id": "s04-file-005",
+  "type": "file",
+  "conceptIds": ["malware-files", "phishing-signs"],
+  "difficulty": 3,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6,
+    "quarantine": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "fileName": {
+      "text": "Tagihan_Okt_SinarJaya.zip",
+      "evidenceId": "file-name"
+    },
+    "fileType": {
+      "text": "Arsip ZIP terkunci password, isinya 1 file: Tagihan_Okt.pdf.exe",
+      "evidenceId": "file-type"
+    },
+    "size": {
+      "text": "1,4 MB",
+      "evidenceId": "file-size"
+    },
+    "source": {
+      "text": "Lampiran email dari tagihan@sinarjaya-invoice.test untuk bagian Keuangan. Belum dibuka.",
+      "evidenceId": "source"
+    },
+    "message": {
+      "text": "Tagihan bulan ini terlampir. Demi keamanan, file dikunci. Password: 2026.",
+      "evidenceId": "message"
+    }
+  },
+  "evidence": {
+    "required": ["file-type", "source"],
+    "supporting": ["message", "sb-locked", "sb-keys"]
+  },
+  "explanation": "Di dalam ZIP ada Tagihan_Okt.pdf.exe, yang akhiran paling kanannya .exe alias program, dan pengirimnya bukan domain Sinar Jaya yang biasa (sinarjaya.test). Filenya belum dibuka, jadi cukup diblokir.",
+  "ruleRefs": ["r-mal-1", "r-mal-2", "r-phish-1", "r-mal-4"],
+  "hints": [
+    "ZIP itu seperti kardus. Lihat apa isinya.",
+    "Baca nama file di dalamnya sampai ujung kanan, lalu cek domain pengirimnya."
+  ],
+  "intel": {
+    "sandbox": [
+      {
+        "text": "ZIP dikunci password, jadi pemindai email tidak bisa memeriksa isinya",
+        "evidenceId": "sb-locked"
+      },
+      {
+        "text": "Program di dalamnya mencoba merekam ketikan keyboard",
+        "evidenceId": "sb-keys"
+      }
+    ]
+  }
+}

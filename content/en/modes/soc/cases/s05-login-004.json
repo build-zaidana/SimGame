@@ -1,0 +1,63 @@
+{
+  "id": "s05-login-004",
+  "type": "login-alert",
+  "conceptIds": ["log-reading", "incident-response"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "reset-password",
+  "acceptableDecisions": {
+    "block": 0.6,
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "account": {
+      "user": "Hendra Gunawan",
+      "role": "Former Warehouse staff"
+    },
+    "headline": {
+      "text": "Old account active again at 02:13",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "02:11",
+        "location": "Unknown",
+        "ip": "198.51.100.23",
+        "device": "Windows (new device)",
+        "method": "Wrong password",
+        "result": "failed",
+        "evidenceId": "ev-1"
+      },
+      {
+        "time": "02:13",
+        "location": "Unknown",
+        "ip": "198.51.100.23",
+        "device": "Windows (new device)",
+        "method": "Password only (MFA not enabled)",
+        "result": "success",
+        "evidenceId": "ev-2"
+      }
+    ],
+    "context": [
+      {
+        "text": "HR: Hendra resigned on 30 September. His laptop and access card have been returned.",
+        "evidenceId": "ctx-resign"
+      },
+      {
+        "text": "It turns out Hendra's account was never deactivated.",
+        "evidenceId": "ctx-active"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["ev-2", "ctx-resign"],
+    "supporting": ["ev-1", "ctx-active"]
+  },
+  "explanation": "The account of an employee who already resigned suddenly logged in at 02:13 from a new device, even though his laptop was returned. Contain it first by resetting the password to cut off that access, then ask IT to deactivate the account.",
+  "ruleRefs": ["r-log-3", "r-ir-2"],
+  "hints": [
+    "Who owns this account, and does he still work here?",
+    "Look at the time and device of the successful login, then compare them with the HR note."
+  ]
+}

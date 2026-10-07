@@ -1,0 +1,57 @@
+{
+  "id": "s04-file-005",
+  "type": "file",
+  "conceptIds": ["malware-files", "phishing-signs"],
+  "difficulty": 3,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6,
+    "quarantine": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "fileName": {
+      "text": "Tagihan_Okt_SinarJaya.zip",
+      "evidenceId": "file-name"
+    },
+    "fileType": {
+      "text": "Password-locked ZIP archive containing 1 file: Tagihan_Okt.pdf.exe",
+      "evidenceId": "file-type"
+    },
+    "size": {
+      "text": "1,4 MB",
+      "evidenceId": "file-size"
+    },
+    "source": {
+      "text": "Email attachment from tagihan@sinarjaya-invoice.test to the Finance team. Not opened yet.",
+      "evidenceId": "source"
+    },
+    "message": {
+      "text": "This month's invoice is attached. For security, the file is locked. Password: 2026.",
+      "evidenceId": "message"
+    }
+  },
+  "evidence": {
+    "required": ["file-type", "source"],
+    "supporting": ["message", "sb-locked", "sb-keys"]
+  },
+  "explanation": "Inside the ZIP is Tagihan_Okt.pdf.exe, whose rightmost ending is .exe, meaning a program, and the sender is not Sinar Jaya's usual domain (sinarjaya.test). The file has not been opened, so blocking it is enough.",
+  "ruleRefs": ["r-mal-1", "r-mal-2", "r-phish-1", "r-mal-4"],
+  "hints": [
+    "A ZIP is like a box. Look at what is inside.",
+    "Read the name of the file inside all the way to the right, then check the sender's domain."
+  ],
+  "intel": {
+    "sandbox": [
+      {
+        "text": "The ZIP is password-locked, so the email scanner cannot check what is inside",
+        "evidenceId": "sb-locked"
+      },
+      {
+        "text": "The program inside tries to record keyboard typing",
+        "evidenceId": "sb-keys"
+      }
+    ]
+  }
+}

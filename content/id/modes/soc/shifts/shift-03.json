@@ -22,6 +22,10 @@
       "arriveAt": 14
     },
     {
+      "caseId": "s03-email-005",
+      "arriveAt": 18
+    },
+    {
       "caseId": "s03-login-002",
       "arriveAt": 22
     },
@@ -32,6 +36,10 @@
     {
       "caseId": "s03-login-003",
       "arriveAt": 40
+    },
+    {
+      "caseId": "s03-login-005",
+      "arriveAt": 45
     },
     {
       "caseId": "s03-email-003",

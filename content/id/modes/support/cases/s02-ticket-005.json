@@ -1,0 +1,57 @@
+{
+  "id": "s02-ticket-005",
+  "type": "ticket",
+  "conceptIds": ["hardware-basics", "troubleshooting"],
+  "difficulty": 1,
+  "verdict": "fault",
+  "correctDecision": "fix",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Rudi Hartono",
+      "department": "Gudang"
+    },
+    "device": {
+      "text": "PC kantor PC-0221 dan speaker meja",
+      "evidenceId": "device"
+    },
+    "subject": {
+      "text": "Speaker kresek-kresek dan suaranya cuma dari kiri",
+      "evidenceId": "subject"
+    },
+    "description": [
+      {
+        "text": "Sejak meja saya digeser kemarin, speaker berbunyi kresek-kresek dan suaranya hanya keluar dari sisi kiri.",
+        "evidenceId": "desc-symptom"
+      },
+      {
+        "text": "Kalau kabel speaker di belakang PC saya sentuh, suaranya kadang normal sebentar.",
+        "evidenceId": "desc-touch"
+      },
+      {
+        "text": "Colokan audio (jack) di belakang PC tidak masuk sampai habis: ujung logamnya masih kelihatan.",
+        "evidenceId": "desc-jack"
+      },
+      {
+        "text": "Kalau pakai headset di colokan depan, suaranya jernih dari kiri dan kanan.",
+        "evidenceId": "desc-headset"
+      }
+    ],
+    "history": [
+      {
+        "text": "Bulan lalu: speaker ini dites di Bengkel IT dan dinyatakan normal.",
+        "evidenceId": "hist-test"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["desc-jack"],
+    "supporting": ["desc-touch", "desc-headset"]
+  },
+  "explanation": "Colokan audio yang tidak masuk penuh setelah meja digeser membuat sambungannya putus-sambung, padahal suara lewat headset jernih. Perbaiki dengan mencolok ulang jack audio sampai masuk penuh, lalu uji lagi.",
+  "ruleRefs": ["r-hw-2", "r-ts-1"],
+  "hints": [
+    "Apa yang berubah tepat sebelum suaranya rusak?",
+    "Lewat headset suaranya jernih. Jadi periksa sambungan kabel speaker di belakang PC."
+  ]
+}

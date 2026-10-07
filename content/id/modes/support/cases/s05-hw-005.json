@@ -1,0 +1,57 @@
+{
+  "id": "s05-hw-005",
+  "type": "hardware",
+  "conceptIds": ["escalation-safety"],
+  "difficulty": 2,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "acceptableDecisions": {},
+  "severity": 3,
+  "data": {
+    "device": {
+      "name": "Flashdisk tanpa label inventaris (ditemukan di parkiran)",
+      "owner": "Tidak diketahui"
+    },
+    "checks": [
+      {
+        "part": "Stiker di badan flashdisk",
+        "observation": "Tulisan tangan: \"GAJI DIREKSI 2026 – RAHASIA\"",
+        "evidenceId": "chk-sticker"
+      },
+      {
+        "part": "Stiker inventaris kantor",
+        "observation": "Tidak ada, padahal flashdisk resmi PT Nusa Digital selalu berstiker inventaris",
+        "evidenceId": "chk-inventory"
+      },
+      {
+        "part": "Asal",
+        "observation": "Ditemukan satpam di parkiran pagi ini, belum ada yang mengaku memilikinya",
+        "evidenceId": "chk-found"
+      },
+      {
+        "part": "Kondisi fisik",
+        "observation": "Utuh, tidak ada kerusakan",
+        "evidenceId": "chk-body"
+      },
+      {
+        "part": "Isi",
+        "observation": "Belum diperiksa: belum pernah dicolokkan ke komputer mana pun",
+        "evidenceId": "chk-unplugged"
+      }
+    ],
+    "note": {
+      "text": "Satpam: Colok saja ke PC Bengkel, Mas, biar ketahuan punya siapa. Nanti saya kembalikan ke pemiliknya.",
+      "evidenceId": "note-guard"
+    }
+  },
+  "evidence": {
+    "required": ["chk-sticker", "chk-inventory"],
+    "supporting": ["chk-found", "chk-unplugged", "note-guard"]
+  },
+  "explanation": "Flashdisk tak dikenal dengan label yang memancing rasa penasaran, tergeletak di parkiran, adalah umpan klasik untuk menjalankan program jahat begitu dicolokkan. Jangan colokkan ke komputer mana pun; serahkan ke tim SOC untuk diperiksa dengan aman.",
+  "ruleRefs": ["r-esc-2", "r-esc-1"],
+  "hints": [
+    "Flashdisk ini tidak rusak. Dari mana asalnya, dan kenapa labelnya begitu menarik?",
+    "Benda asing yang sengaja dibuat memancing penasaran adalah tanda serangan. Siapa yang ahli memeriksanya?"
+  ]
+}

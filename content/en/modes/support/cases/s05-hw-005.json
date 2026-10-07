@@ -1,0 +1,57 @@
+{
+  "id": "s05-hw-005",
+  "type": "hardware",
+  "conceptIds": ["escalation-safety"],
+  "difficulty": 2,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "acceptableDecisions": {},
+  "severity": 3,
+  "data": {
+    "device": {
+      "name": "USB flash drive with no asset tag (found in the parking lot)",
+      "owner": "Unknown"
+    },
+    "checks": [
+      {
+        "part": "Sticker on the drive",
+        "observation": "Handwritten: \"DIRECTORS' SALARIES 2026 – CONFIDENTIAL\"",
+        "evidenceId": "chk-sticker"
+      },
+      {
+        "part": "Office asset tag",
+        "observation": "None, while official PT Nusa Digital drives always carry an asset tag",
+        "evidenceId": "chk-inventory"
+      },
+      {
+        "part": "Origin",
+        "observation": "Found by security in the parking lot this morning, no one has claimed it",
+        "evidenceId": "chk-found"
+      },
+      {
+        "part": "Physical condition",
+        "observation": "Intact, no damage",
+        "evidenceId": "chk-body"
+      },
+      {
+        "part": "Contents",
+        "observation": "Not checked yet: it has never been plugged into any computer",
+        "evidenceId": "chk-unplugged"
+      }
+    ],
+    "note": {
+      "text": "Security guard: Just plug it into the Workshop PC so we know whose it is. I will return it to the owner.",
+      "evidenceId": "note-guard"
+    }
+  },
+  "evidence": {
+    "required": ["chk-sticker", "chk-inventory"],
+    "supporting": ["chk-found", "chk-unplugged", "note-guard"]
+  },
+  "explanation": "An unknown flash drive with a label that sparks curiosity, left in a parking lot, is classic bait for running malicious software as soon as it is plugged in. Do not plug it into any computer; hand it to the SOC team to be checked safely.",
+  "ruleRefs": ["r-esc-2", "r-esc-1"],
+  "hints": [
+    "This drive is not broken. Where did it come from, and why is its label so tempting?",
+    "An unknown item made to spark curiosity is a sign of an attack. Who is the expert at checking it?"
+  ]
+}

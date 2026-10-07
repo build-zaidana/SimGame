@@ -26,6 +26,10 @@
       "arriveAt": 22
     },
     {
+      "caseId": "s05-ticket-005",
+      "arriveAt": 26
+    },
+    {
       "caseId": "s05-hw-002",
       "arriveAt": 30
     },
@@ -40,6 +44,10 @@
     {
       "caseId": "s05-hw-003",
       "arriveAt": 52
+    },
+    {
+      "caseId": "s05-hw-005",
+      "arriveAt": 56
     },
     {
       "caseId": "s05-diag-003",

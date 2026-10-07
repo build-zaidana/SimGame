@@ -1,0 +1,74 @@
+{
+  "id": "s03-diag-006",
+  "type": "diagnostic",
+  "conceptIds": ["network-basics", "user-guidance"],
+  "difficulty": 2,
+  "verdict": "no-fault",
+  "correctDecision": "guide",
+  "severity": 1,
+  "data": {
+    "device": {
+      "name": "Laptop kantor NB-0742",
+      "owner": "Dimas Prakoso (Legal)"
+    },
+    "readings": [
+      {
+        "label": "Wi-Fi tersambung",
+        "value": "NusaKantor-5G (pita/band 5 GHz)",
+        "evidenceId": "r-ssid"
+      },
+      {
+        "label": "Kekuatan sinyal",
+        "value": "Sangat lemah: 1 dari 5 bar",
+        "evidenceId": "r-signal"
+      },
+      {
+        "label": "Lokasi laptop",
+        "value": "Ruang arsip di ujung lantai 3, terhalang dua tembok dari router",
+        "evidenceId": "r-loc"
+      },
+      {
+        "label": "Wi-Fi lain yang terlihat",
+        "value": "NusaKantor (pita/band 2,4 GHz): 4 dari 5 bar",
+        "evidenceId": "r-24"
+      },
+      {
+        "label": "Kartu Wi-Fi",
+        "value": "Terdeteksi, driver normal",
+        "evidenceId": "r-card"
+      }
+    ],
+    "console": [
+      {
+        "text": "> ping 10.20.3.1 (di ruang arsip)  →  6 dari 10 paket hilang, waktu 120–300ms",
+        "evidenceId": "con-ping-far"
+      },
+      {
+        "text": "> ping 10.20.3.1 (di meja dekat router)  →  10 dari 10 dibalas, waktu 3ms",
+        "evidenceId": "con-ping-near"
+      }
+    ],
+    "note": {
+      "text": "Dimas: di meja saya lancar, tapi di ruang arsip Wi-Fi putus-putus terus. Kartu Wi-Fi-nya rusak ya?",
+      "evidenceId": "note-user"
+    }
+  },
+  "intel": {
+    "ping": [
+      {
+        "text": "Router lantai 3 (10.20.3.1): balas 2ms ke laptop lain di dekatnya",
+        "evidenceId": "ping-router"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["r-signal", "r-24"],
+    "supporting": ["con-ping-near", "r-loc", "r-card", "ping-router"]
+  },
+  "explanation": "Wi-Fi pita 5 GHz lebih cepat tapi jangkauannya pendek dan mudah terhalang tembok, sedangkan di dekat router laptop Dimas lancar. Perangkatnya sehat, jadi arahkan Dimas memakai NusaKantor (2,4 GHz) yang sinyalnya kuat di ruang arsip.",
+  "ruleRefs": ["r-guide-1", "r-net-1"],
+  "hints": [
+    "Di dekat router lancar, di ruang arsip putus. Apa bedanya kedua tempat itu?",
+    "Bandingkan kekuatan sinyal dua Wi-Fi yang terlihat di ruang arsip."
+  ]
+}
