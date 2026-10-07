@@ -325,6 +325,17 @@ svg.sprite {
   animation: screen-in 180ms ease-out;
 }
 
+/* Banner naik pangkat: muncul dari bawah tanpa memperlebar halaman (tidak di-scale). */
+@keyframes rank-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+.rank-in {
+  animation: rank-in 450ms ease-out both;
+}
+
 /* Robot kurir: meluncur antar-tile. */
 .robot-step {
   transition: transform 180ms linear;

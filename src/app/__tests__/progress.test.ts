@@ -10,6 +10,8 @@ import {
   buildShift,
   commitShift,
   nextShift,
+  perksFor,
+  rankOf,
   planFromShift,
   practiceShifts,
   reviewItemsFor,
@@ -277,5 +279,45 @@ describe('reviewItemsFor', () => {
     });
     const mastery = { p1: { box: 1 as const, dueAtShiftIndex: 2, seen: 1, correct: 0 } };
     expect(reviewItemsFor(reviewContent, s2, mastery).map((i) => i.id)).toContain('p1');
+  });
+});
+
+describe('rankOf / perksFor (ADR 027)', () => {
+  const withUpgrades = {
+    ...content,
+    upgrades: [
+      { id: 'plant', price: 30, requiresRank: 0, effect: { kind: 'cosmetic' } },
+      { id: 'coffee', price: 120, requiresRank: 1, effect: { kind: 'free-hints', value: 2 } },
+      { id: 'monitor', price: 160, requiresRank: 2, effect: { kind: 'shift-time', percent: 15 } },
+    ],
+  } as unknown as ModeContent;
+  const done = (stars: 0 | 1 | 2 | 3) => ({ bestScore: 80, stars, completedAt: '2026-10-01' });
+
+  it('ranks by completed shifts of the mode', () => {
+    const p = newModeProgress();
+    expect(rankOf(p, withUpgrades)).toBe(0);
+    expect(rankOf({ ...p, shifts: { 'soc-01': done(2) } }, withUpgrades)).toBe(3);
+    expect(rankOf({ ...p, shifts: { 'soc-01': done(0), 'soc-02': done(1) } }, withUpgrades)).toBe(
+      4,
+    );
+  });
+
+  it('ignores shift records without a completion time', () => {
+    const p = { ...newModeProgress(), shifts: { 'soc-01': { bestScore: 0, stars: 0 as const } } };
+    expect(rankOf(p, withUpgrades)).toBe(0);
+  });
+
+  it('turns owned upgrades and rank into session perks', () => {
+    const p = {
+      ...newModeProgress(),
+      shifts: { 'soc-01': done(2) },
+      upgradesOwned: ['plant', 'coffee', 'monitor', 'gone'],
+    };
+    expect(perksFor(p, withUpgrades)).toEqual({ freeHints: 2, payBonus: 30, shiftTimePercent: 15 });
+    expect(perksFor(newModeProgress(), withUpgrades)).toEqual({
+      freeHints: 1,
+      payBonus: 0,
+      shiftTimePercent: 0,
+    });
   });
 });

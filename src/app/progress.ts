@@ -1,12 +1,13 @@
 import type { CaseSchemas, ModeContent } from '../content/loader.ts';
 import type { ReviewItem, ShiftDef } from '../content/schemas.ts';
 import { newBadges, type BadgeRule } from '../engine/badges.ts';
-import { carryTrust } from '../engine/economy.ts';
+import { carryTrust, upgradePerks } from '../engine/economy.ts';
+import { careerRank, rankPayBonus, type RankInput } from '../engine/rank.ts';
 import { recordResult, recordShiftConcepts, type MasteryMap } from '../engine/mastery.ts';
 import { createRng } from '../engine/rng.ts';
 import { selectReviewItems } from '../engine/review.ts';
 import { summarizeShift } from '../engine/shift.ts';
-import type { ShiftPlan, ShiftSession } from '../engine/types.ts';
+import type { SessionPerks, ShiftPlan, ShiftSession } from '../engine/types.ts';
 import type { CaseGenerator } from '../modes/contract.ts';
 import { newModeProgress, type ModeProgress, type SaveData } from '../persistence/saveSchema.ts';
 
@@ -192,5 +193,27 @@ export function commitShift(
       (m, r) => recordResult(m, r.itemId, r.correct, session.shiftOrder),
       recordShiftConcepts(save.mastery, results, session.shiftOrder),
     ),
+  };
+}
+
+/** Masukan pangkat dari progres sebuah mode (hanya shift yang benar-benar selesai). */
+export function rankInput(progress: ModeProgress, content: ModeContent): RankInput {
+  const done = content.shifts
+    .map((s) => progress.shifts[s.id])
+    .filter((r) => r?.completedAt !== undefined);
+  return { completedShifts: done.length, totalShifts: content.shifts.length };
+}
+
+/** Pangkat karier (0 = Magang … 4 = Lead) di mode ini (ADR 027). */
+export function rankOf(progress: ModeProgress, content: ModeContent): number {
+  return careerRank(rankInput(progress, content));
+}
+
+/** Keuntungan yang dicatat ke sesi saat shift dimulai: upgrade meja + tunjangan pangkat. */
+export function perksFor(progress: ModeProgress, content: ModeContent): SessionPerks {
+  const owned = content.upgrades.filter((u) => progress.upgradesOwned.includes(u.id));
+  return {
+    ...upgradePerks(owned.map((u) => u.effect)),
+    payBonus: rankPayBonus(rankOf(progress, content)),
   };
 }

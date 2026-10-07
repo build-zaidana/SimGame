@@ -3,7 +3,7 @@ import type { ShiftSession } from '../engine/types.ts';
 import { BASELINE_TRUST } from '../engine/economy.ts';
 
 /** Naikkan + tambah migrasi di migrations.ts + test setiap kali bentuk save berubah. */
-export const SAVE_SCHEMA_VERSION = 10;
+export const SAVE_SCHEMA_VERSION = 11;
 
 const level = z.literal([1, 2, 3]);
 const score01 = z.number().min(0).max(1);
@@ -68,6 +68,14 @@ export const shiftSessionSchema: z.ZodType<ShiftSession> = z.object({
   trust: z.number().min(0).max(100),
   /** v2: kasus prosedural; divalidasi skema tipe kasus saat dipakai. */
   generatedCases: z.record(z.string(), z.unknown()),
+  /** v11: keuntungan meja & pangkat saat shift dimulai (ADR 027). */
+  perks: z
+    .object({
+      freeHints: z.number().int().min(1),
+      payBonus: z.number().int().nonnegative(),
+      shiftTimePercent: z.number().nonnegative(),
+    })
+    .optional(),
 });
 
 export const settingsSchema = z.object({
@@ -96,6 +104,8 @@ export const modeProgressSchema = z.object({
   wallet: z.number().int().nonnegative(),
   trust: z.number().min(0).max(100),
   toolsOwned: z.array(z.string()),
+  /** v11: upgrade meja yang sudah dibeli (ADR 027). */
+  upgradesOwned: z.array(z.string()),
   chaptersUnlocked: z.array(z.string()),
   /** Untuk melanjutkan di tengah shift. */
   activeSession: shiftSessionSchema.optional(),
@@ -172,6 +182,7 @@ export function newModeProgress(): ModeProgress {
     wallet: 0,
     trust: INITIAL_TRUST,
     toolsOwned: [],
+    upgradesOwned: [],
     chaptersUnlocked: [],
     badges: {},
   };

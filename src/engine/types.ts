@@ -115,4 +115,15 @@ export interface ShiftSession {
    * disimpan di sini supaya shift yang dilanjutkan memakai kasus yang sama persis.
    */
   generatedCases: Record<string, unknown>;
+  /** Keuntungan meja & pangkat saat shift dimulai (ADR 027). Tidak ada = nilai bawaan. */
+  perks?: SessionPerks | undefined;
+}
+
+export interface SessionPerks {
+  /** Banyak petunjuk per kasus yang tidak mengurangi skor (bawaan 1). */
+  freeHints: number;
+  /** Tunjangan pangkat yang ditambahkan ke gaji shift. */
+  payBonus: number;
+  /** Tambahan durasi shift dalam persen (sudah dihitung ke durationMs). */
+  shiftTimePercent: number;
 }

@@ -48,6 +48,7 @@ export function StandardDesk({
   wallet,
   mastery,
   toolsOwned,
+  upgrades = [],
   practice,
   newsTier,
   dispatch,
@@ -262,6 +263,7 @@ export function StandardDesk({
                     mentorName={id.speakers[mode.mentor] ?? mode.mentor}
                     hints={activeCase.hints}
                     used={active.hintsUsed}
+                    freeHints={session.perks?.freeHints ?? 1}
                     disabled={session.phase !== 'inspecting'}
                     onAsk={() => dispatch({ type: 'USE_HINT' })}
                   />
@@ -269,6 +271,20 @@ export function StandardDesk({
               </>
             ) : (
               <p className="p-4 text-ink-muted">{id.desk.noCaseOpen}</p>
+            )}
+            {upgrades.length > 0 && (
+              <ul
+                aria-label={id.rank.deskLabel}
+                className="mt-4 flex flex-wrap justify-end gap-2 text-2xl"
+                data-testid="desk-items"
+              >
+                {upgrades.map((u) => (
+                  <li key={u.id} title={u.name} className="hop">
+                    <span aria-hidden="true">{u.icon}</span>
+                    <span className="sr-only">{u.name}</span>
+                  </li>
+                ))}
+              </ul>
             )}
           </div>
         </section>

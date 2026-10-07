@@ -3,6 +3,7 @@
  * `scripts/content-check.ts` di Node, jadi import memakai ekstensi `.ts` (ADR 010).
  */
 import { z } from 'zod';
+import { RANK_COUNT } from '../engine/rank.ts';
 
 export const idSchema = z.string().regex(/^[a-z0-9][a-z0-9-]*$/, 'ID harus kebab-case');
 const text = z.string().trim().min(1);
@@ -12,6 +13,8 @@ export const modeMetaSchema = z.strictObject({
   id: idSchema,
   title: text,
   description: text,
+  /** Judul pangkat karier, dari Magang sampai Lead (ADR 027, engine/rank.ts). */
+  ranks: z.array(text).length(RANK_COUNT),
 });
 
 export const conceptFrontmatterSchema = z.strictObject({
@@ -137,6 +140,27 @@ export const toolSchema = z.strictObject({
 });
 export const toolsFileSchema = z.strictObject({ tools: z.array(toolSchema).min(1) });
 
+/** Upgrade meja (ADR 027): hiasan atau keuntungan kecil, dibeli dengan gaji mode itu. */
+export const upgradeSchema = z.strictObject({
+  id: idSchema,
+  name: text,
+  icon: text,
+  description: text,
+  price: z.number().int().positive(),
+  /** Pangkat minimum untuk membeli (0 = Magang). */
+  requiresRank: z
+    .number()
+    .int()
+    .min(0)
+    .max(RANK_COUNT - 1),
+  effect: z.discriminatedUnion('kind', [
+    z.strictObject({ kind: z.literal('cosmetic') }),
+    z.strictObject({ kind: z.literal('free-hints'), value: z.number().int().min(2).max(3) }),
+    z.strictObject({ kind: z.literal('shift-time'), percent: z.number().int().min(5).max(25) }),
+  ]),
+});
+export const upgradesFileSchema = z.strictObject({ upgrades: z.array(upgradeSchema).min(1) });
+
 /** Lencana (PRD C3, ADR 021). Aturannya dinilai oleh engine/badges.ts. */
 const minCases = z.number().int().positive();
 const minStars = z.literal([1, 2, 3]).optional();
@@ -235,5 +259,6 @@ export type ReviewItem = z.infer<typeof reviewItemSchema>;
 export type Dialogue = z.infer<typeof dialogueSchema>;
 export type BaseCase = z.infer<typeof baseCaseSchema>;
 export type Tool = z.infer<typeof toolSchema>;
+export type Upgrade = z.infer<typeof upgradeSchema>;
 export type Assessment = z.infer<typeof assessmentSchema>;
 export type MarkableText = z.infer<typeof markableTextSchema>;

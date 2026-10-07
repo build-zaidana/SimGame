@@ -65,7 +65,7 @@ export const id = {
     moreShiftsSoon: 'Shift berikutnya segera hadir.',
     rulebook: 'Buku Panduan',
     settings: 'Pengaturan',
-    shop: 'Toko Alat',
+    shop: 'Toko & Upgrade',
     transfer: 'Pindah Save',
     preTest: 'Tes Awal (opsional)',
     postTest: 'Tes Akhir',
@@ -89,7 +89,7 @@ export const id = {
     enter: 'Masuk',
     open: 'Buka',
     talk: 'Ngobrol',
-    shopLabel: 'Toko Alat',
+    shopLabel: 'Toko & Upgrade',
     rulebookLabel: 'Rak Buku Panduan',
     badgesLabel: 'Papan Lencana',
     raniLabel: 'Mbak Rani',
@@ -183,7 +183,7 @@ export const id = {
     activeLabel: (name: string) => `Alat: ${name}`,
     owner: 'Pemilik domain:',
     lockedHint: (name: string) =>
-      `🔒 ${name} bisa memberi info tambahan untuk kasus ini. Beli di Toko Alat.`,
+      `🔒 ${name} bisa memberi info tambahan untuk kasus ini. Beli di Toko & Upgrade.`,
     whoisHeading: 'Cek WHOIS: umur domain',
     whoisRow: (domain: string, registered: string) => `${domain} · didaftarkan ${registered}`,
     sandboxHeading: 'Sandbox: perilaku file saat dijalankan',
@@ -191,7 +191,7 @@ export const id = {
     logFilterRow: (failed: number, success: number) => `${failed} gagal · ${success} berhasil`,
   },
   shop: {
-    heading: 'Toko Alat',
+    heading: 'Toko & Upgrade',
     intro: 'Alat membuka cara baru untuk memeriksa kasus. Dibayar dari gaji shift.',
     wallet: (n: number) => `Gajimu: Rp ${n}`,
     price: (n: number) => `Rp ${n}`,
@@ -201,6 +201,24 @@ export const id = {
     lockedUntil: (order: number) => `Tersedia mulai Shift ${order}`,
     bought: (name: string) => `${name} siap dipakai di meja!`,
     concept: (title: string) => `Terkait: ${title}`,
+    toolsHeading: 'Alat kerja',
+    upgradesHeading: 'Upgrade meja',
+    upgradesIntro:
+      'Hiasan dan kenyamanan untuk mejamu. Beberapa baru terbuka setelah kamu naik pangkat.',
+    cosmetic: 'Hiasan',
+    perk: 'Keuntungan',
+    rankLocked: (rank: string) => `Terbuka di pangkat ${rank}`,
+    installed: (name: string) => `${name} dipasang di mejamu!`,
+  },
+  rank: {
+    current: (title: string) => `Pangkat: ${title}`,
+    nextShifts: (n: number, title: string) => `${n} shift lagi menuju ${title}`,
+    top: 'Pangkat tertinggi. Luar biasa!',
+    allowance: (n: number) => `Tunjangan pangkat: Rp ${n} per shift`,
+    promoted: (title: string) => `Naik pangkat! Kamu sekarang ${title}`,
+    promotedDetail: (n: number) =>
+      `Tunjangan naik jadi Rp ${n} per shift, dan upgrade meja baru bisa dibeli di toko.`,
+    deskLabel: 'Barang di mejamu',
   },
   transfer: {
     heading: 'Pindah Save',
@@ -249,6 +267,7 @@ export const id = {
     askAgain: 'Petunjuk lagi',
     heading: (mentor: string) => `Petunjuk ${mentor}`,
     free: 'Petunjuk pertama gratis.',
+    freeLeft: (n: number) => `Masih ${n} petunjuk gratis (☕ mesin kopi).`,
     costs: 'Petunjuk berikutnya mengurangi skor kasus 10 poin.',
     noMore: 'Itu semua petunjuk untuk kasus ini.',
     level: (n: number, total: number) => `Petunjuk ${n} dari ${total}`,
@@ -354,8 +373,9 @@ export const id = {
     trust: (n: number) => `Kepercayaan klien: ${n}`,
     trustRecovery: (n: number) =>
       `Klien memberi kesempatan lagi: shift berikutnya kepercayaan mulai dari ${n}.`,
-    pay: (n: number, base: number) =>
-      `Gaji shift ini: +Rp ${n} (pokok Rp ${base} + Rp ${n - base} dari skor kasus)`,
+    pay: (n: number, base: number, bonus: number) =>
+      `Gaji shift ini: +Rp ${n} (pokok Rp ${base} + Rp ${n - base - bonus} dari skor kasus` +
+      (bonus > 0 ? ` + tunjangan pangkat Rp ${bonus})` : ')'),
     casesHeading: 'Rincian kasus',
     caseScore: (n: number) => `skor ${n}`,
     missed: 'terlewat',

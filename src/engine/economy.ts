@@ -61,3 +61,42 @@ export function buyTool(
     toolsOwned: [...state.toolsOwned, tool.id],
   };
 }
+
+export type BuyUpgradeResult =
+  | { ok: true; wallet: number; upgradesOwned: string[] }
+  | { ok: false; reason: 'insufficient-funds' | 'already-owned' | 'rank-locked' };
+
+/** Membeli upgrade meja (ADR 027). Sebagian upgrade baru terbuka di pangkat tertentu. */
+export function buyUpgrade(
+  state: { wallet: number; upgradesOwned: readonly string[] },
+  item: { id: string; price: number; requiresRank: number },
+  rank: number,
+): BuyUpgradeResult {
+  if (state.upgradesOwned.includes(item.id)) return { ok: false, reason: 'already-owned' };
+  if (rank < item.requiresRank) return { ok: false, reason: 'rank-locked' };
+  if (state.wallet < item.price) return { ok: false, reason: 'insufficient-funds' };
+  return {
+    ok: true,
+    wallet: state.wallet - item.price,
+    upgradesOwned: [...state.upgradesOwned, item.id],
+  };
+}
+
+export type UpgradeEffect =
+  | { kind: 'cosmetic' }
+  | { kind: 'free-hints'; value: number }
+  | { kind: 'shift-time'; percent: number };
+
+/** Keuntungan kecil dari upgrade yang dimiliki. Tanpa upgrade: 1 petunjuk gratis, waktu normal. */
+export function upgradePerks(effects: readonly UpgradeEffect[]): {
+  freeHints: number;
+  shiftTimePercent: number;
+} {
+  let freeHints = 1;
+  let shiftTimePercent = 0;
+  for (const e of effects) {
+    if (e.kind === 'free-hints') freeHints = Math.max(freeHints, e.value);
+    else if (e.kind === 'shift-time') shiftTimePercent += e.percent;
+  }
+  return { freeHints, shiftTimePercent };
+}

@@ -9,6 +9,9 @@ import { useEffect } from 'react';
 import { playSfx } from '../sfx.ts';
 import { useCountUp } from '../ui/useCountUp.ts';
 import { prefersReducedMotion } from '../ui/motion.ts';
+import { commitShift, rankOf } from '../progress.ts';
+import { rankPayBonus } from '../../engine/rank.ts';
+import { newModeProgress } from '../../persistence/saveSchema.ts';
 
 /** Jeda antar-bintang di laporan (ms). */
 const STAR_STEP = 350;
@@ -45,6 +48,28 @@ function ShiftTally({ stars, pay }: { stars: number; pay: number | null }) {
   );
 }
 
+/** Perayaan naik pangkat (ADR 027), muncul setelah hitungan gaji selesai. */
+function RankUp({ title, rank, delayMs }: { title: string; rank: number; delayMs: number }) {
+  const sound = useAppStore((s) => s.save?.profile.settings.sound ?? false);
+  useEffect(() => {
+    if (sound && !prefersReducedMotion()) playSfx('combo', delayMs / 1000);
+  }, [sound, delayMs]);
+  return (
+    <section
+      role="status"
+      className="rank-in flex flex-col gap-1 border-4 border-accent bg-accent/10 p-3"
+      style={{ animationDelay: `${delayMs}ms` }}
+      data-testid="rank-up"
+    >
+      <p className="font-display text-xl text-accent">
+        <span aria-hidden="true">⬆ </span>
+        {id.rank.promoted(title)}
+      </p>
+      <p className="text-sm">{id.rank.promotedDetail(rankPayBonus(rank))}</p>
+    </section>
+  );
+}
+
 /** Pengingat ekspor muncul di laporan shift ini (ARCHITECTURE §7.3). */
 const EXPORT_REMINDER_SHIFTS = [2, 4];
 const EXPORT_REMINDER_OFF = 'exportReminderOff';
@@ -59,12 +84,23 @@ export function ReportScreen() {
   const setFlag = useAppStore((s) => s.setFlag);
   const reminderOff = useAppStore((s) => s.save?.flags[EXPORT_REMINDER_OFF] === true);
   const practice = useAppStore((s) => s.practice);
+  const save = useAppStore((s) => s.save);
   const mode = session ? getMode(session.modeId) : undefined;
   if (!session || !content || !mode) return null;
 
   const shift = content.shifts.find((s) => s.id === session.shiftId);
   const summary = summarizeShift(session, shift?.pay ?? { base: 0, perCase: 0 });
   const outro = shift ? content.dialogues[shift.outroDialogue] : undefined;
+  // Pangkat sesudah shift ini disimpan (disimpan sungguhan setelah Review Cepat).
+  const rankBefore = save ? rankOf(save.modes[session.modeId] ?? newModeProgress(), content) : 0;
+  const rankAfter =
+    save && !practice
+      ? rankOf(
+          commitShift(save, session, content, session.shiftId).modes[session.modeId] ??
+            newModeProgress(),
+          content,
+        )
+      : rankBefore;
   const chapterOfRule = (ruleId: string) =>
     content.rulebook.chapters.find((ch) => ch.rules.some((r) => r.id === ruleId));
 
@@ -85,8 +121,19 @@ export function ReportScreen() {
         {!practice && carryTrust(summary.trust) > summary.trust && (
           <p data-testid="trust-recovery">{id.report.trustRecovery(carryTrust(summary.trust))}</p>
         )}
-        <p>{practice ? id.report.practicePay : id.report.pay(summary.pay, shift?.pay.base ?? 0)}</p>
+        <p>
+          {practice
+            ? id.report.practicePay
+            : id.report.pay(summary.pay, shift?.pay.base ?? 0, session.perks?.payBonus ?? 0)}
+        </p>
       </section>
+      {rankAfter > rankBefore && (
+        <RankUp
+          title={content.meta.ranks[rankAfter] ?? ''}
+          rank={rankAfter}
+          delayMs={summary.stars * STAR_STEP + 1100}
+        />
+      )}
       {practice && (
         <p role="note" className="border-2 border-focus p-3" data-testid="practice-banner">
           <span aria-hidden="true">🎯 </span>

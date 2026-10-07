@@ -14,7 +14,7 @@ async function finishShift1(page: Page) {
 }
 
 async function buyLinkChecker(page: Page) {
-  await page.getByRole('button', { name: 'Toko Alat' }).click();
+  await page.getByRole('button', { name: 'Toko & Upgrade' }).click();
   await expect(page.getByTestId('wallet')).toHaveText('Gajimu: Rp 76');
   await page.getByRole('button', { name: 'Beli Pemeriksa Tautan (Rp 50)' }).click();
   await expect(page.getByTestId('wallet')).toHaveText('Gajimu: Rp 26');

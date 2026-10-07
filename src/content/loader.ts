@@ -16,6 +16,7 @@ import {
   rulebookSchema,
   shiftSchema,
   toolsFileSchema,
+  upgradesFileSchema,
   badgesFileSchema,
   type Badge,
   type Assessment,
@@ -27,6 +28,7 @@ import {
   type Rulebook,
   type ShiftDef,
   type Tool,
+  type Upgrade,
 } from './schemas.ts';
 
 export type CaseSchemas = Record<string, z.ZodType<BaseCase, unknown>>;
@@ -40,6 +42,7 @@ export interface ModeContent<TCase extends BaseCase = BaseCase> {
   review: ReviewItem[];
   dialogues: Record<string, Dialogue>;
   tools: Tool[];
+  upgrades: Upgrade[];
   badges: Badge[];
   assessment: Assessment | null;
 }
@@ -71,7 +74,7 @@ export function parseModeContent<TCase extends BaseCase = BaseCase>(
 ): ParseResult<TCase> {
   const errors: ContentError[] = [];
   const content: ModeContent<TCase> = {
-    meta: { id: '', title: '', description: '' },
+    meta: { id: '', title: '', description: '', ranks: [] },
     concepts: [],
     rulebook: { chapters: [] },
     shifts: [],
@@ -79,6 +82,7 @@ export function parseModeContent<TCase extends BaseCase = BaseCase>(
     review: [],
     dialogues: {},
     tools: [],
+    upgrades: [],
     badges: [],
     assessment: null,
   };
@@ -99,6 +103,8 @@ export function parseModeContent<TCase extends BaseCase = BaseCase>(
       content.meta = parse(file, modeMetaSchema, raw) ?? content.meta;
     } else if (file === 'tools.json') {
       content.tools = parse(file, toolsFileSchema, raw)?.tools ?? [];
+    } else if (file === 'upgrades.json') {
+      content.upgrades = parse(file, upgradesFileSchema, raw)?.upgrades ?? [];
     } else if (file === 'badges.json') {
       content.badges = parse(file, badgesFileSchema, raw)?.badges ?? [];
     } else if (file === 'assessment.json') {
