@@ -323,7 +323,6 @@ describe('migration v11 → v12 (end-of-shift boss)', () => {
   it('keeps old sessions without a boss and keeps a recorded boss', () => {
     const v11 = { ...JSON.parse(JSON.stringify(saveWithSession())), schemaVersion: 11 };
     const migrated = migrate(v11);
-    expect(SAVE_SCHEMA_VERSION).toBe(12);
     expect(migrated.modes['soc']?.activeSession?.boss).toBeUndefined();
     const later = JSON.parse(JSON.stringify(migrated));
     later.modes.soc.activeSession.boss = {
@@ -335,6 +334,21 @@ describe('migration v11 → v12 (end-of-shift boss)', () => {
     expect(migrate(later).modes['soc']?.activeSession?.boss).toEqual(
       later.modes.soc.activeSession.boss,
     );
+  });
+});
+
+describe('migration v12 → v13 (daily challenge)', () => {
+  it('keeps old saves and keeps daily data', () => {
+    const v12 = { ...JSON.parse(JSON.stringify(saveWithSession())), schemaVersion: 12 };
+    const migrated = migrate(v12);
+    expect(SAVE_SCHEMA_VERSION).toBe(13);
+    expect(migrated.daily).toBeUndefined();
+    const later = JSON.parse(JSON.stringify(migrated));
+    later.daily = { streak: 2, best: 4, lastDate: '2026-10-07', done: { soc: '2026-10-07' } };
+    later.modes.soc.activeSession.daily = { date: '2026-10-07' };
+    const loaded = migrate(later);
+    expect(loaded.daily).toEqual(later.daily);
+    expect(loaded.modes['soc']?.activeSession?.daily).toEqual({ date: '2026-10-07' });
   });
 });
 

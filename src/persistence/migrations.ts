@@ -75,6 +75,8 @@ export const MIGRATIONS: Record<number, Migration> = {
   },
   /** v11 → v12: sesi boleh menyimpan boss akhir shift (ADR 028); data lama tetap valid. */
   11: (d) => d,
+  /** v12 → v13: tantangan harian (opsional) di sesi dan di save; data lama tetap valid. */
+  12: (d) => d,
 };
 
 export function runMigrations(

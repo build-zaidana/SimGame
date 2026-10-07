@@ -4,6 +4,7 @@ import { newBadges, type BadgeRule } from '../engine/badges.ts';
 import { carryTrust, upgradePerks } from '../engine/economy.ts';
 import { careerRank, rankPayBonus, type RankInput } from '../engine/rank.ts';
 import { bossState } from '../engine/boss.ts';
+import { dailyCases, dailyReward, nextDailyStreak } from '../engine/daily.ts';
 import { recordResult, recordShiftConcepts, type MasteryMap } from '../engine/mastery.ts';
 import { createRng } from '../engine/rng.ts';
 import { selectReviewItems } from '../engine/review.ts';
@@ -227,5 +228,70 @@ export function perksFor(progress: ModeProgress, content: ModeContent): SessionP
   return {
     ...upgradePerks(owned.map((u) => u.effect)),
     payBonus: rankPayBonus(rankOf(progress, content)),
+  };
+}
+
+/** Lama tantangan harian (menit game); kecepatan jam ikut shift pertama mode itu. */
+const DAILY_GAME_MINUTES = 90;
+
+/** Kasus untuk tantangan harian: kasus tetap dari shift yang sudah diselesaikan (materinya dikenal). */
+export function dailyPool(content: ModeContent, progress: ModeProgress): string[] {
+  const ids = practiceShifts(content, progress).flatMap((s) =>
+    s.queue.flatMap((q) => ('caseId' in q ? [q.caseId] : [])),
+  );
+  return [...new Set(ids)].filter((id) => id in content.cases);
+}
+
+/** Rencana tantangan harian (ADR 029): semua kasus datang sekaligus. null bila belum ada shift selesai. */
+export function buildDaily(
+  modeId: string,
+  content: ModeContent,
+  progress: ModeProgress,
+  date: string,
+): ShiftPlan | null {
+  const cases = dailyCases(dailyPool(content, progress), date, modeId);
+  const first = content.shifts[0];
+  if (cases.length === 0 || !first) return null;
+  return {
+    shiftId: `daily-${date}`,
+    modeId,
+    order: Math.max(...practiceShifts(content, progress).map((s) => s.order)),
+    durationGameMinutes: DAILY_GAME_MINUTES,
+    realSecondsPerGameMinute: first.realSecondsPerGameMinute,
+    cases: cases.map((caseId) => ({ caseId, arriveAt: 0 })),
+  };
+}
+
+/** Menutup tantangan harian: hadiah ke dompet mode, streak naik, slot latihan dikosongkan. */
+export function commitDaily(
+  save: SaveData,
+  session: ShiftSession,
+  now: string,
+): { save: SaveData; reward: number } {
+  const date = session.daily?.date;
+  const progress = save.modes[session.modeId];
+  if (!date || !progress) return { save, reward: 0 };
+  const prev = save.daily ?? { streak: 0, best: 0, done: {} };
+  // Tantangan kemarin yang baru diselesaikan hari ini tidak memundurkan streak.
+  const stale = prev.lastDate !== undefined && date < prev.lastDate;
+  const streak = stale ? prev.streak : nextDailyStreak(prev, date);
+  const correct = session.cases.filter((c) => c.outcome?.correct).length;
+  // Hadiah hanya sekali per mode per hari.
+  const reward =
+    prev.done[session.modeId] === date ? 0 : dailyReward(correct, session.cases.length, streak);
+  const { practiceSession: _done, ...rest } = progress;
+  return {
+    reward,
+    save: {
+      ...save,
+      updatedAt: now,
+      modes: { ...save.modes, [session.modeId]: { ...rest, wallet: progress.wallet + reward } },
+      daily: {
+        streak,
+        best: Math.max(prev.best, streak),
+        lastDate: stale ? prev.lastDate : date,
+        done: { ...prev.done, [session.modeId]: date },
+      },
+    },
   };
 }

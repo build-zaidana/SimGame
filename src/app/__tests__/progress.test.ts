@@ -10,6 +10,9 @@ import {
   buildShift,
   commitShift,
   nextShift,
+  buildDaily,
+  commitDaily,
+  dailyPool,
   perksFor,
   rankOf,
   planFromShift,
@@ -318,6 +321,111 @@ describe('rankOf / perksFor (ADR 027)', () => {
       freeHints: 1,
       payBonus: 0,
       shiftTimePercent: 0,
+    });
+  });
+});
+
+describe('daily challenge (ADR 029)', () => {
+  const done = { bestScore: 80, stars: 2 as const, completedAt: '2026-10-01' };
+  const twoShifts = { ...newModeProgress(), shifts: { 'soc-01': done, 'soc-02': done } };
+
+  it('draws only from fixed cases of completed shifts', () => {
+    expect(dailyPool(content, newModeProgress())).toEqual([]);
+    expect(dailyPool(content, { ...newModeProgress(), shifts: { 'soc-01': done } })).toEqual([
+      'a',
+      'b',
+    ]);
+  });
+
+  it('builds a short plan of today’s cases that all arrive at once', () => {
+    const plan = buildDaily('soc', content, twoShifts, '2026-10-07');
+    expect(plan?.shiftId).toBe('daily-2026-10-07');
+    expect(plan?.order).toBe(2);
+    expect(plan?.cases.every((c) => c.arriveAt === 0)).toBe(true);
+    expect(plan?.cases.length).toBe(2);
+    expect(buildDaily('soc', content, newModeProgress(), '2026-10-07')).toBeNull();
+  });
+
+  it('pays the reward into the mode wallet, grows the streak, and frees the practice slot', () => {
+    const plan = buildDaily('soc', content, twoShifts, '2026-10-07')!;
+    let s = startShift({ plan, seed: 1, playMode: 'relaxed', trust: 75 });
+    s = { ...s, daily: { date: '2026-10-07' } };
+    for (const c of plan.cases) {
+      s = shiftReducer(s, { type: 'DISMISS_BRIEFING' });
+      s = shiftReducer(s, { type: 'OPEN_CASE', caseId: c.caseId });
+      s = shiftReducer(s, {
+        type: 'DECIDE',
+        outcome: {
+          caseId: c.caseId,
+          decision: 'block',
+          verdict: 'malicious',
+          severity: 1,
+          impact: 'correct',
+          correct: true,
+          decisionScore: 1,
+          evidenceScore: 1,
+          missedEvidence: [],
+          wrongMarks: [],
+        },
+      });
+      s = shiftReducer(s, { type: 'CLOSE_FEEDBACK' });
+    }
+    const save = {
+      ...createNewSave({ installId: 'x', now: '2026-10-07T08:00:00.000Z' }),
+      modes: { soc: { ...twoShifts, wallet: 5, practiceSession: s } },
+      daily: { streak: 2, best: 2, lastDate: '2026-10-06', done: {} },
+    };
+    const { save: next, reward } = commitDaily(save, s, '2026-10-07T09:00:00.000Z');
+    // 2 benar × 10 + bonus streak 3 hari × 5.
+    expect(reward).toBe(35);
+    expect(next.modes['soc']?.wallet).toBe(40);
+    expect(next.modes['soc']?.practiceSession).toBeUndefined();
+    expect(next.daily).toEqual({
+      streak: 3,
+      best: 3,
+      lastDate: '2026-10-07',
+      done: { soc: '2026-10-07' },
+    });
+  });
+
+  it('pays once per desk per day, and an old run finished late does not break the streak', () => {
+    const base = createNewSave({ installId: 'x', now: '2026-10-07T08:00:00.000Z' });
+    const run = (date: string) =>
+      ({
+        ...startShift({
+          plan: buildDaily('soc', content, twoShifts, date)!,
+          seed: 1,
+          playMode: 'relaxed',
+          trust: 75,
+        }),
+        daily: { date },
+      }) as const;
+    const again = commitDaily(
+      {
+        ...base,
+        modes: { soc: twoShifts },
+        daily: { streak: 3, best: 5, lastDate: '2026-10-07', done: { soc: '2026-10-07' } },
+      },
+      run('2026-10-07'),
+      'now',
+    );
+    expect(again.reward).toBe(0);
+    expect(again.save.daily?.streak).toBe(3);
+
+    const late = commitDaily(
+      {
+        ...base,
+        modes: { soc: twoShifts },
+        daily: { streak: 4, best: 4, lastDate: '2026-10-08', done: { dev: '2026-10-08' } },
+      },
+      run('2026-10-07'),
+      'now',
+    );
+    expect(late.save.daily).toEqual({
+      streak: 4,
+      best: 4,
+      lastDate: '2026-10-08',
+      done: { dev: '2026-10-08', soc: '2026-10-07' },
     });
   });
 });

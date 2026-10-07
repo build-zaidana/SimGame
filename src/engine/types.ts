@@ -138,6 +138,8 @@ export interface ShiftSession {
   perks?: SessionPerks | undefined;
   /** v12: gelombang boss shift ini (ADR 028). Tidak ada = shift tanpa boss. */
   boss?: SessionBoss | undefined;
+  /** v13: sesi tantangan harian (ADR 029); engine tidak membacanya. */
+  daily?: { date: string } | undefined;
 }
 
 export interface SessionPerks {
