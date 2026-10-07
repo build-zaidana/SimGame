@@ -3,7 +3,8 @@ import { t as id } from '../../i18n/index.ts';
 import { modes, upcomingModes } from '../../modes/registry.ts';
 import { newModeProgress } from '../../persistence/saveSchema.ts';
 import { nextShift, practiceShifts } from '../progress.ts';
-import { useAppStore } from '../store.ts';
+import { localDate, useAppStore } from '../store.ts';
+import { previousDate } from '../../engine/daily.ts';
 import { PhaserHub, type HotspotInfo, type HubSpeech } from '../../hub/PhaserHub.tsx';
 import { OfficeIllustration } from '../ui/hub/OfficeIllustration.tsx';
 import { Medal } from '../ui/Medal.tsx';
@@ -18,6 +19,13 @@ export function HubScreen() {
   const enterMode = useAppStore((s) => s.enterMode);
   const enterPractice = useAppStore((s) => s.enterPractice);
   const cancelPractice = useAppStore((s) => s.cancelPractice);
+  const enterDaily = useAppStore((s) => s.enterDaily);
+  const today = localDate();
+  // Beruntun masih hidup bila tantangan terakhir hari ini atau kemarin.
+  const streak =
+    save?.daily?.lastDate === today || save?.daily?.lastDate === previousDate(today)
+      ? save.daily.streak
+      : 0;
   const preloadContent = useAppStore((s) => s.preloadContent);
   const openRulebook = useAppStore((s) => s.openRulebook);
   const openMenu = useAppStore((s) => s.openMenu);
@@ -187,7 +195,11 @@ export function HubScreen() {
         {modes.map((m) => {
           const progress = save?.modes[m.id] ?? newModeProgress();
           const active = progress.activeSession;
-          const practiceRun = progress.practiceSession;
+          const slotRun = progress.practiceSession;
+          // Slot latihan dipakai bersama: tantangan harian ditandai `daily` (ADR 029).
+          const dailyRun = slotRun?.daily ? slotRun : undefined;
+          const practiceRun = slotRun?.daily ? undefined : slotRun;
+          const dailyDone = save?.daily?.done[m.id] === today;
           const ownContent = contents[m.id] ?? null;
           const shift = ownContent ? nextShift(ownContent, progress) : undefined;
           const practiceList = ownContent ? practiceShifts(ownContent, progress) : [];
@@ -225,6 +237,57 @@ export function HubScreen() {
                   {label}
                 </button>
               )}
+              {ownContent && (
+                <section
+                  aria-labelledby={`daily-${m.id}`}
+                  className="mt-2 flex flex-col gap-2 border-t-2 border-ink/30 pt-2"
+                  data-testid={`daily-${m.id}`}
+                >
+                  <h3 id={`daily-${m.id}`} className="font-display">
+                    <span aria-hidden="true">📅 </span>
+                    {id.daily.heading}
+                    {streak > 0 && (
+                      <span className="ml-2 text-sm text-accent" data-testid="daily-streak">
+                        <span aria-hidden="true">🔥 </span>
+                        {id.daily.streak(streak)}
+                      </span>
+                    )}
+                  </h3>
+                  {practiceList.length === 0 ? (
+                    <p className="text-xs text-ink-muted">{id.daily.locked}</p>
+                  ) : dailyRun ? (
+                    <button
+                      type="button"
+                      className={btnSecondary}
+                      disabled={entering}
+                      onClick={() => run(() => enterDaily(m.id))}
+                    >
+                      {id.daily.resume}
+                    </button>
+                  ) : dailyDone ? (
+                    <p className="text-sm text-safe">
+                      <span aria-hidden="true">✓ </span>
+                      {id.daily.doneToday}
+                    </p>
+                  ) : practiceRun ? (
+                    <p className="text-xs text-ink-muted">{id.daily.busy}</p>
+                  ) : (
+                    <>
+                      <p className="text-xs text-ink-muted">
+                        {id.daily.intro(3)} {id.daily.rewardRule}
+                      </p>
+                      <button
+                        type="button"
+                        className={btnSecondary}
+                        disabled={entering}
+                        onClick={() => run(() => enterDaily(m.id))}
+                      >
+                        {id.daily.start(m.deskTitle)}
+                      </button>
+                    </>
+                  )}
+                </section>
+              )}
               {(practiceRun || practiceList.length > 0) && (
                 <section
                   aria-labelledby={`practice-${m.id}`}
@@ -235,7 +298,9 @@ export function HubScreen() {
                     {id.hub.practiceHeading}
                   </h3>
                   <p className="text-xs text-ink-muted">{id.hub.practiceIntro}</p>
-                  {practiceRun ? (
+                  {dailyRun ? (
+                    <p className="text-xs text-ink-muted">{id.daily.busyPractice}</p>
+                  ) : practiceRun ? (
                     <div className="flex flex-wrap gap-2">
                       <button
                         type="button"

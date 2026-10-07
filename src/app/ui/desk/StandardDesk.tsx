@@ -330,7 +330,11 @@ export function StandardDesk({
       />
       {session.phase === 'briefing' && (
         <BriefingDialog
-          heading={id.briefing.shiftHeading(session.shiftOrder, shift?.title ?? '')}
+          heading={
+            session.daily
+              ? id.daily.reportHeading(session.daily.date)
+              : id.briefing.shiftHeading(session.shiftOrder, shift?.title ?? '')
+          }
           dialogue={shift ? content.dialogues[shift.introDialogue] : undefined}
           newspaper={
             shift?.newspaper

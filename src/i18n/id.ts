@@ -210,6 +210,27 @@ export const id = {
     rankLocked: (rank: string) => `Terbuka di pangkat ${rank}`,
     installed: (name: string) => `${name} dipasang di mejamu!`,
   },
+  daily: {
+    heading: 'Tantangan Harian',
+    intro: (n: number) =>
+      `${n} kasus pilihan hari ini dari shift yang sudah kamu selesaikan. Sama untuk semua pemain hari ini!`,
+    streak: (n: number) => `Beruntun ${n} hari`,
+    best: (n: number) => `Rekor: ${n} hari`,
+    start: (desk: string) => `Mulai tantangan harian ${desk}`,
+    resume: 'Lanjutkan tantangan harian',
+    doneToday: 'Selesai hari ini. Datang lagi besok!',
+    locked: 'Selesaikan Shift 1 dulu untuk membuka tantangan harian.',
+    busy: 'Selesaikan atau batalkan latihan dulu.',
+    busyPractice: 'Selesaikan tantangan harian dulu sebelum latihan.',
+    rewardRule: 'Rp 10 per kasus benar, plus bonus beruntun bila semua benar.',
+    badge: 'HARIAN',
+    badgeLabel: 'Tantangan harian: hanya hadiah & beruntun yang disimpan',
+    reportHeading: (date: string) => `Tantangan Harian · ${date}`,
+    reportReward: (reward: number, streak: number) =>
+      `Hadiah +Rp ${reward} · beruntun ${streak} hari`,
+    reportAgain: 'Hadiah hari ini untuk meja ini sudah diambil. Hasil ini tidak dibayar lagi.',
+    claim: 'Ambil hadiah & kembali ke kantor',
+  },
   boss: {
     chip: 'BOSS',
     label: (title: string) => `Boss: ${title}`,

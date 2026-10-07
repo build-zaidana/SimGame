@@ -18,7 +18,9 @@ import {
 import { encodeSave } from '../persistence/transfer.ts';
 import {
   awardBadges,
+  buildDaily,
   buildShift,
+  commitDaily,
   perksFor,
   rankOf,
   commitShift,
@@ -87,6 +89,8 @@ interface AppState {
   /** Mode Latihan: lanjutkan latihan tersimpan, atau mulai latihan shift yang sudah selesai. */
   enterPractice(modeId: string, shiftId?: string): Promise<void>;
   cancelPractice(modeId: string): void;
+  /** Tantangan harian (ADR 029): lanjutkan yang tersimpan atau mulai tantangan hari ini. */
+  enterDaily(modeId: string): Promise<void>;
   dispatch(action: ShiftAction): void;
   openMenu(screen: MenuScreen, modeId?: string): void;
   openRulebook(focusChapterId: string | null): void;
@@ -221,6 +225,10 @@ export const useAppStore = create<AppState>()((set, get) => ({
 
   enterPractice(modeId, shiftId) {
     return openSession(modeId, true, shiftId);
+  },
+
+  enterDaily(modeId) {
+    return openSession(modeId, true, undefined, localDate());
   },
 
   cancelPractice(modeId) {
@@ -442,9 +450,12 @@ export const useAppStore = create<AppState>()((set, get) => ({
       practice,
     });
     // Latihan: hanya slot latihan yang dikosongkan; gaji, kepercayaan, skor, dan Leitner tidak berubah.
-    const next = practice
-      ? withSession(save, null, session.modeId, 'practiceSession')
-      : commitShift(save, session, content, nowIso(), reviewResults);
+    // Tantangan harian: hanya hadiahnya dan streak harian yang disimpan (ADR 029).
+    const next = session.daily
+      ? commitDaily(save, session, nowIso()).save
+      : practice
+        ? withSession(save, null, session.modeId, 'practiceSession')
+        : commitShift(save, session, content, nowIso(), reviewResults);
     write(next);
     const before = save.modes[session.modeId]?.badges ?? {};
     const earned = Object.keys(next.modes[session.modeId]?.badges ?? {}).filter(
@@ -467,8 +478,19 @@ bindAnalyticsIdentity(() => {
   return save?.flags[ANALYTICS_OPT_IN] === true ? { installId: save.installId } : null;
 });
 
+/** Tanggal lokal pemain ('YYYY-MM-DD') untuk tantangan harian. */
+export function localDate(d = new Date()): string {
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+
 /** Membuka sesi jalur utama atau latihan: lanjutkan yang tersimpan, atau mulai shift baru. */
-async function openSession(modeId: string, practice: boolean, practiceShiftId?: string) {
+async function openSession(
+  modeId: string,
+  practice: boolean,
+  practiceShiftId?: string,
+  dailyDate?: string,
+) {
   const { save } = useAppStore.getState();
   const mode = getMode(modeId);
   if (!save || !mode) return;
@@ -476,6 +498,21 @@ async function openSession(modeId: string, practice: boolean, practiceShiftId?: 
   const progress = save.modes[modeId] ?? newModeProgress();
   const slot = slotOf(practice);
   let session = progress[slot] ?? null;
+  if (!session && dailyDate) {
+    const plan = buildDaily(modeId, content, progress, dailyDate);
+    if (!plan) return;
+    const seed = crypto.getRandomValues(new Uint32Array(1))[0] ?? 1;
+    session = {
+      ...startShift({
+        plan,
+        seed,
+        playMode: save.profile.settings.playMode,
+        trust: progress.trust,
+        perks: perksFor(progress, content),
+      }),
+      daily: { date: dailyDate },
+    };
+  }
   if (!session) {
     const shift = practice
       ? practiceShifts(content, progress).find((s) => s.id === practiceShiftId)

@@ -3,7 +3,7 @@ import type { ShiftSession } from '../engine/types.ts';
 import { BASELINE_TRUST } from '../engine/economy.ts';
 
 /** Naikkan + tambah migrasi di migrations.ts + test setiap kali bentuk save berubah. */
-export const SAVE_SCHEMA_VERSION = 12;
+export const SAVE_SCHEMA_VERSION = 13;
 
 const level = z.literal([1, 2, 3]);
 const score01 = z.number().min(0).max(1);
@@ -85,6 +85,8 @@ export const shiftSessionSchema: z.ZodType<ShiftSession> = z.object({
       reward: z.number().int().nonnegative(),
     })
     .optional(),
+  /** v13: tantangan harian (ADR 029). */
+  daily: z.object({ date: z.string() }).optional(),
 });
 
 export const settingsSchema = z.object({
@@ -147,6 +149,15 @@ export const saveDataSchema = z.object({
       correct: z.number().int().nonnegative(),
     }),
   ),
+  /** v13: tantangan harian (ADR 029): streak global + tanggal terakhir per mode. */
+  daily: z
+    .object({
+      streak: z.number().int().nonnegative(),
+      best: z.number().int().nonnegative(),
+      lastDate: z.string().optional(),
+      done: z.record(z.string(), z.string()),
+    })
+    .optional(),
   assessments: z
     .object({ pre: assessmentResultSchema.optional(), post: assessmentResultSchema.optional() })
     .optional(),
