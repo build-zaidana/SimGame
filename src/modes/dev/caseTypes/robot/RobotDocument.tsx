@@ -28,7 +28,8 @@ export function RobotDocument({ data, locked, answer, onAnswer, onRun }: Documen
   useEffect(() => warmUpPython(), []);
 
   const flush = (text = code) => {
-    if (text === saved.current) return;
+    // Tanpa jawaban tersimpan, kode awal tetap ditulis (lihat CodingDocument).
+    if (text === saved.current && answer?.text !== undefined) return;
     saved.current = text;
     onAnswer?.(text);
   };

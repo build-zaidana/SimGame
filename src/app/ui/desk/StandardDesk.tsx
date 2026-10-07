@@ -96,6 +96,7 @@ export function StandardDesk({
       nowMs: session.elapsedMs,
       openedAtMs: active?.openedAtMs ?? null,
       shiftOrder: session.shiftOrder,
+      relaxed: session.playMode === 'relaxed',
     },
     onRollback: () => dispatch({ type: 'ROLLBACK_INCIDENT' }),
   };
@@ -162,7 +163,7 @@ export function StandardDesk({
         wallet={wallet}
         onTogglePause={() => dispatch({ type: session.paused ? 'RESUME' : 'PAUSE' })}
       />
-      {bossMeta && <BossBar session={session} meta={bossMeta} />}
+      {bossMeta && <BossBar session={session} meta={bossMeta} practice={practice} />}
       <div className="hidden items-center gap-2 border-b-2 border-ink/40 p-2 md:flex lg:hidden">
         <button
           type="button"
@@ -323,6 +324,7 @@ export function StandardDesk({
               timing: {
                 openedAtMs: active.openedAtMs ?? session.elapsedMs,
                 nowMs: session.elapsedMs,
+                relaxed: session.playMode === 'relaxed',
               },
             }),
           });

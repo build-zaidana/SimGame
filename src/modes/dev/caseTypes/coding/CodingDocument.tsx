@@ -5,7 +5,7 @@ import type { DocumentProps } from '../../../contract.ts';
 import { CodeEditor } from '../../ui/CodeEditor.tsx';
 import { RunPanel } from '../../ui/RunPanel.tsx';
 import { ServerHealthChip, ServerRoom, serverState } from '../../ui/ServerRoom.tsx';
-import { serverHealth } from '../../incident.ts';
+import { RELAXED_HEALTH_FLOOR, serverHealth } from '../../incident.ts';
 import type { CodingCase } from './schema.ts';
 
 /** Jeda menyimpan draf kode ke sesi (setiap aksi menulis save). */
@@ -27,7 +27,9 @@ export function CodingDocument({
   const saved = useRef(answer?.text ?? d.starter);
 
   const flush = (text = code) => {
-    if (text === saved.current) return;
+    // Tanpa jawaban tersimpan, kode awal tetap ditulis: jalan/rollback mencatat jawaban, dan
+    // jawaban tanpa teks akan membuka editor kosong saat kasus dibuka lagi.
+    if (text === saved.current && answer?.text !== undefined) return;
     saved.current = text;
     onAnswer?.(text);
   };
@@ -57,10 +59,11 @@ export function CodingDocument({
           nowMs: clock.nowMs,
           rolledBackAtMs: answer?.rolledBackAtMs,
           drainPerSecond: incident.drainPerSecond,
+          ...(clock.relaxed ? { floor: RELAXED_HEALTH_FLOOR } : {}),
         })
       : 100;
   const fixed = !!answer?.total && answer.passed === answer.total;
-  const state = serverState(health, answer?.rolledBackAtMs !== undefined, fixed);
+  const state = serverState(health, answer?.rolledBackAtMs !== undefined);
   return (
     <article aria-labelledby="doc-title" className="border-2 border-ink/40 bg-bg p-3">
       <p className="font-display text-accent">
@@ -76,7 +79,12 @@ export function CodingDocument({
           health={health}
           state={state}
           canRollback={!locked && (clock?.shiftOrder ?? 1) >= 3}
-          onRollback={() => onRollback?.()}
+          onRollback={() => {
+            flush();
+            onRollback?.();
+          }}
+          fixReady={fixed && !locked}
+          relaxed={clock?.relaxed ?? false}
         />
       )}
       <p className="text-sm text-ink-muted">

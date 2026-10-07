@@ -196,7 +196,9 @@ export function ReportScreen() {
         >
           <span aria-hidden="true">👾 {shift.boss.icon} </span>
           {summary.bossBonus > 0
-            ? id.boss.reportDefeated(shift.boss.title, summary.bossBonus)
+            ? practice
+              ? id.boss.defeatedPractice(shift.boss.title)
+              : id.boss.reportDefeated(shift.boss.title, summary.bossBonus)
             : id.boss.reportEscaped(shift.boss.title)}
         </p>
       )}

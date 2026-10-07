@@ -19,7 +19,16 @@ export interface BossMeta {
  * datang, kalah, atau lolos. Banner tidak menangkap klik (pemain tetap bisa bekerja di bawahnya);
  * hilang sendiri atau ditutup.
  */
-export function BossBar({ session, meta }: { session: ShiftSession; meta: BossMeta }) {
+export function BossBar({
+  session,
+  meta,
+  practice,
+}: {
+  session: ShiftSession;
+  meta: BossMeta;
+  /** Mode Latihan: tidak ada bonus gaji. */
+  practice: boolean;
+}) {
   const sound = useAppStore((s) => s.save?.profile.settings.sound ?? false);
   const state = bossState(session);
   const status = state?.status ?? 'pending';
@@ -43,6 +52,11 @@ export function BossBar({ session, meta }: { session: ShiftSession; meta: BossMe
   if (!state || !session.boss) return null;
   const timed = session.playMode === 'normal';
   const reward = session.boss.reward;
+  const rules = practice
+    ? id.boss.rulesPractice(state.maxHp)
+    : timed
+      ? id.boss.rulesTimed(state.maxHp, reward)
+      : id.boss.rules(state.maxHp, reward);
   return (
     <>
       {status === 'active' && (
@@ -78,9 +92,7 @@ export function BossBar({ session, meta }: { session: ShiftSession; meta: BossMe
               {id.boss.timeLeft(Math.ceil(state.msLeft / 1000))}
             </p>
           )}
-          <p className="w-full text-xs">
-            {timed ? id.boss.rulesTimed(state.maxHp, reward) : id.boss.rules(state.maxHp, reward)}
-          </p>
+          <p className="w-full text-xs">{rules}</p>
         </section>
       )}
       {banner && (
@@ -108,17 +120,15 @@ export function BossBar({ session, meta }: { session: ShiftSession; meta: BossMe
                 {meta.title}
               </span>
               <span className="text-sm">{meta.intro}</span>
-              <span className="text-sm font-bold">
-                {timed
-                  ? id.boss.rulesTimed(state.maxHp, reward)
-                  : id.boss.rules(state.maxHp, reward)}
-              </span>
+              <span className="text-sm font-bold">{rules}</span>
             </>
           ) : (
             <span className="font-display text-lg">
               <span aria-hidden="true">{banner === 'defeated' ? '🏆 ' : '💨 '}</span>
               {banner === 'defeated'
-                ? id.boss.defeated(meta.title, reward)
+                ? practice
+                  ? id.boss.defeatedPractice(meta.title)
+                  : id.boss.defeated(meta.title, reward)
                 : id.boss.escaped(meta.title)}
             </span>
           )}

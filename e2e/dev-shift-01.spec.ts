@@ -109,7 +109,8 @@ test('Developer desk: fix a real bug in Python until every test passes', async (
   await expect(page.getByTestId('run-summary')).toContainText('SEMUA TES LULUS', {
     timeout: 15_000,
   });
-  await expect(server).toHaveAttribute('data-state', 'fixed');
+  // Tes lulus = perbaikan siap; server baru pulih setelah perbaikan dikirim.
+  await expect(server.getByTestId('fix-ready')).toBeVisible();
   await page.locator('[data-decision="submit"]').click();
   await expect(page.getByRole('dialog').getByRole('heading', { name: 'Tepat!' })).toBeVisible();
 });

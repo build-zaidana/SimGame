@@ -441,14 +441,16 @@ export const useAppStore = create<AppState>()((set, get) => ({
     if (!session || !save || !content || session.phase !== 'ended') return;
     const shift = content.shifts.find((s) => s.id === session.shiftId);
     const summary = summarizeShift(session, shift?.pay ?? { base: 0, perCase: 0 });
-    telemetry.track({
-      name: 'shift_completed',
-      modeId: session.modeId,
-      shiftId: session.shiftId,
-      averageScore: summary.averageScore,
-      stars: summary.stars,
-      practice,
-    });
+    // Tantangan harian bukan shift: tidak dicatat sebagai shift selesai (tidak ada shift_started).
+    if (!session.daily)
+      telemetry.track({
+        name: 'shift_completed',
+        modeId: session.modeId,
+        shiftId: session.shiftId,
+        averageScore: summary.averageScore,
+        stars: summary.stars,
+        practice,
+      });
     // Latihan: hanya slot latihan yang dikosongkan; gaji, kepercayaan, skor, dan Leitner tidak berubah.
     // Tantangan harian: hanya hadiahnya dan streak harian yang disimpan (ADR 029).
     const next = session.daily

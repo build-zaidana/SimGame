@@ -50,7 +50,8 @@ export interface PlayerInput {
   marks: EvidenceId[];
   answer?: CaseAnswer | undefined;
   /** Waktu jam shift saat kasus dibuka & saat diputuskan (untuk insiden yang memburuk seiring waktu). */
-  timing?: { openedAtMs: number; nowMs: number } | undefined;
+  /** `relaxed`: mode Santai, jam tidak boleh mengurangi skor (PRD §76). */
+  timing?: { openedAtMs: number; nowMs: number; relaxed?: boolean } | undefined;
 }
 
 export interface CaseOutcome {

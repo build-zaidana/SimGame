@@ -31,7 +31,8 @@ export interface DocumentProps<TCase extends BaseCase = BaseCase> {
   /** Mencatat satu kali menjalankan tes (jumlah lulus / total). */
   onRun?(passed: number, total: number): void;
   /** Jam shift untuk kasus yang memburuk seiring waktu (insiden produksi). */
-  clock?: { nowMs: number; openedAtMs: number | null; shiftOrder: number } | undefined;
+  clock?:
+    { nowMs: number; openedAtMs: number | null; shiftOrder: number; relaxed: boolean } | undefined;
   /** Rollback darurat insiden produksi. */
   onRollback?(): void;
 }

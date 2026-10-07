@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { t as id } from '../../i18n/index.ts';
 import { modes, upcomingModes } from '../../modes/registry.ts';
 import { newModeProgress } from '../../persistence/saveSchema.ts';
-import { nextShift, practiceShifts } from '../progress.ts';
+import { dailyPool, nextShift, practiceShifts } from '../progress.ts';
 import { localDate, useAppStore } from '../store.ts';
 import { previousDate } from '../../engine/daily.ts';
 import { PhaserHub, type HotspotInfo, type HubSpeech } from '../../hub/PhaserHub.tsx';
@@ -255,7 +255,7 @@ export function HubScreen() {
                       </p>
                     )}
                   </div>
-                  {practiceList.length === 0 ? (
+                  {dailyPool(ownContent, progress).length === 0 ? (
                     <p className="text-xs text-ink-muted">{id.daily.locked}</p>
                   ) : dailyRun ? (
                     <button

@@ -8,6 +8,9 @@ describe('serverHealth (server terbakar)', () => {
     expect(serverHealth({ openedAtMs: 1000, nowMs: 11_000, drainPerSecond: 2 })).toBe(80);
     expect(serverHealth({ openedAtMs: 0, nowMs: 999_000, drainPerSecond: 2 })).toBe(0);
   });
+  it('never drops below the floor (Santai mode)', () => {
+    expect(serverHealth({ openedAtMs: 0, nowMs: 999_000, drainPerSecond: 2, floor: 35 })).toBe(35);
+  });
   it('freezes at the moment of the emergency rollback', () => {
     expect(
       serverHealth({ openedAtMs: 0, nowMs: 60_000, rolledBackAtMs: 5000, drainPerSecond: 2 }),
@@ -52,6 +55,16 @@ describe('evaluateIncident', () => {
   it('letting the server go down hurts users even if the fix is right', () => {
     const o = evaluateIncident(c, 2, input(200_000));
     expect(o).toMatchObject({ correct: false, impact: 'threat-allowed' });
+  });
+
+  it('in Santai mode the clock never costs points: a slow full fix is fully correct', () => {
+    const slow = { ...input(999_000), timing: { openedAtMs: 0, nowMs: 999_000, relaxed: true } };
+    expect(evaluateIncident(c, 2, slow)).toMatchObject({
+      correct: true,
+      impact: 'correct',
+      decisionScore: 1,
+      evidenceScore: 1,
+    });
   });
 
   it('failing tests stay partial or wrong like normal coding tasks', () => {

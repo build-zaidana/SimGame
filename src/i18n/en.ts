@@ -250,6 +250,9 @@ export const en: Strings = {
     reportEscaped: (title) =>
       `Boss ${title}: got away. Beat a boss by deciding all of its cases correctly.`,
     dismiss: 'Close',
+    rulesPractice: (n) =>
+      `Practice: decide all ${n} boss cases correctly to beat it (no pay bonus).`,
+    defeatedPractice: (title) => `${title} defeated! (practice, no pay bonus)`,
   },
   rank: {
     current: (title) => `Rank: ${title}`,
@@ -526,6 +529,8 @@ export const en: Strings = {
       rollbackHint: 'Restore the healthy version first: the damage stops, then fix the bug.',
       lockedHint: 'Fix the bug as fast as you can before the server goes down!',
       fixed: 'Fix ready! Press Submit Solution to deploy it now.',
+      relaxedHint:
+        'Relaxed mode: the server will not go down and time does not cost points. Users are still waiting, though!',
     },
     customers: {
       label: 'App customer queue',

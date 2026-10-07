@@ -252,6 +252,9 @@ export const id = {
     reportEscaped: (title: string) =>
       `Boss ${title}: lolos. Kalahkan boss dengan memutuskan semua kasusnya dengan benar.`,
     dismiss: 'Tutup',
+    rulesPractice: (n: number) =>
+      `Latihan: putuskan ${n} kasus boss dengan benar untuk mengalahkannya (tanpa bonus gaji).`,
+    defeatedPractice: (title: string) => `Boss ${title} kalah! (latihan, tanpa bonus gaji)`,
   },
   rank: {
     current: (title: string) => `Pangkat: ${title}`,
@@ -534,6 +537,8 @@ export const id = {
       rollbackHint: 'Kembalikan versi sehat dulu: kerusakan berhenti, lalu perbaiki bugnya.',
       lockedHint: 'Perbaiki bugnya secepat mungkin sebelum server down!',
       fixed: 'Perbaikan siap! Tekan Kirim Solusi untuk memasangnya sekarang.',
+      relaxedHint:
+        'Mode Santai: server tidak akan down dan waktu tidak mengurangi skor. Tapi pengguna tetap menunggu!',
     },
     customers: {
       label: 'Antrean pelanggan aplikasi',

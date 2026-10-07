@@ -4,10 +4,13 @@ import { useAppStore } from '../../../app/store.ts';
 import { btnSecondary } from '../../../app/ui/styles.ts';
 import { t as id } from '../../../i18n/index.ts';
 
-export type ServerState = 'ok' | 'smoke' | 'fire' | 'down' | 'stable' | 'fixed';
+export type ServerState = 'ok' | 'smoke' | 'fire' | 'down' | 'stable';
 
-export function serverState(health: number, rolledBack: boolean, fixed: boolean): ServerState {
-  if (fixed) return 'fixed';
+/**
+ * Keadaan server. Tes yang lulus belum memperbaiki server: perbaikan baru terpasang saat dikirim,
+ * jadi kerusakan berjalan terus sampai Kirim Solusi atau rollback.
+ */
+export function serverState(health: number, rolledBack: boolean): ServerState {
   if (rolledBack) return 'stable';
   if (health <= 0) return 'down';
   if (health < 35) return 'fire';
@@ -21,7 +24,6 @@ const LED: Record<ServerState, string> = {
   fire: '#f07a6a',
   down: '#3d4658',
   stable: '#8fd0fa',
-  fixed: '#74cf92',
 };
 
 interface ServerRoomProps {
@@ -30,10 +32,22 @@ interface ServerRoomProps {
   state: ServerState;
   canRollback: boolean;
   onRollback(): void;
+  /** Semua tes lulus: perbaikan siap dikirim (server tetap rusak sampai dikirim). */
+  fixReady: boolean;
+  /** Mode Santai: server tidak pernah down. */
+  relaxed: boolean;
 }
 
 /** Rak server pixel yang berasap/terbakar sesuai kesehatan, plus bar kesehatan & tombol rollback. */
-export function ServerRoom({ service, health, state, canRollback, onRollback }: ServerRoomProps) {
+export function ServerRoom({
+  service,
+  health,
+  state,
+  canRollback,
+  onRollback,
+  fixReady,
+  relaxed,
+}: ServerRoomProps) {
   const t = id.dev.incident;
   const sound = useAppStore((s) => s.save?.profile.settings.sound ?? false);
   const prev = useRef(state);
@@ -44,7 +58,7 @@ export function ServerRoom({ service, health, state, canRollback, onRollback }: 
     if (worse && sound) for (const d of [0, 0.3, 0.6]) playSfx('wrong', d, 1.4);
   }, [state, sound]);
   const burning = state === 'smoke' || state === 'fire';
-  const statusText = state === 'fixed' ? t.fixed : t.status[state];
+  const statusText = t.status[state];
   return (
     <section
       aria-label={t.label(service)}
@@ -122,9 +136,15 @@ export function ServerRoom({ service, health, state, canRollback, onRollback }: 
           <p className="mt-1 text-xs font-bold" role="status">
             {statusText}
           </p>
+          {fixReady && (
+            <p className="mt-1 text-xs font-bold text-[#74cf92]" data-testid="fix-ready">
+              <span aria-hidden="true">✅ </span>
+              {t.fixed}
+            </p>
+          )}
         </div>
       </div>
-      {canRollback && state !== 'fixed' && state !== 'stable' && (
+      {canRollback && state !== 'stable' && (
         <div className="mt-2 flex flex-wrap items-center gap-2">
           <button
             type="button"
@@ -139,7 +159,7 @@ export function ServerRoom({ service, health, state, canRollback, onRollback }: 
         </div>
       )}
       {!canRollback && (state === 'ok' || state === 'smoke' || state === 'fire') && (
-        <p className="mt-2 text-xs text-[#c9ccd6]">{t.lockedHint}</p>
+        <p className="mt-2 text-xs text-[#c9ccd6]">{relaxed ? t.relaxedHint : t.lockedHint}</p>
       )}
     </section>
   );
@@ -151,7 +171,6 @@ const CHIP_ICON: Record<ServerState, string> = {
   fire: '🔥',
   down: '⛔',
   stable: '🧊',
-  fixed: '✅',
 };
 
 /** Indikator ringkas di dekat editor: di HP ruang server tergulir keluar layar saat mengetik. */
