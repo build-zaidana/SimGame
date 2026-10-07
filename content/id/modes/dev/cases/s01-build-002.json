@@ -1,0 +1,55 @@
+{
+  "id": "s01-build-002",
+  "type": "coding",
+  "conceptIds": ["python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Bayu Pratama",
+      "team": "Tim Rapor Sekolah"
+    },
+    "title": "Lomba kilat: genap atau ganjil?",
+    "story": [
+      "Tulis fungsi jenis_angka(n) yang mengembalikan teks \"genap\" atau \"ganjil\".",
+      "Petunjuk: operator % memberi sisa pembagian. Ada tes tersembunyi untuk angka 0 dan angka negatif!"
+    ],
+    "file": "rapor/angka.py",
+    "starter": "def jenis_angka(n):\n    # Tulis kodemu di sini\n    return None\n",
+    "tests": [
+      {
+        "name": "empat",
+        "code": "assert jenis_angka(4) == \"genap\""
+      },
+      {
+        "name": "tujuh",
+        "code": "assert jenis_angka(7) == \"ganjil\""
+      },
+      {
+        "name": "nol",
+        "code": "assert jenis_angka(0) == \"genap\"",
+        "hidden": true
+      },
+      {
+        "name": "negatif",
+        "code": "assert jenis_angka(-3) == \"ganjil\"",
+        "hidden": true
+      }
+    ],
+    "solution": "def jenis_angka(n):\n    if n % 2 == 0:\n        return \"genap\"\n    return \"ganjil\"\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Angka genap habis dibagi 2, jadi sisa baginya n % 2 sama dengan 0. Nol juga genap, dan untuk -3 sisa baginya 1, jadi tetap ganjil.",
+  "ruleRefs": ["r-py-1", "r-err-2"],
+  "hints": [
+    "Coba print(7 % 2) dan print(4 % 2). Apa bedanya?",
+    "Pakai if n % 2 == 0: lalu return \"genap\".",
+    "Di luar if, return \"ganjil\". Ingat indentasi 4 spasi."
+  ]
+}

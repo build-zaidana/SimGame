@@ -1,0 +1,50 @@
+{
+  "id": "s01-fix-003",
+  "type": "coding",
+  "conceptIds": ["reading-errors", "python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Sari Kusuma",
+      "team": "Tim Kasir"
+    },
+    "title": "Struk belanja error: NameError",
+    "story": [
+      "Setiap kasir menekan Cetak Struk, aplikasinya error.",
+      "Jalankan tesnya dan baca baris terakhir pesan error. NameError artinya Python bertemu nama yang belum pernah dibuat."
+    ],
+    "file": "kasir/struk.py",
+    "starter": "def total_struk(harga):\n    total = 0\n    for h in harga:\n        total = total + h\n    return totl\n",
+    "tests": [
+      {
+        "name": "tiga barang",
+        "code": "assert total_struk([10000, 20000, 5000]) == 35000"
+      },
+      {
+        "name": "satu barang",
+        "code": "assert total_struk([7500]) == 7500"
+      },
+      {
+        "name": "struk kosong",
+        "code": "assert total_struk([]) == 0",
+        "hidden": true
+      }
+    ],
+    "solution": "def total_struk(harga):\n    total = 0\n    for h in harga:\n        total = total + h\n    return total\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Pesan NameError: name 'totl' isn't defined menunjuk salah ketik, karena variabel yang dibuat bernama total. Baris terakhir pesan error selalu memberi tahu jenis masalah dan nama yang bermasalah.",
+  "ruleRefs": ["r-err-1", "r-err-3"],
+  "hints": [
+    "Jalankan tes, lalu baca baris paling bawah pesan error.",
+    "Nama apa yang disebut di pesan error? Apakah nama itu pernah dibuat di fungsi ini?",
+    "Ganti return totl menjadi return total."
+  ]
+}

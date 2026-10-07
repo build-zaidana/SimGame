@@ -1,0 +1,55 @@
+{
+  "id": "s02-fix-004",
+  "type": "coding",
+  "conceptIds": ["debugging", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Galih Prasetyo",
+      "team": "Attendance Team"
+    },
+    "title": "The first student is never marked present",
+    "story": [
+      "The attendance summary is always one short when the first student on the list is present. \"P\" means present, \"A\" means absent.",
+      "Add print(i) inside the loop to see which positions are checked."
+    ],
+    "file": "attendance/summary.py",
+    "starter": "def count_present(attendance):\n    count = 0\n    for i in range(1, len(attendance)):\n        if attendance[i] == \"P\":\n            count = count + 1\n    return count\n",
+    "tests": [
+      {
+        "name": "three students",
+        "code": "assert count_present([\"P\", \"A\", \"P\"]) == 2"
+      },
+      {
+        "name": "first student absent",
+        "code": "assert count_present([\"A\", \"P\"]) == 1"
+      },
+      {
+        "name": "only one student",
+        "code": "assert count_present([\"P\"]) == 1",
+        "hidden": true
+      },
+      {
+        "name": "empty class",
+        "code": "assert count_present([]) == 0",
+        "hidden": true
+      }
+    ],
+    "solution": "def count_present(attendance):\n    count = 0\n    for i in range(len(attendance)):\n        if attendance[i] == \"P\":\n            count = count + 1\n    return count\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "range(1, len(attendance)) starts at position 1, but the first student is at position 0, so they are never checked. range(len(attendance)) starts at 0 and checks every student.",
+  "ruleRefs": ["r-dbg-2", "r-dbg-1"],
+  "hints": [
+    "Print i in every round. Which number shows up first?",
+    "Lists in Python start at position 0. Is position 0 checked?",
+    "Change range(1, len(attendance)) to range(len(attendance))."
+  ]
+}

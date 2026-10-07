@@ -1,0 +1,65 @@
+{
+  "id": "s04-build-004",
+  "type": "coding",
+  "conceptIds": ["testing", "python-basics"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Maya Lestari",
+      "team": "School Report Team"
+    },
+    "title": "Speed challenge: letter grades",
+    "story": [
+      "Write letter_grade(score): 85 and above is \"A\", 70 and above \"B\", 55 and above \"C\", otherwise \"D\".",
+      "Hidden tests check numbers exactly at every limit. Test the limits, not just the numbers in the middle!"
+    ],
+    "file": "report/grades.py",
+    "starter": "def letter_grade(score):\n    # Write your code here\n    return \"D\"\n",
+    "tests": [
+      {
+        "name": "high score",
+        "code": "assert letter_grade(90) == \"A\""
+      },
+      {
+        "name": "middle score",
+        "code": "assert letter_grade(60) == \"C\""
+      },
+      {
+        "name": "limit A",
+        "code": "assert letter_grade(85) == \"A\"",
+        "hidden": true
+      },
+      {
+        "name": "limit B",
+        "code": "assert letter_grade(70) == \"B\"",
+        "hidden": true
+      },
+      {
+        "name": "limit C",
+        "code": "assert letter_grade(55) == \"C\"",
+        "hidden": true
+      },
+      {
+        "name": "below C",
+        "code": "assert letter_grade(54) == \"D\"",
+        "hidden": true
+      }
+    ],
+    "solution": "def letter_grade(score):\n    if score >= 85:\n        return \"A\"\n    if score >= 70:\n        return \"B\"\n    if score >= 55:\n        return \"C\"\n    return \"D\"\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Check from the highest grade to the lowest with >=, so numbers exactly at a limit get the right letter. Edge cases like 85, 70 and 55 are where bugs hide most often.",
+  "ruleRefs": ["r-tst-1", "r-py-4"],
+  "hints": [
+    "Start from the highest limit: if score >= 85: return \"A\".",
+    "Continue for 70 and 55 with >=.",
+    "If nothing matches, return \"D\" on the last line."
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "id": "s04-fix-003",
+  "type": "coding",
+  "conceptIds": ["testing", "python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Fajar Nugroho",
+      "team": "Account Team"
+    },
+    "title": "Empty names crash the profile page",
+    "story": [
+      "Profile pictures are replaced by the first letter of the user name. Users who have not filled in a name make the profile page crash.",
+      "There is a hidden test for that edge case. Think: does empty text have a first letter?"
+    ],
+    "file": "account/initial.py",
+    "starter": "def initial(name):\n    return name[0].upper()\n",
+    "tests": [
+      {
+        "name": "lowercase",
+        "code": "assert initial(\"budi\") == \"B\""
+      },
+      {
+        "name": "capitalised",
+        "code": "assert initial(\"Sari\") == \"S\""
+      },
+      {
+        "name": "empty name",
+        "code": "assert initial(\"\") == \"?\"",
+        "hidden": true
+      }
+    ],
+    "solution": "def initial(name):\n    if len(name) == 0:\n        return \"?\"\n    return name[0].upper()\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Empty text has no first letter, so name[0] raises an IndexError. Check the length first and return \"?\" for that edge case.",
+  "ruleRefs": ["r-tst-1", "r-dbg-3"],
+  "hints": [
+    "What happens if you run \"\"[0] in Python?",
+    "Check first: if len(name) == 0:",
+    "For an empty name, return \"?\" before reading name[0]."
+  ]
+}

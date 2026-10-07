@@ -1,0 +1,50 @@
+{
+  "id": "s05-build-003",
+  "type": "coding",
+  "conceptIds": ["secure-coding", "python-basics"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Fajar Nugroho",
+      "team": "Tim Akun Pengguna"
+    },
+    "title": "Lomba kilat: samarkan email di log",
+    "story": [
+      "Log login masih mencatat alamat email lengkap. Itu data pribadi yang tidak boleh terlihat utuh.",
+      "Tulis samarkan_email(email): sisakan huruf pertama, ganti sisanya sebelum @ dengan ***, dan biarkan domainnya. Contoh: budi@contoh.test menjadi b***@contoh.test."
+    ],
+    "file": "akun/samarkan.py",
+    "starter": "def samarkan_email(email):\n    # Tulis kodemu di sini\n    return email\n",
+    "tests": [
+      {
+        "name": "email biasa",
+        "code": "assert samarkan_email(\"budi@contoh.test\") == \"b***@contoh.test\""
+      },
+      {
+        "name": "ada titik",
+        "code": "assert samarkan_email(\"sari.w@kantor.test\") == \"s***@kantor.test\""
+      },
+      {
+        "name": "nama satu huruf",
+        "code": "assert samarkan_email(\"a@x.test\") == \"a***@x.test\"",
+        "hidden": true
+      }
+    ],
+    "solution": "def samarkan_email(email):\n    bagian = email.split(\"@\")\n    return bagian[0][0] + \"***@\" + bagian[1]\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "split(\"@\") memisahkan nama dan domain, lalu hanya huruf pertama nama yang disisakan. Data pribadi seperti email lengkap tidak boleh tersimpan utuh di log.",
+  "ruleRefs": ["r-sec-2", "r-tst-1"],
+  "hints": [
+    "Coba print(\"budi@contoh.test\".split(\"@\")). Hasilnya daftar dua bagian.",
+    "Bagian pertama adalah nama: ambil huruf pertamanya dengan [0].",
+    "Gabungkan: huruf pertama + \"***@\" + bagian kedua."
+  ]
+}

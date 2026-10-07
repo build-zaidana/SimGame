@@ -1,0 +1,50 @@
+{
+  "id": "s03-fix-003",
+  "type": "coding",
+  "conceptIds": ["python-basics", "debugging"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Rina Wulandari",
+      "team": "Online Shop Team"
+    },
+    "title": "Voucher fails exactly at the limit",
+    "story": [
+      "New promo: spend at least Rp100,000 to get a voucher. Customers who spend exactly Rp100,000 complain they did not get one.",
+      "Look at the comparison sign. \"At least\" means the limit itself counts."
+    ],
+    "file": "shop/voucher.py",
+    "starter": "def gets_voucher(total_spent):\n    return total_spent > 100000\n",
+    "tests": [
+      {
+        "name": "big spender",
+        "code": "assert gets_voucher(150000) == True"
+      },
+      {
+        "name": "exactly at the limit",
+        "code": "assert gets_voucher(100000) == True"
+      },
+      {
+        "name": "just below",
+        "code": "assert gets_voucher(99999) == False",
+        "hidden": true
+      }
+    ],
+    "solution": "def gets_voucher(total_spent):\n    return total_spent >= 100000\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "The > sign means \"more than\", so exactly Rp100,000 does not pass. \"At least\" means more than or equal to, which is >=.",
+  "ruleRefs": ["r-py-4", "r-err-2"],
+  "hints": [
+    "Run the tests. Which one fails, and with what number?",
+    "Is 100000 > 100000 True?",
+    "Change > to >=."
+  ]
+}

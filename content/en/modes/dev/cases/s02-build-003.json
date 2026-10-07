@@ -1,0 +1,55 @@
+{
+  "id": "s02-build-003",
+  "type": "coding",
+  "conceptIds": ["python-basics", "debugging"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Putri Handayani",
+      "team": "Learning App Team"
+    },
+    "title": "Speed challenge: count the capitals",
+    "story": [
+      "Write a function count_capitals(text) that counts how many capital letters are in the text.",
+      "A for loop can read text letter by letter, and c.isupper() is True when c is a capital letter."
+    ],
+    "file": "learning/capitals.py",
+    "starter": "def count_capitals(text):\n    # Write your code here\n    return 0\n",
+    "tests": [
+      {
+        "name": "two words",
+        "code": "assert count_capitals(\"Hello World\") == 2"
+      },
+      {
+        "name": "all lowercase",
+        "code": "assert count_capitals(\"abc\") == 0"
+      },
+      {
+        "name": "acronym",
+        "code": "assert count_capitals(\"SMK\") == 3",
+        "hidden": true
+      },
+      {
+        "name": "with numbers",
+        "code": "assert count_capitals(\"Class 10A\") == 2",
+        "hidden": true
+      }
+    ],
+    "solution": "def count_capitals(text):\n    count = 0\n    for c in text:\n        if c.isupper():\n            count = count + 1\n    return count\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "for c in text takes one letter per round, and c.isupper() checks whether that letter is a capital. Numbers and spaces are not capital letters, so they are not counted.",
+  "ruleRefs": ["r-err-2", "r-dbg-4"],
+  "hints": [
+    "Start with count = 0, then for c in text:",
+    "Inside the loop: if c.isupper(): add 1 to count.",
+    "Do not forget return count outside the loop."
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "id": "s05-fix-004",
+  "type": "coding",
+  "conceptIds": ["secure-coding", "testing"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Dewi Anggraini",
+      "team": "Tim Dompet Digital"
+    },
+    "title": "Transfer dengan jumlah negatif diterima",
+    "story": [
+      "Laporan dari tim QA: transfer sebesar -5.000 diterima, dan saldo pengirim malah bertambah.",
+      "Jangan percaya input pengguna. Transfer sah hanya bila jumlahnya lebih dari 0 dan tidak melebihi saldo."
+    ],
+    "file": "dompet/transfer.py",
+    "starter": "def transfer_sah(jumlah, saldo):\n    return jumlah <= saldo\n",
+    "tests": [
+      {
+        "name": "transfer biasa",
+        "code": "assert transfer_sah(50000, 100000) == True"
+      },
+      {
+        "name": "melebihi saldo",
+        "code": "assert transfer_sah(150000, 100000) == False"
+      },
+      {
+        "name": "jumlah negatif",
+        "code": "assert transfer_sah(-5000, 100000) == False",
+        "hidden": true
+      },
+      {
+        "name": "jumlah nol",
+        "code": "assert transfer_sah(0, 100000) == False",
+        "hidden": true
+      }
+    ],
+    "solution": "def transfer_sah(jumlah, saldo):\n    return jumlah > 0 and jumlah <= saldo\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Kode lama hanya memeriksa batas atas, jadi angka negatif dan nol ikut lolos. Input pengguna harus diperiksa rentangnya di kedua sisi sebelum dipakai.",
+  "ruleRefs": ["r-sec-1", "r-tst-1"],
+  "hints": [
+    "Coba bayangkan jumlah = -5000. Apakah -5000 <= 100000?",
+    "Tambahkan syarat bahwa jumlah harus lebih dari 0.",
+    "Gabungkan dua syarat dengan and: jumlah > 0 and jumlah <= saldo."
+  ]
+}

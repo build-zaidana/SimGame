@@ -1,0 +1,55 @@
+{
+  "id": "s05-fix-004",
+  "type": "coding",
+  "conceptIds": ["secure-coding", "testing"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Dewi Anggraini",
+      "team": "Digital Wallet Team"
+    },
+    "title": "Negative transfers are accepted",
+    "story": [
+      "Report from the QA team: a transfer of -5,000 was accepted, and the sender balance went up instead.",
+      "Never trust user input. A transfer is valid only when the amount is more than 0 and not above the balance."
+    ],
+    "file": "wallet/transfer.py",
+    "starter": "def valid_transfer(amount, balance):\n    return amount <= balance\n",
+    "tests": [
+      {
+        "name": "normal transfer",
+        "code": "assert valid_transfer(50000, 100000) == True"
+      },
+      {
+        "name": "above balance",
+        "code": "assert valid_transfer(150000, 100000) == False"
+      },
+      {
+        "name": "negative amount",
+        "code": "assert valid_transfer(-5000, 100000) == False",
+        "hidden": true
+      },
+      {
+        "name": "zero amount",
+        "code": "assert valid_transfer(0, 100000) == False",
+        "hidden": true
+      }
+    ],
+    "solution": "def valid_transfer(amount, balance):\n    return amount > 0 and amount <= balance\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "The old code only checked the upper limit, so negative numbers and zero slipped through. User input must have its range checked on both sides before it is used.",
+  "ruleRefs": ["r-sec-1", "r-tst-1"],
+  "hints": [
+    "Imagine amount = -5000. Is -5000 <= 100000?",
+    "Add a condition that the amount must be more than 0.",
+    "Join both conditions with and: amount > 0 and amount <= balance."
+  ]
+}
