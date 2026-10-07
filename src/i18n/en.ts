@@ -254,6 +254,33 @@ export const en: Strings = {
       `Practice: decide all ${n} boss cases correctly to beat it (no pay bonus).`,
     defeatedPractice: (title) => `${title} defeated! (practice, no pay bonus)`,
   },
+  tips: {
+    label: 'Tips',
+    gotIt: 'Got it',
+    skipAll: 'Skip all tips',
+    reset: 'Show tips again',
+    resetDone: 'Tips will show up again in the office.',
+    welcome: {
+      title: 'Welcome to the office!',
+      body: 'Pick one of the desks below to start your first shift. Each desk is an IT career with its own pay, rank and challenges. Relaxed mode (the default) has no time limit; switch it in Settings if you want more of a challenge.',
+    },
+    rank: {
+      title: 'Your rank grows with every shift',
+      body: 'Your rank is shown on the desk card. Each promotion raises your allowance per shift and unlocks new desk upgrades in the shop.',
+    },
+    daily: {
+      title: 'The daily challenge is open',
+      body: 'Every day there are 3 picked cases at each desk where you have finished a shift. Play every day to keep your 🔥 streak and earn bonus coins.',
+    },
+    shop: {
+      title: 'Your pay can be spent',
+      body: 'In Shop & Upgrades, work tools reveal extra info at the desk, while desk upgrades add decorations and small perks like free hints.',
+    },
+    practice: {
+      title: 'Want to replay a shift?',
+      body: 'Use Practice Mode on the desk card. It does not change your best score, pay or rank, so it is safe to try again.',
+    },
+  },
   rank: {
     current: (title) => `Rank: ${title}`,
     nextShifts: (n, title) => `${n} more ${n === 1 ? 'shift' : 'shifts'} to ${title}`,

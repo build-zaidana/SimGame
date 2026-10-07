@@ -102,6 +102,8 @@ interface AppState {
   /** Mengganti save di perangkat ini (save lama menjadi cadangan). */
   importSave(data: SaveData): void;
   setFlag(key: string, value: boolean): void;
+  /** Mengubah save dengan fungsi murni (mis. tips onboarding, ADR 030). */
+  updateSave(change: (save: SaveData) => SaveData): void;
   updateSettings(patch: Partial<Settings>): void;
   saveAssessment(kind: AssessmentKind, correct: number, total: number): void;
   /** Laporan → Review Cepat selesai → simpan hasil (termasuk jawaban review) → kembali ke HUB. */
@@ -411,6 +413,14 @@ export const useAppStore = create<AppState>()((set, get) => ({
     if (!save) return;
     const settings = { ...save.profile.settings, ...patch };
     const next = { ...save, updatedAt: nowIso(), profile: { ...save.profile, settings } };
+    write(next);
+    set({ save: next });
+  },
+
+  updateSave(change) {
+    const { save } = get();
+    if (!save) return;
+    const next = { ...change(save), updatedAt: nowIso() };
     write(next);
     set({ save: next });
   },
