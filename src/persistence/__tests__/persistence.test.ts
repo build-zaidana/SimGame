@@ -341,7 +341,6 @@ describe('migration v12 → v13 (daily challenge)', () => {
   it('keeps old saves and keeps daily data', () => {
     const v12 = { ...JSON.parse(JSON.stringify(saveWithSession())), schemaVersion: 12 };
     const migrated = migrate(v12);
-    expect(SAVE_SCHEMA_VERSION).toBe(13);
     expect(migrated.daily).toBeUndefined();
     const later = JSON.parse(JSON.stringify(migrated));
     later.daily = { streak: 2, best: 4, lastDate: '2026-10-07', done: { soc: '2026-10-07' } };
@@ -349,6 +348,31 @@ describe('migration v12 → v13 (daily challenge)', () => {
     const loaded = migrate(later);
     expect(loaded.daily).toEqual(later.daily);
     expect(loaded.modes['soc']?.activeSession?.daily).toEqual({ date: '2026-10-07' });
+  });
+});
+
+describe('migration v13 → v14 (decision order)', () => {
+  it('keeps old sessions and keeps a recorded decision order', () => {
+    const v13 = { ...JSON.parse(JSON.stringify(saveWithSession())), schemaVersion: 13 };
+    const migrated = migrate(v13);
+    expect(SAVE_SCHEMA_VERSION).toBe(14);
+    expect(migrated.modes['soc']?.activeSession?.cases[0]?.decidedSeq).toBeUndefined();
+    const later = JSON.parse(JSON.stringify(migrated));
+    later.modes.soc.activeSession.cases[0].decidedSeq = 1;
+    expect(migrate(later).modes['soc']?.activeSession?.cases[0]?.decidedSeq).toBe(1);
+  });
+});
+
+describe('a broken session never costs the whole save', () => {
+  it('drops an invalid in-progress shift but keeps the progress', () => {
+    const broken = JSON.parse(JSON.stringify(migrate(saveWithSession())));
+    broken.modes.soc.wallet = 42;
+    broken.modes.soc.activeSession.cases[0].answer = { text: 'x'.repeat(20_001), runs: 0 };
+    broken.modes.soc.practiceSession = { nonsense: true };
+    const loaded = migrate(broken);
+    expect(loaded.modes['soc']?.wallet).toBe(42);
+    expect(loaded.modes['soc']?.activeSession).toBeUndefined();
+    expect(loaded.modes['soc']?.practiceSession).toBeUndefined();
   });
 });
 

@@ -1,9 +1,10 @@
 import { z } from 'zod';
 import type { ShiftSession } from '../engine/types.ts';
 import { BASELINE_TRUST } from '../engine/economy.ts';
+import { MAX_ANSWER_LENGTH } from '../engine/shift.ts';
 
 /** Naikkan + tambah migrasi di migrations.ts + test setiap kali bentuk save berubah. */
-export const SAVE_SCHEMA_VERSION = 13;
+export const SAVE_SCHEMA_VERSION = 14;
 
 const level = z.literal([1, 2, 3]);
 const score01 = z.number().min(0).max(1);
@@ -40,7 +41,7 @@ const sessionCaseSchema = z.object({
   /** v9: jawaban ketikan pemain (Meja Developer, ADR 026). */
   answer: z
     .object({
-      text: z.string().max(20_000),
+      text: z.string().max(MAX_ANSWER_LENGTH),
       runs: z.number().int().nonnegative(),
       passed: z.number().int().nonnegative().optional(),
       total: z.number().int().nonnegative().optional(),
@@ -48,6 +49,8 @@ const sessionCaseSchema = z.object({
       rolledBackAtMs: z.number().nonnegative().optional(),
     })
     .optional(),
+  /** v14: urutan keputusan dalam shift (kasus bisa dibuka bergantian). */
+  decidedSeq: z.number().int().positive().optional(),
 });
 
 export const shiftSessionSchema: z.ZodType<ShiftSession> = z.object({
@@ -118,10 +121,13 @@ export const modeProgressSchema = z.object({
   /** v11: upgrade meja yang sudah dibeli (ADR 027). */
   upgradesOwned: z.array(z.string()),
   chaptersUnlocked: z.array(z.string()),
-  /** Untuk melanjutkan di tengah shift. */
-  activeSession: shiftSessionSchema.optional(),
+  /**
+   * Untuk melanjutkan di tengah shift. Sesi yang rusak dibuang (`catch`), bukan menggagalkan seluruh
+   * save: kehilangan satu shift yang sedang berjalan jauh lebih ringan daripada kehilangan progres.
+   */
+  activeSession: shiftSessionSchema.optional().catch(undefined),
   /** v3: shift Mode Latihan yang sedang berjalan (PRD S5); tidak memengaruhi progres utama. */
-  practiceSession: shiftSessionSchema.optional(),
+  practiceSession: shiftSessionSchema.optional().catch(undefined),
   /** v4: lencana yang sudah didapat → waktu didapat (ISO). */
   badges: z.record(z.string(), z.string()),
 });

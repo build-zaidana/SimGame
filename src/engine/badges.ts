@@ -41,11 +41,16 @@ function allDecided(cases: readonly SessionCase[], min: number): boolean {
   return cases.length >= min && cases.every((c) => c.status === 'decided' && c.outcome);
 }
 
-/** Kasus yang sudah diputuskan, urut saat dibuka (satu kasus diperiksa dalam satu waktu). */
+/**
+ * Kasus yang sudah diputuskan, urut keputusan. Sesi lama (sebelum v14) tanpa `decidedSeq` memakai
+ * urutan dibuka sebagai perkiraan.
+ */
 function inDecisionOrder(cases: readonly SessionCase[]): SessionCase[] {
-  return cases
-    .filter((c) => c.status === 'decided' && c.outcome)
-    .sort((a, b) => (a.openedAtMs ?? 0) - (b.openedAtMs ?? 0));
+  const decided = cases.filter((c) => c.status === 'decided' && c.outcome);
+  const bySeq = decided.every((c) => c.decidedSeq !== undefined);
+  return decided.sort((a, b) =>
+    bySeq ? (a.decidedSeq ?? 0) - (b.decidedSeq ?? 0) : (a.openedAtMs ?? 0) - (b.openedAtMs ?? 0),
+  );
 }
 
 /** Keputusan tepat berturut-turut sampai kasus terakhir (penghitung "beruntun" di meja). */

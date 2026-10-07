@@ -111,6 +111,8 @@ export interface SessionCase {
   score: number | null;
   /** v9: jawaban ketikan pemain (Meja Developer). */
   answer?: CaseAnswer | undefined;
+  /** v14: urutan keputusan (1 = diputuskan pertama); kasus bisa dibuka bergantian. */
+  decidedSeq?: number | undefined;
 }
 
 /** Seluruh state shift. Data biasa: bisa diserialisasi dan dilanjutkan. */
