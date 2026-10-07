@@ -89,7 +89,7 @@ function DailyReport() {
   const already = save.daily?.done[session.modeId] === session.daily.date;
   const correct = session.cases.filter((c) => c.outcome?.correct).length;
   return (
-    <main className="mx-auto flex min-h-dvh max-w-3xl flex-col gap-4 p-4 pb-24">
+    <main className="mx-auto flex min-h-dvh max-w-3xl flex-col gap-4 p-4 pb-36">
       <h1 className="font-display text-2xl text-accent">
         <span aria-hidden="true">📅 </span>
         {id.daily.reportHeading(session.daily.date)}
@@ -161,10 +161,31 @@ export function ReportScreen() {
     content.rulebook.chapters.find((ch) => ch.rules.some((r) => r.id === ruleId));
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-3xl flex-col gap-4 p-4 pb-24">
+    <main className="mx-auto flex min-h-dvh max-w-3xl flex-col gap-4 p-4 pb-36">
       <h1 className="font-display text-2xl text-accent">
         {id.report.heading(session.shiftOrder, shift?.title ?? '')}
       </h1>
+      {shift?.boss && session.boss && (
+        <p
+          className={`${panel} p-3 font-bold`}
+          data-testid="boss-result"
+          data-status={summary.bossBonus > 0 ? 'defeated' : 'escaped'}
+        >
+          <span aria-hidden="true">👾 {shift.boss.icon} </span>
+          {summary.bossBonus > 0
+            ? practice
+              ? id.boss.defeatedPractice(shift.boss.title)
+              : id.boss.reportDefeated(shift.boss.title, summary.bossBonus)
+            : id.boss.reportEscaped(shift.boss.title)}
+        </p>
+      )}
+      {rankAfter > rankBefore && (
+        <RankUp
+          title={content.meta.ranks[rankAfter] ?? ''}
+          rank={rankAfter}
+          delayMs={summary.stars * STAR_STEP + 1100}
+        />
+      )}
       <section
         className={`${panel} grid gap-1 p-4`}
         aria-label={id.report.average(summary.averageScore)}
@@ -188,27 +209,6 @@ export function ReportScreen() {
               )}
         </p>
       </section>
-      {shift?.boss && session.boss && (
-        <p
-          className={`${panel} p-3 font-display`}
-          data-testid="boss-result"
-          data-status={summary.bossBonus > 0 ? 'defeated' : 'escaped'}
-        >
-          <span aria-hidden="true">👾 {shift.boss.icon} </span>
-          {summary.bossBonus > 0
-            ? practice
-              ? id.boss.defeatedPractice(shift.boss.title)
-              : id.boss.reportDefeated(shift.boss.title, summary.bossBonus)
-            : id.boss.reportEscaped(shift.boss.title)}
-        </p>
-      )}
-      {rankAfter > rankBefore && (
-        <RankUp
-          title={content.meta.ranks[rankAfter] ?? ''}
-          rank={rankAfter}
-          delayMs={summary.stars * STAR_STEP + 1100}
-        />
-      )}
       {practice && (
         <p role="note" className="border-2 border-focus p-3" data-testid="practice-banner">
           <span aria-hidden="true">🎯 </span>

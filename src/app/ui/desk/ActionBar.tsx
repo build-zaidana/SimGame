@@ -54,17 +54,20 @@ export function ActionBar({ decisions, disabled, onDecide }: ActionBarProps) {
           disabled={disabled}
           onClick={() => onDecide(d.id)}
           className={
-            (decisions.length > 3
-              ? 'text-xs sm:text-base '
-              : 'whitespace-nowrap text-sm sm:text-base ') +
-            'min-h-12 border-2 border-ink px-2 font-stamp ' +
+            // HP: ikon di atas label dan huruf lebih rapat, supaya label tetap muat di teks
+            // "Sangat besar" tanpa melebarkan halaman (label panjang boleh patah).
+            (decisions.length > 3 ? 'text-xs ' : 'text-sm ') +
+            'flex min-h-12 min-w-0 flex-col items-center justify-center leading-tight ' +
+            '[overflow-wrap:anywhere] tracking-normal ' +
+            'sm:flex-row sm:gap-1 sm:text-base sm:tracking-[0.08em] ' +
+            'border-2 border-ink px-1 py-1 font-stamp ' +
             'focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-focus ' +
             'disabled:cursor-not-allowed disabled:opacity-40 ' +
             (COLOR[d.id] ?? 'bg-focus text-bg')
           }
         >
-          <span aria-hidden="true">{ICON[d.id] ?? '•'} </span>
-          {d.label}
+          <span aria-hidden="true">{ICON[d.id] ?? '•'}</span>
+          <span className="min-w-0">{d.label}</span>
         </button>
       ))}
     </nav>

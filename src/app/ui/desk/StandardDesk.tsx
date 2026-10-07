@@ -10,7 +10,7 @@ import { BriefingDialog } from './BriefingDialog.tsx';
 import { FeedbackDialog } from './FeedbackDialog.tsx';
 import { Hud } from './Hud.tsx';
 import { QueuePane, type QueueItem } from './QueuePane.tsx';
-import { BossBar } from './BossBar.tsx';
+import { BossBar, BossBrief } from './BossBar.tsx';
 import { MentorHints } from './MentorHints.tsx';
 import { Rulebook } from '../Rulebook.tsx';
 import { useShiftClock } from './useShiftClock.ts';
@@ -215,6 +215,7 @@ export function StandardDesk({
         >
           <QueuePane
             session={session}
+            header={bossMeta && <BossBrief session={session} meta={bossMeta} practice={practice} />}
             labelOf={labelOf}
             onOpen={(caseId) => {
               dispatch({ type: 'OPEN_CASE', caseId });

@@ -14,6 +14,8 @@ test('the end-of-shift boss arrives as one wave and is beaten by deciding every 
   await expect(banner).toHaveAttribute('data-status', 'active');
   await expect(banner).toContainText('BOSS DATANG!');
   await expect(banner).toContainText('Gelombang Pancingan');
+  // Cerita boss tetap terbaca di atas antrian setelah banner hilang.
+  await expect(page.getByTestId('boss-brief')).toContainText('Tiga pesan masuk bersamaan');
   await banner.getByRole('button', { name: 'Tutup' }).click();
   const bar = page.getByTestId('boss-bar');
   await expect(bar).toHaveAttribute('data-hp', '3');

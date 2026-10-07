@@ -67,8 +67,8 @@ export function Hud({ deskTitle, session, wallet, practice, streak, onTogglePaus
           title={id.daily.badgeLabel}
           data-testid="daily-badge"
         >
-          <span aria-hidden="true">📅 </span>
-          {id.daily.badge}
+          <span aria-hidden="true">📅</span>
+          <span className="hidden sm:inline"> {id.daily.badge}</span>
           <span className="sr-only">: {id.daily.badgeLabel}</span>
         </span>
       ) : (
@@ -147,7 +147,11 @@ export function Hud({ deskTitle, session, wallet, practice, streak, onTogglePaus
             data-testid="streak"
           >
             <span aria-hidden="true">🔥 </span>
-            {id.desk.streak(streak)}
+            {/* HP: cukup "×N" supaya HUD tetap satu baris; teks lengkap untuk pembaca layar. */}
+            <span className="sr-only sm:not-sr-only">{id.desk.streak(streak)}</span>
+            <span aria-hidden="true" className="sm:hidden">
+              ×{streak}
+            </span>
           </span>
         )}
         <span className="hidden sm:inline">

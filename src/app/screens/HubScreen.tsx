@@ -117,14 +117,14 @@ export function HubScreen() {
           className="flex flex-wrap items-center gap-3 border-4 border-accent bg-panel p-3 pixel-shadow"
           data-testid="new-badges"
         >
-          <p className="font-display text-accent">{id.hub.newBadges}</p>
-          <ul className="flex flex-1 flex-wrap gap-3">
+          <p className="w-full font-display text-accent">{id.hub.newBadges}</p>
+          <ul className="flex w-full flex-wrap gap-3">
             {newBadges.map((bid) => {
               const b = Object.values(contents)
                 .flatMap((c) => c.badges)
                 .find((x) => x.id === bid);
               return b ? (
-                <li key={bid} className="stamp flex items-center gap-2">
+                <li key={bid} className="stamp flex min-w-0 items-center gap-2">
                   <Medal tier={b.tier} icon={b.icon} locked={false} className="w-9 text-lg" />
                   <span className="font-display text-sm">{b.title}</span>
                 </li>
@@ -237,7 +237,13 @@ export function HubScreen() {
                   {label}
                 </button>
               )}
-              {ownContent && (
+              {ownContent && dailyPool(ownContent, progress).length === 0 && (
+                <p className="text-xs text-ink-muted" data-testid={`daily-${m.id}`}>
+                  <span aria-hidden="true">📅 </span>
+                  {id.daily.locked}
+                </p>
+              )}
+              {ownContent && dailyPool(ownContent, progress).length > 0 && (
                 <section
                   aria-label={id.daily.sectionLabel(m.deskTitle)}
                   className="mt-2 flex flex-col gap-2 border-t-2 border-ink/30 pt-2"
@@ -255,9 +261,7 @@ export function HubScreen() {
                       </p>
                     )}
                   </div>
-                  {dailyPool(ownContent, progress).length === 0 ? (
-                    <p className="text-xs text-ink-muted">{id.daily.locked}</p>
-                  ) : dailyRun ? (
+                  {dailyRun ? (
                     <button
                       type="button"
                       className={btnSecondary}

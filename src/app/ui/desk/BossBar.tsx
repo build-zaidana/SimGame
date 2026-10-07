@@ -62,12 +62,12 @@ export function BossBar({
       {status === 'active' && (
         <section
           aria-label={id.boss.label(meta.title)}
-          className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b-2 border-danger bg-danger/15 px-3 py-1"
+          className="flex flex-wrap items-center gap-x-3 border-b-2 border-danger bg-danger/15 px-3 py-0.5 text-sm"
           data-testid="boss-bar"
           data-status={status}
           data-hp={state.hp}
         >
-          <p className="font-display text-danger">
+          <p className="min-w-0 flex-1 truncate font-display text-danger">
             <span aria-hidden="true">👾 {meta.icon} </span>
             {id.boss.label(meta.title)}
           </p>
@@ -92,7 +92,6 @@ export function BossBar({
               {id.boss.timeLeft(Math.ceil(state.msLeft / 1000))}
             </p>
           )}
-          <p className="w-full text-xs">{rules}</p>
         </section>
       )}
       {banner && (
@@ -119,7 +118,6 @@ export function BossBar({
                 <span aria-hidden="true">{meta.icon} </span>
                 {meta.title}
               </span>
-              <span className="text-sm">{meta.intro}</span>
               <span className="text-sm font-bold">{rules}</span>
             </>
           ) : (
@@ -143,5 +141,40 @@ export function BossBar({
         </div>
       )}
     </>
+  );
+}
+
+/** Cerita & aturan boss di atas antrian selama boss aktif (banner hanya pengumuman singkat). */
+export function BossBrief({
+  session,
+  meta,
+  practice,
+}: {
+  session: ShiftSession;
+  meta: BossMeta;
+  practice: boolean;
+}) {
+  const state = bossState(session);
+  if (!state || state.status !== 'active' || !session.boss) return null;
+  const reward = session.boss.reward;
+  return (
+    <section
+      aria-label={id.boss.label(meta.title)}
+      className="flex flex-col gap-1 border-2 border-danger bg-danger/15 p-2 text-sm"
+      data-testid="boss-brief"
+    >
+      <p className="font-display text-danger">
+        <span aria-hidden="true">👾 {meta.icon} </span>
+        {meta.title}
+      </p>
+      <p>{meta.intro}</p>
+      <p className="font-bold">
+        {practice
+          ? id.boss.rulesPractice(state.maxHp)
+          : session.playMode === 'normal'
+            ? id.boss.rulesTimed(state.maxHp, reward)
+            : id.boss.rules(state.maxHp, reward)}
+      </p>
+    </section>
   );
 }
