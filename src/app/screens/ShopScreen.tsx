@@ -15,6 +15,7 @@ export function ShopScreen() {
   const buyUpgrade = useAppStore((s) => s.buyUpgrade);
   const back = useAppStore((s) => s.back);
   const [message, setMessage] = useState<string | null>(null);
+  const [justBought, setJustBought] = useState<string | null>(null);
   const { modeId, content, inSession } = useMenuMode();
 
   const progress = save?.modes[modeId] ?? newModeProgress();
@@ -112,9 +113,9 @@ export function ShopScreen() {
                   </p>
                   <p className="text-sm">{u.description}</p>
                   {owned ? (
-                    <p className="font-display text-safe">
+                    <p className="font-display text-safe" role="status">
                       <span aria-hidden="true">✓ </span>
-                      {id.shop.owned}
+                      {justBought === u.id ? id.shop.installed(u.name) : id.shop.owned}
                     </p>
                   ) : locked ? (
                     <p className="text-sm text-ink-muted">
@@ -127,13 +128,19 @@ export function ShopScreen() {
                         type="button"
                         className={btnPrimary}
                         disabled={!affordable}
+                        aria-describedby={affordable ? undefined : `upgrade-${u.id}-funds`}
                         onClick={() => {
-                          if (buyUpgrade(modeId, u.id)?.ok) setMessage(id.shop.installed(u.name));
+                          // Konfirmasi tampil di kartu ini (pesan di atas halaman tidak terlihat di HP).
+                          if (buyUpgrade(modeId, u.id)?.ok) setJustBought(u.id);
                         }}
                       >
                         {id.shop.buy(u.name, u.price)}
                       </button>
-                      {!affordable && <p className="text-xs text-ink-muted">{id.shop.notEnough}</p>}
+                      {!affordable && (
+                        <p id={`upgrade-${u.id}-funds`} className="text-xs text-ink-muted">
+                          {id.shop.notEnough}
+                        </p>
+                      )}
                     </>
                   )}
                 </li>

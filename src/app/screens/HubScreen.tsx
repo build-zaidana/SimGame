@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { t as id } from '../../i18n/index.ts';
 import { modes, upcomingModes } from '../../modes/registry.ts';
 import { newModeProgress } from '../../persistence/saveSchema.ts';
-import { nextShift, practiceShifts } from '../progress.ts';
+import { dailyPool, nextShift, practiceShifts } from '../progress.ts';
 import { localDate, useAppStore } from '../store.ts';
 import { previousDate } from '../../engine/daily.ts';
 import { PhaserHub, type HotspotInfo, type HubSpeech } from '../../hub/PhaserHub.tsx';
@@ -117,14 +117,14 @@ export function HubScreen() {
           className="flex flex-wrap items-center gap-3 border-4 border-accent bg-panel p-3 pixel-shadow"
           data-testid="new-badges"
         >
-          <p className="font-display text-accent">{id.hub.newBadges}</p>
-          <ul className="flex flex-1 flex-wrap gap-3">
+          <p className="w-full font-display text-accent">{id.hub.newBadges}</p>
+          <ul className="flex w-full flex-wrap gap-3">
             {newBadges.map((bid) => {
               const b = Object.values(contents)
                 .flatMap((c) => c.badges)
                 .find((x) => x.id === bid);
               return b ? (
-                <li key={bid} className="stamp flex items-center gap-2">
+                <li key={bid} className="stamp flex min-w-0 items-center gap-2">
                   <Medal tier={b.tier} icon={b.icon} locked={false} className="w-9 text-lg" />
                   <span className="font-display text-sm">{b.title}</span>
                 </li>
@@ -237,25 +237,31 @@ export function HubScreen() {
                   {label}
                 </button>
               )}
-              {ownContent && (
+              {ownContent && dailyPool(ownContent, progress).length === 0 && (
+                <p className="text-xs text-ink-muted" data-testid={`daily-${m.id}`}>
+                  <span aria-hidden="true">📅 </span>
+                  {id.daily.locked}
+                </p>
+              )}
+              {ownContent && dailyPool(ownContent, progress).length > 0 && (
                 <section
-                  aria-labelledby={`daily-${m.id}`}
+                  aria-label={id.daily.sectionLabel(m.deskTitle)}
                   className="mt-2 flex flex-col gap-2 border-t-2 border-ink/30 pt-2"
                   data-testid={`daily-${m.id}`}
                 >
-                  <h3 id={`daily-${m.id}`} className="font-display">
-                    <span aria-hidden="true">📅 </span>
-                    {id.daily.heading}
+                  <div className="flex flex-wrap items-baseline gap-x-2">
+                    <h3 className="font-display">
+                      <span aria-hidden="true">📅 </span>
+                      {id.daily.heading}
+                    </h3>
                     {streak > 0 && (
-                      <span className="ml-2 text-sm text-accent" data-testid="daily-streak">
+                      <p className="text-sm text-accent" data-testid="daily-streak">
                         <span aria-hidden="true">🔥 </span>
                         {id.daily.streak(streak)}
-                      </span>
+                      </p>
                     )}
-                  </h3>
-                  {practiceList.length === 0 ? (
-                    <p className="text-xs text-ink-muted">{id.daily.locked}</p>
-                  ) : dailyRun ? (
+                  </div>
+                  {dailyRun ? (
                     <button
                       type="button"
                       className={btnSecondary}
@@ -290,10 +296,10 @@ export function HubScreen() {
               )}
               {(practiceRun || practiceList.length > 0) && (
                 <section
-                  aria-labelledby={`practice-${m.id}`}
+                  aria-label={id.hub.practiceLabel(m.deskTitle)}
                   className="mt-2 flex flex-col gap-2 border-t-2 border-ink/30 pt-2"
                 >
-                  <h3 id={`practice-${m.id}`} className="font-display">
+                  <h3 className="font-display">
                     <span aria-hidden="true">🎯 </span>
                     {id.hub.practiceHeading}
                   </h3>

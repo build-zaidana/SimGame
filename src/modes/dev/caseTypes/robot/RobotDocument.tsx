@@ -28,7 +28,8 @@ export function RobotDocument({ data, locked, answer, onAnswer, onRun }: Documen
   useEffect(() => warmUpPython(), []);
 
   const flush = (text = code) => {
-    if (text === saved.current) return;
+    // Tanpa jawaban tersimpan, kode awal tetap ditulis (lihat CodingDocument).
+    if (text === saved.current && answer?.text !== undefined) return;
     saved.current = text;
     onAnswer?.(text);
   };
@@ -73,6 +74,8 @@ export function RobotDocument({ data, locked, answer, onAnswer, onRun }: Documen
       setOutcome(o);
       if (o.kind !== 'done') return;
       // Di HP peta ada jauh di atas tombol Jalankan: gulir ke peta supaya robotnya terlihat bergerak.
+      // Fokus ikut ke peta supaya pengguna keyboard tidak kehilangan posisinya.
+      stage.current?.focus({ preventScroll: true });
       stage.current?.scrollIntoView({ block: 'center', behavior: instant ? 'auto' : 'smooth' });
       const passed = o.result.maps.filter((m) => m.passed).length;
       onRun?.(passed, d.maps.length);
@@ -110,7 +113,11 @@ export function RobotDocument({ data, locked, answer, onAnswer, onRun }: Documen
           <p key={i}>{s}</p>
         ))}
       </div>
-      <div ref={stage}>
+      <div
+        ref={stage}
+        tabIndex={-1}
+        className="focus-visible:outline-4 focus-visible:outline-focus"
+      >
         {d.maps.length > 1 && (
           <div role="tablist" aria-label={t.mapsLabel} className="mb-1 flex gap-1">
             {d.maps.map((_, i) => {

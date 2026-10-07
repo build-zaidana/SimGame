@@ -19,7 +19,16 @@ export interface BossMeta {
  * datang, kalah, atau lolos. Banner tidak menangkap klik (pemain tetap bisa bekerja di bawahnya);
  * hilang sendiri atau ditutup.
  */
-export function BossBar({ session, meta }: { session: ShiftSession; meta: BossMeta }) {
+export function BossBar({
+  session,
+  meta,
+  practice,
+}: {
+  session: ShiftSession;
+  meta: BossMeta;
+  /** Mode Latihan: tidak ada bonus gaji. */
+  practice: boolean;
+}) {
   const sound = useAppStore((s) => s.save?.profile.settings.sound ?? false);
   const state = bossState(session);
   const status = state?.status ?? 'pending';
@@ -43,20 +52,27 @@ export function BossBar({ session, meta }: { session: ShiftSession; meta: BossMe
   if (!state || !session.boss) return null;
   const timed = session.playMode === 'normal';
   const reward = session.boss.reward;
+  const rules = practice
+    ? id.boss.rulesPractice(state.maxHp)
+    : timed
+      ? id.boss.rulesTimed(state.maxHp, reward)
+      : id.boss.rules(state.maxHp, reward);
   return (
     <>
       {status === 'active' && (
-        <div
-          className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b-2 border-danger bg-danger/15 px-3 py-1"
+        <section
+          aria-label={id.boss.label(meta.title)}
+          className="flex flex-wrap items-center gap-x-3 border-b-2 border-danger bg-danger/15 px-3 py-0.5 text-sm"
           data-testid="boss-bar"
           data-status={status}
           data-hp={state.hp}
         >
-          <p className="font-display text-danger">
+          <p className="min-w-0 flex-1 truncate font-display text-danger">
             <span aria-hidden="true">👾 {meta.icon} </span>
             {id.boss.label(meta.title)}
           </p>
-          <p className="flex items-center" aria-label={id.boss.hp(state.hp, state.maxHp)}>
+          <p className="flex items-center">
+            <span className="sr-only">{id.boss.hp(state.hp, state.maxHp)}</span>
             <span key={state.hp} className={state.hp < state.maxHp ? 'flinch' : 'inline-block'}>
               {Array.from({ length: state.maxHp }, (_, i) => (
                 <span
@@ -76,7 +92,7 @@ export function BossBar({ session, meta }: { session: ShiftSession; meta: BossMe
               {id.boss.timeLeft(Math.ceil(state.msLeft / 1000))}
             </p>
           )}
-        </div>
+        </section>
       )}
       {banner && (
         <div
@@ -102,18 +118,15 @@ export function BossBar({ session, meta }: { session: ShiftSession; meta: BossMe
                 <span aria-hidden="true">{meta.icon} </span>
                 {meta.title}
               </span>
-              <span className="text-sm">{meta.intro}</span>
-              <span className="text-sm font-bold">
-                {timed
-                  ? id.boss.rulesTimed(state.maxHp, reward)
-                  : id.boss.rules(state.maxHp, reward)}
-              </span>
+              <span className="text-sm font-bold">{rules}</span>
             </>
           ) : (
             <span className="font-display text-lg">
               <span aria-hidden="true">{banner === 'defeated' ? '🏆 ' : '💨 '}</span>
               {banner === 'defeated'
-                ? id.boss.defeated(meta.title, reward)
+                ? practice
+                  ? id.boss.defeatedPractice(meta.title)
+                  : id.boss.defeated(meta.title, reward)
                 : id.boss.escaped(meta.title)}
             </span>
           )}
@@ -128,5 +141,40 @@ export function BossBar({ session, meta }: { session: ShiftSession; meta: BossMe
         </div>
       )}
     </>
+  );
+}
+
+/** Cerita & aturan boss di atas antrian selama boss aktif (banner hanya pengumuman singkat). */
+export function BossBrief({
+  session,
+  meta,
+  practice,
+}: {
+  session: ShiftSession;
+  meta: BossMeta;
+  practice: boolean;
+}) {
+  const state = bossState(session);
+  if (!state || state.status !== 'active' || !session.boss) return null;
+  const reward = session.boss.reward;
+  return (
+    <section
+      aria-label={id.boss.label(meta.title)}
+      className="flex flex-col gap-1 border-2 border-danger bg-danger/15 p-2 text-sm"
+      data-testid="boss-brief"
+    >
+      <p className="font-display text-danger">
+        <span aria-hidden="true">👾 {meta.icon} </span>
+        {meta.title}
+      </p>
+      <p>{meta.intro}</p>
+      <p className="font-bold">
+        {practice
+          ? id.boss.rulesPractice(state.maxHp)
+          : session.playMode === 'normal'
+            ? id.boss.rulesTimed(state.maxHp, reward)
+            : id.boss.rules(state.maxHp, reward)}
+      </p>
+    </section>
   );
 }

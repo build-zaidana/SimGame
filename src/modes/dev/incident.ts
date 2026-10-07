@@ -12,11 +12,16 @@ export function serverHealth(p: {
   nowMs: number;
   rolledBackAtMs?: number | undefined;
   drainPerSecond: number;
+  /** Batas bawah (mode Santai: server tidak pernah down). */
+  floor?: number;
 }): number {
   const until = Math.min(p.nowMs, p.rolledBackAtMs ?? p.nowMs);
   const lost = (Math.max(0, until - p.openedAtMs) / 1000) * p.drainPerSecond;
-  return Math.max(0, Math.min(100, Math.round(100 - lost)));
+  return Math.max(p.floor ?? 0, Math.min(100, Math.round(100 - lost)));
 }
+
+/** Mode Santai (PRD §76: jam tidak mengurangi skor): server hanya berasap/terbakar, tidak down. */
+export const RELAXED_HEALTH_FLOOR = 35;
 
 /**
  * Nilai = bagian tes yang lulus (seperti tugas coding). Komponen kedua = sisa kesehatan server
@@ -29,9 +34,16 @@ export function evaluateIncident(
 ): CaseOutcome {
   const a = input.answer;
   const score = a?.total ? (a.passed ?? 0) / a.total : 0;
-  const health = input.timing
-    ? serverHealth({ ...input.timing, rolledBackAtMs: a?.rolledBackAtMs, drainPerSecond })
-    : 100;
+  // Mode Santai: jam tidak pernah mengurangi skor (PRD §76).
+  const health =
+    input.timing && !input.timing.relaxed
+      ? serverHealth({
+          openedAtMs: input.timing.openedAtMs,
+          nowMs: input.timing.nowMs,
+          rolledBackAtMs: a?.rolledBackAtMs,
+          drainPerSecond,
+        })
+      : 100;
   const down = health === 0;
   const correct = score === 1 && !down;
   return {

@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { t as id } from '../../../i18n/index.ts';
 import type { ShiftSession } from '../../../engine/types.ts';
 
@@ -9,17 +10,20 @@ export interface QueueItem {
 
 interface QueuePaneProps {
   session: ShiftSession;
+  /** Ditampilkan di atas antrian (mis. cerita boss). */
+  header?: ReactNode;
   labelOf(caseId: string): QueueItem;
   onOpen(caseId: string): void;
 }
 
 const STATUS_GLYPH = { arrived: '•', decided: '✓', missed: '✗', pending: '' } as const;
 
-export function QueuePane({ session, labelOf, onOpen }: QueuePaneProps) {
+export function QueuePane({ session, labelOf, onOpen, header }: QueuePaneProps) {
   const visible = session.cases.filter((c) => c.status !== 'pending');
   const waiting = visible.filter((c) => c.status === 'arrived').length === 0;
   return (
     <div className="flex flex-col gap-2 p-3">
+      {header}
       <h2 className="font-display text-ink-muted">{id.desk.queueHeading}</h2>
       <ol className="flex flex-col gap-2">
         {visible.map((c) => {

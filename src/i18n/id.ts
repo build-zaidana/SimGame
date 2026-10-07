@@ -55,6 +55,7 @@ export const id = {
     enterShift: (order: number, title: string) => `Mulai Shift ${order}: ${title}`,
     allShiftsDone: 'Semua shift selesai! Ulangi shift mana pun lewat Mode Latihan.',
     practiceHeading: 'Mode Latihan',
+    practiceLabel: (desk: string) => `Mode Latihan ${desk}`,
     practiceIntro:
       'Ulangi shift yang sudah selesai. Tidak memengaruhi gaji, kepercayaan, skor terbaik, atau review.',
     practiceShift: (order: number, title: string) => `Latihan Shift ${order}: ${title}`,
@@ -230,6 +231,9 @@ export const id = {
       `Hadiah +Rp ${reward} · beruntun ${streak} hari`,
     reportAgain: 'Hadiah hari ini untuk meja ini sudah diambil. Hasil ini tidak dibayar lagi.',
     claim: 'Ambil hadiah & kembali ke kantor',
+    caseRight: 'Benar',
+    caseWrong: 'Belum tepat',
+    sectionLabel: (desk: string) => `Tantangan Harian ${desk}`,
   },
   boss: {
     chip: 'BOSS',
@@ -248,6 +252,9 @@ export const id = {
     reportEscaped: (title: string) =>
       `Boss ${title}: lolos. Kalahkan boss dengan memutuskan semua kasusnya dengan benar.`,
     dismiss: 'Tutup',
+    rulesPractice: (n: number) =>
+      `Latihan: putuskan ${n} kasus boss dengan benar untuk mengalahkannya (tanpa bonus gaji).`,
+    defeatedPractice: (title: string) => `Boss ${title} kalah! (latihan, tanpa bonus gaji)`,
   },
   rank: {
     current: (title: string) => `Pangkat: ${title}`,
@@ -530,6 +537,8 @@ export const id = {
       rollbackHint: 'Kembalikan versi sehat dulu: kerusakan berhenti, lalu perbaiki bugnya.',
       lockedHint: 'Perbaiki bugnya secepat mungkin sebelum server down!',
       fixed: 'Perbaikan siap! Tekan Kirim Solusi untuk memasangnya sekarang.',
+      relaxedHint:
+        'Mode Santai: server tidak akan down dan waktu tidak mengurangi skor. Tapi pengguna tetap menunggu!',
     },
     customers: {
       label: 'Antrean pelanggan aplikasi',

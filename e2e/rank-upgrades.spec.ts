@@ -29,7 +29,9 @@ test('finishing a shift promotes the player, and desk upgrades can be bought by 
   );
   await page.getByRole('button', { name: 'Beli Tanaman meja (Rp 30)' }).click();
   await expect(page.getByTestId('wallet')).toHaveText('Gajimu: Rp 46');
-  await expect(page.locator('[data-upgrade="plant"]')).toContainText('Sudah dimiliki');
+  await expect(page.locator('[data-upgrade="plant"]')).toContainText(
+    'Tanaman meja dipasang di mejamu!',
+  );
   await page.getByRole('button', { name: 'Kembali' }).click();
 
   // Barang yang dibeli dipajang di meja.

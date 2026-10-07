@@ -56,6 +56,7 @@ export const en: Strings = {
     enterShift: (order, title) => `Start Shift ${order}: ${title}`,
     allShiftsDone: 'All shifts done! Replay any shift in Practice Mode.',
     practiceHeading: 'Practice Mode',
+    practiceLabel: (desk) => `${desk} Practice Mode`,
     practiceIntro:
       'Replay a shift you have finished. It does not change your pay, trust, best score or reviews.',
     practiceShift: (order, title) => `Practice Shift ${order}: ${title}`,
@@ -229,6 +230,9 @@ export const en: Strings = {
     reportReward: (reward, streak) => `Reward +Rp ${reward} · ${streak}-day streak`,
     reportAgain: 'Today’s reward for this desk was already claimed. This run is not paid again.',
     claim: 'Claim reward & return to the office',
+    caseRight: 'Correct',
+    caseWrong: 'Not quite',
+    sectionLabel: (desk) => `${desk} Daily Challenge`,
   },
   boss: {
     chip: 'BOSS',
@@ -246,6 +250,9 @@ export const en: Strings = {
     reportEscaped: (title) =>
       `Boss ${title}: got away. Beat a boss by deciding all of its cases correctly.`,
     dismiss: 'Close',
+    rulesPractice: (n) =>
+      `Practice: decide all ${n} boss cases correctly to beat it (no pay bonus).`,
+    defeatedPractice: (title) => `${title} defeated! (practice, no pay bonus)`,
   },
   rank: {
     current: (title) => `Rank: ${title}`,
@@ -522,6 +529,8 @@ export const en: Strings = {
       rollbackHint: 'Restore the healthy version first: the damage stops, then fix the bug.',
       lockedHint: 'Fix the bug as fast as you can before the server goes down!',
       fixed: 'Fix ready! Press Submit Solution to deploy it now.',
+      relaxedHint:
+        'Relaxed mode: the server will not go down and time does not cost points. Users are still waiting, though!',
     },
     customers: {
       label: 'App customer queue',
