@@ -3,7 +3,13 @@ import type { ModeContent } from '../content/loader.ts';
 import type { CaseSchemas } from '../content/loader.ts';
 import { locale, setLocale, type Locale } from '../i18n/index.ts';
 import { buyTool, buyUpgrade, type BuyResult, type BuyUpgradeResult } from '../engine/economy.ts';
-import { shiftReducer, startShift, summarizeShift, type ShiftAction } from '../engine/shift.ts';
+import {
+  dropUnknownCases,
+  shiftReducer,
+  startShift,
+  summarizeShift,
+  type ShiftAction,
+} from '../engine/shift.ts';
 import type { ShiftSession } from '../engine/types.ts';
 import type { CareerMode } from '../modes/contract.ts';
 import { getMode, modes } from '../modes/registry.ts';
@@ -503,10 +509,12 @@ async function openSession(
   practiceShiftId?: string,
   dailyDate?: string,
 ) {
-  const { save } = useAppStore.getState();
   const mode = getMode(modeId);
-  if (!save || !mode) return;
+  if (!mode || !useAppStore.getState().save) return;
   const content = await loadContent(modeId);
+  // Dibaca setelah konten dimuat: perubahan save selama menunggu (mis. menutup tips) tidak hilang.
+  const { save } = useAppStore.getState();
+  if (!save) return;
   const progress = save.modes[modeId] ?? newModeProgress();
   const slot = slotOf(practice);
   let session = progress[slot] ?? null;
@@ -548,11 +556,13 @@ async function openSession(
       practice,
     });
   }
+  const merged = withGeneratedCases(content, session, schemasOf(mode));
+  session = dropUnknownCases(session, (id) => id in merged.cases);
   const next = withSession(save, session, modeId, slot);
   write(next);
   useAppStore.setState({
     contents: { ...useAppStore.getState().contents, [modeId]: content },
-    content: withGeneratedCases(content, session, schemasOf(mode)),
+    content: merged,
     session,
     practice,
     save: next,
