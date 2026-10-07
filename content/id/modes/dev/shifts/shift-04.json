@@ -80,5 +80,14 @@
     },
     "classified": "HILANG: Satu tes untuk daftar kosong. Terakhir terlihat sebelum rilis Kamis.",
     "sources": ["Martin Fowler: Test Pyramid"]
+  },
+  "boss": {
+    "title": "Dinding Tes Merah",
+    "icon": "🧪",
+    "intro": "Tes merah di mana-mana. Pastikan setiap perubahan punya tes yang benar sebelum disetujui.",
+    "caseIds": ["s04-pr-004", "s04-build-003", "s04-pr-005"],
+    "arriveAt": 65,
+    "durationGameMinutes": 45,
+    "reward": 60
   }
 }

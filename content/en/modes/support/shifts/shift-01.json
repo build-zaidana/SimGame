@@ -59,5 +59,14 @@
     },
     "classified": "WANTED: A patient technician who doesn't panic at blinking lights. See Pak Joko at the IT Workshop, floor 2.",
     "sources": ["CompTIA A+ Core 2: Troubleshooting Methodology", "ITIL 4: Service Desk practice"]
+  },
+  "boss": {
+    "title": "Monday Morning Rush",
+    "icon": "☕",
+    "intro": "Three tickets arrive at once before the morning meeting. Find the cause first, do not just replace the device.",
+    "caseIds": ["s01-diag-002", "s01-ticket-005", "s01-ticket-006"],
+    "arriveAt": 50,
+    "durationGameMinutes": 30,
+    "reward": 30
   }
 }

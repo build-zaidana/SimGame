@@ -6,7 +6,10 @@
       "description": "Menyelesaikan Shift 1 di Bengkel IT.",
       "icon": "🪛",
       "tier": "bronze",
-      "rule": { "type": "shift-complete", "shiftId": "support-01" }
+      "rule": {
+        "type": "shift-complete",
+        "shiftId": "support-01"
+      }
     },
     {
       "id": "murid-bengkel",
@@ -14,7 +17,9 @@
       "description": "Menjawab semua soal Review Cepat dengan benar dalam satu shift.",
       "icon": "📚",
       "tier": "bronze",
-      "rule": { "type": "review-perfect" }
+      "rule": {
+        "type": "review-perfect"
+      }
     },
     {
       "id": "tak-ada-yang-tertinggal",
@@ -22,7 +27,11 @@
       "description": "Satu shift penuh tanpa membiarkan kerusakan, dengan minimal ★★.",
       "icon": "🧯",
       "tier": "silver",
-      "rule": { "type": "no-threat-allowed", "minCases": 8, "minStars": 2 }
+      "rule": {
+        "type": "no-threat-allowed",
+        "minCases": 8,
+        "minStars": 2
+      }
     },
     {
       "id": "hemat-suku-cadang",
@@ -30,7 +39,11 @@
       "description": "Satu shift penuh tanpa membongkar perangkat sehat dan tanpa eskalasi yang tidak perlu, dengan minimal ★★.",
       "icon": "🔩",
       "tier": "silver",
-      "rule": { "type": "no-legit-blocked", "minCases": 8, "minStars": 2 }
+      "rule": {
+        "type": "no-legit-blocked",
+        "minCases": 8,
+        "minStars": 2
+      }
     },
     {
       "id": "mata-teknisi",
@@ -38,7 +51,10 @@
       "description": "Lima kasus berturut-turut dengan keputusan tepat, bukti lengkap, dan tanpa salah tandai.",
       "icon": "🔎",
       "tier": "silver",
-      "rule": { "type": "evidence-streak", "count": 5 }
+      "rule": {
+        "type": "evidence-streak",
+        "count": 5
+      }
     },
     {
       "id": "teknisi-mandiri",
@@ -46,7 +62,11 @@
       "description": "Menyelesaikan satu shift tanpa bertanya ke Pak Joko, dengan minimal ★★.",
       "icon": "🧠",
       "tier": "silver",
-      "rule": { "type": "no-hints", "minCases": 8, "minStars": 2 }
+      "rule": {
+        "type": "no-hints",
+        "minCases": 8,
+        "minStars": 2
+      }
     },
     {
       "id": "kotak-perkakas",
@@ -54,7 +74,10 @@
       "description": "Memiliki kedua alat Bengkel IT.",
       "icon": "🧰",
       "tier": "silver",
-      "rule": { "type": "tools-owned", "count": 2 }
+      "rule": {
+        "type": "tools-owned",
+        "count": 2
+      }
     },
     {
       "id": "bengkel-bintang",
@@ -62,7 +85,10 @@
       "description": "Meraih ★★★ di sebuah shift Bengkel IT.",
       "icon": "⭐",
       "tier": "gold",
-      "rule": { "type": "shift-stars", "stars": 3 }
+      "rule": {
+        "type": "shift-stars",
+        "stars": 3
+      }
     },
     {
       "id": "andalan-kantor",
@@ -70,7 +96,10 @@
       "description": "Mengakhiri shift dengan kepercayaan pengguna 90 atau lebih.",
       "icon": "💛",
       "tier": "gold",
-      "rule": { "type": "trust-at-least", "value": 90 }
+      "rule": {
+        "type": "trust-at-least",
+        "value": 90
+      }
     },
     {
       "id": "kepala-bengkel",
@@ -78,7 +107,20 @@
       "description": "Menyelesaikan Shift 5 dan menemukan jejak Kelabu di laptop aneh.",
       "icon": "🏅",
       "tier": "gold",
-      "rule": { "type": "shift-complete", "shiftId": "support-05" }
+      "rule": {
+        "type": "shift-complete",
+        "shiftId": "support-05"
+      }
+    },
+    {
+      "id": "pemburu-boss",
+      "title": "Pemburu Boss",
+      "description": "Mengalahkan boss akhir shift: semua kasus boss diputuskan dengan benar.",
+      "icon": "👾",
+      "tier": "silver",
+      "rule": {
+        "type": "boss-defeated"
+      }
     }
   ]
 }

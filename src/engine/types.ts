@@ -75,6 +75,25 @@ export interface ShiftPlan {
   durationGameMinutes: number;
   realSecondsPerGameMinute: number;
   cases: { caseId: string; arriveAt: number }[];
+  /** Gelombang boss akhir shift (ADR 028): kasus-kasus ini datang bersamaan di `arriveAt`. */
+  boss?: BossPlan | undefined;
+}
+
+export interface BossPlan {
+  caseIds: string[];
+  /** Menit game saat boss datang. */
+  arriveAt: number;
+  /** Batas waktu boss (menit game, hanya di mode Normal). */
+  durationGameMinutes: number;
+  /** Bonus gaji bila semua kasus boss benar. */
+  reward: number;
+}
+
+export interface SessionBoss {
+  caseIds: string[];
+  startsAtMs: number;
+  endsAtMs: number;
+  reward: number;
 }
 
 export type ShiftPhase = 'briefing' | 'working' | 'inspecting' | 'feedback' | 'ended';
@@ -117,6 +136,8 @@ export interface ShiftSession {
   generatedCases: Record<string, unknown>;
   /** Keuntungan meja & pangkat saat shift dimulai (ADR 027). Tidak ada = nilai bawaan. */
   perks?: SessionPerks | undefined;
+  /** v12: gelombang boss shift ini (ADR 028). Tidak ada = shift tanpa boss. */
+  boss?: SessionBoss | undefined;
 }
 
 export interface SessionPerks {

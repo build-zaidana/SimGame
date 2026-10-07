@@ -10,6 +10,7 @@ import { BriefingDialog } from './BriefingDialog.tsx';
 import { FeedbackDialog } from './FeedbackDialog.tsx';
 import { Hud } from './Hud.tsx';
 import { QueuePane, type QueueItem } from './QueuePane.tsx';
+import { BossBar } from './BossBar.tsx';
 import { MentorHints } from './MentorHints.tsx';
 import { Rulebook } from '../Rulebook.tsx';
 import { useShiftClock } from './useShiftClock.ts';
@@ -149,6 +150,7 @@ export function StandardDesk({
     return `${mobile} md:block md:border-l-2 md:border-ink/40 lg:border-l-0`;
   };
   const waitingCount = session.cases.filter((c) => c.status === 'arrived').length;
+  const bossMeta = content.shifts.find((s) => s.id === session.shiftId)?.boss;
 
   return (
     <div className="flex h-dvh flex-col">
@@ -160,6 +162,7 @@ export function StandardDesk({
         wallet={wallet}
         onTogglePause={() => dispatch({ type: session.paused ? 'RESUME' : 'PAUSE' })}
       />
+      {bossMeta && <BossBar session={session} meta={bossMeta} />}
       <div className="hidden items-center gap-2 border-b-2 border-ink/40 p-2 md:flex lg:hidden">
         <button
           type="button"

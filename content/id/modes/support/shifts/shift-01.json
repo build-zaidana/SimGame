@@ -59,5 +59,14 @@
     },
     "classified": "DICARI: Teknisi sabar yang tidak panik melihat lampu berkedip. Temui Pak Joko di Bengkel IT, lantai 2.",
     "sources": ["CompTIA A+ Core 2: Troubleshooting Methodology", "ITIL 4: Service Desk practice"]
+  },
+  "boss": {
+    "title": "Antrean Senin Pagi",
+    "icon": "☕",
+    "intro": "Tiga tiket datang sekaligus sebelum rapat pagi. Cari penyebabnya dulu, jangan langsung ganti perangkat.",
+    "caseIds": ["s01-diag-002", "s01-ticket-005", "s01-ticket-006"],
+    "arriveAt": 50,
+    "durationGameMinutes": 30,
+    "reward": 30
   }
 }

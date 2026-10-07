@@ -1,4 +1,5 @@
 import { applyTrust, shiftPay, trustDelta, type PayRule } from './economy.ts';
+import { bossBonus, bossState } from './boss.ts';
 import { createRng } from './rng.ts';
 import { caseScore, shiftStars, timeBonus } from './scoring.ts';
 import type {
@@ -49,11 +50,18 @@ export function startShift({
   perks,
 }: StartShiftParams): ShiftSession {
   const msPerGameMinute = plan.realSecondsPerGameMinute * 1000;
+  const boss = plan.boss;
+  const bossIds = boss
+    ? plan.cases.map((c) => c.caseId).filter((id) => boss.caseIds.includes(id))
+    : [];
+  // Kasus boss datang bersamaan saat boss tiba.
+  const arrival = (c: { caseId: string; arriveAt: number }) =>
+    boss && bossIds.includes(c.caseId) ? boss.arriveAt : c.arriveAt;
   const cases: SessionCase[] = [...plan.cases]
-    .sort((a, b) => a.arriveAt - b.arriveAt)
+    .sort((a, b) => arrival(a) - arrival(b))
     .map((c) => ({
       caseId: c.caseId,
-      arriveAtMs: c.arriveAt * msPerGameMinute,
+      arriveAtMs: arrival(c) * msPerGameMinute,
       status: 'pending',
       marks: [],
       hintsUsed: 0,
@@ -81,6 +89,16 @@ export function startShift({
     trust,
     generatedCases,
     ...(perks ? { perks } : {}),
+    ...(boss && bossIds.length > 0
+      ? {
+          boss: {
+            caseIds: bossIds,
+            startsAtMs: boss.arriveAt * msPerGameMinute,
+            endsAtMs: (boss.arriveAt + boss.durationGameMinutes) * msPerGameMinute,
+            reward: boss.reward,
+          },
+        }
+      : {}),
   });
 }
 
@@ -113,6 +131,29 @@ function end(s: ShiftSession): ShiftSession {
   };
 }
 
+/**
+ * Mode Normal: saat waktu boss habis, kasus boss yang belum diputuskan terlewat (yang sedang dibaca
+ * ikut ditutup). Mode Santai tanpa penalti waktu.
+ */
+function bossTimeout(s: ShiftSession): ShiftSession {
+  const boss = s.boss;
+  if (!boss || s.playMode !== 'normal' || s.elapsedMs < boss.endsAtMs) return s;
+  if (bossState(s)?.status !== 'active') return s;
+  const open = (id: string) =>
+    boss.caseIds.includes(id) && s.cases.some((c) => c.caseId === id && c.status !== 'decided');
+  const closing = s.activeCaseId !== null && open(s.activeCaseId);
+  const next: ShiftSession = {
+    ...s,
+    cases: s.cases.map((c) =>
+      boss.caseIds.includes(c.caseId) && c.status !== 'decided' ? { ...c, status: 'missed' } : c,
+    ),
+    ...(closing ? { phase: 'working' as const, activeCaseId: null } : {}),
+  };
+  return next.cases.every((c) => c.status === 'decided' || c.status === 'missed')
+    ? end(next)
+    : next;
+}
+
 /** Setelah umpan balik: selesai jika semua kasus beres; lompati jam jika antrian kosong. */
 function afterCase(s: ShiftSession): ShiftSession {
   if (s.cases.every((c) => c.status === 'decided' || c.status === 'missed')) return end(s);
@@ -125,7 +166,8 @@ function afterCase(s: ShiftSession): ShiftSession {
 function tick(s: ShiftSession, dtMs: number): ShiftSession {
   if (s.paused || (s.phase !== 'working' && s.phase !== 'inspecting') || dtMs <= 0) return s;
   const elapsedMs = Math.min(s.durationMs, s.elapsedMs + dtMs);
-  const next = arrive({ ...s, elapsedMs });
+  const next = bossTimeout(arrive({ ...s, elapsedMs }));
+  if (next.phase === 'ended') return next;
   if (elapsedMs < s.durationMs) return next;
   if (s.playMode === 'normal') return end(next);
   // Mode Santai: tanpa penalti waktu; semua kasus tersisa langsung masuk antrian.
@@ -250,6 +292,8 @@ export interface ShiftSummary {
   decidedCount: number;
   totalCount: number;
   pay: number;
+  /** Bonus boss yang sudah termasuk di `pay` (ADR 028). */
+  bossBonus: number;
   stars: 0 | 1 | 2 | 3;
   trust: number;
 }
@@ -268,7 +312,10 @@ export function summarizeShift(s: ShiftSession, pay: PayRule): ShiftSummary {
       shiftPay(
         pay,
         s.cases.map((c) => c.score ?? 0),
-      ) + (s.perks?.payBonus ?? 0),
+      ) +
+      (s.perks?.payBonus ?? 0) +
+      bossBonus(s),
+    bossBonus: bossBonus(s),
     stars: shiftStars(averageScore, s.trust),
     trust: s.trust,
   };

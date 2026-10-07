@@ -84,5 +84,14 @@
     },
     "classified": "WANTED: The owner of the 'helper-kode' account that keeps sending PRs at midnight. — K.",
     "sources": ["OWASP Top 10", "OWASP Input Validation Cheat Sheet"]
+  },
+  "boss": {
+    "title": "The Mysterious PR",
+    "icon": "🕵️",
+    "intro": "A suspicious trail in the logs, a robot in a maze and a mysterious PR all arrive together. This is your final test!",
+    "caseIds": ["s05-ctf-001", "s05-robot-001", "s05-pr-006"],
+    "arriveAt": 75,
+    "durationGameMinutes": 45,
+    "reward": 70
   }
 }

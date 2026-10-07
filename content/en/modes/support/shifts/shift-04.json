@@ -76,5 +76,14 @@
     },
     "classified": "FREE: Plenty of disk space for anyone willing to empty their Downloads folder.",
     "sources": ["NIST SP 800-40 Rev. 4", "CompTIA A+ Core 2: Software Troubleshooting"]
+  },
+  "boss": {
+    "title": "Mass Update",
+    "icon": "🔄",
+    "intro": "After a big update, reports pour in together. Not every problem means something is broken.",
+    "caseIds": ["s04-diag-004", "s04-ticket-005", "s04-diag-005"],
+    "arriveAt": 64,
+    "durationGameMinutes": 30,
+    "reward": 60
   }
 }

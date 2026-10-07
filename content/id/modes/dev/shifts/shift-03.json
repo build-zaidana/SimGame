@@ -79,5 +79,14 @@
       "Git Documentation: git-revert",
       "Site Reliability Engineering (O’Reilly): Release Engineering"
     ]
+  },
+  "boss": {
+    "title": "Malam Rilis",
+    "icon": "🔥",
+    "intro": "Rilis besar malam ini! Review PR terakhir dengan teliti dan selesaikan lomba kilat.",
+    "caseIds": ["s03-pr-004", "s03-build-002", "s03-pr-005"],
+    "arriveAt": 63,
+    "durationGameMinutes": 45,
+    "reward": 50
   }
 }

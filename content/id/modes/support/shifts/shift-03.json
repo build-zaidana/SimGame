@@ -72,5 +72,14 @@
     },
     "classified": "HILANG: Satu kabel jaringan biru, terakhir terlihat di bawah meja Pemasaran. Harap dikembalikan.",
     "sources": ["CompTIA Network+: Troubleshooting Methodology", "IETF RFC 3927"]
+  },
+  "boss": {
+    "title": "Badai Sinyal",
+    "icon": "📶",
+    "intro": "Jaringan kantor bermasalah di beberapa lantai sekaligus. Baca hasil diagnostik dengan teliti.",
+    "caseIds": ["s03-diag-004", "s03-ticket-004", "s03-diag-005"],
+    "arriveAt": 63,
+    "durationGameMinutes": 30,
+    "reward": 50
   }
 }

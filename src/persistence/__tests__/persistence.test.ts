@@ -301,7 +301,6 @@ describe('migration v10 → v11 (desk upgrades and session perks)', () => {
     const v10 = { ...JSON.parse(JSON.stringify(saveWithSession())), schemaVersion: 10 };
     delete v10.modes.soc.upgradesOwned;
     const migrated = migrate(v10);
-    expect(SAVE_SCHEMA_VERSION).toBe(11);
     expect(migrated.modes['soc']?.upgradesOwned).toEqual([]);
     expect(migrated.modes['soc']?.activeSession?.perks).toBeUndefined();
   });
@@ -317,6 +316,25 @@ describe('migration v10 → v11 (desk upgrades and session perks)', () => {
       shiftTimePercent: 15,
     });
     expect(loaded.modes['soc']?.upgradesOwned).toEqual(['coffee']);
+  });
+});
+
+describe('migration v11 → v12 (end-of-shift boss)', () => {
+  it('keeps old sessions without a boss and keeps a recorded boss', () => {
+    const v11 = { ...JSON.parse(JSON.stringify(saveWithSession())), schemaVersion: 11 };
+    const migrated = migrate(v11);
+    expect(SAVE_SCHEMA_VERSION).toBe(12);
+    expect(migrated.modes['soc']?.activeSession?.boss).toBeUndefined();
+    const later = JSON.parse(JSON.stringify(migrated));
+    later.modes.soc.activeSession.boss = {
+      caseIds: ['a', 'b'],
+      startsAtMs: 1000,
+      endsAtMs: 5000,
+      reward: 40,
+    };
+    expect(migrate(later).modes['soc']?.activeSession?.boss).toEqual(
+      later.modes.soc.activeSession.boss,
+    );
   });
 });
 

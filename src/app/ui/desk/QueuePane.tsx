@@ -53,7 +53,15 @@ export function QueuePane({ session, labelOf, onOpen }: QueuePaneProps) {
               >
                 <span aria-hidden="true">{label.icon}</span>
                 <span className="flex-1">
-                  <span className="block leading-snug">{label.title}</span>
+                  <span className="block leading-snug">
+                    {session.boss?.caseIds.includes(c.caseId) && (
+                      <span className="mr-1 border-2 border-danger px-1 font-display text-xs text-danger">
+                        <span aria-hidden="true">👾 </span>
+                        {id.boss.chip}
+                      </span>
+                    )}
+                    {label.title}
+                  </span>
                   <span className="block text-xs text-ink-muted">
                     <span aria-hidden="true">{STATUS_GLYPH[c.status]} </span>
                     {status}

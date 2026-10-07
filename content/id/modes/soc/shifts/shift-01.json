@@ -59,5 +59,14 @@
     },
     "classified": "LOWONGAN: Dicari analis SOC yang teliti dan suka membaca dari kanan ke kiri. Hubungi Mbak Rani, lantai 3.",
     "sources": ["APWG Phishing Activity Trends Report", "BSSN: panduan mengenali phishing"]
+  },
+  "boss": {
+    "title": "Gelombang Pancingan",
+    "icon": "🎣",
+    "intro": "Tiga pesan masuk bersamaan! Penipu berharap kamu terburu-buru. Periksa buktinya satu per satu, karena tidak semua pesan berbahaya.",
+    "caseIds": ["s01-email-004", "s01-url-003", "s01-email-005"],
+    "arriveAt": 42,
+    "durationGameMinutes": 30,
+    "reward": 30
   }
 }

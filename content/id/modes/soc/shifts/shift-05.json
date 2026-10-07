@@ -85,5 +85,14 @@
     },
     "classified": "SAMPAI JUMPA NANTI SIANG. — K.",
     "sources": ["NIST SP 800-61: Computer Security Incident Handling Guide", "BSSN"]
+  },
+  "boss": {
+    "title": "Serangan Kelabu",
+    "icon": "🕶️",
+    "intro": "Kelabu menyerang serentak di menit-menit terakhir. Ingat semua yang sudah kamu pelajari di Buku Panduan!",
+    "caseIds": ["s05-url-001", "s05-login-003", "s05-email-005"],
+    "arriveAt": 62,
+    "durationGameMinutes": 30,
+    "reward": 70
   }
 }

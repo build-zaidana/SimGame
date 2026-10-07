@@ -72,5 +72,14 @@
     },
     "classified": "FOR SALE: Look-alike domains, cheap prices. Serious buyers only. — K.",
     "sources": ["APWG Phishing Activity Trends Report", "BSSN: guide to spotting phishing"]
+  },
+  "boss": {
+    "title": "Inbox Storm",
+    "icon": "📨",
+    "intro": "Before closing time the inbox floods: a receipt, a link and a request to change bank details. Which are real and which are fake?",
+    "caseIds": ["s02-email-005", "s02-url-002", "s02-email-006"],
+    "arriveAt": 60,
+    "durationGameMinutes": 30,
+    "reward": 40
   }
 }

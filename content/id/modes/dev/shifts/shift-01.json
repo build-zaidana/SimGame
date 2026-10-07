@@ -66,5 +66,14 @@
       "Python Software Foundation: The Python Tutorial",
       "OWASP: Secrets Management Cheat Sheet"
     ]
+  },
+  "boss": {
+    "title": "Rilis Sore",
+    "icon": "🚀",
+    "intro": "Sebelum rilis sore, tiga tugas datang sekaligus: robot gudang, tantangan CTF, dan satu PR. Selesaikan semuanya dengan benar!",
+    "caseIds": ["s01-robot-002", "s01-ctf-001", "s01-pr-003"],
+    "arriveAt": 60,
+    "durationGameMinutes": 45,
+    "reward": 30
   }
 }

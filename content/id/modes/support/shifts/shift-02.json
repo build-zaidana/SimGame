@@ -72,5 +72,14 @@
     },
     "classified": "DIJUAL: Pasta termal, obeng mini, dan sabar yang tidak ada habisnya. Hubungi gudang suku cadang.",
     "sources": ["CompTIA A+ Core 1: Hardware", "US CPSC: peringatan baterai lithium-ion"]
+  },
+  "boss": {
+    "title": "Gunung Laptop",
+    "icon": "💻",
+    "intro": "Meja Bengkel IT penuh laptop dan keluhan. Bedakan yang rusak, yang salah pakai, dan yang perlu spesialis.",
+    "caseIds": ["s02-hw-004", "s02-ticket-004", "s02-hw-005"],
+    "arriveAt": 63,
+    "durationGameMinutes": 30,
+    "reward": 40
   }
 }

@@ -79,5 +79,14 @@
       "Git Documentation: git-revert",
       "Site Reliability Engineering (O’Reilly): Release Engineering"
     ]
+  },
+  "boss": {
+    "title": "Release Night",
+    "icon": "🔥",
+    "intro": "Big release tonight! Review the last PRs carefully and finish the speed challenge.",
+    "caseIds": ["s03-pr-004", "s03-build-002", "s03-pr-005"],
+    "arriveAt": 63,
+    "durationGameMinutes": 45,
+    "reward": 50
   }
 }

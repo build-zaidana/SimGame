@@ -84,5 +84,14 @@
     },
     "classified": "DICARI: Pemilik akun 'helper-kode' yang rajin mengirim PR tengah malam. — K.",
     "sources": ["OWASP Top 10", "OWASP Input Validation Cheat Sheet"]
+  },
+  "boss": {
+    "title": "PR Misterius",
+    "icon": "🕵️",
+    "intro": "Jejak mencurigakan di log, robot di labirin, dan PR misterius datang bersamaan. Ini ujian terakhirmu!",
+    "caseIds": ["s05-ctf-001", "s05-robot-001", "s05-pr-006"],
+    "arriveAt": 75,
+    "durationGameMinutes": 45,
+    "reward": 70
   }
 }

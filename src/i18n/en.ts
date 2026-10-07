@@ -210,6 +210,23 @@ export const en: Strings = {
     rankLocked: (rank) => `Unlocks at rank ${rank}`,
     installed: (name) => `${name} is now on your desk!`,
   },
+  boss: {
+    chip: 'BOSS',
+    label: (title) => `Boss: ${title}`,
+    hp: (hp, max) => `Boss HP ${hp} of ${max}`,
+    timeLeft: (s) => `${s}s`,
+    arrives: 'BOSS INCOMING!',
+    rules: (n, reward) => `Decide all ${n} boss cases correctly for a Rp ${reward} bonus.`,
+    rulesTimed: (n, reward) =>
+      `Decide all ${n} boss cases correctly before time runs out for a Rp ${reward} bonus.`,
+    defeated: (title, reward) => `${title} defeated! Bonus +Rp ${reward}`,
+    escaped: (title) => `${title} got away. No bonus this time.`,
+    reportDefeated: (title, reward) =>
+      `Boss ${title}: defeated! The Rp ${reward} bonus is in your pay.`,
+    reportEscaped: (title) =>
+      `Boss ${title}: got away. Beat a boss by deciding all of its cases correctly.`,
+    dismiss: 'Close',
+  },
   rank: {
     current: (title) => `Rank: ${title}`,
     nextShifts: (n, title) => `${n} more ${n === 1 ? 'shift' : 'shifts'} to ${title}`,
@@ -368,9 +385,11 @@ export const en: Strings = {
     correct: (n, total) => `Correct decisions: ${n} of ${total}`,
     trust: (n) => `Client trust: ${n}`,
     trustRecovery: (n) => `The client gives you another chance: next shift, trust starts at ${n}.`,
-    pay: (n, base, bonus) =>
-      `Pay this shift: +Rp ${n} (base Rp ${base} + Rp ${n - base - bonus} from case scores` +
-      (bonus > 0 ? ` + rank allowance Rp ${bonus})` : ')'),
+    pay: (n, base, bonus, boss) =>
+      `Pay this shift: +Rp ${n} (base Rp ${base} + Rp ${n - base - bonus - boss} from case scores` +
+      (bonus > 0 ? ` + rank allowance Rp ${bonus}` : '') +
+      (boss > 0 ? ` + boss bonus Rp ${boss}` : '') +
+      ')',
     casesHeading: 'Case breakdown',
     caseScore: (n) => `score ${n}`,
     missed: 'missed',

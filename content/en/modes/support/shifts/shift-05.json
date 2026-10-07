@@ -80,5 +80,14 @@
     },
     "classified": "WANTED: The owner of an unnamed laptop found in the floor 3 meeting room. Ask at the IT Workshop. — Security",
     "sources": ["NIST SP 800-61: Incident Handling Guide", "ITIL 4: Incident Management"]
+  },
+  "boss": {
+    "title": "The Final Minutes",
+    "icon": "🕵️",
+    "intro": "At the end of the day the last three cases arrive together. Remember when to fix and when to hand over to a specialist.",
+    "caseIds": ["s05-ticket-004", "s05-hw-004", "s05-diag-004"],
+    "arriveAt": 68,
+    "durationGameMinutes": 30,
+    "reward": 70
   }
 }

@@ -81,5 +81,14 @@
     },
     "classified": "A PACKAGE FOR YOU is on its way. Don't forget to open it. — K.",
     "sources": ["BSSN: warning about APK files", "OWASP: malware glossary"]
+  },
+  "boss": {
+    "title": "Mystery Parcels",
+    "icon": "📦",
+    "intro": "Files, emails and logins arrive all at once before home time. Check the source and the content before you decide.",
+    "caseIds": ["s04-email-001", "s04-file-004", "s04-login-003"],
+    "arriveAt": 62,
+    "durationGameMinutes": 30,
+    "reward": 60
   }
 }

@@ -10,7 +10,8 @@ export type BadgeRule =
   | { type: 'no-hints'; minCases: number; minStars?: number }
   | { type: 'review-perfect' }
   | { type: 'tools-owned'; count: number }
-  | { type: 'trust-at-least'; value: number };
+  | { type: 'trust-at-least'; value: number }
+  | { type: 'boss-defeated' };
 
 export interface BadgeContext {
   /** Shift yang baru selesai; null bila dinilai di luar shift (mis. membeli alat). */
@@ -20,6 +21,8 @@ export interface BadgeContext {
   trust: number;
   toolsOwned: number;
   reviewResults: readonly { correct: boolean }[];
+  /** Boss shift ini dikalahkan (ADR 028). */
+  bossDefeated: boolean;
 }
 
 const SHIFT_RULES = new Set<BadgeRule['type']>([
@@ -28,6 +31,7 @@ const SHIFT_RULES = new Set<BadgeRule['type']>([
   'no-threat-allowed',
   'no-legit-blocked',
   'evidence-streak',
+  'boss-defeated',
   'no-hints',
   'review-perfect',
 ]);
@@ -96,6 +100,8 @@ export function badgeEarned(rule: BadgeRule, ctx: BadgeContext): boolean {
       return ctx.toolsOwned >= rule.count;
     case 'trust-at-least':
       return ctx.trust >= rule.value;
+    case 'boss-defeated':
+      return ctx.bossDefeated;
   }
 }
 

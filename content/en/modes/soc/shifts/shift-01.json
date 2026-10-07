@@ -59,5 +59,14 @@
     },
     "classified": "JOB OPENING: Careful SOC analyst wanted. Must enjoy reading from right to left. Ask for Rani, 3rd floor.",
     "sources": ["APWG Phishing Activity Trends Report", "BSSN: guide to spotting phishing"]
+  },
+  "boss": {
+    "title": "The Phishing Wave",
+    "icon": "🎣",
+    "intro": "Three messages land at once! Scammers hope you rush. Check the evidence one by one, because not every message is dangerous.",
+    "caseIds": ["s01-email-004", "s01-url-003", "s01-email-005"],
+    "arriveAt": 42,
+    "durationGameMinutes": 30,
+    "reward": 30
   }
 }

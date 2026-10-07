@@ -72,5 +72,14 @@
     },
     "classified": "FOR SALE: Thermal paste, mini screwdrivers, and endless patience. Contact the spare parts store.",
     "sources": ["CompTIA A+ Core 1: Hardware", "US CPSC: lithium-ion battery warnings"]
+  },
+  "boss": {
+    "title": "Laptop Mountain",
+    "icon": "💻",
+    "intro": "The workshop desk is piled with laptops and complaints. Tell apart what is broken, what is misused and what needs a specialist.",
+    "caseIds": ["s02-hw-004", "s02-ticket-004", "s02-hw-005"],
+    "arriveAt": 63,
+    "durationGameMinutes": 30,
+    "reward": 40
   }
 }

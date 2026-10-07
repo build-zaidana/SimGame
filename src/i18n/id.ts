@@ -210,6 +210,24 @@ export const id = {
     rankLocked: (rank: string) => `Terbuka di pangkat ${rank}`,
     installed: (name: string) => `${name} dipasang di mejamu!`,
   },
+  boss: {
+    chip: 'BOSS',
+    label: (title: string) => `Boss: ${title}`,
+    hp: (hp: number, max: number) => `HP boss ${hp} dari ${max}`,
+    timeLeft: (s: number) => `${s} dtk`,
+    arrives: 'BOSS DATANG!',
+    rules: (n: number, reward: number) =>
+      `Putuskan ${n} kasus boss dengan benar untuk bonus Rp ${reward}.`,
+    rulesTimed: (n: number, reward: number) =>
+      `Putuskan ${n} kasus boss dengan benar sebelum waktu habis untuk bonus Rp ${reward}.`,
+    defeated: (title: string, reward: number) => `Boss ${title} kalah! Bonus +Rp ${reward}`,
+    escaped: (title: string) => `Boss ${title} lolos. Tidak ada bonus kali ini.`,
+    reportDefeated: (title: string, reward: number) =>
+      `Boss ${title}: dikalahkan! Bonus +Rp ${reward} sudah masuk gaji.`,
+    reportEscaped: (title: string) =>
+      `Boss ${title}: lolos. Kalahkan boss dengan memutuskan semua kasusnya dengan benar.`,
+    dismiss: 'Tutup',
+  },
   rank: {
     current: (title: string) => `Pangkat: ${title}`,
     nextShifts: (n: number, title: string) => `${n} shift lagi menuju ${title}`,
@@ -373,9 +391,11 @@ export const id = {
     trust: (n: number) => `Kepercayaan klien: ${n}`,
     trustRecovery: (n: number) =>
       `Klien memberi kesempatan lagi: shift berikutnya kepercayaan mulai dari ${n}.`,
-    pay: (n: number, base: number, bonus: number) =>
-      `Gaji shift ini: +Rp ${n} (pokok Rp ${base} + Rp ${n - base - bonus} dari skor kasus` +
-      (bonus > 0 ? ` + tunjangan pangkat Rp ${bonus})` : ')'),
+    pay: (n: number, base: number, bonus: number, boss: number) =>
+      `Gaji shift ini: +Rp ${n} (pokok Rp ${base} + Rp ${n - base - bonus - boss} dari skor kasus` +
+      (bonus > 0 ? ` + tunjangan pangkat Rp ${bonus}` : '') +
+      (boss > 0 ? ` + bonus boss Rp ${boss}` : '') +
+      ')',
     casesHeading: 'Rincian kasus',
     caseScore: (n: number) => `skor ${n}`,
     missed: 'terlewat',

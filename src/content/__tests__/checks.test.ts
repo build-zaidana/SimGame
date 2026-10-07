@@ -218,6 +218,34 @@ describe('content validation', () => {
       /domain bukan .*bankasli\.co\.id/,
     ],
     [
+      'boss case not in the queue',
+      (f) =>
+        ((f['shifts/s-1.json'] as { boss: object }).boss = {
+          title: 'Boss',
+          icon: '👾',
+          intro: 'Datang bersamaan.',
+          caseIds: ['c-2', 'c-9'],
+          arriveAt: 0,
+          durationGameMinutes: 10,
+          reward: 30,
+        }),
+      /boss: kasus tidak ada di antrian: c-9/,
+    ],
+    [
+      'boss running past the end of the shift',
+      (f) =>
+        ((f['shifts/s-1.json'] as { boss: object }).boss = {
+          title: 'Boss',
+          icon: '👾',
+          intro: 'Datang bersamaan.',
+          caseIds: ['c-2', 'c-3'],
+          arriveAt: 2,
+          durationGameMinutes: 10,
+          reward: 30,
+        }),
+      /boss: batas waktu boss melewati akhir shift/,
+    ],
+    [
       'unknown chapter',
       (f) => ((f['shifts/s-1.json'] as { unlocksChapters: string[] }).unlocksChapters = ['ch-x']),
       /bab tidak ada: ch-x/,
