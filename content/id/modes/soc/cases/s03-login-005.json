@@ -1,0 +1,63 @@
+{
+  "id": "s03-login-005",
+  "type": "login-alert",
+  "conceptIds": ["passwords-mfa"],
+  "difficulty": 3,
+  "verdict": "malicious",
+  "correctDecision": "reset-password",
+  "acceptableDecisions": {
+    "block": 0.6,
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "account": {
+      "user": "Dewi Lestari",
+      "role": "Staf HR"
+    },
+    "headline": {
+      "text": "Login dengan OTP ke nomor HP baru",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "08:15",
+        "location": "Kantor Jakarta",
+        "ip": "10.20.1.52",
+        "device": "Laptop kantor (terdaftar)",
+        "method": "Password + OTP",
+        "result": "success",
+        "evidenceId": "ev-1"
+      },
+      {
+        "time": "10:34",
+        "location": "Tidak dikenal",
+        "ip": "203.0.113.88",
+        "device": "Android (perangkat baru)",
+        "method": "Password baru + OTP ke nomor baru",
+        "result": "success",
+        "evidenceId": "ev-2"
+      }
+    ],
+    "context": [
+      {
+        "text": "10:25 Helpdesk menerima telepon dari orang yang mengaku Dewi: HP-nya hilang, minta password direset dan nomor OTP diganti. Permintaan dikabulkan.",
+        "evidenceId": "ctx-helpdesk"
+      },
+      {
+        "text": "Atasan Dewi: Dewi rapat bersamanya sejak 10.00, dan HP-nya ada di meja.",
+        "evidenceId": "ctx-phone"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["ev-2", "ctx-helpdesk"],
+    "supporting": ["ctx-phone"]
+  },
+  "explanation": "Penipu menelepon helpdesk sambil mengaku Dewi agar password dan nomor OTP diganti, lalu sembilan menit kemudian login dari perangkat asing, padahal HP Dewi tidak hilang. Akunnya sudah diambil alih, jadi reset password dan kembalikan nomor OTP ke milik Dewi.",
+  "ruleRefs": ["r-pass-2", "r-pass-4"],
+  "hints": [
+    "Cocokkan jam login baru dengan catatan helpdesk.",
+    "Benarkah HP Dewi hilang? Baca keterangan atasannya."
+  ]
+}

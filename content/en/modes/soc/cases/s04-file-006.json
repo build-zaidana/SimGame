@@ -1,0 +1,49 @@
+{
+  "id": "s04-file-006",
+  "type": "file",
+  "conceptIds": ["malware-files"],
+  "difficulty": 2,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "fileName": {
+      "text": "NusaRapat_Setup_4.2.exe",
+      "evidenceId": "file-name"
+    },
+    "fileType": {
+      "text": "Windows installer (.exe), digitally signed by PT Nusa Digital",
+      "evidenceId": "file-type"
+    },
+    "size": {
+      "text": "68 MB",
+      "evidenceId": "file-size"
+    },
+    "source": {
+      "text": "Downloaded by Bayu himself from the official portal software.nusadigital.test, as noted in IT ticket #3105.",
+      "evidenceId": "source"
+    },
+    "message": {
+      "text": "IT team: the new version of the meeting app is available. Please install it from the office software portal.",
+      "evidenceId": "message"
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["source", "file-type", "sb-clean"]
+  },
+  "explanation": "An .exe file is indeed a program, but this installer was requested through an IT ticket and downloaded directly from the office's own portal (nusadigital.test). What deserves suspicion is a program disguised as a document or one that arrives unasked.",
+  "ruleRefs": ["r-mal-2", "r-url-1"],
+  "hints": [
+    "A program is not automatically dangerous. Where did it come from?",
+    "Read the portal's domain from the right. Was this file actually requested?"
+  ],
+  "intel": {
+    "sandbox": [
+      {
+        "text": "Installs the meeting app. Does not contact unknown servers or read personal files.",
+        "evidenceId": "sb-clean"
+      }
+    ]
+  }
+}

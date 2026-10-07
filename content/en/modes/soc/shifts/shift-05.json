@@ -51,6 +51,14 @@
       "arriveAt": 54
     },
     {
+      "caseId": "s05-login-004",
+      "arriveAt": 57
+    },
+    {
+      "caseId": "s05-email-006",
+      "arriveAt": 59
+    },
+    {
       "caseId": "s05-url-001",
       "arriveAt": 62
     },

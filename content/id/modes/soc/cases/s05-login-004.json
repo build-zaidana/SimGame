@@ -1,0 +1,63 @@
+{
+  "id": "s05-login-004",
+  "type": "login-alert",
+  "conceptIds": ["log-reading", "incident-response"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "reset-password",
+  "acceptableDecisions": {
+    "block": 0.6,
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "account": {
+      "user": "Hendra Gunawan",
+      "role": "Mantan staf Gudang"
+    },
+    "headline": {
+      "text": "Akun lama aktif lagi pukul 02.13",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "02:11",
+        "location": "Tidak dikenal",
+        "ip": "198.51.100.23",
+        "device": "Windows (perangkat baru)",
+        "method": "Password salah",
+        "result": "failed",
+        "evidenceId": "ev-1"
+      },
+      {
+        "time": "02:13",
+        "location": "Tidak dikenal",
+        "ip": "198.51.100.23",
+        "device": "Windows (perangkat baru)",
+        "method": "Password saja (MFA belum aktif)",
+        "result": "success",
+        "evidenceId": "ev-2"
+      }
+    ],
+    "context": [
+      {
+        "text": "HR: Hendra resign 30 September. Laptop dan kartu aksesnya sudah dikembalikan.",
+        "evidenceId": "ctx-resign"
+      },
+      {
+        "text": "Akun Hendra ternyata belum dinonaktifkan.",
+        "evidenceId": "ctx-active"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["ev-2", "ctx-resign"],
+    "supporting": ["ev-1", "ctx-active"]
+  },
+  "explanation": "Akun karyawan yang sudah resign tiba-tiba berhasil login pukul 02.13 dari perangkat baru, padahal laptopnya sudah dikembalikan. Batasi dulu dengan mereset password agar akses itu terputus, lalu minta IT menonaktifkan akunnya.",
+  "ruleRefs": ["r-log-3", "r-ir-2"],
+  "hints": [
+    "Siapa pemilik akun ini, dan apakah ia masih bekerja di sini?",
+    "Lihat jam dan perangkat pada login yang berhasil, lalu bandingkan dengan catatan HR."
+  ]
+}

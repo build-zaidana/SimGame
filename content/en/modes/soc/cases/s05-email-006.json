@@ -1,0 +1,52 @@
+{
+  "id": "s05-email-006",
+  "type": "email",
+  "conceptIds": ["phishing-signs", "passwords-mfa"],
+  "difficulty": 2,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "from": {
+      "name": "PT Nusa Digital Account Portal",
+      "address": "no-reply@nusadigital.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Password reset link for ticket #3120",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "11:42",
+    "body": [
+      {
+        "text": "Hi Sari,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "As you requested from the helpdesk (ticket #3120), please create a new password using this link:",
+        "evidenceId": "body-info"
+      },
+      {
+        "link": {
+          "label": "akun.nusadigital.test/password-baru",
+          "href": "https://akun.nusadigital.test/password-baru"
+        },
+        "evidenceId": "link"
+      },
+      {
+        "text": "We will never ask for your password or OTP. If you did not request a reset, contact the helpdesk at ext. 110.",
+        "evidenceId": "body-warning"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["sender", "link", "greeting"]
+  },
+  "explanation": "Both the sender and the link use the real office domain (nusadigital.test), and the email greets Sari and refers to a ticket she actually opened. It does not ask for an OTP or any data, so allow it.",
+  "ruleRefs": ["r-phish-5", "r-url-1"],
+  "hints": [
+    "Password reset emails are often faked. Check the sender and where the link goes.",
+    "Real domain, greets by name, and no OTP request. Anything still off?"
+  ]
+}

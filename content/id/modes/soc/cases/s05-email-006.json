@@ -1,0 +1,52 @@
+{
+  "id": "s05-email-006",
+  "type": "email",
+  "conceptIds": ["phishing-signs", "passwords-mfa"],
+  "difficulty": 2,
+  "verdict": "safe",
+  "correctDecision": "allow",
+  "severity": 1,
+  "data": {
+    "from": {
+      "name": "Portal Akun PT Nusa Digital",
+      "address": "no-reply@nusadigital.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Tautan reset password untuk tiket #3120",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "11:42",
+    "body": [
+      {
+        "text": "Halo Sari,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "Sesuai permintaanmu ke helpdesk (tiket #3120), silakan buat password baru lewat tautan ini:",
+        "evidenceId": "body-info"
+      },
+      {
+        "link": {
+          "label": "akun.nusadigital.test/password-baru",
+          "href": "https://akun.nusadigital.test/password-baru"
+        },
+        "evidenceId": "link"
+      },
+      {
+        "text": "Kami tidak akan pernah meminta password atau OTP-mu. Kalau kamu tidak meminta reset, hubungi helpdesk di ext. 110.",
+        "evidenceId": "body-warning"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["sender", "link", "greeting"]
+  },
+  "explanation": "Pengirim dan tautannya sama-sama memakai domain kantor yang asli (nusadigital.test), emailnya menyapa Sari dan merujuk tiket yang memang ia buat. Email ini tidak meminta OTP atau data, jadi izinkan.",
+  "ruleRefs": ["r-phish-5", "r-url-1"],
+  "hints": [
+    "Email reset password sering dipalsukan. Cek pengirim dan tujuan tautannya.",
+    "Domain asli, menyapa dengan nama, dan tidak meminta OTP. Masih ada yang janggal?"
+  ]
+}

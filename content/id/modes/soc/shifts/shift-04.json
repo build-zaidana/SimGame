@@ -43,8 +43,16 @@
       "arriveAt": 44
     },
     {
+      "caseId": "s04-file-005",
+      "arriveAt": 48
+    },
+    {
       "caseId": "s04-login-002",
       "arriveAt": 52
+    },
+    {
+      "caseId": "s04-file-006",
+      "arriveAt": 57
     },
     {
       "caseId": "s04-email-001",

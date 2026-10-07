@@ -1,0 +1,63 @@
+{
+  "id": "s03-login-005",
+  "type": "login-alert",
+  "conceptIds": ["passwords-mfa"],
+  "difficulty": 3,
+  "verdict": "malicious",
+  "correctDecision": "reset-password",
+  "acceptableDecisions": {
+    "block": 0.6,
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "account": {
+      "user": "Dewi Lestari",
+      "role": "HR Staff"
+    },
+    "headline": {
+      "text": "Login with OTP sent to a new phone number",
+      "evidenceId": "headline"
+    },
+    "events": [
+      {
+        "time": "08:15",
+        "location": "Jakarta office",
+        "ip": "10.20.1.52",
+        "device": "Office laptop (registered)",
+        "method": "Password + OTP",
+        "result": "success",
+        "evidenceId": "ev-1"
+      },
+      {
+        "time": "10:34",
+        "location": "Unknown",
+        "ip": "203.0.113.88",
+        "device": "Android (new device)",
+        "method": "New password + OTP to new number",
+        "result": "success",
+        "evidenceId": "ev-2"
+      }
+    ],
+    "context": [
+      {
+        "text": "10:25 The helpdesk got a call from someone claiming to be Dewi: her phone was lost, so she asked for a password reset and a new OTP number. The request was granted.",
+        "evidenceId": "ctx-helpdesk"
+      },
+      {
+        "text": "Dewi's manager: Dewi has been in a meeting with her since 10:00, and her phone is on the table.",
+        "evidenceId": "ctx-phone"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["ev-2", "ctx-helpdesk"],
+    "supporting": ["ctx-phone"]
+  },
+  "explanation": "A scammer called the helpdesk pretending to be Dewi to get her password and OTP number changed, then logged in from an unknown device nine minutes later, even though Dewi's phone was never lost. Her account has been taken over, so reset the password and give the OTP number back to Dewi.",
+  "ruleRefs": ["r-pass-2", "r-pass-4"],
+  "hints": [
+    "Match the time of the new login with the helpdesk note.",
+    "Was Dewi's phone really lost? Read what her manager says."
+  ]
+}

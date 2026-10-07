@@ -1,0 +1,55 @@
+{
+  "id": "s03-email-005",
+  "type": "email",
+  "conceptIds": ["phishing-signs", "passwords-mfa"],
+  "difficulty": 2,
+  "verdict": "malicious",
+  "correctDecision": "block",
+  "acceptableDecisions": {
+    "escalate": 0.6
+  },
+  "severity": 3,
+  "data": {
+    "from": {
+      "name": "IT Security Team",
+      "address": "keamanan@nusadigital-mfa.test",
+      "evidenceId": "sender"
+    },
+    "subject": {
+      "text": "Required: re-register your MFA today",
+      "evidenceId": "subject"
+    },
+    "receivedAt": "09:20",
+    "body": [
+      {
+        "text": "Dear Employee,",
+        "evidenceId": "greeting"
+      },
+      {
+        "text": "The office MFA system has been updated. Scan the QR code below with your phone camera, then enter your password and OTP code.",
+        "evidenceId": "request"
+      },
+      {
+        "link": {
+          "label": "[QR code image]",
+          "href": "https://nusadigital-mfa.test/daftar-ulang"
+        },
+        "evidenceId": "qr-link"
+      },
+      {
+        "text": "Accounts that have not re-registered will be locked at 17:00.",
+        "evidenceId": "urgency"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["sender", "qr-link"],
+    "supporting": ["request", "urgency", "greeting"]
+  },
+  "explanation": "A QR code (the square pattern you scan with a phone camera) is just a link in picture form, and this one leads to nusadigital-mfa.test, not the office domain. The real IT team never asks for your password and OTP by email.",
+  "ruleRefs": ["r-phish-1", "r-phish-2", "r-pass-1"],
+  "hints": [
+    "Even a picture can hide a link. Where does it lead?",
+    "Compare the sender's domain and the QR code's destination with nusadigital.test."
+  ]
+}
