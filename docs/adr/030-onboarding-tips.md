@@ -12,7 +12,7 @@ bisa tidak sadar fitur-fitur itu ada. Pemilik memilih "onboarding pemain baru".
 - **Kartu tips, satu per satu, saat relevan**, bukan tur panjang di awal. Pemula langsung bisa main
   (PRD: sesi pendek, langsung main). Urutan: selamat datang → pangkat → tantangan harian → toko (saat
   gaji ≥ harga upgrade termurah) → Mode Latihan. Tips setelah shift pertama baru muncul setelah ada
-  shift jalur utama yang selesai.
+  shift jalur utama yang selesai. Sambutan hanya muncul untuk yang belum pernah menyelesaikan shift.
 - Logika murni di `src/app/onboarding.ts` (`nextTip`, `dismissTip`, `skipAllTips`, `resetTips`) dengan
   unit test. Status disimpan di `save.flags` (`tip:<id>`), jadi **bentuk save tidak berubah** (tanpa
   migrasi).

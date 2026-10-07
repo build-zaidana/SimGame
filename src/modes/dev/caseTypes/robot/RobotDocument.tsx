@@ -197,7 +197,7 @@ export function RobotDocument({ data, locked, answer, onAnswer, onRun }: Documen
         )}
       </div>
       {!locked && answer?.total === undefined && (
-        <p className="mt-2 text-sm text-ink-muted">{id.dev.run.notRunYet}</p>
+        <p className="mt-2 text-sm text-ink-muted">{t.notRunYet}</p>
       )}
     </article>
   );

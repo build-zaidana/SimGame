@@ -36,5 +36,6 @@ test('new players get one tip at a time, and tips can be skipped and restored', 
   await page.getByRole('button', { name: 'Tampilkan tips lagi' }).click();
   await expect(page.getByText('Tips akan muncul lagi di kantor.')).toBeVisible();
   await page.getByRole('button', { name: 'Kembali' }).click();
-  await expect(tip).toHaveAttribute('data-tip', 'welcome');
+  // Sambutan dilewati karena pemain sudah pernah bekerja; tips dimulai dari pangkat lagi.
+  await expect(tip).toHaveAttribute('data-tip', 'rank');
 });

@@ -19,7 +19,8 @@ function finishedAnyShift(save: SaveData): boolean {
 }
 
 const READY: Record<TipId, (save: SaveData) => boolean> = {
-  welcome: () => true,
+  // Sambutan hanya untuk yang belum pernah main; pemain yang langsung bekerja tidak perlu disambut lagi.
+  welcome: (save) => !finishedAnyShift(save),
   rank: finishedAnyShift,
   daily: finishedAnyShift,
   shop: (save) =>
