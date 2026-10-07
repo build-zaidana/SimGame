@@ -69,7 +69,8 @@ export function RobotDocument({ data, locked, answer, onAnswer, onRun }: Documen
     flush();
     setStep(0);
     setBusy(true);
-    void runRobotProgram(code, d.maps).then((o) => {
+    const ran = code;
+    void runRobotProgram(ran, d.maps).then((o) => {
       setBusy(false);
       setOutcome(o);
       if (o.kind !== 'done') return;
@@ -78,7 +79,7 @@ export function RobotDocument({ data, locked, answer, onAnswer, onRun }: Documen
       stage.current?.focus({ preventScroll: true });
       stage.current?.scrollIntoView({ block: 'center', behavior: instant ? 'auto' : 'smooth' });
       const passed = o.result.maps.filter((m) => m.passed).length;
-      onRun?.(passed, d.maps.length);
+      onRun?.(passed, d.maps.length, ran);
       // Tampilkan peta pertama yang gagal (atau tetap di peta ini bila semua berhasil).
       const firstFail = o.result.maps.findIndex((m) => !m.passed);
       if (firstFail >= 0) {

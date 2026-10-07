@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { shiftReducer, startShift, summarizeShift, type ShiftAction } from '../shift.ts';
+import {
+  MAX_ANSWER_LENGTH,
+  dropUnknownCases,
+  shiftReducer,
+  startShift,
+  summarizeShift,
+  type ShiftAction,
+} from '../shift.ts';
 import type { CaseOutcome, ShiftPlan, ShiftSession } from '../types.ts';
 
 const plan: ShiftPlan = {
@@ -141,8 +148,8 @@ describe('case flow', () => {
     expect(s.cases[0]?.answer).toEqual({ text: 'def f():\n    return 1', runs: 0 });
     s = run(
       s,
-      { type: 'RECORD_RUN', passed: 1, total: 3 },
-      { type: 'RECORD_RUN', passed: 3, total: 3 },
+      { type: 'RECORD_RUN', caseId: 'a', text: 'def f():\n    return 1', passed: 1, total: 3 },
+      { type: 'RECORD_RUN', caseId: 'a', text: 'def f():\n    return 1', passed: 3, total: 3 },
     );
     expect(s.cases[0]?.answer).toEqual({
       text: 'def f():\n    return 1',
@@ -167,14 +174,49 @@ describe('case flow', () => {
       { type: 'SET_ANSWER', text: 'x' },
     );
     expect(s.cases[0]?.answer).toEqual({ text: 'x', runs: 0, rolledBackAtMs: 3000 });
-    s = run(s, { type: 'RECORD_RUN', passed: 1, total: 1 });
+    s = run(s, { type: 'RECORD_RUN', caseId: 'a', text: 'x', passed: 1, total: 1 });
+    expect(s.cases[0]?.answer?.passed).toBe(1);
     expect(s.cases[0]?.answer?.rolledBackAtMs).toBe(3000);
   });
 
   it('SET_ANSWER and RECORD_RUN are ignored without an active case', () => {
     const s = working();
     expect(run(s, { type: 'SET_ANSWER', text: 'x' })).toBe(s);
-    expect(run(s, { type: 'RECORD_RUN', passed: 1, total: 1 })).toBe(s);
+    expect(run(s, { type: 'RECORD_RUN', caseId: 'a', text: '', passed: 1, total: 1 })).toBe(s);
+  });
+
+  it('RECORD_RUN ignores results for another case or for code that has since changed', () => {
+    const s = run(
+      working(),
+      { type: 'OPEN_CASE', caseId: 'a' },
+      { type: 'SET_ANSWER', text: 'baru' },
+    );
+    // Tes dijalankan untuk kasus lain (pemain pindah kasus sebelum hasil keluar).
+    expect(run(s, { type: 'RECORD_RUN', caseId: 'b', text: 'baru', passed: 3, total: 3 })).toBe(s);
+    // Kode sudah diubah setelah tes dijalankan: hasil lama tidak berlaku.
+    expect(run(s, { type: 'RECORD_RUN', caseId: 'a', text: 'lama', passed: 3, total: 3 })).toBe(s);
+  });
+
+  it('SET_ANSWER clamps very long text so the save stays valid', () => {
+    const s = run(
+      working(),
+      { type: 'OPEN_CASE', caseId: 'a' },
+      { type: 'SET_ANSWER', text: 'x'.repeat(MAX_ANSWER_LENGTH + 500) },
+    );
+    expect(s.cases[0]?.answer?.text).toHaveLength(MAX_ANSWER_LENGTH);
+  });
+
+  it('numbers decisions in the order they were made', () => {
+    // a dibuka lebih dulu, tapi b yang diputuskan lebih dulu.
+    const s = run(
+      working(),
+      { type: 'TICK', dtMs: 6000 },
+      { type: 'OPEN_CASE', caseId: 'a' },
+      ...decide('b'),
+      ...decide('a'),
+    );
+    const seq = (id: string) => s.cases.find((c) => c.caseId === id)?.decidedSeq;
+    expect([seq('b'), seq('a'), seq('c')]).toEqual([1, 2, undefined]);
   });
 
   it('TOGGLE_MARK and USE_HINT are ignored without an active case', () => {
@@ -321,5 +363,20 @@ describe('desk perks', () => {
     const s = working();
     expect(s.perks).toBeUndefined();
     expect(s.durationMs).toBe(10_000);
+  });
+});
+
+describe('dropUnknownCases (content changed under a resumed shift)', () => {
+  it('removes cases the content no longer has, so the shift can still end', () => {
+    const s = run(working(), { type: 'OPEN_CASE', caseId: 'a' });
+    const next = dropUnknownCases(s, (id) => id !== 'a');
+    expect(next.cases.map((c) => c.caseId)).toEqual(['b', 'c']);
+    expect(next.activeCaseId).toBeNull();
+    expect(next.phase).toBe('working');
+  });
+
+  it('returns the same session when every case is known', () => {
+    const s = working();
+    expect(dropUnknownCases(s, () => true)).toBe(s);
   });
 });

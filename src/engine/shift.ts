@@ -22,6 +22,9 @@ export interface StartShiftParams {
   perks?: SessionPerks;
 }
 
+/** Panjang maksimum jawaban ketikan (kode/bendera); sama dengan batas skema save. */
+export const MAX_ANSWER_LENGTH = 20_000;
+
 export type ShiftAction =
   | ({ type: 'START_SHIFT' } & StartShiftParams)
   | { type: 'DISMISS_BRIEFING' }
@@ -33,7 +36,8 @@ export type ShiftAction =
   | { type: 'USE_HINT' }
   /** Meja Developer (ADR 026): draf jawaban & hasil menjalankan tes. */
   | { type: 'SET_ANSWER'; text: string }
-  | { type: 'RECORD_RUN'; passed: number; total: number }
+  /** Hasil tes untuk `text` di kasus `caseId`; diabaikan bila pemain sudah pindah kasus/mengubah kode. */
+  | { type: 'RECORD_RUN'; caseId: string; text: string; passed: number; total: number }
   /** Insiden produksi: rollback darurat (dicatat sekali). */
   | { type: 'ROLLBACK_INCIDENT' }
   /** `outcome` berasal dari `CaseTypeDef.evaluate()` milik mode. */
@@ -113,6 +117,34 @@ function arrive(s: ShiftSession): ShiftSession {
   };
 }
 
+/**
+ * Membuang kasus yang tidak ada lagi di konten (mis. konten diperbarui saat shift sedang berjalan),
+ * supaya shift yang dilanjutkan tidak macet di kasus tanpa dokumen.
+ */
+export function dropUnknownCases(
+  s: ShiftSession,
+  known: (caseId: string) => boolean,
+): ShiftSession {
+  if (s.cases.every((c) => known(c.caseId))) return s;
+  const gone = (id: string | null) => id !== null && !known(id);
+  const reset = gone(s.activeCaseId) || gone(s.feedbackCaseId);
+  return {
+    ...s,
+    cases: s.cases.filter((c) => known(c.caseId)),
+    ...(reset && s.phase !== 'briefing' && s.phase !== 'ended'
+      ? { phase: 'working' as const, activeCaseId: null, feedbackCaseId: null }
+      : {}),
+    ...(s.boss
+      ? {
+          // Boss tanpa kasus tersisa dihapus, supaya tidak "terkalahkan" tanpa dilawan.
+          boss: s.boss.caseIds.some(known)
+            ? { ...s.boss, caseIds: s.boss.caseIds.filter(known) }
+            : undefined,
+        }
+      : {}),
+  };
+}
+
 function updateCase(
   s: ShiftSession,
   caseId: string,
@@ -189,7 +221,13 @@ function decide(s: ShiftSession, outcome: CaseOutcome): ShiftSession {
     ),
   });
   return {
-    ...updateCase(s, active.caseId, (c) => ({ ...c, status: 'decided', outcome, score })),
+    ...updateCase(s, active.caseId, (c) => ({
+      ...c,
+      status: 'decided',
+      outcome,
+      score,
+      decidedSeq: s.cases.filter((x) => x.status === 'decided').length + 1,
+    })),
     phase: 'feedback',
     feedbackCaseId: active.caseId,
     trust: applyTrust(s.trust, trustDelta(outcome.impact, outcome.severity)),
@@ -235,15 +273,17 @@ export function shiftReducer(s: ShiftSession, a: ShiftAction): ShiftSession {
       return updateCase(s, s.activeCaseId, (c) => ({
         ...c,
         answer: {
-          text: a.text,
+          text: a.text.slice(0, MAX_ANSWER_LENGTH),
           runs: c.answer?.runs ?? 0,
           ...(c.answer?.rolledBackAtMs !== undefined
             ? { rolledBackAtMs: c.answer.rolledBackAtMs }
             : {}),
         },
       }));
-    case 'RECORD_RUN':
-      if (s.phase !== 'inspecting' || !s.activeCaseId) return s;
+    case 'RECORD_RUN': {
+      if (s.phase !== 'inspecting' || s.activeCaseId !== a.caseId) return s;
+      const current = s.cases.find((c) => c.caseId === a.caseId)?.answer?.text ?? '';
+      if (current !== a.text.slice(0, MAX_ANSWER_LENGTH)) return s;
       return updateCase(s, s.activeCaseId, (c) => ({
         ...c,
         answer: {
@@ -256,6 +296,7 @@ export function shiftReducer(s: ShiftSession, a: ShiftAction): ShiftSession {
             : {}),
         },
       }));
+    }
     case 'ROLLBACK_INCIDENT':
       if (s.phase !== 'inspecting' || !s.activeCaseId) return s;
       return updateCase(s, s.activeCaseId, (c) =>

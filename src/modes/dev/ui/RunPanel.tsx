@@ -14,7 +14,8 @@ interface RunPanelProps {
   /** Dipanggil sebelum menjalankan (mis. menyimpan draf kode). */
   beforeRun?(): void;
   /** Mencatat hasil tes ke sesi; tanpa ini = konsol coba-coba (CTF). */
-  onResult?(passed: number, total: number): void;
+  /** `code` = kode yang dijalankan (bisa sudah berbeda dari editor saat hasil keluar). */
+  onResult?(passed: number, total: number, code: string): void;
   /** Baris error kode pemain, untuk ditandai di editor. */
   onErrorLine?(line: number | undefined): void;
   label?: string;
@@ -41,14 +42,15 @@ export function RunPanel({
   const run = () => {
     beforeRun?.();
     setBusy(true);
-    void runPython(code, tests).then((o) => {
+    const ran = code;
+    void runPython(ran, tests).then((o) => {
       setBusy(false);
       setOutcome(o);
       const result = o.kind === 'done' ? o.result : null;
       onErrorLine?.(result?.error?.line);
       if (!result || tests.length === 0) return;
       const passed = result.tests.filter((t) => t.passed).length;
-      onResult?.(passed, tests.length);
+      onResult?.(passed, tests.length, ran);
       if (sound) playSfx(passed === tests.length ? 'combo' : 'wrong');
     });
   };

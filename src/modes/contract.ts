@@ -28,8 +28,11 @@ export interface DocumentProps<TCase extends BaseCase = BaseCase> {
   /** Jawaban ketikan pemain (kode/bendera, ADR 026); hanya tipe kasus yang memakainya. */
   answer?: CaseAnswer | undefined;
   onAnswer?(text: string): void;
-  /** Mencatat satu kali menjalankan tes (jumlah lulus / total). */
-  onRun?(passed: number, total: number): void;
+  /**
+   * Mencatat satu kali menjalankan tes (jumlah lulus / total) untuk `text`, yaitu kode/bendera yang
+   * benar-benar dijalankan. Hasil diabaikan bila kode sudah diubah atau kasus sudah berganti.
+   */
+  onRun?(passed: number, total: number, text: string): void;
   /** Jam shift untuk kasus yang memburuk seiring waktu (insiden produksi). */
   clock?:
     { nowMs: number; openedAtMs: number | null; shiftOrder: number; relaxed: boolean } | undefined;

@@ -134,7 +134,7 @@ export function CodingDocument({
         tests={d.tests}
         disabled={locked}
         beforeRun={() => flush()}
-        onResult={(passed, total) => onRun?.(passed, total)}
+        onResult={(passed, total, ran) => onRun?.(passed, total, ran)}
         onErrorLine={setErrorLine}
         scene={{ file: d.file, seed: data.id }}
       />
