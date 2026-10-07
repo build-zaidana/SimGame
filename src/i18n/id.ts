@@ -55,6 +55,7 @@ export const id = {
     enterShift: (order: number, title: string) => `Mulai Shift ${order}: ${title}`,
     allShiftsDone: 'Semua shift selesai! Ulangi shift mana pun lewat Mode Latihan.',
     practiceHeading: 'Mode Latihan',
+    practiceLabel: (desk: string) => `Mode Latihan ${desk}`,
     practiceIntro:
       'Ulangi shift yang sudah selesai. Tidak memengaruhi gaji, kepercayaan, skor terbaik, atau review.',
     practiceShift: (order: number, title: string) => `Latihan Shift ${order}: ${title}`,
@@ -230,6 +231,9 @@ export const id = {
       `Hadiah +Rp ${reward} · beruntun ${streak} hari`,
     reportAgain: 'Hadiah hari ini untuk meja ini sudah diambil. Hasil ini tidak dibayar lagi.',
     claim: 'Ambil hadiah & kembali ke kantor',
+    caseRight: 'Benar',
+    caseWrong: 'Belum tepat',
+    sectionLabel: (desk: string) => `Tantangan Harian ${desk}`,
   },
   boss: {
     chip: 'BOSS',

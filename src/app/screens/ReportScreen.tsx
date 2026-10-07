@@ -64,7 +64,6 @@ function RankUp({ title, rank, delayMs }: { title: string; rank: number; delayMs
   }, [sound, delayMs]);
   return (
     <section
-      role="status"
       className="rank-in flex flex-col gap-1 border-4 border-accent bg-accent/10 p-3"
       style={{ animationDelay: `${delayMs}ms` }}
       data-testid="rank-up"
@@ -108,6 +107,9 @@ function DailyReport() {
         {session.cases.map((c) => (
           <li key={c.caseId} className={`${panel} p-3`}>
             <span aria-hidden="true">{c.outcome?.correct ? '✓ ' : '✗ '}</span>
+            <span className="sr-only">
+              {c.outcome?.correct ? id.daily.caseRight : id.daily.caseWrong}:{' '}
+            </span>
             {content.cases[c.caseId]?.explanation}
           </li>
         ))}

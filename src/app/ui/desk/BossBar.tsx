@@ -46,7 +46,8 @@ export function BossBar({ session, meta }: { session: ShiftSession; meta: BossMe
   return (
     <>
       {status === 'active' && (
-        <div
+        <section
+          aria-label={id.boss.label(meta.title)}
           className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b-2 border-danger bg-danger/15 px-3 py-1"
           data-testid="boss-bar"
           data-status={status}
@@ -56,7 +57,8 @@ export function BossBar({ session, meta }: { session: ShiftSession; meta: BossMe
             <span aria-hidden="true">👾 {meta.icon} </span>
             {id.boss.label(meta.title)}
           </p>
-          <p className="flex items-center" aria-label={id.boss.hp(state.hp, state.maxHp)}>
+          <p className="flex items-center">
+            <span className="sr-only">{id.boss.hp(state.hp, state.maxHp)}</span>
             <span key={state.hp} className={state.hp < state.maxHp ? 'flinch' : 'inline-block'}>
               {Array.from({ length: state.maxHp }, (_, i) => (
                 <span
@@ -76,7 +78,10 @@ export function BossBar({ session, meta }: { session: ShiftSession; meta: BossMe
               {id.boss.timeLeft(Math.ceil(state.msLeft / 1000))}
             </p>
           )}
-        </div>
+          <p className="w-full text-xs">
+            {timed ? id.boss.rulesTimed(state.maxHp, reward) : id.boss.rules(state.maxHp, reward)}
+          </p>
+        </section>
       )}
       {banner && (
         <div

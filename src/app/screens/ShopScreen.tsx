@@ -127,13 +127,18 @@ export function ShopScreen() {
                         type="button"
                         className={btnPrimary}
                         disabled={!affordable}
+                        aria-describedby={affordable ? undefined : `upgrade-${u.id}-funds`}
                         onClick={() => {
                           if (buyUpgrade(modeId, u.id)?.ok) setMessage(id.shop.installed(u.name));
                         }}
                       >
                         {id.shop.buy(u.name, u.price)}
                       </button>
-                      {!affordable && <p className="text-xs text-ink-muted">{id.shop.notEnough}</p>}
+                      {!affordable && (
+                        <p id={`upgrade-${u.id}-funds`} className="text-xs text-ink-muted">
+                          {id.shop.notEnough}
+                        </p>
+                      )}
                     </>
                   )}
                 </li>

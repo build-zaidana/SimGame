@@ -56,6 +56,7 @@ export const en: Strings = {
     enterShift: (order, title) => `Start Shift ${order}: ${title}`,
     allShiftsDone: 'All shifts done! Replay any shift in Practice Mode.',
     practiceHeading: 'Practice Mode',
+    practiceLabel: (desk) => `${desk} Practice Mode`,
     practiceIntro:
       'Replay a shift you have finished. It does not change your pay, trust, best score or reviews.',
     practiceShift: (order, title) => `Practice Shift ${order}: ${title}`,
@@ -229,6 +230,9 @@ export const en: Strings = {
     reportReward: (reward, streak) => `Reward +Rp ${reward} · ${streak}-day streak`,
     reportAgain: 'Today’s reward for this desk was already claimed. This run is not paid again.',
     claim: 'Claim reward & return to the office',
+    caseRight: 'Correct',
+    caseWrong: 'Not quite',
+    sectionLabel: (desk) => `${desk} Daily Challenge`,
   },
   boss: {
     chip: 'BOSS',

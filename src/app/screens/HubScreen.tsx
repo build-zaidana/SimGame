@@ -239,20 +239,22 @@ export function HubScreen() {
               )}
               {ownContent && (
                 <section
-                  aria-labelledby={`daily-${m.id}`}
+                  aria-label={id.daily.sectionLabel(m.deskTitle)}
                   className="mt-2 flex flex-col gap-2 border-t-2 border-ink/30 pt-2"
                   data-testid={`daily-${m.id}`}
                 >
-                  <h3 id={`daily-${m.id}`} className="font-display">
-                    <span aria-hidden="true">📅 </span>
-                    {id.daily.heading}
+                  <div className="flex flex-wrap items-baseline gap-x-2">
+                    <h3 className="font-display">
+                      <span aria-hidden="true">📅 </span>
+                      {id.daily.heading}
+                    </h3>
                     {streak > 0 && (
-                      <span className="ml-2 text-sm text-accent" data-testid="daily-streak">
+                      <p className="text-sm text-accent" data-testid="daily-streak">
                         <span aria-hidden="true">🔥 </span>
                         {id.daily.streak(streak)}
-                      </span>
+                      </p>
                     )}
-                  </h3>
+                  </div>
                   {practiceList.length === 0 ? (
                     <p className="text-xs text-ink-muted">{id.daily.locked}</p>
                   ) : dailyRun ? (
@@ -290,10 +292,10 @@ export function HubScreen() {
               )}
               {(practiceRun || practiceList.length > 0) && (
                 <section
-                  aria-labelledby={`practice-${m.id}`}
+                  aria-label={id.hub.practiceLabel(m.deskTitle)}
                   className="mt-2 flex flex-col gap-2 border-t-2 border-ink/30 pt-2"
                 >
-                  <h3 id={`practice-${m.id}`} className="font-display">
+                  <h3 className="font-display">
                     <span aria-hidden="true">🎯 </span>
                     {id.hub.practiceHeading}
                   </h3>
