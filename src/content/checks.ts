@@ -237,6 +237,15 @@ export function checkModeContent(content: ModeContent, policy: CheckPolicy): Con
 
   for (const s of content.shifts) {
     const file = `shifts/${s.id}.json`;
+    if (s.boss) {
+      const queued = new Set(s.queue.flatMap((q) => ('caseId' in q ? [q.caseId] : [])));
+      if (new Set(s.boss.caseIds).size !== s.boss.caseIds.length)
+        err(file, 'boss: kasus boss ganda');
+      for (const id of s.boss.caseIds)
+        if (!queued.has(id)) err(file, `boss: kasus tidak ada di antrian: ${id}`);
+      if (s.boss.arriveAt + s.boss.durationGameMinutes > s.durationGameMinutes)
+        err(file, 'boss: batas waktu boss melewati akhir shift');
+    }
     let safe = 0;
     // Tugas coding/CTF (verdict `task`, ADR 026) bukan keputusan aman/tidak: tidak ikut rasio.
     let decisions = 0;

@@ -78,6 +78,16 @@
         "type": "shift-complete",
         "shiftId": "dev-05"
       }
+    },
+    {
+      "id": "pemburu-boss",
+      "title": "Pemburu Boss",
+      "description": "Mengalahkan boss akhir shift: semua kasus boss diputuskan dengan benar.",
+      "icon": "👾",
+      "tier": "silver",
+      "rule": {
+        "type": "boss-defeated"
+      }
     }
   ]
 }

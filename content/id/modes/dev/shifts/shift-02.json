@@ -72,5 +72,14 @@
     },
     "classified": "DICARI: Bebek karet untuk diajak bicara saat debugging. Hubungi Kak Dimas.",
     "sources": ["Python Software Foundation: Errors and Exceptions"]
+  },
+  "boss": {
+    "title": "Bug Berantai",
+    "icon": "🐛",
+    "intro": "Satu bug memicu bug lain. Perbaiki, review, dan tulis fungsi baru sebelum waktu habis.",
+    "caseIds": ["s02-fix-003", "s02-pr-003", "s02-build-002"],
+    "arriveAt": 60,
+    "durationGameMinutes": 45,
+    "reward": 40
   }
 }

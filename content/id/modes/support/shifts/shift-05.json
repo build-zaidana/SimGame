@@ -80,5 +80,14 @@
     },
     "classified": "DICARI: Pemilik laptop tanpa nama yang ditemukan di ruang rapat lantai 3. Tanyakan ke Bengkel IT. — Satpam",
     "sources": ["NIST SP 800-61: Incident Handling Guide", "ITIL 4: Incident Management"]
+  },
+  "boss": {
+    "title": "Detik-detik Terakhir",
+    "icon": "🕵️",
+    "intro": "Di akhir hari, tiga kasus terakhir datang bersamaan. Ingat kapan harus memperbaiki dan kapan harus meneruskan ke spesialis.",
+    "caseIds": ["s05-ticket-004", "s05-hw-004", "s05-diag-004"],
+    "arriveAt": 68,
+    "durationGameMinutes": 30,
+    "reward": 70
   }
 }

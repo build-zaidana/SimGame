@@ -66,5 +66,14 @@
       "Python Software Foundation: The Python Tutorial",
       "OWASP: Secrets Management Cheat Sheet"
     ]
+  },
+  "boss": {
+    "title": "Afternoon Release",
+    "icon": "🚀",
+    "intro": "Before the afternoon release, three tasks arrive at once: the warehouse robot, a CTF challenge and a PR. Get them all right!",
+    "caseIds": ["s01-robot-002", "s01-ctf-001", "s01-pr-003"],
+    "arriveAt": 60,
+    "durationGameMinutes": 45,
+    "reward": 30
   }
 }

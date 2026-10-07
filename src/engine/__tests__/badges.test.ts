@@ -50,6 +50,7 @@ function ctx(cases: SessionCase[], over: Partial<BadgeContext> = {}): BadgeConte
     trust: 75,
     toolsOwned: 0,
     reviewResults: [],
+    bossDefeated: false,
     ...over,
   };
 }
@@ -57,6 +58,13 @@ function ctx(cases: SessionCase[], over: Partial<BadgeContext> = {}): BadgeConte
 const good = () => [decided('correct'), decided('correct'), decided('correct')];
 
 describe('badgeEarned', () => {
+  it('boss-defeated needs the boss of this shift beaten (ADR 028)', () => {
+    const rule = { type: 'boss-defeated' } as const;
+    expect(badgeEarned(rule, ctx(good(), { bossDefeated: true }))).toBe(true);
+    expect(badgeEarned(rule, ctx(good()))).toBe(false);
+    expect(badgeEarned(rule, ctx([], { shiftId: null, bossDefeated: true }))).toBe(false);
+  });
+
   it('shift-complete: only for the named shift (or any shift without a name)', () => {
     expect(badgeEarned({ type: 'shift-complete', shiftId: 'soc-01' }, ctx(good()))).toBe(true);
     expect(badgeEarned({ type: 'shift-complete', shiftId: 'soc-05' }, ctx(good()))).toBe(false);

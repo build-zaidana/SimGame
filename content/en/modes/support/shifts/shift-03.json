@@ -72,5 +72,14 @@
     },
     "classified": "LOST: One blue network cable, last seen under the Marketing desk. Please return it.",
     "sources": ["CompTIA Network+: Troubleshooting Methodology", "IETF RFC 3927"]
+  },
+  "boss": {
+    "title": "Signal Storm",
+    "icon": "📶",
+    "intro": "The office network acts up on several floors at once. Read the diagnostic results carefully.",
+    "caseIds": ["s03-diag-004", "s03-ticket-004", "s03-diag-005"],
+    "arriveAt": 63,
+    "durationGameMinutes": 30,
+    "reward": 50
   }
 }

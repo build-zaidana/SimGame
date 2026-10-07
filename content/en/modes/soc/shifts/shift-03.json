@@ -72,5 +72,14 @@
     },
     "classified": "THANK YOU to everyone who read their code out over the phone. You were a big help. — K.",
     "sources": ["BSSN: advice on keeping your OTP secret", "NIST SP 800-63B"]
+  },
+  "boss": {
+    "title": "The Code Hunter",
+    "icon": "🔑",
+    "intro": "Someone is after staff login codes from every direction. Stay careful: an unusual login is not always an attack.",
+    "caseIds": ["s03-login-004", "s03-email-004", "s03-url-002"],
+    "arriveAt": 60,
+    "durationGameMinutes": 30,
+    "reward": 50
   }
 }

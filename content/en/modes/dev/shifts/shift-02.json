@@ -72,5 +72,14 @@
     },
     "classified": "WANTED: A rubber duck to talk to while debugging. Contact Dimas.",
     "sources": ["Python Software Foundation: Errors and Exceptions"]
+  },
+  "boss": {
+    "title": "Chain of Bugs",
+    "icon": "🐛",
+    "intro": "One bug sets off another. Fix, review and write a new function before time runs out.",
+    "caseIds": ["s02-fix-003", "s02-pr-003", "s02-build-002"],
+    "arriveAt": 60,
+    "durationGameMinutes": 45,
+    "reward": 40
   }
 }

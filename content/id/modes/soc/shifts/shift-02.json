@@ -72,5 +72,14 @@
     },
     "classified": "DIJUAL: Domain mirip-mirip, harga miring. Hanya untuk peminat serius. — K.",
     "sources": ["APWG Phishing Activity Trends Report", "BSSN: panduan mengenali phishing"]
+  },
+  "boss": {
+    "title": "Badai Kotak Masuk",
+    "icon": "📨",
+    "intro": "Menjelang sore kotak masuk banjir: struk, tautan, dan permintaan ganti rekening. Mana yang asli, mana yang palsu?",
+    "caseIds": ["s02-email-005", "s02-url-002", "s02-email-006"],
+    "arriveAt": 60,
+    "durationGameMinutes": 30,
+    "reward": 40
   }
 }

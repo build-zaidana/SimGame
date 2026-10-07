@@ -111,6 +111,16 @@
         "type": "shift-complete",
         "shiftId": "support-05"
       }
+    },
+    {
+      "id": "pemburu-boss",
+      "title": "Boss Hunter",
+      "description": "Beat an end-of-shift boss: every boss case decided correctly.",
+      "icon": "👾",
+      "tier": "silver",
+      "rule": {
+        "type": "boss-defeated"
+      }
     }
   ]
 }

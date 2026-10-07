@@ -85,5 +85,14 @@
     },
     "classified": "SEE YOU AT LUNCHTIME. — K.",
     "sources": ["NIST SP 800-61: Computer Security Incident Handling Guide", "BSSN"]
+  },
+  "boss": {
+    "title": "Kelabu Strikes",
+    "icon": "🕶️",
+    "intro": "Kelabu attacks all at once in the final minutes. Remember everything you learned from the guide!",
+    "caseIds": ["s05-url-001", "s05-login-003", "s05-email-005"],
+    "arriveAt": 62,
+    "durationGameMinutes": 30,
+    "reward": 70
   }
 }

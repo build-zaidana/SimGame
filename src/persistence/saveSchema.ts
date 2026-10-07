@@ -3,7 +3,7 @@ import type { ShiftSession } from '../engine/types.ts';
 import { BASELINE_TRUST } from '../engine/economy.ts';
 
 /** Naikkan + tambah migrasi di migrations.ts + test setiap kali bentuk save berubah. */
-export const SAVE_SCHEMA_VERSION = 11;
+export const SAVE_SCHEMA_VERSION = 12;
 
 const level = z.literal([1, 2, 3]);
 const score01 = z.number().min(0).max(1);
@@ -74,6 +74,15 @@ export const shiftSessionSchema: z.ZodType<ShiftSession> = z.object({
       freeHints: z.number().int().min(1),
       payBonus: z.number().int().nonnegative(),
       shiftTimePercent: z.number().nonnegative(),
+    })
+    .optional(),
+  /** v12: gelombang boss akhir shift (ADR 028). */
+  boss: z
+    .object({
+      caseIds: z.array(z.string()).min(1),
+      startsAtMs: z.number().nonnegative(),
+      endsAtMs: z.number().nonnegative(),
+      reward: z.number().int().nonnegative(),
     })
     .optional(),
 });

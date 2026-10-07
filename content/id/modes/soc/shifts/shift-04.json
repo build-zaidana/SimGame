@@ -81,5 +81,14 @@
     },
     "classified": "PAKET UNTUK ANDA sedang dalam perjalanan. Jangan lupa dibuka, ya. — K.",
     "sources": ["BSSN: imbauan waspada file APK", "OWASP: glosarium malware"]
+  },
+  "boss": {
+    "title": "Paket Misterius",
+    "icon": "📦",
+    "intro": "File, email, dan login berdatangan sekaligus menjelang jam pulang. Periksa sumber dan isinya sebelum memutuskan.",
+    "caseIds": ["s04-email-001", "s04-file-004", "s04-login-003"],
+    "arriveAt": 62,
+    "durationGameMinutes": 30,
+    "reward": 60
   }
 }

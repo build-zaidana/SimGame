@@ -83,6 +83,18 @@ export const shiftSchema = z.strictObject({
     perCase: z.number().int().nonnegative(),
   }),
   newspaper: newspaperSchema.optional(),
+  /** Boss akhir shift (ADR 028): kasus dari antrian yang datang bersamaan, dengan batas waktu. */
+  boss: z
+    .strictObject({
+      title: text,
+      icon: text,
+      intro: text,
+      caseIds: z.array(idSchema).min(2).max(4),
+      arriveAt: z.number().int().nonnegative(),
+      durationGameMinutes: z.number().int().min(10),
+      reward: z.number().int().positive(),
+    })
+    .optional(),
 });
 
 const reviewBase = {
@@ -174,6 +186,7 @@ export const badgeRuleSchema = z.discriminatedUnion('type', [
   z.strictObject({ type: z.literal('review-perfect') }),
   z.strictObject({ type: z.literal('tools-owned'), count: minCases }),
   z.strictObject({ type: z.literal('trust-at-least'), value: z.number().int().min(1).max(100) }),
+  z.strictObject({ type: z.literal('boss-defeated') }),
 ]);
 export const badgeSchema = z.strictObject({
   id: idSchema,

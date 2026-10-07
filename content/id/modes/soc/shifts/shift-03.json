@@ -72,5 +72,14 @@
     },
     "classified": "TERIMA KASIH kepada siapa pun yang membacakan kodenya lewat telepon. Kalian sangat membantu. — K.",
     "sources": ["BSSN: imbauan menjaga kerahasiaan OTP", "NIST SP 800-63B"]
+  },
+  "boss": {
+    "title": "Pemburu Kode Rahasia",
+    "icon": "🔑",
+    "intro": "Seseorang mengincar kode login karyawan dari segala arah. Tetap teliti: login yang aneh belum tentu serangan.",
+    "caseIds": ["s03-login-004", "s03-email-004", "s03-url-002"],
+    "arriveAt": 60,
+    "durationGameMinutes": 30,
+    "reward": 50
   }
 }
