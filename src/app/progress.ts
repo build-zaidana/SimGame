@@ -3,6 +3,7 @@ import type { ReviewItem, ShiftDef } from '../content/schemas.ts';
 import { newBadges, type BadgeRule } from '../engine/badges.ts';
 import { carryTrust, upgradePerks } from '../engine/economy.ts';
 import { careerRank, rankPayBonus, type RankInput } from '../engine/rank.ts';
+import { bossState } from '../engine/boss.ts';
 import { recordResult, recordShiftConcepts, type MasteryMap } from '../engine/mastery.ts';
 import { createRng } from '../engine/rng.ts';
 import { selectReviewItems } from '../engine/review.ts';
@@ -51,6 +52,16 @@ export function buildShift(
       durationGameMinutes: shift.durationGameMinutes,
       realSecondsPerGameMinute: shift.realSecondsPerGameMinute,
       cases,
+      ...(shift.boss
+        ? {
+            boss: {
+              caseIds: shift.boss.caseIds,
+              arriveAt: shift.boss.arriveAt,
+              durationGameMinutes: shift.boss.durationGameMinutes,
+              reward: shift.boss.reward,
+            },
+          }
+        : {}),
     },
     generatedCases,
   };
@@ -134,6 +145,7 @@ export function awardBadges(
     trust: shift?.trust ?? progress.trust,
     toolsOwned: progress.toolsOwned.length,
     reviewResults: shift?.reviewResults ?? [],
+    bossDefeated: shift ? bossState(shift.session)?.status === 'defeated' : false,
   });
   if (earned.length === 0) return { progress, earned };
   const badges = { ...progress.badges, ...Object.fromEntries(earned.map((id) => [id, now])) };

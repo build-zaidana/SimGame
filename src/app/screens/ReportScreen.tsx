@@ -124,9 +124,26 @@ export function ReportScreen() {
         <p>
           {practice
             ? id.report.practicePay
-            : id.report.pay(summary.pay, shift?.pay.base ?? 0, session.perks?.payBonus ?? 0)}
+            : id.report.pay(
+                summary.pay,
+                shift?.pay.base ?? 0,
+                session.perks?.payBonus ?? 0,
+                summary.bossBonus,
+              )}
         </p>
       </section>
+      {shift?.boss && session.boss && (
+        <p
+          className={`${panel} p-3 font-display`}
+          data-testid="boss-result"
+          data-status={summary.bossBonus > 0 ? 'defeated' : 'escaped'}
+        >
+          <span aria-hidden="true">👾 {shift.boss.icon} </span>
+          {summary.bossBonus > 0
+            ? id.boss.reportDefeated(shift.boss.title, summary.bossBonus)
+            : id.boss.reportEscaped(shift.boss.title)}
+        </p>
+      )}
       {rankAfter > rankBefore && (
         <RankUp
           title={content.meta.ranks[rankAfter] ?? ''}
