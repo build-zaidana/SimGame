@@ -10,6 +10,7 @@ const VOICE: Partial<Record<Line['speaker'], number>> = {
   rani: 1.25,
   joko: 0.8,
   dimas: 1.05,
+  laras: 0.95,
   kelabu: 0.55,
 };
 

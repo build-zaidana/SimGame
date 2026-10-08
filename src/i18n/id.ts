@@ -120,7 +120,7 @@ export const id = {
       deskTitle: 'Meja Developer',
       rulebook: 'Buku Panduan Developer',
     },
-    data: { title: 'Analis Data / AI', deskTitle: 'Meja Data', rulebook: 'Buku Panduan' },
+    data: { title: 'Analis Data / AI', deskTitle: 'Meja Data', rulebook: 'Buku Panduan Data' },
   },
   decisions: {
     allow: 'Izinkan',
@@ -373,6 +373,7 @@ export const id = {
     kelabu: 'Kelabu',
     joko: 'Pak Joko',
     dimas: 'Kak Dimas',
+    laras: 'Bu Laras',
     narrator: '',
   } as Record<string, string>,
   stamps: {
@@ -624,6 +625,103 @@ export const id = {
       incidentLines: ['Server-nya berasap! Tolong cepat!', 'Pengguna tidak bisa masuk. Darurat!'],
       ctf: { name: 'Papan CTF', role: 'Latihan tim keamanan' },
       ctfLines: ['Bendera tersembunyi menunggu ditemukan.', 'Tantangan baru di papan CTF!'],
+    },
+  },
+  data: {
+    editor: {
+      label: 'Query SQL',
+      keysLabel: 'Tombol bantu mengetik SQL',
+      help: 'Ketuk tombol untuk menyisipkan kata kunci SQL. Huruf besar/kecil tidak masalah.',
+      reset: 'Kembalikan query awal',
+    },
+    run: {
+      button: 'Jalankan Query',
+      running: 'Menjalankan…',
+      timeout:
+        'Query berjalan lebih dari 4 detik dan dihentikan. Mungkin ada perulangan yang tidak pernah selesai.',
+      failed: 'SQLite gagal dimuat. Coba jalankan lagi.',
+      summary: (p: number, t: number) => `${p} dari ${t} set data cocok`,
+      allPassed: 'SEMUA DATA COCOK!',
+      got: 'Hasil query-mu',
+      expected: 'Hasil yang diminta',
+      sample: 'Data contoh',
+      hiddenSet: (n: number) => `Data uji tersembunyi #${n}`,
+      match: 'cocok',
+      mismatch: 'belum cocok',
+      empty: 'Query masih kosong. Tulis perintah SELECT dulu.',
+      error: 'Error dari SQLite',
+      noRows: '(tidak ada baris)',
+      truncated: (n: number) => `… hanya ${n} baris pertama yang ditampilkan`,
+      notRunYet: 'Jalankan query dulu, baru kirim solusi.',
+      hints: {
+        'no-such-column':
+          "Nama kolom tidak ditemukan. Cek ejaannya di daftar kolom tabel; teks harus diapit tanda kutip tunggal, mis. 'Bandung'.",
+        'no-such-table': 'Nama tabel tidak ditemukan. Cek ejaannya di daftar tabel di atas.',
+        syntax: 'Ada salah tulis. Urutan yang benar: SELECT … FROM … WHERE … GROUP BY … ORDER BY …',
+        aggregate:
+          'Fungsi seperti COUNT/SUM/AVG di WHERE tidak bisa. Untuk menyaring hasil kelompok, pakai HAVING setelah GROUP BY.',
+      } as Record<string, string>,
+    },
+    query: {
+      fixHeading: 'Perbaiki query',
+      buildHeading: 'Tulis query',
+      requester: 'Diminta oleh',
+      tables: 'Tabel di database',
+      table: (name: string, n: number) => `Tabel ${name} · ${n} baris`,
+      hiddenNote: (n: number) =>
+        `Query-mu juga dicek di ${n} set data uji tersembunyi yang isinya berbeda.`,
+      orderedNote: 'Urutan baris ikut dinilai.',
+      queueTitle: (title: string) => `SQL: ${title}`,
+    },
+    chart: {
+      heading: 'Laporan grafik',
+      author: 'Dibuat oleh',
+      purpose: 'Akan dikirim ke',
+      axis: (start: number, unit: string) => `Sumbu Y dimulai dari ${start} ${unit}`,
+      data: 'Angka di grafik',
+      claims: 'Judul & kesimpulan laporan',
+      notes: 'Catatan',
+      queueTitle: (title: string) => `Grafik: ${title}`,
+      value: (n: number) => n.toLocaleString('id-ID'),
+    },
+    request: {
+      heading: {
+        share: 'Permintaan data',
+        quality: 'Cek kualitas data',
+        'ai-train': 'Data latih AI',
+        'ai-answer': 'Jawaban asisten AI',
+      } as Record<string, string>,
+      from: 'Dari',
+      table: 'Pratinjau data',
+      chat: 'Percakapan',
+      user: 'Pengguna',
+      ai: 'Asisten AI',
+      notes: 'Catatan',
+    },
+    tools: {
+      profileHeading: 'Profiler Data: ringkasan isi kolom',
+      sourceHeading: 'Cek Sumber: asal data & klaim',
+      profileName: 'Profiler Data',
+      sourceName: 'Cek Sumber',
+    },
+    citations: {
+      'threat-allowed':
+        'PERINGATAN: laporan/permintaan bermasalah disetujui. Keputusan bisnis atau data orang jadi taruhannya.',
+      'legit-blocked': 'CATATAN: laporannya sudah jujur dan aman. Pekerjaan baik jadi tertahan.',
+      'needless-escalation': 'CATATAN: cukup disetujui; tim hukum & atasan jadi repot tanpa perlu.',
+    } as Record<string, string>,
+    visitors: {
+      queryLines: [
+        'Butuh angka ini buat rapat. Bisa bantu?',
+        'Datanya ada, tapi aku bingung narik-nya.',
+      ],
+      fixLines: ['Query-ku hasilnya aneh. Tolong cek, ya.', 'Angkanya kok beda sama kemarin?'],
+      chartLines: [
+        'Grafiknya sudah jadi. Boleh langsung kukirim?',
+        'Tolong cek laporanku sebelum terbit.',
+      ],
+      requestLines: ['Ada permintaan data, nih.', 'Bisa minta datanya hari ini?'],
+      aiLines: ['Tim AI minta pendapatmu.', 'Hasil AI-nya meyakinkan, sih. Aman, kan?'],
     },
   },
   support: {

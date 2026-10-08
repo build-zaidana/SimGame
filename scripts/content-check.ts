@@ -18,6 +18,10 @@ import { loadMicroPython } from '@micropython/micropython-webassembly-pyscript';
 import { devCaseSchemas } from '../src/modes/dev/caseTypes/schemas.ts';
 import { DEV_TOOL_IDS } from '../src/modes/dev/tools.ts';
 import { verifyDevCase } from '../src/modes/dev/verify.ts';
+import initSqlJs from 'sql.js';
+import { dataCaseSchemas } from '../src/modes/data/caseTypes/schemas.ts';
+import { DATA_TOOL_IDS } from '../src/modes/data/tools.ts';
+import { verifyDataCase } from '../src/modes/data/verify.ts';
 
 const ROOT = join(import.meta.dirname, '..');
 const LOCALES_DIR = join(ROOT, 'content');
@@ -41,7 +45,15 @@ const MODES: Record<
     tools: DEV_TOOL_IDS,
     verify: (c) => verifyDevCase(loadMicroPython, c),
   },
+  data: {
+    schemas: dataCaseSchemas,
+    generators: {},
+    tools: DATA_TOOL_IDS,
+    verify: async (c) => verifyDataCase(await sqlEngine, c),
+  },
 };
+/** SQLite untuk memeriksa query acuan Meja Data (ADR 031); dimuat sekali. */
+const sqlEngine = initSqlJs();
 /** Jumlah seed yang dicoba untuk tiap entri generator di antrian shift. */
 const GENERATOR_SAMPLES = 20;
 

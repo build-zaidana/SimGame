@@ -3,7 +3,7 @@ import { PixelCanvas } from './canvas.ts';
 
 /** Potret 32×32. Cahaya dari kiri atas; outline gelap seperti sprite game. */
 export const PORTRAIT_SIZE = 32;
-export type PortraitKind = 'person' | 'system' | 'rani' | 'kelabu' | 'joko' | 'dimas';
+export type PortraitKind = 'person' | 'system' | 'rani' | 'kelabu' | 'joko' | 'dimas' | 'laras';
 /** Ekspresi wajah: reaksi pengunjung setelah keputusan pemain. */
 export type Mood = 'neutral' | 'happy' | 'upset';
 
@@ -210,6 +210,28 @@ function dimas(mood: Mood): PixelCanvas {
   return p.outline(OUTLINE);
 }
 
+/** Bu Laras: analis data senior Meja Data. Rambut bob dengan uban, blazer, bros grafik batang. */
+function laras(mood: Mood): PixelCanvas {
+  const p = new PixelCanvas(32, 32);
+  const skin = '#bd875c';
+  shoulders(p, '#7c3f58');
+  // Kerah kemeja putih + bros grafik batang kecil.
+  p.line(13, 25, 15, 28, '#f4efe4').line(19, 25, 17, 28, '#f4efe4');
+  p.set(20, 29, '#74cf92').rect(21, 28, 1, 2, '#f2c14e').rect(22, 27, 1, 3, '#8fd0fa');
+  neckAndHead(p, skin);
+  // Rambut bob sebahu dengan seberkas uban di depan.
+  const hair = '#2a1d16';
+  p.ellipse(16, 10, 8.8, 5.4, hair, {
+    shade: '#1a120d',
+    clip: (x, y) => y <= 11 || x < 9 || x > 22,
+  });
+  p.rect(7, 10, 3, 10, hair).rect(22, 10, 3, 10, hair);
+  p.line(12, 6, 15, 9, '#b8b8bc');
+  faceFeatures(p, skin, hair, 1, mood);
+  glasses(p, '#7c3f58');
+  return p.outline(OUTLINE);
+}
+
 function kelabu(): PixelCanvas {
   const p = new PixelCanvas(32, 32);
   const hood = '#5b6070';
@@ -275,11 +297,13 @@ export function portraitPaths(
           ? joko(mood)
           : kind === 'dimas'
             ? dimas(mood)
-            : kind === 'rani'
-              ? rani(mood)
-              : kind === 'kelabu'
-                ? kelabu()
-                : person(seed, mood);
+            : kind === 'laras'
+              ? laras(mood)
+              : kind === 'rani'
+                ? rani(mood)
+                : kind === 'kelabu'
+                  ? kelabu()
+                  : person(seed, mood);
     paths = canvas.toPaths();
     cache.set(key, paths);
   }
