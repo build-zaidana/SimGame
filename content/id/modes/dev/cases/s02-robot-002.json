@@ -1,0 +1,50 @@
+{
+  "id": "s02-robot-002",
+  "type": "robot",
+  "conceptIds": ["python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Yoga Saputra",
+      "team": "Tim Gudang"
+    },
+    "title": "Lorong panjang",
+    "story": [
+      "Lorong gudang ini panjang sekali. Menulis maju() enam kali itu melelahkan!",
+      "Pakai for i in range(n): untuk mengulang perintah n kali."
+    ],
+    "maps": [
+      {
+        "grid": [
+          "##########",
+          "#......P.#",
+          "#######.##",
+          "#######.##",
+          "#######T##",
+          "##########"
+        ],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      }
+    ],
+    "starter": "# Ulangi maju() 6 kali dengan for, lalu ambil paketnya\nfor i in range(3):\n    maju()\n",
+    "solution": "for i in range(6):\n    maju()\nambil()\nbelok_kanan()\nfor i in range(3):\n    maju()\nantar()\n",
+    "commands": ["forward", "turn_left", "turn_right", "pick_up", "deliver", "for_range"]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "for i in range(6): mengulang isi blok enam kali, jadi program tetap pendek walau lorongnya panjang. Hitung kotaknya dulu, lalu tulis angka pengulangannya.",
+  "ruleRefs": ["r-py-1"],
+  "hints": [
+    "Hitung berapa kotak dari robot sampai paket.",
+    "Paket 6 langkah di depan; setelah belok kanan, bendera 3 langkah lagi."
+  ]
+}

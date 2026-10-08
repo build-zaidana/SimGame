@@ -43,7 +43,18 @@
       }
     ],
     "starter": "# Program lama hanya bisa lurus. Lorong baru berbelok!\nwhile not di_tujuan():\n    if ada_paket():\n        ambil()\n    maju()\nantar()\n",
-    "solution": "while not di_tujuan():\n    if ada_paket():\n        ambil()\n    if depan_kosong():\n        maju()\n    else:\n        belok_kanan()\nantar()\n"
+    "solution": "while not di_tujuan():\n    if ada_paket():\n        ambil()\n    if depan_kosong():\n        maju()\n    else:\n        belok_kanan()\nantar()\n",
+    "commands": [
+      "forward",
+      "turn_left",
+      "turn_right",
+      "pick_up",
+      "deliver",
+      "while_target",
+      "if_front",
+      "if_package",
+      "else"
+    ]
   },
   "evidence": {
     "required": [],
