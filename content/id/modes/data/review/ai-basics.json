@@ -1,0 +1,63 @@
+{
+  "items": [
+    {
+      "id": "rv-ai-1",
+      "type": "mcq",
+      "conceptId": "ai-basics",
+      "difficulty": 1,
+      "prompt": "90% data latih AI penyaring lamaran berasal dari laki-laki. Risikonya?",
+      "choices": ["AI berat sebelah terhadap perempuan", "AI jadi lebih cepat", "Tidak ada risiko"],
+      "answerIndex": 0,
+      "explanation": "AI meniru pola di data latihnya. Data yang berat sebelah menghasilkan keputusan yang berat sebelah."
+    },
+    {
+      "id": "rv-ai-2",
+      "type": "mcq",
+      "conceptId": "ai-basics",
+      "difficulty": 2,
+      "prompt": "Asisten AI menyebut \"Peraturan Menteri No. 99/2025\". Langkah pertama?",
+      "choices": [
+        "Cek ke sumber resmi apakah peraturannya ada",
+        "Langsung kutip di laporan",
+        "Percaya karena AI pintar"
+      ],
+      "answerIndex": 0,
+      "explanation": "AI bisa mengarang sumber yang terdengar meyakinkan (halusinasi). Selalu cek sumber aslinya."
+    },
+    {
+      "id": "rv-ai-3",
+      "type": "mcq",
+      "conceptId": "ai-basics",
+      "difficulty": 1,
+      "prompt": "Bolehkah menempelkan daftar pelanggan ke chatbot AI publik untuk dirangkum?",
+      "choices": [
+        "Tidak, data pribadi tidak boleh keluar kantor",
+        "Boleh, asal cepat",
+        "Boleh kalau malam hari"
+      ],
+      "answerIndex": 0,
+      "explanation": "Data yang dimasukkan ke layanan AI publik bisa tersimpan di luar kendali kantor."
+    },
+    {
+      "id": "rv-ai-4",
+      "type": "tap-evidence",
+      "conceptId": "ai-basics",
+      "difficulty": 2,
+      "prompt": "Ketuk bagian jawaban AI yang perlu dicek dulu.",
+      "parts": [
+        {
+          "text": "Penjualan kuartal ini Rp 120 juta,"
+        },
+        {
+          "text": "naik 50% menurut \"Laporan Statistik 2031\".",
+          "evidenceId": "cite"
+        },
+        {
+          "text": "Ringkasan dibuat otomatis."
+        }
+      ],
+      "answer": ["cite"],
+      "explanation": "Rujukan dari masa depan jelas dikarang. Cek angka dan sumbernya ke data asli."
+    }
+  ]
+}

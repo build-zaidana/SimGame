@@ -1,0 +1,64 @@
+{
+  "id": "s01-chart-002",
+  "type": "chart",
+  "conceptIds": ["honest-charts"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "author": {
+      "name": "Maya Anggraini",
+      "team": "Finance Team"
+    },
+    "title": "Store Visitors per Month",
+    "purpose": "Internal office newsletter",
+    "chart": {
+      "kind": "line",
+      "title": "Visitors per month",
+      "unit": "people",
+      "axisStart": 0,
+      "points": [
+        {
+          "label": "Jan",
+          "value": 400,
+          "evidenceId": "pt-1"
+        },
+        {
+          "label": "Feb",
+          "value": 420,
+          "evidenceId": "pt-2"
+        },
+        {
+          "label": "Mar",
+          "value": 440,
+          "evidenceId": "pt-3"
+        }
+      ],
+      "axisEvidenceId": "axis"
+    },
+    "claims": [
+      {
+        "text": "Visitors rose slowly, about 10% over three months.",
+        "evidenceId": "claim-slow"
+      }
+    ],
+    "notes": [
+      {
+        "text": "Source: door counters at 3 branches, January–March.",
+        "evidenceId": "note-source"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["claim-slow", "note-source", "axis"]
+  },
+  "explanation": "The axis starts at 0, the source is clear, and \"up about 10%\" matches 400 to 440. An honest report like this should simply be approved.",
+  "ruleRefs": ["r-ch-1", "r-ch-4"],
+  "hints": [
+    "Check the axis, the source, and whether the claim matches the numbers.",
+    "From 400 to 440 is a 10% rise. Is anything misleading?"
+  ]
+}

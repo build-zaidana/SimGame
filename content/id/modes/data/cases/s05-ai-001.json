@@ -1,0 +1,66 @@
+{
+  "id": "s05-ai-001",
+  "type": "request",
+  "conceptIds": ["ai-basics"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "kind": "ai-answer",
+    "from": {
+      "name": "Dian Kartika",
+      "team": "Tim Humas"
+    },
+    "title": "Ringkasan AI untuk siaran pers",
+    "message": [
+      {
+        "text": "Ringkasan ini dibuat asisten AI. Rencananya langsung masuk siaran pers.",
+        "evidenceId": "msg-press"
+      }
+    ],
+    "notes": [],
+    "table": {
+      "title": "Tabel sumber",
+      "columns": [
+        {
+          "name": "tahun"
+        },
+        {
+          "name": "pendapatan_juta"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["2025", "400"],
+          "evidenceId": "row-2025"
+        },
+        {
+          "cells": ["2026", "420"],
+          "evidenceId": "row-2026"
+        }
+      ]
+    },
+    "chat": [
+      {
+        "who": "user",
+        "text": "Ringkas pertumbuhan pendapatan tahun ini."
+      },
+      {
+        "who": "ai",
+        "text": "Pendapatan PT Nusa Digital tahun ini naik 50% menjadi Rp 420 juta.",
+        "evidenceId": "ai-claim"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["ai-claim"],
+    "supporting": ["row-2025", "row-2026"]
+  },
+  "explanation": "AI menulis \"naik 50%\", padahal tabel menunjukkan 400 ke 420 juta, hanya sekitar 5%. Minta revisi sebelum terbit.",
+  "ruleRefs": ["r-ai-2"],
+  "hints": ["Hitung sendiri kenaikannya dari tabel.", "Dari 400 ke 420 itu naik berapa persen?"]
+}

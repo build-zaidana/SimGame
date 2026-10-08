@@ -1,0 +1,58 @@
+{
+  "items": [
+    {
+      "id": "rv-dt-1",
+      "type": "mcq",
+      "conceptId": "data-tables",
+      "difficulty": 1,
+      "prompt": "Which part of a query picks the COLUMNS?",
+      "choices": ["SELECT", "FROM", "WHERE"],
+      "answerIndex": 0,
+      "explanation": "SELECT picks columns, FROM picks the table, WHERE filters rows."
+    },
+    {
+      "id": "rv-dt-2",
+      "type": "mcq",
+      "conceptId": "data-tables",
+      "difficulty": 1,
+      "prompt": "How do you write the text Bandung in WHERE?",
+      "choices": ["kota = 'Bandung'", "kota = Bandung", "kota == Bandung"],
+      "answerIndex": 0,
+      "explanation": "Text in SQL goes in single quotes. Without them, SQL thinks Bandung is a column name."
+    },
+    {
+      "id": "rv-dt-3",
+      "type": "mcq",
+      "conceptId": "data-tables",
+      "difficulty": 2,
+      "prompt": "Rule: AT LEAST 120 points. Which condition is right?",
+      "choices": ["poin > 120", "poin >= 120", "poin < 120"],
+      "answerIndex": 1,
+      "explanation": ">= includes 120 itself, while > does not."
+    },
+    {
+      "id": "rv-dt-4",
+      "type": "mcq",
+      "conceptId": "data-tables",
+      "difficulty": 2,
+      "prompt": "Get the 3 customers with the most points. Which ending is right?",
+      "choices": ["ORDER BY poin LIMIT 3", "ORDER BY poin DESC LIMIT 3", "LIMIT 3 ORDER BY poin"],
+      "answerIndex": 1,
+      "explanation": "DESC sorts largest first, then LIMIT 3 keeps the top three. LIMIT always comes last."
+    },
+    {
+      "id": "rv-dt-5",
+      "type": "mcq",
+      "conceptId": "data-tables",
+      "difficulty": 2,
+      "prompt": "What is the difference between AND and OR in WHERE city = 'Medan' ... age < 30?",
+      "choices": [
+        "AND: both must hold. OR: either one is enough.",
+        "They are the same.",
+        "OR is stricter than AND."
+      ],
+      "answerIndex": 0,
+      "explanation": "AND keeps only people in Medan who are under 30. OR keeps everyone in Medan plus everyone under 30."
+    }
+  ]
+}

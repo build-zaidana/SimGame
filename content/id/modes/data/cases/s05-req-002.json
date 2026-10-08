@@ -1,0 +1,62 @@
+{
+  "id": "s05-req-002",
+  "type": "request",
+  "conceptIds": ["data-privacy"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "kind": "share",
+    "from": {
+      "name": "Dian Kartika",
+      "team": "Tim Humas"
+    },
+    "title": "Angka untuk laporan tahunan publik",
+    "message": [
+      {
+        "text": "Untuk laporan tahunan di situs kantor, kami butuh jumlah pelanggan per kota.",
+        "evidenceId": "msg-public"
+      }
+    ],
+    "notes": [
+      {
+        "text": "Tidak ada nama, NIK, atau nomor HP.",
+        "evidenceId": "note-anon"
+      }
+    ],
+    "table": {
+      "title": "Yang akan diterbitkan",
+      "columns": [
+        {
+          "name": "kota"
+        },
+        {
+          "name": "jumlah_pelanggan"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["Bandung", "4.210"]
+        },
+        {
+          "cells": ["Medan", "3.180"]
+        },
+        {
+          "cells": ["Surabaya", "3.940"]
+        }
+      ]
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["msg-public", "note-anon"]
+  },
+  "explanation": "Hanya angka total per kota, tanpa identitas siapa pun. Ini aman diterbitkan.",
+  "ruleRefs": ["r-pv-2"],
+  "hints": [
+    "Bisakah seseorang dikenali dari angka-angka ini?",
+    "Angka total per kota biasanya aman."
+  ]
+}

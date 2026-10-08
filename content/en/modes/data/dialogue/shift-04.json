@@ -1,0 +1,38 @@
+{
+  "dialogues": [
+    {
+      "id": "data-04-intro",
+      "lines": [
+        {
+          "speaker": "laras",
+          "text": "Two new things today: JOIN for combining tables, and our first AI project."
+        },
+        {
+          "speaker": "laras",
+          "text": "AI is a diligent student: it copies whatever is in its training data, mistakes included."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "An AI trained on just any data... must be very clever, right? Heh."
+        },
+        {
+          "speaker": "laras",
+          "text": "Ignore that voice. Check the bias, check the privacy, check the sources."
+        }
+      ]
+    },
+    {
+      "id": "data-04-outro",
+      "lines": [
+        {
+          "speaker": "laras",
+          "text": "Good work. You saved the job-screening AI from an unfair pattern."
+        },
+        {
+          "speaker": "laras",
+          "text": "Tomorrow is the year-end report. Everything you've learned will be used at once."
+        }
+      ]
+    }
+  ]
+}

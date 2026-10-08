@@ -1,0 +1,82 @@
+{
+  "id": "s03-q-003",
+  "type": "query",
+  "conceptIds": ["data-quality"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Maya Anggraini",
+      "team": "Finance Team"
+    },
+    "title": "Donations recorded twice",
+    "story": [
+      "The donation total is bigger than the money in the bank. Something seems recorded twice.",
+      "Show the emails that appear MORE THAN ONCE, with how many times."
+    ],
+    "tables": [
+      {
+        "name": "donations",
+        "columns": [
+          {
+            "name": "email",
+            "type": "TEXT"
+          },
+          {
+            "name": "amount",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          ["a@contoh.test", 50000],
+          ["b@contoh.test", 20000],
+          ["a@contoh.test", 50000],
+          ["c@contoh.test", 10000]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "donations",
+            "columns": [
+              {
+                "name": "email",
+                "type": "TEXT"
+              },
+              {
+                "name": "amount",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              ["d@contoh.test", 15000],
+              ["e@contoh.test", 30000],
+              ["e@contoh.test", 30000],
+              ["d@contoh.test", 15000],
+              ["e@contoh.test", 30000]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "-- Group by email, then keep those that appear more than once\n",
+    "solution": "SELECT email, COUNT(*) FROM donations GROUP BY email HAVING COUNT(*) > 1",
+    "ordered": false
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "GROUP BY email counts each email, then HAVING COUNT(*) > 1 keeps only the duplicates.",
+  "ruleRefs": ["r-dq-1", "r-agg-3"],
+  "hints": [
+    "It's GROUP BY plus HAVING from last shift.",
+    "SELECT email, COUNT(*) FROM donations GROUP BY email HAVING COUNT(*) > 1"
+  ]
+}

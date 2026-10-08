@@ -133,7 +133,7 @@ export const reviewItemSchema = z.discriminatedUnion('type', [
 ]);
 export const reviewFileSchema = z.strictObject({ items: z.array(reviewItemSchema).min(1) });
 
-export const speakerSchema = z.enum(['rani', 'kelabu', 'joko', 'dimas', 'narrator']);
+export const speakerSchema = z.enum(['rani', 'kelabu', 'joko', 'dimas', 'laras', 'narrator']);
 export const dialogueSchema = z.strictObject({
   id: idSchema,
   lines: z.array(z.strictObject({ speaker: speakerSchema, text })).min(1),
@@ -240,6 +240,9 @@ export const baseCaseSchema = z.strictObject({
       /** Meja Developer (ADR 026): hasil Test Runner dan Linter. */
       tests: z.array(z.strictObject({ text, evidenceId: idSchema.optional() })).optional(),
       lint: z.array(z.strictObject({ text, evidenceId: idSchema.optional() })).optional(),
+      /** Meja Data (ADR 031): hasil Profiler Data dan Cek Sumber. */
+      profile: z.array(z.strictObject({ text, evidenceId: idSchema.optional() })).optional(),
+      source: z.array(z.strictObject({ text, evidenceId: idSchema.optional() })).optional(),
     })
     .optional(),
 });

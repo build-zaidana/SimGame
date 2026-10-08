@@ -1,0 +1,48 @@
+{
+  "items": [
+    {
+      "id": "rv-ag-1",
+      "type": "mcq",
+      "conceptId": "sql-aggregate",
+      "difficulty": 1,
+      "prompt": "Fungsi apa untuk MENGHITUNG banyaknya pesanan?",
+      "choices": ["COUNT(*)", "SUM(total)", "AVG(total)"],
+      "answerIndex": 0,
+      "explanation": "COUNT(*) menghitung baris. SUM menjumlahkan nilai, AVG merata-rata."
+    },
+    {
+      "id": "rv-ag-2",
+      "type": "mcq",
+      "conceptId": "sql-aggregate",
+      "difficulty": 2,
+      "prompt": "Mau total penjualan PER cabang. Yang ditambahkan?",
+      "choices": ["GROUP BY cabang", "ORDER BY cabang", "WHERE cabang"],
+      "answerIndex": 0,
+      "explanation": "GROUP BY membuat satu baris hasil untuk setiap cabang."
+    },
+    {
+      "id": "rv-ag-3",
+      "type": "mcq",
+      "conceptId": "sql-aggregate",
+      "difficulty": 2,
+      "prompt": "Cabang dengan lebih dari 2 pesanan. Syaratnya ditulis di mana?",
+      "choices": ["HAVING COUNT(*) > 2", "WHERE COUNT(*) > 2", "LIMIT 2"],
+      "answerIndex": 0,
+      "explanation": "Syarat pada hasil kelompok memakai HAVING setelah GROUP BY. WHERE bekerja sebelum baris dikelompokkan."
+    },
+    {
+      "id": "rv-ag-4",
+      "type": "mcq",
+      "conceptId": "sql-aggregate",
+      "difficulty": 2,
+      "prompt": "Kenapa SUM(total) / 5 berbahaya untuk menghitung rata-rata?",
+      "choices": [
+        "Hanya benar kalau datanya tepat 5 baris",
+        "SUM tidak boleh dibagi",
+        "Tidak ada masalah"
+      ],
+      "answerIndex": 0,
+      "explanation": "Angka tetap tidak ikut berubah saat datanya bertambah. AVG(total) selalu menghitung dari jumlah baris yang sebenarnya."
+    }
+  ]
+}

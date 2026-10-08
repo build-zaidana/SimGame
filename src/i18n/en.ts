@@ -121,7 +121,7 @@ export const en: Strings = {
       deskTitle: 'Developer Desk',
       rulebook: 'Developer Handbook',
     },
-    data: { title: 'Data / AI Analyst', deskTitle: 'Data Desk', rulebook: 'Handbook' },
+    data: { title: 'Data / AI Analyst', deskTitle: 'Data Desk', rulebook: 'Data Handbook' },
   },
   decisions: {
     allow: 'Allow',
@@ -371,6 +371,7 @@ export const en: Strings = {
     kelabu: 'Kelabu',
     joko: 'Joko',
     dimas: 'Dimas',
+    laras: 'Laras',
     narrator: '',
   },
   stamps: {
@@ -620,6 +621,108 @@ export const en: Strings = {
       incidentLines: ['The server is smoking! Hurry, please!', 'Users cannot get in. Emergency!'],
       ctf: { name: 'CTF Board', role: 'Security team practice' },
       ctfLines: ['A hidden flag is waiting to be found.', 'New challenge on the CTF board!'],
+    },
+  },
+  data: {
+    editor: {
+      label: 'SQL query',
+      keysLabel: 'Helper keys for typing SQL',
+      help: 'Tap a key to insert an SQL keyword. Upper or lower case both work.',
+      reset: 'Restore the starting query',
+    },
+    run: {
+      button: 'Run Query',
+      running: 'Running…',
+      timeout:
+        'The query ran for more than 4 seconds and was stopped. There may be a loop that never ends.',
+      failed: 'SQLite failed to load. Try running again.',
+      summary: (p: number, t: number) => `${p} of ${t} datasets match`,
+      allPassed: 'ALL DATA MATCHES!',
+      got: 'Your query result',
+      expected: 'Requested result',
+      sample: 'Sample data',
+      hiddenSet: (n: number) => `Hidden test dataset #${n}`,
+      match: 'matches',
+      mismatch: 'does not match yet',
+      empty: 'The query is still empty. Write a SELECT first.',
+      error: 'SQLite error',
+      noRows: '(no rows)',
+      truncated: (n: number) => `… only the first ${n} rows are shown`,
+      notRunYet: 'Run the query first, then submit.',
+      hints: {
+        'no-such-column':
+          "Column name not found. Check the spelling in the table's column list; text values need single quotes, e.g. 'Bandung'.",
+        'no-such-table': 'Table name not found. Check the spelling in the table list above.',
+        syntax:
+          'Something is mistyped. The right order is: SELECT … FROM … WHERE … GROUP BY … ORDER BY …',
+        aggregate:
+          'Functions like COUNT/SUM/AVG cannot go in WHERE. To filter grouped results, use HAVING after GROUP BY.',
+      } as Record<string, string>,
+    },
+    query: {
+      fixHeading: 'Fix the query',
+      buildHeading: 'Write a query',
+      requester: 'Requested by',
+      tables: 'Tables in the database',
+      table: (name: string, n: number) => `Table ${name} · ${n} rows`,
+      hiddenNote: (n: number) =>
+        `Your query is also checked on ${n} hidden test dataset${n > 1 ? 's' : ''} with different contents.`,
+      orderedNote: 'Row order is graded.',
+      queueTitle: (title: string) => `SQL: ${title}`,
+    },
+    chart: {
+      heading: 'Chart report',
+      author: 'Made by',
+      purpose: 'Will be sent to',
+      axis: (start: number, unit: string) => `The Y axis starts at ${start} ${unit}`,
+      data: 'Numbers in the chart',
+      claims: 'Report title & conclusion',
+      notes: 'Notes',
+      queueTitle: (title: string) => `Chart: ${title}`,
+      value: (n: number) => n.toLocaleString('en-US'),
+    },
+    request: {
+      heading: {
+        share: 'Data request',
+        quality: 'Data quality check',
+        'ai-train': 'AI training data',
+        'ai-answer': 'AI assistant answer',
+      } as Record<string, string>,
+      from: 'From',
+      table: 'Data preview',
+      chat: 'Conversation',
+      user: 'User',
+      ai: 'AI assistant',
+      notes: 'Notes',
+    },
+    tools: {
+      profileHeading: 'Data Profiler: column summary',
+      sourceHeading: 'Source Check: where the data & claims come from',
+      profileName: 'Data Profiler',
+      sourceName: 'Source Check',
+    },
+    citations: {
+      'threat-allowed':
+        "WARNING: a problematic report/request was approved. Business decisions or people's data are at stake.",
+      'legit-blocked': 'NOTE: the report was honest and safe. Good work got held up.',
+      'needless-escalation':
+        'NOTE: approving was enough; legal & managers were bothered for nothing.',
+    } as Record<string, string>,
+    visitors: {
+      queryLines: [
+        'I need this number for a meeting. Can you help?',
+        "The data's there, I just can't pull it.",
+      ],
+      fixLines: [
+        'My query gives weird results. Can you check?',
+        'Why are the numbers different from yesterday?',
+      ],
+      chartLines: [
+        'The chart is done. Can I send it right away?',
+        'Please check my report before it goes out.',
+      ],
+      requestLines: ["There's a data request.", 'Can I get the data today?'],
+      aiLines: ['The AI team wants your opinion.', 'The AI result looks convincing. Safe, right?'],
     },
   },
   support: {

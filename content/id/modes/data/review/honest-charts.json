@@ -1,0 +1,63 @@
+{
+  "items": [
+    {
+      "id": "rv-hc-1",
+      "type": "mcq",
+      "conceptId": "honest-charts",
+      "difficulty": 1,
+      "prompt": "Grafik batang penjualan dimulai dari 950. Apa masalahnya?",
+      "choices": ["Beda kecil tampak sangat besar", "Tidak ada masalah", "Warnanya kurang cerah"],
+      "answerIndex": 0,
+      "explanation": "Sumbu yang tidak mulai dari 0 memperbesar perbedaan secara visual. Grafik batang sebaiknya mulai dari 0."
+    },
+    {
+      "id": "rv-hc-2",
+      "type": "mcq",
+      "conceptId": "honest-charts",
+      "difficulty": 1,
+      "prompt": "\"Mayoritas warga kota suka cokelat\" dari survei 6 orang. Pendapatmu?",
+      "choices": [
+        "Sampelnya terlalu kecil untuk klaim itu",
+        "Sudah pasti benar",
+        "Perlu grafik garis"
+      ],
+      "answerIndex": 0,
+      "explanation": "Enam orang tidak mewakili satu kota. Klaim harus sebanding dengan sampelnya."
+    },
+    {
+      "id": "rv-hc-3",
+      "type": "mcq",
+      "conceptId": "honest-charts",
+      "difficulty": 2,
+      "prompt": "Penjualan payung dan teh hangat naik bersamaan. Kesimpulan yang tepat?",
+      "choices": [
+        "Payung membuat orang membeli teh",
+        "Keduanya mungkin dipicu hal lain, mis. musim hujan",
+        "Teh membuat orang membeli payung"
+      ],
+      "answerIndex": 1,
+      "explanation": "Korelasi bukan sebab-akibat. Sering ada penyebab ketiga yang membuat dua angka naik bersama."
+    },
+    {
+      "id": "rv-hc-4",
+      "type": "tap-evidence",
+      "conceptId": "honest-charts",
+      "difficulty": 2,
+      "prompt": "Ketuk bagian laporan yang menunjukkan cherry-picking.",
+      "parts": [
+        {
+          "text": "Judul: \"Penjualan selalu naik sepanjang tahun\""
+        },
+        {
+          "text": "Grafik hanya menampilkan April–Juni",
+          "evidenceId": "range"
+        },
+        {
+          "text": "Sumber: catatan kasir"
+        }
+      ],
+      "answer": ["range"],
+      "explanation": "Menampilkan hanya bulan yang bagus menyembunyikan penurunan di bulan lain."
+    }
+  ]
+}

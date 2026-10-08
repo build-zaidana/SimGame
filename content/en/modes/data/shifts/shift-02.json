@@ -1,0 +1,84 @@
+{
+  "id": "data-02",
+  "order": 2,
+  "title": "Monthly Meeting",
+  "durationGameMinutes": 150,
+  "realSecondsPerGameMinute": 4,
+  "unlocksChapters": ["ch-agg", "ch-privacy"],
+  "introDialogue": "data-02-intro",
+  "outroDialogue": "data-02-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s02-q-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s02-req-002",
+      "arriveAt": 8
+    },
+    {
+      "caseId": "s02-q-002",
+      "arriveAt": 16
+    },
+    {
+      "caseId": "s02-chart-001",
+      "arriveAt": 26
+    },
+    {
+      "caseId": "s02-q-003",
+      "arriveAt": 38
+    },
+    {
+      "caseId": "s02-chart-003",
+      "arriveAt": 50
+    },
+    {
+      "caseId": "s02-q-004",
+      "arriveAt": 70
+    },
+    {
+      "caseId": "s02-req-001",
+      "arriveAt": 76
+    },
+    {
+      "caseId": "s02-chart-002",
+      "arriveAt": 88
+    }
+  ],
+  "review": {
+    "count": 4,
+    "conceptIds": ["sql-aggregate", "data-privacy", "honest-charts"]
+  },
+  "pay": {
+    "base": 55,
+    "perCase": 14
+  },
+  "newspaper": {
+    "headline": "Monthly Meeting Needs Numbers Fast",
+    "lead": "PT Nusa Digital's branch managers want a sales summary. The data team prepares per-branch numbers without exposing customers' personal data.",
+    "tip": {
+      "title": "Tip: Summarise, Do Not Detail",
+      "text": "Meetings rarely need lists of names. Totals per group (GROUP BY) are usually enough, and safer."
+    },
+    "sources": [
+      "SQLite Documentation — Aggregate Functions",
+      "UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi"
+    ],
+    "impact": {
+      "good": "The charts the data team checked yesterday were praised by the board: clear and honest.",
+      "mixed": "Some of yesterday's reports passed with notes; the board asks for more careful checks.",
+      "bad": "An exaggerated chart reached the board. Laras asks for every chart to be rechecked."
+    },
+    "classified": "FOR SALE: Used calculator, the \"÷ 5\" key is worn out. Ask the Finance Team."
+  },
+  "boss": {
+    "title": "Meeting Deadline",
+    "icon": "⏰",
+    "intro": "The meeting was moved up! Three things must be done now: a query, a data request and a chart.",
+    "caseIds": ["s02-q-004", "s02-req-001", "s02-chart-002"],
+    "arriveAt": 70,
+    "durationGameMinutes": 45,
+    "reward": 35
+  }
+}

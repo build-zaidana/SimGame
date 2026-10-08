@@ -1,0 +1,64 @@
+{
+  "id": "s02-chart-002",
+  "type": "chart",
+  "conceptIds": ["honest-charts"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Sari Wulandari",
+      "team": "Marketing Team"
+    },
+    "title": "Umbrellas Boost Tea Sales",
+    "purpose": "A promotion budget proposal",
+    "chart": {
+      "kind": "bar",
+      "title": "Hot tea sold",
+      "unit": "cups",
+      "axisStart": 0,
+      "points": [
+        {
+          "label": "Oct",
+          "value": 200
+        },
+        {
+          "label": "Nov",
+          "value": 260
+        },
+        {
+          "label": "Dec",
+          "value": 330
+        }
+      ],
+      "axisEvidenceId": "axis"
+    },
+    "claims": [
+      {
+        "text": "Since umbrellas went on display at the till, tea sales rose. Umbrellas make people buy tea!",
+        "evidenceId": "claim-cause"
+      }
+    ],
+    "notes": [
+      {
+        "text": "Umbrellas have been on display since October.",
+        "evidenceId": "note-display"
+      },
+      {
+        "text": "October–December is the peak of the rainy season.",
+        "evidenceId": "note-rain"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["claim-cause"],
+    "supporting": ["note-rain"]
+  },
+  "explanation": "Rising together does not make umbrellas the cause; the rainy season can make people buy both umbrellas and hot tea. Ask for a revised conclusion.",
+  "ruleRefs": ["r-ch-3"],
+  "hints": ["Did anything else happen in those months?", "Read the note about the season."]
+}

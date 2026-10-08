@@ -1,0 +1,127 @@
+{
+  "id": "s03-q-004",
+  "type": "query",
+  "conceptIds": ["data-quality"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Putri Rahayu",
+      "team": "Charity Run Committee"
+    },
+    "title": "An average age that makes sense",
+    "story": [
+      "We need the average participant age to order T-shirts.",
+      "Some ages are typos. Average only the ages above 0 and below 120."
+    ],
+    "tables": [
+      {
+        "name": "registrants",
+        "columns": [
+          {
+            "name": "name",
+            "type": "TEXT"
+          },
+          {
+            "name": "email",
+            "type": "TEXT"
+          },
+          {
+            "name": "age",
+            "type": "INTEGER"
+          },
+          {
+            "name": "city",
+            "type": "TEXT"
+          }
+        ],
+        "rows": [
+          ["Rina", "rina@contoh.test", 17, "Bandung"],
+          ["Tono", "tono@contoh.test", 230, "Medan"],
+          ["Wati", null, 45, "Bandung"],
+          ["Yusuf", "yusuf@contoh.test", 28, "Bdg"],
+          ["Zahra", null, 33, "Medan"]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "registrants",
+            "columns": [
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "email",
+                "type": "TEXT"
+              },
+              {
+                "name": "age",
+                "type": "INTEGER"
+              },
+              {
+                "name": "city",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              ["Adi", null, 19, "Solo"],
+              ["Bella", "bella@contoh.test", 52, "Solo"],
+              ["Candra", "candra@contoh.test", -4, "Surabaya"],
+              ["Dina", "dina@contoh.test", 40, "Sby"]
+            ]
+          }
+        ]
+      },
+      {
+        "tables": [
+          {
+            "name": "registrants",
+            "columns": [
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "email",
+                "type": "TEXT"
+              },
+              {
+                "name": "age",
+                "type": "INTEGER"
+              },
+              {
+                "name": "city",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              ["Edo", "edo@contoh.test", 21, "Medan"],
+              ["Fitri", null, 150, "Bandung"],
+              ["Galih", null, 36, "Bandung"],
+              ["Hana", null, 24, "Medan"],
+              ["Irfan", "irfan@contoh.test", 31, "Mdn"]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "SELECT AVG(age)\nFROM registrants\n",
+    "solution": "SELECT AVG(age) FROM registrants WHERE age > 0 AND age < 120",
+    "ordered": false
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "An age of 230 or below zero is clearly a typo that ruins the average. Filter with WHERE first, then take AVG.",
+  "ruleRefs": ["r-dq-3"],
+  "hints": ["Look at the age column. Any impossible numbers?", "Add WHERE age > 0 AND age < 120."]
+}

@@ -1,0 +1,143 @@
+{
+  "id": "s02-q-002",
+  "type": "query",
+  "conceptIds": ["sql-aggregate"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Maya Anggraini",
+      "team": "Finance Team"
+    },
+    "title": "Revenue per product",
+    "story": [
+      "Which product brings in the most money?",
+      "Show the product name and the sum of the total column for each product."
+    ],
+    "tables": [
+      {
+        "name": "orders",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER"
+          },
+          {
+            "name": "branch",
+            "type": "TEXT"
+          },
+          {
+            "name": "product",
+            "type": "TEXT"
+          },
+          {
+            "name": "qty",
+            "type": "INTEGER"
+          },
+          {
+            "name": "total",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          [1, "Bandung", "Milk Coffee", 2, 40000],
+          [2, "Medan", "Sweet Tea", 1, 15000],
+          [3, "Bandung", "Toast", 3, 45000],
+          [4, "Surabaya", "Milk Coffee", 1, 20000],
+          [5, "Bandung", "Sweet Tea", 2, 30000]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "orders",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "branch",
+                "type": "TEXT"
+              },
+              {
+                "name": "product",
+                "type": "TEXT"
+              },
+              {
+                "name": "qty",
+                "type": "INTEGER"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, "Medan", "Milk Coffee", 1, 20000],
+              [2, "Medan", "Toast", 4, 60000],
+              [3, "Solo", "Sweet Tea", 1, 15000],
+              [4, "Medan", "Milk Coffee", 2, 45000]
+            ]
+          }
+        ]
+      },
+      {
+        "tables": [
+          {
+            "name": "orders",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "branch",
+                "type": "TEXT"
+              },
+              {
+                "name": "product",
+                "type": "TEXT"
+              },
+              {
+                "name": "qty",
+                "type": "INTEGER"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, "Surabaya", "Sweet Tea", 2, 30000],
+              [2, "Surabaya", "Milk Coffee", 3, 60000],
+              [3, "Bandung", "Toast", 1, 15000],
+              [4, "Surabaya", "Toast", 2, 30000],
+              [5, "Bandung", "Milk Coffee", 1, 20000],
+              [6, "Surabaya", "Sweet Tea", 1, 15000]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "-- Add up the total column for each product\n",
+    "solution": "SELECT product, SUM(total) FROM orders GROUP BY product",
+    "ordered": false
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "SUM(total) adds up the money, and GROUP BY product splits it per product.",
+  "ruleRefs": ["r-agg-1", "r-agg-2"],
+  "hints": [
+    "Like orders per branch, but you add up the total column.",
+    "SELECT product, SUM(total) FROM orders GROUP BY product"
+  ]
+}

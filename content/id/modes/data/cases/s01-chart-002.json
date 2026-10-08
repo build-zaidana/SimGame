@@ -1,0 +1,64 @@
+{
+  "id": "s01-chart-002",
+  "type": "chart",
+  "conceptIds": ["honest-charts"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "author": {
+      "name": "Maya Anggraini",
+      "team": "Tim Keuangan"
+    },
+    "title": "Pengunjung Toko per Bulan",
+    "purpose": "Buletin internal kantor",
+    "chart": {
+      "kind": "line",
+      "title": "Pengunjung per bulan",
+      "unit": "orang",
+      "axisStart": 0,
+      "points": [
+        {
+          "label": "Jan",
+          "value": 400,
+          "evidenceId": "pt-1"
+        },
+        {
+          "label": "Feb",
+          "value": 420,
+          "evidenceId": "pt-2"
+        },
+        {
+          "label": "Mar",
+          "value": 440,
+          "evidenceId": "pt-3"
+        }
+      ],
+      "axisEvidenceId": "axis"
+    },
+    "claims": [
+      {
+        "text": "Pengunjung naik pelan, sekitar 10% dalam tiga bulan.",
+        "evidenceId": "claim-slow"
+      }
+    ],
+    "notes": [
+      {
+        "text": "Sumber: penghitung pintu di 3 cabang, Januari–Maret.",
+        "evidenceId": "note-source"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["claim-slow", "note-source", "axis"]
+  },
+  "explanation": "Sumbu mulai dari 0, sumbernya jelas, dan klaim \"naik sekitar 10%\" sesuai angka 400 ke 440. Laporan jujur seperti ini cukup disetujui.",
+  "ruleRefs": ["r-ch-1", "r-ch-4"],
+  "hints": [
+    "Cek sumbu, sumber, dan apakah klaimnya cocok dengan angka.",
+    "Dari 400 ke 440 itu naik 10%. Ada yang menyesatkan?"
+  ]
+}

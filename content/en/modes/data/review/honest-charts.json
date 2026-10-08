@@ -1,0 +1,63 @@
+{
+  "items": [
+    {
+      "id": "rv-hc-1",
+      "type": "mcq",
+      "conceptId": "honest-charts",
+      "difficulty": 1,
+      "prompt": "A sales bar chart starts at 950. What is the problem?",
+      "choices": ["Small differences look huge", "No problem at all", "The colours are too dull"],
+      "answerIndex": 0,
+      "explanation": "An axis that does not start at 0 visually exaggerates differences. Bar charts should start at 0."
+    },
+    {
+      "id": "rv-hc-2",
+      "type": "mcq",
+      "conceptId": "honest-charts",
+      "difficulty": 1,
+      "prompt": "\"Most of the city prefers chocolate\" from a survey of 6 people. Your view?",
+      "choices": [
+        "The sample is too small for that claim",
+        "Definitely true",
+        "It needs a line chart"
+      ],
+      "answerIndex": 0,
+      "explanation": "Six people do not represent a whole city. A claim must match its sample."
+    },
+    {
+      "id": "rv-hc-3",
+      "type": "mcq",
+      "conceptId": "honest-charts",
+      "difficulty": 2,
+      "prompt": "Umbrella and hot tea sales rise together. The right conclusion?",
+      "choices": [
+        "Umbrellas make people buy tea",
+        "Both may be driven by something else, e.g. the rainy season",
+        "Tea makes people buy umbrellas"
+      ],
+      "answerIndex": 1,
+      "explanation": "Correlation is not causation. Often a third factor makes two numbers rise together."
+    },
+    {
+      "id": "rv-hc-4",
+      "type": "tap-evidence",
+      "conceptId": "honest-charts",
+      "difficulty": 2,
+      "prompt": "Tap the part of the report that shows cherry-picking.",
+      "parts": [
+        {
+          "text": "Title: \"Sales kept rising all year\""
+        },
+        {
+          "text": "The chart only shows April–June",
+          "evidenceId": "range"
+        },
+        {
+          "text": "Source: cash register records"
+        }
+      ],
+      "answer": ["range"],
+      "explanation": "Showing only the good months hides the drops in other months."
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "id": "s01-chart-001",
+  "type": "chart",
+  "conceptIds": ["honest-charts"],
+  "difficulty": 1,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Bayu Firmansyah",
+      "team": "Sales Team"
+    },
+    "title": "February Coffee Sales",
+    "purpose": "Tomorrow morning's board meeting",
+    "chart": {
+      "kind": "bar",
+      "title": "Cups of coffee sold",
+      "unit": "cups",
+      "axisStart": 950,
+      "points": [
+        {
+          "label": "January",
+          "value": 980,
+          "evidenceId": "pt-jan"
+        },
+        {
+          "label": "February",
+          "value": 1000,
+          "evidenceId": "pt-feb"
+        }
+      ],
+      "axisEvidenceId": "axis"
+    },
+    "claims": [
+      {
+        "text": "February sales SOARED compared to January!",
+        "evidenceId": "claim-jump"
+      }
+    ],
+    "notes": [
+      {
+        "text": "Source: cash register records from all branches.",
+        "evidenceId": "note-source"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["axis", "claim-jump"],
+    "supporting": ["pt-jan", "pt-feb"]
+  },
+  "explanation": "The Y axis starts at 950, so a rise of 20 cups (about 2%) looks like it multiplied. Ask for a revision: start the axis at 0 and drop \"soared\".",
+  "ruleRefs": ["r-ch-1"],
+  "hints": [
+    "Compare the January and February numbers. How big is the difference?",
+    "Look at what number the Y axis starts from."
+  ]
+}

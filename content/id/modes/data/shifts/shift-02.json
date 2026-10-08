@@ -1,0 +1,84 @@
+{
+  "id": "data-02",
+  "order": 2,
+  "title": "Rapat Bulanan",
+  "durationGameMinutes": 150,
+  "realSecondsPerGameMinute": 4,
+  "unlocksChapters": ["ch-agg", "ch-privacy"],
+  "introDialogue": "data-02-intro",
+  "outroDialogue": "data-02-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s02-q-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s02-req-002",
+      "arriveAt": 8
+    },
+    {
+      "caseId": "s02-q-002",
+      "arriveAt": 16
+    },
+    {
+      "caseId": "s02-chart-001",
+      "arriveAt": 26
+    },
+    {
+      "caseId": "s02-q-003",
+      "arriveAt": 38
+    },
+    {
+      "caseId": "s02-chart-003",
+      "arriveAt": 50
+    },
+    {
+      "caseId": "s02-q-004",
+      "arriveAt": 70
+    },
+    {
+      "caseId": "s02-req-001",
+      "arriveAt": 76
+    },
+    {
+      "caseId": "s02-chart-002",
+      "arriveAt": 88
+    }
+  ],
+  "review": {
+    "count": 4,
+    "conceptIds": ["sql-aggregate", "data-privacy", "honest-charts"]
+  },
+  "pay": {
+    "base": 55,
+    "perCase": 14
+  },
+  "newspaper": {
+    "headline": "Rapat Bulanan Butuh Angka Cepat",
+    "lead": "Para manajer cabang PT Nusa Digital meminta ringkasan penjualan. Tim data menyiapkan angka per cabang tanpa membuka data pribadi pelanggan.",
+    "tip": {
+      "title": "Tips: Ringkas, Bukan Rinci",
+      "text": "Rapat jarang butuh daftar nama. Jumlah per kelompok (GROUP BY) biasanya cukup dan lebih aman."
+    },
+    "sources": [
+      "SQLite Documentation — Aggregate Functions",
+      "UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi"
+    ],
+    "impact": {
+      "good": "Grafik yang diperiksa tim data kemarin dipuji direksi: jelas dan jujur.",
+      "mixed": "Sebagian laporan kemarin lolos dengan catatan; direksi minta pemeriksaan lebih teliti.",
+      "bad": "Grafik yang melebih-lebihkan sempat sampai ke direksi. Bu Laras minta semua grafik dicek ulang."
+    },
+    "classified": "DIJUAL: Kalkulator bekas, tombol \"÷ 5\" sudah aus. Hubungi Tim Keuangan."
+  },
+  "boss": {
+    "title": "Tenggat Rapat",
+    "icon": "⏰",
+    "intro": "Rapat dimajukan! Tiga hal harus beres sekarang: satu query, satu permintaan data, dan satu grafik.",
+    "caseIds": ["s02-q-004", "s02-req-001", "s02-chart-002"],
+    "arriveAt": 70,
+    "durationGameMinutes": 45,
+    "reward": 35
+  }
+}

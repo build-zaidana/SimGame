@@ -1,0 +1,143 @@
+{
+  "id": "s02-q-001",
+  "type": "query",
+  "conceptIds": ["sql-aggregate"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Hendra Kusuma",
+      "team": "Branch Manager"
+    },
+    "title": "Orders per branch",
+    "story": [
+      "For the monthly meeting: how many orders did each branch get?",
+      "Show the branch name and its number of orders."
+    ],
+    "tables": [
+      {
+        "name": "orders",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER"
+          },
+          {
+            "name": "branch",
+            "type": "TEXT"
+          },
+          {
+            "name": "product",
+            "type": "TEXT"
+          },
+          {
+            "name": "qty",
+            "type": "INTEGER"
+          },
+          {
+            "name": "total",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          [1, "Bandung", "Milk Coffee", 2, 40000],
+          [2, "Medan", "Sweet Tea", 1, 15000],
+          [3, "Bandung", "Toast", 3, 45000],
+          [4, "Surabaya", "Milk Coffee", 1, 20000],
+          [5, "Bandung", "Sweet Tea", 2, 30000]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "orders",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "branch",
+                "type": "TEXT"
+              },
+              {
+                "name": "product",
+                "type": "TEXT"
+              },
+              {
+                "name": "qty",
+                "type": "INTEGER"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, "Medan", "Milk Coffee", 1, 20000],
+              [2, "Medan", "Toast", 4, 60000],
+              [3, "Solo", "Sweet Tea", 1, 15000],
+              [4, "Medan", "Milk Coffee", 2, 45000]
+            ]
+          }
+        ]
+      },
+      {
+        "tables": [
+          {
+            "name": "orders",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "branch",
+                "type": "TEXT"
+              },
+              {
+                "name": "product",
+                "type": "TEXT"
+              },
+              {
+                "name": "qty",
+                "type": "INTEGER"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, "Surabaya", "Sweet Tea", 2, 30000],
+              [2, "Surabaya", "Milk Coffee", 3, 60000],
+              [3, "Bandung", "Toast", 1, 15000],
+              [4, "Surabaya", "Toast", 2, 30000],
+              [5, "Bandung", "Milk Coffee", 1, 20000],
+              [6, "Surabaya", "Sweet Tea", 1, 15000]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "SELECT branch, COUNT(*)\nFROM orders\n",
+    "solution": "SELECT branch, COUNT(*) FROM orders GROUP BY branch",
+    "ordered": false
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "GROUP BY branch makes one row per branch, then COUNT(*) counts the orders in each group.",
+  "ruleRefs": ["r-agg-1", "r-agg-2"],
+  "hints": [
+    "Without grouping, COUNT(*) counts every row into one number.",
+    "Add GROUP BY branch at the end."
+  ]
+}

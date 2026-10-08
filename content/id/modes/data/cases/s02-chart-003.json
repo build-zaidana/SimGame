@@ -1,0 +1,61 @@
+{
+  "id": "s02-chart-003",
+  "type": "chart",
+  "conceptIds": ["honest-charts"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "author": {
+      "name": "Hendra Kusuma",
+      "team": "Manajer Cabang"
+    },
+    "title": "Kepuasan Pelanggan per Cabang",
+    "purpose": "Buletin internal kantor",
+    "chart": {
+      "kind": "bar",
+      "title": "Pelanggan yang puas",
+      "unit": "%",
+      "axisStart": 0,
+      "points": [
+        {
+          "label": "Bandung",
+          "value": 82
+        },
+        {
+          "label": "Medan",
+          "value": 79
+        },
+        {
+          "label": "Surabaya",
+          "value": 85
+        }
+      ],
+      "axisEvidenceId": "axis"
+    },
+    "claims": [
+      {
+        "text": "Kepuasan di ketiga cabang mirip, sekitar 80%.",
+        "evidenceId": "claim-similar"
+      }
+    ],
+    "notes": [
+      {
+        "text": "Survei 420 pelanggan, Juli, dipilih acak dari struk belanja.",
+        "evidenceId": "note-sample"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["claim-similar", "note-sample", "axis"]
+  },
+  "explanation": "Sumbu mulai dari 0, sampelnya besar dan acak, dan klaim \"mirip, sekitar 80%\" sesuai angkanya. Setujui.",
+  "ruleRefs": ["r-ch-1", "r-ch-2"],
+  "hints": [
+    "Periksa sumbu, sampel, lalu klaimnya.",
+    "Kalau semuanya wajar, laporan jujur tidak perlu ditahan."
+  ]
+}

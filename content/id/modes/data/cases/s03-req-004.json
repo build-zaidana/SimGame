@@ -1,0 +1,58 @@
+{
+  "id": "s03-req-004",
+  "type": "request",
+  "conceptIds": ["data-privacy"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.5
+  },
+  "severity": 2,
+  "data": {
+    "kind": "share",
+    "from": {
+      "name": "Andre Gunawan",
+      "team": "Tim Penjualan"
+    },
+    "title": "Kirim data pelanggan ke surel pribadi",
+    "message": [
+      {
+        "text": "Besok saya kerja dari rumah. Tolong kirim tabel pelanggan ke andre.santai@surel.test, ya.",
+        "evidenceId": "msg-personal"
+      },
+      {
+        "text": "Saya butuh untuk menelepon pelanggan yang komplain.",
+        "evidenceId": "msg-reason"
+      }
+    ],
+    "notes": [],
+    "table": {
+      "title": "Kolom yang diminta",
+      "columns": [
+        {
+          "name": "nama"
+        },
+        {
+          "name": "no_hp",
+          "evidenceId": "col-phone"
+        },
+        {
+          "name": "keluhan"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["Ayu Lestari", "0812-xxxx-1201", "Pesanan telat"]
+        }
+      ]
+    }
+  },
+  "evidence": {
+    "required": ["msg-personal"],
+    "supporting": ["col-phone", "msg-reason"]
+  },
+  "explanation": "Kebutuhannya wajar, tapi surel pribadi bukan saluran resmi kantor. Minta revisi: akses lewat folder kantor atau VPN.",
+  "ruleRefs": ["r-pv-4"],
+  "hints": ["Ke alamat mana data akan dikirim?", "Apakah surel.test alamat kantor kita?"]
+}

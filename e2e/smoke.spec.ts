@@ -11,5 +11,9 @@ test('title screen loads and Main opens the hub', async ({ page }) => {
 
   await play.click();
   await expect(page.getByRole('heading', { name: 'Kantor PT Nusa Digital' })).toBeVisible();
-  await expect(page.getByText('Segera hadir')).toHaveCount(1);
+  // Keempat meja di PRD bisa dimainkan (ADR 031): tidak ada lagi kartu "Segera hadir".
+  await expect(page.getByText('Segera hadir')).toHaveCount(0);
+  await expect(
+    page.getByRole('button', { name: 'Mulai Shift 1: Hari Pertama di Meja Data', exact: true }),
+  ).toBeVisible();
 });

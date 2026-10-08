@@ -1,0 +1,73 @@
+{
+  "id": "s04-ai-004",
+  "type": "request",
+  "conceptIds": ["ai-basics"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "kind": "ai-answer",
+    "from": {
+      "name": "Maya Anggraini",
+      "team": "Tim Keuangan"
+    },
+    "title": "Ringkasan penjualan dari asisten AI",
+    "message": [
+      {
+        "text": "Asisten AI kantor merangkum penjualan kuartal ini. Sudah saya cocokkan dengan tabel sumber.",
+        "evidenceId": "msg-checked"
+      }
+    ],
+    "notes": [],
+    "table": {
+      "title": "Tabel sumber",
+      "columns": [
+        {
+          "name": "kuartal"
+        },
+        {
+          "name": "penjualan_juta"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["Q2", "428"]
+        },
+        {
+          "cells": ["Q3", "450"]
+        }
+      ]
+    },
+    "chat": [
+      {
+        "who": "user",
+        "text": "Ringkas penjualan Q3 dibanding Q2."
+      },
+      {
+        "who": "ai",
+        "text": "Penjualan Q3 Rp 450 juta, naik sekitar 5% dari Q2 (Rp 428 juta).",
+        "evidenceId": "ai-summary"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["msg-checked", "ai-summary", "src-ok"]
+  },
+  "explanation": "Angka di jawaban AI cocok dengan tabel sumber (428 ke 450 juta, naik sekitar 5%) dan sudah dicek manusia. Boleh disetujui.",
+  "ruleRefs": ["r-ai-2"],
+  "hints": [
+    "Cocokkan angka di jawaban AI dengan tabelnya.",
+    "Dari 428 ke 450, naiknya kira-kira berapa persen?"
+  ],
+  "intel": {
+    "source": [
+      {
+        "text": "Angka Q2 dan Q3 sama dengan laporan keuangan resmi.",
+        "evidenceId": "src-ok"
+      }
+    ]
+  }
+}

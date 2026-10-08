@@ -1,0 +1,84 @@
+{
+  "id": "data-04",
+  "order": 4,
+  "title": "First AI Project",
+  "durationGameMinutes": 150,
+  "realSecondsPerGameMinute": 4,
+  "unlocksChapters": ["ch-join", "ch-ai"],
+  "introDialogue": "data-04-intro",
+  "outroDialogue": "data-04-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s04-q-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s04-ai-005",
+      "arriveAt": 8
+    },
+    {
+      "caseId": "s04-q-002",
+      "arriveAt": 16
+    },
+    {
+      "caseId": "s04-ai-001",
+      "arriveAt": 26
+    },
+    {
+      "caseId": "s04-q-003",
+      "arriveAt": 38
+    },
+    {
+      "caseId": "s04-ai-004",
+      "arriveAt": 50
+    },
+    {
+      "caseId": "s04-q-004",
+      "arriveAt": 70
+    },
+    {
+      "caseId": "s04-ai-002",
+      "arriveAt": 76
+    },
+    {
+      "caseId": "s04-ai-003",
+      "arriveAt": 88
+    }
+  ],
+  "review": {
+    "count": 4,
+    "conceptIds": ["sql-join", "ai-basics", "data-privacy"]
+  },
+  "pay": {
+    "base": 65,
+    "perCase": 16
+  },
+  "newspaper": {
+    "headline": "Nusa Digital Starts an AI Project",
+    "lead": "PT Nusa Digital's AI team has started training models for several services. The data team must make sure the training data is fair and safe.",
+    "tip": {
+      "title": "Tip: AI Can Make Things Up",
+      "text": "AI assistants sometimes cite official-sounding sources that do not exist. Check before quoting."
+    },
+    "sources": [
+      "NIST — AI Risk Management Framework (AI RMF 1.0)",
+      "OWASP — Top 10 for LLM Applications (2025)"
+    ],
+    "impact": {
+      "good": "Clean charity run data meant the winners were announced without complaints.",
+      "mixed": "The charity run announcement had to be corrected because of some duplicates.",
+      "bad": "The announced donation total turned out wrong. The committee apologised to participants."
+    },
+    "classified": "WANTED: Balanced training data. Lopsided data need not apply."
+  },
+  "boss": {
+    "title": "AI Launch",
+    "icon": "🤖",
+    "intro": "The AI team wants to launch this afternoon! One query and two AI decisions must be done first.",
+    "caseIds": ["s04-q-004", "s04-ai-002", "s04-ai-003"],
+    "arriveAt": 70,
+    "durationGameMinutes": 45,
+    "reward": 40
+  }
+}

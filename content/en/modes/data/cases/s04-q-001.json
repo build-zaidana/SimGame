@@ -1,0 +1,135 @@
+{
+  "id": "s04-q-001",
+  "type": "query",
+  "conceptIds": ["sql-join"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Bayu Firmansyah",
+      "team": "Sales Team"
+    },
+    "title": "Who placed the order?",
+    "story": [
+      "The orders table only stores customer_id. We need the customer NAME.",
+      "Show the customer name and the total of every order."
+    ],
+    "tables": [
+      {
+        "name": "customers",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER"
+          },
+          {
+            "name": "name",
+            "type": "TEXT"
+          },
+          {
+            "name": "city",
+            "type": "TEXT"
+          }
+        ],
+        "rows": [
+          [1, "Ayu", "Bandung"],
+          [2, "Budi", "Medan"],
+          [3, "Citra", "Bandung"]
+        ]
+      },
+      {
+        "name": "orders",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER"
+          },
+          {
+            "name": "customer_id",
+            "type": "INTEGER"
+          },
+          {
+            "name": "total",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          [1, 2, 50000],
+          [2, 1, 30000],
+          [3, 3, 20000],
+          [4, 2, 10000]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "customers",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "city",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [1, "Dewi", "Solo"],
+              [2, "Eko", "Solo"],
+              [3, "Fani", "Medan"],
+              [4, "Gilang", "Medan"]
+            ]
+          },
+          {
+            "name": "orders",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "customer_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, 4, 70000],
+              [2, 3, 15000],
+              [3, 4, 5000],
+              [4, 1, 40000],
+              [5, 2, 25000]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "SELECT customers.name, orders.total\nFROM orders\nJOIN customers ON\n",
+    "solution": "SELECT customers.name, orders.total FROM orders JOIN customers ON orders.customer_id = customers.id",
+    "ordered": false
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "The customer_id column in orders points to the id column in customers, and JOIN with ON combines rows whose values match.",
+  "ruleRefs": ["r-jn-1", "r-jn-2"],
+  "hints": [
+    "Which column in orders points to a customer?",
+    "After ON, pair customer_id from the orders table with the id column from the customers table."
+  ]
+}

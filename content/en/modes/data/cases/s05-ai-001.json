@@ -1,0 +1,69 @@
+{
+  "id": "s05-ai-001",
+  "type": "request",
+  "conceptIds": ["ai-basics"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "kind": "ai-answer",
+    "from": {
+      "name": "Dian Kartika",
+      "team": "Public Relations"
+    },
+    "title": "An AI summary for the press release",
+    "message": [
+      {
+        "text": "An AI assistant wrote this summary. The plan is to put it straight into the press release.",
+        "evidenceId": "msg-press"
+      }
+    ],
+    "notes": [],
+    "table": {
+      "title": "Source table",
+      "columns": [
+        {
+          "name": "year"
+        },
+        {
+          "name": "revenue_million"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["2025", "400"],
+          "evidenceId": "row-2025"
+        },
+        {
+          "cells": ["2026", "420"],
+          "evidenceId": "row-2026"
+        }
+      ]
+    },
+    "chat": [
+      {
+        "who": "user",
+        "text": "Summarise this year's revenue growth."
+      },
+      {
+        "who": "ai",
+        "text": "PT Nusa Digital's revenue grew 50% this year to Rp 420 million.",
+        "evidenceId": "ai-claim"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["ai-claim"],
+    "supporting": ["row-2025", "row-2026"]
+  },
+  "explanation": "The AI says \"up 50%\", but the table shows 400 to 420 million, only about 5%. Ask for a revision before publishing.",
+  "ruleRefs": ["r-ai-2"],
+  "hints": [
+    "Work out the rise yourself from the table.",
+    "From 400 to 420 is what percentage rise?"
+  ]
+}

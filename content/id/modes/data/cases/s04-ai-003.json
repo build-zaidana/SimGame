@@ -1,0 +1,54 @@
+{
+  "id": "s04-ai-003",
+  "type": "request",
+  "conceptIds": ["ai-basics"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {},
+  "severity": 2,
+  "data": {
+    "kind": "ai-answer",
+    "from": {
+      "name": "Rudi Hartono",
+      "team": "Tim Layanan Pelanggan"
+    },
+    "title": "Jawaban AI untuk halaman FAQ",
+    "message": [
+      {
+        "text": "Jawaban dari asisten AI ini mau kami pasang di halaman FAQ dompet digital.",
+        "evidenceId": "msg-faq"
+      }
+    ],
+    "notes": [],
+    "chat": [
+      {
+        "who": "user",
+        "text": "Berapa usia minimal untuk membuka akun dompet digital?"
+      },
+      {
+        "who": "ai",
+        "text": "Menurut Peraturan Menteri No. 99 Tahun 2025, usia minimalnya 13 tahun.",
+        "evidenceId": "ai-cite"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["ai-cite"],
+    "supporting": ["src-missing", "msg-faq"]
+  },
+  "explanation": "Peraturan yang dirujuk tidak bisa ditemukan, tanda AI mengarang sumber (halusinasi). Minta revisi: cek aturan resmi sebelum dipasang.",
+  "ruleRefs": ["r-ai-2"],
+  "hints": [
+    "Bagian mana dari jawaban yang bisa dicek kebenarannya?",
+    "Apakah peraturan itu benar-benar ada?"
+  ],
+  "intel": {
+    "source": [
+      {
+        "text": "Peraturan Menteri No. 99 Tahun 2025 tidak ditemukan di basis data peraturan.",
+        "evidenceId": "src-missing"
+      }
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "items": [
+    {
+      "id": "rv-ai-1",
+      "type": "mcq",
+      "conceptId": "ai-basics",
+      "difficulty": 1,
+      "prompt": "90% of the training data for a job-screening AI comes from men. The risk?",
+      "choices": ["The AI is biased against women", "The AI gets faster", "No risk"],
+      "answerIndex": 0,
+      "explanation": "AI copies the patterns in its training data. Lopsided data gives lopsided decisions."
+    },
+    {
+      "id": "rv-ai-2",
+      "type": "mcq",
+      "conceptId": "ai-basics",
+      "difficulty": 2,
+      "prompt": "An AI assistant cites \"Ministerial Regulation No. 99/2025\". First step?",
+      "choices": [
+        "Check an official source to see if it exists",
+        "Quote it in the report right away",
+        "Trust it because AI is smart"
+      ],
+      "answerIndex": 0,
+      "explanation": "AI can invent convincing-sounding sources (hallucination). Always check the original."
+    },
+    {
+      "id": "rv-ai-3",
+      "type": "mcq",
+      "conceptId": "ai-basics",
+      "difficulty": 1,
+      "prompt": "May you paste a customer list into a public AI chatbot to summarise it?",
+      "choices": [
+        "No, personal data must not leave the office",
+        "Yes, if it is quick",
+        "Yes, if it is at night"
+      ],
+      "answerIndex": 0,
+      "explanation": "Data pasted into a public AI service may be stored outside the office’s control."
+    },
+    {
+      "id": "rv-ai-4",
+      "type": "tap-evidence",
+      "conceptId": "ai-basics",
+      "difficulty": 2,
+      "prompt": "Tap the part of the AI answer that needs checking first.",
+      "parts": [
+        {
+          "text": "Sales this quarter were Rp 120 million,"
+        },
+        {
+          "text": "up 50% according to the \"2031 Statistics Report\".",
+          "evidenceId": "cite"
+        },
+        {
+          "text": "Summary generated automatically."
+        }
+      ],
+      "answer": ["cite"],
+      "explanation": "A reference from the future is clearly made up. Check the number and source against the real data."
+    }
+  ]
+}

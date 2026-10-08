@@ -1,0 +1,84 @@
+{
+  "id": "data-03",
+  "order": 3,
+  "title": "Dirty Data",
+  "durationGameMinutes": 150,
+  "realSecondsPerGameMinute": 4,
+  "unlocksChapters": ["ch-quality"],
+  "introDialogue": "data-03-intro",
+  "outroDialogue": "data-03-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s03-q-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s03-req-003",
+      "arriveAt": 8
+    },
+    {
+      "caseId": "s03-q-002",
+      "arriveAt": 16
+    },
+    {
+      "caseId": "s03-req-001",
+      "arriveAt": 26
+    },
+    {
+      "caseId": "s03-q-003",
+      "arriveAt": 38
+    },
+    {
+      "caseId": "s03-chart-001",
+      "arriveAt": 50
+    },
+    {
+      "caseId": "s03-q-004",
+      "arriveAt": 70
+    },
+    {
+      "caseId": "s03-req-002",
+      "arriveAt": 76
+    },
+    {
+      "caseId": "s03-req-004",
+      "arriveAt": 88
+    }
+  ],
+  "review": {
+    "count": 4,
+    "conceptIds": ["data-quality", "sql-aggregate", "data-privacy"]
+  },
+  "pay": {
+    "base": 60,
+    "perCase": 15
+  },
+  "newspaper": {
+    "headline": "Nusa Digital Charity Run Flooded with Sign-ups",
+    "lead": "The charity run sign-up form received hundreds of entries in a day. The committee asks the data team to clean them before any announcement.",
+    "tip": {
+      "title": "Tip: NULL Is Not Zero",
+      "text": "An empty column holds NULL. Find it with IS NULL; the = sign will never find it."
+    },
+    "sources": [
+      "DAMA International — DAMA-DMBOK (2nd ed.)",
+      "SQLite Documentation — NULL Handling"
+    ],
+    "impact": {
+      "good": "Yesterday's monthly meeting went smoothly thanks to tidy, safe summaries.",
+      "mixed": "Yesterday's meeting ended, but some numbers had to be recalculated.",
+      "bad": "Customer personal data almost went to an outside party. Laras reminded the whole team."
+    },
+    "classified": "MISSING: One charity runner’s email. Last seen holding NULL."
+  },
+  "boss": {
+    "title": "Winners Announcement",
+    "icon": "🏃",
+    "intro": "The committee announces results soon! Clean the data first: one query and two requests are waiting.",
+    "caseIds": ["s03-q-004", "s03-req-002", "s03-req-004"],
+    "arriveAt": 70,
+    "durationGameMinutes": 45,
+    "reward": 35
+  }
+}

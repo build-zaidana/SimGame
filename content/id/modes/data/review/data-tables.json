@@ -1,0 +1,58 @@
+{
+  "items": [
+    {
+      "id": "rv-dt-1",
+      "type": "mcq",
+      "conceptId": "data-tables",
+      "difficulty": 1,
+      "prompt": "Bagian mana dari query yang memilih KOLOM?",
+      "choices": ["SELECT", "FROM", "WHERE"],
+      "answerIndex": 0,
+      "explanation": "SELECT memilih kolom, FROM memilih tabel, WHERE menyaring baris."
+    },
+    {
+      "id": "rv-dt-2",
+      "type": "mcq",
+      "conceptId": "data-tables",
+      "difficulty": 1,
+      "prompt": "Cara menulis teks Bandung di WHERE yang benar?",
+      "choices": ["kota = 'Bandung'", "kota = Bandung", "kota == Bandung"],
+      "answerIndex": 0,
+      "explanation": "Teks di SQL diapit tanda kutip tunggal. Tanpa kutip, SQL mengira Bandung adalah nama kolom."
+    },
+    {
+      "id": "rv-dt-3",
+      "type": "mcq",
+      "conceptId": "data-tables",
+      "difficulty": 2,
+      "prompt": "Aturan: poin MINIMAL 120. Syarat mana yang tepat?",
+      "choices": ["poin > 120", "poin >= 120", "poin < 120"],
+      "answerIndex": 1,
+      "explanation": ">= ikut memasukkan angka 120 itu sendiri, sedangkan > tidak."
+    },
+    {
+      "id": "rv-dt-4",
+      "type": "mcq",
+      "conceptId": "data-tables",
+      "difficulty": 2,
+      "prompt": "Ambil 3 pelanggan dengan poin terbanyak. Bagian akhir query yang tepat?",
+      "choices": ["ORDER BY poin LIMIT 3", "ORDER BY poin DESC LIMIT 3", "LIMIT 3 ORDER BY poin"],
+      "answerIndex": 1,
+      "explanation": "DESC mengurutkan dari yang terbesar, lalu LIMIT 3 mengambil tiga teratas. LIMIT selalu ditulis paling akhir."
+    },
+    {
+      "id": "rv-dt-5",
+      "type": "mcq",
+      "conceptId": "data-tables",
+      "difficulty": 2,
+      "prompt": "Apa beda AND dan OR di WHERE kota = 'Medan' ... umur < 30?",
+      "choices": [
+        "AND: dua syarat harus benar. OR: cukup salah satu.",
+        "Sama saja.",
+        "OR lebih ketat dari AND."
+      ],
+      "answerIndex": 0,
+      "explanation": "AND hanya memilih orang Medan yang di bawah 30. OR memilih semua orang Medan ditambah semua yang di bawah 30."
+    }
+  ]
+}

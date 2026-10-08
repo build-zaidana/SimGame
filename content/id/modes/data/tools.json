@@ -1,0 +1,22 @@
+{
+  "tools": [
+    {
+      "id": "data-profiler",
+      "name": "Profiler Data",
+      "icon": "🔬",
+      "description": "Meringkas isi tiap kolom secara otomatis: berapa yang kosong, berapa yang ganda, dan nilai terkecil/terbesar.",
+      "price": 70,
+      "conceptId": "data-quality",
+      "unlockAtShift": 2
+    },
+    {
+      "id": "source-check",
+      "name": "Cek Sumber",
+      "icon": "🔎",
+      "description": "Melacak asal angka dan rujukan di laporan atau jawaban AI: benar ada, atau dikarang?",
+      "price": 90,
+      "conceptId": "ai-basics",
+      "unlockAtShift": 3
+    }
+  ]
+}

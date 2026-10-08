@@ -1,0 +1,131 @@
+{
+  "id": "s01-q-002",
+  "type": "query",
+  "conceptIds": ["data-tables"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Rudi Hartono",
+      "team": "Tim Layanan Pelanggan"
+    },
+    "title": "Hadiah poin yang terlewat",
+    "story": [
+      "Promo: pelanggan dengan poin MINIMAL 120 dapat voucher.",
+      "Ada pelanggan yang protes tidak dapat voucher. Query-nya kenapa, ya?"
+    ],
+    "tables": [
+      {
+        "name": "pelanggan",
+        "columns": [
+          {
+            "name": "nama",
+            "type": "TEXT"
+          },
+          {
+            "name": "kota",
+            "type": "TEXT"
+          },
+          {
+            "name": "umur",
+            "type": "INTEGER"
+          },
+          {
+            "name": "poin",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          ["Ayu Lestari", "Bandung", 24, 120],
+          ["Budi Santoso", "Medan", 31, 45],
+          ["Citra Dewi", "Bandung", 19, 300],
+          ["Dodi Pratama", "Surabaya", 42, 80],
+          ["Eka Putri", "Medan", 27, 150],
+          ["Fajar Nugroho", "Bandung", 35, 60]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "pelanggan",
+            "columns": [
+              {
+                "name": "nama",
+                "type": "TEXT"
+              },
+              {
+                "name": "kota",
+                "type": "TEXT"
+              },
+              {
+                "name": "umur",
+                "type": "INTEGER"
+              },
+              {
+                "name": "poin",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              ["Gita Permata", "Bandung", 22, 90],
+              ["Hadi Wijaya", "Solo", 50, 210],
+              ["Indah Sari", "Medan", 29, 120],
+              ["Jaka Purnama", "Bandung", 61, 500],
+              ["Kiki Amelia", "Medan", 33, 15]
+            ]
+          }
+        ]
+      },
+      {
+        "tables": [
+          {
+            "name": "pelanggan",
+            "columns": [
+              {
+                "name": "nama",
+                "type": "TEXT"
+              },
+              {
+                "name": "kota",
+                "type": "TEXT"
+              },
+              {
+                "name": "umur",
+                "type": "INTEGER"
+              },
+              {
+                "name": "poin",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              ["Lina Marlina", "Surabaya", 26, 120],
+              ["Mega Utami", "Medan", 21, 400],
+              ["Nanda Putra", "Bandung", 45, 130],
+              ["Oki Setiawan", "Medan", 38, 75]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "SELECT nama, poin\nFROM pelanggan\nWHERE poin > 120\n",
+    "solution": "SELECT nama, poin FROM pelanggan WHERE poin >= 120",
+    "ordered": false
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "\"Minimal 120\" berarti 120 juga ikut, jadi tandanya >= bukan >. Dengan > 120, pelanggan yang poinnya tepat 120 tertinggal.",
+  "ruleRefs": ["r-sql-3"],
+  "hints": [
+    "Lihat pelanggan dengan poin tepat 120. Apakah dia muncul di hasil?",
+    "Ganti tanda > menjadi >=."
+  ]
+}

@@ -63,8 +63,20 @@ function walkStrings(
   } else if (Array.isArray(v)) {
     for (const x of v) walkStrings(x, keyFilter, out, key);
   } else if (v && typeof v === 'object') {
-    for (const [k, x] of Object.entries(v)) walkStrings(x, keyFilter, out, k);
+    // Kunci yang ditolak dilewati beserta seluruh isinya (mis. tabel SQL di dalam `tables`).
+    for (const [k, x] of Object.entries(v))
+      if (!keyFilter || keyFilter(k)) walkStrings(x, keyFilter, out, k);
   }
+}
+
+/** Kunci berisi kode (Meja Developer & Meja Data), bukan teks bacaan pemain. */
+const CODE_KEYS = ['solution', 'tests', 'starter', 'scratch', 'flag', 'maps'];
+
+/** Teks yang dilihat pemain: semua string kecuali kode & tes. Isi tabel data tetap ikut. */
+export function readableText(v: unknown): string {
+  const out: string[] = [];
+  walkStrings(v, (k) => !CODE_KEYS.includes(k), out);
+  return out.join(' ');
 }
 
 const allStrings = (v: unknown) => {
@@ -76,12 +88,15 @@ const allStrings = (v: unknown) => {
 /** Teks yang dibaca pemain di dokumen (bukan ID atau href tersembunyi). */
 export function documentText(data: unknown): string {
   const out: string[] = [];
-  // Kode acuan, tes, dan kode awal editor (Meja Developer) bukan teks bacaan dokumen.
+  // Kode acuan, tes, kode awal editor (Meja Developer), dan tabel SQL (Meja Data) bukan teks bacaan.
   walkStrings(
     data,
     (k) =>
+      !k.endsWith('EvidenceId') &&
       ![
         'evidenceId',
+        'tables',
+        'hidden',
         'href',
         'id',
         'solution',
@@ -102,7 +117,7 @@ export function collectEvidenceIds(data: unknown): string[] {
     if (Array.isArray(v)) v.forEach(walk);
     else if (v && typeof v === 'object') {
       for (const [k, x] of Object.entries(v)) {
-        if (k === 'evidenceId' && typeof x === 'string') out.push(x);
+        if ((k === 'evidenceId' || k.endsWith('EvidenceId')) && typeof x === 'string') out.push(x);
         else walk(x);
       }
     }
@@ -230,7 +245,8 @@ export function checkModeContent(content: ModeContent, policy: CheckPolicy): Con
     const text = allStrings(c).join(' ');
     const brands = findBrands(text, policy.brandDenylist);
     if (brands.length) err(file, `merek nyata: ${brands.join(', ')}`);
-    const domains = findNonFictionalDomains(text, policy.fictionalDomains);
+    // Kode (mis. `pelanggan.id` di SQL) bukan alamat web: domain hanya dicek di teks bacaan.
+    const domains = findNonFictionalDomains(readableText(c), policy.fictionalDomains);
     if (domains.length)
       err(file, `domain bukan .test/.example/fiktif terdaftar: ${domains.join(', ')}`);
   }

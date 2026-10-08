@@ -1,0 +1,131 @@
+{
+  "id": "s01-q-002",
+  "type": "query",
+  "conceptIds": ["data-tables"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Rudi Hartono",
+      "team": "Customer Service Team"
+    },
+    "title": "Missed points reward",
+    "story": [
+      "Promo: customers with AT LEAST 120 points get a voucher.",
+      "A customer complained they got no voucher. What is wrong with the query?"
+    ],
+    "tables": [
+      {
+        "name": "customers",
+        "columns": [
+          {
+            "name": "name",
+            "type": "TEXT"
+          },
+          {
+            "name": "city",
+            "type": "TEXT"
+          },
+          {
+            "name": "age",
+            "type": "INTEGER"
+          },
+          {
+            "name": "points",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          ["Ayu Lestari", "Bandung", 24, 120],
+          ["Budi Santoso", "Medan", 31, 45],
+          ["Citra Dewi", "Bandung", 19, 300],
+          ["Dodi Pratama", "Surabaya", 42, 80],
+          ["Eka Putri", "Medan", 27, 150],
+          ["Fajar Nugroho", "Bandung", 35, 60]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "customers",
+            "columns": [
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "city",
+                "type": "TEXT"
+              },
+              {
+                "name": "age",
+                "type": "INTEGER"
+              },
+              {
+                "name": "points",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              ["Gita Permata", "Bandung", 22, 90],
+              ["Hadi Wijaya", "Solo", 50, 210],
+              ["Indah Sari", "Medan", 29, 120],
+              ["Jaka Purnama", "Bandung", 61, 500],
+              ["Kiki Amelia", "Medan", 33, 15]
+            ]
+          }
+        ]
+      },
+      {
+        "tables": [
+          {
+            "name": "customers",
+            "columns": [
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "city",
+                "type": "TEXT"
+              },
+              {
+                "name": "age",
+                "type": "INTEGER"
+              },
+              {
+                "name": "points",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              ["Lina Marlina", "Surabaya", 26, 120],
+              ["Mega Utami", "Medan", 21, 400],
+              ["Nanda Putra", "Bandung", 45, 130],
+              ["Oki Setiawan", "Medan", 38, 75]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "SELECT name, points\nFROM customers\nWHERE points > 120\n",
+    "solution": "SELECT name, points FROM customers WHERE points >= 120",
+    "ordered": false
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "\"At least 120\" includes 120 itself, so the sign is >= not >. With > 120, customers with exactly 120 points are left out.",
+  "ruleRefs": ["r-sql-3"],
+  "hints": [
+    "Look at the customer with exactly 120 points. Do they appear in the result?",
+    "Change the > sign to >=."
+  ]
+}

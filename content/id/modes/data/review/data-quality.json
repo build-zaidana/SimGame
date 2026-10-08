@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "id": "rv-dq-1",
+      "type": "mcq",
+      "conceptId": "data-quality",
+      "difficulty": 1,
+      "prompt": "Cara mencari email yang kosong (NULL)?",
+      "choices": ["WHERE email IS NULL", "WHERE email = NULL", "WHERE email = ''"],
+      "answerIndex": 0,
+      "explanation": "NULL tidak pernah \"sama dengan\" apa pun, jadi = NULL tidak menemukan apa-apa. Pakai IS NULL."
+    },
+    {
+      "id": "rv-dq-2",
+      "type": "mcq",
+      "conceptId": "data-quality",
+      "difficulty": 2,
+      "prompt": "Total donasi tampak dua kali lipat dari biasanya. Apa yang dicek dulu?",
+      "choices": ["Baris ganda", "Warna grafik", "Nama tabelnya"],
+      "answerIndex": 0,
+      "explanation": "Data yang tercatat dua kali membuat total membengkak. Cari dengan GROUP BY lalu HAVING COUNT(*) > 1."
+    },
+    {
+      "id": "rv-dq-3",
+      "type": "tap-evidence",
+      "conceptId": "data-quality",
+      "difficulty": 2,
+      "prompt": "Ketuk nilai yang mustahil di data pendaftar ini.",
+      "parts": [
+        {
+          "text": "Rina, 17 tahun"
+        },
+        {
+          "text": "Tono, 230 tahun",
+          "evidenceId": "age"
+        },
+        {
+          "text": "Wati, 45 tahun"
+        }
+      ],
+      "answer": ["age"],
+      "explanation": "Tidak ada orang berumur 230 tahun. Itu salah ketik yang harus diperbaiki sebelum dihitung."
+    },
+    {
+      "id": "rv-dq-4",
+      "type": "mcq",
+      "conceptId": "data-quality",
+      "difficulty": 1,
+      "prompt": "Untuk melihat setiap kota cukup sekali, pakai…",
+      "choices": ["SELECT DISTINCT kota", "SELECT kota LIMIT 1", "SELECT COUNT(kota)"],
+      "answerIndex": 0,
+      "explanation": "DISTINCT membuang nilai yang berulang, berguna untuk melihat ejaan yang berbeda."
+    }
+  ]
+}

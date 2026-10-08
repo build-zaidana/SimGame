@@ -1,0 +1,130 @@
+{
+  "id": "s03-q-001",
+  "type": "query",
+  "conceptIds": ["data-quality"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Putri Rahayu",
+      "team": "Charity Run Committee"
+    },
+    "title": "List of registrant cities",
+    "story": [
+      "We want to know which cities the charity run participants come from.",
+      "Show each city only ONCE."
+    ],
+    "tables": [
+      {
+        "name": "registrants",
+        "columns": [
+          {
+            "name": "name",
+            "type": "TEXT"
+          },
+          {
+            "name": "email",
+            "type": "TEXT"
+          },
+          {
+            "name": "age",
+            "type": "INTEGER"
+          },
+          {
+            "name": "city",
+            "type": "TEXT"
+          }
+        ],
+        "rows": [
+          ["Rina", "rina@contoh.test", 17, "Bandung"],
+          ["Tono", "tono@contoh.test", 230, "Medan"],
+          ["Wati", null, 45, "Bandung"],
+          ["Yusuf", "yusuf@contoh.test", 28, "Bdg"],
+          ["Zahra", null, 33, "Medan"]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "registrants",
+            "columns": [
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "email",
+                "type": "TEXT"
+              },
+              {
+                "name": "age",
+                "type": "INTEGER"
+              },
+              {
+                "name": "city",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              ["Adi", null, 19, "Solo"],
+              ["Bella", "bella@contoh.test", 52, "Solo"],
+              ["Candra", "candra@contoh.test", -4, "Surabaya"],
+              ["Dina", "dina@contoh.test", 40, "Sby"]
+            ]
+          }
+        ]
+      },
+      {
+        "tables": [
+          {
+            "name": "registrants",
+            "columns": [
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "email",
+                "type": "TEXT"
+              },
+              {
+                "name": "age",
+                "type": "INTEGER"
+              },
+              {
+                "name": "city",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              ["Edo", "edo@contoh.test", 21, "Medan"],
+              ["Fitri", null, 150, "Bandung"],
+              ["Galih", null, 36, "Bandung"],
+              ["Hana", null, 24, "Medan"],
+              ["Irfan", "irfan@contoh.test", 31, "Mdn"]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "SELECT city\nFROM registrants\n",
+    "solution": "SELECT DISTINCT city FROM registrants",
+    "ordered": false
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "DISTINCT removes repeated values. The result also reveals odd spellings like \"Bdg\" that need fixing.",
+  "ruleRefs": ["r-dq-1"],
+  "hints": [
+    "Without anything extra, the same city appears many times.",
+    "Write SELECT DISTINCT city."
+  ]
+}

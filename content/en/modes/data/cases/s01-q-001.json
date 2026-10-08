@@ -1,0 +1,100 @@
+{
+  "id": "s01-q-001",
+  "type": "query",
+  "conceptIds": ["data-tables"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Sari Wulandari",
+      "team": "Marketing Team"
+    },
+    "title": "Customers from Bandung",
+    "story": [
+      "We want to send invitations to an event in Bandung.",
+      "Please show the names of customers who live in Bandung only."
+    ],
+    "tables": [
+      {
+        "name": "customers",
+        "columns": [
+          {
+            "name": "name",
+            "type": "TEXT"
+          },
+          {
+            "name": "city",
+            "type": "TEXT"
+          },
+          {
+            "name": "age",
+            "type": "INTEGER"
+          },
+          {
+            "name": "points",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          ["Ayu Lestari", "Bandung", 24, 120],
+          ["Budi Santoso", "Medan", 31, 45],
+          ["Citra Dewi", "Bandung", 19, 300],
+          ["Dodi Pratama", "Surabaya", 42, 80],
+          ["Eka Putri", "Medan", 27, 150],
+          ["Fajar Nugroho", "Bandung", 35, 60]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "customers",
+            "columns": [
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "city",
+                "type": "TEXT"
+              },
+              {
+                "name": "age",
+                "type": "INTEGER"
+              },
+              {
+                "name": "points",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              ["Gita Permata", "Bandung", 22, 90],
+              ["Hadi Wijaya", "Solo", 50, 210],
+              ["Indah Sari", "Medan", 29, 120],
+              ["Jaka Purnama", "Bandung", 61, 500],
+              ["Kiki Amelia", "Medan", 33, 15]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "-- Show the name column for customers in Bandung\nSELECT name\nFROM customers\n",
+    "solution": "SELECT name FROM customers WHERE city = 'Bandung'",
+    "ordered": false
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "WHERE city = 'Bandung' keeps rows whose city is Bandung. Text always goes in single quotes.",
+  "ruleRefs": ["r-sql-1", "r-sql-2"],
+  "hints": [
+    "The query already picks the column and table. Missing: which rows to keep.",
+    "Add a line WHERE city = 'Bandung' below FROM."
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "dialogues": [
+    {
+      "id": "data-03-intro",
+      "lines": [
+        {
+          "speaker": "laras",
+          "text": "Hari ini kita kedatangan data dari formulir lari amal. Formulir itu... yah, ditulis manusia yang terburu-buru."
+        },
+        {
+          "speaker": "laras",
+          "text": "Cari tiga musuh utama: baris ganda, nilai kosong, dan nilai mustahil."
+        },
+        {
+          "speaker": "laras",
+          "text": "Tapi kalau datanya sudah bersih, jangan ditahan. Teliti bukan berarti curiga pada semua hal."
+        }
+      ]
+    },
+    {
+      "id": "data-03-outro",
+      "lines": [
+        {
+          "speaker": "laras",
+          "text": "Bagus! Laporan dari data kotor itu seperti memasak dengan bahan basi. Kamu sudah mencucinya dulu."
+        },
+        {
+          "speaker": "laras",
+          "text": "Besok kita mulai proyek AI pertama. AI pun hanya sebaik data latihnya."
+        }
+      ]
+    }
+  ]
+}

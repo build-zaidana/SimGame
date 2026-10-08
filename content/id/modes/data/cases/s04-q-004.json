@@ -1,0 +1,135 @@
+{
+  "id": "s04-q-004",
+  "type": "query",
+  "conceptIds": ["sql-join", "sql-aggregate"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Sari Wulandari",
+      "team": "Tim Pemasaran"
+    },
+    "title": "Dua pelanggan terbaik",
+    "story": [
+      "Kami mau mengundang 2 pelanggan dengan total belanja terbesar ke acara pelanggan setia.",
+      "Tampilkan nama dan total belanjanya, urut dari yang terbesar."
+    ],
+    "tables": [
+      {
+        "name": "pelanggan",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER"
+          },
+          {
+            "name": "nama",
+            "type": "TEXT"
+          },
+          {
+            "name": "kota",
+            "type": "TEXT"
+          }
+        ],
+        "rows": [
+          [1, "Ayu", "Bandung"],
+          [2, "Budi", "Medan"],
+          [3, "Citra", "Bandung"]
+        ]
+      },
+      {
+        "name": "pesanan",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER"
+          },
+          {
+            "name": "pelanggan_id",
+            "type": "INTEGER"
+          },
+          {
+            "name": "total",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          [1, 2, 50000],
+          [2, 1, 30000],
+          [3, 3, 20000],
+          [4, 2, 10000]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "pelanggan",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "nama",
+                "type": "TEXT"
+              },
+              {
+                "name": "kota",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [1, "Dewi", "Solo"],
+              [2, "Eko", "Solo"],
+              [3, "Fani", "Medan"],
+              [4, "Gilang", "Medan"]
+            ]
+          },
+          {
+            "name": "pesanan",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "pelanggan_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, 4, 70000],
+              [2, 3, 15000],
+              [3, 4, 5000],
+              [4, 1, 40000],
+              [5, 2, 25000]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "-- JOIN, kelompokkan per nama, jumlahkan, urutkan, ambil 2\n",
+    "solution": "SELECT pelanggan.nama, SUM(pesanan.total) FROM pesanan JOIN pelanggan ON pesanan.pelanggan_id = pelanggan.id GROUP BY pelanggan.nama ORDER BY SUM(pesanan.total) DESC LIMIT 2",
+    "ordered": true
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Gabungkan tabel, jumlahkan total per nama, urutkan dari yang terbesar dengan DESC, lalu LIMIT 2.",
+  "ruleRefs": ["r-jn-1", "r-sql-4", "r-agg-2"],
+  "hints": [
+    "Ini gabungan JOIN, GROUP BY, ORDER BY, dan LIMIT.",
+    "Urutkan dengan ORDER BY SUM(pesanan.total) DESC, lalu LIMIT 2."
+  ]
+}

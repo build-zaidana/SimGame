@@ -1,0 +1,74 @@
+{
+  "id": "s03-req-001",
+  "type": "request",
+  "conceptIds": ["data-quality"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "kind": "quality",
+    "from": {
+      "name": "Maya Anggraini",
+      "team": "Tim Keuangan"
+    },
+    "title": "Total donasi untuk laporan publik",
+    "message": [
+      {
+        "text": "Tolong setujui tabel ini. Totalnya akan kami umumkan di situs lari amal.",
+        "evidenceId": "msg-public"
+      }
+    ],
+    "notes": [],
+    "table": {
+      "title": "Donasi masuk",
+      "columns": [
+        {
+          "name": "id_transaksi"
+        },
+        {
+          "name": "nama"
+        },
+        {
+          "name": "jumlah"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["TRX-0411", "Rina", "50.000"]
+        },
+        {
+          "cells": ["TRX-0412", "Tono", "200.000"]
+        },
+        {
+          "cells": ["TRX-0412", "Tono", "200.000"],
+          "evidenceId": "row-dup"
+        },
+        {
+          "cells": ["TRX-0413", "Wati", "25.000"]
+        }
+      ]
+    }
+  },
+  "evidence": {
+    "required": ["row-dup"],
+    "supporting": ["msg-public", "prof-dup"]
+  },
+  "explanation": "Transaksi TRX-0412 tercatat dua kali, jadi total yang diumumkan akan lebih besar dari uang sebenarnya. Minta revisi: hapus baris ganda dulu.",
+  "ruleRefs": ["r-dq-1"],
+  "hints": [
+    "Bandingkan baris-baris tabelnya satu per satu.",
+    "Ada dua baris dengan nomor transaksi yang sama."
+  ],
+  "intel": {
+    "profile": [
+      {
+        "text": "Kolom id_transaksi: 1 nilai ganda (TRX-0412).",
+        "evidenceId": "prof-dup"
+      }
+    ]
+  }
+}

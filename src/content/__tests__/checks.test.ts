@@ -7,6 +7,7 @@ import {
   DEFAULT_LIMITS,
   findBrands,
   findNonFictionalDomains,
+  readableText,
   type CheckPolicy,
 } from '../checks.ts';
 import { parseModeContent } from '../loader.ts';
@@ -373,6 +374,20 @@ describe('text helpers', () => {
     expect(findNonFictionalDomains('buka contoh-asli.com', policy.fictionalDomains)).toEqual([
       'contoh-asli.com',
     ]);
+  });
+});
+
+describe('readableText (text a player sees, not code)', () => {
+  it('skips code and tests, including everything nested under them, but keeps table values', () => {
+    const text = readableText({
+      story: ['Cek bank.co.id dulu.'],
+      solution: 'SELECT pelanggan.id FROM pelanggan',
+      starter: 'SELECT pesanan.id',
+      tests: [{ name: 'tes', code: 'assert x.id == 1' }],
+      tables: [{ name: 'pelanggan', rows: [['a.co.id']] }],
+      hidden: [{ tables: [{ rows: [['b.co.id']] }] }],
+    });
+    expect(text).toBe('Cek bank.co.id dulu. pelanggan a.co.id b.co.id');
   });
 });
 

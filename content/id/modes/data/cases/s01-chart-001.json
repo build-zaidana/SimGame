@@ -1,0 +1,61 @@
+{
+  "id": "s01-chart-001",
+  "type": "chart",
+  "conceptIds": ["honest-charts"],
+  "difficulty": 1,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Bayu Firmansyah",
+      "team": "Tim Penjualan"
+    },
+    "title": "Penjualan Kopi Februari",
+    "purpose": "Rapat direksi besok pagi",
+    "chart": {
+      "kind": "bar",
+      "title": "Cangkir kopi terjual",
+      "unit": "cangkir",
+      "axisStart": 950,
+      "points": [
+        {
+          "label": "Januari",
+          "value": 980,
+          "evidenceId": "pt-jan"
+        },
+        {
+          "label": "Februari",
+          "value": 1000,
+          "evidenceId": "pt-feb"
+        }
+      ],
+      "axisEvidenceId": "axis"
+    },
+    "claims": [
+      {
+        "text": "Penjualan Februari MELONJAK TAJAM dibanding Januari!",
+        "evidenceId": "claim-jump"
+      }
+    ],
+    "notes": [
+      {
+        "text": "Sumber: catatan kasir semua cabang.",
+        "evidenceId": "note-source"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["axis", "claim-jump"],
+    "supporting": ["pt-jan", "pt-feb"]
+  },
+  "explanation": "Sumbu Y dimulai dari 950, jadi kenaikan 20 cangkir (sekitar 2%) tampak seperti berlipat. Minta revisi: sumbu mulai dari 0 dan judul tanpa \"melonjak tajam\".",
+  "ruleRefs": ["r-ch-1"],
+  "hints": [
+    "Bandingkan angka Januari dan Februari. Berapa selisihnya?",
+    "Lihat sumbu Y dimulai dari angka berapa."
+  ]
+}

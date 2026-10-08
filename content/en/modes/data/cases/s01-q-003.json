@@ -1,0 +1,100 @@
+{
+  "id": "s01-q-003",
+  "type": "query",
+  "conceptIds": ["data-tables"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Bayu Firmansyah",
+      "team": "Sales Team"
+    },
+    "title": "Three most loyal customers",
+    "story": [
+      "This month we reward the 3 customers with the most points.",
+      "Show their name and points, sorted from the most points."
+    ],
+    "tables": [
+      {
+        "name": "customers",
+        "columns": [
+          {
+            "name": "name",
+            "type": "TEXT"
+          },
+          {
+            "name": "city",
+            "type": "TEXT"
+          },
+          {
+            "name": "age",
+            "type": "INTEGER"
+          },
+          {
+            "name": "points",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          ["Ayu Lestari", "Bandung", 24, 120],
+          ["Budi Santoso", "Medan", 31, 45],
+          ["Citra Dewi", "Bandung", 19, 300],
+          ["Dodi Pratama", "Surabaya", 42, 80],
+          ["Eka Putri", "Medan", 27, 150],
+          ["Fajar Nugroho", "Bandung", 35, 60]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "customers",
+            "columns": [
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "city",
+                "type": "TEXT"
+              },
+              {
+                "name": "age",
+                "type": "INTEGER"
+              },
+              {
+                "name": "points",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              ["Gita Permata", "Bandung", 22, 90],
+              ["Hadi Wijaya", "Solo", 50, 210],
+              ["Indah Sari", "Medan", 29, 120],
+              ["Jaka Purnama", "Bandung", 61, 500],
+              ["Kiki Amelia", "Medan", 33, 15]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "SELECT name, points\nFROM customers\n",
+    "solution": "SELECT name, points FROM customers ORDER BY points DESC LIMIT 3",
+    "ordered": true
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "ORDER BY points DESC sorts from the most points, then LIMIT 3 keeps the top three rows.",
+  "ruleRefs": ["r-sql-4"],
+  "hints": [
+    "Two steps: sort first, then keep the top few rows.",
+    "Add ORDER BY points DESC then LIMIT 3."
+  ]
+}

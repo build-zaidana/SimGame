@@ -1,0 +1,100 @@
+{
+  "id": "s01-q-003",
+  "type": "query",
+  "conceptIds": ["data-tables"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Bayu Firmansyah",
+      "team": "Tim Penjualan"
+    },
+    "title": "Tiga pelanggan paling setia",
+    "story": [
+      "Bulan ini kami memberi hadiah ke 3 pelanggan dengan poin terbanyak.",
+      "Tampilkan nama dan poinnya, urut dari poin terbesar."
+    ],
+    "tables": [
+      {
+        "name": "pelanggan",
+        "columns": [
+          {
+            "name": "nama",
+            "type": "TEXT"
+          },
+          {
+            "name": "kota",
+            "type": "TEXT"
+          },
+          {
+            "name": "umur",
+            "type": "INTEGER"
+          },
+          {
+            "name": "poin",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          ["Ayu Lestari", "Bandung", 24, 120],
+          ["Budi Santoso", "Medan", 31, 45],
+          ["Citra Dewi", "Bandung", 19, 300],
+          ["Dodi Pratama", "Surabaya", 42, 80],
+          ["Eka Putri", "Medan", 27, 150],
+          ["Fajar Nugroho", "Bandung", 35, 60]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "pelanggan",
+            "columns": [
+              {
+                "name": "nama",
+                "type": "TEXT"
+              },
+              {
+                "name": "kota",
+                "type": "TEXT"
+              },
+              {
+                "name": "umur",
+                "type": "INTEGER"
+              },
+              {
+                "name": "poin",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              ["Gita Permata", "Bandung", 22, 90],
+              ["Hadi Wijaya", "Solo", 50, 210],
+              ["Indah Sari", "Medan", 29, 120],
+              ["Jaka Purnama", "Bandung", 61, 500],
+              ["Kiki Amelia", "Medan", 33, 15]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "SELECT nama, poin\nFROM pelanggan\n",
+    "solution": "SELECT nama, poin FROM pelanggan ORDER BY poin DESC LIMIT 3",
+    "ordered": true
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "ORDER BY poin DESC mengurutkan dari poin terbesar, lalu LIMIT 3 mengambil tiga baris teratas.",
+  "ruleRefs": ["r-sql-4"],
+  "hints": [
+    "Dua langkah: urutkan dulu, lalu ambil beberapa baris teratas.",
+    "Tambahkan ORDER BY poin DESC lalu LIMIT 3."
+  ]
+}

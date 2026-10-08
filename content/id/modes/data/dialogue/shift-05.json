@@ -1,0 +1,34 @@
+{
+  "dialogues": [
+    {
+      "id": "data-05-intro",
+      "lines": [
+        {
+          "speaker": "laras",
+          "text": "Hari terakhir di rangkaian ini: laporan akhir tahun. Angka-angka kita akan dibaca publik."
+        },
+        {
+          "speaker": "laras",
+          "text": "Pakai semuanya: query yang rapi, grafik yang jujur, data pribadi yang terjaga, dan AI yang dicek."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "Aku punya penawaran spesial hari ini. Kamu pasti suka."
+        }
+      ]
+    },
+    {
+      "id": "data-05-outro",
+      "lines": [
+        {
+          "speaker": "laras",
+          "text": "Laporan tahunan terbit, dan semua angkanya bisa dipertanggungjawabkan. Saya bangga."
+        },
+        {
+          "speaker": "laras",
+          "text": "Analis data yang baik bukan cuma pintar SQL. Ia jujur pada angka dan menjaga orang di balik data."
+        }
+      ]
+    }
+  ]
+}

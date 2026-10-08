@@ -1,0 +1,58 @@
+{
+  "id": "s05-chart-001",
+  "type": "chart",
+  "conceptIds": ["honest-charts"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Dian Kartika",
+      "team": "Public Relations"
+    },
+    "title": "This Year's Customer Satisfaction",
+    "purpose": "The year-end press release",
+    "chart": {
+      "kind": "bar",
+      "title": "Satisfied customers",
+      "unit": "%",
+      "axisStart": 80,
+      "points": [
+        {
+          "label": "Last year",
+          "value": 84,
+          "evidenceId": "pt-last"
+        },
+        {
+          "label": "This year",
+          "value": 88,
+          "evidenceId": "pt-now"
+        }
+      ],
+      "axisEvidenceId": "axis"
+    },
+    "claims": [
+      {
+        "text": "Customer satisfaction skyrocketed this year!",
+        "evidenceId": "claim-drastic"
+      }
+    ],
+    "notes": [
+      {
+        "text": "Survey of 600 customers each year.",
+        "evidenceId": "note-sample"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["axis", "claim-drastic"],
+    "supporting": ["pt-last", "pt-now"]
+  },
+  "explanation": "A 4-point rise is good news, but an axis starting at 80 makes it look like a leap. Ask for a revision: axis from 0 and a fitting claim.",
+  "ruleRefs": ["r-ch-1"],
+  "hints": ["How big is the gap between last year and this year?", "Where does the Y axis start?"]
+}

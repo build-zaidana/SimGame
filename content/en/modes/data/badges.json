@@ -1,0 +1,92 @@
+{
+  "badges": [
+    {
+      "id": "select-pertama",
+      "title": "First SELECT",
+      "description": "Finished Shift 1 at the Data Desk.",
+      "icon": "🗃️",
+      "tier": "bronze",
+      "rule": {
+        "type": "shift-complete",
+        "shiftId": "data-01"
+      }
+    },
+    {
+      "id": "data-cocok",
+      "title": "All Matching",
+      "description": "Five decisions in a row, right and with no wrong marks.",
+      "icon": "✅",
+      "tier": "silver",
+      "rule": {
+        "type": "evidence-streak",
+        "count": 5
+      }
+    },
+    {
+      "id": "analis-mandiri",
+      "title": "Independent Analyst",
+      "description": "A shift without hints from Laras, with at least ★★.",
+      "icon": "🧠",
+      "tier": "silver",
+      "rule": {
+        "type": "no-hints",
+        "minCases": 7,
+        "minStars": 2
+      }
+    },
+    {
+      "id": "grafik-jujur",
+      "title": "Honest Chart Keeper",
+      "description": "A shift without letting a problematic report through.",
+      "icon": "📊",
+      "tier": "silver",
+      "rule": {
+        "type": "no-threat-allowed",
+        "minCases": 7
+      }
+    },
+    {
+      "id": "tiga-bintang-data",
+      "title": "Data Star",
+      "description": "Got ★★★ in a Data Desk shift.",
+      "icon": "🌟",
+      "tier": "gold",
+      "rule": {
+        "type": "shift-stars",
+        "stars": 3
+      }
+    },
+    {
+      "id": "perkakas-data",
+      "title": "Full Toolkit",
+      "description": "Own both the Data Profiler and Source Check.",
+      "icon": "🧰",
+      "tier": "bronze",
+      "rule": {
+        "type": "tools-owned",
+        "count": 2
+      }
+    },
+    {
+      "id": "penakluk-tenggat",
+      "title": "Deadline Crusher",
+      "description": "Beat an end-of-shift boss at the Data Desk.",
+      "icon": "⏱️",
+      "tier": "silver",
+      "rule": {
+        "type": "boss-defeated"
+      }
+    },
+    {
+      "id": "lead-data",
+      "title": "Year-End Report",
+      "description": "Finished all five Data Desk shifts.",
+      "icon": "🏆",
+      "tier": "gold",
+      "rule": {
+        "type": "shift-complete",
+        "shiftId": "data-05"
+      }
+    }
+  ]
+}

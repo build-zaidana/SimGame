@@ -1,0 +1,73 @@
+{
+  "id": "s02-req-001",
+  "type": "request",
+  "conceptIds": ["data-privacy"],
+  "difficulty": 2,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "acceptableDecisions": {
+    "revise": 0.5
+  },
+  "severity": 3,
+  "data": {
+    "kind": "share",
+    "from": {
+      "name": "Sari Wulandari",
+      "team": "Marketing Team"
+    },
+    "title": "Customer data for an ad vendor",
+    "message": [
+      {
+        "text": "Our new partner, PT Iklan Kilat, wants customer data for an SMS campaign.",
+        "evidenceId": "msg-vendor"
+      },
+      {
+        "text": "Please send it today: names, phone numbers and ID numbers of all customers.",
+        "evidenceId": "msg-fields"
+      }
+    ],
+    "notes": [
+      {
+        "text": "Customers gave this data for the delivery service, not for advertising.",
+        "evidenceId": "note-purpose"
+      }
+    ],
+    "table": {
+      "title": "Sample of 3 rows",
+      "columns": [
+        {
+          "name": "name"
+        },
+        {
+          "name": "phone",
+          "evidenceId": "col-phone"
+        },
+        {
+          "name": "id_number",
+          "evidenceId": "col-nik"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["Ayu Lestari", "0812-xxxx-1201", "3273-xxxx-xxxx-0001"]
+        },
+        {
+          "cells": ["Budi Santoso", "0813-xxxx-4410", "1271-xxxx-xxxx-0002"]
+        },
+        {
+          "cells": ["Citra Dewi", "0857-xxxx-7788", "3273-xxxx-xxxx-0003"]
+        }
+      ]
+    }
+  },
+  "evidence": {
+    "required": ["msg-vendor", "col-nik"],
+    "supporting": ["col-phone", "note-purpose", "msg-fields"]
+  },
+  "explanation": "Full personal data (even ID numbers) for an outside party and a new purpose needs its legal basis checked by the Data Protection Officer. Escalate; do not send it yet.",
+  "ruleRefs": ["r-pv-3", "r-pv-1"],
+  "hints": [
+    "Who will receive this data? Inside or outside the office?",
+    "Look at which columns are requested, and why customers gave them in the first place."
+  ]
+}

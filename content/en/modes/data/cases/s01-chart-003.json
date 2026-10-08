@@ -1,0 +1,61 @@
+{
+  "id": "s01-chart-003",
+  "type": "chart",
+  "conceptIds": ["honest-charts"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Sari Wulandari",
+      "team": "Marketing Team"
+    },
+    "title": "Bandung's Favourite Flavour",
+    "purpose": "A social media ad",
+    "chart": {
+      "kind": "bar",
+      "title": "Flavour choice",
+      "unit": "people",
+      "axisStart": 0,
+      "points": [
+        {
+          "label": "Chocolate",
+          "value": 4,
+          "evidenceId": "pt-choc"
+        },
+        {
+          "label": "Vanilla",
+          "value": 2,
+          "evidenceId": "pt-van"
+        }
+      ],
+      "axisEvidenceId": "axis"
+    },
+    "claims": [
+      {
+        "text": "Most people in Bandung prefer chocolate!",
+        "evidenceId": "claim-majority"
+      }
+    ],
+    "notes": [
+      {
+        "text": "Source: a survey of 6 people in our office meeting room.",
+        "evidenceId": "note-sample"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["claim-majority", "note-sample"],
+    "supporting": ["pt-choc"]
+  },
+  "explanation": "Six people in one meeting room do not represent everyone in Bandung. Ask for a revision: a bigger sample, or a claim like \"out of 6 colleagues\".",
+  "ruleRefs": ["r-ch-2"],
+  "hints": [
+    "Who was asked in this survey?",
+    "Match the claim \"most people in Bandung\" with the sample size."
+  ]
+}

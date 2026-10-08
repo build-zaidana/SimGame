@@ -1,0 +1,71 @@
+{
+  "id": "s03-req-001",
+  "type": "request",
+  "conceptIds": ["data-quality"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "kind": "quality",
+    "from": {
+      "name": "Maya Anggraini",
+      "team": "Finance Team"
+    },
+    "title": "Donation total for the public report",
+    "message": [
+      {
+        "text": "Please approve this table. We'll announce its total on the charity run site.",
+        "evidenceId": "msg-public"
+      }
+    ],
+    "notes": [],
+    "table": {
+      "title": "Incoming donations",
+      "columns": [
+        {
+          "name": "transaction_id"
+        },
+        {
+          "name": "name"
+        },
+        {
+          "name": "amount"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["TRX-0411", "Rina", "50.000"]
+        },
+        {
+          "cells": ["TRX-0412", "Tono", "200.000"]
+        },
+        {
+          "cells": ["TRX-0412", "Tono", "200.000"],
+          "evidenceId": "row-dup"
+        },
+        {
+          "cells": ["TRX-0413", "Wati", "25.000"]
+        }
+      ]
+    }
+  },
+  "evidence": {
+    "required": ["row-dup"],
+    "supporting": ["msg-public", "prof-dup"]
+  },
+  "explanation": "Transaction TRX-0412 is recorded twice, so the announced total would be bigger than the real money. Ask for a revision: remove the duplicate first.",
+  "ruleRefs": ["r-dq-1"],
+  "hints": ["Compare the table rows one by one.", "Two rows share the same transaction number."],
+  "intel": {
+    "profile": [
+      {
+        "text": "Column transaction_id: 1 duplicate value (TRX-0412).",
+        "evidenceId": "prof-dup"
+      }
+    ]
+  }
+}

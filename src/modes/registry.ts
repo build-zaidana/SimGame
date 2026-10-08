@@ -3,19 +3,12 @@ import type { CareerMode, UpcomingMode } from './contract.ts';
 import { socMode } from './soc/index.ts';
 import { supportMode } from './support/index.ts';
 import { devMode } from './dev/index.ts';
+import { dataMode } from './data/index.ts';
 
-export const modes: CareerMode[] = [socMode, supportMode, devMode];
+export const modes: CareerMode[] = [socMode, supportMode, devMode, dataMode];
 
-export const upcomingModes: UpcomingMode[] = (['data'] as const).map((m) => ({
-  id: m,
-  get title() {
-    return id.modes[m].title;
-  },
-  get deskTitle() {
-    return id.modes[m].deskTitle;
-  },
-  status: 'coming-soon',
-}));
+/** Mode yang tampil di HUB sebagai "Segera hadir". Kosong: semua mode di PRD sudah bisa dimainkan. */
+export const upcomingModes: UpcomingMode[] = [];
 
 /** Judul buku panduan sebuah mode (ikut bahasa aktif). */
 export function rulebookTitle(modeId: string): string {
