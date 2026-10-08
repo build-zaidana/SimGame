@@ -1,5 +1,6 @@
 import { useRef, useState, type KeyboardEvent } from 'react';
 import { t as id } from '../../../i18n/index.ts';
+import { MAX_ANSWER_LENGTH } from '../../../engine/shift.ts';
 import { nextIndent, tokenizeLine, type TokenKind } from './pyHighlight.ts';
 
 const TOKEN_CLASS: Record<TokenKind, string> = {
@@ -49,7 +50,7 @@ export function CodeEditor({
 
   const replace = (start: number, end: number, text: string, caret = start + text.length) => {
     const next = value.slice(0, start) + text + value.slice(end);
-    onChange(next);
+    onChange(next.slice(0, MAX_ANSWER_LENGTH));
     requestAnimationFrame(() => {
       area.current?.setSelectionRange(caret, caret);
     });
@@ -149,7 +150,8 @@ export function CodeEditor({
             ref={area}
             value={value}
             readOnly={readOnly}
-            onChange={(e) => onChange(e.target.value)}
+            maxLength={MAX_ANSWER_LENGTH}
+            onChange={(e) => onChange(e.target.value.slice(0, MAX_ANSWER_LENGTH))}
             onKeyDown={onKeyDown}
             onScroll={syncScroll}
             aria-label={label}

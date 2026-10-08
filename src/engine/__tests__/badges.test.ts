@@ -175,6 +175,13 @@ describe('currentStreak (combo counter on the desk)', () => {
     expect(currentStreak([d, a, c, b])).toBe(2);
   });
 
+  it('follows the decision order when cases were opened in a different order', () => {
+    // A dibuka dulu tapi diputuskan terakhir (salah); B diputuskan lebih dulu (benar).
+    const a = decided('threat-allowed', {}, { openedAtMs: 1, decidedSeq: 2 });
+    const b = decided('correct', {}, { openedAtMs: 2, decidedSeq: 1 });
+    expect(currentStreak([a, b])).toBe(0);
+  });
+
   it('is zero with no decisions or after a wrong one', () => {
     expect(currentStreak([])).toBe(0);
     expect(currentStreak([decided('correct'), decided('legit-blocked')])).toBe(0);

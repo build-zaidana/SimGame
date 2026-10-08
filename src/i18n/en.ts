@@ -535,6 +535,7 @@ export const en: Strings = {
         'if has_package():',
       ],
       run: 'Run Robot',
+      notRunYet: 'Run the robot first, then submit.',
       summary: (p, t) => `${p} of ${t} maps completed`,
       allPassed: 'ALL PACKAGES DELIVERED!',
       delivered: (d, t) => `Packages delivered: ${d}/${t}`,

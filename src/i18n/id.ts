@@ -543,6 +543,7 @@ export const id = {
         'if ada_paket():',
       ],
       run: 'Jalankan Robot',
+      notRunYet: 'Jalankan robot dulu, baru kirim solusi.',
       summary: (p: number, t: number) => `${p} dari ${t} peta berhasil`,
       allPassed: 'SEMUA PAKET TERANTAR!',
       delivered: (d: number, t: number) => `Paket terantar: ${d}/${t}`,

@@ -91,7 +91,9 @@ export function StandardDesk({
     onToggleMark: (evidenceId) => dispatch({ type: 'TOGGLE_MARK', evidenceId }),
     answer: active?.answer,
     onAnswer: (text) => dispatch({ type: 'SET_ANSWER', text }),
-    onRun: (passed, total) => dispatch({ type: 'RECORD_RUN', passed, total }),
+    // Kasus dikunci saat dirender: hasil tes yang keluar setelah pemain pindah kasus diabaikan reducer.
+    onRun: (passed, total, text) =>
+      active && dispatch({ type: 'RECORD_RUN', caseId: active.caseId, text, passed, total }),
     clock: {
       nowMs: session.elapsedMs,
       openedAtMs: active?.openedAtMs ?? null,

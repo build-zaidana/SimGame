@@ -16,7 +16,7 @@ export function CtfDocument({ data, locked, answer, onAnswer, onRun }: DocumentP
     const ok = flag.trim() === d.flag;
     setChecked(ok);
     onAnswer?.(flag);
-    onRun?.(ok ? 1 : 0, 1);
+    onRun?.(ok ? 1 : 0, 1, flag);
   };
   return (
     <article aria-labelledby="doc-title" className="border-2 border-ink/40 bg-bg p-3">
@@ -67,6 +67,7 @@ export function CtfDocument({ data, locked, answer, onAnswer, onRun }: DocumentP
               setChecked(null);
             }}
             placeholder="FLAG{...}"
+            maxLength={200}
             spellCheck={false}
             autoCapitalize="off"
             autoCorrect="off"

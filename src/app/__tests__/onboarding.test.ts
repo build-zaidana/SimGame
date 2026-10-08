@@ -36,6 +36,10 @@ describe('nextTip (onboarding, ADR 030)', () => {
     expect(order).toEqual(['rank', 'daily', 'shop', 'practice']);
   });
 
+  it('skips the welcome once the player has already finished a shift', () => {
+    expect(nextTip(afterFirstShift(80))).toBe('rank');
+  });
+
   it('waits with the shop tip until the player can afford an upgrade', () => {
     const save = seen(afterFirstShift(10), 'welcome', 'rank', 'daily');
     expect(nextTip(save)).toBe('practice');
@@ -58,7 +62,8 @@ describe('nextTip (onboarding, ADR 030)', () => {
     const skipped = skipAllTips(afterFirstShift(80));
     expect(nextTip(skipped)).toBeNull();
     expect(TIP_IDS.every((id) => skipped.flags[`tip:${id}`])).toBe(true);
-    expect(nextTip(resetTips(skipped))).toBe('welcome');
+    expect(nextTip(resetTips(skipped))).toBe('rank');
+    expect(nextTip(resetTips(skipAllTips(fresh())))).toBe('welcome');
   });
 
   it('keeps unrelated flags when resetting', () => {

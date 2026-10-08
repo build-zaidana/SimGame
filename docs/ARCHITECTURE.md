@@ -374,9 +374,9 @@ Saat pertama kali menyimpan: panggil `navigator.storage.persist()` (abaikan jika
 ### 7.2 Bentuk save
 ```ts
 // src/persistence/saveSchema.ts
-export const SAVE_SCHEMA_VERSION = 13;
+export const SAVE_SCHEMA_VERSION = 14;
 SaveData = {
-  schemaVersion: 13,
+  schemaVersion: 14,
   createdAt: string, updatedAt: string,
   installId: string,                  // UUID acak; tidak terkait identitas
   profile: { nickname: string, settings: { textScale: 1|1.15|1.3, playMode: 'relaxed'|'normal', reduceMotion: boolean, sound: boolean, music: boolean /* v5 */, language: 'id'|'en' /* v6, ADR 023 */, exploreOffice: boolean /* v7, ADR 024 */ } },
@@ -387,7 +387,8 @@ SaveData = {
       wallet: number, trust: number,
       toolsOwned: string[], chaptersUnlocked: string[],
       upgradesOwned: string[],         // v11: upgrade meja (ADR 027)
-      activeSession?: ShiftSession,   // untuk lanjut di tengah shift; v11: perks? (ADR 027); v12: boss? (ADR 028); v13: daily? (ADR 029)
+      activeSession?: ShiftSession,   // untuk lanjut di tengah shift; v11: perks? (ADR 027); v12: boss? (ADR 028); v13: daily? (ADR 029); v14: cases[].decidedSeq?
+                                      // sesi rusak dibuang saat load (catch), progres lain tetap aman
       practiceSession?: ShiftSession, // v3: Mode Latihan (ADR 014)
       badges: Record<badgeId, string>, // v4: lencana → waktu didapat (ADR 021)
     }

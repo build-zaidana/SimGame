@@ -77,6 +77,8 @@ export const MIGRATIONS: Record<number, Migration> = {
   11: (d) => d,
   /** v12 → v13: tantangan harian (opsional) di sesi dan di save; data lama tetap valid. */
   12: (d) => d,
+  /** v13 → v14: kasus di sesi boleh menyimpan urutan keputusan; data lama tetap valid. */
+  13: (d) => d,
 };
 
 export function runMigrations(
