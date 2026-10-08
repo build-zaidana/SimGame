@@ -1,0 +1,67 @@
+{
+  "id": "s03-robot-002",
+  "type": "robot",
+  "conceptIds": ["python-basics", "debugging"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Yoga Saputra",
+      "team": "Warehouse Team"
+    },
+    "title": "Go until you hit the wall",
+    "story": [
+      "Each warehouse corridor has a different length. A fixed number in range() will not fit them all.",
+      "while front_clear(): keeps the robot moving as long as the way ahead is clear."
+    ],
+    "maps": [
+      {
+        "grid": ["#########", "#.....P##", "######.##", "######.##", "######T##", "#########"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      },
+      {
+        "grid": ["#######", "#..P###", "###.###", "###T###", "#######"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      },
+      {
+        "grid": [
+          "###########",
+          "#.......P##",
+          "########.##",
+          "########.##",
+          "########.##",
+          "########T##",
+          "###########"
+        ],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      }
+    ],
+    "starter": "# Keep moving until the wall, pick up, turn right, move until the wall again\nwhile front_clear():\n    forward()\n",
+    "solution": "while front_clear():\n    forward()\npick_up()\nturn_right()\nwhile front_clear():\n    forward()\ndeliver()\n",
+    "commands": ["forward", "turn_left", "turn_right", "pick_up", "deliver", "while_front"]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "while checks the sensor before every step, so the same program works in short and long corridors alike. That is sturdier than counting steps.",
+  "ruleRefs": ["r-py-1"],
+  "hints": [
+    "There are three maps with different corridor lengths. A fixed count will fail on one of them.",
+    "After turning right, use while front_clear(): again to reach the flag."
+  ]
+}

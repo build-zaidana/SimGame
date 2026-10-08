@@ -5,6 +5,7 @@
  */
 import { runWithTests, type LoadMicroPython, type PyTest } from './runner/harness.ts';
 import { runRobot, type RobotMap } from './runner/robot.ts';
+import { missingCommands, type RobotCommand } from './runner/robotPalette.ts';
 
 /** Peta valid: pinggir dinding, start di lantai, ada paket dan tujuan. */
 export function robotMapErrors(map: RobotMap, i: number): string[] {
@@ -42,8 +43,18 @@ export async function verifyDevCase(load: LoadMicroPython, c: DevCaseLike): Prom
     if (start.tests.every((t) => t.passed)) errors.push('kode awal sudah lulus semua tes');
   }
   if (c.type === 'robot') {
-    const d = c.data as { maps: RobotMap[]; starter: string; solution: string };
+    const d = c.data as {
+      maps: RobotMap[];
+      starter: string;
+      solution: string;
+      commands?: RobotCommand[];
+    };
     d.maps.forEach((m, i) => errors.push(...robotMapErrors(m, i)));
+    const missing = missingCommands(d.solution, d.commands);
+    if (missing.length)
+      errors.push(
+        `solusi acuan memakai perintah yang tidak ada di palet level: ${missing.join(', ')}`,
+      );
     if (errors.length) return errors;
     const sol = await runRobot(load, d.solution, d.maps);
     sol.maps.forEach((m, i) => {

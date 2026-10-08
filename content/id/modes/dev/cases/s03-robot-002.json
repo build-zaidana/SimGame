@@ -1,0 +1,67 @@
+{
+  "id": "s03-robot-002",
+  "type": "robot",
+  "conceptIds": ["python-basics", "debugging"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Yoga Saputra",
+      "team": "Tim Gudang"
+    },
+    "title": "Jalan sampai mentok",
+    "story": [
+      "Panjang lorong di tiap gudang berbeda. Angka tetap di range() tidak akan cocok untuk semua.",
+      "while depan_kosong(): membuat robot terus maju selama depannya kosong."
+    ],
+    "maps": [
+      {
+        "grid": ["#########", "#.....P##", "######.##", "######.##", "######T##", "#########"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      },
+      {
+        "grid": ["#######", "#..P###", "###.###", "###T###", "#######"],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      },
+      {
+        "grid": [
+          "###########",
+          "#.......P##",
+          "########.##",
+          "########.##",
+          "########.##",
+          "########T##",
+          "###########"
+        ],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      }
+    ],
+    "starter": "# Maju terus sampai mentok, ambil paket, belok kanan, maju lagi sampai mentok\nwhile depan_kosong():\n    maju()\n",
+    "solution": "while depan_kosong():\n    maju()\nambil()\nbelok_kanan()\nwhile depan_kosong():\n    maju()\nantar()\n",
+    "commands": ["forward", "turn_left", "turn_right", "pick_up", "deliver", "while_front"]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "while memeriksa sensor sebelum setiap langkah, jadi program yang sama berhasil di lorong pendek maupun panjang. Ini lebih tangguh daripada menghitung langkah.",
+  "ruleRefs": ["r-py-1"],
+  "hints": [
+    "Ada tiga peta dengan panjang lorong berbeda. Hitungan tetap pasti gagal di salah satunya.",
+    "Setelah belok kanan, pakai while depan_kosong(): lagi sampai bendera."
+  ]
+}

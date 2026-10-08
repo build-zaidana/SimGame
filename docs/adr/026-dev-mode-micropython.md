@@ -84,3 +84,14 @@ Masukan pemilik: Meja Developer masih terasa seperti latihan coding biasa. Tahap
   ringkas `ServerHealthChip` di atas editor, dan peta robot digulir ke layar saat program dijalankan.
 - Kasus robot ada di setiap shift dengan materi yang naik: urutan cek (debug), if/else + sensor depan,
   `def` + uji semua peta (kasus tepi), lalu aturan tangan kanan di labirin.
+
+## Pembaruan (8 Oktober 2026): palet perintah robot per level
+
+- Kasus robot boleh membatasi tombol perintah lewat `data.commands` (kunci tanpa bahasa:
+  `forward`, `for_range`, `while_target`, `while_front`, `if_front`, `if_package`, `else`, …; teks tombol
+  di i18n). Level 1 hanya perintah dasar; perulangan dan sensor muncul bertahap. Pemain tetap boleh
+  mengetik apa pun; palet hanya bantuan mengetik di HP.
+- `content:check` memastikan semua perintah yang dipakai solusi acuan ada di palet levelnya
+  (`runner/robotPalette.ts`, dengan unit test).
+- Tombol `else:` otomatis mundur satu indentasi agar sejajar dengan `if`-nya.
+- Dua level baru: `for i in range(n)` (shift 2) dan `while depan_kosong():` di tiga peta berbeda panjang (shift 3).
