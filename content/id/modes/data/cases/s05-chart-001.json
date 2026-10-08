@@ -1,0 +1,58 @@
+{
+  "id": "s05-chart-001",
+  "type": "chart",
+  "conceptIds": ["honest-charts"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Dian Kartika",
+      "team": "Tim Humas"
+    },
+    "title": "Kepuasan Pelanggan Tahun Ini",
+    "purpose": "Siaran pers akhir tahun",
+    "chart": {
+      "kind": "bar",
+      "title": "Pelanggan yang puas",
+      "unit": "%",
+      "axisStart": 80,
+      "points": [
+        {
+          "label": "Tahun lalu",
+          "value": 84,
+          "evidenceId": "pt-last"
+        },
+        {
+          "label": "Tahun ini",
+          "value": 88,
+          "evidenceId": "pt-now"
+        }
+      ],
+      "axisEvidenceId": "axis"
+    },
+    "claims": [
+      {
+        "text": "Kepuasan pelanggan melonjak drastis tahun ini!",
+        "evidenceId": "claim-drastic"
+      }
+    ],
+    "notes": [
+      {
+        "text": "Survei 600 pelanggan tiap tahun.",
+        "evidenceId": "note-sample"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["axis", "claim-drastic"],
+    "supporting": ["pt-last", "pt-now"]
+  },
+  "explanation": "Naik 4 poin persen itu kabar baik, tapi sumbu yang dimulai dari 80 membuatnya tampak melonjak. Minta revisi: sumbu dari 0 dan klaim yang sesuai.",
+  "ruleRefs": ["r-ch-1"],
+  "hints": ["Berapa selisih tahun lalu dan tahun ini?", "Sumbu Y dimulai dari angka berapa?"]
+}

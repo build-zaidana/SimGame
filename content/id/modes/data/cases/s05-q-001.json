@@ -1,0 +1,128 @@
+{
+  "id": "s05-q-001",
+  "type": "query",
+  "conceptIds": ["sql-aggregate"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Maya Anggraini",
+      "team": "Tim Keuangan"
+    },
+    "title": "Penjualan per bulan",
+    "story": [
+      "Untuk laporan akhir tahun: total penjualan setiap bulan.",
+      "Tampilkan bulan dan totalnya, urut dari bulan 1."
+    ],
+    "tables": [
+      {
+        "name": "penjualan",
+        "columns": [
+          {
+            "name": "bulan",
+            "type": "INTEGER"
+          },
+          {
+            "name": "kategori",
+            "type": "TEXT"
+          },
+          {
+            "name": "pelanggan",
+            "type": "TEXT"
+          },
+          {
+            "name": "total",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          [1, "Minuman", "Ayu", 300],
+          [1, "Makanan", "Budi", 200],
+          [2, "Minuman", "Ayu", 250],
+          [2, "Minuman", "Citra", 400],
+          [3, "Makanan", "Budi", 350],
+          [3, "Minuman", "Dodi", 100]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "penjualan",
+            "columns": [
+              {
+                "name": "bulan",
+                "type": "INTEGER"
+              },
+              {
+                "name": "kategori",
+                "type": "TEXT"
+              },
+              {
+                "name": "pelanggan",
+                "type": "TEXT"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, "Makanan", "Eka", 700],
+              [2, "Minuman", "Eka", 100],
+              [2, "Makanan", "Fajar", 150],
+              [3, "Minuman", "Gita", 500],
+              [3, "Minuman", "Hadi", 300]
+            ]
+          }
+        ]
+      },
+      {
+        "tables": [
+          {
+            "name": "penjualan",
+            "columns": [
+              {
+                "name": "bulan",
+                "type": "INTEGER"
+              },
+              {
+                "name": "kategori",
+                "type": "TEXT"
+              },
+              {
+                "name": "pelanggan",
+                "type": "TEXT"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, "Minuman", "Indah", 900],
+              [2, "Makanan", "Indah", 50],
+              [3, "Makanan", "Joni", 120],
+              [3, "Makanan", "Kiki", 80]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "SELECT bulan, SUM(total)\nFROM penjualan\n",
+    "solution": "SELECT bulan, SUM(total) FROM penjualan GROUP BY bulan ORDER BY bulan",
+    "ordered": true
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "GROUP BY bulan menjumlahkan per bulan, ORDER BY bulan mengurutkannya dari Januari.",
+  "ruleRefs": ["r-agg-2", "r-sql-4"],
+  "hints": ["Kelompokkan dulu, baru urutkan.", "Tambahkan GROUP BY bulan ORDER BY bulan."]
+}

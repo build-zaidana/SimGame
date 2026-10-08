@@ -1,0 +1,38 @@
+{
+  "dialogues": [
+    {
+      "id": "data-04-intro",
+      "lines": [
+        {
+          "speaker": "laras",
+          "text": "Hari ini dua hal baru: JOIN untuk menggabungkan tabel, dan proyek AI pertama kita."
+        },
+        {
+          "speaker": "laras",
+          "text": "AI itu murid yang rajin: ia meniru apa pun yang ada di data latihnya, termasuk kesalahannya."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "AI yang dilatih dengan data apa saja... pasti pintar sekali, kan? Hehe."
+        },
+        {
+          "speaker": "laras",
+          "text": "Abaikan saja suara itu. Cek biasnya, cek privasinya, cek sumbernya."
+        }
+      ]
+    },
+    {
+      "id": "data-04-outro",
+      "lines": [
+        {
+          "speaker": "laras",
+          "text": "Kerja bagus. Kamu menyelamatkan AI penyaring lamaran dari pola yang tidak adil."
+        },
+        {
+          "speaker": "laras",
+          "text": "Besok laporan akhir tahun. Semua yang kamu pelajari akan dipakai sekaligus."
+        }
+      ]
+    }
+  ]
+}

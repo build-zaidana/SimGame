@@ -1,0 +1,34 @@
+{
+  "dialogues": [
+    {
+      "id": "data-02-intro",
+      "lines": [
+        {
+          "speaker": "laras",
+          "text": "Hari ini rapat bulanan. Semua orang butuh angka ringkasan: jumlah, total, rata-rata."
+        },
+        {
+          "speaker": "laras",
+          "text": "Kenalan dengan COUNT, SUM, AVG, dan GROUP BY. Buku Panduan sudah saya tambah babnya."
+        },
+        {
+          "speaker": "laras",
+          "text": "Satu lagi: kalau ada yang minta data pribadi pelanggan, berhenti dan pikirkan dulu siapa penerimanya."
+        }
+      ]
+    },
+    {
+      "id": "data-02-outro",
+      "lines": [
+        {
+          "speaker": "laras",
+          "text": "Rapatnya lancar berkat angkamu. Ringkasan per cabang jauh lebih berguna daripada ribuan baris."
+        },
+        {
+          "speaker": "laras",
+          "text": "Dan ingat: data pribadi bukan milik kita. Kita hanya dititipi."
+        }
+      ]
+    }
+  ]
+}

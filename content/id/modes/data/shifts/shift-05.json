@@ -1,0 +1,84 @@
+{
+  "id": "data-05",
+  "order": 5,
+  "title": "Laporan Akhir Tahun",
+  "durationGameMinutes": 150,
+  "realSecondsPerGameMinute": 4,
+  "unlocksChapters": [],
+  "introDialogue": "data-05-intro",
+  "outroDialogue": "data-05-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s05-q-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s05-req-002",
+      "arriveAt": 8
+    },
+    {
+      "caseId": "s05-q-002",
+      "arriveAt": 16
+    },
+    {
+      "caseId": "s05-chart-001",
+      "arriveAt": 26
+    },
+    {
+      "caseId": "s05-q-003",
+      "arriveAt": 38
+    },
+    {
+      "caseId": "s05-chart-002",
+      "arriveAt": 50
+    },
+    {
+      "caseId": "s05-q-004",
+      "arriveAt": 70
+    },
+    {
+      "caseId": "s05-req-001",
+      "arriveAt": 76
+    },
+    {
+      "caseId": "s05-ai-001",
+      "arriveAt": 88
+    }
+  ],
+  "review": {
+    "count": 5,
+    "conceptIds": ["sql-aggregate", "honest-charts", "data-privacy", "ai-basics"]
+  },
+  "pay": {
+    "base": 70,
+    "perCase": 17
+  },
+  "newspaper": {
+    "headline": "Laporan Akhir Tahun Siap Disusun",
+    "lead": "Semua tim PT Nusa Digital menunggu angka akhir tahun. Tim data menyiapkan query, grafik, dan ringkasan yang akan dibaca publik.",
+    "tip": {
+      "title": "Tips: Cek Ulang Sebelum Terbit",
+      "text": "Angka yang sudah terbit sulit ditarik. Cocokkan setiap klaim dengan tabel sumbernya."
+    },
+    "sources": [
+      "Alberto Cairo — How Charts Lie (2019)",
+      "NIST — AI Risk Management Framework (AI RMF 1.0)"
+    ],
+    "impact": {
+      "good": "Peluncuran AI kemarin dipuji: adil, aman, dan sumbernya jelas.",
+      "mixed": "Fitur AI meluncur, tapi beberapa jawabannya harus diralat.",
+      "bad": "Jawaban AI yang mengarang sempat tayang di FAQ. Tim AI menariknya kembali."
+    },
+    "classified": "GRATIS: AI ajaib peramal penjualan. Syarat: unggah semua data pelanggan. (Jangan.)"
+  },
+  "boss": {
+    "title": "Tenggat Laporan Tahunan",
+    "icon": "🗓️",
+    "intro": "Laporan tahunan harus terbit hari ini! Satu query, satu permintaan mencurigakan, dan satu ringkasan AI menunggu.",
+    "caseIds": ["s05-q-004", "s05-req-001", "s05-ai-001"],
+    "arriveAt": 70,
+    "durationGameMinutes": 45,
+    "reward": 45
+  }
+}

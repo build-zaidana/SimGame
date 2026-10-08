@@ -1,0 +1,65 @@
+{
+  "id": "s05-chart-002",
+  "type": "chart",
+  "conceptIds": ["honest-charts"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "author": {
+      "name": "Maya Anggraini",
+      "team": "Tim Keuangan"
+    },
+    "title": "Pendapatan per Kuartal",
+    "purpose": "Laporan tahunan untuk karyawan",
+    "chart": {
+      "kind": "line",
+      "title": "Pendapatan",
+      "unit": "juta rupiah",
+      "axisStart": 0,
+      "points": [
+        {
+          "label": "Q1",
+          "value": 410
+        },
+        {
+          "label": "Q2",
+          "value": 428
+        },
+        {
+          "label": "Q3",
+          "value": 450
+        },
+        {
+          "label": "Q4",
+          "value": 445
+        }
+      ],
+      "axisEvidenceId": "axis"
+    },
+    "claims": [
+      {
+        "text": "Pendapatan naik pelan di Q1–Q3, lalu sedikit turun di Q4.",
+        "evidenceId": "claim-honest"
+      }
+    ],
+    "notes": [
+      {
+        "text": "Sumber: laporan keuangan resmi, setahun penuh.",
+        "evidenceId": "note-source"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["claim-honest", "note-source", "axis"]
+  },
+  "explanation": "Rentangnya setahun penuh, sumbu dari 0, dan klaimnya jujur sampai menyebut penurunan Q4. Setujui.",
+  "ruleRefs": ["r-ch-4", "r-ch-1"],
+  "hints": [
+    "Apakah ada bulan atau kuartal yang disembunyikan?",
+    "Laporan yang jujur juga menyebut kabar kurang baik."
+  ]
+}

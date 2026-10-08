@@ -1,0 +1,59 @@
+{
+  "id": "s05-req-002",
+  "type": "request",
+  "conceptIds": ["data-privacy"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "kind": "share",
+    "from": {
+      "name": "Dian Kartika",
+      "team": "Public Relations"
+    },
+    "title": "Numbers for the public annual report",
+    "message": [
+      {
+        "text": "For the annual report on the office website we need the number of customers per city.",
+        "evidenceId": "msg-public"
+      }
+    ],
+    "notes": [
+      {
+        "text": "No names, ID numbers or phone numbers.",
+        "evidenceId": "note-anon"
+      }
+    ],
+    "table": {
+      "title": "What will be published",
+      "columns": [
+        {
+          "name": "city"
+        },
+        {
+          "name": "customers"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["Bandung", "4.210"]
+        },
+        {
+          "cells": ["Medan", "3.180"]
+        },
+        {
+          "cells": ["Surabaya", "3.940"]
+        }
+      ]
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["msg-public", "note-anon"]
+  },
+  "explanation": "Only totals per city, with nobody’s identity. This is safe to publish.",
+  "ruleRefs": ["r-pv-2"],
+  "hints": ["Could anyone be identified from these numbers?", "Totals per city are usually safe."]
+}

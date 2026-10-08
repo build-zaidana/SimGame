@@ -1,0 +1,135 @@
+{
+  "id": "s04-q-002",
+  "type": "query",
+  "conceptIds": ["sql-join", "sql-aggregate"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Maya Anggraini",
+      "team": "Finance Team"
+    },
+    "title": "Revenue per city",
+    "story": [
+      "Which city spends the most?",
+      "Show the city and the sum of order totals from customers in that city."
+    ],
+    "tables": [
+      {
+        "name": "customers",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER"
+          },
+          {
+            "name": "name",
+            "type": "TEXT"
+          },
+          {
+            "name": "city",
+            "type": "TEXT"
+          }
+        ],
+        "rows": [
+          [1, "Ayu", "Bandung"],
+          [2, "Budi", "Medan"],
+          [3, "Citra", "Bandung"]
+        ]
+      },
+      {
+        "name": "orders",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER"
+          },
+          {
+            "name": "customer_id",
+            "type": "INTEGER"
+          },
+          {
+            "name": "total",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          [1, 2, 50000],
+          [2, 1, 30000],
+          [3, 3, 20000],
+          [4, 2, 10000]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "customers",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "city",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [1, "Dewi", "Solo"],
+              [2, "Eko", "Solo"],
+              [3, "Fani", "Medan"],
+              [4, "Gilang", "Medan"]
+            ]
+          },
+          {
+            "name": "orders",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "customer_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, 4, 70000],
+              [2, 3, 15000],
+              [3, 4, 5000],
+              [4, 1, 40000],
+              [5, 2, 25000]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "-- Join orders with customers, then group by city\n",
+    "solution": "SELECT customers.city, SUM(orders.total) FROM orders JOIN customers ON orders.customer_id = customers.id GROUP BY customers.city",
+    "ordered": false
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "The city is in customers, the money is in orders. JOIN first, then GROUP BY city and SUM(total).",
+  "ruleRefs": ["r-jn-1", "r-agg-2"],
+  "hints": [
+    "Start from the earlier JOIN query, then add grouping.",
+    "… GROUP BY customers.city with SUM(orders.total)"
+  ]
+}

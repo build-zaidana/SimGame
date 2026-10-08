@@ -1,0 +1,143 @@
+{
+  "id": "s02-q-004",
+  "type": "query",
+  "conceptIds": ["sql-aggregate"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Bayu Firmansyah",
+      "team": "Tim Penjualan"
+    },
+    "title": "Cabang paling sibuk",
+    "story": [
+      "Kami mau menambah kasir di cabang yang punya LEBIH DARI 2 pesanan.",
+      "Tampilkan cabang dan jumlah pesanannya, hanya yang lebih dari 2."
+    ],
+    "tables": [
+      {
+        "name": "pesanan",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER"
+          },
+          {
+            "name": "cabang",
+            "type": "TEXT"
+          },
+          {
+            "name": "produk",
+            "type": "TEXT"
+          },
+          {
+            "name": "jumlah",
+            "type": "INTEGER"
+          },
+          {
+            "name": "total",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          [1, "Bandung", "Kopi Susu", 2, 40000],
+          [2, "Medan", "Teh Manis", 1, 15000],
+          [3, "Bandung", "Roti Bakar", 3, 45000],
+          [4, "Surabaya", "Kopi Susu", 1, 20000],
+          [5, "Bandung", "Teh Manis", 2, 30000]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "pesanan",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "cabang",
+                "type": "TEXT"
+              },
+              {
+                "name": "produk",
+                "type": "TEXT"
+              },
+              {
+                "name": "jumlah",
+                "type": "INTEGER"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, "Medan", "Kopi Susu", 1, 20000],
+              [2, "Medan", "Roti Bakar", 4, 60000],
+              [3, "Solo", "Teh Manis", 1, 15000],
+              [4, "Medan", "Kopi Susu", 2, 45000]
+            ]
+          }
+        ]
+      },
+      {
+        "tables": [
+          {
+            "name": "pesanan",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "cabang",
+                "type": "TEXT"
+              },
+              {
+                "name": "produk",
+                "type": "TEXT"
+              },
+              {
+                "name": "jumlah",
+                "type": "INTEGER"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, "Surabaya", "Teh Manis", 2, 30000],
+              [2, "Surabaya", "Kopi Susu", 3, 60000],
+              [3, "Bandung", "Roti Bakar", 1, 15000],
+              [4, "Surabaya", "Roti Bakar", 2, 30000],
+              [5, "Bandung", "Kopi Susu", 1, 20000],
+              [6, "Surabaya", "Teh Manis", 1, 15000]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "SELECT cabang, COUNT(*)\nFROM pesanan\nGROUP BY cabang\n",
+    "solution": "SELECT cabang, COUNT(*) FROM pesanan GROUP BY cabang HAVING COUNT(*) > 2",
+    "ordered": false
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Syarat untuk hasil kelompok ditulis dengan HAVING setelah GROUP BY. WHERE tidak bisa memakai COUNT.",
+  "ruleRefs": ["r-agg-3"],
+  "hints": [
+    "Hitungannya sudah benar. Sekarang saring kelompoknya.",
+    "Tambahkan HAVING COUNT(*) > 2 di baris terakhir."
+  ]
+}

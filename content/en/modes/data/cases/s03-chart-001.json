@@ -1,0 +1,58 @@
+{
+  "id": "s03-chart-001",
+  "type": "chart",
+  "conceptIds": ["honest-charts", "data-quality"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "author": {
+      "name": "Putri Rahayu",
+      "team": "Charity Run Committee"
+    },
+    "title": "Charity Run Participants per City",
+    "purpose": "Committee announcement",
+    "chart": {
+      "kind": "bar",
+      "title": "Registered participants",
+      "unit": "people",
+      "axisStart": 0,
+      "points": [
+        {
+          "label": "Bandung",
+          "value": 140
+        },
+        {
+          "label": "Medan",
+          "value": 95
+        },
+        {
+          "label": "Surabaya",
+          "value": 120
+        }
+      ],
+      "axisEvidenceId": "axis"
+    },
+    "claims": [
+      {
+        "text": "Bandung has the most participants.",
+        "evidenceId": "claim-top"
+      }
+    ],
+    "notes": [
+      {
+        "text": "12 duplicate rows were removed; the spelling \"Bdg\" was merged into \"Bandung\".",
+        "evidenceId": "note-clean"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["claim-top", "note-clean", "axis"]
+  },
+  "explanation": "The data was cleaned, the axis starts at 0, and the claim fits the numbers. Approve it.",
+  "ruleRefs": ["r-dq-4", "r-ch-1"],
+  "hints": ["Check whether the data was cleaned.", "Are the axis, note and claim all reasonable?"]
+}

@@ -1,0 +1,58 @@
+{
+  "id": "s04-ai-001",
+  "type": "request",
+  "conceptIds": ["ai-basics"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.5
+  },
+  "severity": 3,
+  "data": {
+    "kind": "ai-train",
+    "from": {
+      "name": "Lestari Ningsih",
+      "team": "HR Team"
+    },
+    "title": "Training data for a job-screening AI",
+    "message": [
+      {
+        "text": "We are training an AI to screen job applications using data on employees hired in the last 10 years.",
+        "evidenceId": "msg-source"
+      },
+      {
+        "text": "The AI will screen ALL applicants from next month.",
+        "evidenceId": "msg-use"
+      }
+    ],
+    "notes": [],
+    "table": {
+      "title": "Training data summary",
+      "columns": [
+        {
+          "name": "gender"
+        },
+        {
+          "name": "count"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["Male", "900"],
+          "evidenceId": "row-men"
+        },
+        {
+          "cells": ["Female", "100"]
+        }
+      ]
+    }
+  },
+  "evidence": {
+    "required": ["row-men"],
+    "supporting": ["msg-use", "msg-source"]
+  },
+  "explanation": "The training data is 90% men, so the AI will tend to copy that pattern and disadvantage women. Ask for a revision: balance the data and test for fairness first.",
+  "ruleRefs": ["r-ai-1"],
+  "hints": ["Who is in the training data?", "Compare the number of men and women."]
+}

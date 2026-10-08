@@ -1,0 +1,127 @@
+{
+  "id": "s03-q-001",
+  "type": "query",
+  "conceptIds": ["data-quality"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Putri Rahayu",
+      "team": "Panitia Lari Amal"
+    },
+    "title": "Daftar kota pendaftar",
+    "story": [
+      "Kami mau tahu peserta lari amal datang dari kota mana saja.",
+      "Tampilkan setiap kota cukup SEKALI."
+    ],
+    "tables": [
+      {
+        "name": "pendaftar",
+        "columns": [
+          {
+            "name": "nama",
+            "type": "TEXT"
+          },
+          {
+            "name": "email",
+            "type": "TEXT"
+          },
+          {
+            "name": "umur",
+            "type": "INTEGER"
+          },
+          {
+            "name": "kota",
+            "type": "TEXT"
+          }
+        ],
+        "rows": [
+          ["Rina", "rina@contoh.test", 17, "Bandung"],
+          ["Tono", "tono@contoh.test", 230, "Medan"],
+          ["Wati", null, 45, "Bandung"],
+          ["Yusuf", "yusuf@contoh.test", 28, "Bdg"],
+          ["Zahra", null, 33, "Medan"]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "pendaftar",
+            "columns": [
+              {
+                "name": "nama",
+                "type": "TEXT"
+              },
+              {
+                "name": "email",
+                "type": "TEXT"
+              },
+              {
+                "name": "umur",
+                "type": "INTEGER"
+              },
+              {
+                "name": "kota",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              ["Adi", null, 19, "Solo"],
+              ["Bella", "bella@contoh.test", 52, "Solo"],
+              ["Candra", "candra@contoh.test", -4, "Surabaya"],
+              ["Dina", "dina@contoh.test", 40, "Sby"]
+            ]
+          }
+        ]
+      },
+      {
+        "tables": [
+          {
+            "name": "pendaftar",
+            "columns": [
+              {
+                "name": "nama",
+                "type": "TEXT"
+              },
+              {
+                "name": "email",
+                "type": "TEXT"
+              },
+              {
+                "name": "umur",
+                "type": "INTEGER"
+              },
+              {
+                "name": "kota",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              ["Edo", "edo@contoh.test", 21, "Medan"],
+              ["Fitri", null, 150, "Bandung"],
+              ["Galih", null, 36, "Bandung"],
+              ["Hana", null, 24, "Medan"],
+              ["Irfan", "irfan@contoh.test", 31, "Mdn"]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "SELECT kota\nFROM pendaftar\n",
+    "solution": "SELECT DISTINCT kota FROM pendaftar",
+    "ordered": false
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "DISTINCT membuang nilai yang berulang. Hasilnya juga memperlihatkan ejaan berbeda seperti \"Bdg\" yang perlu disatukan.",
+  "ruleRefs": ["r-dq-1"],
+  "hints": ["Tanpa tambahan, kota yang sama muncul berkali-kali.", "Tulis SELECT DISTINCT kota."]
+}

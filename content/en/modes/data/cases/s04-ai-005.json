@@ -1,0 +1,67 @@
+{
+  "id": "s04-ai-005",
+  "type": "request",
+  "conceptIds": ["ai-basics"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "kind": "ai-train",
+    "from": {
+      "name": "Teguh Prasetyo",
+      "team": "AI Team"
+    },
+    "title": "Training data for a menu recommendation AI",
+    "message": [
+      {
+        "text": "This AI suggests menu items in the app based on order history.",
+        "evidenceId": "msg-purpose"
+      }
+    ],
+    "notes": [
+      {
+        "text": "No names, phone numbers or addresses; only menu history.",
+        "evidenceId": "note-anon"
+      },
+      {
+        "text": "Customers agreed to this use in the app terms of service.",
+        "evidenceId": "note-consent"
+      }
+    ],
+    "table": {
+      "title": "Training data summary",
+      "columns": [
+        {
+          "name": "city"
+        },
+        {
+          "name": "orders"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["Bandung", "3.100"],
+          "evidenceId": "row-balanced"
+        },
+        {
+          "cells": ["Medan", "2.950"]
+        },
+        {
+          "cells": ["Surabaya", "3.020"]
+        }
+      ]
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["note-anon", "note-consent", "row-balanced"]
+  },
+  "explanation": "The data is anonymous, balanced across cities, and covered by consent in the terms of service. Safe to approve.",
+  "ruleRefs": ["r-ai-1", "r-ai-3"],
+  "hints": [
+    "Check three things: personal data, balance, and consent.",
+    "If it's all fine, there's no need to hold it back."
+  ]
+}

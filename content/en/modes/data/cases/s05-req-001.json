@@ -1,0 +1,45 @@
+{
+  "id": "s05-req-001",
+  "type": "request",
+  "conceptIds": ["data-privacy", "ai-basics"],
+  "difficulty": 3,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "acceptableDecisions": {
+    "revise": 0.3
+  },
+  "severity": 3,
+  "data": {
+    "kind": "share",
+    "from": {
+      "name": "Kelabu",
+      "team": "Freelance AI consultant"
+    },
+    "title": "Upload the whole database to a free AI",
+    "message": [
+      {
+        "text": "I have a free magic AI that can predict next year’s sales!",
+        "evidenceId": "msg-magic"
+      },
+      {
+        "text": "Just upload the ENTIRE customer database, including ID numbers and phones, to unggah.kelabu.test.",
+        "evidenceId": "msg-all"
+      },
+      {
+        "text": "Quick, the offer ends at 5 pm.",
+        "evidenceId": "msg-rush"
+      }
+    ],
+    "notes": []
+  },
+  "evidence": {
+    "required": ["msg-all"],
+    "supporting": ["msg-rush", "msg-magic"]
+  },
+  "explanation": "All customer personal data is requested for an unknown outside AI service, under time pressure. Escalate to the Data Protection Officer and security.",
+  "ruleRefs": ["r-ai-3", "r-pv-3"],
+  "hints": [
+    "What data is requested, and where is it going?",
+    "Time pressure and a \"free\" offer are warning signs."
+  ]
+}

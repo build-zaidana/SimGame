@@ -1,0 +1,34 @@
+{
+  "dialogues": [
+    {
+      "id": "data-03-intro",
+      "lines": [
+        {
+          "speaker": "laras",
+          "text": "Today we've got data from the charity run form. That form was... well, filled in by people in a hurry."
+        },
+        {
+          "speaker": "laras",
+          "text": "Hunt for the three main enemies: duplicates, empty values and impossible values."
+        },
+        {
+          "speaker": "laras",
+          "text": "But if the data is already clean, don't hold it back. Careful doesn't mean suspicious of everything."
+        }
+      ]
+    },
+    {
+      "id": "data-03-outro",
+      "lines": [
+        {
+          "speaker": "laras",
+          "text": "Great! A report from dirty data is like cooking with spoiled ingredients. You washed them first."
+        },
+        {
+          "speaker": "laras",
+          "text": "Tomorrow we start our first AI project. AI is only as good as its training data."
+        }
+      ]
+    }
+  ]
+}

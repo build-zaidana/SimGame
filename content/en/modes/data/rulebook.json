@@ -1,0 +1,190 @@
+{
+  "chapters": [
+    {
+      "id": "ch-sql",
+      "title": "Chapter 1 · Tables & SELECT",
+      "conceptId": "data-tables",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-sql-1",
+          "text": "SELECT columns FROM table: pick only the columns you need. A * means every column.",
+          "evidenceTags": ["select"]
+        },
+        {
+          "id": "r-sql-2",
+          "text": "WHERE filters rows. Text goes in single quotes ('Bandung'), numbers do not.",
+          "evidenceTags": ["where"]
+        },
+        {
+          "id": "r-sql-3",
+          "text": "Watch the boundary: \"at least 120\" means >= 120, not > 120.",
+          "evidenceTags": ["boundary"]
+        },
+        {
+          "id": "r-sql-4",
+          "text": "ORDER BY column DESC sorts largest first; LIMIT 3 keeps the top 3 rows.",
+          "evidenceTags": ["order"]
+        }
+      ]
+    },
+    {
+      "id": "ch-chart",
+      "title": "Chapter 2 · Honest Charts",
+      "conceptId": "honest-charts",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-ch-1",
+          "text": "Bar charts must start at 0. A cut axis makes a small difference look huge.",
+          "evidenceTags": ["axis"]
+        },
+        {
+          "id": "r-ch-2",
+          "text": "Check the sample size. A claim about \"all customers\" from 6 people cannot be trusted yet.",
+          "evidenceTags": ["sample"]
+        },
+        {
+          "id": "r-ch-3",
+          "text": "Correlation is not causation: two numbers rising together do not prove one causes the other.",
+          "evidenceTags": ["cause"]
+        },
+        {
+          "id": "r-ch-4",
+          "text": "Show the full time range. Picking only the good months (cherry-picking) is misleading.",
+          "evidenceTags": ["range"]
+        }
+      ]
+    },
+    {
+      "id": "ch-agg",
+      "title": "Chapter 3 · Summarising Data",
+      "conceptId": "sql-aggregate",
+      "unlockAtShift": 2,
+      "rules": [
+        {
+          "id": "r-agg-1",
+          "text": "COUNT(*) counts rows, SUM() adds up, AVG() takes the average.",
+          "evidenceTags": ["aggregate"]
+        },
+        {
+          "id": "r-agg-2",
+          "text": "GROUP BY column makes one result row per group, for example per branch.",
+          "evidenceTags": ["group"]
+        },
+        {
+          "id": "r-agg-3",
+          "text": "Filtering grouped results (e.g. COUNT(*) > 2) uses HAVING after GROUP BY, not WHERE.",
+          "evidenceTags": ["having"]
+        },
+        {
+          "id": "r-agg-4",
+          "text": "Do not hard-code numbers like \"/ 5\". Let SQL calculate from the data.",
+          "evidenceTags": ["hardcode"]
+        }
+      ]
+    },
+    {
+      "id": "ch-privacy",
+      "title": "Chapter 4 · Personal Data",
+      "conceptId": "data-privacy",
+      "unlockAtShift": 2,
+      "rules": [
+        {
+          "id": "r-pv-1",
+          "text": "Names, ID numbers, phone numbers and addresses are personal data. Use them only for purposes the owner agreed to.",
+          "evidenceTags": ["personal"]
+        },
+        {
+          "id": "r-pv-2",
+          "text": "Share only what is needed: if summary numbers are enough, do not send per-person data.",
+          "evidenceTags": ["minimal"]
+        },
+        {
+          "id": "r-pv-3",
+          "text": "Personal data for outsiders or a new purpose: escalate to the Data Protection Officer (DPO).",
+          "evidenceTags": ["third-party"]
+        },
+        {
+          "id": "r-pv-4",
+          "text": "Never send office data to a personal email or an app the office does not own.",
+          "evidenceTags": ["channel"]
+        }
+      ]
+    },
+    {
+      "id": "ch-quality",
+      "title": "Chapter 5 · Dirty Data",
+      "conceptId": "data-quality",
+      "unlockAtShift": 3,
+      "rules": [
+        {
+          "id": "r-dq-1",
+          "text": "Check for duplicate rows: data recorded twice inflates totals.",
+          "evidenceTags": ["duplicate"]
+        },
+        {
+          "id": "r-dq-2",
+          "text": "An empty value (NULL) is not zero. Find it with IS NULL, not = NULL.",
+          "evidenceTags": ["null"]
+        },
+        {
+          "id": "r-dq-3",
+          "text": "Impossible values (age 230, 31 February) mean an input error. Fix them before calculating.",
+          "evidenceTags": ["impossible"]
+        },
+        {
+          "id": "r-dq-4",
+          "text": "Clean, consistent data is fine to use. Do not hold work back without a reason.",
+          "evidenceTags": ["clean"]
+        }
+      ]
+    },
+    {
+      "id": "ch-join",
+      "title": "Chapter 6 · Joining Tables",
+      "conceptId": "sql-join",
+      "unlockAtShift": 4,
+      "rules": [
+        {
+          "id": "r-jn-1",
+          "text": "JOIN table_b ON table_a.column = table_b.column combines rows whose values match.",
+          "evidenceTags": ["join"]
+        },
+        {
+          "id": "r-jn-2",
+          "text": "Link columns that really belong together, e.g. orders.customer_id with customers.id.",
+          "evidenceTags": ["key"]
+        }
+      ]
+    },
+    {
+      "id": "ch-ai",
+      "title": "Chapter 7 · Responsible AI",
+      "conceptId": "ai-basics",
+      "unlockAtShift": 4,
+      "rules": [
+        {
+          "id": "r-ai-1",
+          "text": "AI learns from training data. Lopsided data makes a lopsided AI (bias).",
+          "evidenceTags": ["bias"]
+        },
+        {
+          "id": "r-ai-2",
+          "text": "AI assistants can make up facts and sources (hallucination). Check the original source before using it.",
+          "evidenceTags": ["hallucination"]
+        },
+        {
+          "id": "r-ai-3",
+          "text": "Never paste personal data or office secrets into a public AI service.",
+          "evidenceTags": ["ai-privacy"]
+        },
+        {
+          "id": "r-ai-4",
+          "text": "Training data with personal data used without consent: escalate, do not use it yet.",
+          "evidenceTags": ["consent"]
+        }
+      ]
+    }
+  ]
+}

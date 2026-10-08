@@ -1,0 +1,58 @@
+{
+  "id": "s04-ai-001",
+  "type": "request",
+  "conceptIds": ["ai-basics"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.5
+  },
+  "severity": 3,
+  "data": {
+    "kind": "ai-train",
+    "from": {
+      "name": "Lestari Ningsih",
+      "team": "Tim SDM"
+    },
+    "title": "Data latih AI penyaring lamaran",
+    "message": [
+      {
+        "text": "Kami melatih AI untuk menyaring lamaran kerja dari data karyawan yang diterima 10 tahun terakhir.",
+        "evidenceId": "msg-source"
+      },
+      {
+        "text": "AI-nya akan menyaring SEMUA pelamar mulai bulan depan.",
+        "evidenceId": "msg-use"
+      }
+    ],
+    "notes": [],
+    "table": {
+      "title": "Ringkasan data latih",
+      "columns": [
+        {
+          "name": "jenis_kelamin"
+        },
+        {
+          "name": "jumlah"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["Laki-laki", "900"],
+          "evidenceId": "row-men"
+        },
+        {
+          "cells": ["Perempuan", "100"]
+        }
+      ]
+    }
+  },
+  "evidence": {
+    "required": ["row-men"],
+    "supporting": ["msg-use", "msg-source"]
+  },
+  "explanation": "Data latih 90% laki-laki, jadi AI cenderung meniru pola itu dan merugikan pelamar perempuan. Minta revisi: seimbangkan data dan uji keadilannya dulu.",
+  "ruleRefs": ["r-ai-1"],
+  "hints": ["Siapa saja yang ada di data latihnya?", "Bandingkan jumlah laki-laki dan perempuan."]
+}

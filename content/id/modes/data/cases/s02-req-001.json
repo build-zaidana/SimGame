@@ -1,0 +1,73 @@
+{
+  "id": "s02-req-001",
+  "type": "request",
+  "conceptIds": ["data-privacy"],
+  "difficulty": 2,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "acceptableDecisions": {
+    "revise": 0.5
+  },
+  "severity": 3,
+  "data": {
+    "kind": "share",
+    "from": {
+      "name": "Sari Wulandari",
+      "team": "Tim Pemasaran"
+    },
+    "title": "Data pelanggan untuk vendor iklan",
+    "message": [
+      {
+        "text": "Mitra baru kita, PT Iklan Kilat, minta data pelanggan untuk kampanye SMS.",
+        "evidenceId": "msg-vendor"
+      },
+      {
+        "text": "Tolong kirim hari ini: nama, nomor HP, dan NIK semua pelanggan.",
+        "evidenceId": "msg-fields"
+      }
+    ],
+    "notes": [
+      {
+        "text": "Pelanggan memberikan data ini untuk layanan pesan antar, bukan untuk iklan.",
+        "evidenceId": "note-purpose"
+      }
+    ],
+    "table": {
+      "title": "Contoh 3 baris",
+      "columns": [
+        {
+          "name": "nama"
+        },
+        {
+          "name": "no_hp",
+          "evidenceId": "col-phone"
+        },
+        {
+          "name": "nik",
+          "evidenceId": "col-nik"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["Ayu Lestari", "0812-xxxx-1201", "3273-xxxx-xxxx-0001"]
+        },
+        {
+          "cells": ["Budi Santoso", "0813-xxxx-4410", "1271-xxxx-xxxx-0002"]
+        },
+        {
+          "cells": ["Citra Dewi", "0857-xxxx-7788", "3273-xxxx-xxxx-0003"]
+        }
+      ]
+    }
+  },
+  "evidence": {
+    "required": ["msg-vendor", "col-nik"],
+    "supporting": ["col-phone", "note-purpose", "msg-fields"]
+  },
+  "explanation": "Data pribadi lengkap (sampai NIK) untuk pihak luar dan tujuan baru harus dicek dasar hukumnya oleh Petugas Pelindungan Data. Eskalasi, jangan dikirim dulu.",
+  "ruleRefs": ["r-pv-3", "r-pv-1"],
+  "hints": [
+    "Siapa yang akan menerima data ini? Orang dalam atau luar kantor?",
+    "Lihat kolom apa saja yang diminta, dan untuk apa pelanggan dulu memberikannya."
+  ]
+}

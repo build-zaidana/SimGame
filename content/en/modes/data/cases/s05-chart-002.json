@@ -1,0 +1,65 @@
+{
+  "id": "s05-chart-002",
+  "type": "chart",
+  "conceptIds": ["honest-charts"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "author": {
+      "name": "Maya Anggraini",
+      "team": "Finance Team"
+    },
+    "title": "Revenue per Quarter",
+    "purpose": "The annual report for employees",
+    "chart": {
+      "kind": "line",
+      "title": "Revenue",
+      "unit": "million rupiah",
+      "axisStart": 0,
+      "points": [
+        {
+          "label": "Q1",
+          "value": 410
+        },
+        {
+          "label": "Q2",
+          "value": 428
+        },
+        {
+          "label": "Q3",
+          "value": 450
+        },
+        {
+          "label": "Q4",
+          "value": 445
+        }
+      ],
+      "axisEvidenceId": "axis"
+    },
+    "claims": [
+      {
+        "text": "Revenue rose slowly in Q1–Q3, then dipped slightly in Q4.",
+        "evidenceId": "claim-honest"
+      }
+    ],
+    "notes": [
+      {
+        "text": "Source: official financial reports, full year.",
+        "evidenceId": "note-source"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["claim-honest", "note-source", "axis"]
+  },
+  "explanation": "It covers the full year, the axis starts at 0, and the claim is honest enough to mention the Q4 dip. Approve it.",
+  "ruleRefs": ["r-ch-4", "r-ch-1"],
+  "hints": [
+    "Are any months or quarters hidden?",
+    "An honest report mentions the less good news too."
+  ]
+}

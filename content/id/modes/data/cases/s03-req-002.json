@@ -1,0 +1,64 @@
+{
+  "id": "s03-req-002",
+  "type": "request",
+  "conceptIds": ["data-quality"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "kind": "quality",
+    "from": {
+      "name": "Putri Rahayu",
+      "team": "Panitia Lari Amal"
+    },
+    "title": "Data peserta untuk asuransi",
+    "message": [
+      {
+        "text": "Data ini mau kami kirim ke asuransi untuk menghitung premi per kelompok umur.",
+        "evidenceId": "msg-insurance"
+      }
+    ],
+    "notes": [],
+    "table": {
+      "title": "Peserta",
+      "columns": [
+        {
+          "name": "nama"
+        },
+        {
+          "name": "umur"
+        },
+        {
+          "name": "tgl_daftar"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["Rina", "17", "12-02-2026"]
+        },
+        {
+          "cells": ["Tono", "230", "14-02-2026"],
+          "evidenceId": "row-age"
+        },
+        {
+          "cells": ["Wati", "45", "31-02-2026"],
+          "evidenceId": "row-date"
+        }
+      ]
+    }
+  },
+  "evidence": {
+    "required": ["row-age"],
+    "supporting": ["row-date", "msg-insurance"]
+  },
+  "explanation": "Umur 230 dan tanggal 31 Februari mustahil, jadi perhitungan premi akan salah. Minta revisi: perbaiki data dulu.",
+  "ruleRefs": ["r-dq-3"],
+  "hints": [
+    "Baca setiap angka umur dan tanggal. Ada yang mustahil?",
+    "Berapa umur manusia tertua yang masuk akal?"
+  ]
+}

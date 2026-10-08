@@ -1,0 +1,58 @@
+{
+  "id": "s03-req-004",
+  "type": "request",
+  "conceptIds": ["data-privacy"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.5
+  },
+  "severity": 2,
+  "data": {
+    "kind": "share",
+    "from": {
+      "name": "Andre Gunawan",
+      "team": "Sales Team"
+    },
+    "title": "Send customer data to a personal email",
+    "message": [
+      {
+        "text": "I'm working from home tomorrow. Please send the customer table to andre.santai@surel.test.",
+        "evidenceId": "msg-personal"
+      },
+      {
+        "text": "I need it to call customers who complained.",
+        "evidenceId": "msg-reason"
+      }
+    ],
+    "notes": [],
+    "table": {
+      "title": "Requested columns",
+      "columns": [
+        {
+          "name": "name"
+        },
+        {
+          "name": "phone",
+          "evidenceId": "col-phone"
+        },
+        {
+          "name": "complaint"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["Ayu Lestari", "0812-xxxx-1201", "Late order"]
+        }
+      ]
+    }
+  },
+  "evidence": {
+    "required": ["msg-personal"],
+    "supporting": ["col-phone", "msg-reason"]
+  },
+  "explanation": "The need is fair, but a personal email is not an official office channel. Ask for a revision: use the office folder or VPN.",
+  "ruleRefs": ["r-pv-4"],
+  "hints": ["Which address will the data go to?", "Is surel.test our office address?"]
+}

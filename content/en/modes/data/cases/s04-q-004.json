@@ -1,0 +1,135 @@
+{
+  "id": "s04-q-004",
+  "type": "query",
+  "conceptIds": ["sql-join", "sql-aggregate"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Sari Wulandari",
+      "team": "Marketing Team"
+    },
+    "title": "Top two customers",
+    "story": [
+      "We want to invite the 2 customers with the biggest total spending to a loyalty event.",
+      "Show their name and total spending, largest first."
+    ],
+    "tables": [
+      {
+        "name": "customers",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER"
+          },
+          {
+            "name": "name",
+            "type": "TEXT"
+          },
+          {
+            "name": "city",
+            "type": "TEXT"
+          }
+        ],
+        "rows": [
+          [1, "Ayu", "Bandung"],
+          [2, "Budi", "Medan"],
+          [3, "Citra", "Bandung"]
+        ]
+      },
+      {
+        "name": "orders",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER"
+          },
+          {
+            "name": "customer_id",
+            "type": "INTEGER"
+          },
+          {
+            "name": "total",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          [1, 2, 50000],
+          [2, 1, 30000],
+          [3, 3, 20000],
+          [4, 2, 10000]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "customers",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "city",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [1, "Dewi", "Solo"],
+              [2, "Eko", "Solo"],
+              [3, "Fani", "Medan"],
+              [4, "Gilang", "Medan"]
+            ]
+          },
+          {
+            "name": "orders",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "customer_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, 4, 70000],
+              [2, 3, 15000],
+              [3, 4, 5000],
+              [4, 1, 40000],
+              [5, 2, 25000]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "-- JOIN, group by name, sum, sort, keep 2\n",
+    "solution": "SELECT customers.name, SUM(orders.total) FROM orders JOIN customers ON orders.customer_id = customers.id GROUP BY customers.name ORDER BY SUM(orders.total) DESC LIMIT 2",
+    "ordered": true
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Join the tables, sum the totals per name, sort largest first with DESC, then LIMIT 2.",
+  "ruleRefs": ["r-jn-1", "r-sql-4", "r-agg-2"],
+  "hints": [
+    "It's JOIN, GROUP BY, ORDER BY and LIMIT together.",
+    "Sort with ORDER BY SUM(orders.total) DESC, then LIMIT 2."
+  ]
+}

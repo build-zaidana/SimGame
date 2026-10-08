@@ -1,0 +1,100 @@
+{
+  "id": "s01-q-001",
+  "type": "query",
+  "conceptIds": ["data-tables"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Sari Wulandari",
+      "team": "Tim Pemasaran"
+    },
+    "title": "Pelanggan dari Bandung",
+    "story": [
+      "Kami mau mengirim undangan acara di Bandung.",
+      "Tolong tampilkan nama pelanggan yang tinggal di Bandung saja."
+    ],
+    "tables": [
+      {
+        "name": "pelanggan",
+        "columns": [
+          {
+            "name": "nama",
+            "type": "TEXT"
+          },
+          {
+            "name": "kota",
+            "type": "TEXT"
+          },
+          {
+            "name": "umur",
+            "type": "INTEGER"
+          },
+          {
+            "name": "poin",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          ["Ayu Lestari", "Bandung", 24, 120],
+          ["Budi Santoso", "Medan", 31, 45],
+          ["Citra Dewi", "Bandung", 19, 300],
+          ["Dodi Pratama", "Surabaya", 42, 80],
+          ["Eka Putri", "Medan", 27, 150],
+          ["Fajar Nugroho", "Bandung", 35, 60]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "pelanggan",
+            "columns": [
+              {
+                "name": "nama",
+                "type": "TEXT"
+              },
+              {
+                "name": "kota",
+                "type": "TEXT"
+              },
+              {
+                "name": "umur",
+                "type": "INTEGER"
+              },
+              {
+                "name": "poin",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              ["Gita Permata", "Bandung", 22, 90],
+              ["Hadi Wijaya", "Solo", 50, 210],
+              ["Indah Sari", "Medan", 29, 120],
+              ["Jaka Purnama", "Bandung", 61, 500],
+              ["Kiki Amelia", "Medan", 33, 15]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "-- Tampilkan kolom nama untuk pelanggan di Bandung\nSELECT nama\nFROM pelanggan\n",
+    "solution": "SELECT nama FROM pelanggan WHERE kota = 'Bandung'",
+    "ordered": false
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "WHERE kota = 'Bandung' menyaring baris yang kotanya Bandung. Teks selalu diapit tanda kutip tunggal.",
+  "ruleRefs": ["r-sql-1", "r-sql-2"],
+  "hints": [
+    "Query-nya sudah memilih kolom dan tabel. Yang kurang: baris mana yang diambil.",
+    "Tambahkan baris WHERE kota = 'Bandung' di bawah FROM."
+  ]
+}

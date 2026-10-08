@@ -1,0 +1,131 @@
+{
+  "id": "s01-q-004",
+  "type": "query",
+  "conceptIds": ["data-tables"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Sari Wulandari",
+      "team": "Tim Pemasaran"
+    },
+    "title": "Promo anak muda di Medan",
+    "story": [
+      "Promo baru untuk pelanggan di Medan yang umurnya di bawah 30 tahun.",
+      "Tampilkan nama dan umur mereka."
+    ],
+    "tables": [
+      {
+        "name": "pelanggan",
+        "columns": [
+          {
+            "name": "nama",
+            "type": "TEXT"
+          },
+          {
+            "name": "kota",
+            "type": "TEXT"
+          },
+          {
+            "name": "umur",
+            "type": "INTEGER"
+          },
+          {
+            "name": "poin",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          ["Ayu Lestari", "Bandung", 24, 120],
+          ["Budi Santoso", "Medan", 31, 45],
+          ["Citra Dewi", "Bandung", 19, 300],
+          ["Dodi Pratama", "Surabaya", 42, 80],
+          ["Eka Putri", "Medan", 27, 150],
+          ["Fajar Nugroho", "Bandung", 35, 60]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "pelanggan",
+            "columns": [
+              {
+                "name": "nama",
+                "type": "TEXT"
+              },
+              {
+                "name": "kota",
+                "type": "TEXT"
+              },
+              {
+                "name": "umur",
+                "type": "INTEGER"
+              },
+              {
+                "name": "poin",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              ["Gita Permata", "Bandung", 22, 90],
+              ["Hadi Wijaya", "Solo", 50, 210],
+              ["Indah Sari", "Medan", 29, 120],
+              ["Jaka Purnama", "Bandung", 61, 500],
+              ["Kiki Amelia", "Medan", 33, 15]
+            ]
+          }
+        ]
+      },
+      {
+        "tables": [
+          {
+            "name": "pelanggan",
+            "columns": [
+              {
+                "name": "nama",
+                "type": "TEXT"
+              },
+              {
+                "name": "kota",
+                "type": "TEXT"
+              },
+              {
+                "name": "umur",
+                "type": "INTEGER"
+              },
+              {
+                "name": "poin",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              ["Lina Marlina", "Surabaya", 26, 120],
+              ["Mega Utami", "Medan", 21, 400],
+              ["Nanda Putra", "Bandung", 45, 130],
+              ["Oki Setiawan", "Medan", 38, 75]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "-- Dua syarat sekaligus: kota DAN umur\nSELECT nama, umur\nFROM pelanggan\n",
+    "solution": "SELECT nama, umur FROM pelanggan WHERE kota = 'Medan' AND umur < 30",
+    "ordered": false
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "AND berarti kedua syarat harus benar: kotanya Medan dan umurnya di bawah 30. Dengan OR, semua orang Medan ikut terpilih.",
+  "ruleRefs": ["r-sql-2"],
+  "hints": [
+    "Ada dua syarat. Kata apa yang menggabungkan keduanya?",
+    "WHERE kota = 'Medan' AND umur < 30"
+  ]
+}

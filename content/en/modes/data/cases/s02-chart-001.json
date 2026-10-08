@@ -1,0 +1,68 @@
+{
+  "id": "s02-chart-001",
+  "type": "chart",
+  "conceptIds": ["honest-charts"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Bayu Firmansyah",
+      "team": "Sales Team"
+    },
+    "title": "This Year's Sales Trend",
+    "purpose": "A report for investors",
+    "chart": {
+      "kind": "line",
+      "title": "Sales per month",
+      "unit": "million rupiah",
+      "axisStart": 0,
+      "points": [
+        {
+          "label": "Apr",
+          "value": 300
+        },
+        {
+          "label": "May",
+          "value": 340
+        },
+        {
+          "label": "Jun",
+          "value": 380
+        }
+      ],
+      "axisEvidenceId": "axis"
+    },
+    "claims": [
+      {
+        "text": "Our sales ALWAYS went up this year!",
+        "evidenceId": "claim-always"
+      }
+    ],
+    "notes": [
+      {
+        "text": "This chart shows April–June only.",
+        "evidenceId": "note-range"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["claim-always", "note-range"],
+    "supporting": ["src-q1"]
+  },
+  "explanation": "The claim says \"all year\" but the chart only shows three rising months. Ask for a revision with the full range from January.",
+  "ruleRefs": ["r-ch-4"],
+  "hints": ["Match the words \"all year\" with the months shown.", "Where are January to March?"],
+  "intel": {
+    "source": [
+      {
+        "text": "Cash records January–March: 420, 390, 310 million (falling).",
+        "evidenceId": "src-q1"
+      }
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "id": "s04-ai-005",
+  "type": "request",
+  "conceptIds": ["ai-basics"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "kind": "ai-train",
+    "from": {
+      "name": "Teguh Prasetyo",
+      "team": "Tim AI"
+    },
+    "title": "Data latih AI rekomendasi menu",
+    "message": [
+      {
+        "text": "AI ini menyarankan menu di aplikasi berdasarkan riwayat pesanan.",
+        "evidenceId": "msg-purpose"
+      }
+    ],
+    "notes": [
+      {
+        "text": "Tanpa nama, nomor HP, atau alamat; hanya riwayat menu.",
+        "evidenceId": "note-anon"
+      },
+      {
+        "text": "Pelanggan sudah menyetujui pemakaian ini di syarat layanan aplikasi.",
+        "evidenceId": "note-consent"
+      }
+    ],
+    "table": {
+      "title": "Ringkasan data latih",
+      "columns": [
+        {
+          "name": "kota"
+        },
+        {
+          "name": "jumlah_pesanan"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["Bandung", "3.100"],
+          "evidenceId": "row-balanced"
+        },
+        {
+          "cells": ["Medan", "2.950"]
+        },
+        {
+          "cells": ["Surabaya", "3.020"]
+        }
+      ]
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["note-anon", "note-consent", "row-balanced"]
+  },
+  "explanation": "Datanya anonim, seimbang antarkota, dan sesuai persetujuan di syarat layanan. Aman disetujui.",
+  "ruleRefs": ["r-ai-1", "r-ai-3"],
+  "hints": [
+    "Cek tiga hal: data pribadi, keseimbangan data, dan persetujuan.",
+    "Kalau semuanya aman, tidak perlu ditahan."
+  ]
+}

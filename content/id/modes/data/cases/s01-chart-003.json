@@ -1,0 +1,61 @@
+{
+  "id": "s01-chart-003",
+  "type": "chart",
+  "conceptIds": ["honest-charts"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Sari Wulandari",
+      "team": "Tim Pemasaran"
+    },
+    "title": "Rasa Favorit Warga Bandung",
+    "purpose": "Iklan di media sosial",
+    "chart": {
+      "kind": "bar",
+      "title": "Pilihan rasa",
+      "unit": "orang",
+      "axisStart": 0,
+      "points": [
+        {
+          "label": "Cokelat",
+          "value": 4,
+          "evidenceId": "pt-choc"
+        },
+        {
+          "label": "Vanila",
+          "value": 2,
+          "evidenceId": "pt-van"
+        }
+      ],
+      "axisEvidenceId": "axis"
+    },
+    "claims": [
+      {
+        "text": "Mayoritas warga Bandung lebih suka rasa cokelat!",
+        "evidenceId": "claim-majority"
+      }
+    ],
+    "notes": [
+      {
+        "text": "Sumber: survei 6 orang di ruang rapat kantor kami.",
+        "evidenceId": "note-sample"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["claim-majority", "note-sample"],
+    "supporting": ["pt-choc"]
+  },
+  "explanation": "Enam orang di satu ruang rapat tidak mewakili seluruh warga Bandung. Minta revisi: perbanyak sampel atau ubah klaimnya menjadi \"dari 6 rekan kantor\".",
+  "ruleRefs": ["r-ch-2"],
+  "hints": [
+    "Siapa saja yang ditanya di survei ini?",
+    "Cocokkan klaim \"mayoritas warga Bandung\" dengan jumlah sampelnya."
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "badges": [
+    {
+      "id": "select-pertama",
+      "title": "SELECT Pertama",
+      "description": "Menyelesaikan Shift 1 di Meja Data.",
+      "icon": "🗃️",
+      "tier": "bronze",
+      "rule": {
+        "type": "shift-complete",
+        "shiftId": "data-01"
+      }
+    },
+    {
+      "id": "data-cocok",
+      "title": "Semua Cocok",
+      "description": "Lima keputusan berturut-turut tepat tanpa salah tandai.",
+      "icon": "✅",
+      "tier": "silver",
+      "rule": {
+        "type": "evidence-streak",
+        "count": 5
+      }
+    },
+    {
+      "id": "analis-mandiri",
+      "title": "Analis Mandiri",
+      "description": "Satu shift tanpa petunjuk Bu Laras, dengan minimal ★★.",
+      "icon": "🧠",
+      "tier": "silver",
+      "rule": {
+        "type": "no-hints",
+        "minCases": 7,
+        "minStars": 2
+      }
+    },
+    {
+      "id": "grafik-jujur",
+      "title": "Penjaga Grafik Jujur",
+      "description": "Satu shift tanpa meloloskan laporan bermasalah.",
+      "icon": "📊",
+      "tier": "silver",
+      "rule": {
+        "type": "no-threat-allowed",
+        "minCases": 7
+      }
+    },
+    {
+      "id": "tiga-bintang-data",
+      "title": "Bintang Data",
+      "description": "Mendapat ★★★ di satu shift Meja Data.",
+      "icon": "🌟",
+      "tier": "gold",
+      "rule": {
+        "type": "shift-stars",
+        "stars": 3
+      }
+    },
+    {
+      "id": "perkakas-data",
+      "title": "Perkakas Lengkap",
+      "description": "Memiliki Profiler Data dan Cek Sumber.",
+      "icon": "🧰",
+      "tier": "bronze",
+      "rule": {
+        "type": "tools-owned",
+        "count": 2
+      }
+    },
+    {
+      "id": "penakluk-tenggat",
+      "title": "Penakluk Tenggat",
+      "description": "Mengalahkan boss akhir shift di Meja Data.",
+      "icon": "⏱️",
+      "tier": "silver",
+      "rule": {
+        "type": "boss-defeated"
+      }
+    },
+    {
+      "id": "lead-data",
+      "title": "Laporan Akhir Tahun",
+      "description": "Menyelesaikan kelima shift Meja Data.",
+      "icon": "🏆",
+      "tier": "gold",
+      "rule": {
+        "type": "shift-complete",
+        "shiftId": "data-05"
+      }
+    }
+  ]
+}

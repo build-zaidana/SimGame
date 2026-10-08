@@ -1,0 +1,68 @@
+{
+  "id": "data-01",
+  "order": 1,
+  "title": "First Day at the Data Desk",
+  "durationGameMinutes": 150,
+  "realSecondsPerGameMinute": 4,
+  "unlocksChapters": ["ch-sql", "ch-chart"],
+  "introDialogue": "data-01-intro",
+  "outroDialogue": "data-01-outro",
+  "tutorial": true,
+  "queue": [
+    {
+      "caseId": "s01-q-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s01-chart-001",
+      "arriveAt": 8
+    },
+    {
+      "caseId": "s01-q-002",
+      "arriveAt": 18
+    },
+    {
+      "caseId": "s01-chart-002",
+      "arriveAt": 30
+    },
+    {
+      "caseId": "s01-q-003",
+      "arriveAt": 60
+    },
+    {
+      "caseId": "s01-chart-003",
+      "arriveAt": 72
+    },
+    {
+      "caseId": "s01-q-004",
+      "arriveAt": 86
+    }
+  ],
+  "review": {
+    "count": 3,
+    "conceptIds": ["data-tables", "honest-charts"]
+  },
+  "pay": {
+    "base": 50,
+    "perCase": 14
+  },
+  "newspaper": {
+    "headline": "PT Nusa Digital Opens a Data Desk",
+    "lead": "PT Nusa Digital's data team welcomes a new analyst. The job: pulling numbers from the database with SQL and checking charts before reports go out.",
+    "tip": {
+      "title": "Tip: Look at the Axis First",
+      "text": "Before trusting a bar chart, check where the Y axis starts. If it is not 0, a small difference can look huge."
+    },
+    "classified": "WANTED: An analyst who reads tables carefully. Ask for Laras, 3rd floor.",
+    "sources": ["SQLite Documentation — SELECT", "Alberto Cairo — How Charts Lie (2019)"]
+  },
+  "boss": {
+    "title": "Board Meeting",
+    "icon": "📈",
+    "intro": "The board meets soon! Three requests arrive at once: two queries and one chart. Get them all right!",
+    "caseIds": ["s01-q-003", "s01-chart-003", "s01-q-004"],
+    "arriveAt": 60,
+    "durationGameMinutes": 45,
+    "reward": 30
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "id": "data-03",
+  "order": 3,
+  "title": "Data Kotor",
+  "durationGameMinutes": 150,
+  "realSecondsPerGameMinute": 4,
+  "unlocksChapters": ["ch-quality"],
+  "introDialogue": "data-03-intro",
+  "outroDialogue": "data-03-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s03-q-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s03-req-003",
+      "arriveAt": 8
+    },
+    {
+      "caseId": "s03-q-002",
+      "arriveAt": 16
+    },
+    {
+      "caseId": "s03-req-001",
+      "arriveAt": 26
+    },
+    {
+      "caseId": "s03-q-003",
+      "arriveAt": 38
+    },
+    {
+      "caseId": "s03-chart-001",
+      "arriveAt": 50
+    },
+    {
+      "caseId": "s03-q-004",
+      "arriveAt": 70
+    },
+    {
+      "caseId": "s03-req-002",
+      "arriveAt": 76
+    },
+    {
+      "caseId": "s03-req-004",
+      "arriveAt": 88
+    }
+  ],
+  "review": {
+    "count": 4,
+    "conceptIds": ["data-quality", "sql-aggregate", "data-privacy"]
+  },
+  "pay": {
+    "base": 60,
+    "perCase": 15
+  },
+  "newspaper": {
+    "headline": "Lari Amal Nusa Digital Dibanjiri Pendaftar",
+    "lead": "Formulir pendaftaran lari amal menerima ratusan data dalam sehari. Panitia meminta tim data membersihkannya sebelum diumumkan.",
+    "tip": {
+      "title": "Tips: NULL Bukan Nol",
+      "text": "Kolom yang kosong bernilai NULL. Cari dengan IS NULL; tanda = tidak akan menemukannya."
+    },
+    "sources": [
+      "DAMA International — DAMA-DMBOK (2nd ed.)",
+      "SQLite Documentation — NULL Handling"
+    ],
+    "impact": {
+      "good": "Rapat bulanan kemarin berjalan mulus berkat ringkasan yang rapi dan aman.",
+      "mixed": "Rapat kemarin selesai, tapi beberapa angka harus dihitung ulang.",
+      "bad": "Data pribadi pelanggan nyaris terkirim ke pihak luar. Bu Laras mengingatkan seluruh tim."
+    },
+    "classified": "HILANG: Satu email peserta lari amal. Terakhir terlihat bernilai NULL."
+  },
+  "boss": {
+    "title": "Pengumuman Pemenang",
+    "icon": "🏃",
+    "intro": "Panitia mau mengumumkan hasil sebentar lagi! Bersihkan datanya dulu: satu query dan dua permintaan menunggu.",
+    "caseIds": ["s03-q-004", "s03-req-002", "s03-req-004"],
+    "arriveAt": 70,
+    "durationGameMinutes": 45,
+    "reward": 35
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "id": "s03-q-003",
+  "type": "query",
+  "conceptIds": ["data-quality"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Maya Anggraini",
+      "team": "Tim Keuangan"
+    },
+    "title": "Donasi tercatat ganda",
+    "story": [
+      "Total donasi kok lebih besar dari uang di rekening. Sepertinya ada yang tercatat dua kali.",
+      "Tampilkan email yang muncul LEBIH DARI SEKALI, beserta berapa kali muncul."
+    ],
+    "tables": [
+      {
+        "name": "donasi",
+        "columns": [
+          {
+            "name": "email",
+            "type": "TEXT"
+          },
+          {
+            "name": "jumlah",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          ["a@contoh.test", 50000],
+          ["b@contoh.test", 20000],
+          ["a@contoh.test", 50000],
+          ["c@contoh.test", 10000]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "donasi",
+            "columns": [
+              {
+                "name": "email",
+                "type": "TEXT"
+              },
+              {
+                "name": "jumlah",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              ["d@contoh.test", 15000],
+              ["e@contoh.test", 30000],
+              ["e@contoh.test", 30000],
+              ["d@contoh.test", 15000],
+              ["e@contoh.test", 30000]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "-- Kelompokkan per email, lalu saring yang muncul lebih dari 1 kali\n",
+    "solution": "SELECT email, COUNT(*) FROM donasi GROUP BY email HAVING COUNT(*) > 1",
+    "ordered": false
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "GROUP BY email menghitung kemunculan tiap email, lalu HAVING COUNT(*) > 1 menyisakan yang ganda.",
+  "ruleRefs": ["r-dq-1", "r-agg-3"],
+  "hints": [
+    "Ini gabungan GROUP BY dan HAVING dari shift kemarin.",
+    "SELECT email, COUNT(*) FROM donasi GROUP BY email HAVING COUNT(*) > 1"
+  ]
+}

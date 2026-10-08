@@ -1,0 +1,127 @@
+{
+  "id": "s05-q-004",
+  "type": "query",
+  "conceptIds": ["sql-aggregate"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Maya Anggraini",
+      "team": "Tim Keuangan"
+    },
+    "title": "Bulan terbaik tahun ini",
+    "story": [
+      "Bulan mana yang penjualannya paling besar? Tampilkan bulan dan totalnya saja, satu baris."
+    ],
+    "tables": [
+      {
+        "name": "penjualan",
+        "columns": [
+          {
+            "name": "bulan",
+            "type": "INTEGER"
+          },
+          {
+            "name": "kategori",
+            "type": "TEXT"
+          },
+          {
+            "name": "pelanggan",
+            "type": "TEXT"
+          },
+          {
+            "name": "total",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          [1, "Minuman", "Ayu", 300],
+          [1, "Makanan", "Budi", 200],
+          [2, "Minuman", "Ayu", 250],
+          [2, "Minuman", "Citra", 400],
+          [3, "Makanan", "Budi", 350],
+          [3, "Minuman", "Dodi", 100]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "penjualan",
+            "columns": [
+              {
+                "name": "bulan",
+                "type": "INTEGER"
+              },
+              {
+                "name": "kategori",
+                "type": "TEXT"
+              },
+              {
+                "name": "pelanggan",
+                "type": "TEXT"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, "Makanan", "Eka", 700],
+              [2, "Minuman", "Eka", 100],
+              [2, "Makanan", "Fajar", 150],
+              [3, "Minuman", "Gita", 500],
+              [3, "Minuman", "Hadi", 300]
+            ]
+          }
+        ]
+      },
+      {
+        "tables": [
+          {
+            "name": "penjualan",
+            "columns": [
+              {
+                "name": "bulan",
+                "type": "INTEGER"
+              },
+              {
+                "name": "kategori",
+                "type": "TEXT"
+              },
+              {
+                "name": "pelanggan",
+                "type": "TEXT"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, "Minuman", "Indah", 900],
+              [2, "Makanan", "Indah", 50],
+              [3, "Makanan", "Joni", 120],
+              [3, "Makanan", "Kiki", 80]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "",
+    "solution": "SELECT bulan, SUM(total) FROM penjualan GROUP BY bulan ORDER BY SUM(total) DESC LIMIT 1",
+    "ordered": true
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Jumlahkan per bulan, urutkan totalnya dari yang terbesar, lalu ambil satu baris teratas.",
+  "ruleRefs": ["r-agg-2", "r-sql-4"],
+  "hints": ["Mulai dari query penjualan per bulan.", "… ORDER BY SUM(total) DESC LIMIT 1"]
+}

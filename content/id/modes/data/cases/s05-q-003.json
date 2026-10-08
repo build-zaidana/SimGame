@@ -1,0 +1,130 @@
+{
+  "id": "s05-q-003",
+  "type": "query",
+  "conceptIds": ["sql-aggregate", "data-quality"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Sari Wulandari",
+      "team": "Tim Pemasaran"
+    },
+    "title": "Berapa pelanggan per kategori?",
+    "story": [
+      "Satu pelanggan bisa membeli berkali-kali. Kami mau tahu berapa ORANG berbeda yang membeli tiap kategori."
+    ],
+    "tables": [
+      {
+        "name": "penjualan",
+        "columns": [
+          {
+            "name": "bulan",
+            "type": "INTEGER"
+          },
+          {
+            "name": "kategori",
+            "type": "TEXT"
+          },
+          {
+            "name": "pelanggan",
+            "type": "TEXT"
+          },
+          {
+            "name": "total",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          [1, "Minuman", "Ayu", 300],
+          [1, "Makanan", "Budi", 200],
+          [2, "Minuman", "Ayu", 250],
+          [2, "Minuman", "Citra", 400],
+          [3, "Makanan", "Budi", 350],
+          [3, "Minuman", "Dodi", 100]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "penjualan",
+            "columns": [
+              {
+                "name": "bulan",
+                "type": "INTEGER"
+              },
+              {
+                "name": "kategori",
+                "type": "TEXT"
+              },
+              {
+                "name": "pelanggan",
+                "type": "TEXT"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, "Makanan", "Eka", 700],
+              [2, "Minuman", "Eka", 100],
+              [2, "Makanan", "Fajar", 150],
+              [3, "Minuman", "Gita", 500],
+              [3, "Minuman", "Hadi", 300]
+            ]
+          }
+        ]
+      },
+      {
+        "tables": [
+          {
+            "name": "penjualan",
+            "columns": [
+              {
+                "name": "bulan",
+                "type": "INTEGER"
+              },
+              {
+                "name": "kategori",
+                "type": "TEXT"
+              },
+              {
+                "name": "pelanggan",
+                "type": "TEXT"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, "Minuman", "Indah", 900],
+              [2, "Makanan", "Indah", 50],
+              [3, "Makanan", "Joni", 120],
+              [3, "Makanan", "Kiki", 80]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "-- Petunjuk: COUNT(DISTINCT kolom) menghitung nilai yang berbeda saja\n",
+    "solution": "SELECT kategori, COUNT(DISTINCT pelanggan) FROM penjualan GROUP BY kategori",
+    "ordered": false
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "COUNT(*) menghitung transaksi; COUNT(DISTINCT pelanggan) menghitung orangnya, jadi pembeli yang sama tidak terhitung dua kali.",
+  "ruleRefs": ["r-agg-1", "r-dq-1"],
+  "hints": [
+    "Ayu membeli minuman dua kali. Harusnya dihitung berapa orang?",
+    "SELECT kategori, COUNT(DISTINCT pelanggan) … GROUP BY kategori"
+  ]
+}

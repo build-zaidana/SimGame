@@ -1,0 +1,62 @@
+{
+  "id": "s02-req-002",
+  "type": "request",
+  "conceptIds": ["data-privacy"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "kind": "share",
+    "from": {
+      "name": "Hendra Kusuma",
+      "team": "Branch Manager"
+    },
+    "title": "Order summary for the meeting",
+    "message": [
+      {
+        "text": "For tomorrow's managers' meeting I need the number of orders per branch this month.",
+        "evidenceId": "msg-need"
+      }
+    ],
+    "notes": [
+      {
+        "text": "No customer names, phone numbers or addresses.",
+        "evidenceId": "note-aggregate"
+      }
+    ],
+    "table": {
+      "title": "What will be sent",
+      "columns": [
+        {
+          "name": "branch"
+        },
+        {
+          "name": "orders"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["Bandung", "128"]
+        },
+        {
+          "cells": ["Medan", "97"]
+        },
+        {
+          "cells": ["Surabaya", "115"]
+        }
+      ]
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["msg-need", "note-aggregate"]
+  },
+  "explanation": "These are per-branch summary numbers with no names or phone numbers, for an internal meeting. Safe to approve.",
+  "ruleRefs": ["r-pv-2"],
+  "hints": [
+    "Is there any data that points to a specific person?",
+    "A per-branch summary for an internal meeting is usually safe."
+  ]
+}

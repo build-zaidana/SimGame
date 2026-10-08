@@ -1,0 +1,143 @@
+{
+  "id": "s02-q-002",
+  "type": "query",
+  "conceptIds": ["sql-aggregate"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Maya Anggraini",
+      "team": "Tim Keuangan"
+    },
+    "title": "Pendapatan per produk",
+    "story": [
+      "Produk mana yang paling banyak menghasilkan uang?",
+      "Tampilkan nama produk dan jumlah kolom total untuk tiap produk."
+    ],
+    "tables": [
+      {
+        "name": "pesanan",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER"
+          },
+          {
+            "name": "cabang",
+            "type": "TEXT"
+          },
+          {
+            "name": "produk",
+            "type": "TEXT"
+          },
+          {
+            "name": "jumlah",
+            "type": "INTEGER"
+          },
+          {
+            "name": "total",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          [1, "Bandung", "Kopi Susu", 2, 40000],
+          [2, "Medan", "Teh Manis", 1, 15000],
+          [3, "Bandung", "Roti Bakar", 3, 45000],
+          [4, "Surabaya", "Kopi Susu", 1, 20000],
+          [5, "Bandung", "Teh Manis", 2, 30000]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "pesanan",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "cabang",
+                "type": "TEXT"
+              },
+              {
+                "name": "produk",
+                "type": "TEXT"
+              },
+              {
+                "name": "jumlah",
+                "type": "INTEGER"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, "Medan", "Kopi Susu", 1, 20000],
+              [2, "Medan", "Roti Bakar", 4, 60000],
+              [3, "Solo", "Teh Manis", 1, 15000],
+              [4, "Medan", "Kopi Susu", 2, 45000]
+            ]
+          }
+        ]
+      },
+      {
+        "tables": [
+          {
+            "name": "pesanan",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "cabang",
+                "type": "TEXT"
+              },
+              {
+                "name": "produk",
+                "type": "TEXT"
+              },
+              {
+                "name": "jumlah",
+                "type": "INTEGER"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, "Surabaya", "Teh Manis", 2, 30000],
+              [2, "Surabaya", "Kopi Susu", 3, 60000],
+              [3, "Bandung", "Roti Bakar", 1, 15000],
+              [4, "Surabaya", "Roti Bakar", 2, 30000],
+              [5, "Bandung", "Kopi Susu", 1, 20000],
+              [6, "Surabaya", "Teh Manis", 1, 15000]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "-- Jumlahkan kolom total untuk setiap produk\n",
+    "solution": "SELECT produk, SUM(total) FROM pesanan GROUP BY produk",
+    "ordered": false
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "SUM(total) menjumlahkan uang, dan GROUP BY produk memisahkannya per produk.",
+  "ruleRefs": ["r-agg-1", "r-agg-2"],
+  "hints": [
+    "Mirip pesanan per cabang, tapi yang dijumlahkan kolom total.",
+    "SELECT produk, SUM(total) FROM pesanan GROUP BY produk"
+  ]
+}

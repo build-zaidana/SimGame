@@ -1,0 +1,84 @@
+{
+  "id": "data-04",
+  "order": 4,
+  "title": "Proyek AI Pertama",
+  "durationGameMinutes": 150,
+  "realSecondsPerGameMinute": 4,
+  "unlocksChapters": ["ch-join", "ch-ai"],
+  "introDialogue": "data-04-intro",
+  "outroDialogue": "data-04-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s04-q-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s04-ai-005",
+      "arriveAt": 8
+    },
+    {
+      "caseId": "s04-q-002",
+      "arriveAt": 16
+    },
+    {
+      "caseId": "s04-ai-001",
+      "arriveAt": 26
+    },
+    {
+      "caseId": "s04-q-003",
+      "arriveAt": 38
+    },
+    {
+      "caseId": "s04-ai-004",
+      "arriveAt": 50
+    },
+    {
+      "caseId": "s04-q-004",
+      "arriveAt": 70
+    },
+    {
+      "caseId": "s04-ai-002",
+      "arriveAt": 76
+    },
+    {
+      "caseId": "s04-ai-003",
+      "arriveAt": 88
+    }
+  ],
+  "review": {
+    "count": 4,
+    "conceptIds": ["sql-join", "ai-basics", "data-privacy"]
+  },
+  "pay": {
+    "base": 65,
+    "perCase": 16
+  },
+  "newspaper": {
+    "headline": "Nusa Digital Mulai Proyek AI",
+    "lead": "Tim AI PT Nusa Digital mulai melatih model untuk beberapa layanan. Tim data diminta memastikan data latihnya adil dan aman.",
+    "tip": {
+      "title": "Tips: AI Bisa Mengarang",
+      "text": "Asisten AI kadang menulis sumber yang terdengar resmi tapi tidak ada. Cek dulu sebelum dikutip."
+    },
+    "sources": [
+      "NIST — AI Risk Management Framework (AI RMF 1.0)",
+      "OWASP — Top 10 for LLM Applications (2025)"
+    ],
+    "impact": {
+      "good": "Data lari amal yang bersih membuat pengumuman pemenang berjalan tanpa protes.",
+      "mixed": "Pengumuman lari amal sempat diralat karena beberapa data ganda.",
+      "bad": "Total donasi yang diumumkan ternyata keliru. Panitia meminta maaf ke peserta."
+    },
+    "classified": "DICARI: Data latih yang seimbang. Data berat sebelah harap tidak melamar."
+  },
+  "boss": {
+    "title": "Peluncuran AI",
+    "icon": "🤖",
+    "intro": "Tim AI mau meluncurkan fitur sore ini! Satu query dan dua keputusan AI harus beres dulu.",
+    "caseIds": ["s04-q-004", "s04-ai-002", "s04-ai-003"],
+    "arriveAt": 70,
+    "durationGameMinutes": 45,
+    "reward": 40
+  }
+}

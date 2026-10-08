@@ -12,11 +12,11 @@ PRD §1 menyebut Data/AI sebagai mode karier berikutnya, tanpa kurikulum. Pemili
   ditambah tugas menulis query yang hasilnya dicek otomatis.
 - **Bahasa query: SQLite asli (sql.js)**, bukan SQL mini buatan sendiri, meski lebih besar.
 
-| Pilihan                    | Unduhan (gzip) | Catatan                                                    |
-| -------------------------- | -------------- | ---------------------------------------------------------- |
-| sql.js 1.14.2 (MIT), wasm  | ±338 KB        | SQLite asli: semua SQL yang dipelajari berlaku di dunia nyata |
-| SQL mini buatan sendiri    | ±10 KB         | Ringan, tapi subset & pesan error tidak sama dengan SQL asli |
-| Python (MicroPython)       | sudah ada      | Bukan bahasa yang lazim dipakai analis untuk query         |
+| Pilihan                   | Unduhan (gzip) | Catatan                                                       |
+| ------------------------- | -------------- | ------------------------------------------------------------- |
+| sql.js 1.14.2 (MIT), wasm | ±338 KB        | SQLite asli: semua SQL yang dipelajari berlaku di dunia nyata |
+| SQL mini buatan sendiri   | ±10 KB         | Ringan, tapi subset & pesan error tidak sama dengan SQL asli  |
+| Python (MicroPython)      | sudah ada      | Bukan bahasa yang lazim dipakai analis untuk query            |
 
 ## Keputusan
 

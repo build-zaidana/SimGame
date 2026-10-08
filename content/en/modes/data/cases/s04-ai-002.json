@@ -1,0 +1,56 @@
+{
+  "id": "s04-ai-002",
+  "type": "request",
+  "conceptIds": ["ai-basics", "data-privacy"],
+  "difficulty": 3,
+  "verdict": "specialist",
+  "correctDecision": "escalate",
+  "acceptableDecisions": {
+    "revise": 0.5
+  },
+  "severity": 3,
+  "data": {
+    "kind": "ai-train",
+    "from": {
+      "name": "Teguh Prasetyo",
+      "team": "AI Team"
+    },
+    "title": "A chatbot from customer chat history",
+    "message": [
+      {
+        "text": "We want to train a chatbot on 50,000 customer chats with the service team.",
+        "evidenceId": "msg-train"
+      }
+    ],
+    "notes": [
+      {
+        "text": "No customer consent for this use yet.",
+        "evidenceId": "note-consent"
+      }
+    ],
+    "table": {
+      "title": "Sample chats",
+      "columns": [
+        {
+          "name": "chat_text"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["Send it to Jl. Melati No. 5, phone 0812-xxxx-3301"],
+          "evidenceId": "row-address"
+        },
+        {
+          "cells": ["Why hasn't my order arrived?"]
+        }
+      ]
+    }
+  },
+  "evidence": {
+    "required": ["note-consent", "row-address"],
+    "supporting": ["msg-train"]
+  },
+  "explanation": "The chats contain addresses and phone numbers, and customers never agreed to their data training an AI. Escalate to the Data Protection Officer.",
+  "ruleRefs": ["r-ai-4", "r-pv-3"],
+  "hints": ["Read the sample chats. Any personal data?", "Did customers agree to this use for AI?"]
+}

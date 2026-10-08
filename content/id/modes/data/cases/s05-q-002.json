@@ -1,0 +1,131 @@
+{
+  "id": "s05-q-002",
+  "type": "query",
+  "conceptIds": ["sql-aggregate"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Bayu Firmansyah",
+      "team": "Tim Penjualan"
+    },
+    "title": "Kategori laris",
+    "story": [
+      "Kami mau tahu kategori dengan total penjualan di atas 600.",
+      "Query ini malah error. Kenapa, ya?"
+    ],
+    "tables": [
+      {
+        "name": "penjualan",
+        "columns": [
+          {
+            "name": "bulan",
+            "type": "INTEGER"
+          },
+          {
+            "name": "kategori",
+            "type": "TEXT"
+          },
+          {
+            "name": "pelanggan",
+            "type": "TEXT"
+          },
+          {
+            "name": "total",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          [1, "Minuman", "Ayu", 300],
+          [1, "Makanan", "Budi", 200],
+          [2, "Minuman", "Ayu", 250],
+          [2, "Minuman", "Citra", 400],
+          [3, "Makanan", "Budi", 350],
+          [3, "Minuman", "Dodi", 100]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "penjualan",
+            "columns": [
+              {
+                "name": "bulan",
+                "type": "INTEGER"
+              },
+              {
+                "name": "kategori",
+                "type": "TEXT"
+              },
+              {
+                "name": "pelanggan",
+                "type": "TEXT"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, "Makanan", "Eka", 700],
+              [2, "Minuman", "Eka", 100],
+              [2, "Makanan", "Fajar", 150],
+              [3, "Minuman", "Gita", 500],
+              [3, "Minuman", "Hadi", 300]
+            ]
+          }
+        ]
+      },
+      {
+        "tables": [
+          {
+            "name": "penjualan",
+            "columns": [
+              {
+                "name": "bulan",
+                "type": "INTEGER"
+              },
+              {
+                "name": "kategori",
+                "type": "TEXT"
+              },
+              {
+                "name": "pelanggan",
+                "type": "TEXT"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, "Minuman", "Indah", 900],
+              [2, "Makanan", "Indah", 50],
+              [3, "Makanan", "Joni", 120],
+              [3, "Makanan", "Kiki", 80]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "SELECT kategori, SUM(total)\nFROM penjualan\nWHERE SUM(total) > 600\nGROUP BY kategori\n",
+    "solution": "SELECT kategori, SUM(total) FROM penjualan GROUP BY kategori HAVING SUM(total) > 600",
+    "ordered": false
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "WHERE bekerja sebelum baris dikelompokkan, jadi belum tahu SUM per kategori. Syarat itu pindah ke HAVING setelah GROUP BY.",
+  "ruleRefs": ["r-agg-3"],
+  "hints": [
+    "Baca pesan errornya: ada fungsi SUM di tempat yang salah.",
+    "Hapus baris WHERE, lalu tambahkan HAVING SUM(total) > 600 setelah GROUP BY."
+  ]
+}

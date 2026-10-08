@@ -1,0 +1,34 @@
+{
+  "dialogues": [
+    {
+      "id": "data-05-intro",
+      "lines": [
+        {
+          "speaker": "laras",
+          "text": "The last day of this run: the year-end report. The public will read our numbers."
+        },
+        {
+          "speaker": "laras",
+          "text": "Use it all: tidy queries, honest charts, protected personal data and checked AI."
+        },
+        {
+          "speaker": "kelabu",
+          "text": "I have a special offer today. You’ll love it."
+        }
+      ]
+    },
+    {
+      "id": "data-05-outro",
+      "lines": [
+        {
+          "speaker": "laras",
+          "text": "The annual report is out, and every number can be backed up. I’m proud."
+        },
+        {
+          "speaker": "laras",
+          "text": "A good data analyst is not just good at SQL. They are honest with numbers and protect the people behind the data."
+        }
+      ]
+    }
+  ]
+}

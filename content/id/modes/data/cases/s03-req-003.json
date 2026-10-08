@@ -1,0 +1,76 @@
+{
+  "id": "s03-req-003",
+  "type": "request",
+  "conceptIds": ["data-quality"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "kind": "quality",
+    "from": {
+      "name": "Rudi Hartono",
+      "team": "Tim Layanan Pelanggan"
+    },
+    "title": "Data kepuasan untuk dianalisis",
+    "message": [
+      {
+        "text": "Data survei sudah kami rapikan. Boleh dipakai untuk analisis bulan ini?",
+        "evidenceId": "msg-clean"
+      }
+    ],
+    "notes": [
+      {
+        "text": "Sudah dicek: tiap id_respon unik, tidak ada skor kosong.",
+        "evidenceId": "note-check"
+      }
+    ],
+    "table": {
+      "title": "Survei (skala 1–5)",
+      "columns": [
+        {
+          "name": "id_respon"
+        },
+        {
+          "name": "cabang"
+        },
+        {
+          "name": "skor"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["R-01", "Bandung", "4"]
+        },
+        {
+          "cells": ["R-02", "Medan", "5"]
+        },
+        {
+          "cells": ["R-03", "Surabaya", "3"]
+        },
+        {
+          "cells": ["R-04", "Bandung", "4"]
+        }
+      ]
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["msg-clean", "prof-clean", "note-check"]
+  },
+  "explanation": "Tidak ada baris ganda, nilai kosong, atau nilai mustahil; skornya 1–5 sesuai skala. Data bersih seperti ini boleh langsung dipakai.",
+  "ruleRefs": ["r-dq-4"],
+  "hints": [
+    "Cek ganda, kosong, dan nilai mustahil.",
+    "Kalau semuanya rapi, tidak ada alasan menahannya."
+  ],
+  "intel": {
+    "profile": [
+      {
+        "text": "0 nilai kosong, 0 nilai ganda; skor terkecil 3, terbesar 5.",
+        "evidenceId": "prof-clean"
+      }
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "id": "s02-chart-002",
+  "type": "chart",
+  "conceptIds": ["honest-charts"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Sari Wulandari",
+      "team": "Tim Pemasaran"
+    },
+    "title": "Payung Pendongkrak Penjualan Teh",
+    "purpose": "Usulan anggaran promosi",
+    "chart": {
+      "kind": "bar",
+      "title": "Teh hangat terjual",
+      "unit": "gelas",
+      "axisStart": 0,
+      "points": [
+        {
+          "label": "Okt",
+          "value": 200
+        },
+        {
+          "label": "Nov",
+          "value": 260
+        },
+        {
+          "label": "Des",
+          "value": 330
+        }
+      ],
+      "axisEvidenceId": "axis"
+    },
+    "claims": [
+      {
+        "text": "Sejak payung dipajang di kasir, penjualan teh naik. Payung membuat orang membeli teh!",
+        "evidenceId": "claim-cause"
+      }
+    ],
+    "notes": [
+      {
+        "text": "Payung dipajang di kasir sejak Oktober.",
+        "evidenceId": "note-display"
+      },
+      {
+        "text": "Oktober–Desember adalah puncak musim hujan.",
+        "evidenceId": "note-rain"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["claim-cause"],
+    "supporting": ["note-rain"]
+  },
+  "explanation": "Naik bersamaan bukan berarti payung penyebabnya; musim hujan bisa membuat orang membeli payung dan teh hangat sekaligus. Minta revisi kesimpulannya.",
+  "ruleRefs": ["r-ch-3"],
+  "hints": ["Apakah ada hal lain yang terjadi di bulan-bulan itu?", "Baca catatan tentang musim."]
+}

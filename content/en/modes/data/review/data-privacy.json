@@ -1,0 +1,52 @@
+{
+  "items": [
+    {
+      "id": "rv-pv-1",
+      "type": "mcq",
+      "conceptId": "data-privacy",
+      "difficulty": 1,
+      "prompt": "Which one is personal data?",
+      "choices": ["A customer's phone number", "Number of orders per city", "The price of coffee"],
+      "answerIndex": 0,
+      "explanation": "A phone number points to one person. A per-city summary does not."
+    },
+    {
+      "id": "rv-pv-2",
+      "type": "mcq",
+      "conceptId": "data-privacy",
+      "difficulty": 2,
+      "prompt": "The meeting only needs orders per branch. What do you send?",
+      "choices": [
+        "Just the per-branch summary",
+        "Full customer data",
+        "Customer names and phone numbers"
+      ],
+      "answerIndex": 0,
+      "explanation": "Minimisation: share only what the purpose needs."
+    },
+    {
+      "id": "rv-pv-3",
+      "type": "mcq",
+      "conceptId": "data-privacy",
+      "difficulty": 2,
+      "prompt": "An ad vendor asks for customer names and phone numbers. Your move?",
+      "choices": [
+        "Escalate to the Data Protection Officer",
+        "Send it right away",
+        "Send it from a personal email"
+      ],
+      "answerIndex": 0,
+      "explanation": "Personal data for outsiders and a new purpose needs its legal basis checked by the DPO."
+    },
+    {
+      "id": "rv-pv-4",
+      "type": "mcq",
+      "conceptId": "data-privacy",
+      "difficulty": 1,
+      "prompt": "The Indonesian law that protects personal data is…",
+      "choices": ["Law No. 27 of 2022 (UU PDP)", "The Traffic Law", "There is none"],
+      "answerIndex": 0,
+      "explanation": "Law No. 27 of 2022 on Personal Data Protection sets how personal data may be processed."
+    }
+  ]
+}

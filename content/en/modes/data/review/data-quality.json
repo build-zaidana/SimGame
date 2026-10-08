@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "id": "rv-dq-1",
+      "type": "mcq",
+      "conceptId": "data-quality",
+      "difficulty": 1,
+      "prompt": "How do you find empty (NULL) emails?",
+      "choices": ["WHERE email IS NULL", "WHERE email = NULL", "WHERE email = ''"],
+      "answerIndex": 0,
+      "explanation": "NULL is never \"equal\" to anything, so = NULL finds nothing. Use IS NULL."
+    },
+    {
+      "id": "rv-dq-2",
+      "type": "mcq",
+      "conceptId": "data-quality",
+      "difficulty": 2,
+      "prompt": "Donation totals look double the usual. What do you check first?",
+      "choices": ["Duplicate rows", "Chart colours", "The table name"],
+      "answerIndex": 0,
+      "explanation": "Data recorded twice inflates totals. Find it with GROUP BY then HAVING COUNT(*) > 1."
+    },
+    {
+      "id": "rv-dq-3",
+      "type": "tap-evidence",
+      "conceptId": "data-quality",
+      "difficulty": 2,
+      "prompt": "Tap the impossible value in this registrant data.",
+      "parts": [
+        {
+          "text": "Rina, 17 years old"
+        },
+        {
+          "text": "Tono, 230 years old",
+          "evidenceId": "age"
+        },
+        {
+          "text": "Wati, 45 years old"
+        }
+      ],
+      "answer": ["age"],
+      "explanation": "Nobody is 230 years old. It is a typo that must be fixed before calculating."
+    },
+    {
+      "id": "rv-dq-4",
+      "type": "mcq",
+      "conceptId": "data-quality",
+      "difficulty": 1,
+      "prompt": "To see each city only once, use…",
+      "choices": ["SELECT DISTINCT kota", "SELECT kota LIMIT 1", "SELECT COUNT(kota)"],
+      "answerIndex": 0,
+      "explanation": "DISTINCT removes repeated values, handy for spotting different spellings."
+    }
+  ]
+}

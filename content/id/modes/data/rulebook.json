@@ -1,0 +1,190 @@
+{
+  "chapters": [
+    {
+      "id": "ch-sql",
+      "title": "Bab 1 · Tabel & SELECT",
+      "conceptId": "data-tables",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-sql-1",
+          "text": "SELECT kolom FROM tabel: pilih kolom yang dibutuhkan saja. Tanda * berarti semua kolom.",
+          "evidenceTags": ["select"]
+        },
+        {
+          "id": "r-sql-2",
+          "text": "WHERE menyaring baris. Teks diapit tanda kutip tunggal ('Bandung'), angka tidak.",
+          "evidenceTags": ["where"]
+        },
+        {
+          "id": "r-sql-3",
+          "text": "Perhatikan batas: \"minimal 120\" berarti >= 120, bukan > 120.",
+          "evidenceTags": ["boundary"]
+        },
+        {
+          "id": "r-sql-4",
+          "text": "ORDER BY kolom DESC mengurutkan dari yang terbesar; LIMIT 3 mengambil 3 baris teratas.",
+          "evidenceTags": ["order"]
+        }
+      ]
+    },
+    {
+      "id": "ch-chart",
+      "title": "Bab 2 · Grafik Jujur",
+      "conceptId": "honest-charts",
+      "unlockAtShift": 1,
+      "rules": [
+        {
+          "id": "r-ch-1",
+          "text": "Grafik batang harus mulai dari 0. Sumbu yang dipotong membuat beda kecil tampak besar.",
+          "evidenceTags": ["axis"]
+        },
+        {
+          "id": "r-ch-2",
+          "text": "Cek jumlah sampel. Kesimpulan tentang \"semua pelanggan\" dari 6 orang belum bisa dipercaya.",
+          "evidenceTags": ["sample"]
+        },
+        {
+          "id": "r-ch-3",
+          "text": "Korelasi bukan sebab-akibat: dua angka yang naik bersama belum tentu saling menyebabkan.",
+          "evidenceTags": ["cause"]
+        },
+        {
+          "id": "r-ch-4",
+          "text": "Tampilkan rentang waktu utuh. Hanya memilih bulan yang bagus (cherry-picking) itu menyesatkan.",
+          "evidenceTags": ["range"]
+        }
+      ]
+    },
+    {
+      "id": "ch-agg",
+      "title": "Bab 3 · Merangkum Data",
+      "conceptId": "sql-aggregate",
+      "unlockAtShift": 2,
+      "rules": [
+        {
+          "id": "r-agg-1",
+          "text": "COUNT(*) menghitung baris, SUM() menjumlahkan, AVG() menghitung rata-rata.",
+          "evidenceTags": ["aggregate"]
+        },
+        {
+          "id": "r-agg-2",
+          "text": "GROUP BY kolom membuat satu baris hasil per kelompok, misalnya per cabang.",
+          "evidenceTags": ["group"]
+        },
+        {
+          "id": "r-agg-3",
+          "text": "Menyaring hasil kelompok (mis. COUNT(*) > 2) memakai HAVING setelah GROUP BY, bukan WHERE.",
+          "evidenceTags": ["having"]
+        },
+        {
+          "id": "r-agg-4",
+          "text": "Jangan menulis angka tetap seperti \"/ 5\". Biarkan SQL menghitung dari datanya.",
+          "evidenceTags": ["hardcode"]
+        }
+      ]
+    },
+    {
+      "id": "ch-privacy",
+      "title": "Bab 4 · Data Pribadi",
+      "conceptId": "data-privacy",
+      "unlockAtShift": 2,
+      "rules": [
+        {
+          "id": "r-pv-1",
+          "text": "Nama, NIK, nomor HP, dan alamat adalah data pribadi. Pakai hanya untuk tujuan yang disetujui pemiliknya.",
+          "evidenceTags": ["personal"]
+        },
+        {
+          "id": "r-pv-2",
+          "text": "Bagikan secukupnya: kalau angka ringkasan sudah cukup, jangan kirim data per orang.",
+          "evidenceTags": ["minimal"]
+        },
+        {
+          "id": "r-pv-3",
+          "text": "Data pribadi untuk pihak luar atau keperluan baru: eskalasi ke Petugas Pelindungan Data (DPO).",
+          "evidenceTags": ["third-party"]
+        },
+        {
+          "id": "r-pv-4",
+          "text": "Jangan kirim data kantor ke surel pribadi atau aplikasi yang bukan milik kantor.",
+          "evidenceTags": ["channel"]
+        }
+      ]
+    },
+    {
+      "id": "ch-quality",
+      "title": "Bab 5 · Data Kotor",
+      "conceptId": "data-quality",
+      "unlockAtShift": 3,
+      "rules": [
+        {
+          "id": "r-dq-1",
+          "text": "Cek baris ganda: data yang tercatat dua kali membuat total membengkak.",
+          "evidenceTags": ["duplicate"]
+        },
+        {
+          "id": "r-dq-2",
+          "text": "Nilai kosong (NULL) bukan nol. Cari dengan IS NULL, bukan = NULL.",
+          "evidenceTags": ["null"]
+        },
+        {
+          "id": "r-dq-3",
+          "text": "Nilai mustahil (umur 230, tanggal 31 Februari) tanda salah input. Perbaiki dulu sebelum dihitung.",
+          "evidenceTags": ["impossible"]
+        },
+        {
+          "id": "r-dq-4",
+          "text": "Data yang sudah bersih dan konsisten boleh dipakai. Jangan menahan pekerjaan tanpa alasan.",
+          "evidenceTags": ["clean"]
+        }
+      ]
+    },
+    {
+      "id": "ch-join",
+      "title": "Bab 6 · Menggabungkan Tabel",
+      "conceptId": "sql-join",
+      "unlockAtShift": 4,
+      "rules": [
+        {
+          "id": "r-jn-1",
+          "text": "JOIN tabel_b ON tabel_a.kolom = tabel_b.kolom menggabungkan baris yang nilainya cocok.",
+          "evidenceTags": ["join"]
+        },
+        {
+          "id": "r-jn-2",
+          "text": "Hubungkan kolom yang memang berpasangan, mis. pesanan.pelanggan_id dengan pelanggan.id.",
+          "evidenceTags": ["key"]
+        }
+      ]
+    },
+    {
+      "id": "ch-ai",
+      "title": "Bab 7 · AI yang Bertanggung Jawab",
+      "conceptId": "ai-basics",
+      "unlockAtShift": 4,
+      "rules": [
+        {
+          "id": "r-ai-1",
+          "text": "AI belajar dari data latih. Data yang berat sebelah menghasilkan AI yang berat sebelah (bias).",
+          "evidenceTags": ["bias"]
+        },
+        {
+          "id": "r-ai-2",
+          "text": "Asisten AI bisa mengarang fakta dan sumber (halusinasi). Cek ke sumber asli sebelum dipakai.",
+          "evidenceTags": ["hallucination"]
+        },
+        {
+          "id": "r-ai-3",
+          "text": "Jangan masukkan data pribadi atau rahasia kantor ke layanan AI publik.",
+          "evidenceTags": ["ai-privacy"]
+        },
+        {
+          "id": "r-ai-4",
+          "text": "Data latih berisi data pribadi tanpa persetujuan: eskalasi, jangan dipakai dulu.",
+          "evidenceTags": ["consent"]
+        }
+      ]
+    }
+  ]
+}

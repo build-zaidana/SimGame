@@ -1,0 +1,48 @@
+{
+  "items": [
+    {
+      "id": "rv-ag-1",
+      "type": "mcq",
+      "conceptId": "sql-aggregate",
+      "difficulty": 1,
+      "prompt": "Which function COUNTS the number of orders?",
+      "choices": ["COUNT(*)", "SUM(total)", "AVG(total)"],
+      "answerIndex": 0,
+      "explanation": "COUNT(*) counts rows. SUM adds values, AVG averages them."
+    },
+    {
+      "id": "rv-ag-2",
+      "type": "mcq",
+      "conceptId": "sql-aggregate",
+      "difficulty": 2,
+      "prompt": "You want total sales PER branch. What do you add?",
+      "choices": ["GROUP BY cabang", "ORDER BY cabang", "WHERE cabang"],
+      "answerIndex": 0,
+      "explanation": "GROUP BY makes one result row for each branch."
+    },
+    {
+      "id": "rv-ag-3",
+      "type": "mcq",
+      "conceptId": "sql-aggregate",
+      "difficulty": 2,
+      "prompt": "Branches with more than 2 orders. Where does the condition go?",
+      "choices": ["HAVING COUNT(*) > 2", "WHERE COUNT(*) > 2", "LIMIT 2"],
+      "answerIndex": 0,
+      "explanation": "Conditions on grouped results use HAVING after GROUP BY. WHERE works before rows are grouped."
+    },
+    {
+      "id": "rv-ag-4",
+      "type": "mcq",
+      "conceptId": "sql-aggregate",
+      "difficulty": 2,
+      "prompt": "Why is SUM(total) / 5 risky for an average?",
+      "choices": [
+        "It is only right when there are exactly 5 rows",
+        "SUM cannot be divided",
+        "No problem at all"
+      ],
+      "answerIndex": 0,
+      "explanation": "A fixed number does not change when data grows. AVG(total) always uses the real row count."
+    }
+  ]
+}

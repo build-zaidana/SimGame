@@ -1,0 +1,34 @@
+{
+  "dialogues": [
+    {
+      "id": "data-02-intro",
+      "lines": [
+        {
+          "speaker": "laras",
+          "text": "It's the monthly meeting today. Everyone needs summary numbers: counts, totals, averages."
+        },
+        {
+          "speaker": "laras",
+          "text": "Meet COUNT, SUM, AVG and GROUP BY. I've added a chapter to the handbook."
+        },
+        {
+          "speaker": "laras",
+          "text": "One more thing: if someone asks for customers’ personal data, stop and think about who will receive it."
+        }
+      ]
+    },
+    {
+      "id": "data-02-outro",
+      "lines": [
+        {
+          "speaker": "laras",
+          "text": "The meeting went well thanks to your numbers. A per-branch summary beats thousands of rows."
+        },
+        {
+          "speaker": "laras",
+          "text": "And remember: personal data isn't ours. It's only entrusted to us."
+        }
+      ]
+    }
+  ]
+}

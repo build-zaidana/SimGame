@@ -1,0 +1,58 @@
+{
+  "id": "s03-chart-001",
+  "type": "chart",
+  "conceptIds": ["honest-charts", "data-quality"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "author": {
+      "name": "Putri Rahayu",
+      "team": "Panitia Lari Amal"
+    },
+    "title": "Peserta Lari Amal per Kota",
+    "purpose": "Pengumuman panitia",
+    "chart": {
+      "kind": "bar",
+      "title": "Peserta terdaftar",
+      "unit": "orang",
+      "axisStart": 0,
+      "points": [
+        {
+          "label": "Bandung",
+          "value": 140
+        },
+        {
+          "label": "Medan",
+          "value": 95
+        },
+        {
+          "label": "Surabaya",
+          "value": 120
+        }
+      ],
+      "axisEvidenceId": "axis"
+    },
+    "claims": [
+      {
+        "text": "Bandung jadi kota dengan peserta terbanyak.",
+        "evidenceId": "claim-top"
+      }
+    ],
+    "notes": [
+      {
+        "text": "12 baris ganda sudah dihapus; ejaan \"Bdg\" disatukan menjadi \"Bandung\".",
+        "evidenceId": "note-clean"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["claim-top", "note-clean", "axis"]
+  },
+  "explanation": "Datanya sudah dibersihkan, sumbu mulai dari 0, dan klaimnya sesuai angka. Setujui.",
+  "ruleRefs": ["r-dq-4", "r-ch-1"],
+  "hints": ["Cek apakah datanya sudah dibersihkan.", "Sumbu, catatan, dan klaimnya semua wajar?"]
+}

@@ -1,0 +1,61 @@
+{
+  "id": "s02-chart-003",
+  "type": "chart",
+  "conceptIds": ["honest-charts"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "author": {
+      "name": "Hendra Kusuma",
+      "team": "Branch Manager"
+    },
+    "title": "Customer Satisfaction per Branch",
+    "purpose": "Internal office newsletter",
+    "chart": {
+      "kind": "bar",
+      "title": "Satisfied customers",
+      "unit": "%",
+      "axisStart": 0,
+      "points": [
+        {
+          "label": "Bandung",
+          "value": 82
+        },
+        {
+          "label": "Medan",
+          "value": 79
+        },
+        {
+          "label": "Surabaya",
+          "value": 85
+        }
+      ],
+      "axisEvidenceId": "axis"
+    },
+    "claims": [
+      {
+        "text": "Satisfaction at all three branches is similar, around 80%.",
+        "evidenceId": "claim-similar"
+      }
+    ],
+    "notes": [
+      {
+        "text": "Survey of 420 customers in July, picked at random from receipts.",
+        "evidenceId": "note-sample"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["claim-similar", "note-sample", "axis"]
+  },
+  "explanation": "The axis starts at 0, the sample is large and random, and \"similar, around 80%\" fits the numbers. Approve it.",
+  "ruleRefs": ["r-ch-1", "r-ch-2"],
+  "hints": [
+    "Check the axis, the sample, then the claim.",
+    "If everything is reasonable, an honest report should not be held back."
+  ]
+}

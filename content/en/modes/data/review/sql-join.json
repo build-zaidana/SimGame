@@ -1,0 +1,42 @@
+{
+  "items": [
+    {
+      "id": "rv-jn-1",
+      "type": "mcq",
+      "conceptId": "sql-join",
+      "difficulty": 1,
+      "prompt": "The orders table only has customer_id. How do you show who ordered?",
+      "choices": ["JOIN with the customers table", "Guess from the id", "You cannot"],
+      "answerIndex": 0,
+      "explanation": "JOIN combines rows from two tables whose values match."
+    },
+    {
+      "id": "rv-jn-2",
+      "type": "mcq",
+      "conceptId": "sql-join",
+      "difficulty": 2,
+      "prompt": "Which ON pairing is right?",
+      "choices": [
+        "pesanan.pelanggan_id = pelanggan.id",
+        "pesanan.id = pelanggan.id",
+        "pesanan.total = pelanggan.id"
+      ],
+      "answerIndex": 0,
+      "explanation": "customer_id in orders points to id in customers. Other pairings mix up the people."
+    },
+    {
+      "id": "rv-jn-3",
+      "type": "mcq",
+      "conceptId": "sql-join",
+      "difficulty": 2,
+      "prompt": "Why write orders.id instead of just id?",
+      "choices": [
+        "id exists in both tables, so you must say which",
+        "To make it longer",
+        "It is required in every query"
+      ],
+      "answerIndex": 0,
+      "explanation": "When two tables share a column name, SQL needs to know which one you mean."
+    }
+  ]
+}

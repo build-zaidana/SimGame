@@ -1,0 +1,72 @@
+{
+  "upgrades": [
+    {
+      "id": "plant",
+      "name": "Desk plant",
+      "icon": "🪴",
+      "description": "A small plant that grows slowly but surely, like an honest chart. Desk decoration.",
+      "price": 30,
+      "requiresRank": 0,
+      "effect": {
+        "kind": "cosmetic"
+      }
+    },
+    {
+      "id": "lamp",
+      "name": "Desk lamp",
+      "icon": "💡",
+      "description": "Warm light for reading long tables. Desk decoration.",
+      "price": 60,
+      "requiresRank": 1,
+      "effect": {
+        "kind": "cosmetic"
+      }
+    },
+    {
+      "id": "coffee",
+      "name": "Coffee machine",
+      "icon": "☕",
+      "description": "A fresher mind: the first 2 mentor hints on every case are free.",
+      "price": 120,
+      "requiresRank": 1,
+      "effect": {
+        "kind": "free-hints",
+        "value": 2
+      }
+    },
+    {
+      "id": "cat",
+      "name": "Cat figurine",
+      "icon": "🐈",
+      "description": "A tiny pixel cat that loves sitting on the keyboard. Desk decoration.",
+      "price": 80,
+      "requiresRank": 2,
+      "effect": {
+        "kind": "cosmetic"
+      }
+    },
+    {
+      "id": "monitor",
+      "name": "Second monitor",
+      "icon": "🖥️",
+      "description": "Tables and handbook side by side: shift time is 15% longer.",
+      "price": 160,
+      "requiresRank": 2,
+      "effect": {
+        "kind": "shift-time",
+        "percent": 15
+      }
+    },
+    {
+      "id": "trophy",
+      "name": "Trophy shelf",
+      "icon": "🏆",
+      "description": "A place to show off the badges you've collected. Decoration for seniors.",
+      "price": 150,
+      "requiresRank": 3,
+      "effect": {
+        "kind": "cosmetic"
+      }
+    }
+  ]
+}

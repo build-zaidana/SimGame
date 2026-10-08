@@ -1,0 +1,84 @@
+{
+  "id": "data-05",
+  "order": 5,
+  "title": "Year-End Report",
+  "durationGameMinutes": 150,
+  "realSecondsPerGameMinute": 4,
+  "unlocksChapters": [],
+  "introDialogue": "data-05-intro",
+  "outroDialogue": "data-05-outro",
+  "tutorial": false,
+  "queue": [
+    {
+      "caseId": "s05-q-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s05-req-002",
+      "arriveAt": 8
+    },
+    {
+      "caseId": "s05-q-002",
+      "arriveAt": 16
+    },
+    {
+      "caseId": "s05-chart-001",
+      "arriveAt": 26
+    },
+    {
+      "caseId": "s05-q-003",
+      "arriveAt": 38
+    },
+    {
+      "caseId": "s05-chart-002",
+      "arriveAt": 50
+    },
+    {
+      "caseId": "s05-q-004",
+      "arriveAt": 70
+    },
+    {
+      "caseId": "s05-req-001",
+      "arriveAt": 76
+    },
+    {
+      "caseId": "s05-ai-001",
+      "arriveAt": 88
+    }
+  ],
+  "review": {
+    "count": 5,
+    "conceptIds": ["sql-aggregate", "honest-charts", "data-privacy", "ai-basics"]
+  },
+  "pay": {
+    "base": 70,
+    "perCase": 17
+  },
+  "newspaper": {
+    "headline": "Year-End Report Gets Under Way",
+    "lead": "Every team at PT Nusa Digital is waiting for year-end figures. The data team prepares queries, charts and summaries the public will read.",
+    "tip": {
+      "title": "Tip: Double-Check Before Publishing",
+      "text": "Published numbers are hard to take back. Match every claim with its source table."
+    },
+    "sources": [
+      "Alberto Cairo — How Charts Lie (2019)",
+      "NIST — AI Risk Management Framework (AI RMF 1.0)"
+    ],
+    "impact": {
+      "good": "Yesterday's AI launch was praised: fair, safe and well-sourced.",
+      "mixed": "The AI feature launched, but some of its answers had to be corrected.",
+      "bad": "A made-up AI answer appeared on the FAQ. The AI team pulled it back."
+    },
+    "classified": "FREE: Magic sales-predicting AI. Condition: upload all customer data. (Don’t.)"
+  },
+  "boss": {
+    "title": "Annual Report Deadline",
+    "icon": "🗓️",
+    "intro": "The annual report goes out today! One query, one suspicious request and one AI summary are waiting.",
+    "caseIds": ["s05-q-004", "s05-req-001", "s05-ai-001"],
+    "arriveAt": 70,
+    "durationGameMinutes": 45,
+    "reward": 45
+  }
+}

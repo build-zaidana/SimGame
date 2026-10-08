@@ -1,0 +1,38 @@
+{
+  "dialogues": [
+    {
+      "id": "data-01-intro",
+      "lines": [
+        {
+          "speaker": "laras",
+          "text": "Welcome to the Data Desk! I'm Laras, a senior data analyst. Just call me Laras."
+        },
+        {
+          "speaker": "laras",
+          "text": "Here you write real SQL. Type a query, press Run Query, then compare your result with the requested one."
+        },
+        {
+          "speaker": "laras",
+          "text": "Your query is also quietly checked on other data, so no memorising answers."
+        },
+        {
+          "speaker": "laras",
+          "text": "There are also charts from colleagues: APPROVE if honest, REVISE if misleading, ESCALATE if it needs a manager."
+        }
+      ]
+    },
+    {
+      "id": "data-01-outro",
+      "lines": [
+        {
+          "speaker": "laras",
+          "text": "First shift done! You've used SELECT, WHERE and ORDER BY, and caught a chart that exaggerated."
+        },
+        {
+          "speaker": "laras",
+          "text": "Remember: correct numbers shown in a misleading way can still fool people."
+        }
+      ]
+    }
+  ]
+}

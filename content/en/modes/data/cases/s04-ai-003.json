@@ -1,0 +1,51 @@
+{
+  "id": "s04-ai-003",
+  "type": "request",
+  "conceptIds": ["ai-basics"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {},
+  "severity": 2,
+  "data": {
+    "kind": "ai-answer",
+    "from": {
+      "name": "Rudi Hartono",
+      "team": "Customer Service Team"
+    },
+    "title": "An AI answer for the FAQ page",
+    "message": [
+      {
+        "text": "We want to put this AI assistant answer on the e-wallet FAQ page.",
+        "evidenceId": "msg-faq"
+      }
+    ],
+    "notes": [],
+    "chat": [
+      {
+        "who": "user",
+        "text": "What is the minimum age to open an e-wallet account?"
+      },
+      {
+        "who": "ai",
+        "text": "According to Ministerial Regulation No. 99 of 2025, the minimum age is 13.",
+        "evidenceId": "ai-cite"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["ai-cite"],
+    "supporting": ["src-missing", "msg-faq"]
+  },
+  "explanation": "The cited regulation cannot be found, a sign the AI made up its source (hallucination). Ask for a revision: check the official rules before publishing.",
+  "ruleRefs": ["r-ai-2"],
+  "hints": ["Which part of the answer can be fact-checked?", "Does that regulation really exist?"],
+  "intel": {
+    "source": [
+      {
+        "text": "Ministerial Regulation No. 99 of 2025 was not found in the regulation database.",
+        "evidenceId": "src-missing"
+      }
+    ]
+  }
+}

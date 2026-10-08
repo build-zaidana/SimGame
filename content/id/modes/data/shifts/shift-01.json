@@ -1,0 +1,68 @@
+{
+  "id": "data-01",
+  "order": 1,
+  "title": "Hari Pertama di Meja Data",
+  "durationGameMinutes": 150,
+  "realSecondsPerGameMinute": 4,
+  "unlocksChapters": ["ch-sql", "ch-chart"],
+  "introDialogue": "data-01-intro",
+  "outroDialogue": "data-01-outro",
+  "tutorial": true,
+  "queue": [
+    {
+      "caseId": "s01-q-001",
+      "arriveAt": 0
+    },
+    {
+      "caseId": "s01-chart-001",
+      "arriveAt": 8
+    },
+    {
+      "caseId": "s01-q-002",
+      "arriveAt": 18
+    },
+    {
+      "caseId": "s01-chart-002",
+      "arriveAt": 30
+    },
+    {
+      "caseId": "s01-q-003",
+      "arriveAt": 60
+    },
+    {
+      "caseId": "s01-chart-003",
+      "arriveAt": 72
+    },
+    {
+      "caseId": "s01-q-004",
+      "arriveAt": 86
+    }
+  ],
+  "review": {
+    "count": 3,
+    "conceptIds": ["data-tables", "honest-charts"]
+  },
+  "pay": {
+    "base": 50,
+    "perCase": 14
+  },
+  "newspaper": {
+    "headline": "PT Nusa Digital Buka Meja Data",
+    "lead": "Tim data PT Nusa Digital menerima analis baru. Tugasnya: menarik angka dari database dengan SQL dan memeriksa grafik sebelum laporan terbit.",
+    "tip": {
+      "title": "Tips: Lihat Sumbu Dulu",
+      "text": "Sebelum percaya grafik batang, cek sumbu Y dimulai dari mana. Kalau bukan dari 0, beda kecil bisa tampak raksasa."
+    },
+    "classified": "DICARI: Analis yang teliti membaca tabel. Hubungi Bu Laras, lantai 3.",
+    "sources": ["SQLite Documentation — SELECT", "Alberto Cairo — How Charts Lie (2019)"]
+  },
+  "boss": {
+    "title": "Rapat Direksi",
+    "icon": "📈",
+    "intro": "Direksi rapat sebentar lagi! Tiga permintaan datang sekaligus: dua query dan satu grafik. Selesaikan semuanya dengan benar!",
+    "caseIds": ["s01-q-003", "s01-chart-003", "s01-q-004"],
+    "arriveAt": 60,
+    "durationGameMinutes": 45,
+    "reward": 30
+  }
+}

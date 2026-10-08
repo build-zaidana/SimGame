@@ -1,0 +1,62 @@
+{
+  "id": "s02-req-002",
+  "type": "request",
+  "conceptIds": ["data-privacy"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "kind": "share",
+    "from": {
+      "name": "Hendra Kusuma",
+      "team": "Manajer Cabang"
+    },
+    "title": "Ringkasan pesanan untuk rapat",
+    "message": [
+      {
+        "text": "Untuk rapat manajer besok, saya butuh jumlah pesanan per cabang bulan ini.",
+        "evidenceId": "msg-need"
+      }
+    ],
+    "notes": [
+      {
+        "text": "Tidak ada nama, nomor HP, atau alamat pelanggan.",
+        "evidenceId": "note-aggregate"
+      }
+    ],
+    "table": {
+      "title": "Yang akan dikirim",
+      "columns": [
+        {
+          "name": "cabang"
+        },
+        {
+          "name": "jumlah_pesanan"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["Bandung", "128"]
+        },
+        {
+          "cells": ["Medan", "97"]
+        },
+        {
+          "cells": ["Surabaya", "115"]
+        }
+      ]
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["msg-need", "note-aggregate"]
+  },
+  "explanation": "Ini angka ringkasan per cabang tanpa nama atau nomor HP, dipakai untuk rapat internal. Aman disetujui.",
+  "ruleRefs": ["r-pv-2"],
+  "hints": [
+    "Apakah ada data yang menunjuk ke orang tertentu?",
+    "Ringkasan per cabang untuk rapat internal biasanya aman."
+  ]
+}

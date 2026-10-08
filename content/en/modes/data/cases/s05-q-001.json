@@ -1,0 +1,128 @@
+{
+  "id": "s05-q-001",
+  "type": "query",
+  "conceptIds": ["sql-aggregate"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Maya Anggraini",
+      "team": "Finance Team"
+    },
+    "title": "Sales per month",
+    "story": [
+      "For the year-end report: total sales for each month.",
+      "Show the month and its total, in order from month 1."
+    ],
+    "tables": [
+      {
+        "name": "sales",
+        "columns": [
+          {
+            "name": "month",
+            "type": "INTEGER"
+          },
+          {
+            "name": "category",
+            "type": "TEXT"
+          },
+          {
+            "name": "customer",
+            "type": "TEXT"
+          },
+          {
+            "name": "total",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          [1, "Drinks", "Ayu", 300],
+          [1, "Food", "Budi", 200],
+          [2, "Drinks", "Ayu", 250],
+          [2, "Drinks", "Citra", 400],
+          [3, "Food", "Budi", 350],
+          [3, "Drinks", "Dodi", 100]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "sales",
+            "columns": [
+              {
+                "name": "month",
+                "type": "INTEGER"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "customer",
+                "type": "TEXT"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, "Food", "Eka", 700],
+              [2, "Drinks", "Eka", 100],
+              [2, "Food", "Fajar", 150],
+              [3, "Drinks", "Gita", 500],
+              [3, "Drinks", "Hadi", 300]
+            ]
+          }
+        ]
+      },
+      {
+        "tables": [
+          {
+            "name": "sales",
+            "columns": [
+              {
+                "name": "month",
+                "type": "INTEGER"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "customer",
+                "type": "TEXT"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, "Drinks", "Indah", 900],
+              [2, "Food", "Indah", 50],
+              [3, "Food", "Joni", 120],
+              [3, "Food", "Kiki", 80]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "SELECT month, SUM(total)\nFROM sales\n",
+    "solution": "SELECT month, SUM(total) FROM sales GROUP BY month ORDER BY month",
+    "ordered": true
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "GROUP BY month sums per month, ORDER BY month puts them in order from January.",
+  "ruleRefs": ["r-agg-2", "r-sql-4"],
+  "hints": ["Group first, then sort.", "Add GROUP BY month ORDER BY month."]
+}

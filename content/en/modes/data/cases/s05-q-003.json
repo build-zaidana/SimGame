@@ -1,0 +1,130 @@
+{
+  "id": "s05-q-003",
+  "type": "query",
+  "conceptIds": ["sql-aggregate", "data-quality"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Sari Wulandari",
+      "team": "Marketing Team"
+    },
+    "title": "How many customers per category?",
+    "story": [
+      "One customer can buy many times. We want to know how many DIFFERENT people bought each category."
+    ],
+    "tables": [
+      {
+        "name": "sales",
+        "columns": [
+          {
+            "name": "month",
+            "type": "INTEGER"
+          },
+          {
+            "name": "category",
+            "type": "TEXT"
+          },
+          {
+            "name": "customer",
+            "type": "TEXT"
+          },
+          {
+            "name": "total",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          [1, "Drinks", "Ayu", 300],
+          [1, "Food", "Budi", 200],
+          [2, "Drinks", "Ayu", 250],
+          [2, "Drinks", "Citra", 400],
+          [3, "Food", "Budi", 350],
+          [3, "Drinks", "Dodi", 100]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "sales",
+            "columns": [
+              {
+                "name": "month",
+                "type": "INTEGER"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "customer",
+                "type": "TEXT"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, "Food", "Eka", 700],
+              [2, "Drinks", "Eka", 100],
+              [2, "Food", "Fajar", 150],
+              [3, "Drinks", "Gita", 500],
+              [3, "Drinks", "Hadi", 300]
+            ]
+          }
+        ]
+      },
+      {
+        "tables": [
+          {
+            "name": "sales",
+            "columns": [
+              {
+                "name": "month",
+                "type": "INTEGER"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "customer",
+                "type": "TEXT"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, "Drinks", "Indah", 900],
+              [2, "Food", "Indah", 50],
+              [3, "Food", "Joni", 120],
+              [3, "Food", "Kiki", 80]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "-- Hint: COUNT(DISTINCT column) counts only different values\n",
+    "solution": "SELECT category, COUNT(DISTINCT customer) FROM sales GROUP BY category",
+    "ordered": false
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "COUNT(*) counts transactions; COUNT(DISTINCT customer) counts people, so the same buyer is not counted twice.",
+  "ruleRefs": ["r-agg-1", "r-dq-1"],
+  "hints": [
+    "Ayu bought drinks twice. How many people should that count as?",
+    "SELECT category, COUNT(DISTINCT customer) … GROUP BY category"
+  ]
+}

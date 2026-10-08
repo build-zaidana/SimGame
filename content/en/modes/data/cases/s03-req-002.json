@@ -1,0 +1,64 @@
+{
+  "id": "s03-req-002",
+  "type": "request",
+  "conceptIds": ["data-quality"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "kind": "quality",
+    "from": {
+      "name": "Putri Rahayu",
+      "team": "Charity Run Committee"
+    },
+    "title": "Participant data for insurance",
+    "message": [
+      {
+        "text": "We want to send this to the insurer to price premiums by age group.",
+        "evidenceId": "msg-insurance"
+      }
+    ],
+    "notes": [],
+    "table": {
+      "title": "Participants",
+      "columns": [
+        {
+          "name": "name"
+        },
+        {
+          "name": "age"
+        },
+        {
+          "name": "signup_date"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["Rina", "17", "12-02-2026"]
+        },
+        {
+          "cells": ["Tono", "230", "14-02-2026"],
+          "evidenceId": "row-age"
+        },
+        {
+          "cells": ["Wati", "45", "31-02-2026"],
+          "evidenceId": "row-date"
+        }
+      ]
+    }
+  },
+  "evidence": {
+    "required": ["row-age"],
+    "supporting": ["row-date", "msg-insurance"]
+  },
+  "explanation": "An age of 230 and 31 February are impossible, so premium calculations would be wrong. Ask for a revision: fix the data first.",
+  "ruleRefs": ["r-dq-3"],
+  "hints": [
+    "Read each age and date. Anything impossible?",
+    "What is a reasonable maximum human age?"
+  ]
+}

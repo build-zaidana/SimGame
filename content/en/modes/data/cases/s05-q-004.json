@@ -1,0 +1,125 @@
+{
+  "id": "s05-q-004",
+  "type": "query",
+  "conceptIds": ["sql-aggregate"],
+  "difficulty": 3,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Maya Anggraini",
+      "team": "Finance Team"
+    },
+    "title": "Best month of the year",
+    "story": ["Which month had the biggest sales? Show just the month and its total, one row."],
+    "tables": [
+      {
+        "name": "sales",
+        "columns": [
+          {
+            "name": "month",
+            "type": "INTEGER"
+          },
+          {
+            "name": "category",
+            "type": "TEXT"
+          },
+          {
+            "name": "customer",
+            "type": "TEXT"
+          },
+          {
+            "name": "total",
+            "type": "INTEGER"
+          }
+        ],
+        "rows": [
+          [1, "Drinks", "Ayu", 300],
+          [1, "Food", "Budi", 200],
+          [2, "Drinks", "Ayu", 250],
+          [2, "Drinks", "Citra", 400],
+          [3, "Food", "Budi", 350],
+          [3, "Drinks", "Dodi", 100]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "sales",
+            "columns": [
+              {
+                "name": "month",
+                "type": "INTEGER"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "customer",
+                "type": "TEXT"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, "Food", "Eka", 700],
+              [2, "Drinks", "Eka", 100],
+              [2, "Food", "Fajar", 150],
+              [3, "Drinks", "Gita", 500],
+              [3, "Drinks", "Hadi", 300]
+            ]
+          }
+        ]
+      },
+      {
+        "tables": [
+          {
+            "name": "sales",
+            "columns": [
+              {
+                "name": "month",
+                "type": "INTEGER"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "customer",
+                "type": "TEXT"
+              },
+              {
+                "name": "total",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [1, "Drinks", "Indah", 900],
+              [2, "Food", "Indah", 50],
+              [3, "Food", "Joni", 120],
+              [3, "Food", "Kiki", 80]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "",
+    "solution": "SELECT month, SUM(total) FROM sales GROUP BY month ORDER BY SUM(total) DESC LIMIT 1",
+    "ordered": true
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Sum per month, sort the totals largest first, then keep the top row.",
+  "ruleRefs": ["r-agg-2", "r-sql-4"],
+  "hints": ["Start from the sales-per-month query.", "… ORDER BY SUM(total) DESC LIMIT 1"]
+}

@@ -1,0 +1,76 @@
+{
+  "id": "s03-req-003",
+  "type": "request",
+  "conceptIds": ["data-quality"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "kind": "quality",
+    "from": {
+      "name": "Rudi Hartono",
+      "team": "Customer Service Team"
+    },
+    "title": "Satisfaction data for analysis",
+    "message": [
+      {
+        "text": "We've tidied up the survey data. Can it be used for this month's analysis?",
+        "evidenceId": "msg-clean"
+      }
+    ],
+    "notes": [
+      {
+        "text": "Checked: every response_id is unique, no empty scores.",
+        "evidenceId": "note-check"
+      }
+    ],
+    "table": {
+      "title": "Survey (scale 1–5)",
+      "columns": [
+        {
+          "name": "response_id"
+        },
+        {
+          "name": "branch"
+        },
+        {
+          "name": "score"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["R-01", "Bandung", "4"]
+        },
+        {
+          "cells": ["R-02", "Medan", "5"]
+        },
+        {
+          "cells": ["R-03", "Surabaya", "3"]
+        },
+        {
+          "cells": ["R-04", "Bandung", "4"]
+        }
+      ]
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["msg-clean", "prof-clean", "note-check"]
+  },
+  "explanation": "No duplicates, empty values or impossible values; scores are 1–5 as the scale says. Clean data like this can be used right away.",
+  "ruleRefs": ["r-dq-4"],
+  "hints": [
+    "Check for duplicates, blanks and impossible values.",
+    "If it's all tidy, there's no reason to hold it back."
+  ],
+  "intel": {
+    "profile": [
+      {
+        "text": "0 empty values, 0 duplicates; lowest score 3, highest 5.",
+        "evidenceId": "prof-clean"
+      }
+    ]
+  }
+}

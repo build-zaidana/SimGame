@@ -1,0 +1,22 @@
+{
+  "tools": [
+    {
+      "id": "data-profiler",
+      "name": "Data Profiler",
+      "icon": "🔬",
+      "description": "Automatically summarises each column: how many are empty, how many duplicated, and the smallest/largest values.",
+      "price": 70,
+      "conceptId": "data-quality",
+      "unlockAtShift": 2
+    },
+    {
+      "id": "source-check",
+      "name": "Source Check",
+      "icon": "🔎",
+      "description": "Traces where numbers and references in a report or AI answer come from: real, or made up?",
+      "price": 90,
+      "conceptId": "ai-basics",
+      "unlockAtShift": 3
+    }
+  ]
+}

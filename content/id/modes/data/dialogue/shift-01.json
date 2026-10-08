@@ -1,0 +1,38 @@
+{
+  "dialogues": [
+    {
+      "id": "data-01-intro",
+      "lines": [
+        {
+          "speaker": "laras",
+          "text": "Selamat datang di Meja Data! Saya Laras, analis data senior. Panggil saja Bu Laras."
+        },
+        {
+          "speaker": "laras",
+          "text": "Di sini kamu menulis SQL sungguhan. Ketik query, tekan Jalankan Query, lalu bandingkan hasilmu dengan hasil yang diminta."
+        },
+        {
+          "speaker": "laras",
+          "text": "Query-mu juga dicek diam-diam di data lain, jadi jangan menghafal jawabannya, ya."
+        },
+        {
+          "speaker": "laras",
+          "text": "Ada juga grafik dari rekan kerja: SETUJUI kalau jujur, REVISI kalau menyesatkan, ESKALASI kalau perlu atasan."
+        }
+      ]
+    },
+    {
+      "id": "data-01-outro",
+      "lines": [
+        {
+          "speaker": "laras",
+          "text": "Shift pertama beres! Kamu sudah memakai SELECT, WHERE, dan ORDER BY, dan menangkap grafik yang melebih-lebihkan."
+        },
+        {
+          "speaker": "laras",
+          "text": "Ingat: angka yang benar tapi ditampilkan menyesatkan tetap bisa menipu orang."
+        }
+      ]
+    }
+  ]
+}

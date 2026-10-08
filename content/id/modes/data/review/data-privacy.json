@@ -1,0 +1,52 @@
+{
+  "items": [
+    {
+      "id": "rv-pv-1",
+      "type": "mcq",
+      "conceptId": "data-privacy",
+      "difficulty": 1,
+      "prompt": "Mana yang termasuk data pribadi?",
+      "choices": ["Nomor HP pelanggan", "Jumlah pesanan per kota", "Harga kopi"],
+      "answerIndex": 0,
+      "explanation": "Nomor HP bisa menunjuk ke satu orang. Angka ringkasan per kota tidak."
+    },
+    {
+      "id": "rv-pv-2",
+      "type": "mcq",
+      "conceptId": "data-privacy",
+      "difficulty": 2,
+      "prompt": "Rapat hanya butuh jumlah pesanan per cabang. Data apa yang dikirim?",
+      "choices": [
+        "Ringkasan per cabang saja",
+        "Semua data pelanggan lengkap",
+        "Nama dan nomor HP pelanggan"
+      ],
+      "answerIndex": 0,
+      "explanation": "Prinsip minimisasi: bagikan secukupnya untuk tujuan yang diminta."
+    },
+    {
+      "id": "rv-pv-3",
+      "type": "mcq",
+      "conceptId": "data-privacy",
+      "difficulty": 2,
+      "prompt": "Vendor iklan minta daftar nama dan nomor HP pelanggan. Langkahmu?",
+      "choices": [
+        "Eskalasi ke Petugas Pelindungan Data",
+        "Langsung kirim",
+        "Kirim lewat surel pribadi"
+      ],
+      "answerIndex": 0,
+      "explanation": "Data pribadi untuk pihak luar dan tujuan baru perlu dicek dasar hukumnya oleh DPO."
+    },
+    {
+      "id": "rv-pv-4",
+      "type": "mcq",
+      "conceptId": "data-privacy",
+      "difficulty": 1,
+      "prompt": "Undang-undang Indonesia yang melindungi data pribadi adalah…",
+      "choices": ["UU No. 27 Tahun 2022 (UU PDP)", "UU Lalu Lintas", "Tidak ada"],
+      "answerIndex": 0,
+      "explanation": "UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi mengatur cara data pribadi boleh diproses."
+    }
+  ]
+}

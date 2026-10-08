@@ -1,0 +1,71 @@
+{
+  "id": "s02-chart-001",
+  "type": "chart",
+  "conceptIds": ["honest-charts"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Bayu Firmansyah",
+      "team": "Tim Penjualan"
+    },
+    "title": "Tren Penjualan Tahun Ini",
+    "purpose": "Laporan untuk investor",
+    "chart": {
+      "kind": "line",
+      "title": "Penjualan per bulan",
+      "unit": "juta rupiah",
+      "axisStart": 0,
+      "points": [
+        {
+          "label": "Apr",
+          "value": 300
+        },
+        {
+          "label": "Mei",
+          "value": 340
+        },
+        {
+          "label": "Jun",
+          "value": 380
+        }
+      ],
+      "axisEvidenceId": "axis"
+    },
+    "claims": [
+      {
+        "text": "Penjualan kita SELALU naik sepanjang tahun ini!",
+        "evidenceId": "claim-always"
+      }
+    ],
+    "notes": [
+      {
+        "text": "Grafik ini menampilkan April–Juni saja.",
+        "evidenceId": "note-range"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["claim-always", "note-range"],
+    "supporting": ["src-q1"]
+  },
+  "explanation": "Klaim \"sepanjang tahun\" tapi grafiknya hanya tiga bulan yang naik. Minta revisi dengan rentang waktu utuh sejak Januari.",
+  "ruleRefs": ["r-ch-4"],
+  "hints": [
+    "Cocokkan kata \"sepanjang tahun\" dengan bulan yang ditampilkan.",
+    "Ke mana bulan Januari sampai Maret?"
+  ],
+  "intel": {
+    "source": [
+      {
+        "text": "Catatan kasir Januari–Maret: 420, 390, 310 juta (turun).",
+        "evidenceId": "src-q1"
+      }
+    ]
+  }
+}

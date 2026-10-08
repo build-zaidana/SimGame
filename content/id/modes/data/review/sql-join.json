@@ -1,0 +1,42 @@
+{
+  "items": [
+    {
+      "id": "rv-jn-1",
+      "type": "mcq",
+      "conceptId": "sql-join",
+      "difficulty": 1,
+      "prompt": "Tabel pesanan hanya punya pelanggan_id. Bagaimana menampilkan nama pemesan?",
+      "choices": ["JOIN dengan tabel pelanggan", "Tebak dari id-nya", "Tidak bisa"],
+      "answerIndex": 0,
+      "explanation": "JOIN menggabungkan baris dari dua tabel yang nilainya cocok."
+    },
+    {
+      "id": "rv-jn-2",
+      "type": "mcq",
+      "conceptId": "sql-join",
+      "difficulty": 2,
+      "prompt": "Pasangan ON yang benar?",
+      "choices": [
+        "pesanan.pelanggan_id = pelanggan.id",
+        "pesanan.id = pelanggan.id",
+        "pesanan.total = pelanggan.id"
+      ],
+      "answerIndex": 0,
+      "explanation": "pelanggan_id di tabel pesanan menunjuk ke id di tabel pelanggan. Pasangan lain membuat orangnya tertukar."
+    },
+    {
+      "id": "rv-jn-3",
+      "type": "mcq",
+      "conceptId": "sql-join",
+      "difficulty": 2,
+      "prompt": "Kenapa menulis pesanan.id, bukan cukup id?",
+      "choices": [
+        "Kolom id ada di dua tabel, jadi harus jelas yang mana",
+        "Biar lebih panjang",
+        "Wajib di semua query"
+      ],
+      "answerIndex": 0,
+      "explanation": "Kalau nama kolom sama di dua tabel, SQL perlu tahu tabel mana yang dimaksud."
+    }
+  ]
+}

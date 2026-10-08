@@ -1,0 +1,127 @@
+{
+  "id": "s03-q-002",
+  "type": "query",
+  "conceptIds": ["data-quality"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Rudi Hartono",
+      "team": "Customer Service Team"
+    },
+    "title": "Registrants without an email",
+    "story": [
+      "We want to call registrants who haven't filled in an email.",
+      "This query finds nobody, even though some are empty."
+    ],
+    "tables": [
+      {
+        "name": "registrants",
+        "columns": [
+          {
+            "name": "name",
+            "type": "TEXT"
+          },
+          {
+            "name": "email",
+            "type": "TEXT"
+          },
+          {
+            "name": "age",
+            "type": "INTEGER"
+          },
+          {
+            "name": "city",
+            "type": "TEXT"
+          }
+        ],
+        "rows": [
+          ["Rina", "rina@contoh.test", 17, "Bandung"],
+          ["Tono", "tono@contoh.test", 230, "Medan"],
+          ["Wati", null, 45, "Bandung"],
+          ["Yusuf", "yusuf@contoh.test", 28, "Bdg"],
+          ["Zahra", null, 33, "Medan"]
+        ]
+      }
+    ],
+    "hidden": [
+      {
+        "tables": [
+          {
+            "name": "registrants",
+            "columns": [
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "email",
+                "type": "TEXT"
+              },
+              {
+                "name": "age",
+                "type": "INTEGER"
+              },
+              {
+                "name": "city",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              ["Adi", null, 19, "Solo"],
+              ["Bella", "bella@contoh.test", 52, "Solo"],
+              ["Candra", "candra@contoh.test", -4, "Surabaya"],
+              ["Dina", "dina@contoh.test", 40, "Sby"]
+            ]
+          }
+        ]
+      },
+      {
+        "tables": [
+          {
+            "name": "registrants",
+            "columns": [
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "email",
+                "type": "TEXT"
+              },
+              {
+                "name": "age",
+                "type": "INTEGER"
+              },
+              {
+                "name": "city",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              ["Edo", "edo@contoh.test", 21, "Medan"],
+              ["Fitri", null, 150, "Bandung"],
+              ["Galih", null, 36, "Bandung"],
+              ["Hana", null, 24, "Medan"],
+              ["Irfan", "irfan@contoh.test", 31, "Mdn"]
+            ]
+          }
+        ]
+      }
+    ],
+    "starter": "SELECT name\nFROM registrants\nWHERE email = NULL\n",
+    "solution": "SELECT name FROM registrants WHERE email IS NULL",
+    "ordered": false
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "NULL means \"unknown\", so it is never equal to anything. Use IS NULL to find it.",
+  "ruleRefs": ["r-dq-2"],
+  "hints": ["Look at the equals sign before NULL.", "Replace = NULL with IS NULL."]
+}

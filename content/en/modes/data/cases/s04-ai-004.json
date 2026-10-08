@@ -1,0 +1,73 @@
+{
+  "id": "s04-ai-004",
+  "type": "request",
+  "conceptIds": ["ai-basics"],
+  "difficulty": 1,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "kind": "ai-answer",
+    "from": {
+      "name": "Maya Anggraini",
+      "team": "Finance Team"
+    },
+    "title": "A sales summary from the AI assistant",
+    "message": [
+      {
+        "text": "The office AI assistant summarised this quarter's sales. I've matched it against the source table.",
+        "evidenceId": "msg-checked"
+      }
+    ],
+    "notes": [],
+    "table": {
+      "title": "Source table",
+      "columns": [
+        {
+          "name": "quarter"
+        },
+        {
+          "name": "sales_million"
+        }
+      ],
+      "rows": [
+        {
+          "cells": ["Q2", "428"]
+        },
+        {
+          "cells": ["Q3", "450"]
+        }
+      ]
+    },
+    "chat": [
+      {
+        "who": "user",
+        "text": "Summarise Q3 sales compared with Q2."
+      },
+      {
+        "who": "ai",
+        "text": "Q3 sales were Rp 450 million, up about 5% from Q2 (Rp 428 million).",
+        "evidenceId": "ai-summary"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["msg-checked", "ai-summary", "src-ok"]
+  },
+  "explanation": "The numbers in the AI answer match the source table (428 to 450 million, up about 5%) and a person checked them. It can be approved.",
+  "ruleRefs": ["r-ai-2"],
+  "hints": [
+    "Match the AI answer's numbers with the table.",
+    "From 428 to 450, roughly what percentage rise is that?"
+  ],
+  "intel": {
+    "source": [
+      {
+        "text": "The Q2 and Q3 figures match the official financial report.",
+        "evidenceId": "src-ok"
+      }
+    ]
+  }
+}
