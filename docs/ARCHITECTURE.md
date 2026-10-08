@@ -14,6 +14,7 @@
 │     │                                                                          │
 │     ├── modes/soc/   ← paket mode: CaseType (schema + evaluator + renderer)     │
 │     ├── modes/support ← Bengkel IT (ADR 025); modes/dev ← Meja Developer (ADR 026) │
+│     ├── modes/data ← Meja Data: SQL sungguhan dengan sql.js (ADR 031)           │
 │     │                                                                          │
 │     ├── engine/      ← TS murni: shift reducer, scoring, mastery, RNG, clock   │
 │     │                  (tanpa React, tanpa DOM, tanpa Phaser → mudah dites)     │
@@ -459,7 +460,7 @@ Desktop ≥ 1024px                         HP < 768px (potret)
 
 ## 10. HUB
 
-- **v1.0 — `HubMenu`** (React): ilustrasi kantor pixel statis dengan 4 hotspot meja (SOC aktif; Support/Dev/Data bertanda "Segera hadir"), tombol Panduan, Pengaturan, Pindah Save.
+- **v1.0 — `HubMenu`** (React): ilustrasi kantor pixel statis dengan 4 hotspot meja (awalnya hanya SOC aktif; sejak ADR 025/026/031 keempat meja bisa dimainkan), tombol Panduan, Pengaturan, Pindah Save.
 - **v1.1 — `PhaserHub`** (sudah dibangun, ADR 024; logika peta di `src/hub/officeMap.ts`, kontrak di `src/hub/hubTypes.ts`): komponen React yang memanggil `import('./phaser/createGame')` secara dinamis, me-*mount* `Phaser.Game` ke `<div>`, dan berkomunikasi lewat callback `onNear`/`onInteract` (bukan EventBus global). Scene: kantor pixel dari kode, pemain bergerak (keyboard saat kanvas difokus, atau ketuk tujuan), NPC Mbak Rani, zona interaksi meja/toko/rak/papan lencana → React mengganti layar. Saat keluar hub, `game.destroy(true)` untuk membebaskan memori di HP.
 - Kedua versi memakai data yang sama: `modes/registry.ts`.
 
@@ -470,6 +471,7 @@ Desktop ≥ 1024px                         HP < 768px (potret)
 | JS awal (gzip) | ≤ 250 KB | `size-limit` di CI |
 | Chunk per mode | ≤ 150 KB + konten | `size-limit` |
 | Phaser | tidak ada di bundle awal | `size-limit` + cek manual `vite build --mode analyze` |
+| Runtime bahasa per meja (MicroPython, SQLite/sql.js) | lazy; ≤ 300 KB / ≤ 360 KB gzip | `size-limit` (ADR 026, 031) |
 | Aset sampai Shift 1 | ≤ 2 MB | Lighthouse / DevTools |
 | Lighthouse mobile | Performance ≥ 85, Accessibility ≥ 95 | manual tiap milestone |
 
@@ -503,7 +505,7 @@ Rencana mode berikutnya:
 |---|---|---|
 | IT Support (✅ ADR 025) | `ticket`, `diagnostic`, `hardware` | Bengkel: Pemindai Perangkat Keras, Alat Ping |
 | Software Engineer (✅ ADR 026) | `coding` (fix/build), `pull-request`, `ctf` | Editor kode mini buatan sendiri + MicroPython (WASM, worker, lazy) |
-| Data / AI | `data-cleaning`, `chart-misleading`, `model-eval` | Tabel & grafik |
+| Data / AI (✅ ADR 031) | `query` (SQL sungguhan), `chart`, `request` (privasi, kualitas data, AI) | Editor SQL + sql.js/SQLite (WASM, worker, lazy); Profiler Data, Cek Sumber |
 
 ## 14. Urutan implementasi (milestone untuk Claude Code)
 

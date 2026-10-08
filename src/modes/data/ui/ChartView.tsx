@@ -1,3 +1,5 @@
+import { axisTop } from './axis.ts';
+
 interface ChartViewProps {
   kind: 'bar' | 'line';
   title: string;
@@ -10,19 +12,12 @@ const W = 320;
 const H = 180;
 const PAD = { left: 40, right: 8, top: 12, bottom: 34 };
 
-/** Nilai teratas sumbu: sedikit di atas nilai terbesar, dibulatkan agar rapi. */
-function niceTop(max: number): number {
-  if (max <= 0) return 1;
-  const step = 10 ** Math.floor(Math.log10(max));
-  return Math.ceil((max * 1.05) / step) * step;
-}
-
 /**
  * Grafik sederhana (SVG) persis seperti yang dibuat rekan: sumbu Y mulai dari `axisStart`. Sumbu yang
  * tidak dimulai dari 0 sengaja ditampilkan apa adanya: itulah yang harus disadari pemain.
  */
 export function ChartView({ kind, title, unit, axisStart, points }: ChartViewProps) {
-  const top = niceTop(Math.max(...points.map((p) => p.value)));
+  const top = axisTop(axisStart, Math.max(...points.map((p) => p.value)));
   const plotW = W - PAD.left - PAD.right;
   const plotH = H - PAD.top - PAD.bottom;
   const y = (v: number) =>
