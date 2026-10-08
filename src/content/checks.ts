@@ -76,12 +76,15 @@ const allStrings = (v: unknown) => {
 /** Teks yang dibaca pemain di dokumen (bukan ID atau href tersembunyi). */
 export function documentText(data: unknown): string {
   const out: string[] = [];
-  // Kode acuan, tes, dan kode awal editor (Meja Developer) bukan teks bacaan dokumen.
+  // Kode acuan, tes, kode awal editor (Meja Developer), dan tabel SQL (Meja Data) bukan teks bacaan.
   walkStrings(
     data,
     (k) =>
+      !k.endsWith('EvidenceId') &&
       ![
         'evidenceId',
+        'tables',
+        'hidden',
         'href',
         'id',
         'solution',
@@ -102,7 +105,7 @@ export function collectEvidenceIds(data: unknown): string[] {
     if (Array.isArray(v)) v.forEach(walk);
     else if (v && typeof v === 'object') {
       for (const [k, x] of Object.entries(v)) {
-        if (k === 'evidenceId' && typeof x === 'string') out.push(x);
+        if ((k === 'evidenceId' || k.endsWith('EvidenceId')) && typeof x === 'string') out.push(x);
         else walk(x);
       }
     }
