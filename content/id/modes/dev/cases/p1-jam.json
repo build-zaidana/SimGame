@@ -1,0 +1,52 @@
+{
+  "id": "p1-jam",
+  "type": "coding",
+  "conceptIds": ["debugging"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Bu Sekar",
+      "team": "Pemilik Kopi Senja"
+    },
+    "title": "Toko tutup di jam buka",
+    "story": [
+      "Pukul 08.00 tepat, aplikasi bilang toko masih tutup. Pelanggan pagi protes.",
+      "Toko buka pukul 08.00 dan tutup pukul 21.00. Parameter jam adalah angka jam (0–23)."
+    ],
+    "file": "antrean/jam.py",
+    "starter": "def jam_buka(jam):\n    return jam > 8 and jam < 21\n",
+    "tests": [
+      {
+        "name": "siang",
+        "code": "assert jam_buka(13) == True"
+      },
+      {
+        "name": "subuh",
+        "code": "assert jam_buka(7) == False"
+      },
+      {
+        "name": "tepat jam 8",
+        "code": "assert jam_buka(8) == True",
+        "hidden": true
+      },
+      {
+        "name": "jam tutup",
+        "code": "assert jam_buka(21) == False",
+        "hidden": true
+      }
+    ],
+    "solution": "def jam_buka(jam):\n    return jam >= 8 and jam < 21\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Jam 8 tepat sudah buka, jadi tandanya >= 8; jam 21 sudah tutup, jadi < 21. Bug batas seperti ini klasik.",
+  "ruleRefs": ["r-py-4", "r-tst-1"],
+  "hints": ["Apa hasilnya untuk jam 8 tepat?", "Ganti jam > 8 menjadi jam >= 8."]
+}

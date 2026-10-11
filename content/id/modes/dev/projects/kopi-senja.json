@@ -1,0 +1,186 @@
+{
+  "id": "kopi-senja",
+  "title": "Aplikasi Antrean Kopi Senja",
+  "client": {
+    "name": "Bu Sekar",
+    "team": "Pemilik Kopi Senja"
+  },
+  "unlockAfterShift": 2,
+  "level": 3,
+  "terms": {
+    "sprint": "Sprint",
+    "columns": {
+      "todo": "To Do",
+      "doing": "Dikerjakan",
+      "done": "Selesai"
+    }
+  },
+  "brief": {
+    "title": "PRD: Aplikasi Antrean Kopi Senja",
+    "intro": [
+      "Kedai Kopi Senja selalu ramai. Bu Sekar ingin aplikasi antrean sederhana untuk kasir dan layar di toko.",
+      "Sebelum menulis kode, pilah dulu kebutuhannya. Yang ambigu ditanyakan, yang di luar lingkup tidak dikerjakan."
+    ],
+    "items": [
+      {
+        "id": "b-nomor",
+        "text": "Pelanggan mendapat nomor antrean berurutan; setelah 999 kembali ke 1.",
+        "kind": "clear",
+        "why": "Aturannya jelas dan bisa langsung diuji."
+      },
+      {
+        "id": "b-tunggu",
+        "text": "Layar menampilkan perkiraan waktu tunggu dalam menit.",
+        "kind": "clear",
+        "why": "Jelas apa yang ditampilkan dan satuannya."
+      },
+      {
+        "id": "b-cepat",
+        "text": "Aplikasinya harus cepat.",
+        "kind": "ambiguous",
+        "why": "Cepat itu berapa detik? Tanyakan angka targetnya, misalnya nomor muncul kurang dari 2 detik."
+      },
+      {
+        "id": "b-bagus",
+        "text": "Tampilannya harus bagus dan modern.",
+        "kind": "ambiguous",
+        "why": "Bagus menurut siapa? Minta contoh atau sketsa tampilan yang diinginkan."
+      },
+      {
+        "id": "b-diskon",
+        "text": "Member mendapat diskon 10%.",
+        "kind": "clear",
+        "why": "Angkanya pasti dan bisa dihitung."
+      },
+      {
+        "id": "b-jam",
+        "text": "Antrean hanya dibuka pukul 08.00 sampai 21.00.",
+        "kind": "clear",
+        "why": "Batas jamnya disebut dengan jelas."
+      },
+      {
+        "id": "b-game",
+        "text": "Sekalian buatkan game tebak-tebakan untuk pelanggan yang menunggu.",
+        "kind": "out-of-scope",
+        "why": "Itu proyek lain. Catat sebagai ide, jangan masuk proyek ini."
+      },
+      {
+        "id": "b-gaji",
+        "text": "Aplikasi juga menghitung gaji barista.",
+        "kind": "out-of-scope",
+        "why": "Penggajian bukan bagian dari sistem antrean."
+      }
+    ]
+  },
+  "cards": [
+    {
+      "id": "k-nomor",
+      "title": "Nomor antrean berurutan",
+      "story": "Sebagai pelanggan, saya mendapat nomor antrean agar tahu giliran saya.",
+      "points": 2,
+      "priority": "must",
+      "caseId": "p1-nomor"
+    },
+    {
+      "id": "k-total",
+      "title": "Perbaiki total bayar",
+      "story": "Sebagai kasir, saya ingin total bayar benar untuk pesanan lebih dari satu.",
+      "points": 3,
+      "priority": "must",
+      "caseId": "p1-total"
+    },
+    {
+      "id": "k-tunggu",
+      "title": "Perkiraan waktu tunggu",
+      "story": "Sebagai pelanggan, saya ingin tahu kira-kira berapa lama menunggu.",
+      "points": 2,
+      "priority": "must",
+      "caseId": "p1-tunggu"
+    },
+    {
+      "id": "k-jam",
+      "title": "Jam buka yang benar",
+      "story": "Sebagai pemilik, saya ingin antrean hanya terbuka di jam operasional.",
+      "points": 2,
+      "priority": "must",
+      "caseId": "p1-jam"
+    },
+    {
+      "id": "k-diskon",
+      "title": "Diskon member",
+      "story": "Sebagai member, saya mendapat potongan 10%.",
+      "points": 2,
+      "priority": "should",
+      "caseId": "p1-diskon"
+    },
+    {
+      "id": "k-log",
+      "title": "Review: log pesanan",
+      "story": "Rekan minta PR log pesanannya di-review sebelum digabung.",
+      "points": 1,
+      "priority": "should",
+      "caseId": "p1-pr-log"
+    },
+    {
+      "id": "k-tes",
+      "title": "Review: tes nomor antrean",
+      "story": "PR berisi tes tambahan menunggu review.",
+      "points": 1,
+      "priority": "should",
+      "caseId": "p1-pr-tes"
+    },
+    {
+      "id": "k-rupiah",
+      "title": "Format harga rupiah",
+      "story": "Sebagai kasir, saya ingin harga tampil rapi seperti Rp 25.000.",
+      "points": 2,
+      "priority": "could",
+      "caseId": "p1-rupiah"
+    },
+    {
+      "id": "k-prioritas",
+      "title": "Member didahulukan",
+      "story": "Sebagai member, saya ingin dilayani lebih dulu.",
+      "points": 3,
+      "priority": "could",
+      "caseId": "p1-prioritas"
+    }
+  ],
+  "sprints": [
+    {
+      "goal": "Pelanggan bisa mengambil nomor dan kasir menghitung total dengan benar.",
+      "capacity": 5,
+      "surprises": []
+    },
+    {
+      "goal": "Layar antrean siap dipakai di jam buka toko.",
+      "capacity": 5,
+      "surprises": [
+        {
+          "caseId": "p1-insiden",
+          "arriveAt": 15
+        }
+      ]
+    },
+    {
+      "goal": "Fitur untuk member dan kerapian sebelum rilis.",
+      "capacity": 5,
+      "surprises": [
+        {
+          "caseId": "p1-pr-hotfix",
+          "arriveAt": 10
+        }
+      ]
+    }
+  ],
+  "durationGameMinutes": 90,
+  "realSecondsPerGameMinute": 4,
+  "pay": {
+    "perPoint": 12,
+    "completion": 80
+  },
+  "sources": [
+    "Schwaber & Sutherland — The Scrum Guide (2020)",
+    "Atlassian — What is a product requirements document (PRD)?"
+  ]
+}

@@ -270,7 +270,13 @@ function Plan({ project, sprint }: { project: ProjectDef; sprint: number }) {
           },
           { key: 'sprint', title: t.chosen(term), cards: picked },
         ].map((col) => (
-          <section key={col.key} aria-label={col.title} data-column={col.key}>
+          <section
+            key={col.key}
+            aria-label={col.title}
+            data-column={col.key}
+            // HP: kartu yang sudah dipilih tampil di atas backlog; md: berdampingan.
+            className={col.key === 'sprint' ? 'order-first md:order-none' : ''}
+          >
             <h3 className="mb-1 font-display text-ink-muted">
               {col.title} ({col.cards.length})
             </h3>

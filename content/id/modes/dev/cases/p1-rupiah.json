@@ -1,0 +1,49 @@
+{
+  "id": "p1-rupiah",
+  "type": "coding",
+  "conceptIds": ["python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Bu Sekar",
+      "team": "Pemilik Kopi Senja"
+    },
+    "title": "Format harga rupiah",
+    "story": [
+      "Layar kasir harus menampilkan harga seperti Rp 25.000, dengan titik setiap tiga angka."
+    ],
+    "file": "kasir/format.py",
+    "starter": "def format_rupiah(angka):\n    return \"Rp \" + str(angka)\n",
+    "tests": [
+      {
+        "name": "ribuan",
+        "code": "assert format_rupiah(25000) == \"Rp 25.000\""
+      },
+      {
+        "name": "ratusan",
+        "code": "assert format_rupiah(500) == \"Rp 500\""
+      },
+      {
+        "name": "jutaan",
+        "code": "assert format_rupiah(1250000) == \"Rp 1.250.000\"",
+        "hidden": true
+      }
+    ],
+    "solution": "def format_rupiah(angka):\n    teks = str(angka)\n    hasil = \"\"\n    while len(teks) > 3:\n        hasil = \".\" + teks[-3:] + hasil\n        teks = teks[:-3]\n    return \"Rp \" + teks + hasil\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Ambil tiga angka dari belakang berulang-ulang, beri titik di depannya, sampai sisa teksnya tiga angka atau kurang.",
+  "ruleRefs": ["r-py-2"],
+  "hints": [
+    "teks[-3:] adalah tiga huruf terakhir, teks[:-3] sisanya.",
+    "Pakai while len(teks) > 3: untuk mengulang."
+  ]
+}

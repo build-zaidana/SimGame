@@ -190,6 +190,29 @@
           "evidenceTags": ["dependency"]
         }
       ]
+    },
+    {
+      "id": "ch-proj",
+      "title": "Chapter 8 · Project Work",
+      "conceptId": "project-work",
+      "unlockAtShift": 3,
+      "rules": [
+        {
+          "id": "r-prj-1",
+          "text": "Before coding, sort the PRD: clear (build it), ambiguous (ask until measurable), out of scope (note it, do not build it).",
+          "evidenceTags": ["brief"]
+        },
+        {
+          "id": "r-prj-2",
+          "text": "Plan within team capacity and take MUST cards first, then SHOULD, then COULD.",
+          "evidenceTags": ["plan"]
+        },
+        {
+          "id": "r-prj-3",
+          "text": "Unfinished cards go back to the backlog. Never switch off tests or force overtime to hit a target.",
+          "evidenceTags": ["sprint"]
+        }
+      ]
     }
   ]
 }

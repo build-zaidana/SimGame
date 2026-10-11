@@ -1,0 +1,51 @@
+{
+  "id": "p1-pr-tes",
+  "type": "pull-request",
+  "conceptIds": ["testing", "code-review"],
+  "difficulty": 2,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "author": {
+      "name": "Kak Dimas",
+      "team": "Developer Team"
+    },
+    "title": "Add queue number tests",
+    "description": [
+      {
+        "text": "Adds tests for queue number edge cases, including after 999.",
+        "evidenceId": "desc-tests"
+      }
+    ],
+    "file": "antrean/test_tiket.py",
+    "diff": [
+      {
+        "code": "assert next_number(41) == 42",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-normal"
+      },
+      {
+        "code": "assert next_number(999) == 1",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-edge"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Automated tests: all passing",
+        "evidenceId": "check-ok"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["line-edge", "check-ok"]
+  },
+  "explanation": "The new tests cover the normal and the edge case, and all pass. Work like this should simply be approved.",
+  "ruleRefs": ["r-rev-1", "r-tst-3"],
+  "hints": ["What do these tests check?", "Is anything dangerous or wrong?"]
+}

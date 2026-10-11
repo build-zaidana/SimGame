@@ -1,0 +1,47 @@
+{
+  "id": "p1-tunggu",
+  "type": "coding",
+  "conceptIds": ["python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Bu Sekar",
+      "team": "Pemilik Kopi Senja"
+    },
+    "title": "Perkiraan waktu tunggu",
+    "story": [
+      "Layar antrean menampilkan perkiraan waktu tunggu dalam menit.",
+      "Rumusnya: banyak orang di depan × menit per orang."
+    ],
+    "file": "antrean/tunggu.py",
+    "starter": "def perkiraan_tunggu(di_depan, menit_per_orang):\n    return 0\n",
+    "tests": [
+      {
+        "name": "tiga orang",
+        "code": "assert perkiraan_tunggu(3, 4) == 12"
+      },
+      {
+        "name": "antrean kosong",
+        "code": "assert perkiraan_tunggu(0, 5) == 0"
+      },
+      {
+        "name": "sepuluh orang",
+        "code": "assert perkiraan_tunggu(10, 2) == 20",
+        "hidden": true
+      }
+    ],
+    "solution": "def perkiraan_tunggu(di_depan, menit_per_orang):\n    return di_depan * menit_per_orang\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Waktu tunggu adalah banyak orang dikali menit per orang. Kalau antrean kosong, hasilnya otomatis 0.",
+  "ruleRefs": ["r-err-2"],
+  "hints": ["Kalikan dua parameternya."]
+}

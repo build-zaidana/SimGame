@@ -1,0 +1,52 @@
+{
+  "id": "p1-pr-hotfix",
+  "type": "pull-request",
+  "conceptIds": ["testing", "code-review"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.5
+  },
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Rio Pratama",
+      "team": "Tim Developer"
+    },
+    "title": "Hotfix cepat sebelum demo ke klien",
+    "description": [
+      {
+        "text": "Demo ke Bu Sekar 10 menit lagi! Tesnya bikin lambat, jadi saya matikan dulu.",
+        "evidenceId": "desc-rush"
+      }
+    ],
+    "file": "pengaturan.py",
+    "diff": [
+      {
+        "code": "JALANKAN_TES = True",
+        "indent": 0,
+        "kind": "del"
+      },
+      {
+        "code": "JALANKAN_TES = False",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-off"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Tes otomatis: dilewati (0 dijalankan)",
+        "evidenceId": "check-skip"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["line-off"],
+    "supporting": ["check-skip", "desc-rush"]
+  },
+  "explanation": "Mematikan tes demi mengejar demo membuat bug bisa lolos ke klien. Minta revisi: nyalakan lagi tesnya, dan kalau perlu undur demo sebentar.",
+  "ruleRefs": ["r-tst-2", "r-prj-3"],
+  "hints": ["Apa yang diubah baris ini?", "Lihat hasil pemeriksaan otomatisnya."]
+}

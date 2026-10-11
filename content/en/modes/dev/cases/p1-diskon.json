@@ -1,0 +1,47 @@
+{
+  "id": "p1-diskon",
+  "type": "coding",
+  "conceptIds": ["python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Bu Sekar",
+      "team": "Owner, Kopi Senja"
+    },
+    "title": "10% member discount",
+    "story": [
+      "Kopi Senja members get a 10% discount. Non-members pay full price.",
+      "Round down: use integer division //."
+    ],
+    "file": "kasir/diskon.py",
+    "starter": "def member_discount(total, member):\n    return total\n",
+    "tests": [
+      {
+        "name": "member",
+        "code": "assert member_discount(50000, True) == 45000"
+      },
+      {
+        "name": "not a member",
+        "code": "assert member_discount(50000, False) == 50000"
+      },
+      {
+        "name": "rounding",
+        "code": "assert member_discount(12345, True) == 11110",
+        "hidden": true
+      }
+    ],
+    "solution": "def member_discount(total, member):\n    if member:\n        return total * 90 // 100\n    return total\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "A 10% discount means paying 90%: total × 90 // 100. Integer division avoids decimals in money.",
+  "ruleRefs": ["r-py-3"],
+  "hints": ["For members, return 90% of the total.", "total * 90 // 100"]
+}

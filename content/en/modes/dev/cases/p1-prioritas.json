@@ -1,0 +1,47 @@
+{
+  "id": "p1-prioritas",
+  "type": "coding",
+  "conceptIds": ["python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Bu Sekar",
+      "team": "Owner, Kopi Senja"
+    },
+    "title": "Members first in the queue",
+    "story": [
+      "Bu Sekar wants members served first, but members keep their order among themselves.",
+      "Each customer is [name, member]. Return the list of names only."
+    ],
+    "file": "antrean/prioritas.py",
+    "starter": "def priority_queue(customers):\n    return []\n",
+    "tests": [
+      {
+        "name": "one member",
+        "code": "assert priority_queue([[\"Ayu\", False], [\"Budi\", True]]) == [\"Budi\", \"Ayu\"]"
+      },
+      {
+        "name": "empty",
+        "code": "assert priority_queue([]) == []"
+      },
+      {
+        "name": "order kept",
+        "code": "assert priority_queue([[\"A\", True], [\"B\", False], [\"C\", True]]) == [\"A\", \"C\", \"B\"]",
+        "hidden": true
+      }
+    ],
+    "solution": "def priority_queue(customers):\n    members = []\n    others = []\n    for name, is_member in customers:\n        if is_member:\n            members.append(name)\n        else:\n            others.append(name)\n    return members + others\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Split into two lists while keeping the order, then join them: members first, then everyone else.",
+  "ruleRefs": ["r-py-1"],
+  "hints": ["Make two empty lists: members and others.", "The final result is members + others."]
+}

@@ -1,0 +1,186 @@
+{
+  "id": "kopi-senja",
+  "title": "Kopi Senja Queue App",
+  "client": {
+    "name": "Bu Sekar",
+    "team": "Owner, Kopi Senja"
+  },
+  "unlockAfterShift": 2,
+  "level": 3,
+  "terms": {
+    "sprint": "Sprint",
+    "columns": {
+      "todo": "To Do",
+      "doing": "In Progress",
+      "done": "Done"
+    }
+  },
+  "brief": {
+    "title": "PRD: Kopi Senja Queue App",
+    "intro": [
+      "The Kopi Senja café is always busy. Bu Sekar wants a simple queue app for the till and the in-store screen.",
+      "Before writing code, sort the requirements first. Ask about the ambiguous ones; leave out what is out of scope."
+    ],
+    "items": [
+      {
+        "id": "b-nomor",
+        "text": "Customers get sequential queue numbers; after 999 it goes back to 1.",
+        "kind": "clear",
+        "why": "The rule is clear and can be tested right away."
+      },
+      {
+        "id": "b-tunggu",
+        "text": "The screen shows the estimated wait in minutes.",
+        "kind": "clear",
+        "why": "It is clear what is shown and in which unit."
+      },
+      {
+        "id": "b-cepat",
+        "text": "The app must be fast.",
+        "kind": "ambiguous",
+        "why": "How many seconds is fast? Ask for a target number, for example the number appears in under 2 seconds."
+      },
+      {
+        "id": "b-bagus",
+        "text": "It must look nice and modern.",
+        "kind": "ambiguous",
+        "why": "Nice according to whom? Ask for an example or sketch of the desired look."
+      },
+      {
+        "id": "b-diskon",
+        "text": "Members get a 10% discount.",
+        "kind": "clear",
+        "why": "The number is exact and can be calculated."
+      },
+      {
+        "id": "b-jam",
+        "text": "The queue only runs from 08:00 to 21:00.",
+        "kind": "clear",
+        "why": "The opening hours are stated clearly."
+      },
+      {
+        "id": "b-game",
+        "text": "Also make a guessing game for waiting customers.",
+        "kind": "out-of-scope",
+        "why": "That is a different project. Note it as an idea; keep it out of this one."
+      },
+      {
+        "id": "b-gaji",
+        "text": "The app also calculates barista salaries.",
+        "kind": "out-of-scope",
+        "why": "Payroll is not part of a queue system."
+      }
+    ]
+  },
+  "cards": [
+    {
+      "id": "k-nomor",
+      "title": "Sequential queue numbers",
+      "story": "As a customer, I get a queue number so I know my turn.",
+      "points": 2,
+      "priority": "must",
+      "caseId": "p1-nomor"
+    },
+    {
+      "id": "k-total",
+      "title": "Fix the bill total",
+      "story": "As a cashier, I want correct totals for multi-item orders.",
+      "points": 3,
+      "priority": "must",
+      "caseId": "p1-total"
+    },
+    {
+      "id": "k-tunggu",
+      "title": "Estimated wait",
+      "story": "As a customer, I want to know roughly how long I will wait.",
+      "points": 2,
+      "priority": "must",
+      "caseId": "p1-tunggu"
+    },
+    {
+      "id": "k-jam",
+      "title": "Correct opening hours",
+      "story": "As the owner, I want the queue open only during business hours.",
+      "points": 2,
+      "priority": "must",
+      "caseId": "p1-jam"
+    },
+    {
+      "id": "k-diskon",
+      "title": "Member discount",
+      "story": "As a member, I get 10% off.",
+      "points": 2,
+      "priority": "should",
+      "caseId": "p1-diskon"
+    },
+    {
+      "id": "k-log",
+      "title": "Review: order log",
+      "story": "A teammate asks for a review of the order log PR before merging.",
+      "points": 1,
+      "priority": "should",
+      "caseId": "p1-pr-log"
+    },
+    {
+      "id": "k-tes",
+      "title": "Review: queue number tests",
+      "story": "A PR with extra tests is waiting for review.",
+      "points": 1,
+      "priority": "should",
+      "caseId": "p1-pr-tes"
+    },
+    {
+      "id": "k-rupiah",
+      "title": "Rupiah price format",
+      "story": "As a cashier, I want prices to look tidy like Rp 25.000.",
+      "points": 2,
+      "priority": "could",
+      "caseId": "p1-rupiah"
+    },
+    {
+      "id": "k-prioritas",
+      "title": "Members served first",
+      "story": "As a member, I want to be served first.",
+      "points": 3,
+      "priority": "could",
+      "caseId": "p1-prioritas"
+    }
+  ],
+  "sprints": [
+    {
+      "goal": "Customers can take a number and the till totals orders correctly.",
+      "capacity": 5,
+      "surprises": []
+    },
+    {
+      "goal": "The queue screen is ready during opening hours.",
+      "capacity": 5,
+      "surprises": [
+        {
+          "caseId": "p1-insiden",
+          "arriveAt": 15
+        }
+      ]
+    },
+    {
+      "goal": "Member features and polish before release.",
+      "capacity": 5,
+      "surprises": [
+        {
+          "caseId": "p1-pr-hotfix",
+          "arriveAt": 10
+        }
+      ]
+    }
+  ],
+  "durationGameMinutes": 90,
+  "realSecondsPerGameMinute": 4,
+  "pay": {
+    "perPoint": 12,
+    "completion": 80
+  },
+  "sources": [
+    "Schwaber & Sutherland — The Scrum Guide (2020)",
+    "Atlassian — What is a product requirements document (PRD)?"
+  ]
+}

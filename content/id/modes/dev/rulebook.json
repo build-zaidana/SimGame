@@ -190,6 +190,29 @@
           "evidenceTags": ["dependency"]
         }
       ]
+    },
+    {
+      "id": "ch-proj",
+      "title": "Bab 8 · Kerja Proyek",
+      "conceptId": "project-work",
+      "unlockAtShift": 3,
+      "rules": [
+        {
+          "id": "r-prj-1",
+          "text": "Sebelum coding, pilah PRD: jelas (kerjakan), ambigu (tanyakan sampai terukur), di luar lingkup (catat, jangan dikerjakan).",
+          "evidenceTags": ["brief"]
+        },
+        {
+          "id": "r-prj-2",
+          "text": "Rencanakan sesuai kapasitas tim dan dahulukan kartu MUST, lalu SHOULD, lalu COULD.",
+          "evidenceTags": ["plan"]
+        },
+        {
+          "id": "r-prj-3",
+          "text": "Kartu yang belum selesai kembali ke backlog. Jangan mematikan tes atau lembur paksa demi mengejar target.",
+          "evidenceTags": ["sprint"]
+        }
+      ]
     }
   ]
 }

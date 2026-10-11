@@ -1,0 +1,47 @@
+{
+  "id": "p1-tunggu",
+  "type": "coding",
+  "conceptIds": ["python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Bu Sekar",
+      "team": "Owner, Kopi Senja"
+    },
+    "title": "Estimated waiting time",
+    "story": [
+      "The queue screen shows the estimated wait in minutes.",
+      "The formula: people ahead × minutes per person."
+    ],
+    "file": "antrean/tunggu.py",
+    "starter": "def estimated_wait(ahead, minutes_each):\n    return 0\n",
+    "tests": [
+      {
+        "name": "three people",
+        "code": "assert estimated_wait(3, 4) == 12"
+      },
+      {
+        "name": "empty queue",
+        "code": "assert estimated_wait(0, 5) == 0"
+      },
+      {
+        "name": "ten people",
+        "code": "assert estimated_wait(10, 2) == 20",
+        "hidden": true
+      }
+    ],
+    "solution": "def estimated_wait(ahead, minutes_each):\n    return ahead * minutes_each\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "The wait is the number of people times the minutes each. With an empty queue the result is automatically 0.",
+  "ruleRefs": ["r-err-2"],
+  "hints": ["Multiply the two parameters."]
+}

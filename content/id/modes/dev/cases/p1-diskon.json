@@ -1,0 +1,47 @@
+{
+  "id": "p1-diskon",
+  "type": "coding",
+  "conceptIds": ["python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Bu Sekar",
+      "team": "Pemilik Kopi Senja"
+    },
+    "title": "Diskon member 10%",
+    "story": [
+      "Member Kopi Senja mendapat diskon 10%. Bukan member membayar penuh.",
+      "Hasil dibulatkan ke bawah: pakai pembagian bulat //."
+    ],
+    "file": "kasir/diskon.py",
+    "starter": "def diskon_member(total, member):\n    return total\n",
+    "tests": [
+      {
+        "name": "member",
+        "code": "assert diskon_member(50000, True) == 45000"
+      },
+      {
+        "name": "bukan member",
+        "code": "assert diskon_member(50000, False) == 50000"
+      },
+      {
+        "name": "pembulatan",
+        "code": "assert diskon_member(12345, True) == 11110",
+        "hidden": true
+      }
+    ],
+    "solution": "def diskon_member(total, member):\n    if member:\n        return total * 90 // 100\n    return total\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Diskon 10% berarti membayar 90%: total × 90 // 100. Pembagian bulat menghindari angka desimal di uang.",
+  "ruleRefs": ["r-py-3"],
+  "hints": ["Kalau member, kembalikan 90% dari total.", "total * 90 // 100"]
+}
