@@ -1,0 +1,50 @@
+{
+  "id": "p1-total",
+  "type": "coding",
+  "conceptIds": ["debugging"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Bu Sekar",
+      "team": "Pemilik Kopi Senja"
+    },
+    "title": "Total bayar terlalu murah",
+    "story": [
+      "Kasir bilang total bayar sering kurang: pesan 2 kopi, yang terhitung cuma 1.",
+      "Setiap pesanan berisi [harga, jumlah]."
+    ],
+    "file": "kasir/bayar.py",
+    "starter": "def total_bayar(pesanan):\n    total = 0\n    for harga, jumlah in pesanan:\n        total = total + harga\n    return total\n",
+    "tests": [
+      {
+        "name": "dua kopi",
+        "code": "assert total_bayar([[20000, 2]]) == 40000"
+      },
+      {
+        "name": "campuran",
+        "code": "assert total_bayar([[15000, 1], [10000, 3]]) == 45000"
+      },
+      {
+        "name": "pesanan kosong",
+        "code": "assert total_bayar([]) == 0",
+        "hidden": true
+      }
+    ],
+    "solution": "def total_bayar(pesanan):\n    total = 0\n    for harga, jumlah in pesanan:\n        total = total + harga * jumlah\n    return total\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Kodenya hanya menjumlah harga dan melupakan jumlah barang. Setiap baris harus dihitung harga × jumlah.",
+  "ruleRefs": ["r-err-3", "r-py-3"],
+  "hints": [
+    "Bandingkan hasil kodemu dengan yang seharusnya di tes \"dua kopi\".",
+    "Baris total = total + harga belum memakai jumlah."
+  ]
+}

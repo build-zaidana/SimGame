@@ -1,0 +1,51 @@
+{
+  "id": "p1-pr-tes",
+  "type": "pull-request",
+  "conceptIds": ["testing", "code-review"],
+  "difficulty": 2,
+  "verdict": "no-fault",
+  "correctDecision": "approve",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "author": {
+      "name": "Kak Dimas",
+      "team": "Tim Developer"
+    },
+    "title": "Tambah tes nomor antrean",
+    "description": [
+      {
+        "text": "Menambah tes untuk kasus tepi nomor antrean, termasuk setelah 999.",
+        "evidenceId": "desc-tests"
+      }
+    ],
+    "file": "antrean/test_tiket.py",
+    "diff": [
+      {
+        "code": "assert nomor_berikutnya(41) == 42",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-normal"
+      },
+      {
+        "code": "assert nomor_berikutnya(999) == 1",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-edge"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Tes otomatis: semua lulus",
+        "evidenceId": "check-ok"
+      }
+    ]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": ["line-edge", "check-ok"]
+  },
+  "explanation": "Tes baru menguji kasus biasa dan kasus tepi, dan semuanya lulus. Pekerjaan seperti ini langsung disetujui.",
+  "ruleRefs": ["r-rev-1", "r-tst-3"],
+  "hints": ["Apa yang diuji tes ini?", "Ada yang berbahaya atau salah?"]
+}

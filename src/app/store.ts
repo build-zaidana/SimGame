@@ -36,6 +36,8 @@ import {
   type ReviewResult,
 } from './progress.ts';
 import { playSfx } from './sfx.ts';
+import { commitBrief, commitProjectSprint, startSprint } from './projects.ts';
+import type { SprintOutcome } from '../engine/project.ts';
 import { currentStreak } from '../engine/badges.ts';
 import { ANALYTICS_OPT_IN, bindAnalyticsIdentity, telemetry } from './telemetry.ts';
 
@@ -51,7 +53,8 @@ export type Screen =
   | 'shop'
   | 'assessment'
   | 'learning-report'
-  | 'badges';
+  | 'badges'
+  | 'project';
 
 /** Layar menu yang dibuka "di atas" layar lain dan kembali ke sana. */
 type MenuScreen =
@@ -114,6 +117,15 @@ interface AppState {
   saveAssessment(kind: AssessmentKind, correct: number, total: number): void;
   /** Laporan → Review Cepat selesai → simpan hasil (termasuk jawaban review) → kembali ke HUB. */
   finishShift(reviewResults: readonly ReviewResult[]): void;
+  /** Proyek klien yang sedang dibuka di layar Proyek (ADR 032). */
+  projectFocus: { modeId: string; projectId: string } | null;
+  /** Hasil sprint terakhir (ditampilkan sekali di layar Proyek sebagai retro). */
+  lastSprint: { projectId: string; outcome: SprintOutcome; pay: number; completed: boolean } | null;
+  openProject(modeId: string, projectId: string): Promise<void>;
+  /** Menyimpan skor memilah kebutuhan di brief. */
+  submitBrief(score: number): void;
+  /** Mulai (atau lanjutkan) sprint berikutnya dengan kartu yang direncanakan. */
+  enterSprint(cardIds: readonly string[]): Promise<void>;
 }
 
 let repo: SaveRepository | null = null;
@@ -178,6 +190,8 @@ export const useAppStore = create<AppState>()((set, get) => ({
   returnTo: 'hub',
   rulebookFocus: null,
   assessmentKind: 'pre',
+  projectFocus: null,
+  lastSprint: null,
 
   async init() {
     if (repo) return;
@@ -237,6 +251,28 @@ export const useAppStore = create<AppState>()((set, get) => ({
 
   enterDaily(modeId) {
     return openSession(modeId, true, undefined, localDate());
+  },
+
+  async openProject(modeId, projectId) {
+    await get().preloadContent(modeId);
+    set({ projectFocus: { modeId, projectId }, lastSprint: null, screen: 'project' });
+  },
+
+  submitBrief(score) {
+    const { save, projectFocus } = get();
+    if (!save || !projectFocus) return;
+    const next = commitBrief(save, projectFocus.modeId, projectFocus.projectId, score, nowIso());
+    write(next);
+    set({ save: next });
+  },
+
+  enterSprint(cardIds) {
+    const focus = get().projectFocus;
+    if (!focus) return Promise.resolve();
+    return openSession(focus.modeId, true, undefined, undefined, {
+      projectId: focus.projectId,
+      cardIds,
+    });
   },
 
   cancelPractice(modeId) {
@@ -469,6 +505,29 @@ export const useAppStore = create<AppState>()((set, get) => ({
       });
     // Latihan: hanya slot latihan yang dikosongkan; gaji, kepercayaan, skor, dan Leitner tidak berubah.
     // Tantangan harian: hanya hadiahnya dan streak harian yang disimpan (ADR 029).
+    const project = session.project
+      ? content.projects.find((p) => p.id === session.project?.projectId)
+      : undefined;
+    if (session.project && project) {
+      // Sprint proyek (ADR 032): hasil kartu & gaji per poin, lalu kembali ke layar Proyek (retro).
+      const r = commitProjectSprint(save, session, project, nowIso());
+      write(r.save);
+      set({
+        save: r.save,
+        session: null,
+        practice: false,
+        screen: 'project',
+        projectFocus: { modeId: session.modeId, projectId: project.id },
+        lastSprint: {
+          projectId: project.id,
+          outcome: r.outcome,
+          pay: r.pay,
+          completed: r.completed,
+        },
+      });
+      if (save.profile.settings.sound) playSfx(r.completed ? 'bell' : 'combo');
+      return;
+    }
     const next = session.daily
       ? commitDaily(save, session, nowIso()).save
       : practice
@@ -508,6 +567,7 @@ async function openSession(
   practice: boolean,
   practiceShiftId?: string,
   dailyDate?: string,
+  sprint?: { projectId: string; cardIds: readonly string[] },
 ) {
   const mode = getMode(modeId);
   if (!mode || !useAppStore.getState().save) return;
@@ -531,6 +591,24 @@ async function openSession(
         perks: perksFor(progress, content),
       }),
       daily: { date: dailyDate },
+    };
+  }
+  if (!session && sprint) {
+    // Sprint proyek klien (ADR 032): memakai slot latihan, seperti tantangan harian.
+    const project = content.projects.find((p) => p.id === sprint.projectId);
+    if (!project) return;
+    const { plan, marker } = startSprint(project, modeId, progress, sprint.cardIds);
+    if (marker.cardIds.length === 0) return;
+    const seed = crypto.getRandomValues(new Uint32Array(1))[0] ?? 1;
+    session = {
+      ...startShift({
+        plan,
+        seed,
+        playMode: save.profile.settings.playMode,
+        trust: progress.trust,
+        perks: perksFor(progress, content),
+      }),
+      project: marker,
     };
   }
   if (!session) {

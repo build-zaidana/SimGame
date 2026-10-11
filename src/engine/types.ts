@@ -143,6 +143,18 @@ export interface ShiftSession {
   boss?: SessionBoss | undefined;
   /** v13: sesi tantangan harian (ADR 029); engine tidak membacanya. */
   daily?: { date: string } | undefined;
+  /** v15: sesi ini adalah satu sprint proyek klien (ADR 032); engine shift tidak membacanya. */
+  project?: SessionProject | undefined;
+}
+
+export interface SessionProject {
+  projectId: string;
+  /** Sprint ke-n (mulai 1). */
+  sprint: number;
+  /** Kartu yang direncanakan pemain untuk sprint ini. */
+  cardIds: string[];
+  /** Skor perencanaan sprint ini (0–1). */
+  planScore: number;
 }
 
 export interface SessionPerks {

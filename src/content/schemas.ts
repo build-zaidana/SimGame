@@ -205,6 +205,75 @@ export const assessmentSchema = z.strictObject({
   post: z.array(idSchema).min(3).max(10),
 });
 
+/**
+ * Proyek klien (ADR 032): brief berisi kebutuhan yang dipilah pemain, kartu pekerjaan yang masing-
+ * masing menunjuk satu kasus mode, dan beberapa sprint dengan kapasitas & kejutan. Istilah papan
+ * mengikuti profesi meja (Scrum, penanganan insiden, tiket layanan, proyek data).
+ */
+export const projectSchema = z.strictObject({
+  id: idSchema,
+  title: text,
+  client: z.strictObject({ name: text, team: text }),
+  /** Proyek terbuka setelah shift ke-n jalur utama selesai. */
+  unlockAfterShift: z.number().int().min(1),
+  /** Tingkat shift untuk keputusan bertahap di meja (mis. Rollback mulai shift 3). */
+  level: z.number().int().min(1),
+  terms: z.strictObject({
+    /** Nama satu putaran kerja: "Sprint", "Fase", dst. */
+    sprint: text,
+    columns: z.strictObject({ todo: text, doing: text, done: text }),
+  }),
+  brief: z.strictObject({
+    title: text,
+    intro: z.array(text).min(1).max(3),
+    items: z
+      .array(
+        z.strictObject({
+          id: idSchema,
+          text,
+          kind: z.enum(['clear', 'ambiguous', 'out-of-scope']),
+          why: text,
+        }),
+      )
+      .min(3)
+      .max(8),
+  }),
+  cards: z
+    .array(
+      z.strictObject({
+        id: idSchema,
+        title: text,
+        story: text,
+        points: z.number().int().min(1).max(5),
+        priority: z.enum(['must', 'should', 'could']),
+        caseId: idSchema,
+      }),
+    )
+    .min(3)
+    .max(12),
+  sprints: z
+    .array(
+      z.strictObject({
+        goal: text,
+        capacity: z.number().int().min(1).max(20),
+        surprises: z
+          .array(z.strictObject({ caseId: idSchema, arriveAt: z.number().int().nonnegative() }))
+          .max(2)
+          .default([]),
+      }),
+    )
+    .min(2)
+    .max(4),
+  durationGameMinutes: z.number().int().positive(),
+  realSecondsPerGameMinute: z.number().positive(),
+  pay: z.strictObject({
+    perPoint: z.number().int().nonnegative(),
+    completion: z.number().int().nonnegative(),
+  }),
+  sources: z.array(text).min(1),
+});
+export type ProjectDef = z.infer<typeof projectSchema>;
+
 /** Bagian kasus yang sama untuk semua tipe; `data` divalidasi oleh skema tipe kasus. */
 export const baseCaseSchema = z.strictObject({
   id: idSchema,

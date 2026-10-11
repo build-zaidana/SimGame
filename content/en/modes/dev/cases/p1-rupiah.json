@@ -1,0 +1,47 @@
+{
+  "id": "p1-rupiah",
+  "type": "coding",
+  "conceptIds": ["python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Bu Sekar",
+      "team": "Owner, Kopi Senja"
+    },
+    "title": "Rupiah price format",
+    "story": ["The till screen must show prices like Rp 25.000, with a dot every three digits."],
+    "file": "kasir/format.py",
+    "starter": "def format_rupiah(amount):\n    return \"Rp \" + str(amount)\n",
+    "tests": [
+      {
+        "name": "thousands",
+        "code": "assert format_rupiah(25000) == \"Rp 25.000\""
+      },
+      {
+        "name": "hundreds",
+        "code": "assert format_rupiah(500) == \"Rp 500\""
+      },
+      {
+        "name": "millions",
+        "code": "assert format_rupiah(1250000) == \"Rp 1.250.000\"",
+        "hidden": true
+      }
+    ],
+    "solution": "def format_rupiah(amount):\n    text = str(amount)\n    result = \"\"\n    while len(text) > 3:\n        result = \".\" + text[-3:] + result\n        text = text[:-3]\n    return \"Rp \" + text + result\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Repeatedly take the last three digits and put a dot in front, until three digits or fewer remain.",
+  "ruleRefs": ["r-py-2"],
+  "hints": [
+    "text[-3:] is the last three characters, text[:-3] is the rest.",
+    "Use while len(text) > 3: to repeat."
+  ]
+}

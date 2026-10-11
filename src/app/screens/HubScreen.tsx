@@ -3,6 +3,7 @@ import { t as id } from '../../i18n/index.ts';
 import { modes, upcomingModes } from '../../modes/registry.ts';
 import { newModeProgress } from '../../persistence/saveSchema.ts';
 import { dailyPool, nextShift, practiceShifts } from '../progress.ts';
+import { projectStep } from '../projects.ts';
 import { localDate, useAppStore } from '../store.ts';
 import { previousDate } from '../../engine/daily.ts';
 import { PhaserHub, type HotspotInfo, type HubSpeech } from '../../hub/PhaserHub.tsx';
@@ -21,6 +22,7 @@ export function HubScreen() {
   const enterPractice = useAppStore((s) => s.enterPractice);
   const cancelPractice = useAppStore((s) => s.cancelPractice);
   const enterDaily = useAppStore((s) => s.enterDaily);
+  const openProject = useAppStore((s) => s.openProject);
   const today = localDate();
   // Beruntun masih hidup bila tantangan terakhir hari ini atau kemarin.
   const streak =
@@ -200,7 +202,9 @@ export function HubScreen() {
           const slotRun = progress.practiceSession;
           // Slot latihan dipakai bersama: tantangan harian ditandai `daily` (ADR 029).
           const dailyRun = slotRun?.daily ? slotRun : undefined;
-          const practiceRun = slotRun?.daily ? undefined : slotRun;
+          // Sprint proyek klien (ADR 032) juga memakai slot latihan.
+          const projectRun = slotRun?.project ? slotRun : undefined;
+          const practiceRun = slotRun && !slotRun.daily && !slotRun.project ? slotRun : undefined;
           const dailyDone = save?.daily?.done[m.id] === today;
           const ownContent = contents[m.id] ?? null;
           const shift = ownContent ? nextShift(ownContent, progress) : undefined;
@@ -279,6 +283,8 @@ export function HubScreen() {
                     </p>
                   ) : practiceRun ? (
                     <p className="text-xs text-ink-muted">{id.daily.busy}</p>
+                  ) : projectRun ? (
+                    <p className="text-xs text-ink-muted">{id.project.busyOther}</p>
                   ) : (
                     <>
                       <p className="text-xs text-ink-muted">
@@ -296,6 +302,60 @@ export function HubScreen() {
                   )}
                 </section>
               )}
+              {ownContent && ownContent.projects.length > 0 && (
+                <section
+                  aria-label={id.project.sectionLabel(m.deskTitle)}
+                  className="mt-2 flex flex-col gap-2 border-t-2 border-ink/30 pt-2"
+                  data-testid={`projects-${m.id}`}
+                >
+                  <h3 className="font-display">
+                    <span aria-hidden="true">📋 </span>
+                    {id.project.hubHeading}
+                  </h3>
+                  <p className="text-xs text-ink-muted">{id.project.hubIntro}</p>
+                  <ul className="flex flex-col gap-2">
+                    {ownContent.projects.map((p) => {
+                      const step = projectStep(p, progress);
+                      const running =
+                        projectRun?.project?.projectId === p.id ? projectRun.project : undefined;
+                      return (
+                        <li key={p.id}>
+                          {step.kind === 'locked' ? (
+                            <p className="text-xs text-ink-muted">
+                              <span aria-hidden="true">🔒 </span>
+                              {p.title}: {id.project.locked(step.afterShift)}
+                            </p>
+                          ) : (
+                            <button
+                              type="button"
+                              className={`${btnSecondary} w-full justify-start text-left`}
+                              disabled={entering}
+                              onClick={() => run(() => openProject(m.id, p.id))}
+                            >
+                              <span className="flex flex-col">
+                                <span>{p.title}</span>
+                                <span className="text-xs text-ink-muted">
+                                  {running
+                                    ? id.project.resume(p.terms.sprint, running.sprint)
+                                    : step.kind === 'brief'
+                                      ? id.project.status.brief
+                                      : step.kind === 'planning'
+                                        ? id.project.status.planning(
+                                            p.terms.sprint,
+                                            step.sprint,
+                                            p.sprints.length,
+                                          )
+                                        : `✓ ${id.project.status.done}`}
+                                </span>
+                              </span>
+                            </button>
+                          )}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </section>
+              )}
               {(practiceRun || practiceList.length > 0) && (
                 <section
                   aria-label={id.hub.practiceLabel(m.deskTitle)}
@@ -308,6 +368,8 @@ export function HubScreen() {
                   <p className="text-xs text-ink-muted">{id.hub.practiceIntro}</p>
                   {dailyRun ? (
                     <p className="text-xs text-ink-muted">{id.daily.busyPractice}</p>
+                  ) : projectRun ? (
+                    <p className="text-xs text-ink-muted">{id.project.busyOther}</p>
                   ) : practiceRun ? (
                     <div className="flex flex-wrap gap-2">
                       <button

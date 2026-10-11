@@ -16,6 +16,8 @@ interface HudProps {
   practice: boolean;
   /** Keputusan tepat beruntun; tampil mulai 2. */
   streak: number;
+  /** Penanda sprint proyek klien (ADR 032), mis. "Sprint 2". */
+  projectLabel?: string | undefined;
   onTogglePause(): void;
 }
 
@@ -46,7 +48,15 @@ function useDelta(value: number) {
   return delta;
 }
 
-export function Hud({ deskTitle, session, wallet, practice, streak, onTogglePause }: HudProps) {
+export function Hud({
+  deskTitle,
+  session,
+  wallet,
+  practice,
+  streak,
+  projectLabel,
+  onTogglePause,
+}: HudProps) {
   const progress = (100 * session.elapsedMs) / Math.max(1, session.durationMs);
   const waiting = session.cases.filter((c) => c.status === 'arrived').length;
   const trustDelta = useDelta(session.trust);
@@ -61,7 +71,15 @@ export function Hud({ deskTitle, session, wallet, practice, streak, onTogglePaus
   return (
     <header className="flex items-center gap-3 border-b-2 border-ink/40 bg-panel px-3 py-1 text-sm">
       <h1 className="hidden font-display text-accent sm:block">{deskTitle}</h1>
-      {session.daily ? (
+      {projectLabel ? (
+        <span
+          className="border-2 border-accent px-1 font-display text-xs text-accent"
+          data-testid="project-badge"
+        >
+          <span aria-hidden="true">📋 </span>
+          {projectLabel}
+        </span>
+      ) : session.daily ? (
         <span
           className="border-2 border-accent px-1 font-display text-xs text-accent"
           title={id.daily.badgeLabel}

@@ -1,0 +1,52 @@
+{
+  "id": "p1-jam",
+  "type": "coding",
+  "conceptIds": ["debugging"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Bu Sekar",
+      "team": "Owner, Kopi Senja"
+    },
+    "title": "Closed during opening hours",
+    "story": [
+      "At exactly 08:00 the app says the shop is still closed. Morning customers complain.",
+      "The shop opens at 08:00 and closes at 21:00. The hour parameter is a whole hour (0–23)."
+    ],
+    "file": "antrean/jam.py",
+    "starter": "def is_open(hour):\n    return hour > 8 and hour < 21\n",
+    "tests": [
+      {
+        "name": "midday",
+        "code": "assert is_open(13) == True"
+      },
+      {
+        "name": "early morning",
+        "code": "assert is_open(7) == False"
+      },
+      {
+        "name": "exactly 8",
+        "code": "assert is_open(8) == True",
+        "hidden": true
+      },
+      {
+        "name": "closing hour",
+        "code": "assert is_open(21) == False",
+        "hidden": true
+      }
+    ],
+    "solution": "def is_open(hour):\n    return hour >= 8 and hour < 21\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "At exactly 8 the shop is open, so the sign is >= 8; at 21 it is closed, so < 21. Boundary bugs like this are classic.",
+  "ruleRefs": ["r-py-4", "r-tst-1"],
+  "hints": ["What is the result for exactly 8?", "Change hour > 8 to hour >= 8."]
+}

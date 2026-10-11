@@ -476,3 +476,98 @@ describe('badges (lencana)', () => {
     expect(withBadges([badge('b-1', { type: 'hack-the-planet' })]).length).toBeGreaterThan(0);
   });
 });
+
+describe('client projects (ADR 032)', () => {
+  const project = (over: object = {}) => ({
+    id: 'p-1',
+    title: 'Proyek',
+    client: { name: 'Toko Kopi Senja', team: 'Klien' },
+    unlockAfterShift: 1,
+    level: 1,
+    terms: { sprint: 'Sprint', columns: { todo: 'To Do', doing: 'Dikerjakan', done: 'Selesai' } },
+    brief: {
+      title: 'PRD',
+      intro: ['Halo.'],
+      items: [
+        { id: 'b-1', text: 'Jelas.', kind: 'clear', why: 'Terukur.' },
+        { id: 'b-2', text: 'Cepat.', kind: 'ambiguous', why: 'Berapa detik?' },
+        { id: 'b-3', text: 'Game.', kind: 'out-of-scope', why: 'Bukan permintaan.' },
+      ],
+    },
+    cards: [
+      { id: 'k-1', title: 'A', story: 'Cerita.', points: 2, priority: 'must', caseId: 'p-c1' },
+      { id: 'k-2', title: 'B', story: 'Cerita.', points: 2, priority: 'should', caseId: 'p-c2' },
+      { id: 'k-3', title: 'C', story: 'Cerita.', points: 1, priority: 'could', caseId: 'p-c3' },
+    ],
+    sprints: [
+      { goal: 'Tujuan 1.', capacity: 3, surprises: [{ caseId: 'p-c4', arriveAt: 5 }] },
+      { goal: 'Tujuan 2.', capacity: 3 },
+    ],
+    durationGameMinutes: 60,
+    realSecondsPerGameMinute: 4,
+    pay: { perPoint: 10, completion: 50 },
+    sources: ['Scrum Guide'],
+    ...over,
+  });
+  const withProject = (p: object) => {
+    const f = fixture();
+    for (const n of [1, 2, 3, 4]) f[`cases/p-c${n}.json`] = emailCase(`p-c${n}`, 'malicious');
+    f['projects/p-1.json'] = p;
+    return errorsFor(f);
+  };
+
+  it('loads a valid project', () => {
+    const f = fixture();
+    for (const n of [1, 2, 3, 4]) f[`cases/p-c${n}.json`] = emailCase(`p-c${n}`, 'malicious');
+    f['projects/p-1.json'] = project();
+    expect(parseModeContent(f, socCaseSchemas).content.projects.map((p) => p.id)).toEqual(['p-1']);
+    expect(withProject(project())).toEqual([]);
+  });
+
+  it('rejects unknown or reused cases', () => {
+    const p = project();
+    const errors = withProject({
+      ...p,
+      cards: [...p.cards.slice(0, 2), { ...p.cards[2], caseId: 'c-1' }],
+      sprints: [
+        { goal: 'X.', capacity: 3, surprises: [{ caseId: 'nope', arriveAt: 1 }] },
+        p.sprints[1],
+      ],
+    });
+    expect(errors).toEqual(
+      expect.arrayContaining([
+        expect.stringMatching(/kasus sudah dipakai di shift: c-1/),
+        expect.stringMatching(/kasus tidak ada: nope/),
+      ]),
+    );
+  });
+
+  it('needs enough capacity for the must-haves and every kind of requirement in the brief', () => {
+    const p = project();
+    expect(
+      withProject({
+        ...p,
+        sprints: [
+          { goal: 'X.', capacity: 1 },
+          { goal: 'Y.', capacity: 0.5 },
+        ],
+      }).length,
+    ).toBeGreaterThan(0);
+    const tight = withProject({
+      ...p,
+      cards: p.cards.map((c) => ({ ...c, priority: 'must' })),
+      sprints: [
+        { goal: 'X.', capacity: 2 },
+        { goal: 'Y.', capacity: 2 },
+      ],
+    });
+    expect(tight).toEqual(expect.arrayContaining([expect.stringMatching(/kapasitas/)]));
+    const brief = {
+      ...p.brief,
+      items: p.brief.items.map((i) => (i.kind === 'ambiguous' ? { ...i, kind: 'clear' } : i)),
+    };
+    expect(withProject({ ...p, brief })).toEqual(
+      expect.arrayContaining([expect.stringMatching(/brief: belum ada kebutuhan "ambiguous"/)]),
+    );
+  });
+});

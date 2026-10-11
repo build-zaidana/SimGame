@@ -1,0 +1,50 @@
+{
+  "id": "p1-nomor",
+  "type": "coding",
+  "conceptIds": ["python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Bu Sekar",
+      "team": "Owner, Kopi Senja"
+    },
+    "title": "Next queue number",
+    "story": [
+      "Every customer gets the next queue number.",
+      "The ticket machine only fits 3 digits: after 999 the number goes back to 1. At the start of the day (last number 0) it starts from 1."
+    ],
+    "file": "antrean/tiket.py",
+    "starter": "def next_number(last):\n    # the number after `last`; after 999 it goes back to 1\n    return 0\n",
+    "tests": [
+      {
+        "name": "normal number",
+        "code": "assert next_number(41) == 42"
+      },
+      {
+        "name": "start of the day",
+        "code": "assert next_number(0) == 1"
+      },
+      {
+        "name": "after 999",
+        "code": "assert next_number(999) == 1",
+        "hidden": true
+      }
+    ],
+    "solution": "def next_number(last):\n    if last >= 999:\n        return 1\n    return last + 1\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Usually the number goes up by one, but after 999 it must go back to 1. Edge cases like this are often missed.",
+  "ruleRefs": ["r-py-4", "r-tst-1"],
+  "hints": [
+    "Return last + 1 for the normal case.",
+    "Add an if: when last is already 999, return 1."
+  ]
+}

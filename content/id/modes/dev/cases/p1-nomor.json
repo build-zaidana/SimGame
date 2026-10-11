@@ -1,0 +1,50 @@
+{
+  "id": "p1-nomor",
+  "type": "coding",
+  "conceptIds": ["python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Bu Sekar",
+      "team": "Pemilik Kopi Senja"
+    },
+    "title": "Nomor antrean berikutnya",
+    "story": [
+      "Setiap pelanggan mendapat nomor antrean berurutan.",
+      "Mesin tiket hanya muat 3 digit: setelah 999, nomor kembali ke 1. Awal hari (nomor terakhir 0) dimulai dari 1."
+    ],
+    "file": "antrean/tiket.py",
+    "starter": "def nomor_berikutnya(terakhir):\n    # nomor setelah `terakhir`; setelah 999 kembali ke 1\n    return 0\n",
+    "tests": [
+      {
+        "name": "nomor biasa",
+        "code": "assert nomor_berikutnya(41) == 42"
+      },
+      {
+        "name": "awal hari",
+        "code": "assert nomor_berikutnya(0) == 1"
+      },
+      {
+        "name": "setelah 999",
+        "code": "assert nomor_berikutnya(999) == 1",
+        "hidden": true
+      }
+    ],
+    "solution": "def nomor_berikutnya(terakhir):\n    if terakhir >= 999:\n        return 1\n    return terakhir + 1\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Biasanya nomor bertambah satu, tapi setelah 999 harus kembali ke 1. Kasus tepi seperti ini yang sering terlewat.",
+  "ruleRefs": ["r-py-4", "r-tst-1"],
+  "hints": [
+    "Kembalikan terakhir + 1 untuk kasus biasa.",
+    "Tambahkan if: kalau terakhir sudah 999, kembalikan 1."
+  ]
+}

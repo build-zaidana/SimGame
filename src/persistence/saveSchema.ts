@@ -4,7 +4,7 @@ import { BASELINE_TRUST } from '../engine/economy.ts';
 import { MAX_ANSWER_LENGTH } from '../engine/shift.ts';
 
 /** Naikkan + tambah migrasi di migrations.ts + test setiap kali bentuk save berubah. */
-export const SAVE_SCHEMA_VERSION = 14;
+export const SAVE_SCHEMA_VERSION = 15;
 
 const level = z.literal([1, 2, 3]);
 const score01 = z.number().min(0).max(1);
@@ -90,6 +90,25 @@ export const shiftSessionSchema: z.ZodType<ShiftSession> = z.object({
     .optional(),
   /** v13: tantangan harian (ADR 029). */
   daily: z.object({ date: z.string() }).optional(),
+  /** v15: sprint proyek klien (ADR 032). */
+  project: z
+    .object({
+      projectId: z.string(),
+      sprint: z.number().int().positive(),
+      cardIds: z.array(z.string()),
+      planScore: z.number().min(0).max(1),
+    })
+    .optional(),
+});
+
+/** v15: progres satu proyek klien (ADR 032). */
+const projectProgressSchema = z.object({
+  briefScore: z.number().min(0).max(1).optional(),
+  sprintsDone: z.number().int().nonnegative(),
+  doneCards: z.array(z.string()),
+  velocity: z.array(z.number().nonnegative()),
+  planScores: z.array(z.number().min(0).max(1)),
+  completedAt: z.string().optional(),
 });
 
 export const settingsSchema = z.object({
@@ -130,6 +149,8 @@ export const modeProgressSchema = z.object({
   practiceSession: shiftSessionSchema.optional().catch(undefined),
   /** v4: lencana yang sudah didapat → waktu didapat (ISO). */
   badges: z.record(z.string(), z.string()),
+  /** v15: proyek klien per ID (ADR 032). */
+  projects: z.record(z.string(), projectProgressSchema),
 });
 
 const assessmentResultSchema = z.object({
@@ -211,5 +232,6 @@ export function newModeProgress(): ModeProgress {
     upgradesOwned: [],
     chaptersUnlocked: [],
     badges: {},
+    projects: {},
   };
 }

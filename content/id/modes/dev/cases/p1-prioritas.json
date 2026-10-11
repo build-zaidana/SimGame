@@ -1,0 +1,47 @@
+{
+  "id": "p1-prioritas",
+  "type": "coding",
+  "conceptIds": ["python-basics"],
+  "difficulty": 2,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "build",
+    "requester": {
+      "name": "Bu Sekar",
+      "team": "Pemilik Kopi Senja"
+    },
+    "title": "Antrean member didahulukan",
+    "story": [
+      "Bu Sekar ingin member dilayani lebih dulu, tapi urutan sesama member tetap.",
+      "Setiap pelanggan berisi [nama, member]. Kembalikan daftar nama saja."
+    ],
+    "file": "antrean/prioritas.py",
+    "starter": "def antrean_prioritas(daftar):\n    return []\n",
+    "tests": [
+      {
+        "name": "satu member",
+        "code": "assert antrean_prioritas([[\"Ayu\", False], [\"Budi\", True]]) == [\"Budi\", \"Ayu\"]"
+      },
+      {
+        "name": "kosong",
+        "code": "assert antrean_prioritas([]) == []"
+      },
+      {
+        "name": "urutan tetap",
+        "code": "assert antrean_prioritas([[\"A\", True], [\"B\", False], [\"C\", True]]) == [\"A\", \"C\", \"B\"]",
+        "hidden": true
+      }
+    ],
+    "solution": "def antrean_prioritas(daftar):\n    member = []\n    biasa = []\n    for nama, is_member in daftar:\n        if is_member:\n            member.append(nama)\n        else:\n            biasa.append(nama)\n    return member + biasa\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Pisahkan ke dua daftar sambil mempertahankan urutan, lalu gabungkan: member dulu, baru yang lain.",
+  "ruleRefs": ["r-py-1"],
+  "hints": ["Buat dua daftar kosong: member dan biasa.", "Hasil akhirnya member + biasa."]
+}

@@ -125,6 +125,58 @@ function DailyReport() {
   );
 }
 
+/** Laporan sprint proyek (ADR 032): kartu selesai / kembali ke backlog, lalu retro di layar Proyek. */
+function SprintReport() {
+  const session = useAppStore((s) => s.session);
+  const content = useAppStore((s) => s.content);
+  const finishShift = useAppStore((s) => s.finishShift);
+  const project = content?.projects.find((p) => p.id === session?.project?.projectId);
+  if (!session?.project || !content || !project) return null;
+  const t = id.project.report;
+  const term = project.terms.sprint;
+  const cards = project.cards.filter((c) => session.project?.cardIds.includes(c.id));
+  const surprises = session.cases.filter((c) => !cards.some((k) => k.caseId === c.caseId));
+  const ok = (caseId: string) =>
+    session.cases.some((c) => c.caseId === caseId && c.outcome?.correct === true);
+  return (
+    <main className="mx-auto flex min-h-dvh max-w-3xl flex-col gap-4 p-4 pb-36">
+      <h1 className="font-display text-2xl text-accent">
+        <span aria-hidden="true">📋 </span>
+        {t.heading(term, session.project.sprint, project.title)}
+      </h1>
+      <ol className="flex flex-col gap-2" data-testid="sprint-cards">
+        {cards.map((k) => (
+          <li key={k.id} className={`${panel} p-3`} data-card-done={ok(k.caseId)}>
+            <p className="font-bold">
+              <span aria-hidden="true">{ok(k.caseId) ? '✓ ' : '↩ '}</span>
+              {k.title}
+              <span className="ml-2 font-display text-sm">{id.project.plan.points(k.points)}</span>
+            </p>
+            <p className="text-sm text-ink-muted">{ok(k.caseId) ? t.cardDone : t.cardCarried}</p>
+            <p className="mt-1 text-sm">{content.cases[k.caseId]?.explanation}</p>
+          </li>
+        ))}
+        {surprises.map((c) => (
+          <li key={c.caseId} className={`${panel} p-3`}>
+            <p className="font-bold">
+              <span aria-hidden="true">⚡ </span>
+              {t.surprise}: {c.outcome?.correct ? '✓' : '✗'}
+            </p>
+            <p className="mt-1 text-sm">{content.cases[c.caseId]?.explanation}</p>
+          </li>
+        ))}
+      </ol>
+      <div className="fixed inset-x-0 bottom-0 border-t-2 border-ink/40 bg-panel p-2">
+        <div className="mx-auto max-w-3xl">
+          <button type="button" className={`${btnPrimary} w-full`} onClick={() => finishShift([])}>
+            {t.finish(term)}
+          </button>
+        </div>
+      </div>
+    </main>
+  );
+}
+
 /** Pengingat ekspor muncul di laporan shift ini (ARCHITECTURE §7.3). */
 const EXPORT_REMINDER_SHIFTS = [2, 4];
 const EXPORT_REMINDER_OFF = 'exportReminderOff';
@@ -145,6 +197,7 @@ export function ReportScreen() {
 
   const shift = content.shifts.find((s) => s.id === session.shiftId);
   if (session.daily && save) return <DailyReport />;
+  if (session.project) return <SprintReport />;
   const summary = summarizeShift(session, shift?.pay ?? { base: 0, perCase: 0 });
   const outro = shift ? content.dialogues[shift.outroDialogue] : undefined;
   // Pangkat sesudah shift ini disimpan (disimpan sungguhan setelah Review Cepat).

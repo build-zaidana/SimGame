@@ -1,0 +1,49 @@
+{
+  "id": "p1-insiden",
+  "type": "coding",
+  "conceptIds": ["debugging", "release-rollback"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Kak Dimas",
+      "team": "Developer Team"
+    },
+    "title": "The queue screen is down!",
+    "story": [
+      "This morning the queue screen at the shop went down. Log: ZeroDivisionError while the queue is still empty.",
+      "An empty queue must show an average of 0."
+    ],
+    "file": "antrean/rata_rata.py",
+    "starter": "def average_wait(minutes):\n    return sum(minutes) / len(minutes)\n",
+    "tests": [
+      {
+        "name": "two customers",
+        "code": "assert average_wait([4, 6]) == 5"
+      },
+      {
+        "name": "empty queue",
+        "code": "assert average_wait([]) == 0"
+      }
+    ],
+    "solution": "def average_wait(minutes):\n    if len(minutes) == 0:\n        return 0\n    return sum(minutes) / len(minutes)\n",
+    "incident": {
+      "service": "Kopi Senja queue screen",
+      "drainPerSecond": 2
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Dividing by len([]) = 0 crashes the program. Check for an empty list first; if the server is already failing, roll back first, then fix.",
+  "ruleRefs": ["r-err-1", "r-rel-2"],
+  "hints": [
+    "Read the error type in the log: dividing by what?",
+    "Add if len(minutes) == 0: return 0 at the start."
+  ]
+}

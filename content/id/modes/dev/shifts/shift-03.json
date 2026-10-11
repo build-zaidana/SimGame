@@ -4,7 +4,7 @@
   "title": "Rilis & Rollback",
   "durationGameMinutes": 150,
   "realSecondsPerGameMinute": 4,
-  "unlocksChapters": ["ch-release"],
+  "unlocksChapters": ["ch-release", "ch-proj"],
   "introDialogue": "dev-03-intro",
   "outroDialogue": "dev-03-outro",
   "tutorial": false,

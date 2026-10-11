@@ -1,0 +1,52 @@
+{
+  "id": "p1-pr-hotfix",
+  "type": "pull-request",
+  "conceptIds": ["testing", "code-review"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.5
+  },
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Rio Pratama",
+      "team": "Developer Team"
+    },
+    "title": "Quick hotfix before the client demo",
+    "description": [
+      {
+        "text": "The demo to Bu Sekar is in 10 minutes! The tests are slow, so I turned them off for now.",
+        "evidenceId": "desc-rush"
+      }
+    ],
+    "file": "pengaturan.py",
+    "diff": [
+      {
+        "code": "JALANKAN_TES = True",
+        "indent": 0,
+        "kind": "del"
+      },
+      {
+        "code": "JALANKAN_TES = False",
+        "indent": 0,
+        "kind": "add",
+        "evidenceId": "line-off"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Automated tests: skipped (0 run)",
+        "evidenceId": "check-skip"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["line-off"],
+    "supporting": ["check-skip", "desc-rush"]
+  },
+  "explanation": "Turning tests off to rush a demo lets bugs slip through to the client. Ask for a revision: switch tests back on, and delay the demo briefly if needed.",
+  "ruleRefs": ["r-tst-2", "r-prj-3"],
+  "hints": ["What does this line change?", "Look at the automated check result."]
+}

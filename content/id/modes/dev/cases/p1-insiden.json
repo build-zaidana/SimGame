@@ -1,0 +1,49 @@
+{
+  "id": "p1-insiden",
+  "type": "coding",
+  "conceptIds": ["debugging", "release-rollback"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 2,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Kak Dimas",
+      "team": "Tim Developer"
+    },
+    "title": "Layar antrean mati!",
+    "story": [
+      "Pagi ini layar antrean di toko mati total. Log: ZeroDivisionError saat antrean masih kosong.",
+      "Antrean kosong harus menampilkan rata-rata 0."
+    ],
+    "file": "antrean/rata_rata.py",
+    "starter": "def rata_rata_tunggu(menit):\n    return sum(menit) / len(menit)\n",
+    "tests": [
+      {
+        "name": "dua pelanggan",
+        "code": "assert rata_rata_tunggu([4, 6]) == 5"
+      },
+      {
+        "name": "antrean kosong",
+        "code": "assert rata_rata_tunggu([]) == 0"
+      }
+    ],
+    "solution": "def rata_rata_tunggu(menit):\n    if len(menit) == 0:\n        return 0\n    return sum(menit) / len(menit)\n",
+    "incident": {
+      "service": "Layar antrean Kopi Senja",
+      "drainPerSecond": 2
+    }
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "Membagi dengan len([]) = 0 membuat program crash. Cek daftar kosong dulu; kalau server terlanjur rusak, rollback dulu lalu perbaiki.",
+  "ruleRefs": ["r-err-1", "r-rel-2"],
+  "hints": [
+    "Baca jenis error di log: pembagian dengan apa?",
+    "Tambahkan if len(menit) == 0: return 0 di awal."
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "id": "p1-pr-log",
+  "type": "pull-request",
+  "conceptIds": ["secure-coding", "code-review"],
+  "difficulty": 2,
+  "verdict": "fault",
+  "correctDecision": "revise",
+  "acceptableDecisions": {
+    "escalate": 0.3
+  },
+  "severity": 2,
+  "data": {
+    "author": {
+      "name": "Kak Dimas",
+      "team": "Developer Team"
+    },
+    "title": "Order log for debugging",
+    "description": [
+      {
+        "text": "To make lost orders easy to trace, I log every order.",
+        "evidenceId": "desc-why"
+      }
+    ],
+    "file": "kasir/log.py",
+    "diff": [
+      {
+        "code": "def catat_pesanan(nama, nomor_hp, total):",
+        "indent": 0,
+        "kind": "add"
+      },
+      {
+        "code": "print(\"Pesanan dari\", nama, nomor_hp, total)",
+        "indent": 1,
+        "kind": "add",
+        "evidenceId": "line-log"
+      },
+      {
+        "code": "return True",
+        "indent": 1,
+        "kind": "add"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Automated tests: all passing",
+        "evidenceId": "check-pass"
+      }
+    ]
+  },
+  "evidence": {
+    "required": ["line-log"],
+    "supporting": ["desc-why", "check-pass"]
+  },
+  "explanation": "A customer phone number is personal data and must not be printed in logs. Ask for a revision: log the queue number only.",
+  "ruleRefs": ["r-sec-2", "r-rev-2"],
+  "hints": ["What data gets printed?", "May a phone number go into a log?"]
+}

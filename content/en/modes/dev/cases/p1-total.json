@@ -1,0 +1,50 @@
+{
+  "id": "p1-total",
+  "type": "coding",
+  "conceptIds": ["debugging"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "acceptableDecisions": {},
+  "severity": 1,
+  "data": {
+    "task": "fix",
+    "requester": {
+      "name": "Bu Sekar",
+      "team": "Owner, Kopi Senja"
+    },
+    "title": "The bill is too cheap",
+    "story": [
+      "The cashier says bills are often short: order 2 coffees and only 1 is charged.",
+      "Each order item is [price, quantity]."
+    ],
+    "file": "kasir/bayar.py",
+    "starter": "def total_bill(order):\n    total = 0\n    for price, qty in order:\n        total = total + price\n    return total\n",
+    "tests": [
+      {
+        "name": "two coffees",
+        "code": "assert total_bill([[20000, 2]]) == 40000"
+      },
+      {
+        "name": "mixed",
+        "code": "assert total_bill([[15000, 1], [10000, 3]]) == 45000"
+      },
+      {
+        "name": "empty order",
+        "code": "assert total_bill([]) == 0",
+        "hidden": true
+      }
+    ],
+    "solution": "def total_bill(order):\n    total = 0\n    for price, qty in order:\n        total = total + price * qty\n    return total\n"
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "The code only adds up prices and forgets the quantity. Each line must count price × quantity.",
+  "ruleRefs": ["r-err-3", "r-py-3"],
+  "hints": [
+    "Compare your result with the expected one in the \"two coffees\" test.",
+    "The line total = total + price does not use the quantity yet."
+  ]
+}
