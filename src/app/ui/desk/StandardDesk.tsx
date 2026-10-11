@@ -7,6 +7,7 @@ import type { BaseCase } from '../../../content/schemas.ts';
 import type { DeskProps, DocumentProps } from '../../../modes/contract.ts';
 import { ActionBar } from './ActionBar.tsx';
 import { BriefingDialog } from './BriefingDialog.tsx';
+import type { Dialogue } from '../../../content/schemas.ts';
 import { FeedbackDialog } from './FeedbackDialog.tsx';
 import { Hud } from './Hud.tsx';
 import { QueuePane, type QueueItem } from './QueuePane.tsx';
@@ -154,6 +155,23 @@ export function StandardDesk({
   };
   const waitingCount = session.cases.filter((c) => c.status === 'arrived').length;
   const bossMeta = content.shifts.find((s) => s.id === session.shiftId)?.boss;
+  // Sprint proyek klien (ADR 032): antrian tampil sebagai papan kerja.
+  const project = session.project
+    ? content.projects.find((p) => p.id === session.project?.projectId)
+    : undefined;
+  const sprintLabel =
+    project && session.project ? `${project.terms.sprint} ${session.project.sprint}` : undefined;
+  const board = project
+    ? {
+        ...project.terms.columns,
+        surprise: id.project.board.surprise,
+        surprises: new Set(
+          session.cases
+            .map((c) => c.caseId)
+            .filter((cid) => !project.cards.some((k) => k.caseId === cid)),
+        ),
+      }
+    : undefined;
 
   return (
     <div className="flex h-dvh flex-col">
@@ -163,6 +181,7 @@ export function StandardDesk({
         practice={practice}
         session={session}
         wallet={wallet}
+        projectLabel={sprintLabel}
         onTogglePause={() => dispatch({ type: session.paused ? 'RESUME' : 'PAUSE' })}
       />
       {bossMeta && <BossBar session={session} meta={bossMeta} practice={practice} />}
@@ -217,6 +236,7 @@ export function StandardDesk({
         >
           <QueuePane
             session={session}
+            board={board}
             header={bossMeta && <BossBrief session={session} meta={bossMeta} practice={practice} />}
             labelOf={labelOf}
             onOpen={(caseId) => {
@@ -336,11 +356,27 @@ export function StandardDesk({
       {session.phase === 'briefing' && (
         <BriefingDialog
           heading={
-            session.daily
-              ? id.daily.reportHeading(session.daily.date)
-              : id.briefing.shiftHeading(session.shiftOrder, shift?.title ?? '')
+            project && sprintLabel
+              ? `${sprintLabel} · ${project.title}`
+              : session.daily
+                ? id.daily.reportHeading(session.daily.date)
+                : id.briefing.shiftHeading(session.shiftOrder, shift?.title ?? '')
           }
-          dialogue={shift ? content.dialogues[shift.introDialogue] : undefined}
+          dialogue={
+            project && session.project
+              ? {
+                  id: 'sprint-goal',
+                  lines: [
+                    {
+                      speaker: mode.mentor as Dialogue['lines'][number]['speaker'],
+                      text: project.sprints[session.project.sprint - 1]?.goal ?? '',
+                    },
+                  ],
+                }
+              : shift
+                ? content.dialogues[shift.introDialogue]
+                : undefined
+          }
           newspaper={
             shift?.newspaper
               ? { paper: shift.newspaper, edition: shift.order, tier: newsTier ?? null }

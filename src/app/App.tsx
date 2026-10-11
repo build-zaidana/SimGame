@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { t as id } from '../i18n/index.ts';
 import { BadgesScreen } from './screens/BadgesScreen.tsx';
+import { ProjectScreen } from './screens/ProjectScreen.tsx';
 import { DeskScreen } from './screens/DeskScreen.tsx';
 import { HubScreen } from './screens/HubScreen.tsx';
 import { LearningReportScreen } from './screens/LearningReportScreen.tsx';
@@ -59,6 +60,8 @@ function ScreenBody({ screen }: { screen: ReturnType<typeof useAppStore.getState
       return <LearningReportScreen />;
     case 'badges':
       return <BadgesScreen />;
+    case 'project':
+      return <ProjectScreen />;
     default:
       return <HubScreen />;
   }
