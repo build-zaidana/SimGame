@@ -17,6 +17,7 @@ const save = (): SaveData => ({
   modes: {
     soc: {
       unlockedShift: 3,
+      projects: {},
       shifts: {
         'soc-01': { bestScore: 90, stars: 3, completedAt: '2026-10-03T10:00:00.000Z' },
         'soc-02': { bestScore: 72, stars: 2, completedAt: '2026-10-03T11:00:00.000Z' },

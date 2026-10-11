@@ -34,6 +34,8 @@ const LOCKED_KEYS = new Set([
   'icon',
   'pre',
   'post',
+  'kind',
+  'priority',
 ]);
 
 const show = (v: unknown) => JSON.stringify(v);

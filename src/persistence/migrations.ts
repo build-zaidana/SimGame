@@ -79,6 +79,13 @@ export const MIGRATIONS: Record<number, Migration> = {
   12: (d) => d,
   /** v13 → v14: kasus di sesi boleh menyimpan urutan keputusan; data lama tetap valid. */
   13: (d) => d,
+  /** v14 → v15: setiap progres mode mendapat daftar proyek klien kosong (ADR 032). */
+  14: (d) => {
+    const modes = (d['modes'] ?? {}) as Record<string, Record<string, unknown>>;
+    const next: Record<string, unknown> = {};
+    for (const [id, progress] of Object.entries(modes)) next[id] = { projects: {}, ...progress };
+    return { ...d, modes: next };
+  },
 };
 
 export function runMigrations(

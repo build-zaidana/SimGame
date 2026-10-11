@@ -38,6 +38,7 @@ function saveWithSession(): SaveData {
       soc: {
         unlockedShift: 1,
         shifts: {},
+        projects: {},
         wallet: 0,
         trust: 75,
         toolsOwned: [],
@@ -355,11 +356,41 @@ describe('migration v13 → v14 (decision order)', () => {
   it('keeps old sessions and keeps a recorded decision order', () => {
     const v13 = { ...JSON.parse(JSON.stringify(saveWithSession())), schemaVersion: 13 };
     const migrated = migrate(v13);
-    expect(SAVE_SCHEMA_VERSION).toBe(14);
     expect(migrated.modes['soc']?.activeSession?.cases[0]?.decidedSeq).toBeUndefined();
     const later = JSON.parse(JSON.stringify(migrated));
     later.modes.soc.activeSession.cases[0].decidedSeq = 1;
     expect(migrate(later).modes['soc']?.activeSession?.cases[0]?.decidedSeq).toBe(1);
+  });
+});
+
+describe('migration v14 → v15 (client projects, ADR 032)', () => {
+  it('gives every mode an empty project list and keeps sprint sessions and project progress', () => {
+    const v14 = { ...JSON.parse(JSON.stringify(saveWithSession())), schemaVersion: 14 };
+    const migrated = migrate(v14);
+    expect(SAVE_SCHEMA_VERSION).toBe(15);
+    expect(migrated.modes['soc']?.projects).toEqual({});
+    const later = JSON.parse(JSON.stringify(migrated));
+    later.modes.soc.projects = {
+      'p-1': {
+        briefScore: 0.75,
+        sprintsDone: 1,
+        doneCards: ['k-1'],
+        velocity: [3],
+        planScores: [1],
+      },
+    };
+    later.modes.soc.practiceSession = {
+      ...later.modes.soc.activeSession,
+      project: { projectId: 'p-1', sprint: 2, cardIds: ['k-2'], planScore: 0.5 },
+    };
+    const loaded = migrate(later);
+    expect(loaded.modes['soc']?.projects['p-1']?.velocity).toEqual([3]);
+    expect(loaded.modes['soc']?.practiceSession?.project).toEqual({
+      projectId: 'p-1',
+      sprint: 2,
+      cardIds: ['k-2'],
+      planScore: 0.5,
+    });
   });
 });
 

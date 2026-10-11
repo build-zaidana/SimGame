@@ -12,6 +12,7 @@ import {
   conceptFrontmatterSchema,
   dialogueFileSchema,
   modeMetaSchema,
+  projectSchema,
   reviewFileSchema,
   rulebookSchema,
   shiftSchema,
@@ -24,6 +25,7 @@ import {
   type Concept,
   type Dialogue,
   type ModeMeta,
+  type ProjectDef,
   type ReviewItem,
   type Rulebook,
   type ShiftDef,
@@ -45,6 +47,8 @@ export interface ModeContent<TCase extends BaseCase = BaseCase> {
   upgrades: Upgrade[];
   badges: Badge[];
   assessment: Assessment | null;
+  /** Proyek klien (ADR 032). */
+  projects: ProjectDef[];
 }
 
 export interface ContentError {
@@ -85,6 +89,7 @@ export function parseModeContent<TCase extends BaseCase = BaseCase>(
     upgrades: [],
     badges: [],
     assessment: null,
+    projects: [],
   };
 
   const parse = <T>(file: string, schema: z.ZodType<T, unknown>, raw: unknown): T | null => {
@@ -146,6 +151,12 @@ export function parseModeContent<TCase extends BaseCase = BaseCase>(
       requireIdMatchesFile(file, c.id);
       if (content.cases[c.id]) errors.push({ file, message: `ID kasus duplikat: ${c.id}` });
       content.cases[c.id] = c;
+    } else if (file.startsWith('projects/') && file.endsWith('.json')) {
+      const project = parse(file, projectSchema, raw);
+      if (project) {
+        requireIdMatchesFile(file, project.id);
+        content.projects.push(project);
+      }
     } else if (file.startsWith('review/') && file.endsWith('.json')) {
       content.review.push(...(parse(file, reviewFileSchema, raw)?.items ?? []));
     } else if (file.startsWith('dialogue/') && file.endsWith('.json')) {

@@ -389,5 +389,48 @@ export function checkModeContent(content: ModeContent, policy: CheckPolicy): Con
     if (brands.length) err(`dialogue/${d.id}`, `merek nyata: ${brands.join(', ')}`);
   }
 
+  // Proyek klien (ADR 032): kasusnya khusus proyek, kapasitas cukup untuk semua must-have.
+  const inShifts = new Set(
+    content.shifts.flatMap((s) => s.queue.flatMap((q) => ('caseId' in q ? [q.caseId] : []))),
+  );
+  const inProjects = new Set<string>();
+  for (const p of content.projects) {
+    const file = `projects/${p.id}.json`;
+    const caseIds = [
+      ...p.cards.map((c) => c.caseId),
+      ...p.sprints.flatMap((s) => s.surprises.map((x) => x.caseId)),
+    ];
+    for (const id of caseIds) {
+      if (!content.cases[id]) err(file, `kasus tidak ada: ${id}`);
+      else if (inShifts.has(id)) err(file, `kasus sudah dipakai di shift: ${id}`);
+      else if (inProjects.has(id)) err(file, `kasus dipakai dua kali: ${id}`);
+      inProjects.add(id);
+    }
+    const seenCards = new Set<string>();
+    for (const c of p.cards) dupCheck(seenCards, c.id, file, 'kartu');
+    const smallest = Math.min(...p.cards.map((c) => c.points));
+    p.sprints.forEach((s, i) => {
+      if (s.capacity < smallest)
+        err(file, `sprint ${i + 1}: kapasitas lebih kecil dari kartu terkecil`);
+    });
+    const mustPoints = p.cards
+      .filter((c) => c.priority === 'must')
+      .reduce((n, c) => n + c.points, 0);
+    const capacity = p.sprints.reduce((n, s) => n + s.capacity, 0);
+    if (capacity < mustPoints)
+      err(file, `kapasitas semua sprint (${capacity}) kurang dari poin must-have (${mustPoints})`);
+    for (const kind of ['clear', 'ambiguous', 'out-of-scope'] as const)
+      if (!p.brief.items.some((i) => i.kind === kind))
+        err(file, `brief: belum ada kebutuhan "${kind}"`);
+    for (const i of p.brief.items)
+      if (countSentences(i.why) > policy.maxExplanationSentences)
+        err(file, `brief ${i.id}: alasan lebih dari ${policy.maxExplanationSentences} kalimat`);
+    const brands = findBrands(allStrings(p).join(' '), policy.brandDenylist);
+    if (brands.length) err(file, `merek nyata: ${brands.join(', ')}`);
+    const domains = findNonFictionalDomains(readableText(p), policy.fictionalDomains);
+    if (domains.length)
+      err(file, `domain bukan .test/.example/fiktif terdaftar: ${domains.join(', ')}`);
+  }
+
   return errors;
 }
