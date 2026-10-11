@@ -43,7 +43,16 @@
       }
     ],
     "starter": "while not di_tujuan():\n    maju()\n    if ada_paket():\n        ambil()\nantar()\n",
-    "solution": "while not di_tujuan():\n    if ada_paket():\n        ambil()\n    maju()\nantar()\n"
+    "solution": "while not di_tujuan():\n    if ada_paket():\n        ambil()\n    maju()\nantar()\n",
+    "commands": [
+      "forward",
+      "turn_left",
+      "turn_right",
+      "pick_up",
+      "deliver",
+      "while_target",
+      "if_package"
+    ]
   },
   "evidence": {
     "required": [],

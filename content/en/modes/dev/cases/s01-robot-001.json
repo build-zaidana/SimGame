@@ -27,7 +27,8 @@
       }
     ],
     "starter": "# The robot faces right. Finish the program!\nforward()\nforward()\n",
-    "solution": "forward()\nforward()\npick_up()\nforward()\nforward()\nturn_right()\nforward()\nforward()\ndeliver()\n"
+    "solution": "forward()\nforward()\npick_up()\nforward()\nforward()\nturn_right()\nforward()\nforward()\ndeliver()\n",
+    "commands": ["forward", "turn_left", "turn_right", "pick_up", "deliver"]
   },
   "evidence": {
     "required": [],

@@ -43,7 +43,18 @@
       }
     ],
     "starter": "# The old program only goes straight. The new corridors turn!\nwhile not at_target():\n    if has_package():\n        pick_up()\n    forward()\ndeliver()\n",
-    "solution": "while not at_target():\n    if has_package():\n        pick_up()\n    if front_clear():\n        forward()\n    else:\n        turn_right()\ndeliver()\n"
+    "solution": "while not at_target():\n    if has_package():\n        pick_up()\n    if front_clear():\n        forward()\n    else:\n        turn_right()\ndeliver()\n",
+    "commands": [
+      "forward",
+      "turn_left",
+      "turn_right",
+      "pick_up",
+      "deliver",
+      "while_target",
+      "if_front",
+      "if_package",
+      "else"
+    ]
   },
   "evidence": {
     "required": [],

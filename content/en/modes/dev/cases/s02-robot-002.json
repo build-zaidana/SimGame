@@ -1,0 +1,50 @@
+{
+  "id": "s02-robot-002",
+  "type": "robot",
+  "conceptIds": ["python-basics"],
+  "difficulty": 1,
+  "verdict": "task",
+  "correctDecision": "submit",
+  "severity": 1,
+  "data": {
+    "requester": {
+      "name": "Yoga Saputra",
+      "team": "Warehouse Team"
+    },
+    "title": "The long corridor",
+    "story": [
+      "This warehouse corridor is really long. Writing forward() six times is tiring!",
+      "Use for i in range(n): to repeat a command n times."
+    ],
+    "maps": [
+      {
+        "grid": [
+          "##########",
+          "#......P.#",
+          "#######.##",
+          "#######.##",
+          "#######T##",
+          "##########"
+        ],
+        "start": {
+          "x": 1,
+          "y": 1,
+          "dir": "E"
+        }
+      }
+    ],
+    "starter": "# Repeat forward() 6 times with for, then pick up the package\nfor i in range(3):\n    forward()\n",
+    "solution": "for i in range(6):\n    forward()\npick_up()\nturn_right()\nfor i in range(3):\n    forward()\ndeliver()\n",
+    "commands": ["forward", "turn_left", "turn_right", "pick_up", "deliver", "for_range"]
+  },
+  "evidence": {
+    "required": [],
+    "supporting": []
+  },
+  "explanation": "for i in range(6): repeats the block six times, so the program stays short even in a long corridor. Count the squares first, then write the repeat count.",
+  "ruleRefs": ["r-py-1"],
+  "hints": [
+    "Count the squares from the robot to the package.",
+    "The package is 6 steps ahead; after turning right, the flag is 3 more steps."
+  ]
+}

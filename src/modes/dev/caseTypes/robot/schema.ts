@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { baseCaseSchema } from '../../../../content/schemas.ts';
+import { ROBOT_COMMANDS } from '../../runner/robotPalette.ts';
 
 export const robotMapSchema = z.strictObject({
   /** '#' dinding, '.' lantai, 'P' paket, 'T' tujuan; pinggir wajib dinding. */
@@ -29,6 +30,8 @@ export const robotCaseSchema = baseCaseSchema.extend({
     starter: z.string().min(1),
     /** Solusi acuan: content:check memastikan berhasil di semua peta. */
     solution: z.string().min(1),
+    /** Tombol perintah di level ini (bertahap: dasar dulu, lalu perulangan & sensor). Tanpa ini: semua. */
+    commands: z.array(z.enum(ROBOT_COMMANDS)).min(1).optional(),
   }),
 });
 export type RobotCase = z.infer<typeof robotCaseSchema>;

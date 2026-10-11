@@ -32,6 +32,9 @@ test('Developer desk: fix a real bug in Python until every test passes', async (
   // Robot kurir: susun program dengan tombol perintah, jalankan, lihat robot mengantar paket.
   await openNextCase(page);
   await expect(page.getByTestId('document')).toHaveAttribute('data-case-id', 's01-robot-001');
+  // Level 1 hanya menampilkan perintah dasar; while/if muncul di level berikutnya.
+  await expect(page.locator('[data-command="maju()"]')).toBeVisible();
+  await expect(page.locator('[data-command="while not di_tujuan():"]')).toHaveCount(0);
   await page.getByTestId('code-editor').fill('');
   for (const cmd of [
     'maju()',

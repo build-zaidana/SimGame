@@ -8,6 +8,7 @@ import type { DocumentProps } from '../../../contract.ts';
 import { replay, type RobotResult } from '../../runner/robot.ts';
 import { runRobotProgram, warmUpPython, type RobotOutcome } from '../../runner/runPython.ts';
 import { CodeEditor } from '../../ui/CodeEditor.tsx';
+import { paletteFor } from '../../runner/robotPalette.ts';
 import { RobotMapView } from '../../ui/RobotMapView.tsx';
 import type { RobotCase } from './schema.ts';
 
@@ -168,7 +169,7 @@ export function RobotDocument({ data, locked, answer, onAnswer, onRun }: Documen
           readOnly={locked}
           errorLine={mapResult?.error?.line}
           testId="code-editor"
-          commands={t.commandList}
+          commands={paletteFor(d.commands).map((k) => t.commandList[k] ?? k)}
           commandsLabel={t.commands}
         />
       </div>

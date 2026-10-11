@@ -27,7 +27,8 @@
       }
     ],
     "starter": "# Robot menghadap ke kanan. Lanjutkan programnya!\nmaju()\nmaju()\n",
-    "solution": "maju()\nmaju()\nambil()\nmaju()\nmaju()\nbelok_kanan()\nmaju()\nmaju()\nantar()\n"
+    "solution": "maju()\nmaju()\nambil()\nmaju()\nmaju()\nbelok_kanan()\nmaju()\nmaju()\nantar()\n",
+    "commands": ["forward", "turn_left", "turn_right", "pick_up", "deliver"]
   },
   "evidence": {
     "required": [],

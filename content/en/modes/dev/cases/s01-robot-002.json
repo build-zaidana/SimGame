@@ -43,7 +43,16 @@
       }
     ],
     "starter": "# Memorised steps only fit one map.\nforward()\nforward()\nforward()\npick_up()\n",
-    "solution": "while not at_target():\n    if has_package():\n        pick_up()\n    forward()\ndeliver()\n"
+    "solution": "while not at_target():\n    if has_package():\n        pick_up()\n    forward()\ndeliver()\n",
+    "commands": [
+      "forward",
+      "turn_left",
+      "turn_right",
+      "pick_up",
+      "deliver",
+      "while_target",
+      "if_package"
+    ]
   },
   "evidence": {
     "required": [],

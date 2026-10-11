@@ -70,10 +70,14 @@ export function CodeEditor({
     const s = el.selectionStart;
     const lineStart = value.lastIndexOf('\n', s - 1) + 1;
     const before = value.slice(lineStart, s);
-    const indent = /^\s*/.exec(before)?.[0] ?? '';
+    const current = /^\s*/.exec(before)?.[0] ?? '';
+    // "else:" sejajar dengan if-nya: mundur satu indentasi dari isi blok.
+    const dedent = /^else\b/.test(cmd) && current.length >= INDENT.length;
+    const indent = dedent ? current.slice(INDENT.length) : current;
     const onEmptyLine = before.trim() === '';
+    const start = onEmptyLine && dedent ? s - INDENT.length : s;
     const text = (onEmptyLine ? '' : '\n' + indent) + cmd + '\n' + nextIndent(indent + cmd);
-    replace(s, el.selectionEnd, text);
+    replace(start, el.selectionEnd, text);
     el.focus();
   };
 

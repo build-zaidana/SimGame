@@ -26,6 +26,10 @@
       "arriveAt": 20
     },
     {
+      "caseId": "s02-robot-002",
+      "arriveAt": 25
+    },
+    {
       "caseId": "s02-ctf-001",
       "arriveAt": 30
     },
